@@ -200,17 +200,41 @@ For per-project use, copy `terra.kicad_dbl` to your project directory.
 
 ### ODBC Driver Installation
 
-**macOS:**
+#### macOS with Homebrew
 ```bash
 brew install sqliteodbc
 ```
 
-**Linux (Ubuntu/Debian):**
+#### macOS with MacPorts
+```bash
+# Install dependencies
+sudo port install unixODBC sqlite3
+
+# Download and build SQLite ODBC driver
+curl -O http://www.ch-werner.de/sqliteodbc/sqliteodbc-0.9998.tar.gz
+tar -xzf sqliteodbc-0.9998.tar.gz
+cd sqliteodbc-0.9998
+
+# Configure and build
+CPPFLAGS="-I/opt/local/include" LDFLAGS="-L/opt/local/lib" \
+  ./configure --prefix=/opt/local --with-sqlite3=/opt/local --with-odbc=/opt/local
+make
+
+# Install (requires sudo)
+sudo make install
+```
+
+After installation, update your `terra.kicad_dbl` to use:
+```
+DRIVER=/opt/local/lib/libsqlite3odbc.dylib
+```
+
+#### Linux (Ubuntu/Debian)
 ```bash
 sudo apt-get install libsqliteodbc
 ```
 
-**Windows:**
+#### Windows
 Download from: http://www.ch-werner.de/sqliteodbc/
 
 ### Custom Footprints Not Found

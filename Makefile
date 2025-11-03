@@ -17,7 +17,7 @@ SQL_FILES := $(addprefix db/,$(KICAD_LIBS:_sym.kicad_sym=.sql))
 DB_FILES := $(addprefix db/,$(KICAD_LIBS:_sym.kicad_sym=.db))
 
 # Default target: build all databases from SQL
-all: $(DB_FILES)
+all: $(DB_FILES) terra.kicad_dbl
 
 # Build database from SQL script
 db/%.db: db/%.sql
@@ -25,6 +25,23 @@ db/%.db: db/%.sql
 	@mkdir -p db
 	@rm -f $@
 	@sqlite3 $@ < $<
+	@echo "Done: $@"
+
+# Detect operating system
+UNAME_S := $(shell uname -s 2>/dev/null || echo "Windows")
+
+# Generate terra.kicad_dbl from template with auto-detected ODBC driver
+terra.kicad_dbl: terra.kicad_dbl.template
+	@echo "Generating terra.kicad_dbl from template..."
+ifeq ($(UNAME_S),Windows_NT)
+	@powershell -ExecutionPolicy Bypass -File setup.ps1 >nul 2>&1 || (echo "Run 'powershell -File setup.ps1' to generate terra.kicad_dbl" && exit 1)
+else ifeq ($(findstring CYGWIN,$(UNAME_S)),CYGWIN)
+	@powershell -ExecutionPolicy Bypass -File setup.ps1 >/dev/null 2>&1 || (echo "Run 'powershell -File setup.ps1' to generate terra.kicad_dbl" && exit 1)
+else ifeq ($(findstring MINGW,$(UNAME_S)),MINGW)
+	@powershell -ExecutionPolicy Bypass -File setup.ps1 >/dev/null 2>&1 || (echo "Run 'powershell -File setup.ps1' to generate terra.kicad_dbl" && exit 1)
+else
+	@bash setup.sh >/dev/null 2>&1 || (echo "Run 'bash setup.sh' to generate terra.kicad_dbl" && exit 1)
+endif
 	@echo "Done: $@"
 
 # Convert KiCad symbol library to SQL (initial import)
@@ -75,6 +92,7 @@ clean:
 	@echo "Cleaning generated files..."
 	rm -f $(DB_FILES)
 	rm -f db/*_test.sql db/*_test.db
+	rm -f terra.kicad_dbl
 	@echo "Done. SQL files preserved."
 
 # Clean everything including SQL (use with caution!)
@@ -155,4 +173,4 @@ help:
 	@echo "  .sql        SQL script (tracked in git)"
 	@echo "  .db         SQLite database (generated, not tracked)"
 
-.PHONY: all dump verify clean distclean status help
+.PHONY: all dump verify clean distclean status help terra.kicad_dbl

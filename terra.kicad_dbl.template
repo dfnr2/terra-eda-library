@@ -11,7 +11,7 @@
     "username": "",
     "password": "",
     "timeout_seconds": 2,
-    "connection_string": "DRIVER=/usr/local/lib/libsqlite3odbc.dylib;Database=__TERRA_PATH__/db/terra.db;Timeout=2000;"
+    "connection_string": "DRIVER=__ODBC_DRIVER_PATH__;Database=__TERRA_PATH__/db/terra.db;Timeout=2000;"
   },
   "libraries": [
     {
