@@ -1,0 +1,81 @@
+# Field name normalization mappings for KiCad symbol library
+#
+# This file defines how different field names in KiCad symbols should be
+# normalized to consistent database column names, and which columns to add/remove.
+#
+# Format:
+#   field_mappings:
+#     original_field_name: normalized_name  # Exact match mappings
+#
+#   field_mapping_patterns:  # Regex pattern-based mappings
+#     - pattern: '^regex_pattern$'  # Use full regex syntax
+#       replacement: normalized_name
+#
+#   column_edits:
+#     column_name: add           # Add this column even if not in symbol data
+#     '^regex_pattern': remove   # Remove columns matching regex pattern
+#
+# Note: Symbol and Footprint fields are automatically added (required for db-lib).
+# Fields without a mapping will use their original name as the column name
+# (after sanitization for SQL compatibility).
+
+field_mappings:
+  # Dual EDA support - rename generic fields to EDA-specific names
+  "Symbol": "KiCad_Symbol"
+  "Footprint": "KiCad_Footprint"
+
+  # Current rating variations
+  "Current": "Current_Rating"
+
+  # Manufacturer part number variations
+  "Manufacturer_PN": "MPN"
+  "Manufacturer PN": "MPN"
+  "Mfr PN": "MPN"
+  "Part Number": "MPN"
+
+  # Package variations
+  "Package Type": "Package"
+  "Package Variant": "Package"
+
+  # RoHS Document Link variations
+  "RoHS Europe Document Link": "RoHS Document Link"
+  "RoHS Link_1": "RoHS Document Link"
+  "RoHS Link": "RoHS Document Link"
+
+  # Temperature coefficients
+  "Temp Coeff": "Temp_Coeff"
+  "Temperature Coefficient": "Temp_Coeff"
+
+  # Voltage variations
+  "Voltage": "Voltage_Rating"
+  "Voltage Rating": "Voltage_Rating"
+
+  # Power variations
+  "Power": "Power_Rating"
+  "Power Rating": "Power_Rating"
+
+  # Other common variations
+  "Desc": "Description"
+  "Tol": "Tolerance"
+  "Ref": "Reference"
+
+# Field mapping patterns - use regex to map multiple fields to one column
+# Patterns are checked in order, first match wins
+field_mapping_patterns:
+  "(?i)current[ _-]rating": "Current_Rating"  # Map any field containing "current[ _-]rating" (case insensitive)
+
+# Column edits - add or remove columns from the database schema
+# Supports regex patterns for remove operations
+column_edits:
+    "Part_ID": add
+    "^ki_.*": remove          # Remove all KiCad internal fields (ki_description, ki_keywords, ki_locked, etc.)
+    "RoHS China Document Link": remove
+    "RoHS China Link": remove
+    "Component_Value": remove  # Consolidated into Value field
+
+    # Altium support columns (blank for now, can be populated later)
+    "Altium_Symbol": add
+    "Altium_Footprint": add
+
+# Note: SPICE simulation fields (Sim.Device, Sim.Pins, Sim.Type, Sim.Library) are
+# automatically added by the script for KiCad simulation support

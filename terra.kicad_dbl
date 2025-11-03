@@ -1,0 +1,201 @@
+{
+  "meta": {
+    "version": 0,
+    "filename": "terra.kicad_dbl"
+  },
+  "name": "Terra EDA Component Library",
+  "description": "Multi-EDA component library with KiCad and Altium support",
+  "source": {
+    "type": "odbc",
+    "dsn": "",
+    "username": "",
+    "password": "",
+    "timeout_seconds": 2,
+    "connection_string": "DRIVER=/usr/local/lib/libsqlite3odbc.dylib;Database=/Volumes/User/dave/vsrc/terra-eda-library/db/terra.db;Timeout=2000;"
+  },
+  "libraries": [
+    {
+      "name": "terra",
+      "table": "symbols",
+      "key": "Symbol_Name",
+      "symbols": "KiCad_Symbol",
+      "footprints": "KiCad_Footprint",
+      "fields": [
+        {
+          "column": "Reference",
+          "name": "Reference",
+          "visible_on_add": true,
+          "visible_in_chooser": false
+        },
+        {
+          "column": "Value",
+          "name": "Value",
+          "visible_on_add": true,
+          "visible_in_chooser": true
+        },
+        {
+          "column": "KiCad_Footprint",
+          "name": "Footprint",
+          "visible_on_add": false,
+          "visible_in_chooser": true
+        },
+        {
+          "column": "Datasheet",
+          "name": "Datasheet",
+          "visible_on_add": false,
+          "visible_in_chooser": false
+        },
+        {
+          "column": "Description",
+          "name": "Description",
+          "visible_on_add": false,
+          "visible_in_chooser": true
+        },
+        {
+          "column": "MPN",
+          "name": "MPN",
+          "visible_on_add": false,
+          "visible_in_chooser": true
+        },
+        {
+          "column": "Manufacturer",
+          "name": "Manufacturer",
+          "visible_on_add": false,
+          "visible_in_chooser": true
+        },
+        {
+          "column": "Manufacturer_Link",
+          "name": "Manufacturer Link",
+          "visible_on_add": false,
+          "visible_in_chooser": false
+        },
+        {
+          "column": "Package",
+          "name": "Package",
+          "visible_on_add": false,
+          "visible_in_chooser": true
+        },
+        {
+          "column": "Current_Rating",
+          "name": "Current Rating",
+          "visible_on_add": false,
+          "visible_in_chooser": true
+        },
+        {
+          "column": "Voltage_Rating",
+          "name": "Voltage Rating",
+          "visible_on_add": false,
+          "visible_in_chooser": true
+        },
+        {
+          "column": "Power_Rating",
+          "name": "Power Rating",
+          "visible_on_add": false,
+          "visible_in_chooser": true
+        },
+        {
+          "column": "Tolerance",
+          "name": "Tolerance",
+          "visible_on_add": false,
+          "visible_in_chooser": true
+        },
+        {
+          "column": "Temp_Coeff",
+          "name": "Temp Coeff",
+          "visible_on_add": false,
+          "visible_in_chooser": false
+        },
+        {
+          "column": "Temp_Operating",
+          "name": "Temp (Operating)",
+          "visible_on_add": false,
+          "visible_in_chooser": false
+        },
+        {
+          "column": "Temp_Soldering",
+          "name": "Temp (Soldering)",
+          "visible_on_add": false,
+          "visible_in_chooser": false
+        },
+        {
+          "column": "Temp_Storage",
+          "name": "Temp (Storage)",
+          "visible_on_add": false,
+          "visible_in_chooser": false
+        },
+        {
+          "column": "Class",
+          "name": "Class",
+          "visible_on_add": false,
+          "visible_in_chooser": true
+        },
+        {
+          "column": "Component_Type",
+          "name": "Component Type",
+          "visible_on_add": false,
+          "visible_in_chooser": true
+        },
+        {
+          "column": "Material",
+          "name": "Material",
+          "visible_on_add": false,
+          "visible_in_chooser": false
+        },
+        {
+          "column": "Number_of_Pins",
+          "name": "Number of Pins",
+          "visible_on_add": false,
+          "visible_in_chooser": true
+        },
+        {
+          "column": "RoHS",
+          "name": "RoHS",
+          "visible_on_add": false,
+          "visible_in_chooser": false
+        },
+        {
+          "column": "RoHS_Document_Link",
+          "name": "RoHS Document Link",
+          "visible_on_add": false,
+          "visible_in_chooser": false
+        },
+        {
+          "column": "Part_ID",
+          "name": "Part ID",
+          "visible_on_add": false,
+          "visible_in_chooser": false
+        },
+        {
+          "column": "Allow_Substitution",
+          "name": "Allow Substitution",
+          "visible_on_add": false,
+          "visible_in_chooser": false
+        },
+        {
+          "column": "BOM_Comment",
+          "name": "BOM Comment",
+          "visible_on_add": false,
+          "visible_in_chooser": false
+        },
+        {
+          "column": "Fitted",
+          "name": "Fitted",
+          "visible_on_add": false,
+          "visible_in_chooser": false
+        },
+        {
+          "column": "Standards_Version",
+          "name": "Standards Version",
+          "visible_on_add": false,
+          "visible_in_chooser": false
+        },
+        {
+          "column": "Tracking",
+          "name": "Tracking",
+          "visible_on_add": false,
+          "visible_in_chooser": false
+        }
+      ]
+    }
+  ]
+}

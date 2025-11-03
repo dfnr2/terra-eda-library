@@ -1,0 +1,44 @@
+# Database files (generated from SQL)
+*.db
+db/*.db
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.so
+
+# Virtual environments
+venv/
+.venv/
+ENV/
+env/
+
+# uv
+.uv/
+
+# Test files
+*_test.sql
+*_test.db
+
+# Working directory
+temp/
+*.tmp
+old/
+t/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Package archives
+*.zip
+*.tar.gz

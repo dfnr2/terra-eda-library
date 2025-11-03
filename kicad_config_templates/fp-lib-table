@@ -1,0 +1,5 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "Terra_Custom")(type "KiCad")(uri "${TERRA_EDA_LIB}/assets/footprints/Custom.pretty")(options "")(descr "Terra custom footprints"))
+  (lib (name "Terra_Standard")(type "KiCad")(uri "${TERRA_EDA_LIB}/assets/footprints/Standard.pretty")(options "")(descr "Terra standard footprints"))
+)
