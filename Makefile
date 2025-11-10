@@ -4,20 +4,29 @@
 # as SQL-based databases with git tracking support.
 
 # Configuration
-PYTHON := python3
+PYTHON := uv run python
 CONFIG := tools/field_mappings.yaml
+VENV_MARKER := .venv/.synced
 
-# Source files - add new *_sym.kicad_sym files here
-# Pattern: terra_sym.kicad_sym -> db/terra.{sql,db}
-#          terra_resistors_sym.kicad_sym -> db/terra_resistors.{sql,db}
-KICAD_LIBS := terra_sym.kicad_sym
-
-# Generate db/ paths for SQL and DB files (strip _sym suffix)
-SQL_FILES := $(addprefix db/,$(KICAD_LIBS:_sym.kicad_sym=.sql))
-DB_FILES := $(addprefix db/,$(KICAD_LIBS:_sym.kicad_sym=.db))
+# Library files - SQL is source of truth, DB is generated
+# Add new libraries here: db/name.sql and db/name.db
+SQL_FILES := db/terra.sql
+DB_FILES := db/terra.db
 
 # Default target: build all databases from SQL
 all: $(DB_FILES)
+
+# Ensure uv environment is synced
+$(VENV_MARKER): pyproject.toml
+	@echo "Syncing uv environment..."
+	@command -v uv >/dev/null 2>&1 || { echo "Error: uv is not installed. Install from https://docs.astral.sh/uv/"; exit 1; }
+	@uv sync
+	@mkdir -p .venv
+	@touch $(VENV_MARKER)
+	@echo "uv environment ready"
+
+# Manual sync target
+sync: $(VENV_MARKER)
 
 # Build database from SQL script
 db/%.db: db/%.sql
@@ -27,16 +36,8 @@ db/%.db: db/%.sql
 	@sqlite3 $@ < $<
 	@echo "Done: $@"
 
-# Convert KiCad symbol library to SQL (initial import)
-# Pattern: terra_sym.kicad_sym -> db/terra.sql
-db/%.sql: %_sym.kicad_sym $(CONFIG)
-	@echo "Converting symbol library to SQL: $< -> $@"
-	@mkdir -p db
-	@$(PYTHON) tools/kicad_sym_to_db.py $< $@ --config $(CONFIG)
-	@echo "Done: $@"
-
 # Dump database to SQL (for committing changes after editing)
-dump: $(DB_FILES)
+dump: $(VENV_MARKER) $(DB_FILES)
 	@echo "Dumping databases to SQL..."
 	@for db in $(DB_FILES); do \
 		sql=$${db%.db}.sql; \
@@ -46,7 +47,7 @@ dump: $(DB_FILES)
 	@echo "Done. Review changes with 'git diff' before committing."
 
 # Verify round-trip consistency (database -> SQL -> database)
-verify: $(DB_FILES)
+verify: $(VENV_MARKER) $(DB_FILES)
 	@echo "Verifying round-trip consistency..."
 	@for db in $(DB_FILES); do \
 		sql=$${db%.db}.sql; \
@@ -75,30 +76,21 @@ clean:
 	@echo "Cleaning generated files..."
 	rm -f $(DB_FILES)
 	rm -f db/*_test.sql db/*_test.db
-	@echo "Done. SQL files preserved."
+	@echo "Done. SQL files and venv preserved."
 
-# Clean everything including SQL (use with caution!)
+# Clean everything including SQL and venv (use with caution!)
 distclean: clean
-	@echo "Cleaning all generated files including SQL..."
+	@echo "Cleaning all generated files including SQL and venv..."
 	rm -f $(SQL_FILES)
+	rm -rf .venv
 	@echo "Done."
 
 # Show status
 status:
-	@echo "KiCad Symbol Library Status"
-	@echo "============================"
+	@echo "Terra EDA Library Status"
+	@echo "========================"
 	@echo ""
-	@echo "Source libraries (.kicad_sym):"
-	@for lib in $(KICAD_LIBS); do \
-		if [ -f $$lib ]; then \
-			count=$$(grep -c "^  (symbol " $$lib || echo 0); \
-			echo "  $$lib ($$count symbols)"; \
-		else \
-			echo "  $$lib (missing)"; \
-		fi; \
-	done
-	@echo ""
-	@echo "SQL scripts (.sql):"
+	@echo "SQL scripts (.sql) - Source of truth:"
 	@for sql in $(SQL_FILES); do \
 		if [ -f $$sql ]; then \
 			count=$$(grep -c "^INSERT INTO symbols" $$sql || echo 0); \
@@ -127,32 +119,33 @@ help:
 	@echo ""
 	@echo "Targets:"
 	@echo "  make              Build all .db files from .sql scripts"
+	@echo "  make sync         Ensure uv environment is set up"
 	@echo "  make dump         Dump .db files back to .sql (after editing)"
 	@echo "  make verify       Verify round-trip consistency"
 	@echo "  make status       Show status of all files"
-	@echo "  make clean        Remove .db files (keep .sql)"
-	@echo "  make distclean    Remove all generated files"
+	@echo "  make clean        Remove .db files (keep .sql and venv)"
+	@echo "  make distclean    Remove all generated files including venv"
 	@echo "  make help         Show this help"
 	@echo ""
 	@echo "Workflow:"
-	@echo "  1. Initial: Convert .kicad_sym to .sql"
-	@echo "     make db/terra.sql"
-	@echo ""
-	@echo "  2. Build: Create .db from .sql"
+	@echo "  1. Build: Create .db from .sql"
 	@echo "     make"
 	@echo ""
-	@echo "  3. Edit: Modify database using SQLite tools or KiCad"
+	@echo "  2. Edit: Modify database directly"
 	@echo "     sqlite3 db/terra.db"
 	@echo ""
-	@echo "  4. Commit: Dump changes back to .sql and commit"
+	@echo "  3. Dump: Export changes back to .sql"
 	@echo "     make dump"
+	@echo ""
+	@echo "  4. Commit: Review and commit changes"
 	@echo "     git diff db/terra.sql"
 	@echo "     git add db/terra.sql"
 	@echo "     git commit -m 'Update library'"
 	@echo ""
 	@echo "Files:"
-	@echo "  .kicad_sym  KiCad symbol library (source)"
-	@echo "  .sql        SQL script (tracked in git)"
+	@echo "  .sql        SQL script (source of truth, tracked in git)"
 	@echo "  .db         SQLite database (generated, not tracked)"
+	@echo ""
+	@echo "Note: .kicad_sym import is a separate workflow (tools/kicad_sym_to_db.py)"
 
-.PHONY: all dump verify clean distclean status help
+.PHONY: all sync dump verify clean distclean status help

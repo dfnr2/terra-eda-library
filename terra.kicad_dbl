@@ -15,7 +15,7 @@
   },
   "libraries": [
     {
-      "name": "terra",
+      "name": "misc",
       "table": "symbols",
       "key": "Symbol_Name",
       "symbols": "KiCad_Symbol",
