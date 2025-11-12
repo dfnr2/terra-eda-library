@@ -22,31 +22,33 @@ def strip_properties(input_file: Path, output_file: Path, properties_to_remove: 
         properties_to_remove: List of property names to remove (e.g., ["Component Value", "Component Type"])
     """
     with open(input_file, 'r') as f:
-        content = f.read()
+        lines = f.readlines()
 
-    # For each property to remove, create a regex pattern that matches the entire property block
-    # Pattern matches: (property "Name" "value" ... ) including nested parentheses
-    for prop_name in properties_to_remove:
-        # Escape the property name for use in regex
-        escaped_name = re.escape(prop_name)
+    # Parse and filter properties by walking through the file
+    output_lines = []
+    i = 0
+    while i < len(lines):
+        line = lines[i]
 
-        # Pattern to match property block with nested parentheses
-        # Matches: (property "Name" ... ) including all nested content
-        pattern = rf'\(property "{escaped_name}"[^)]*(?:\([^)]*(?:\([^)]*\)[^)]*)*\)[^)]*)*\)'
+        # Check if this line starts a property we want to remove
+        prop_match = re.search(r'\(property "([^"]+)"', line)
+        if prop_match:
+            prop_name = prop_match.group(1)
+            if prop_name in properties_to_remove:
+                # Skip this entire property block by counting parentheses
+                depth = line.count('(') - line.count(')')
+                i += 1
+                while i < len(lines) and depth > 0:
+                    depth += lines[i].count('(') - lines[i].count(')')
+                    i += 1
+                continue
 
-        # Keep removing matches until none are left (handles multiple occurrences)
-        while True:
-            new_content = re.sub(pattern, '', content, count=1)
-            if new_content == content:
-                break
-            content = new_content
-
-    # Clean up any resulting blank lines (more than 2 consecutive newlines)
-    content = re.sub(r'\n{3,}', '\n\n', content)
+        output_lines.append(line)
+        i += 1
 
     # Write output
     with open(output_file, 'w') as f:
-        f.write(content)
+        f.writelines(output_lines)
 
     print(f"✓ Stripped properties from {input_file}")
     print(f"  Output: {output_file}")
