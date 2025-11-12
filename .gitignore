@@ -42,3 +42,4 @@ Thumbs.db
 # Package archives
 *.zip
 *.tar.gz
+terra_*.kicad_dbl

@@ -49,52 +49,186 @@ The Terra EDA Library is a **multi-EDA database-driven component library** that 
 
 **Note:** This project was originally called "Ether KiCad Library" in early specifications, but has been renamed to "Terra EDA Library" to reflect its multi-EDA nature. The implementation uses "terra" as the prefix in file names and identifiers.
 
+## Database Architecture (Multi-Table Design)
+
+The Terra EDA Library uses a **one table per component type** architecture within a single SQLite database.
+
+### Design Principles
+
+1. **Denormalized Tables**: Each component type (resistors, capacitors, ICs, etc.) has its own table
+2. **Core Fields**: All tables share 22 standard core fields (identity, CAD integration, supply chain, etc.)
+3. **Type-Specific Fields**: Each table adds fields specific to that component type (e.g., resistance, capacitance, gate count)
+4. **Single Database**: All tables live in one `terra.db` file
+5. **SQL as Source of Truth**: SQL files are version controlled; database is regenerated from SQL
+6. **Perfect Round-Trip**: `SQL → DB → SQL` must produce identical results
+
+### Core Fields (Present in All Tables)
+
+```sql
+-- Identity Fields (3)
+part_id TEXT PRIMARY KEY,
+mpn TEXT NOT NULL,
+manufacturer TEXT NOT NULL,
+
+-- Physical/Display Fields (2)
+package TEXT,
+value TEXT,
+
+-- Documentation Fields (3)
+description TEXT,
+datasheet TEXT,
+manufacturer_link TEXT,
+
+-- CAD Integration Fields (4)
+kicad_symbol TEXT,
+kicad_footprint TEXT,
+altium_symbol TEXT,
+altium_footprint TEXT,
+
+-- Supply Chain Fields (3)
+lifecycle_status TEXT DEFAULT 'Active',
+rohs BOOLEAN DEFAULT TRUE,
+rohs_document_link TEXT,
+
+-- Process Control Fields (4)
+allow_substitution BOOLEAN DEFAULT TRUE,
+tracking BOOLEAN DEFAULT FALSE,
+standards_version TEXT DEFAULT 'v1.0',
+bom_comment TEXT,
+
+-- Metadata Fields (3)
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+created_by TEXT
+```
+
+### Component Type Tables
+
+The following tables are implemented (or planned):
+
+- `resistors` - Resistance, tolerance, power rating, temperature coefficient
+- `capacitors` - Capacitance, tolerance, voltage rating, dielectric material
+- `inductors` - Inductance, tolerance, current rating, saturation current
+- `ferrites` - Impedance at frequency, DC resistance, current rating
+- `transistors` - Type (BJT/MOSFET/etc.), Vce/Vds, Ic/Id, package
+- `diodes` - Type (rectifier/Schottky/Zener), Vf, If, Vr
+- `connectors` - Pin count, pitch, mounting type, current rating
+- `ic_drivers` - Output current, channels, logic level, package
+- `ic_microcontrollers` - Family, flash size, RAM, GPIO count, peripherals
+- `ic_logic` - Logic family, gate type, propagation delay, voltage
+- `ic_memory` - Type (SRAM/DRAM/Flash), capacity, speed, interface
+- `ic_opamp` - GBW, slew rate, input offset, noise, channels
+- `ic_analog` - Function-specific fields (ADC, DAC, comparator, etc.)
+- `leds` - Color, wavelength, forward voltage, luminous intensity, viewing angle
+- `switches` - Type (tactile/toggle/DIP), poles, throw, actuation force
+
+### Searching Across All Tables
+
+Use SQL UNION to search across all component types:
+
+```sql
+-- Find all parts from a manufacturer
+SELECT 'resistor' as type, part_id, mpn FROM resistors WHERE manufacturer = 'Yageo'
+UNION ALL
+SELECT 'capacitor' as type, part_id, mpn FROM capacitors WHERE manufacturer = 'Yageo'
+UNION ALL
+-- ... etc for all tables
+
+-- Or create a view:
+CREATE VIEW all_parts AS
+  SELECT 'resistor' as part_type, * FROM resistors
+  UNION ALL
+  SELECT 'capacitor' as part_type, * FROM capacitors
+  UNION ALL
+  -- ... etc
+```
+
 ## Repository Structure
 
 ```
 terra-eda-library/
-├── README.md                 # User documentation
-├── CLAUDE.md                 # This file - AI assistant guidance
-├── Makefile                  # Build automation
-├── terra_sym.kicad_sym   # Main KiCad symbol library file
-├── terra.kicad_dbl   # Database library configuration for KiCad
-├── terra-eda-lib-spec.md     # Architecture specification document
+├── README.md                          # User documentation
+├── CLAUDE.md                          # This file - AI assistant guidance
+├── Makefile                           # Build automation
+├── terra_sym.kicad_sym                # Main KiCad symbol library file
+├── terra.kicad_dbl                    # Database library configuration for KiCad
+├── terra-eda-lib-spec.md              # Architecture specification document
 ├── db/
-│   ├── terra.sql     # SQL source of truth (tracked in git)
-│   └── terra.db      # SQLite database (generated, not tracked)
+│   ├── tables/                        # SQL source of truth (tracked in git)
+│   │   ├── resistors/
+│   │   │   ├── resistors.sql          # Table schema + data for resistors
+│   │   │   └── kicad/                 # Optional: custom KiCad assets for resistors
+│   │   │       ├── resistors.pretty/  # Custom footprints
+│   │   │       ├── symbols/           # Custom symbols
+│   │   │       └── 3dmodels/          # Custom 3D models
+│   │   ├── capacitors/
+│   │   │   ├── capacitors.sql
+│   │   │   └── kicad/                 # Optional: custom assets
+│   │   ├── inductors/
+│   │   │   └── inductors.sql
+│   │   ├── ferrites/
+│   │   │   └── ferrites.sql
+│   │   ├── transistors/
+│   │   │   └── transistors.sql
+│   │   ├── diodes/
+│   │   │   └── diodes.sql
+│   │   ├── connectors/
+│   │   │   ├── connectors.sql
+│   │   │   └── kicad/
+│   │   ├── ic_drivers/
+│   │   │   └── ic_drivers.sql
+│   │   ├── ic_microcontrollers/
+│   │   │   ├── ic_microcontrollers.sql
+│   │   │   ├── kicad/
+│   │   │   └── altium/                # Optional: Altium assets
+│   │   ├── ic_logic/
+│   │   │   └── ic_logic.sql
+│   │   ├── ic_memory/
+│   │   │   └── ic_memory.sql
+│   │   ├── ic_opamp/
+│   │   │   └── ic_opamp.sql
+│   │   ├── ic_analog/
+│   │   │   └── ic_analog.sql
+│   │   ├── leds/
+│   │   │   └── leds.sql
+│   │   └── switches/
+│   │       └── switches.sql
+│   └── terra.db                       # SQLite database (generated, not tracked)
 ├── tools/
-│   ├── kicad_sym_to_db.py    # Convert .kicad_sym to SQL
-│   ├── db_to_sql.py          # Dump database to SQL
-│   └── field_mappings.yaml   # Field name normalization config
+│   ├── kicad_sym_to_db.py             # Convert .kicad_sym to SQL
+│   ├── db_to_sql.py                   # Dump database to SQL (old single-table)
+│   ├── db_to_tables.py                # Dump database to table structure (new)
+│   └── field_mappings.yaml            # Field name normalization config
 ├── generators/
-│   ├── README.md             # Generator script documentation
-│   └── resistors_example.py  # Example part generation script
-├── temp/                     # Working directory (gitignored)
-├── assets/
-│   ├── symbols/
-│   │   ├── Standard/
-│   │   └── Custom/
-│   ├── footprints/
-│   │   ├── Standard.pretty/
-│   │   └── Custom.pretty/
-│   └── 3dmodels/
-│       ├── Standard.3dshapes/
-│       └── Custom.3dshapes/
-├── old/                      # Archived old files
-└── parts/                    # (future) Per-part YAML definitions
+│   ├── README.md                      # Generator script documentation
+│   └── resistors_example.py           # Example part generation script
+└── temp/                              # Working directory (gitignored)
 ```
 
-## Current Implementation
+**Key Points:**
+- **db/tables/{table_name}/{table_name}.sql**: Each component type has its own directory and SQL file
+- **db/tables/{table_name}/kicad/**: Optional directory for custom KiCad assets specific to that component type
+- **db/tables/{table_name}/altium/**: Optional directory for custom Altium assets
+- **db/terra.db**: Single database containing all tables (generated from SQL, not tracked in git)
+- SQL files contain both CREATE TABLE and INSERT statements
+- Asset paths in SQL reference: `${TERRA_EDA_LIB}/db/tables/{table_name}/kicad/{table_name}.pretty/...`
 
-The repository has a working build system with the following features:
+## Current Implementation Status
 
-- **Build system**: Makefile with targets for building, dumping, verifying databases
-- **Database schema**: Single flat `symbols` table with dual-EDA support
-- **Workflow**: SQL files are source of truth (git tracked), databases are generated artifacts
-- **Multi-EDA**: Separate columns for KiCad and Altium (KiCad_Symbol, Altium_Symbol, etc.)
-- **SPICE support**: Built-in SPICE simulation fields for passive components
+**Transition in Progress:** The repository is transitioning from a single-table architecture to a multi-table architecture.
 
-**Note:** The spec describes a normalized schema (part, symbol_map, footprint_map tables) which is not currently implemented. The flat schema is simpler and works well for current needs.
+### New Multi-Table Architecture (In Development)
+- **Build system**: Makefile concatenates all `db/tables/*/*.sql` files into single `terra.db`
+- **Database schema**: One table per component type, each with core + type-specific fields
+- **Workflow**: SQL files in `db/tables/` are source of truth (git tracked), `terra.db` is generated
+- **Multi-EDA**: Separate columns for KiCad and Altium in core fields
+- **Asset co-location**: Custom symbols/footprints can live alongside their table definitions
+- **Round-trip**: `db_to_tables.py` tool dumps database back to the table structure
+
+### Legacy Single-Table Architecture (Deprecated)
+- **Location**: `db/terra.sql` and `db/terra.db` (old single `symbols` table)
+- **Status**: Will be migrated to new multi-table structure
+- **Migration**: See migration section below for how to split into new structure
 
 ## Database Schema (Current Implementation)
 
@@ -161,9 +295,131 @@ CREATE TABLE symbols (
 - Added `Altium_Symbol` and `Altium_Footprint` columns
 - Added SPICE simulation fields (`Sim_*`)
 
-## Build Workflow
+## Build Workflow (Multi-Table Architecture)
 
-The library uses a Makefile-based workflow with SQL as the source of truth:
+The library uses a Makefile-based workflow with SQL files as the source of truth. All table SQL files are concatenated and loaded into a single `terra.db` database.
+
+### Build Process
+
+```bash
+# Build database from all table SQL files
+make
+
+# This concatenates db/tables/*/*.sql and creates db/terra.db
+```
+
+**What happens:**
+1. Makefile finds all `.sql` files in `db/tables/*/`
+2. Concatenates them in sorted order (deterministic)
+3. Pipes combined SQL into `sqlite3 db/terra.db`
+4. Each table is created and populated independently (no dependencies)
+
+### Dump Process
+
+```bash
+# Dump database back to table structure
+make dump
+
+# This creates/updates db/tables/{table_name}/{table_name}.sql for each table
+```
+
+**What happens:**
+1. `tools/db_to_tables.py` queries database for all tables
+2. For each table (sorted alphabetically):
+   - Creates directory `db/tables/{table_name}/` if needed
+   - Dumps CREATE TABLE to `db/tables/{table_name}/{table_name}.sql`
+   - Dumps INSERT statements (sorted by primary key)
+3. Result is deterministic and suitable for git tracking
+
+### Daily Workflow
+
+**Option A: Edit Database Directly**
+```bash
+# Edit database using SQLite
+sqlite3 db/terra.db
+
+# Make changes (UPDATE, INSERT, DELETE, etc.)
+UPDATE resistors SET tolerance = '1%' WHERE part_id = 'RES-001';
+
+# Dump changes back to SQL files for git tracking
+make dump
+
+# Review changes
+git diff db/tables/
+
+# Commit
+git add db/tables/resistors/resistors.sql
+git commit -m "Update resistor RES-001 tolerance"
+```
+
+**Option B: Edit SQL Directly**
+```bash
+# Edit specific table SQL file
+vim db/tables/resistors/resistors.sql
+
+# Rebuild database
+make
+
+# Commit
+git add db/tables/resistors/resistors.sql
+git commit -m "Add new resistor values"
+```
+
+### Makefile Targets
+
+- `make` or `make all` - Build `terra.db` from all table SQL files
+- `make dump` - Dump `terra.db` back to table SQL files (after editing DB)
+- `make verify` - Verify round-trip consistency (SQL → DB → SQL → DB)
+- `make status` - Show status of all tables
+- `make clean` - Remove generated `terra.db` (keep SQL files)
+- `make help` - Show help
+
+### Adding a New Component Type Table
+
+1. Create directory and SQL file:
+   ```bash
+   mkdir -p db/tables/new_component_type
+   ```
+
+2. Create `db/tables/new_component_type/new_component_type.sql`:
+   ```sql
+   DROP TABLE IF EXISTS new_component_type;
+
+   CREATE TABLE new_component_type (
+     -- Core fields (22 standard fields - see above)
+     part_id TEXT PRIMARY KEY,
+     mpn TEXT NOT NULL,
+     manufacturer TEXT NOT NULL,
+     -- ... (all core fields)
+
+     -- Type-specific fields
+     specific_field_1 TEXT,
+     specific_field_2 REAL
+   );
+
+   BEGIN TRANSACTION;
+   INSERT INTO new_component_type VALUES (...);
+   INSERT INTO new_component_type VALUES (...);
+   COMMIT;
+   ```
+
+3. Build and verify:
+   ```bash
+   make
+   make verify
+   ```
+
+4. Commit:
+   ```bash
+   git add db/tables/new_component_type/
+   git commit -m "Add new component type table"
+   ```
+
+## Build Workflow (Legacy Single-Table - Deprecated)
+
+**Note:** This workflow is deprecated. Use the multi-table workflow above instead.
+
+The old library used a single-table workflow with SQL as the source of truth:
 
 ### Initial Setup (from .kicad_sym)
 
