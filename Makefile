@@ -14,7 +14,7 @@ SQL_FILES := db/terra.sql
 DB_FILES := db/terra.db
 
 # Default target: build all databases from SQL
-all: $(DB_FILES)
+all: $(DB_FILES) terra.kicad_dbl
 
 # Ensure uv environment is synced
 $(VENV_MARKER): pyproject.toml
@@ -36,6 +36,30 @@ db/%.db: db/%.sql
 	@sqlite3 $@ < $<
 	@echo "Done: $@"
 
+# Detect operating system
+UNAME_S := $(shell uname -s 2>/dev/null || echo "Windows")
+
+# Generate terra.kicad_dbl from template with auto-detected ODBC driver
+terra.kicad_dbl: terra.kicad_dbl.template
+	@echo "Generating terra.kicad_dbl from template..."
+ifeq ($(UNAME_S),Windows_NT)
+	@powershell -ExecutionPolicy Bypass -File setup.ps1 >nul 2>&1 || (echo "Run 'powershell -File setup.ps1' to generate terra.kicad_dbl" && exit 1)
+else ifeq ($(findstring CYGWIN,$(UNAME_S)),CYGWIN)
+	@powershell -ExecutionPolicy Bypass -File setup.ps1 >/dev/null 2>&1 || (echo "Run 'powershell -File setup.ps1' to generate terra.kicad_dbl" && exit 1)
+else ifeq ($(findstring MINGW,$(UNAME_S)),MINGW)
+	@powershell -ExecutionPolicy Bypass -File setup.ps1 >/dev/null 2>&1 || (echo "Run 'powershell -File setup.ps1' to generate terra.kicad_dbl" && exit 1)
+else
+	@bash setup.sh >/dev/null 2>&1 || (echo "Run 'bash setup.sh' to generate terra.kicad_dbl" && exit 1)
+endif
+	@echo "Done: $@"
+
+# Convert KiCad symbol library to SQL (initial import)
+# Pattern: terra_sym.kicad_sym -> db/terra.sql
+db/%.sql: %_sym.kicad_sym $(CONFIG)
+	@echo "Converting symbol library to SQL: $< -> $@"
+	@mkdir -p db
+	@$(PYTHON) tools/kicad_sym_to_db.py $< $@ --config $(CONFIG)
+	@echo "Done: $@"
 # Dump database to SQL (for committing changes after editing)
 dump: $(VENV_MARKER) $(DB_FILES)
 	@echo "Dumping databases to SQL..."
@@ -76,6 +100,7 @@ clean:
 	@echo "Cleaning generated files..."
 	rm -f $(DB_FILES)
 	rm -f db/*_test.sql db/*_test.db
+	rm -f terra.kicad_dbl
 	@echo "Done. SQL files and venv preserved."
 
 # Clean everything including SQL and venv (use with caution!)
@@ -148,4 +173,4 @@ help:
 	@echo ""
 	@echo "Note: .kicad_sym import is a separate workflow (tools/kicad_sym_to_db.py)"
 
-.PHONY: all sync dump verify clean distclean status help
+.PHONY: all sync dump verify clean distclean status help terra.kicad_dbl

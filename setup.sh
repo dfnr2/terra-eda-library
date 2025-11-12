@@ -11,13 +11,53 @@ echo ""
 echo "Library path: $SCRIPT_DIR"
 echo ""
 
+# Function to find SQLite ODBC driver
+find_odbc_driver() {
+    # Common paths where SQLite ODBC drivers are installed
+    local paths=(
+        "/usr/local/lib/libsqlite3odbc.dylib"      # Homebrew (Intel Mac)
+        "/opt/homebrew/lib/libsqlite3odbc.dylib"   # Homebrew (Apple Silicon)
+        "/opt/local/lib/libsqlite3odbc.dylib"      # MacPorts
+        "/usr/lib/x86_64-linux-gnu/odbc/libsqlite3odbc.so"  # Ubuntu/Debian
+        "/usr/lib/odbc/libsqlite3odbc.so"          # Other Linux
+        "/usr/local/lib/libsqlite3odbc.so"         # Manual install Linux
+    )
+    
+    for path in "${paths[@]}"; do
+        if [ -f "$path" ]; then
+            echo "$path"
+            return 0
+        fi
+    done
+    
+    return 1
+}
+
 # Generate terra.kicad_dbl from template
 if [ -f "$SCRIPT_DIR/terra.kicad_dbl.template" ]; then
     echo "Generating terra.kicad_dbl with absolute path..."
-    sed "s|__TERRA_PATH__|$SCRIPT_DIR|g" "$SCRIPT_DIR/terra.kicad_dbl.template" > "$SCRIPT_DIR/terra.kicad_dbl"
-    echo "✓ Created terra.kicad_dbl"
+    
+    # Find ODBC driver
+    ODBC_DRIVER=$(find_odbc_driver)
+    if [ $? -eq 0 ]; then
+        echo "Found SQLite ODBC driver: $ODBC_DRIVER"
+    else
+        echo "ERROR: SQLite ODBC driver not found!"
+        echo "  Please install SQLite ODBC driver:"
+        echo "    macOS (Homebrew): brew install sqliteodbc"
+        echo "    macOS (MacPorts): See KICAD_SETUP.md for build instructions"
+        echo "    Linux: sudo apt-get install libsqliteodbc"
+        exit 1
+    fi
+    
+    # Perform substitutions
+    sed -e "s|__TERRA_PATH__|$SCRIPT_DIR|g" \
+        -e "s|__ODBC_DRIVER_PATH__|$ODBC_DRIVER|g" \
+        "$SCRIPT_DIR/terra.kicad_dbl.template" > "$SCRIPT_DIR/terra.kicad_dbl"
+    
+    echo "Created terra.kicad_dbl"
 else
-    echo "✗ Template file not found: terra.kicad_dbl.template"
+    echo "ERROR: Template file not found: terra.kicad_dbl.template"
     exit 1
 fi
 

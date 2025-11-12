@@ -12,18 +12,55 @@ Write-Host ""
 Write-Host "Library path: $ScriptDir"
 Write-Host ""
 
+# Function to find SQLite ODBC driver
+function Find-OdbcDriver {
+    # Common paths where SQLite ODBC drivers are installed on Windows
+    $paths = @(
+        "C:\Windows\System32\sqlite3odbc.dll",
+        "C:\Windows\SysWOW64\sqlite3odbc.dll",
+        "${env:ProgramFiles}\SQLite ODBC Driver\sqlite3odbc.dll",
+        "${env:ProgramFiles(x86)}\SQLite ODBC Driver\sqlite3odbc.dll",
+        "${env:LOCALAPPDATA}\SQLite ODBC Driver\sqlite3odbc.dll",
+        # WSL/Cygwin paths
+        "/mnt/c/Windows/System32/sqlite3odbc.dll",
+        "/cygdrive/c/Windows/System32/sqlite3odbc.dll"
+    )
+    
+    foreach ($path in $paths) {
+        if (Test-Path $path) {
+            # Convert to forward slashes for JSON consistency
+            return $path -replace '\\', '/'
+        }
+    }
+    
+    return $null
+}
+
 # Generate terra.kicad_dbl from template
 $templatePath = Join-Path $ScriptDir "terra.kicad_dbl.template"
 $outputPath = Join-Path $ScriptDir "terra.kicad_dbl"
 
 if (Test-Path $templatePath) {
     Write-Host "Generating terra.kicad_dbl with absolute path..."
+    
+    # Find ODBC driver
+    $odbcDriver = Find-OdbcDriver
+    if ($odbcDriver) {
+        Write-Host "Found SQLite ODBC driver: $odbcDriver"
+    } else {
+        Write-Host "ERROR: SQLite ODBC driver not found!" -ForegroundColor Red
+        Write-Host "  Please install SQLite ODBC driver:"
+        Write-Host "    Download from: http://www.ch-werner.de/sqliteodbc/"
+        Write-Host "    Install the Windows version appropriate for your system"
+        exit 1
+    }
 
-    # Read template and replace placeholder with actual path
+    # Read template and replace placeholders
     $content = Get-Content $templatePath -Raw
     # Convert Windows path to forward slashes for consistency
     $libraryPath = $ScriptDir -replace '\\', '/'
     $content = $content -replace '__TERRA_PATH__', $libraryPath
+    $content = $content -replace '__ODBC_DRIVER_PATH__', $odbcDriver
 
     # Write output
     Set-Content -Path $outputPath -Value $content -NoNewline
