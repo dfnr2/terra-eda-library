@@ -66,7 +66,7 @@ The Terra EDA Library uses a **one table per component type** architecture withi
 
 ```sql
 -- Identity Fields (3)
-part_id TEXT PRIMARY KEY,
+part_id TEXT,
 mpn TEXT NOT NULL,
 manufacturer TEXT NOT NULL,
 
@@ -96,11 +96,28 @@ tracking BOOLEAN DEFAULT FALSE,
 standards_version TEXT DEFAULT 'v1.0',
 bom_comment TEXT,
 
--- Metadata Fields (3)
+-- Metadata Fields (5)
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-created_by TEXT
+created_by TEXT,
+source TEXT DEFAULT 'static',
+dump_priority INTEGER DEFAULT 1,
+
+-- SPICE Simulation Fields (5)
+sim_model_type TEXT,
+sim_device TEXT,
+sim_pins TEXT,
+sim_model_file TEXT,
+sim_params TEXT,
+
+-- Composite Primary Key
+PRIMARY KEY (mpn, manufacturer, kicad_symbol, kicad_footprint, altium_symbol, altium_footprint)
 ```
+
+**Note:** The new core fields include:
+- **source**: Identifies the origin of data (e.g., 'static', 'yageo_rc', etc.)
+- **dump_priority**: Controls file dumping (0 = generated/not dumped, >0 = static/dumped with priority-based numbering)
+- **SPICE fields**: Support for circuit simulation in KiCad
 
 ### Component Type Tables
 

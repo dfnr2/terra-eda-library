@@ -1,0 +1,121 @@
+* Yageo RC_L – 1% / 100 ppm/°C summary
+
+** RC0201 – 1% (no 100 ppm band)
+
+| Field                              | Value                                      |
+|------------------------------------+--------------------------------------------|
+| Size (type)                        | RC0201 (EIA 0201)                          |
+| Tolerance                          | ±1 % (code F)                              |
+| 1% 100 ppm/°C resistance range     | N/A – all 1% values are ±200 ppm/°C        |
+| 1% overall resistance range        | 1 Ω – 10 MΩ (E24 / E96)                    |
+| Rated power @ 70 °C                | 1/20 W                                     |
+| Operating temperature range        | –55 °C … +125 °C                           |
+| Max. working voltage               | 25 V                                       |
+| Max. overload / dielectric voltage | 50 V / 50 V                                |
+| Rated / max jumper current         | 0.5 A / 1.0 A                              |
+| Solderability                      | 245 ±3 °C, 3 ±0.5 s (SnAgCu)               |
+| Resistance to soldering heat       | 260 ±5 °C, 10 ±1 s                         |
+| Storage temperature                | Not specified (use operating range envelope) |
+
+** RC0402 – 1% / 100 ppm/°C
+
+| Field                              | Value                                      |
+|------------------------------------+--------------------------------------------|
+| Size (type)                        | RC0402 (EIA 0402)                          |
+| Tolerance                          | ±1 % (code F)                              |
+| 1% 100 ppm/°C resistance range     | 10 Ω – 10 MΩ                               |
+| 1% overall resistance range        | 1 Ω – 10 MΩ (E24 / E96)                    |
+| 1% 100 ppm decades (E24 / E96)     | 10–100 Ω; 100–1 kΩ; 1–10 kΩ;               |
+|                                    | 10–100 kΩ; 100 kΩ–1 MΩ; 1–10 MΩ            |
+| Rated power @ 70 °C                | 1/16 W (standard)                          |
+| Operating temperature range        | –55 °C … +155 °C                           |
+| Max. working voltage               | 50 V                                       |
+| Max. overload / dielectric voltage | 100 V / 100 V                              |
+| Rated / max jumper current         | 1.0 A / 2.0 A                              |
+| Solderability                      | 245 ±3 °C, 3 ±0.5 s                        |
+| Resistance to soldering heat       | 260 ±5 °C, 10 ±1 s                         |
+| Storage temperature                | Not specified (use operating range envelope) |
+
+** RC0603 – 1% / 100 ppm/°C
+
+| Field                              | Value                                      |
+|------------------------------------+--------------------------------------------|
+| Size (type)                        | RC0603 (EIA 0603)                          |
+| Tolerance                          | ±1 % (code F)                              |
+| 1% 100 ppm/°C resistance range     | 10 Ω – 10 MΩ                               |
+| 1% overall resistance range        | 1 Ω – 10 MΩ (E24 / E96)                    |
+| 1% 100 ppm decades (E24 / E96)     | 10–100 Ω; 100–1 kΩ; 1–10 kΩ;               |
+|                                    | 10–100 kΩ; 100 kΩ–1 MΩ; 1–10 MΩ            |
+| Rated power @ 70 °C                | 1/10 W (standard)                          |
+| Operating temperature range        | –55 °C … +155 °C                           |
+| Max. working voltage               | 75 V                                       |
+| Max. overload / dielectric voltage | 150 V / 150 V                              |
+| Rated / max jumper current         | 1.0 A / 2.0 A                              |
+| Solderability                      | 245 ±3 °C, 3 ±0.5 s                        |
+| Resistance to soldering heat       | 260 ±5 °C, 10 ±1 s                         |
+| Storage temperature                | Not specified (use operating range envelope) |
+
+** RC0805 – 1% / 100 ppm/°C
+
+| Field                              | Value                                      |
+|------------------------------------+--------------------------------------------|
+| Size (type)                        | RC0805 (EIA 0805)                          |
+| Tolerance                          | ±1 % (code F)                              |
+| 1% 100 ppm/°C resistance range     | 10 Ω – 10 MΩ                               |
+| 1% overall resistance range        | 1 Ω – 10 MΩ (E24 / E96)                    |
+| 1% 100 ppm decades (E24 / E96)     | 10–100 Ω; 100–1 kΩ; 1–10 kΩ;               |
+|                                    | 10–100 kΩ; 100 kΩ–1 MΩ; 1–10 MΩ            |
+| Rated power @ 70 °C                | 1/8 W (standard)                           |
+| Operating temperature range        | –55 °C … +155 °C                           |
+| Max. working voltage               | 150 V                                      |
+| Max. overload / dielectric voltage | 300 V / 300 V                              |
+| Rated / max jumper current         | 2.0 A / 5.0 A                              |
+| Solderability                      | 245 ±3 °C, 3 ±0.5 s                        |
+| Resistance to soldering heat       | 260 ±5 °C, 10 ±1 s                         |
+| Storage temperature                | Not specified (use operating range envelope) |
+
+** RC1206 – 1% / 100 ppm/°C (standard 1/4 W)
+
+| Field                              | Value                                      |
+|------------------------------------+--------------------------------------------|
+| Size (type)                        | RC1206 (EIA 1206)                          |
+| Tolerance                          | ±1 % (code F)                              |
+| 1% 100 ppm/°C resistance range     | 10 Ω – 10 MΩ                               |
+| 1% overall resistance range        | 1 Ω – 10 MΩ (E24 / E96)                    |
+| 1% 100 ppm decades (E24 / E96)     | 10–100 Ω; 100–1 kΩ; 1–10 kΩ;               |
+|                                    | 10–100 kΩ; 100 kΩ–1 MΩ; 1–10 MΩ            |
+| Rated power @ 70 °C                | 1/4 W (standard power rating)              |
+| Operating temperature range        | –55 °C … +155 °C                           |
+| Max. working voltage               | 200 V                                      |
+| Max. overload / dielectric voltage | 400 V / 500 V                              |
+| Rated / max jumper current         | 2.0 A / 10.0 A                             |
+| Solderability                      | 245 ±3 °C, 3 ±0.5 s                        |
+| Resistance to soldering heat       | 260 ±5 °C, 10 ±1 s                         |
+| Storage temperature                | Not specified (use operating range envelope) |
+
+** RC2512 – 1% / 100 ppm/°C (standard 1 W)
+
+| Field                              | Value                                      |
+|------------------------------------+--------------------------------------------|
+| Size (type)                        | RC2512 (EIA 2512)                          |
+| Tolerance                          | ±1 % (code F)                              |
+| 1% 100 ppm/°C resistance range     | 10 Ω – 10 MΩ                               |
+| 1% overall resistance range        | 1 Ω – 10 MΩ (E24 / E96)                    |
+| 1% 100 ppm decades (E24 / E96)     | 10–100 Ω; 100–1 kΩ; 1–10 kΩ;               |
+|                                    | 10–100 kΩ; 100 kΩ–1 MΩ; 1–10 MΩ            |
+| Rated power @ 70 °C                | 1 W (standard)                             |
+| Operating temperature range        | –55 °C … +155 °C                           |
+| Max. working voltage               | 200 V                                      |
+| Max. overload / dielectric voltage | 500 V / 500 V                              |
+| Rated / max jumper current         | 2.0 A / 10.0 A                             |
+| Solderability                      | 245 ±3 °C, 3 ±0.5 s                        |
+| Resistance to soldering heat       | 260 ±5 °C, 10 ±1 s                         |
+| Storage temperature                | Not specified (use operating range envelope) |
+
+* Resistance value representation (for all sizes)
+
+- Global part number uses a **2–4 digit value field**, with **R / K / M** as the decimal:
+  - `97R6` → 97.6 Ω
+  - `9K76` → 9.76 kΩ (9760 Ω)
+  - `1M`   → 1.0 MΩ
+- 1% RC0603 parts use **EIA-96 codes** (two-digit code + multiplier) for E96 values; 1% RC0805 and larger use **4-digit numeric codes** (three significant digits + exponent) for E24/E96 values.
