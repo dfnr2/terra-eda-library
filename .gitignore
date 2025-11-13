@@ -43,3 +43,5 @@ Thumbs.db
 *.zip
 *.tar.gz
 terra_*.kicad_dbl
+# Generated resistor files
+db/tables/resistors/resistors_*_yageo_*.sql
