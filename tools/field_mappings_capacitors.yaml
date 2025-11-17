@@ -1,0 +1,105 @@
+# Field name normalization mappings for KiCad symbol library - CAPACITORS
+#
+# This file defines how different field names in KiCad symbols should be
+# normalized to consistent database column names for the capacitors table.
+
+field_mappings:
+  # Dual EDA support
+  "Symbol": "kicad_symbol"
+  "Footprint": "kicad_footprint"
+
+  # Core fields (PascalCase → snake_case and space → snake_case)
+  "Symbol_Name": "part_id"
+  "Part_ID": "part_id"
+  "KiCad_Symbol": "kicad_symbol"
+  "KiCad_Footprint": "kicad_footprint"
+  "Altium_Symbol": "altium_symbol"
+  "Altium_Footprint": "altium_footprint"
+  "Description": "description"
+  "Datasheet": "datasheet"
+  "Manufacturer": "manufacturer"
+  "MPN": "mpn"
+  "Manufacturer_PN": "mpn"
+  "Manufacturer PN": "mpn"
+  "Package": "package"
+  "Value": "value"
+  "Allow_Substitution": "allow_substitution"
+  "Allow Substitution": "allow_substitution"
+  "BOM_Comment": "bom_comment"
+  "BOM Comment": "bom_comment"
+  "Standards_Version": "standards_version"
+  "Standards Version": "standards_version"
+  "Tracking": "tracking"
+  "RoHS": "rohs"
+  "RoHS_Document_Link": "rohs_document_link"
+  "RoHS Document Link": "rohs_document_link"
+  "RoHS Link": "rohs_document_link"
+  "RoHS Link_1": "rohs_document_link"
+  "RoHS Europe Document Link": "rohs_document_link"
+  "Manufacturer_Link": "manufacturer_link"
+  "Manufacturer Link": "manufacturer_link"
+
+  # SPICE fields
+  "Sim_Device": "sim_device"
+  "Sim_Pins": "sim_pins"
+  "Sim_Type": "sim_model_type"
+  "Sim_Library": "sim_model_file"
+  "Sim.Device": "sim_device"
+  "Sim.Pins": "sim_pins"
+  "Sim.Type": "sim_model_type"
+  "Sim.Library": "sim_model_file"
+
+  # Capacitor electrical fields
+  "Tolerance": "tolerance"
+  "Tol": "tolerance"
+  "Voltage_Rating": "voltage_rating_v"
+  "Voltage Rating": "voltage_rating_v"
+  "Voltage": "voltage_rating_v"
+  "Material": "dielectric_class"
+  "Dielectric": "dielectric_class"
+  "Cap_Type": "cap_type"
+  "Capacitor_Type": "cap_type"
+
+  # Temperature fields
+  "Temp_Operating": "temp_operating"
+  "Temp (Operating)": "temp_operating"
+  "Temp_Storage": "temp_storage"
+  "Temp (Storage)": "temp_storage"
+  "Temp_Soldering": "temp_soldering"
+  "Temp (Soldering)": "temp_soldering"
+
+field_mapping_patterns: {}
+
+# Column edits
+column_edits:
+    "part_id": add
+    "source": add
+    "dump_priority": add
+    "altium_symbol": add
+    "altium_footprint": add
+
+    # Remove fields not in capacitors schema
+    "^ki_.*": remove
+    "Class": remove
+    "Component Type": remove
+    "Component_Type": remove
+    "Component Value": remove
+    "Component_Value": remove
+    "Number of Pins": remove
+    "Number_of_Pins": remove
+    "Reference": remove
+    "Fitted": remove
+    "RoHS China Document Link": remove
+    "RoHS China Link": remove
+    "Current Rating": remove
+    "Current_Rating": remove
+    "Current rating": remove
+    "Current": remove
+    "Power Rating": remove
+    "Power_Rating": remove
+    "power_rating": remove
+    "Temp Coeff": remove
+    "Temp Coeff.": remove
+    "Temp_Coeff": remove
+    "temp_coeff": remove
+    "composition": remove

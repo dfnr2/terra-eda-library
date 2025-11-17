@@ -1,7 +1,7 @@
-# Field name normalization mappings for KiCad symbol library
+# Field name normalization mappings for KiCad symbol library - RESISTORS
 #
 # This file defines how different field names in KiCad symbols should be
-# normalized to consistent database column names, and which columns to add/remove.
+# normalized to consistent database column names for the resistors table.
 #
 # Format:
 #   field_mappings:
@@ -42,11 +42,16 @@ field_mappings:
   "Material": "composition"
   "Temp_Coeff": "temp_coeff"
   "Temp_Operating": "temp_operating"
+  "Temp_Soldering": "temp_soldering"
   "Temp_Storage": "temp_storage"
   "Sim_Device": "sim_device"
   "Sim_Pins": "sim_pins"
   "Sim_Type": "sim_model_type"
   "Sim_Library": "sim_model_file"
+  "Sim.Device": "sim_device"
+  "Sim.Pins": "sim_pins"
+  "Sim.Type": "sim_model_type"
+  "Sim.Library": "sim_model_file"
   "Part_ID": "part_id"
   "Allow_Substitution": "allow_substitution"
   "BOM_Comment": "bom_comment"
@@ -56,8 +61,14 @@ field_mappings:
   "RoHS_Document_Link": "rohs_document_link"
   "Manufacturer_Link": "manufacturer_link"
 
-  # Current rating variations
-  "Current": "Current_Rating"
+  # Space variations of field names (from legacy symbols)
+  "Allow Substitution": "allow_substitution"
+  "BOM Comment": "bom_comment"
+  "Manufacturer Link": "manufacturer_link"
+  "Standards Version": "standards_version"
+  "Power Rating": "power_rating"
+  "Voltage Rating": "voltage_rating"
+  "RoHS Document Link": "rohs_document_link"
 
   # Manufacturer part number variations
   "Manufacturer_PN": "mpn"
@@ -74,9 +85,13 @@ field_mappings:
   "RoHS Link_1": "rohs_document_link"
   "RoHS Link": "rohs_document_link"
 
-  # Temperature coefficients
+  # Temperature coefficients and variations
   "Temp Coeff": "temp_coeff"
+  "Temp Coeff.": "temp_coeff"
   "Temperature Coefficient": "temp_coeff"
+  "Temp (Operating)": "temp_operating"
+  "Temp (Soldering)": "temp_soldering"
+  "Temp (Storage)": "temp_storage"
 
   # Voltage variations
   "Voltage": "voltage_rating"
@@ -93,8 +108,7 @@ field_mappings:
 
 # Field mapping patterns - use regex to map multiple fields to one column
 # Patterns are checked in order, first match wins
-field_mapping_patterns:
-  "(?i)current[ _-]rating": "Current_Rating"  # Map any field containing "current[ _-]rating" (case insensitive)
+field_mapping_patterns: {}
 
 # Column edits - add or remove columns from the database schema
 # Supports regex patterns for remove operations
@@ -103,8 +117,21 @@ column_edits:
     "^ki_.*": remove          # Remove all KiCad internal fields (ki_description, ki_keywords, ki_locked, etc.)
     "RoHS China Document Link": remove
     "RoHS China Link": remove
-    "Component_Value": remove  # Consolidated into Value field
+    "Component Value": remove  # Consolidated into Value field (space version)
+    "Component_Value": remove  # Consolidated into Value field (underscore version)
     "Fitted": remove          # Now built into KiCad functionality
+
+    # Resistor-specific removals (fields not in resistors schema)
+    "Class": remove           # Legacy field
+    "Component Type": remove  # Not needed - table defines type
+    "Component_Type": remove  # Not needed - table defines type
+    "Current Rating": remove  # Can be derived from power and voltage ratings
+    "Current_Rating": remove  # Can be derived from power and voltage ratings
+    "Current rating": remove  # Can be derived from power and voltage ratings (lowercase r)
+    "Current": remove         # Can be derived from power and voltage ratings
+    "Number of Pins": remove  # Not applicable to resistors
+    "Number_of_Pins": remove  # Not applicable to resistors
+    "Reference": remove       # KiCad-specific field, not needed in database
 
     # Altium support columns (blank for now, can be populated later)
     "altium_symbol": add

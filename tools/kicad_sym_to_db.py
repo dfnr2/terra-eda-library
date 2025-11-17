@@ -363,24 +363,27 @@ def get_unique_columns(field_mapping: Dict[str, str]) -> List[str]:
     return unique_cols
 
 
-def sql_escape(value: Optional[str]) -> str:
-    """Escape a string value for SQL, handling NULL values."""
+def sql_escape(value) -> str:
+    """Escape a value for SQL, handling NULL values and different types."""
     if value is None or value == '':
         return 'NULL'
-    # Escape single quotes by doubling them
-    escaped = value.replace("'", "''")
+    # Handle integers and floats directly (no quotes)
+    if isinstance(value, (int, float)):
+        return str(value)
+    # Handle strings - escape single quotes by doubling them
+    escaped = str(value).replace("'", "''")
     return f"'{escaped}'"
 
 
-def generate_create_table_sql(field_mapping: Dict[str, str]) -> str:
-    """Generate CREATE TABLE SQL statement for symbols table."""
+def generate_create_table_sql(field_mapping: Dict[str, str], table_name: str = 'symbols') -> str:
+    """Generate CREATE TABLE SQL statement for specified table."""
     # Get unique column names (multiple fields may map to same column)
     unique_columns = get_unique_columns(field_mapping)
 
     # Create column definitions
     columns = [f'"{col}" TEXT' for col in unique_columns]
 
-    create_table_sql = f"CREATE TABLE IF NOT EXISTS symbols (\n  {',\n  '.join(columns)}\n);"
+    create_table_sql = f"CREATE TABLE IF NOT EXISTS {table_name} (\n  {',\n  '.join(columns)}\n);"
     return create_table_sql
 
 
@@ -554,18 +557,28 @@ def prepare_symbol_values(symbol: Dict[str, str], field_mapping: Dict[str, str])
     return column_values
 
 
-def generate_insert_sql(symbols: List[Dict[str, str]], field_mapping: Dict[str, str]) -> List[str]:
-    """Generate INSERT SQL statements for symbols.
+def generate_insert_sql(symbols: List[Dict[str, str]], field_mapping: Dict[str, str], source: str, dump_priority: int, table_name: str = 'symbols') -> List[str]:
+    """Generate INSERT SQL statements for specified table.
 
     Args:
         symbols: List of symbol dictionaries
         field_mapping: Mapping from original field names to database columns
+        source: Source identifier for dump system
+        dump_priority: Priority number for dump system
+        table_name: Name of target table
 
     Returns:
         List of SQL INSERT statements
     """
     # Get unique columns
     unique_columns = get_unique_columns(field_mapping)
+
+    # Add source and dump_priority columns if not already present
+    if 'source' not in unique_columns:
+        unique_columns.append('source')
+    if 'dump_priority' not in unique_columns:
+        unique_columns.append('dump_priority')
+
     columns_str = ', '.join([f'"{col}"' for col in unique_columns])
 
     insert_statements = []
@@ -573,13 +586,18 @@ def generate_insert_sql(symbols: List[Dict[str, str]], field_mapping: Dict[str, 
     for symbol in symbols:
         # Prepare values, merging fields that map to the same column
         column_values = prepare_symbol_values(symbol, field_mapping)
+
+        # Add source and dump_priority to column values
+        column_values['source'] = source
+        column_values['dump_priority'] = dump_priority
+
         values = [column_values.get(col) for col in unique_columns]
 
         # Escape values for SQL
         escaped_values = [sql_escape(v) for v in values]
         values_str = ', '.join(escaped_values)
 
-        insert_sql = f"INSERT INTO symbols ({columns_str}) VALUES ({values_str});"
+        insert_sql = f"INSERT INTO {table_name} ({columns_str}) VALUES ({values_str});"
         insert_statements.append(insert_sql)
 
     return insert_statements
@@ -632,6 +650,9 @@ def main():
     parser.add_argument('input', help='Input KiCad symbol library file (.kicad_sym)')
     parser.add_argument('output', help='Output SQL script file (.sql)')
     parser.add_argument('--config', '-c', help='YAML config file for field name mappings and column edits', default=None)
+    parser.add_argument('--table', '-t', help='Target table name (default: symbols)', default='symbols')
+    parser.add_argument('--source', '-s', help='Source identifier for dump_priority system (default: input filename stem)', default=None)
+    parser.add_argument('--priority', '-p', type=int, help='Dump priority number (default: 100)', default=100)
 
     args = parser.parse_args()
 
@@ -658,6 +679,10 @@ def main():
 
     # Extract library name from input filename (without .kicad_sym extension)
     library_name = input_path.stem
+
+    # Set source default to library name if not provided
+    source = args.source if args.source is not None else library_name
+    dump_priority = args.priority
 
     print("Parsing S-expressions...")
     try:
@@ -700,14 +725,17 @@ def main():
     print("Creating field mapping...")
     field_mapping = create_field_mapping(fields, name_mappings, mapping_patterns)
 
+    # Get table name from arguments
+    table_name = args.table
+
     # Generate SQL statements
     print("Generating SQL statements...")
 
     # Generate CREATE TABLE statement
-    create_table_sql = generate_create_table_sql(field_mapping)
+    create_table_sql = generate_create_table_sql(field_mapping, table_name)
 
     # Generate INSERT statements
-    insert_statements = generate_insert_sql(symbols, field_mapping)
+    insert_statements = generate_insert_sql(symbols, field_mapping, source, dump_priority, table_name)
 
     print(f"  Generated {len(insert_statements)} INSERT statements")
 

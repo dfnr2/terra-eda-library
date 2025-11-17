@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Generate .kicad_dbl files for all component type tables.
+Generate terra.kicad_dbl file with all component type tables.
 
-This script reads the database schema and creates a .kicad_dbl file for each table,
-allowing KiCad to access all component types as separate libraries.
+This script reads the database schema and creates a single terra.kicad_dbl file
+with all tables as separate libraries within it.
 """
 
 import sqlite3
@@ -50,11 +50,10 @@ def create_field_config(column: str) -> Dict:
     """Create field configuration for a column."""
     # Skip internal/metadata columns
     skip_cols = {
-        'part_id', 'created_at', 'updated_at', 'created_by',
-        'lifecycle_status', 'rohs_document_link', 'allow_substitution',
-        'tracking', 'standards_version', 'bom_comment',
-        'altium_symbol', 'altium_footprint',
-        'sim_model_type', 'sim_device', 'sim_pins', 'sim_model_file', 'sim_params'
+        'part_id',  # Internal database key
+        'altium_symbol', 'altium_footprint',  # Not relevant for KiCad
+        'sim_model_type', 'sim_device', 'sim_pins', 'sim_model_file', 'sim_params',  # SPICE internals
+        'source', 'dump_priority'  # Internal dump system metadata
     }
 
     if column in skip_cols:
@@ -69,27 +68,42 @@ def create_field_config(column: str) -> Dict:
 
     visible_on_add = column in {'value'}
 
-    # Convert column name to display name
-    display_name = column.replace('_', ' ').title()
-    if column == 'mpn':
-        display_name = 'Manufacturer PN'
-    elif column == 'kicad_footprint':
-        display_name = 'Footprint'
-    elif column == 'kicad_symbol':
-        display_name = 'Symbol'
+    # Display name mappings
+    display_name_map = {
+        'mpn': 'Manufacturer PN',
+        'kicad_footprint': 'Footprint',
+        'kicad_symbol': 'Symbol',
+        'rohs': 'RoHS',
+        'rohs_document_link': 'RoHS Link',
+        'lifecycle_status': 'Lifecycle Status',
+        'allow_substitution': 'Allow Substitution',
+        'tracking': 'Tracking',
+        'standards_version': 'Standards Version',
+        'bom_comment': 'BOM Comment',
+        'created_at': 'Built On',
+        'updated_at': 'Updated On',
+        'created_by': 'Created By',
+    }
 
-    return {
+    # Convert column name to display name
+    display_name = display_name_map.get(column, column.replace('_', ' ').title())
+
+    field_config = {
         'column': column,
         'name': display_name,
         'visible_on_add': visible_on_add,
         'visible_in_chooser': visible_in_chooser
     }
 
+    # Map to KiCad properties
+    if column == 'exclude_from_bom':
+        field_config['properties'] = {'exclude_from_bom': {}}
 
-def generate_dbl_file(db_path: Path, output_dir: Path, table_name: str, terra_path: str):
-    """Generate a .kicad_dbl file for a specific table."""
-    conn = sqlite3.connect(str(db_path))
+    return field_config
 
+
+def create_library_config(conn: sqlite3.Connection, table_name: str) -> Dict:
+    """Create library configuration for a specific table."""
     # Get all columns
     columns = get_table_columns(conn, table_name)
 
@@ -100,63 +114,68 @@ def generate_dbl_file(db_path: Path, output_dir: Path, table_name: str, terra_pa
         if field:
             fields.append(field)
 
+    return {
+        'name': table_name,
+        'table': table_name,
+        'key': 'part_id',
+        'symbols': 'kicad_symbol',
+        'footprints': 'kicad_footprint',
+        'fields': fields
+    }
+
+
+def generate_unified_dbl_file(db_path: Path, output_dir: Path, tables: List[str]):
+    """Generate a single terra.kicad_dbl file with all tables."""
+    conn = sqlite3.connect(str(db_path))
+
+    # Create library configs for all tables
+    libraries = []
+    for table in tables:
+        libraries.append(create_library_config(conn, table))
+        print(f'  ✓ Added library: {table}')
+
     conn.close()
 
-    # Create the .kicad_dbl structure
+    # Use absolute path to the actual database file
+    db_absolute_path = db_path.absolute()
+
+    # Create the unified .kicad_dbl structure
     dbl_config = {
         'meta': {
             'version': 0,
-            'filename': f'terra_{table_name}.kicad_dbl'
+            'filename': 'terra.kicad_dbl'
         },
-        'name': f'Terra EDA Library - {get_display_name(table_name)}',
-        'description': f'Multi-table component library - {get_display_name(table_name)}',
+        'name': 'Terra EDA Library',
+        'description': 'Multi-table component library for all component types',
         'source': {
             'type': 'odbc',
             'dsn': '',
             'username': '',
             'password': '',
             'timeout_seconds': 2,
-            'connection_string': f'DRIVER=/usr/local/lib/libsqlite3odbc.dylib;Database={terra_path}/db/terra.db;Timeout=2000;'
+            'connection_string': f'DRIVER=/usr/local/lib/libsqlite3odbc.dylib;Database={db_absolute_path};Timeout=2000;'
         },
-        'libraries': [
-            {
-                'name': f'terra_{table_name}',
-                'table': table_name,
-                'key': 'part_id',
-                'symbols': 'kicad_symbol',
-                'footprints': 'kicad_footprint',
-                'fields': fields
-            }
-        ]
+        'libraries': libraries
     }
 
     # Write to file
-    output_file = output_dir / f'terra_{table_name}.kicad_dbl'
+    output_file = output_dir / 'terra.kicad_dbl'
     with open(output_file, 'w') as f:
         json.dump(dbl_config, f, indent=2)
 
-    print(f'  ✓ Created {output_file.name}')
+    print(f'\n✓ Created {output_file.name}')
 
 
 def main():
     if len(sys.argv) < 2:
-        print('Usage: generate_kicad_dbl_files.py <db_path> [terra_path]')
+        print('Usage: generate_kicad_dbl_files.py <db_path>')
         print('  db_path: Path to terra.db')
-        print('  terra_path: Path to terra-eda-library root (default: auto-detect)')
         sys.exit(1)
 
     db_path = Path(sys.argv[1])
-
-    if len(sys.argv) >= 3:
-        terra_path = sys.argv[2]
-    else:
-        # Auto-detect: assume we're in tools/ and terra-eda-library is parent of db/
-        terra_path = str(db_path.parent.parent.absolute())
-
     output_dir = db_path.parent.parent  # Go up from db/ to repo root
 
     print(f'Reading database: {db_path}')
-    print(f'Terra path: {terra_path}')
     print(f'Output directory: {output_dir}')
     print()
 
@@ -164,18 +183,17 @@ def main():
     tables = get_all_tables(conn)
     conn.close()
 
-    print(f'Generating .kicad_dbl files for {len(tables)} tables...')
+    print(f'Generating terra.kicad_dbl with {len(tables)} tables...')
     print()
 
-    for table in tables:
-        generate_dbl_file(db_path, output_dir, table, terra_path)
+    generate_unified_dbl_file(db_path, output_dir, tables)
 
     print()
-    print(f'✓ Generated {len(tables)} .kicad_dbl files')
-    print()
-    print('Add these to KiCad:')
+    print('Add to KiCad:')
     print('  Preferences → Manage Symbol Libraries → Database Libraries')
-    print('  Click + to add each terra_*.kicad_dbl file')
+    print('  Click + to add terra.kicad_dbl')
+    print()
+    print(f'Libraries included: {", ".join(tables)}')
 
 
 if __name__ == '__main__':

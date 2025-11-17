@@ -276,11 +276,9 @@ def dump_table_to_file(conn: sqlite3.Connection, table_name: str, output_dir: Pa
                 continue  # Skip empty priority/source combinations
             
             # Generate filename based on priority and source
+            # Format: {table}_{priority}_{source}.sql (no special cases)
             priority_str = f"{dump_priority:0{padding_width}d}"
-            if source == 'static':
-                data_file = table_dir / f"{table_name}_{priority_str}_data.sql"
-            else:
-                data_file = table_dir / f"{table_name}_{priority_str}_{source}.sql"
+            data_file = table_dir / f"{table_name}_{priority_str}_{source}.sql"
             
             with open(data_file, 'w', encoding='utf-8') as f:
                 f.write(f"-- Terra EDA Library - {table_name} Table Data (priority {dump_priority}, source {source})\n")

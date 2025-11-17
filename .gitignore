@@ -43,5 +43,6 @@ Thumbs.db
 *.zip
 *.tar.gz
 terra_*.kicad_dbl
-# Generated resistor files
-db/tables/resistors/resistors_*_yageo_*.sql
+# Generated SQL files from run_*.py generator scripts
+# Pattern: {table}_generated_*.sql (has dump_priority=0, not dumped back)
+db/tables/*/*_generated_*.sql
