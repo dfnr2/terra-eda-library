@@ -65,10 +65,12 @@ The Terra EDA Library uses a **one table per component type** architecture withi
 ### Core Fields (Present in All Tables)
 
 ```sql
--- Identity Fields (3)
-part_id TEXT,
+-- Identity Fields (4)
+unique_id TEXT PRIMARY KEY,
+part_locator TEXT,
 mpn TEXT NOT NULL,
 manufacturer TEXT NOT NULL,
+variant TEXT,
 
 -- Physical/Display Fields (2)
 package TEXT,
@@ -111,9 +113,26 @@ sim_pins TEXT,
 sim_model_file TEXT,
 sim_params TEXT,
 
--- Composite Primary Key
-PRIMARY KEY (mpn, manufacturer, kicad_symbol, kicad_footprint, altium_symbol, altium_footprint)
+-- Composite Primary Key (represented by unique_id)
+PRIMARY KEY (unique_id)
 ```
+
+**Identity Field Notes:**
+
+- **unique_id**: Auto-generated composite key in format `{manufacturer}-{mpn}-{variant}` or `{manufacturer}-{mpn}` if variant is NULL/empty. This ensures uniqueness across all representations of a part.
+  - Example: `Yageo-RC0603FR-0710KL` (standard part, no variant)
+  - Example: `Yageo-RC0603FR-0710KL-US` (US symbol variant)
+  - Example: `TI-SN74HC00-gate-A` (separate gate representation)
+
+- **part_locator**: Functional descriptor for similar electrical specs (NOT unique). Multiple manufacturers or variants may share the same part_locator.
+  - Example: `res-thick-film-10k-1%-0.1w-0603`
+
+- **variant**: Optional field to distinguish different representations of the same MPN:
+  - Symbol variants: `US`, `EU`, `IEC`
+  - Footprint variants: `hand-solder`, `reflow`
+  - IC representations: `block`, `gate-A`, `gate-B`, `gate-C`
+  - NULL or empty for standard/default representation
+  - User responsibility to maintain consistency
 
 **Note:** The new core fields include:
 - **source**: Identifies the origin of data (e.g., 'static', 'yageo_rc', etc.)
@@ -189,7 +208,7 @@ creepage_clearance_note TEXT,    -- notes if creepage/clearance are special / sa
 
 -- Mating / System Integration
 mating_family           TEXT,    -- e.g. 'mates with MicroFit receptacles'
-mating_part_hint        TEXT,    -- free text for common mating MPNs / internal part_id
+mating_part_hint        TEXT,    -- free text for common mating MPNs / internal part_locator
 
 
 ##### Not in DB, segregate into libraries based on:
@@ -201,9 +220,9 @@ Use SQL UNION to search across all component types:
 
 ```sql
 -- Find all parts from a manufacturer
-SELECT 'resistor' as type, part_id, mpn FROM resistors WHERE manufacturer = 'Yageo'
+SELECT 'resistor' as type, part_locator, mpn FROM resistors WHERE manufacturer = 'Yageo'
 UNION ALL
-SELECT 'capacitor' as type, part_id, mpn FROM capacitors WHERE manufacturer = 'Yageo'
+SELECT 'capacitor' as type, part_locator, mpn FROM capacitors WHERE manufacturer = 'Yageo'
 UNION ALL
 -- ... etc for all tables
 
@@ -370,22 +389,47 @@ CREATE TABLE symbols (
 
 ## Build Workflow (Multi-Table Architecture)
 
-The library uses a Makefile-based workflow with SQL files as the source of truth. All table SQL files are concatenated and loaded into a single `terra.db` database.
+The library uses a Makefile-based workflow with SQL files as the source of truth. The system supports both per-table databases and a unified database.
+
+### Architecture Overview
+
+**Per-Table Structure:**
+- Each component type (resistors, capacitors, etc.) has its own directory: `db/tables/{table}/`
+- Within each directory:
+  - `run_N_description.py` - Generator scripts (tracked in git)
+  - `{table}_N_source.sql` - Static SQL files (tracked in git, dump_priority=N)
+  - `{table}_generated_N_source.sql` - Generated SQL files (gitignored, dump_priority=0)
+- Each table gets its own database: `db/{table}.db`
+- All tables are also combined into a unified database: `db/terra.db`
+
+**Build Chain:**
+```
+run_*.py → {table}_generated_*.sql → db/{table}.db → db/terra.db
+```
 
 ### Build Process
 
 ```bash
-# Build database from all table SQL files
+# Build everything (per-table databases + unified database + kicad_dbl file)
 make
+# OR
+make all
 
-# This concatenates db/tables/*/*.sql and creates db/terra.db
+# Build just one table's database
+make resistors-build
+
+# Run generator scripts for all tables
+make generate
+
+# Run generator script for one table
+make resistors-generate
 ```
 
-**What happens:**
-1. Makefile finds all `.sql` files in `db/tables/*/`
-2. Concatenates them in sorted order (deterministic)
-3. Pipes combined SQL into `sqlite3 db/terra.db`
-4. Each table is created and populated independently (no dependencies)
+**What `make` does:**
+1. Runs all generator scripts (`run_*.py`) to create `{table}_generated_*.sql` files
+2. Builds per-table databases (`db/{table}.db`) from all SQL files in each table directory
+3. Builds unified database (`db/terra.db`) by combining all tables
+4. Generates `terra.kicad_dbl` configuration file
 
 ### Dump Process
 
@@ -412,7 +456,7 @@ make dump
 sqlite3 db/terra.db
 
 # Make changes (UPDATE, INSERT, DELETE, etc.)
-UPDATE resistors SET tolerance = '1%' WHERE part_id = 'RES-001';
+UPDATE resistors SET tolerance = '1%' WHERE part_locator = 'RES-001';
 
 # Dump changes back to SQL files for git tracking
 make dump
@@ -438,14 +482,110 @@ git add db/tables/resistors/resistors.sql
 git commit -m "Add new resistor values"
 ```
 
+### Checking and Verifying Databases
+
+**Check database contents:**
+```bash
+# Count parts in a table
+sqlite3 db/resistors.db "SELECT COUNT(*) FROM resistors;"
+
+# View specific parts
+sqlite3 db/resistors.db "SELECT part_locator, mpn, description FROM resistors WHERE manufacturer='Yageo' LIMIT 10;"
+
+# Check all tables in unified database
+sqlite3 db/terra.db ".tables"
+
+# Count parts across all tables
+sqlite3 db/terra.db "SELECT 'resistors' as table, COUNT(*) as count FROM resistors
+  UNION ALL SELECT 'capacitors', COUNT(*) FROM capacitors;"
+```
+
+**Verify consistency:**
+```bash
+# Full round-trip verification (SQL → DB → SQL → DB)
+make verify
+
+# Check status of all tables
+make status
+```
+
+**Common checks after changes:**
+```bash
+# After modifying generator script
+make resistors-generate  # Regenerate SQL
+make resistors-build     # Rebuild database
+sqlite3 db/resistors.db "SELECT COUNT(*) FROM resistors;"  # Verify count
+
+# After editing database directly
+make dump                # Export changes to SQL
+git diff db/tables/      # Review changes
+make verify              # Verify round-trip consistency
+```
+
 ### Makefile Targets
 
-- `make` or `make all` - Build `terra.db` from all table SQL files
-- `make dump` - Dump `terra.db` back to table SQL files (after editing DB)
+**Global Targets:**
+- `make` or `make all` - Build everything (per-table DBs + unified DB + kicad_dbl)
+- `make generate` - Run all generator scripts to create `{table}_generated_*.sql` files
+- `make dump` - Dump all databases back to static SQL files (excludes generated files)
 - `make verify` - Verify round-trip consistency (SQL → DB → SQL → DB)
-- `make status` - Show status of all tables
-- `make clean` - Remove generated `terra.db` (keep SQL files)
-- `make help` - Show help
+- `make status` - Show status of all tables and databases
+- `make clean` - Remove all generated databases and SQL files
+- `make help` - Show detailed help
+
+**Per-Table Targets (replace `{table}` with resistors, capacitors, etc.):**
+- `make {table}-generate` - Run generator scripts for one table
+- `make {table}-build` - Build `db/{table}.db` from SQL files
+- `make {table}-dump` - Dump `db/{table}.db` back to static SQL files
+- `make {table}-clean` - Remove generated files for one table
+- `make {table}-test` - Run pytest tests for one table (if test files exist)
+
+**Examples:**
+```bash
+# Regenerate and rebuild just resistors
+make resistors-generate
+make resistors-build
+
+# Or rebuild everything
+make clean
+make
+```
+
+### Working with Generator Scripts
+
+Generator scripts (`run_*.py`) automate creation of large component sets (e.g., E-series resistors, capacitor ranges).
+
+**Workflow:**
+1. Modify generator configuration (at top of script)
+2. Run generator to create/update `{table}_generated_*.sql`
+3. Rebuild database to incorporate changes
+
+**Example with resistors:**
+```bash
+# Edit generator configuration
+vim db/tables/resistors/run_200_yageo_rc.py
+# Change PACKAGE_SIZES, TOLERANCE_PERCENT, etc.
+
+# Run generator to create resistors_generated_200_yageo_rc.sql
+cd db/tables/resistors
+python3 run_200_yageo_rc.py
+
+# Or use make target (runs all generators in directory)
+make resistors-generate
+
+# Rebuild database with new parts
+make resistors-build
+
+# Check results
+sqlite3 db/resistors.db "SELECT COUNT(*) FROM resistors;"
+sqlite3 db/resistors.db "SELECT part_locator, description FROM resistors LIMIT 5;"
+```
+
+**Important:**
+- Generated SQL files have `dump_priority = 0` and are NOT dumped by `make dump`
+- Static SQL files have `dump_priority > 0` and ARE dumped by `make dump`
+- Generator scripts should set `SOURCE = None` and `DUMP_PRIORITY = 0` for generated data
+- Add `*_generated_*.sql` to `.gitignore` (already done)
 
 ### Adding a New Component Type Table
 
@@ -460,7 +600,7 @@ git commit -m "Add new resistor values"
 
    CREATE TABLE new_component_type (
      -- Core fields (22 standard fields - see above)
-     part_id TEXT PRIMARY KEY,
+     part_locator TEXT,
      mpn TEXT NOT NULL,
      manufacturer TEXT NOT NULL,
      -- ... (all core fields)

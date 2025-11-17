@@ -573,7 +573,11 @@ def generate_insert_sql(symbols: List[Dict[str, str]], field_mapping: Dict[str, 
     # Get unique columns
     unique_columns = get_unique_columns(field_mapping)
 
-    # Add source and dump_priority columns if not already present
+    # Add generated/computed columns if not already present
+    if 'unique_id' not in unique_columns:
+        unique_columns.insert(0, 'unique_id')  # Insert at beginning (primary key)
+    if 'variant' not in unique_columns:
+        unique_columns.append('variant')
     if 'source' not in unique_columns:
         unique_columns.append('source')
     if 'dump_priority' not in unique_columns:
@@ -587,7 +591,19 @@ def generate_insert_sql(symbols: List[Dict[str, str]], field_mapping: Dict[str, 
         # Prepare values, merging fields that map to the same column
         column_values = prepare_symbol_values(symbol, field_mapping)
 
-        # Add source and dump_priority to column values
+        # Generate unique_id from manufacturer + mpn + variant
+        manufacturer = column_values.get('manufacturer') or column_values.get('Manufacturer') or 'Unknown'
+        mpn = column_values.get('mpn') or column_values.get('MPN') or 'UNKNOWN'
+        variant = column_values.get('variant') or column_values.get('Variant')
+
+        if variant:
+            unique_id = f"{manufacturer}-{mpn}-{variant}"
+        else:
+            unique_id = f"{manufacturer}-{mpn}"
+
+        # Add generated/computed fields
+        column_values['unique_id'] = unique_id
+        column_values['variant'] = variant
         column_values['source'] = source
         column_values['dump_priority'] = dump_priority
 
@@ -653,6 +669,8 @@ def main():
     parser.add_argument('--table', '-t', help='Target table name (default: symbols)', default='symbols')
     parser.add_argument('--source', '-s', help='Source identifier for dump_priority system (default: input filename stem)', default=None)
     parser.add_argument('--priority', '-p', type=int, help='Dump priority number (default: 100)', default=100)
+    parser.add_argument('--filter', '-f', help='Filter symbols by name pattern (substring match on Symbol_Name)', default=None)
+    parser.add_argument('--no-create-table', action='store_true', help='Skip CREATE TABLE statement (only generate INSERT statements)')
 
     args = parser.parse_args()
 
@@ -701,6 +719,16 @@ def main():
 
     print(f"Found {len(symbols)} symbols")
 
+    # Apply filter if specified
+    if args.filter:
+        original_count = len(symbols)
+        symbols = [s for s in symbols if args.filter in s.get('Symbol_Name', '')]
+        print(f"Filtered to {len(symbols)} symbols matching '{args.filter}' (removed {original_count - len(symbols)})")
+
+        if not symbols:
+            print(f"Warning: No symbols match filter '{args.filter}'", file=sys.stderr)
+            sys.exit(1)
+
     # Load config (field mappings and column edits)
     config_path = Path(args.config) if args.config else None
     name_mappings, mapping_patterns, column_edits = load_config(config_path)
@@ -748,14 +776,18 @@ def main():
             f.write(f"-- Generated from: {input_path.name}\n")
             f.write(f"-- Number of symbols: {len(symbols)}\n")
             f.write(f"--\n")
-            f.write(f"-- To create the database, run:\n")
-            f.write(f"--   sqlite3 output.db < {output_path.name}\n")
+            if not args.no_create_table:
+                f.write(f"-- To create the database, run:\n")
+                f.write(f"--   sqlite3 output.db < {output_path.name}\n")
+            else:
+                f.write(f"-- INSERT-only SQL (no CREATE TABLE)\n")
             f.write(f"--\n\n")
 
-            # Write CREATE TABLE
-            f.write("-- Create symbols table\n")
-            f.write(create_table_sql)
-            f.write("\n\n")
+            # Write CREATE TABLE (unless skipped)
+            if not args.no_create_table:
+                f.write("-- Create symbols table\n")
+                f.write(create_table_sql)
+                f.write("\n\n")
 
             # Write INSERT statements
             f.write("-- Insert symbols\n")

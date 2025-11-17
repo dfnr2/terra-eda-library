@@ -371,9 +371,16 @@ def generate_manufacturer_link(mpn):
     """Generate manufacturer product page link"""
     return f"https://www.yageogroup.com/products/Resistors/part/{mpn}"
 
-def generate_part_id(value_str, tolerance, power, tempco, package):
-    """Generate standardized part ID"""
-    return f"RES-{value_str}-{tolerance}-{power}-{tempco}-{package}"
+def generate_part_locator(value_str, tolerance, power, tempco, package, composition):
+    """Generate standardized part locator"""
+    comp_lower = composition.lower().replace(' ', '-')
+    return f"res-{comp_lower}-{value_str.lower()}-{tolerance.lower()}-{power.lower()}-{tempco.lower()}-{package.lower()}"
+
+def generate_unique_id(manufacturer, mpn, variant=None):
+    """Generate unique ID from manufacturer, MPN, and optional variant"""
+    if variant:
+        return f"{manufacturer}-{mpn}-{variant}"
+    return f"{manufacturer}-{mpn}"
 
 def generate_resistors(symbol_style='R', packages=None, series_values=None, series_str='E96', tolerance_percent=1.0):
     """
@@ -490,23 +497,25 @@ def generate_resistors(symbol_style='R', packages=None, series_values=None, seri
             value_readable = encode_resistance(resistance_ohms, style='spice')  # Decimal format for humans (2.74k)
             value_simulation = value_readable  # SPICE uses same format
 
-            # Generate links and IDs
+            # Generate links, IDs, and locator
             manufacturer_link = generate_manufacturer_link(mpn)
             rohs_link = f"https://www.yageogroup.com/component-documentation/download/rohs/{mpn}.pdf"
-            part_id = generate_part_id(value_readable, tolerance_str, power.replace('/', '_'),
-                                      tempco, base_package)
+            part_locator = generate_part_locator(value_readable, tolerance_str, power.replace('/', '_'),
+                                                tempco, base_package, COMPOSITION)
+            unique_id = generate_unique_id(MANUFACTURER, mpn, variant=None)  # No variant for standard parts
 
             # Generate description
+            comp_display = COMPOSITION.lower()
             if resistance_ohms == 0:
-                description = f"Jumper, 0 ohm resistor, {base_package} package"
+                description = f"{MANUFACTURER} {comp_display} jumper, 0 ohm resistor, {base_package} package"
             else:
-                description = f"Resistor {value_readable} {tolerance_str} {power} {tempco} {base_package} thick film"
+                description = f"{MANUFACTURER} {comp_display} resistor {value_readable} {tolerance_str} {power} {tempco} {base_package}"
 
             # Format source for SQL (None → NULL, string → 'string')
             source_sql = 'NULL' if SOURCE is None else f"'{SOURCE}'"
 
-            sql_line = f"""INSERT INTO resistors (part_id, mpn, manufacturer, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tolerance, power_rating, temp_coeff, voltage_rating, composition, temp_operating, temp_soldering, temp_storage, sim_device, sim_pins, lifecycle_status, rohs, rohs_document_link, allow_substitution, tracking, created_at, updated_at, created_by)
-VALUES ('{part_id}', '{mpn}', '{MANUFACTURER}', '{base_package}', '{value_simulation}', '{description}', '{DATASHEET_URL}', '{manufacturer_link}', '{symbol_ref}', '{footprint}', {source_sql}, {DUMP_PRIORITY}, '{tolerance_str}', '{power}', '{tempco}', '{working_voltage}', '{COMPOSITION}', '{temp_operating}', '{temp_soldering}', '{temp_storage}', '{SIM_DEVICE}', '{SIM_PINS}', '{LIFECYCLE_STATUS}', '{ROHS_COMPLIANT}', '{rohs_link}', '{ALLOW_SUBSTITUTION}', '{TRACKING}', '{created_date}', '{build_date}', '{script_name}');"""
+            sql_line = f"""INSERT INTO resistors (unique_id, part_locator, mpn, manufacturer, variant, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tolerance, power_rating, temp_coeff, voltage_rating, composition, temp_operating, temp_soldering, temp_storage, sim_device, sim_pins, lifecycle_status, rohs, rohs_document_link, allow_substitution, tracking, created_at, updated_at, created_by)
+VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{MANUFACTURER}', NULL, '{base_package}', '{value_simulation}', '{description}', '{DATASHEET_URL}', '{manufacturer_link}', '{symbol_ref}', '{footprint}', {source_sql}, {DUMP_PRIORITY}, '{tolerance_str}', '{power}', '{tempco}', '{working_voltage}', '{COMPOSITION}', '{temp_operating}', '{temp_soldering}', '{temp_storage}', '{SIM_DEVICE}', '{SIM_PINS}', '{LIFECYCLE_STATUS}', '{ROHS_COMPLIANT}', '{rohs_link}', '{ALLOW_SUBSTITUTION}', '{TRACKING}', '{created_date}', '{build_date}', '{script_name}');"""
 
             sql_lines.append(sql_line)
             total_parts += 1

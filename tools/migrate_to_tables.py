@@ -59,8 +59,8 @@ def normalize_boolean(value: Optional[str]) -> Optional[int]:
     return None
 
 
-def generate_part_id(table_name: str, sequence: int) -> str:
-    """Generate a part_id for components missing one."""
+def generate_part_locator(table_name: str, sequence: int) -> str:
+    """Generate a part_locator for components missing one."""
     prefix_map = {
         'resistors': 'RES',
         'capacitors': 'CAP',
@@ -141,17 +141,30 @@ def get_target_table(row: Dict[str, Any]) -> str:
 def map_core_fields(old_row: Dict[str, Any], table_name: str, part_counter: Dict[str, int]) -> Dict[str, Any]:
     """Map old field names to new core field names."""
 
-    # Generate or use existing part_id
-    part_id = old_row.get('Part_ID') or old_row.get('Symbol_Name')
-    if not part_id:
+    # Generate or use existing part_locator
+    part_locator = old_row.get('Part_Locator') or old_row.get('Part_ID') or old_row.get('Symbol_Name')
+    if not part_locator:
         part_counter[table_name] += 1
-        part_id = generate_part_id(table_name, part_counter[table_name])
+        part_locator = generate_part_locator(table_name, part_counter[table_name])
+
+    # Get manufacturer and MPN for unique_id
+    manufacturer = old_row.get('Manufacturer') or 'Generic'
+    mpn = old_row.get('MPN') or 'UNKNOWN'
+    variant = old_row.get('Variant')  # Usually NULL for migrated data
+
+    # Generate unique_id
+    if variant:
+        unique_id = f"{manufacturer}-{mpn}-{variant}"
+    else:
+        unique_id = f"{manufacturer}-{mpn}"
 
     new_row = {
         # Identity Fields
-        'part_id': part_id,
-        'mpn': old_row.get('MPN') or 'UNKNOWN',
-        'manufacturer': old_row.get('Manufacturer') or 'Generic',
+        'unique_id': unique_id,
+        'part_locator': part_locator,
+        'mpn': mpn,
+        'manufacturer': manufacturer,
+        'variant': variant,
 
         # Physical/Display Fields
         'package': old_row.get('Package'),
@@ -301,9 +314,11 @@ def create_table_schemas(conn: sqlite3.Connection):
 
     # Core fields SQL (reusable)
     core_fields = """
-        part_id TEXT PRIMARY KEY,
+        unique_id TEXT PRIMARY KEY,
+        part_locator TEXT,
         mpn TEXT NOT NULL,
         manufacturer TEXT NOT NULL,
+        variant TEXT,
         package TEXT,
         value TEXT,
         description TEXT,

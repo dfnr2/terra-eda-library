@@ -50,7 +50,8 @@ def create_field_config(column: str) -> Dict:
     """Create field configuration for a column."""
     # Skip internal/metadata columns
     skip_cols = {
-        'part_id',  # Internal database key
+        'unique_id',  # Internal primary key (used as key field, not displayed)
+        'part_locator',  # Internal database locator
         'altium_symbol', 'altium_footprint',  # Not relevant for KiCad
         'sim_model_type', 'sim_device', 'sim_pins', 'sim_model_file', 'sim_params',  # SPICE internals
         'source', 'dump_priority'  # Internal dump system metadata
@@ -117,7 +118,7 @@ def create_library_config(conn: sqlite3.Connection, table_name: str) -> Dict:
     return {
         'name': table_name,
         'table': table_name,
-        'key': 'part_id',
+        'key': 'unique_id',
         'symbols': 'kicad_symbol',
         'footprints': 'kicad_footprint',
         'fields': fields

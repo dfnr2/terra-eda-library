@@ -7,9 +7,11 @@
 
 CREATE TABLE resistors (
         -- Core fields (shared across all component types)
-        part_id TEXT PRIMARY KEY,
+        unique_id TEXT PRIMARY KEY,
+        part_locator TEXT,
         mpn TEXT NOT NULL,
         manufacturer TEXT NOT NULL,
+        variant TEXT,
         package TEXT,
         value TEXT,
         description TEXT,

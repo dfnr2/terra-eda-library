@@ -9,8 +9,8 @@ field_mappings:
   "Footprint": "kicad_footprint"
 
   # Core fields (PascalCase → snake_case and space → snake_case)
-  "Symbol_Name": "part_id"
-  "Part_ID": "part_id"
+  "Symbol_Name": "part_locator"
+  "Part_Locator": "part_locator"
   "KiCad_Symbol": "kicad_symbol"
   "KiCad_Footprint": "kicad_footprint"
   "Altium_Symbol": "altium_symbol"
@@ -72,7 +72,7 @@ field_mapping_patterns: {}
 
 # Column edits
 column_edits:
-    "part_id": add
+    "part_locator": add
     "source": add
     "dump_priority": add
     "altium_symbol": add

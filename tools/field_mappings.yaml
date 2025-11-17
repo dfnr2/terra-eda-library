@@ -25,7 +25,7 @@ field_mappings:
   "Footprint": "kicad_footprint"
 
   # Old schema to new schema field name mappings (PascalCase → snake_case)
-  "Symbol_Name": "part_id"
+  "Symbol_Name": "part_locator"
   "KiCad_Symbol": "kicad_symbol"
   "KiCad_Footprint": "kicad_footprint"
   "Altium_Symbol": "altium_symbol"
@@ -47,7 +47,7 @@ field_mappings:
   "Sim_Pins": "sim_pins"
   "Sim_Type": "sim_model_type"
   "Sim_Library": "sim_model_file"
-  "Part_ID": "part_id"
+  "Part_Locator": "part_locator"
   "Allow_Substitution": "allow_substitution"
   "BOM_Comment": "bom_comment"
   "Standards_Version": "standards_version"
@@ -99,7 +99,7 @@ field_mapping_patterns:
 # Column edits - add or remove columns from the database schema
 # Supports regex patterns for remove operations
 column_edits:
-    "part_id": add
+    "part_locator": add
     "^ki_.*": remove          # Remove all KiCad internal fields (ki_description, ki_keywords, ki_locked, etc.)
     "RoHS China Document Link": remove
     "RoHS China Link": remove
