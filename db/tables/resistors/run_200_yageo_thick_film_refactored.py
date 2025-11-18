@@ -40,7 +40,7 @@ TRACKING = "No"
 
 # ======================== URL TEMPLATES ========================
 URL_TEMPLATES = {
-    "datasheet": "https://www.yageo.com/upload/media/product/productsearch/datasheet/rchip/PYu-RC_Group_51_RoHS_L_11.pdf",
+    "datasheet": "https://www.yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L",
     "manufacturer_link": "https://www.yageogroup.com/products/Resistors/part/{mpn}",
     "rohs_document": "https://www.yageogroup.com/component-documentation/download/rohs/{mpn}.pdf",
 }
@@ -133,7 +133,7 @@ PRODUCT_SPECS = [
         "power": "1/20W",
         "tempco": "200ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1%",
+        "tolerance": "1.0%",
         "tol_code": "F",
         "min_ohm": 1.0,
         "max_ohm": 10e6,
@@ -153,7 +153,7 @@ PRODUCT_SPECS = [
         "power": "1/16W",
         "tempco": "100ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1%",
+        "tolerance": "1.0%",
         "tol_code": "F",
         "min_ohm": 10,
         "max_ohm": 10e6,
@@ -172,7 +172,7 @@ PRODUCT_SPECS = [
         "power": "1/16W",
         "tempco": "200ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1%",
+        "tolerance": "1.0%",
         "tol_code": "F",
         "min_ohm": 1.0,
         "max_ohm": 9.99,
@@ -192,7 +192,7 @@ PRODUCT_SPECS = [
         "power": "1/10W",
         "tempco": "100ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1%",
+        "tolerance": "1.0%",
         "tol_code": "F",
         "min_ohm": 10,
         "max_ohm": 10e6,
@@ -211,7 +211,7 @@ PRODUCT_SPECS = [
         "power": "1/10W",
         "tempco": "200ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1%",
+        "tolerance": "1.0%",
         "tol_code": "F",
         "min_ohm": 1.0,
         "max_ohm": 9.99,
@@ -231,7 +231,7 @@ PRODUCT_SPECS = [
         "power": "1/8W",
         "tempco": "100ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1%",
+        "tolerance": "1.0%",
         "tol_code": "F",
         "min_ohm": 10,
         "max_ohm": 10e6,
@@ -250,7 +250,7 @@ PRODUCT_SPECS = [
         "power": "1/8W",
         "tempco": "200ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1%",
+        "tolerance": "1.0%",
         "tol_code": "F",
         "min_ohm": 1.0,
         "max_ohm": 9.99,
@@ -270,7 +270,7 @@ PRODUCT_SPECS = [
         "power": "1/4W",
         "tempco": "100ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1%",
+        "tolerance": "1.0%",
         "tol_code": "F",
         "min_ohm": 10,
         "max_ohm": 10e6,
@@ -289,7 +289,7 @@ PRODUCT_SPECS = [
         "power": "1/4W",
         "tempco": "200ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1%",
+        "tolerance": "1.0%",
         "tol_code": "F",
         "min_ohm": 1.0,
         "max_ohm": 9.99,
@@ -309,7 +309,7 @@ PRODUCT_SPECS = [
         "power": "1W",
         "tempco": "100ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1%",
+        "tolerance": "1.0%",
         "tol_code": "F",
         "min_ohm": 10,
         "max_ohm": 10e6,
@@ -328,7 +328,7 @@ PRODUCT_SPECS = [
         "power": "1W",
         "tempco": "200ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1%",
+        "tolerance": "1.0%",
         "tol_code": "F",
         "min_ohm": 1.0,
         "max_ohm": 9.99,
@@ -516,7 +516,7 @@ def generate_resistance_values_in_range(min_ohm: float, max_ohm: float, series: 
         start_i = start_table_idx // stride
 
         values = map(
-            lambda i: E24_TABLE[int((i * stride) % 24)] * (10 ** (start_decade_exp + (i * stride) // 24)),
+            lambda i: float(f"{E24_TABLE[int((i * stride) % 24)] * (10 ** (start_decade_exp + (i * stride) // 24)):.3g}"),
             range(start_i, start_i + num_steps)
         )
         return sorted(set(values))
@@ -664,13 +664,17 @@ def generate_resistors() -> str:
     created_date = get_last_commit_date()
     build_date = get_build_date()
 
+    # Collect unique tolerances from specs
+    tolerances = sorted(set(spec["tolerance"] for spec in PRODUCT_SPECS))
+    tolerance_str = ", ".join(tolerances)
+
     # Build SQL header
     sql_lines = [SQL_TEMPLATES["file_header"].format(
         manufacturer=MANUFACTURER,
         series=SERIES,
         composition=COMPOSITION,
         series_str=config["series_str"],
-        tolerance="1%",  # From specs (all slugs have same tolerance currently)
+        tolerance=tolerance_str,
         datasheet_url=URL_TEMPLATES["datasheet"],
         symbol_ref=symbol_ref,
         tempco_notes=generate_spec_summary(),
