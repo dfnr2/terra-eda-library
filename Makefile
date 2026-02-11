@@ -108,16 +108,16 @@ $(1)-test:
 
 endef
 
-# Generate rules for all discovered tables
-$(foreach table,$(TABLES),$(eval $(call TABLE_RULES,$(table))))
-
 # ============================================================================
-# Global Targets
+# Global Targets (must be before dynamic rule generation)
 # ============================================================================
 
 # Default target: build all table databases and unified terra.db
 .PHONY: all build
 all build: $(DB_FILES) db/terra.db terra.kicad_dbl
+
+# Generate rules for all discovered tables
+$(foreach table,$(TABLES),$(eval $(call TABLE_RULES,$(table))))
 
 # Ensure uv environment is synced
 $(VENV_MARKER): pyproject.toml
