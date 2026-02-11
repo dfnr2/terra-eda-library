@@ -8,6 +8,7 @@ with all tables as separate libraries within it.
 
 import sqlite3
 import json
+import platform
 import sys
 from pathlib import Path
 from typing import List, Dict
@@ -125,6 +126,47 @@ def create_library_config(conn: sqlite3.Connection, table_name: str) -> Dict:
     }
 
 
+def find_sqlite_odbc_driver() -> str:
+    """Find the SQLite ODBC driver for the current platform."""
+    system = platform.system()
+
+    if system == 'Darwin':
+        candidates = [
+            Path('/usr/local/lib/libsqlite3odbc.dylib'),   # Homebrew
+            Path('/opt/local/lib/libsqlite3odbc.dylib'),    # MacPorts
+            Path('/opt/homebrew/lib/libsqlite3odbc.dylib'),  # Homebrew Apple Silicon
+        ]
+    elif system == 'Linux':
+        import struct
+        bits = struct.calcsize('P') * 8
+        # Debian/Ubuntu multiarch, then generic paths
+        candidates = [
+            Path(f'/usr/lib/{platform.machine()}-linux-gnu/odbc/libsqlite3odbc.so'),
+            Path('/usr/lib/odbc/libsqlite3odbc.so'),
+            Path('/usr/lib64/libsqlite3odbc.so'),
+            Path('/usr/local/lib/libsqlite3odbc.so'),
+        ]
+    elif system == 'Windows':
+        candidates = [
+            Path(r'C:\Windows\System32\sqlite3odbc.dll'),
+        ]
+    else:
+        candidates = []
+
+    for path in candidates:
+        if path.exists():
+            return str(path)
+
+    searched = '\n  '.join(str(p) for p in candidates)
+    print(f'Error: SQLite ODBC driver not found. Searched:\n  {searched}', file=sys.stderr)
+    print(f'\nInstall it with:', file=sys.stderr)
+    if system == 'Darwin':
+        print(f'  brew install sqliteodbc', file=sys.stderr)
+    elif system == 'Linux':
+        print(f'  sudo apt-get install libsqliteodbc', file=sys.stderr)
+    sys.exit(1)
+
+
 def generate_unified_dbl_file(db_path: Path, output_dir: Path, tables: List[str]):
     """Generate a single terra.kicad_dbl file with all tables."""
     conn = sqlite3.connect(str(db_path))
@@ -140,6 +182,10 @@ def generate_unified_dbl_file(db_path: Path, output_dir: Path, tables: List[str]
     # Use absolute path to the actual database file
     db_absolute_path = db_path.absolute()
 
+    # Auto-detect ODBC driver for this platform
+    odbc_driver = find_sqlite_odbc_driver()
+    print(f'  Using ODBC driver: {odbc_driver}')
+
     # Create the unified .kicad_dbl structure
     dbl_config = {
         'meta': {
@@ -154,7 +200,7 @@ def generate_unified_dbl_file(db_path: Path, output_dir: Path, tables: List[str]
             'username': '',
             'password': '',
             'timeout_seconds': 2,
-            'connection_string': f'DRIVER=/usr/local/lib/libsqlite3odbc.dylib;Database={db_absolute_path};Timeout=2000;'
+            'connection_string': f'DRIVER={odbc_driver};Database={db_absolute_path};Timeout=2000;'
         },
         'libraries': libraries
     }
