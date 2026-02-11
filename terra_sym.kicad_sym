@@ -58,14 +58,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "14.4V 3.4Ah"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "n/a"
 			(at -22.098 -39.624 0)
 			(effects
@@ -504,14 +496,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "MMBT3904"
-			(at -6.858 5.334 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "na"
 			(at -22.098 -39.624 0)
 			(effects
@@ -909,14 +893,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "MMBT3906"
-			(at -6.858 5.334 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "na"
@@ -1318,14 +1294,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "0.1 uF"
-			(at -5.334 5.588 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "10%"
 			(at -54.61 -28.194 0)
 			(effects
@@ -1661,14 +1629,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "0.1 uF"
-			(at -5.334 3.048 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "10%"
@@ -2008,14 +1968,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "0.1 uF"
-			(at -5.334 5.588 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "5%"
 			(at -54.61 -28.194 0)
 			(effects
@@ -2351,14 +2303,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "1 uF"
-			(at -5.334 5.588 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "10%"
@@ -2698,14 +2642,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "10 uF"
-			(at -5.334 5.588 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "10%"
 			(at -54.61 -28.194 0)
 			(effects
@@ -3041,14 +2977,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "1 uF"
-			(at -5.334 1.778 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "10%"
@@ -3388,14 +3316,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "10 uF"
-			(at -5.334 1.778 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "20%"
 			(at -54.61 -32.004 0)
 			(effects
@@ -3731,14 +3651,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "10 uF"
-			(at -5.334 3.048 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "20%"
@@ -4078,14 +3990,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "10 uF"
-			(at -5.334 3.048 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "20%"
 			(at -34.036 -31.496 0)
 			(effects
@@ -4423,14 +4327,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "10 uF 50V"
-			(at -7.62 7.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "-20%/+80%"
 			(at -16.256 -14.224 0)
 			(effects
@@ -4758,14 +4654,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "22 uF"
-			(at -5.334 3.048 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "20%"
@@ -5283,14 +5171,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "10 uF"
-			(at 5.08 3.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "10%"
 			(at -16.256 -12.954 0)
 			(effects
@@ -5619,14 +5499,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "0.1 uF"
-			(at -5.334 3.048 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "20%"
@@ -5967,14 +5839,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "1 uF"
-			(at -5.334 3.048 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "20%"
 			(at -54.61 -32.004 0)
 			(effects
@@ -6285,7 +6149,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "hotwire:CP_Radial_D13.0mm_P5.00mm"
+		(property "Footprint" "terra_sym:CP_Radial_D13.0mm_P5.00mm"
 			(at -45.5168 -50.292 0)
 			(effects
 				(font
@@ -6310,14 +6174,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "3900 uF"
-			(at -9.652 -2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "+/-20%"
@@ -6672,14 +6528,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "2200 uF"
-			(at -9.652 -2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "+/-20%"
 			(at -62.738 -60.706 0)
 			(effects
@@ -7003,7 +6851,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:KLDX-SMT2-0202"
+		(property "Footprint" "terra_sym:KLDX-SMT2-0202"
 			(at 2.54 -15.24 0)
 			(effects
 				(font
@@ -7028,14 +6876,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "Comp. Value"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "If applicable"
@@ -7443,7 +7283,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:KLDX-SMT2-0202"
+		(property "Footprint" "terra_sym:KLDX-SMT2-0202"
 			(at 2.54 -15.24 0)
 			(effects
 				(font
@@ -7468,14 +7308,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "2.5mm"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "If applicable"
@@ -7883,7 +7715,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:CUI_PJ-202BH"
+		(property "Footprint" "terra_sym:CUI_PJ-202BH"
 			(at 2.54 -15.24 0)
 			(effects
 				(font
@@ -7908,14 +7740,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "2.5mm"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "If applicable"
@@ -8323,7 +8147,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:AMPHENOL_98401-101-26LF"
+		(property "Footprint" "terra_sym:AMPHENOL_98401-101-26LF"
 			(at -15.7988 -48.768 0)
 			(effects
 				(font
@@ -8348,14 +8172,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "2x13, 0.1\""
-			(at 7.62 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "If applicable"
@@ -9378,7 +9194,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:CONN08_560020_MOL"
+		(property "Footprint" "terra_sym:CONN08_560020_MOL"
 			(at -20.6248 -38.354 0)
 			(effects
 				(font
@@ -9398,15 +9214,6 @@
 		)
 		(property "Description" "1 x 8 pin connector 2mm smt"
 			(at -21.59 -34.544 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "1 x 8"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9904,7 +9711,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:CONN26_2311768_TEC"
+		(property "Footprint" "terra_sym:CONN26_2311768_TEC"
 			(at -40.64 -12.065 0)
 			(effects
 				(font
@@ -9929,14 +9736,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "HD26 female"
-			(at 15.24 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -11182,7 +10981,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:CON8_1X8_R_DF3_HIR"
+		(property "Footprint" "terra_sym:CON8_1X8_R_DF3_HIR"
 			(at -20.6248 -38.354 0)
 			(effects
 				(font
@@ -11202,15 +11001,6 @@
 		)
 		(property "Description" "1 x 8 pin connector 2mm through-hole"
 			(at -21.59 -34.544 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "1 x 8"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11707,7 +11497,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:STX35003NTR"
+		(property "Footprint" "terra_sym:STX35003NTR"
 			(at 2.54 -15.24 0)
 			(effects
 				(font
@@ -11732,14 +11522,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "3.5 mm"
-			(at -0.508 -9.144 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -12209,7 +11991,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:14-37FSV30_3_segments"
+		(property "Footprint" "terra_sym:14-37FSV30_3_segments"
 			(at -39.37 -16.51 0)
 			(effects
 				(font
@@ -12234,14 +12016,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "Chassis GND"
-			(at -15.748 -5.842 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "na"
@@ -12531,7 +12305,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:Mill-Max 399-10-108-10-007000 target header, 1x8, 2.54mm, through-hole RA"
+		(property "Footprint" "terra_sym:Mill-Max 399-10-108-10-007000 target header, 1x8, 2.54mm, through-hole RA"
 			(at -20.6248 -38.354 0)
 			(effects
 				(font
@@ -12551,15 +12325,6 @@
 		)
 		(property "Description" "1 x 8 target connector 0.1\" RA through-hole"
 			(at -21.59 -34.544 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "1 x 8"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13057,7 +12822,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:MillMax_829-22-004-20-002101_pogo_RA_8pin"
+		(property "Footprint" "terra_sym:MillMax_829-22-004-20-002101_pogo_RA_8pin"
 			(at 14.1732 -33.274 0)
 			(effects
 				(font
@@ -13082,14 +12847,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "Connector"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "If applicable"
@@ -13617,14 +13374,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "1x4"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "na"
 			(at -22.098 -39.624 0)
 			(effects
@@ -14004,7 +13753,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Isopoint:Molex_Micro-Latch_53254-0270_1x02_P2.00mm_Horizontal"
+		(property "Footprint" "terra_sym:Molex_Micro-Latch_53254-0270_1x02_P2.00mm_Horizontal"
 			(at 1.0414 5.4356 0)
 			(effects
 				(font
@@ -14023,6 +13772,24 @@
 			)
 		)
 		(property "Description" "1x2 0.2mm horizontal Microlatch"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "Molex"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "53254-0270"
 			(at 0 0 0)
 			(effects
 				(font
@@ -14149,7 +13916,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:Molex 15912240 2x12 0.1 header SMT"
+		(property "Footprint" "terra_sym:Molex 15912240 2x12 0.1 header SMT"
 			(at -15.7988 -48.768 0)
 			(effects
 				(font
@@ -14174,14 +13941,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "2x12, 0.1\""
-			(at 7.62 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "If applicable"
@@ -15146,7 +14905,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:Molex 15912040 2x2 0.1 header SMT"
+		(property "Footprint" "terra_sym:Molex 15912040 2x2 0.1 header SMT"
 			(at -15.7988 -48.768 0)
 			(effects
 				(font
@@ -15171,14 +14930,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "2x2, 0.1\""
-			(at 7.62 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -15563,7 +15314,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Isopoint:Molex 5600200320 3-pin header duraclick"
+		(property "Footprint" "terra_sym:Molex 5600200320 3-pin header duraclick"
 			(at 1.651 -13.97 0)
 			(effects
 				(font
@@ -15588,14 +15339,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" ""
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" ""
@@ -15943,7 +15686,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Isopoint:Molex_Micro-Latch_53254-0370_1x03_P2.00mm_Horizontal"
+		(property "Footprint" "terra_sym:Molex_Micro-Latch_53254-0370_1x03_P2.00mm_Horizontal"
 			(at 0.9652 -3.81 0)
 			(effects
 				(font
@@ -15968,14 +15711,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" ""
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" ""
@@ -16323,7 +16058,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Isopoint:Molex_MicroClasp_55935-0330_1x03_P2.00mm_Horizontal"
+		(property "Footprint" "terra_sym:Molex_MicroClasp_55935-0330_1x03_P2.00mm_Horizontal"
 			(at 3.683 -86.487 0)
 			(effects
 				(font
@@ -16348,14 +16083,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" ""
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" ""
@@ -16712,7 +16439,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:Molex_Pico-EZ-Mate_2082940040"
+		(property "Footprint" "terra_sym:Molex_Pico-EZ-Mate_2082940040"
 			(at -9.1948 -6.35 0)
 			(effects
 				(font
@@ -16737,14 +16464,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "connector"
-			(at 7.366 11.176 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "na"
@@ -17129,7 +16848,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Isopoint:Molex_PicoClasp_5015680307_1x03_P1.00mm_Horizontal"
+		(property "Footprint" "terra_sym:Molex_PicoClasp_5015680307_1x03_P1.00mm_Horizontal"
 			(at 3.683 -86.487 0)
 			(effects
 				(font
@@ -17465,7 +17184,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:CONN_5040500891_MOL"
+		(property "Footprint" "terra_sym:CONN_5040500891_MOL"
 			(at -20.6248 -38.354 0)
 			(effects
 				(font
@@ -17485,15 +17204,6 @@
 		)
 		(property "Description" "1 x 8 Picolock header 1.5mm RA SMT"
 			(at -21.59 -34.544 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "1 x 8"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17990,7 +17700,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "nema:1725656"
+		(property "Footprint" "terra_sym:1725656"
 			(at -2.54 -11.938 0)
 			(effects
 				(font
@@ -18010,15 +17720,6 @@
 		)
 		(property "Description" "2-pin Phoenix screw terminal, 2.54mm"
 			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "2 pins"
-			(at -25.4 -17.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18350,7 +18051,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "nema:1725669"
+		(property "Footprint" "terra_sym:1725669"
 			(at -17.272 -10.668 0)
 			(effects
 				(font
@@ -18370,15 +18071,6 @@
 		)
 		(property "Description" "3-pin Phoenix screw terminal, 2.54mm"
 			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "3pins"
-			(at -12.7 -10.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18739,7 +18431,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "nema:1725672"
+		(property "Footprint" "terra_sym:1725672"
 			(at -17.272 -10.668 0)
 			(effects
 				(font
@@ -18759,15 +18451,6 @@
 		)
 		(property "Description" "4-pin Phoenix screw terminal, 2.54mm"
 			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "4 pins"
-			(at 7.366 3.048 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19158,7 +18841,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:RRCMC209010"
+		(property "Footprint" "terra_sym:RRCMC209010"
 			(at -20.6248 -38.354 0)
 			(effects
 				(font
@@ -19178,15 +18861,6 @@
 		)
 		(property "Description" "5-pin RRC Battery Connector"
 			(at -21.59 -34.544 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "Battery"
-			(at -2.286 3.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19597,7 +19271,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:SAMTEC_SSQ-104-02-T-S-RA"
+		(property "Footprint" "terra_sym:SAMTEC_SSQ-104-02-T-S-RA"
 			(at -17.78 -15.24 0)
 			(effects
 				(font
@@ -19622,14 +19296,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "1 x 4"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "na"
@@ -20014,7 +19680,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:51461282"
+		(property "Footprint" "terra_sym:51461282"
 			(at -17.78 -15.24 0)
 			(effects
 				(font
@@ -20039,14 +19705,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "1 x 4"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "na"
@@ -20424,7 +20082,7 @@
 				)
 			)
 		)
-		(property "Footprint" "nema:Tag-Connect_TC2030-IDC-NO-HOLESL_2x03_P1.27mm_Vertical"
+		(property "Footprint" "terra_sym:Tag-Connect_TC2030-IDC-NO-HOLESL_2x03_P1.27mm_Vertical"
 			(at -9.144 -38.608 0)
 			(effects
 				(font
@@ -20444,6 +20102,24 @@
 		)
 		(property "Description" "Tag-Connect ARM Cortex SWD JTAG connector, 6 pin No holes for secondary back-side placement."
 			(at -26.416 -44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "Tag-Connect"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TC2030-IDC-NL"
+			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20646,6 +20322,24 @@
 				(hide yes)
 			)
 		)
+		(property "Manufacturer" "Tag-Connect"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TC2030-IDC-FP"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(property "ki_keywords" "Cortex Debug Connector ARM SWD JTAG"
 			(at 0 0 0)
 			(effects
@@ -20818,7 +20512,7 @@
 				)
 			)
 		)
-		(property "Footprint" "nema:PCB connector for nema arm"
+		(property "Footprint" "terra_sym:PCB connector for nema arm"
 			(at -0.889 -9.017 0)
 			(effects
 				(font
@@ -20837,6 +20531,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "Custom"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CONN-ARM-BOLT"
 			(at 0 0 0)
 			(effects
 				(font
@@ -20931,7 +20643,7 @@
 				)
 			)
 		)
-		(property "Footprint" "nema:PCB connector for nema holder"
+		(property "Footprint" "terra_sym:PCB connector for nema holder"
 			(at 0 0 0)
 			(effects
 				(font
@@ -20950,6 +20662,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "Custom"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CONN-HOLDER"
 			(at 0 0 0)
 			(effects
 				(font
@@ -21069,15 +20799,6 @@
 		)
 		(property "Description" "DIODE SMT/TH 1n914/mmbd914 generic switching"
 			(at -8.636 -16.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "MMBD914"
-			(at -4.826 1.778 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21409,7 +21130,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:Nexperia SOD-123W"
+		(property "Footprint" "terra_sym:Nexperia SOD-123W"
 			(at -1.27 -11.43 0)
 			(effects
 				(font
@@ -21434,14 +21155,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "200V 2.8A"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -21801,14 +21514,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "30V 0.5A"
-			(at 5.08 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "n/a"
 			(at -16.256 -14.224 0)
 			(effects
@@ -22139,14 +21844,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "10A 430V"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "If applicable"
@@ -22508,14 +22205,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "400V 2A"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "n/a"
 			(at -22.098 -39.624 0)
 			(effects
@@ -22818,684 +22507,6 @@
 		)
 		(embedded_fonts no)
 	)
-	(symbol "DIODE Vishay   VSSAF512  Schottky 5A"
-		(pin_numbers
-			(hide yes)
-		)
-		(pin_names
-			(offset 1.016)
-			(hide yes)
-		)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(property "Reference" "D"
-			(at -7.62 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "DIODE Vishay   VSSAF512  Schottky 5A"
-			(at 0 -2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Diode_SMD:D_SMA"
-			(at -17.78 -50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.vishay.com/docs/87611/vssaf512.pdf"
-			(at -12.7 -43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "120V 5A Schottky Power Rectifier Diode"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "5A 120V"
-			(at 5.08 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Tolerance" "n/a"
-			(at -16.256 -14.224 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Package" "SMA (DO-214AC)"
-			(at -38.1 -12.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer" "Vishay"
-			(at -40.64 -15.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer PN" "VSSAF512"
-			(at -22.86 -38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer Link" "https://www.vishay.com/en/product/87611/"
-			(at -17.78 -38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "RoHS" "Yes"
-			(at -20.828 -33.528 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "RoHS Link" "https://www.vishay.com/en/how/leadfree/#summary"
-			(at -20.32 -40.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Allow Substitution" "Yes"
-			(at -21.082 -35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Fitted" "Yes"
-			(at -20.574 -39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Tracking" "No"
-			(at -21.082 -37.592 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "BOM Comment" ""
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Type" "Schottky Diode"
-			(at -16.51 -44.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Temp (Storage)" "-65C/+150C"
-			(at -16.256 -18.288 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Temp (Operating)" "-65C/+150C"
-			(at -16.256 -20.066 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Temp (Soldering)" "If applicable"
-			(at -16.256 -22.098 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Temp Coeff." "If applicable"
-			(at -16.256 -23.876 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Power Rating" "If applicable"
-			(at -16.256 -25.654 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Material" "If applicable"
-			(at -16.256 -27.432 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Class" "If applicable"
-			(at -16.256 -29.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Standards Version" "1.1"
-			(at -20.828 -31.496 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "ki_keywords" "diode Schottky"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "ki_fp_filters" "D*SOD?123*"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(symbol "DIODE Vishay   VSSAF512  Schottky 5A_0_1"
-			(polyline
-				(pts
-					(xy -1.905 0.635) (xy -1.905 1.27) (xy -1.27 1.27) (xy -1.27 -1.27) (xy -0.635 -1.27) (xy -0.635 -0.635)
-				)
-				(stroke
-					(width 0.254)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27)
-				)
-				(stroke
-					(width 0.254)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy 1.27 0) (xy -1.27 0)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-		)
-		(symbol "DIODE Vishay   VSSAF512  Schottky 5A_1_1"
-			(pin passive line
-				(at -3.81 0 0)
-				(length 2.54)
-				(name "K"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 3.81 0 180)
-				(length 2.54)
-				(name "A"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-		)
-		(embedded_fonts no)
-	)
-	(symbol "DIODE Vishay  VSSB410S Schottky 4A"
-		(pin_numbers
-			(hide yes)
-		)
-		(pin_names
-			(offset 1.016)
-			(hide yes)
-		)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(property "Reference" "D"
-			(at -7.62 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "DIODE Vishay  VSSB410S Schottky 4A"
-			(at 0 -2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Diode_SMD:D_SMB"
-			(at -17.78 -50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.vishay.com/docs/89140/vssb410s-e3.pdf"
-			(at -12.7 -43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "100V 4A Schottky Power Rectifier Diode"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "4A 100V"
-			(at 5.08 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Tolerance" "n/a"
-			(at -16.256 -14.224 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Package" "SMB (DO-214AA)"
-			(at -38.1 -12.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer" "Vishay"
-			(at -40.64 -15.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer PN" " VSSB410S"
-			(at -22.86 -38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer Link" "https://www.vishay.com/en/product/89140/"
-			(at -17.78 -38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "RoHS" "Yes"
-			(at -20.828 -33.528 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "RoHS Link" "https://www.vishay.com/en/how/leadfree/#summary"
-			(at -20.32 -40.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Allow Substitution" "Yes"
-			(at -21.082 -35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Fitted" "Yes"
-			(at -20.574 -39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Tracking" "No"
-			(at -21.082 -37.592 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "BOM Comment" ""
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Type" "Schottky Diode"
-			(at -16.51 -44.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Temp (Storage)" "-65C/+150C"
-			(at -16.256 -18.288 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Temp (Operating)" "-65C/+150C"
-			(at -16.256 -20.066 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Temp (Soldering)" "If applicable"
-			(at -16.256 -22.098 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Temp Coeff." "If applicable"
-			(at -16.256 -23.876 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Power Rating" "If applicable"
-			(at -16.256 -25.654 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Material" "If applicable"
-			(at -16.256 -27.432 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Class" "If applicable"
-			(at -16.256 -29.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Standards Version" "1.1"
-			(at -20.828 -31.496 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "ki_keywords" "diode Schottky"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "ki_fp_filters" "D*SOD?123*"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(symbol "DIODE Vishay  VSSB410S Schottky 4A_0_1"
-			(polyline
-				(pts
-					(xy -1.905 0.635) (xy -1.905 1.27) (xy -1.27 1.27) (xy -1.27 -1.27) (xy -0.635 -1.27) (xy -0.635 -0.635)
-				)
-				(stroke
-					(width 0.254)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27)
-				)
-				(stroke
-					(width 0.254)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy 1.27 0) (xy -1.27 0)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-		)
-		(symbol "DIODE Vishay  VSSB410S Schottky 4A_1_1"
-			(pin passive line
-				(at -3.81 0 0)
-				(length 2.54)
-				(name "K"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 3.81 0 180)
-				(length 2.54)
-				(name "A"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-		)
-		(embedded_fonts no)
-	)
 	(symbol "DIODE Vishay VSSAF510  Schottky 5A"
 		(pin_numbers
 			(hide yes)
@@ -23523,7 +22534,7 @@
 				)
 			)
 		)
-		(property "Footprint" "nema:Vishay_SlimSMA_D_DO-221AC"
+		(property "Footprint" "terra_sym:Vishay_SlimSMA_D_DO-221AC"
 			(at -17.78 -50.8 0)
 			(effects
 				(font
@@ -23543,15 +22554,6 @@
 		)
 		(property "Description" "100V 5A Schottky Power Rectifier Diode"
 			(at -5.08 -13.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "VSSAF510"
-			(at 5.08 2.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23862,7 +22864,7 @@
 				)
 			)
 		)
-		(property "Footprint" "nema:Vishay_SlimSMA_D_DO-221AC"
+		(property "Footprint" "terra_sym:Vishay_SlimSMA_D_DO-221AC"
 			(at -17.78 -50.8 0)
 			(effects
 				(font
@@ -23882,15 +22884,6 @@
 		)
 		(property "Description" "120V 5A Schottky Power Rectifier Diode"
 			(at -5.08 -13.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "VSSAF512"
-			(at 5.08 2.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24228,15 +23221,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "VSSB410S"
-			(at 5.08 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "Tolerance" "n/a"
 			(at -16.256 -14.224 0)
 			(effects
@@ -24264,7 +23248,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer PN" " VSSB410S"
+		(property "Manufacturer PN" "VSSB410S"
 			(at -22.86 -38.1 0)
 			(effects
 				(font
@@ -24710,14 +23694,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "80 ohm@100 MHz, 3A"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "25%"
 			(at -22.098 -39.624 0)
 			(effects
@@ -25050,14 +24026,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "120 ohm @ 100 MHz"
-			(at 16.256 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "If applicable"
@@ -25401,14 +24369,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "220 ohm @ 100 MHz"
-			(at 16.256 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "If applicable"
 			(at -16.256 -14.224 0)
 			(effects
@@ -25750,14 +24710,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "60 ohm @ 100 MHz"
-			(at 16.256 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "25%"
 			(at -16.256 -14.224 0)
 			(effects
@@ -26067,7 +25019,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Isopoint:MEM2012F"
+		(property "Footprint" "terra_sym:MEM2012F"
 			(at 2.54 -20.32 0)
 			(effects
 				(font
@@ -26092,14 +25044,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "25 MHz 12V"
-			(at 10.16 7.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Voltage Rating" "12V"
@@ -26614,14 +25558,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "INA180A2"
-			(at 6.604 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "n/a"
 			(at -22.098 -39.624 0)
 			(effects
@@ -26980,7 +25916,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:SC-74-6_1.5x2.9mm_P0.95mm"
+		(property "Footprint" "terra_sym:SC-74-6_1.5x2.9mm_P0.95mm"
 			(at -12.954 -32.004 0)
 			(effects
 				(font
@@ -27000,15 +25936,6 @@
 		)
 		(property "Description" "Dual MOSFET Relay driver SMT"
 			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "Comp. Value"
-			(at -7.366 -23.876 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27416,14 +26343,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "RS-422"
-			(at -7.62 15.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -27982,12 +26901,13 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "RS-422"
-			(at -7.62 15.24 0)
+		(property "Variant" "flipped"
+			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -28546,14 +27466,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "LTC2851"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "If applicable"
 			(at -22.098 -39.624 0)
 			(effects
@@ -29108,14 +28020,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "RS-422"
-			(at -7.62 15.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -29675,8 +28579,8 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "RS-422"
-			(at -7.62 15.24 0)
+		(property "Variant" "flipped"
+			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30240,14 +29144,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "SP490E"
-			(at -7.62 15.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "If applicable"
 			(at 37.846 -65.278 0)
 			(effects
@@ -30777,7 +29673,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:Texas_DCT0008A_SSOP-8_2.95x2.8mm_P0.65mm"
+		(property "Footprint" "terra_sym:Texas_DCT0008A_SSOP-8_2.95x2.8mm_P0.65mm"
 			(at 35.56 -62.23 0)
 			(effects
 				(font
@@ -30802,14 +29698,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "PCA9306"
-			(at -12.954 18.288 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -31269,7 +30157,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:Texas_DCT0008A_SSOP-8_2.95x2.8mm_P0.65mm"
+		(property "Footprint" "terra_sym:Texas_DCT0008A_SSOP-8_2.95x2.8mm_P0.65mm"
 			(at 35.56 -62.23 0)
 			(effects
 				(font
@@ -31294,14 +30182,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "PCA9306"
-			(at -12.954 18.288 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -31786,14 +30666,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "ISO1412BDW"
-			(at 6.35 16.764 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "na"
@@ -32966,14 +31838,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "ISOW1412"
-			(at 2.54 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "na"
@@ -34900,15 +33764,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "TXU0104"
-			(at -0.508 -16.764 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "Tolerance" "n/a"
 			(at 37.846 -65.278 0)
 			(effects
@@ -35597,14 +34452,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "ULN2003A"
-			(at -2.54 13.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -36317,15 +35164,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "SN74LV1T125"
-			(at -12.954 18.288 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "Tolerance" "n/a"
 			(at 37.846 -65.278 0)
 			(effects
@@ -36760,14 +35598,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "74LVC1G123"
-			(at 6.35 10.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -37426,6 +36256,24 @@
 				(hide yes)
 			)
 		)
+		(property "Manufacturer" "Texas Instruments"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "SN74LVC1G123DCU"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(property "ki_keywords" "Single Mono Multivibrator CMOS"
 			(at 0 0 0)
 			(effects
@@ -37656,6 +36504,24 @@
 			)
 		)
 		(property "Description" "Single 2-to-4-line decoder"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "Texas Instruments"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "SN74LVC1G139DCU"
 			(at 0 0 0)
 			(effects
 				(font
@@ -37901,15 +36767,6 @@
 		)
 		(property "Description" "Single 2-to-4-line decoder"
 			(at -3.302 -42.418 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "SN74LVC1G139"
-			(at -12.954 18.288 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38351,14 +37208,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "ATSAMC20E18A"
-			(at 42.164 55.626 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "If applicable"
@@ -39228,14 +38077,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "ATSAMC20G18A"
-			(at 16.002 -39.878 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "If applicable"
@@ -40369,7 +39210,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:SOT95P270X145-5N"
+		(property "Footprint" "terra_sym:SOT95P270X145-5N"
 			(at -34.0868 -23.876 0)
 			(effects
 				(font
@@ -40394,14 +39235,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "4k x 8 EEPROM"
-			(at 7.366 11.176 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "na"
@@ -40805,14 +39638,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "TL081H"
-			(at 7.366 11.176 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "na"
 			(at -22.098 -39.624 0)
 			(effects
@@ -41186,7 +40011,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:SMDIP-8_W8.9mm"
+		(property "Footprint" "terra_sym:SMDIP-8_W8.9mm"
 			(at -13.97 -12.7 0)
 			(effects
 				(font
@@ -41211,14 +40036,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "LAA110L"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "na"
@@ -42039,14 +40856,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "BTS5030"
-			(at 7.366 11.176 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "na"
 			(at -22.098 -39.624 0)
 			(effects
@@ -42475,7 +41284,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:SMDIP-8_W8.9mm"
+		(property "Footprint" "terra_sym:SMDIP-8_W8.9mm"
 			(at -13.97 -12.7 0)
 			(effects
 				(font
@@ -42495,15 +41304,6 @@
 		)
 		(property "Description" "Solid State Relay, LAA110, 2x form A, SMT"
 			(at -34.798 -16.256 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "LAA110L"
-			(at 0 -9.525 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43304,7 +42104,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Isopoint:Coilcraft MSS7341 Shileded power inductor"
+		(property "Footprint" "terra_sym:Coilcraft MSS7341 Shileded power inductor"
 			(at -11.4046 -16.7894 0)
 			(effects
 				(font
@@ -43329,14 +42129,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "10 uH"
-			(at 6.35 3.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Package" "SMT"
@@ -43673,7 +42465,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:Bourns SRR1210"
+		(property "Footprint" "terra_sym:Bourns SRR1210"
 			(at -11.4046 -16.7894 0)
 			(effects
 				(font
@@ -43698,14 +42490,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "68 uH"
-			(at 6.35 3.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Package" "SMT"
@@ -44042,7 +42826,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Isopoint:Coilcraft MSS7341 Shileded power inductor"
+		(property "Footprint" "terra_sym:Coilcraft MSS7341 Shileded power inductor"
 			(at -11.4046 -16.7894 0)
 			(effects
 				(font
@@ -44067,14 +42851,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "10 uH"
-			(at 17.78 7.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Package" "SMT"
@@ -44412,7 +43188,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:ASMT-SWB5-NW703"
+		(property "Footprint" "terra_sym:ASMT-SWB5-NW703"
 			(at -1.27 8.89 0)
 			(effects
 				(font
@@ -44437,14 +43213,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "HSML-A401-U40M1"
-			(at 0 -7.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Package" "SMT"
@@ -44752,7 +43520,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:ASMT-SWB5-NW703"
+		(property "Footprint" "terra_sym:ASMT-SWB5-NW703"
 			(at -1.27 8.89 0)
 			(effects
 				(font
@@ -44777,14 +43545,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "ASMT-SWB5-NW703"
-			(at 0 -7.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Package" "SMT"
@@ -45112,14 +43872,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "AL8843Q"
-			(at 8.128 16.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "4%"
@@ -45530,14 +44282,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "IS32LT3954"
-			(at 0.762 16.764 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "n/a"
 			(at -54.61 -32.004 0)
 			(effects
@@ -45919,7 +44663,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Isopoint:LM3410XMY&slash_NOPB"
+		(property "Footprint" "terra_sym:LM3410XMY_NOPB"
 			(at -25.4 -53.34 0)
 			(effects
 				(font
@@ -45944,14 +44688,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "LM3410XMY/NOPB"
-			(at 15.24 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "20%"
@@ -46354,14 +45090,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "APHBM2012CGKSYKC"
-			(at 5.08 8.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -46844,7 +45572,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:Dialight-550-series"
+		(property "Footprint" "terra_sym:Dialight-550-series"
 			(at -1.27 8.89 0)
 			(effects
 				(font
@@ -46869,14 +45597,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "Green"
-			(at -3.302 -2.286 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Package" "TH CBI"
@@ -47184,7 +45904,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:Dialight-550-3x07"
+		(property "Footprint" "terra_sym:Dialight-550-3x07"
 			(at -1.27 8.89 0)
 			(effects
 				(font
@@ -47209,14 +45929,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "Green/Red"
-			(at -3.048 -8.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Package" "TH CBI"
@@ -47654,7 +46366,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:LED_0603_1608Metric"
+		(property "Footprint" "terra_sym:LED_0603_1608Metric"
 			(at -15.748 -39.878 0)
 			(effects
 				(font
@@ -47679,14 +46391,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "LED"
-			(at 0 -7.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Package" "1608"
@@ -48019,14 +46723,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "DMP3099L"
-			(at 7.366 11.176 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "na"
@@ -48534,14 +47230,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "IRLML2502"
-			(at 7.366 11.176 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "na"
 			(at -22.098 -39.624 0)
 			(effects
@@ -49020,7 +47708,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "nema:TIE-CHASSIS"
+		(property "Footprint" "terra_sym:TIE-CHASSIS"
 			(at 0.9652 -3.81 0)
 			(effects
 				(font
@@ -49040,15 +47728,6 @@
 		)
 		(property "Description" "(type) Value,  params, pkg"
 			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "~"
-			(at -7.62 -10.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -49362,7 +48041,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:OPB733TR"
+		(property "Footprint" "terra_sym:OPB733TR"
 			(at 11.1252 -21.59 0)
 			(effects
 				(font
@@ -49387,14 +48066,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "OPB733"
-			(at 0.508 7.874 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -50079,14 +48750,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "330 ohm"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "1%"
 			(at -22.098 -39.624 0)
 			(effects
@@ -50461,14 +49124,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "1.6 ohm"
-			(at 3.556 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "1%"
 			(at -22.098 -39.624 0)
 			(effects
@@ -50832,14 +49487,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "6.8"
-			(at 3.556 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "1%"
@@ -51216,14 +49863,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "40 mOhm"
-			(at 15.24 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "1%"
 			(at -55.372 -43.942 0)
 			(effects
@@ -51587,14 +50226,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "5.6 ohm"
-			(at 15.24 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "1%"
@@ -51962,14 +50593,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "80 mOhm"
-			(at 15.24 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "1%"
 			(at -55.372 -43.942 0)
 			(effects
@@ -52324,14 +50947,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "1M ohm"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "1%"
@@ -52699,14 +51314,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "1.6"
-			(at 3.556 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "1%"
 			(at -22.098 -39.624 0)
 			(effects
@@ -53070,14 +51677,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "100 ohm"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "1%"
@@ -53445,14 +52044,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "100k"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "1%"
 			(at -22.098 -39.624 0)
 			(effects
@@ -53816,14 +52407,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "10k"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "1%"
@@ -54191,14 +52774,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "120"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "1%"
 			(at -22.098 -39.624 0)
 			(effects
@@ -54562,14 +53137,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "130"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "1%"
@@ -54937,14 +53504,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "15k"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "1%"
 			(at -22.098 -39.624 0)
 			(effects
@@ -55308,14 +53867,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "15k"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "1%"
@@ -55683,14 +54234,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "160 ohm"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "1%"
 			(at -22.098 -39.624 0)
 			(effects
@@ -56054,14 +54597,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "1k"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "1%"
@@ -56429,14 +54964,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "2.2k"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "1%"
 			(at -22.098 -39.624 0)
 			(effects
@@ -56800,14 +55327,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "200k"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "1%"
@@ -57175,14 +55694,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "22k"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "1%"
 			(at -22.098 -39.624 0)
 			(effects
@@ -57546,14 +56057,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "27k"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "1%"
@@ -57921,14 +56424,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "3.3k"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "1%"
 			(at -22.098 -39.624 0)
 			(effects
@@ -58292,14 +56787,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "300 ohm"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "1%"
@@ -58667,14 +57154,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "4.7k"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "1%"
 			(at -22.098 -39.624 0)
 			(effects
@@ -59038,14 +57517,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "4.7k"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "1%"
@@ -59422,14 +57893,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "40 mOhm"
-			(at 15.24 2.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "1%"
 			(at -55.372 -43.942 0)
 			(effects
@@ -59784,14 +58247,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "47"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "1%"
@@ -60157,14 +58612,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "5.6 ohm"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "1%"
@@ -60549,14 +58996,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "51.1K"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "1%"
 			(at -22.098 -39.624 0)
 			(effects
@@ -60920,14 +59359,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "51.1k"
-			(at 5.334 -1.778 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "1%"
@@ -61295,14 +59726,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "68"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "1%"
 			(at -22.098 -39.624 0)
 			(effects
@@ -61666,14 +60089,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "75 ohm"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "1%"
@@ -62041,14 +60456,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "86.6"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "1%"
 			(at -22.098 -39.624 0)
 			(effects
@@ -62409,14 +60816,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "Comp. Value"
-			(at 10.16 15.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "If applicable"
@@ -62806,14 +61205,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "CAT811LTBI-GT3"
-			(at 10.16 7.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "n/a"
 			(at -22.098 -39.624 0)
 			(effects
@@ -63156,7 +61547,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:DF62J12S2AHQAA"
+		(property "Footprint" "terra_sym:DF62J12S2AHQAA"
 			(at -43.18 -34.29 0)
 			(effects
 				(font
@@ -63181,14 +61572,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "DPDT rocker"
-			(at 0 7.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -63639,7 +62022,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:TestPoint_Pad_3.43x1.78mm"
+		(property "Footprint" "terra_sym:TestPoint_Pad_3.43x1.78mm"
 			(at -39.37 -16.51 0)
 			(effects
 				(font
@@ -63664,14 +62047,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "Test"
-			(at -15.748 -5.842 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "na"
@@ -63964,7 +62339,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:SOD-523"
+		(property "Footprint" "terra_sym:SOD-523"
 			(at -21.336 -16.256 0)
 			(effects
 				(font
@@ -63989,14 +62364,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "30kV/1.8V"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -64358,14 +62725,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "18V 200W"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "na"
 			(at -22.098 -39.624 0)
 			(effects
@@ -64725,14 +63084,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "6V 200W"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "na"
 			(at -22.098 -39.624 0)
 			(effects
@@ -65065,7 +63416,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:SOD-323-ESD12VD3B"
+		(property "Footprint" "terra_sym:SOD-323-ESD12VD3B"
 			(at -21.336 -16.256 0)
 			(effects
 				(font
@@ -65089,14 +63440,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "12V / 35kV"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -65573,7 +63916,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:SOD-523"
+		(property "Footprint" "terra_sym:SOD-523"
 			(at -21.336 -16.256 0)
 			(effects
 				(font
@@ -65598,14 +63941,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "30kV/3V"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -65940,7 +64275,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:VESD01C1-02V-G3-08"
+		(property "Footprint" "terra_sym:VESD01C1-02V-G3-08"
 			(at -21.336 -16.256 0)
 			(effects
 				(font
@@ -65965,14 +64300,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "30kV/3V"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -66334,14 +64661,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "18V"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "na"
 			(at -22.098 -39.624 0)
 			(effects
@@ -66674,7 +64993,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:DFN1006-2B"
+		(property "Footprint" "terra_sym:DFN1006-2B"
 			(at -21.336 -16.256 0)
 			(effects
 				(font
@@ -66698,14 +65017,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "30kV/14V"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "n/a"
@@ -67209,14 +65520,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "6V"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Tolerance" "na"
 			(at -22.098 -39.624 0)
 			(effects
@@ -67575,14 +65878,6 @@
 				(hide yes)
 			)
 		)
-		(property "Component Value" "15V"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Package" "SOT-23"
 			(at -0.254 0 0)
 			(effects
@@ -67862,7 +66157,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:SOD3716X135N"
+		(property "Footprint" "terra_sym:SOD3716X135N"
 			(at -10.16 -11.43 0)
 			(effects
 				(font
@@ -67887,14 +66182,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "2V"
-			(at 9.144 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Package" "SOT-23"
@@ -68173,7 +66460,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:SM71202HTG"
+		(property "Footprint" "terra_sym:SM71202HTG"
 			(at -22.86 -15.24 0)
 			(effects
 				(font
@@ -68198,14 +66485,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "SM712-02HTG"
-			(at 0.254 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "na"
@@ -68604,7 +66883,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:SM71202HTG"
+		(property "Footprint" "terra_sym:SM71202HTG"
 			(at -22.86 -15.24 0)
 			(effects
 				(font
@@ -68629,14 +66908,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "SM712-02HTG"
-			(at 0.254 4.826 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "na"
@@ -69035,7 +67306,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "nema:SM71202HTG"
+		(property "Footprint" "terra_sym:SM71202HTG"
 			(at -22.86 -15.24 0)
 			(effects
 				(font
@@ -69060,14 +67331,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Component Value" "SM712-02HTG"
-			(at -8.382 -1.524 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 			)
 		)
 		(property "Tolerance" "na"
@@ -69511,15 +67774,6 @@
 		)
 		(property "Description" "12V Zener Diode, 1.3W"
 			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Component Value" "12V"
-			(at 9.144 4.826 0)
 			(effects
 				(font
 					(size 1.27 1.27)
