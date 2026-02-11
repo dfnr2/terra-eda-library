@@ -19,10 +19,61 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Tuple, Set, Optional
 
+# ============================================================================
+# ======================== USER CONFIGURATION ================================
+# ============================================================================
+# Modify these sections to control what gets generated
+
 # ======================== OUTPUT CONFIGURATION ========================
-OUTPUT_FILE = "resistors_generated_200_yageo_thick_film.sql"
-OUTPUT_CSV = "resistors_generated_200_yageo_thick_film.csv"
-GENERATE_CSV = True  # Set to False to skip CSV generation
+OUTPUT_FILE = "resistors_smt_generated_200_yageo_rc_thick_film.sql"
+OUTPUT_CSV = "resistors_smt_generated_200_yageo_rc_thick_film.csv"
+GENERATE_CSV = False  # Set to True to also generate CSV for inspection
+
+# ======================== TOLERANCE CONFIGURATION ========================
+# Set to "yes" to include, anything else to exclude (case-insensitive)
+TOLERANCE_ENABLE = {
+    "1.0%": "yes",  # F - standard tolerance for RC series
+    "5.0%": "no",   # J - wider tolerance (if needed)
+}
+
+# ======================== PACKAGE / TEMPCO CONFIGURATION ========================
+# Set to "yes" to include, anything else to exclude
+# Format: "PACKAGE/TEMPCO": "yes/no"
+# RC series: 100ppm for 10Ω-10MΩ, 200ppm for 1Ω-9.99Ω (includes 0Ω jumper)
+PACKAGE_TEMPCO_ENABLE = {
+    # 0201 - Only 200ppm variant available
+    "0201/200ppm": "yes",
+    # 0402 - Both variants
+    "0402/100ppm": "yes",  # 10Ω to 10MΩ
+    "0402/200ppm": "yes",  # 1Ω to 9.99Ω + 0Ω jumper
+    # 0603 - Both variants
+    "0603/100ppm": "yes",  # 10Ω to 10MΩ
+    "0603/200ppm": "yes",  # 1Ω to 9.99Ω + 0Ω jumper
+    # 0805 - Both variants
+    "0805/100ppm": "yes",  # 10Ω to 10MΩ
+    "0805/200ppm": "yes",  # 1Ω to 9.99Ω + 0Ω jumper
+    # 1206 - Both variants
+    "1206/100ppm": "yes",  # 10Ω to 10MΩ
+    "1206/200ppm": "yes",  # 1Ω to 9.99Ω + 0Ω jumper
+    # 2512 - Both variants
+    "2512/100ppm": "yes",  # 10Ω to 10MΩ
+    "2512/200ppm": "yes",  # 1Ω to 9.99Ω + 0Ω jumper
+}
+
+# ======================== E-SERIES CONFIGURATION ========================
+# Which E-series to generate (values will be unioned)
+E_SERIES_ENABLE = {
+    "E12": "no",
+    "E24": "yes",
+    "E48": "no",
+    "E96": "yes",
+    "E192": "no",
+}
+
+# ============================================================================
+# ======================== VENDOR SPECIFICATIONS =============================
+# ============================================================================
+# These should not need modification unless datasheet changes
 
 # ======================== DATABASE METADATA ========================
 # For dump system - generated data should have priority 0
@@ -34,8 +85,8 @@ MANUFACTURER = "Yageo"
 SERIES = "RC"  # Thick Film series
 COMPOSITION = "Thick Film"
 LIFECYCLE_STATUS = "Active"
-ROHS_COMPLIANT = "yes"
-ALLOW_SUBSTITUTION = "yes"
+ROHS_COMPLIANT = "Yes"
+ALLOW_SUBSTITUTION = "Yes"
 TRACKING = "No"
 
 # ======================== URL TEMPLATES ========================
@@ -89,7 +140,7 @@ BEGIN TRANSACTION;
 
     "package_header": "-- {package} Package ({power}, {tempco}, {working_voltage} working/{max_voltage} max)",
 
-    "insert": """INSERT INTO resistors (unique_id, part_locator, mpn, manufacturer, variant, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tolerance, power_rating, temp_coeff, voltage_rating, composition, temp_operating, temp_soldering, temp_storage, sim_device, sim_pins, lifecycle_status, rohs, rohs_document_link, allow_substitution, tracking, created_at, updated_at, created_by)
+    "insert": """INSERT INTO resistors_smt (unique_id, part_locator, mpn, manufacturer, variant, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tolerance, power_rating, temp_coeff, voltage_rating, composition, temp_operating, temp_soldering, temp_storage, sim_device, sim_pins, lifecycle_status, rohs, rohs_document_link, allow_substitution, tracking, created_at, updated_at, created_by)
 VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', {variant}, '{package}', '{value_sim}', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, '{tolerance}', '{power_rating}', '{temp_coeff}', '{voltage_rating}', '{composition}', '{temp_operating}', '{temp_soldering}', '{temp_storage}', '{sim_device}', '{sim_pins}', '{lifecycle_status}', '{rohs}', '{rohs_link}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}');""",
 
     "file_footer": """COMMIT;
@@ -104,9 +155,25 @@ SIMULATION = {
 }
 
 # ======================== KICAD CONFIGURATION ========================
+# Symbol: Same for all resistors in this generator
+# Footprint: Built from package using prefix + package + metric + suffix
 KICAD_CONFIG = {
-    "symbol_style": "R_US",  # 'R' (European) or 'R_US' (American)
-    "symbol_prefix": "Device:",  # KiCad symbol library prefix
+    "symbol": "Device:R_US",  # 'Device:R' (European) or 'Device:R_US' (American)
+    "footprint_prefix": "Resistor_SMD:R_",
+    "footprint_suffix": "Metric",
+}
+
+# Package to metric footprint mapping (EIA to metric)
+PACKAGE_METRIC = {
+    "0201": "0603",
+    "0402": "1005",
+    "0603": "1608",
+    "0805": "2012",
+    "1206": "3216",
+    "1210": "3225",
+    "1812": "4532",
+    "2010": "5025",
+    "2512": "6332",
 }
 
 
@@ -124,10 +191,21 @@ KICAD_CONFIG = {
 # - Other packages: 100ppm (10Ω-10MΩ), 200ppm (1Ω-9.99Ω, includes 0Ω)
 # - MPN does NOT include tempco code (always "07" in tcr_code slot)
 
+# Packing codes for RC series: {pack}-{tape}
+# Pack: R=paper tape, K=embossed tape
+# Tape: 07=7" reel, 10=10" reel, 13=13" reel
+# Note: RC series does NOT include TCR code in MPN (unlike RT series)
+PACKING_CODES = {
+    "R-07": "Paper tape, 7-inch reel",
+    "K-07": "Embossed tape, 7-inch reel",
+    "R-10": "Paper tape, 10-inch reel",
+    "K-10": "Embossed tape, 10-inch reel",
+}
+
 PRODUCT_SPECS = [
     # 0201 Package - 200ppm variant only (with 0Ω jumper)
     {
-        "slug": "0201-200ppm-1-10M",
+        "slug": "0201-R07-200ppm-1-10M",
         "package": "0201",
         "dimensions": "0.6mm × 0.3mm",
         "power": "1/20W",
@@ -135,19 +213,19 @@ PRODUCT_SPECS = [
         "tempco_code": "",  # Not used in RC MPN
         "tolerance": "1.0%",
         "tol_code": "F",
+        "packing": "R-07",
         "min_ohm": 1.0,
         "max_ohm": 10e6,
         "working_voltage": "25V",
         "max_voltage": "50V",
         "temp_operating": "-55°C to +125°C",
-        "kicad_footprint": "Resistor_SMD:R_0201_0603Metric",
-        "mpn_template": "{series}{size}{tol}R-07{value_iec}L",
+        "mpn_template": "{series}{size}{tol}{packing}{value_iec}L",
         "include_zero_ohm": True,
     },
 
     # 0402 Package - 100ppm variant (10Ω to 10MΩ, no 0Ω)
     {
-        "slug": "0402-100ppm-10-10M",
+        "slug": "0402-R07-100ppm-10-10M",
         "package": "0402",
         "dimensions": "1.0mm × 0.5mm",
         "power": "1/16W",
@@ -155,18 +233,18 @@ PRODUCT_SPECS = [
         "tempco_code": "",  # Not used in RC MPN
         "tolerance": "1.0%",
         "tol_code": "F",
+        "packing": "R-07",
         "min_ohm": 10,
         "max_ohm": 10e6,
         "working_voltage": "50V",
         "max_voltage": "100V",
         "temp_operating": "-55°C to +155°C",
-        "kicad_footprint": "Resistor_SMD:R_0402_1005Metric",
-        "mpn_template": "{series}{size}{tol}R-07{value_iec}L",
+        "mpn_template": "{series}{size}{tol}{packing}{value_iec}L",
         "include_zero_ohm": False,
     },
     # 0402 Package - 200ppm variant (1Ω to 9.99Ω, with 0Ω)
     {
-        "slug": "0402-200ppm-1-10",
+        "slug": "0402-R07-200ppm-1-10",
         "package": "0402",
         "dimensions": "1.0mm × 0.5mm",
         "power": "1/16W",
@@ -174,19 +252,19 @@ PRODUCT_SPECS = [
         "tempco_code": "",  # Not used in RC MPN
         "tolerance": "1.0%",
         "tol_code": "F",
+        "packing": "R-07",
         "min_ohm": 1.0,
         "max_ohm": 9.99,
         "working_voltage": "50V",
         "max_voltage": "100V",
         "temp_operating": "-55°C to +155°C",
-        "kicad_footprint": "Resistor_SMD:R_0402_1005Metric",
-        "mpn_template": "{series}{size}{tol}R-07{value_iec}L",
+        "mpn_template": "{series}{size}{tol}{packing}{value_iec}L",
         "include_zero_ohm": True,
     },
 
     # 0603 Package - 100ppm variant (10Ω to 10MΩ, no 0Ω)
     {
-        "slug": "0603-100ppm-10-10M",
+        "slug": "0603-R07-100ppm-10-10M",
         "package": "0603",
         "dimensions": "1.6mm × 0.8mm",
         "power": "1/10W",
@@ -194,18 +272,18 @@ PRODUCT_SPECS = [
         "tempco_code": "",  # Not used in RC MPN
         "tolerance": "1.0%",
         "tol_code": "F",
+        "packing": "R-07",
         "min_ohm": 10,
         "max_ohm": 10e6,
         "working_voltage": "75V",
         "max_voltage": "150V",
         "temp_operating": "-55°C to +155°C",
-        "kicad_footprint": "Resistor_SMD:R_0603_1608Metric",
-        "mpn_template": "{series}{size}{tol}R-07{value_iec}L",
+        "mpn_template": "{series}{size}{tol}{packing}{value_iec}L",
         "include_zero_ohm": False,
     },
     # 0603 Package - 200ppm variant (1Ω to 9.99Ω, with 0Ω)
     {
-        "slug": "0603-200ppm-1-10",
+        "slug": "0603-R07-200ppm-1-10",
         "package": "0603",
         "dimensions": "1.6mm × 0.8mm",
         "power": "1/10W",
@@ -213,19 +291,19 @@ PRODUCT_SPECS = [
         "tempco_code": "",  # Not used in RC MPN
         "tolerance": "1.0%",
         "tol_code": "F",
+        "packing": "R-07",
         "min_ohm": 1.0,
         "max_ohm": 9.99,
         "working_voltage": "75V",
         "max_voltage": "150V",
         "temp_operating": "-55°C to +155°C",
-        "kicad_footprint": "Resistor_SMD:R_0603_1608Metric",
-        "mpn_template": "{series}{size}{tol}R-07{value_iec}L",
+        "mpn_template": "{series}{size}{tol}{packing}{value_iec}L",
         "include_zero_ohm": True,
     },
 
     # 0805 Package - 100ppm variant (10Ω to 10MΩ, no 0Ω)
     {
-        "slug": "0805-100ppm-10-10M",
+        "slug": "0805-R07-100ppm-10-10M",
         "package": "0805",
         "dimensions": "2.0mm × 1.25mm",
         "power": "1/8W",
@@ -233,18 +311,18 @@ PRODUCT_SPECS = [
         "tempco_code": "",  # Not used in RC MPN
         "tolerance": "1.0%",
         "tol_code": "F",
+        "packing": "R-07",
         "min_ohm": 10,
         "max_ohm": 10e6,
         "working_voltage": "150V",
         "max_voltage": "300V",
         "temp_operating": "-55°C to +155°C",
-        "kicad_footprint": "Resistor_SMD:R_0805_2012Metric",
-        "mpn_template": "{series}{size}{tol}R-07{value_iec}L",
+        "mpn_template": "{series}{size}{tol}{packing}{value_iec}L",
         "include_zero_ohm": False,
     },
     # 0805 Package - 200ppm variant (1Ω to 9.99Ω, with 0Ω)
     {
-        "slug": "0805-200ppm-1-10",
+        "slug": "0805-R07-200ppm-1-10",
         "package": "0805",
         "dimensions": "2.0mm × 1.25mm",
         "power": "1/8W",
@@ -252,19 +330,19 @@ PRODUCT_SPECS = [
         "tempco_code": "",  # Not used in RC MPN
         "tolerance": "1.0%",
         "tol_code": "F",
+        "packing": "R-07",
         "min_ohm": 1.0,
         "max_ohm": 9.99,
         "working_voltage": "150V",
         "max_voltage": "300V",
         "temp_operating": "-55°C to +155°C",
-        "kicad_footprint": "Resistor_SMD:R_0805_2012Metric",
-        "mpn_template": "{series}{size}{tol}R-07{value_iec}L",
+        "mpn_template": "{series}{size}{tol}{packing}{value_iec}L",
         "include_zero_ohm": True,
     },
 
     # 1206 Package - 100ppm variant (10Ω to 10MΩ, no 0Ω)
     {
-        "slug": "1206-100ppm-10-10M",
+        "slug": "1206-R07-100ppm-10-10M",
         "package": "1206",
         "dimensions": "3.2mm × 1.6mm",
         "power": "1/4W",
@@ -272,18 +350,18 @@ PRODUCT_SPECS = [
         "tempco_code": "",  # Not used in RC MPN
         "tolerance": "1.0%",
         "tol_code": "F",
+        "packing": "R-07",
         "min_ohm": 10,
         "max_ohm": 10e6,
         "working_voltage": "200V",
         "max_voltage": "400V",
         "temp_operating": "-55°C to +155°C",
-        "kicad_footprint": "Resistor_SMD:R_1206_3216Metric",
-        "mpn_template": "{series}{size}{tol}R-07{value_iec}L",
+        "mpn_template": "{series}{size}{tol}{packing}{value_iec}L",
         "include_zero_ohm": False,
     },
     # 1206 Package - 200ppm variant (1Ω to 9.99Ω, with 0Ω)
     {
-        "slug": "1206-200ppm-1-10",
+        "slug": "1206-R07-200ppm-1-10",
         "package": "1206",
         "dimensions": "3.2mm × 1.6mm",
         "power": "1/4W",
@@ -291,19 +369,19 @@ PRODUCT_SPECS = [
         "tempco_code": "",  # Not used in RC MPN
         "tolerance": "1.0%",
         "tol_code": "F",
+        "packing": "R-07",
         "min_ohm": 1.0,
         "max_ohm": 9.99,
         "working_voltage": "200V",
         "max_voltage": "400V",
         "temp_operating": "-55°C to +155°C",
-        "kicad_footprint": "Resistor_SMD:R_1206_3216Metric",
-        "mpn_template": "{series}{size}{tol}R-07{value_iec}L",
+        "mpn_template": "{series}{size}{tol}{packing}{value_iec}L",
         "include_zero_ohm": True,
     },
 
     # 2512 Package - 100ppm variant (10Ω to 10MΩ, no 0Ω)
     {
-        "slug": "2512-100ppm-10-10M",
+        "slug": "2512-R07-100ppm-10-10M",
         "package": "2512",
         "dimensions": "6.3mm × 3.2mm",
         "power": "1W",
@@ -311,18 +389,18 @@ PRODUCT_SPECS = [
         "tempco_code": "",  # Not used in RC MPN
         "tolerance": "1.0%",
         "tol_code": "F",
+        "packing": "R-07",
         "min_ohm": 10,
         "max_ohm": 10e6,
         "working_voltage": "200V",
         "max_voltage": "500V",
         "temp_operating": "-55°C to +155°C",
-        "kicad_footprint": "Resistor_SMD:R_2512_6332Metric",
-        "mpn_template": "{series}{size}{tol}R-07{value_iec}L",
+        "mpn_template": "{series}{size}{tol}{packing}{value_iec}L",
         "include_zero_ohm": False,
     },
     # 2512 Package - 200ppm variant (1Ω to 9.99Ω, with 0Ω)
     {
-        "slug": "2512-200ppm-1-10",
+        "slug": "2512-R07-200ppm-1-10",
         "package": "2512",
         "dimensions": "6.3mm × 3.2mm",
         "power": "1W",
@@ -330,24 +408,102 @@ PRODUCT_SPECS = [
         "tempco_code": "",  # Not used in RC MPN
         "tolerance": "1.0%",
         "tol_code": "F",
+        "packing": "R-07",
         "min_ohm": 1.0,
         "max_ohm": 9.99,
         "working_voltage": "200V",
         "max_voltage": "500V",
         "temp_operating": "-55°C to +155°C",
-        "kicad_footprint": "Resistor_SMD:R_2512_6332Metric",
-        "mpn_template": "{series}{size}{tol}R-07{value_iec}L",
+        "mpn_template": "{series}{size}{tol}{packing}{value_iec}L",
         "include_zero_ohm": True,
     },
 ]
 
-# ======================== GENERATION CONFIGURATION ========================
-# These are the actual selections for this generation run
-GENERATION_CONFIG = {
-    "series": [24, 96],  # E-series to combine (will be unioned)
-    "series_str": "E24+E96",  # Display name for header comments
-    "enabled_slugs": None,  # None = all slugs, or list of slug names to generate
-}
+# ============================================================================
+# ======================== HELPER FUNCTIONS ==================================
+# ============================================================================
+
+
+def get_enabled_tolerances() -> List[str]:
+    """
+    Parse tolerance configuration and return enabled tolerances.
+
+    Returns list of enabled tolerance strings (e.g., ["1.0%"]).
+    """
+    return [t for t, enabled in TOLERANCE_ENABLE.items() if enabled.lower() == "yes"]
+
+
+def get_enabled_package_tempcos() -> List[Tuple[str, str]]:
+    """
+    Parse package/tempco configuration and return enabled combinations.
+
+    Returns list of (package, tempco) tuples.
+    """
+    enabled = []
+    for key, value in PACKAGE_TEMPCO_ENABLE.items():
+        if value.lower() == "yes":
+            parts = key.split("/")
+            package = parts[0]
+            tempco = parts[1]
+            enabled.append((package, tempco))
+    return enabled
+
+
+def get_enabled_e_series() -> List[int]:
+    """
+    Parse E-series configuration and return enabled series numbers.
+
+    Returns list of E-series numbers (e.g., [24, 96]).
+    """
+    series_map = {"E12": 12, "E24": 24, "E48": 48, "E96": 96, "E192": 192}
+    return [
+        series_map[key]
+        for key, enabled in E_SERIES_ENABLE.items()
+        if enabled.lower() == "yes"
+    ]
+
+
+def get_e_series_display_str() -> str:
+    """Get display string for enabled E-series (e.g., 'E24+E96')."""
+    enabled = [key for key, val in E_SERIES_ENABLE.items() if val.lower() == "yes"]
+    return "+".join(sorted(enabled, key=lambda x: int(x[1:])))
+
+
+def get_enabled_specs() -> List[Dict]:
+    """
+    Filter PRODUCT_SPECS based on enabled package/tempco combinations.
+
+    Returns list of spec dictionaries that match enabled configurations.
+    """
+    enabled_combos = get_enabled_package_tempcos()
+
+    # Build lookup set for fast matching
+    enabled_set = set(enabled_combos)
+
+    # Filter specs
+    return [
+        spec
+        for spec in PRODUCT_SPECS
+        if (spec["package"], spec["tempco"]) in enabled_set
+    ]
+
+
+def get_kicad_footprint(package: str) -> str:
+    """
+    Get the KiCad footprint reference for a package size.
+
+    Parameters
+    ----------
+    package : str
+        EIA package size (e.g., "0603", "0805")
+
+    Returns
+    -------
+    str
+        Full KiCad footprint reference (e.g., "Resistor_SMD:R_0603_1608Metric")
+    """
+    metric = PACKAGE_METRIC.get(package, package)
+    return f"{KICAD_CONFIG['footprint_prefix']}{package}_{metric}{KICAD_CONFIG['footprint_suffix']}"
 
 # ======================== VALUE RANGES ========================
 # Global resistance range for value generation
@@ -558,6 +714,7 @@ def format_mpn(value_ohm: float, spec: Dict) -> str:
         series=SERIES,
         size=spec["package"],
         tol=spec["tol_code"],
+        packing=spec["packing"],
         value_iec=value_iec,
     )
 
@@ -643,12 +800,22 @@ def generate_resistors() -> str:
     str
         Complete SQL content with INSERT statements
     """
-    # Get configuration
-    config = GENERATION_CONFIG
+    # Get enabled configurations
+    enabled_series = get_enabled_e_series()
+    series_str = get_e_series_display_str()
+    specs_to_generate = get_enabled_specs()
+
+    if not enabled_series:
+        print("Warning: No E-series enabled!")
+        return ""
+
+    if not specs_to_generate:
+        print("Warning: No package/tempco combinations enabled!")
+        return ""
 
     # Generate resistance values by unioning requested E-series across global range
     resistance_values = set()
-    for series_num in config["series"]:
+    for series_num in enabled_series:
         values = generate_resistance_values_in_range(
             GLOBAL_MIN_OHM, GLOBAL_MAX_OHM, series_num
         )
@@ -656,8 +823,8 @@ def generate_resistors() -> str:
 
     resistance_values = sorted(resistance_values)
 
-    # KiCad symbol reference
-    symbol_ref = f"{KICAD_CONFIG['symbol_prefix']}{KICAD_CONFIG['symbol_style']}"
+    # KiCad symbol reference (same for all resistors)
+    symbol_ref = KICAD_CONFIG["symbol"]
 
     # Get metadata
     script_name = get_script_name()
@@ -673,7 +840,7 @@ def generate_resistors() -> str:
         manufacturer=MANUFACTURER,
         series=SERIES,
         composition=COMPOSITION,
-        series_str=config["series_str"],
+        series_str=series_str,
         tolerance=tolerance_str,
         datasheet_url=URL_TEMPLATES["datasheet"],
         symbol_ref=symbol_ref,
@@ -681,11 +848,6 @@ def generate_resistors() -> str:
     )]
 
     total_parts = 0
-
-    # Filter specs based on configuration
-    specs_to_generate = PRODUCT_SPECS
-    if config["enabled_slugs"] is not None:
-        specs_to_generate = [s for s in PRODUCT_SPECS if s["slug"] in config["enabled_slugs"]]
 
     # ==== DATA-DRIVEN GENERATION LOOP (NO CONDITIONALS) ====
     # Iterate over product specs - each spec is a complete specification
@@ -749,7 +911,7 @@ def generate_resistors() -> str:
                 datasheet=URL_TEMPLATES["datasheet"],
                 manufacturer_link=manufacturer_link,
                 kicad_symbol=symbol_ref,
-                kicad_footprint=spec["kicad_footprint"],
+                kicad_footprint=get_kicad_footprint(spec["package"]),
                 source=source_sql,
                 dump_priority=DUMP_PRIORITY,
                 tolerance=spec["tolerance"],
@@ -789,23 +951,19 @@ def generate_csv_data() -> List[Dict[str, str]]:
 
     Returns list of dictionaries with key fields for each resistor.
     """
-    # Get configuration
-    config = GENERATION_CONFIG
+    # Get enabled configurations
+    enabled_series = get_enabled_e_series()
+    specs_to_generate = get_enabled_specs()
 
     # Generate resistance values by unioning requested E-series across global range
     resistance_values = set()
-    for series_num in config["series"]:
+    for series_num in enabled_series:
         values = generate_resistance_values_in_range(
             GLOBAL_MIN_OHM, GLOBAL_MAX_OHM, series_num
         )
         resistance_values |= set(values)
 
     resistance_values = sorted(resistance_values)
-
-    # Filter specs
-    specs_to_generate = PRODUCT_SPECS
-    if config["enabled_slugs"] is not None:
-        specs_to_generate = [s for s in PRODUCT_SPECS if s["slug"] in config["enabled_slugs"]]
 
     rows = []
 
@@ -851,23 +1009,31 @@ def generate_csv_data() -> List[Dict[str, str]]:
 def main():
     """Generate resistor SQL based on configuration."""
 
-    # Validate E-series configuration
-    for series_num in GENERATION_CONFIG["series"]:
-        if series_num not in (12, 24, 48, 96, 192):
-            print(f"Error: Invalid E-series {series_num}. Must be 12, 24, 48, 96, or 192")
-            sys.exit(1)
+    # Get enabled configurations for display
+    enabled_series = get_enabled_e_series()
+    series_str = get_e_series_display_str()
+    enabled_package_tempcos = get_enabled_package_tempcos()
+    specs_to_generate = get_enabled_specs()
 
-    # Validate enabled slugs if specified
-    if GENERATION_CONFIG["enabled_slugs"] is not None:
-        valid_slugs = {spec["slug"] for spec in PRODUCT_SPECS}
-        for slug in GENERATION_CONFIG["enabled_slugs"]:
-            if slug not in valid_slugs:
-                print(f"Error: Unknown slug '{slug}'")
-                print(f"Valid slugs: {', '.join(sorted(valid_slugs))}")
-                sys.exit(1)
+    # Display configuration summary
+    print(f"{MANUFACTURER} {SERIES} Series {COMPOSITION} Resistor Generator")
+    print("=" * 50)
+    print(f"\nConfiguration:")
+    print(f"  Manufacturer: {MANUFACTURER}")
+    print(f"  Composition: {COMPOSITION}")
+    print(f"  E-series: {series_str or '(none)'}")
+    print(f"\nEnabled package/tempco combinations: {len(enabled_package_tempcos)}")
+    for pkg, tempco in sorted(enabled_package_tempcos)[:10]:
+        print(f"  - {pkg} / {tempco}")
+    if len(enabled_package_tempcos) > 10:
+        print(f"  ... and {len(enabled_package_tempcos) - 10} more")
 
     # Generate SQL content
     sql_content = generate_resistors()
+
+    if not sql_content:
+        print("\nNo parts generated. Check configuration.")
+        sys.exit(1)
 
     # Write SQL file
     output_dir = os.path.dirname(OUTPUT_FILE)
@@ -876,6 +1042,8 @@ def main():
 
     with open(OUTPUT_FILE, "w") as f:
         f.write(sql_content)
+
+    print(f"\nGenerated: {OUTPUT_FILE}")
 
     # Generate and write CSV file if enabled
     if GENERATE_CSV:
@@ -886,26 +1054,9 @@ def main():
                 writer = csv.DictWriter(f, fieldnames=fieldnames)
                 writer.writeheader()
                 writer.writerows(csv_data)
+        print(f"Generated: {OUTPUT_CSV}")
 
-    # Display summary
-    print(f"Generated {OUTPUT_FILE}")
-    if GENERATE_CSV:
-        print(f"Generated {OUTPUT_CSV}")
-    print(f"\nConfiguration:")
-    print(f"  Manufacturer: {MANUFACTURER} {SERIES} Series")
-    print(f"  Composition: {COMPOSITION}")
-    print(f"  Symbol style: {KICAD_CONFIG['symbol_prefix']}{KICAD_CONFIG['symbol_style']}")
-    print(f"  Series: {GENERATION_CONFIG['series_str']}")
-
-    # Summarize generated specs
-    packages = sorted(set(spec["package"] for spec in PRODUCT_SPECS))
-    print(f"  Packages: {', '.join(packages)}")
-    print(f"  Product specs: {len(PRODUCT_SPECS)} slugs defined")
-
-    if GENERATION_CONFIG["enabled_slugs"] is not None:
-        print(f"  Enabled slugs: {', '.join(GENERATION_CONFIG['enabled_slugs'])}")
-
-    # Count actual parts generated
+    # Count parts
     total_parts = sql_content.count("INSERT INTO")
     print(f"\nTotal parts generated: {total_parts}")
 

@@ -1,7 +1,7 @@
-# Field name normalization mappings for KiCad symbol library - RESISTORS
+# Field name normalization mappings for KiCad symbol library - RESISTORS (Through-Hole)
 #
 # This file defines how different field names in KiCad symbols should be
-# normalized to consistent database column names for the resistors table.
+# normalized to consistent database column names for the resistors_th table.
 #
 # Format:
 #   field_mappings:
@@ -34,7 +34,6 @@ field_mappings:
   "Datasheet": "datasheet"
   "Manufacturer": "manufacturer"
   "MPN": "mpn"
-  "Package": "package"
   "Value": "value"
   "Tolerance": "tolerance"
   "Power_Rating": "power_rating"
@@ -61,6 +60,13 @@ field_mappings:
   "RoHS_Document_Link": "rohs_document_link"
   "Manufacturer_Link": "manufacturer_link"
 
+  # Through-hole specific mappings
+  "Lead_Spacing": "lead_spacing_mm"
+  "Lead Spacing": "lead_spacing_mm"
+  "Lead_Spacing_mm": "lead_spacing_mm"
+  "Body_Style": "body_style"
+  "Body Style": "body_style"
+
   # Space variations of field names (from legacy symbols)
   "Allow Substitution": "allow_substitution"
   "BOM Comment": "bom_comment"
@@ -75,10 +81,6 @@ field_mappings:
   "Manufacturer PN": "mpn"
   "Mfr PN": "mpn"
   "Part Number": "mpn"
-
-  # Package variations
-  "Package Type": "package"
-  "Package Variant": "package"
 
   # RoHS Document Link variations
   "RoHS Europe Document Link": "rohs_document_link"
@@ -113,29 +115,48 @@ field_mapping_patterns: {}
 # Column edits - add or remove columns from the database schema
 # Supports regex patterns for remove operations
 column_edits:
+    # Core fields to add (per resistors_th_0_schema.sql)
     "part_locator": add
-    "^ki_.*": remove          # Remove all KiCad internal fields (ki_description, ki_keywords, ki_locked, etc.)
-    "RoHS China Document Link": remove
-    "RoHS China Link": remove
-    "Component Value": remove  # Consolidated into Value field (space version)
-    "Component_Value": remove  # Consolidated into Value field (underscore version)
-    "Fitted": remove          # Now built into KiCad functionality
-
-    # Resistor-specific removals (fields not in resistors schema)
-    "Class": remove           # Legacy field
-    "Component Type": remove  # Not needed - table defines type
-    "Component_Type": remove  # Not needed - table defines type
-    "Current Rating": remove  # Can be derived from power and voltage ratings
-    "Current_Rating": remove  # Can be derived from power and voltage ratings
-    "Current rating": remove  # Can be derived from power and voltage ratings (lowercase r)
-    "Current": remove         # Can be derived from power and voltage ratings
-    "Number of Pins": remove  # Not applicable to resistors
-    "Number_of_Pins": remove  # Not applicable to resistors
-    "Reference": remove       # KiCad-specific field, not needed in database
-
-    # Altium support columns (blank for now, can be populated later)
+    "variant": add
+    "lifecycle_status": add
+    "created_at": add
+    "updated_at": add
+    "created_by": add
+    "source": add
+    "dump_priority": add
     "altium_symbol": add
     "altium_footprint": add
+    "sim_params": add
+
+    # Through-hole specific fields to add
+    "lead_spacing_mm": add
+    "body_style": add
+
+    # Remove KiCad internal fields
+    "^ki_.*": remove
+
+    # Remove legacy/unused fields
+    "RoHS China Document Link": remove
+    "RoHS China Link": remove
+    "Component Value": remove
+    "Component_Value": remove
+    "Fitted": remove
+    "Class": remove
+    "Component Type": remove
+    "Component_Type": remove
+    "Current Rating": remove
+    "Current_Rating": remove
+    "Current rating": remove
+    "Current": remove
+    "Number of Pins": remove
+    "Number_of_Pins": remove
+    "Reference": remove
+
+    # Remove SMT-specific fields
+    "Package": remove
+    "package": remove
+    "Package Type": remove
+    "Package Variant": remove
 
 # Note: SPICE simulation fields (Sim.Device, Sim.Pins, Sim.Type, Sim.Library) are
 # automatically added by the script for KiCad simulation support

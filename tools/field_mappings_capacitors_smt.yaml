@@ -72,14 +72,36 @@ field_mapping_patterns: {}
 
 # Column edits
 column_edits:
+    # Core fields to add (per capacitors_smt_0_schema.sql)
     "part_locator": add
+    "variant": add
+    "lifecycle_status": add
+    "created_at": add
+    "updated_at": add
+    "created_by": add
     "source": add
     "dump_priority": add
     "altium_symbol": add
     "altium_footprint": add
+    "sim_params": add
 
-    # Remove fields not in capacitors schema
+    # Capacitor-specific fields to add (per capacitors_smt_0_schema.sql)
+    "capacitance_f": add
+    "polarized": add
+    "esr_typ_ohm": add
+    "esr_test_freq_hz": add
+    "ripple_current_max_a": add
+    "leakage_current_max_a": add
+    "temp_range_min_c": add
+    "temp_range_max_c": add
+    "lifetime_hours_at_max_temp": add
+    "aec_q_rating": add
+    "height_max_mm": add
+
+    # Remove KiCad internal fields
     "^ki_.*": remove
+
+    # Remove legacy/unused fields
     "Class": remove
     "Component Type": remove
     "Component_Type": remove

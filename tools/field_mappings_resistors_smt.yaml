@@ -1,7 +1,7 @@
-# Field name normalization mappings for KiCad symbol library
+# Field name normalization mappings for KiCad symbol library - RESISTORS
 #
 # This file defines how different field names in KiCad symbols should be
-# normalized to consistent database column names, and which columns to add/remove.
+# normalized to consistent database column names for the resistors table.
 #
 # Format:
 #   field_mappings:
@@ -42,12 +42,17 @@ field_mappings:
   "Material": "composition"
   "Temp_Coeff": "temp_coeff"
   "Temp_Operating": "temp_operating"
+  "Temp_Soldering": "temp_soldering"
   "Temp_Storage": "temp_storage"
   "Sim_Device": "sim_device"
   "Sim_Pins": "sim_pins"
   "Sim_Type": "sim_model_type"
   "Sim_Library": "sim_model_file"
-  "Part_Locator": "part_locator"
+  "Sim.Device": "sim_device"
+  "Sim.Pins": "sim_pins"
+  "Sim.Type": "sim_model_type"
+  "Sim.Library": "sim_model_file"
+  "Part_ID": "part_locator"
   "Allow_Substitution": "allow_substitution"
   "BOM_Comment": "bom_comment"
   "Standards_Version": "standards_version"
@@ -55,10 +60,15 @@ field_mappings:
   "RoHS": "rohs"
   "RoHS_Document_Link": "rohs_document_link"
   "Manufacturer_Link": "manufacturer_link"
-  "Variant": "variant"
 
-  # Current rating variations
-  "Current": "Current_Rating"
+  # Space variations of field names (from legacy symbols)
+  "Allow Substitution": "allow_substitution"
+  "BOM Comment": "bom_comment"
+  "Manufacturer Link": "manufacturer_link"
+  "Standards Version": "standards_version"
+  "Power Rating": "power_rating"
+  "Voltage Rating": "voltage_rating"
+  "RoHS Document Link": "rohs_document_link"
 
   # Manufacturer part number variations
   "Manufacturer_PN": "mpn"
@@ -75,9 +85,13 @@ field_mappings:
   "RoHS Link_1": "rohs_document_link"
   "RoHS Link": "rohs_document_link"
 
-  # Temperature coefficients
+  # Temperature coefficients and variations
   "Temp Coeff": "temp_coeff"
+  "Temp Coeff.": "temp_coeff"
   "Temperature Coefficient": "temp_coeff"
+  "Temp (Operating)": "temp_operating"
+  "Temp (Soldering)": "temp_soldering"
+  "Temp (Storage)": "temp_storage"
 
   # Voltage variations
   "Voltage": "voltage_rating"
@@ -94,22 +108,43 @@ field_mappings:
 
 # Field mapping patterns - use regex to map multiple fields to one column
 # Patterns are checked in order, first match wins
-field_mapping_patterns:
-  "(?i)current[ _-]rating": "Current_Rating"  # Map any field containing "current[ _-]rating" (case insensitive)
+field_mapping_patterns: {}
 
 # Column edits - add or remove columns from the database schema
 # Supports regex patterns for remove operations
 column_edits:
+    # Core fields to add (per resistors_0_schema.sql)
     "part_locator": add
-    "^ki_.*": remove          # Remove all KiCad internal fields (ki_description, ki_keywords, ki_locked, etc.)
-    "RoHS China Document Link": remove
-    "RoHS China Link": remove
-    "Component_Value": remove  # Consolidated into Value field
-    "Fitted": remove          # Now built into KiCad functionality
-
-    # Altium support columns (blank for now, can be populated later)
+    "variant": add
+    "lifecycle_status": add
+    "created_at": add
+    "updated_at": add
+    "created_by": add
+    "source": add
+    "dump_priority": add
     "altium_symbol": add
     "altium_footprint": add
+    "sim_params": add
+
+    # Remove KiCad internal fields
+    "^ki_.*": remove
+
+    # Remove legacy/unused fields
+    "RoHS China Document Link": remove
+    "RoHS China Link": remove
+    "Component Value": remove
+    "Component_Value": remove
+    "Fitted": remove
+    "Class": remove
+    "Component Type": remove
+    "Component_Type": remove
+    "Current Rating": remove
+    "Current_Rating": remove
+    "Current rating": remove
+    "Current": remove
+    "Number of Pins": remove
+    "Number_of_Pins": remove
+    "Reference": remove
 
 # Note: SPICE simulation fields (Sim.Device, Sim.Pins, Sim.Type, Sim.Library) are
 # automatically added by the script for KiCad simulation support

@@ -332,6 +332,9 @@ def create_field_mapping(fields: Set[str], name_mappings: Dict[str, str] = None,
         # Sanitize field name for SQL (replace spaces and special chars with underscores)
         safe_field = re.sub(r'[^\w]+', '_', normalized_field).strip('_')
 
+        # Lowercase for consistency with Terra EDA Library schema
+        safe_field = safe_field.lower()
+
         # Store the mapping - multiple fields can map to the same column
         mapping[field] = safe_field
 
@@ -381,7 +384,23 @@ def generate_create_table_sql(field_mapping: Dict[str, str], table_name: str = '
     unique_columns = get_unique_columns(field_mapping)
 
     # Create column definitions
-    columns = [f'"{col}" TEXT' for col in unique_columns]
+    columns = []
+
+    # Always add unique_id as PRIMARY KEY first
+    columns.append('"unique_id" TEXT PRIMARY KEY')
+
+    # Add other columns (skip if unique_id already in mapping)
+    for col in unique_columns:
+        if col.lower() != 'unique_id':
+            columns.append(f'"{col}" TEXT')
+
+    # Always add variant, source, and dump_priority columns
+    if 'variant' not in [c.lower() for c in unique_columns]:
+        columns.append('"variant" TEXT')
+    if 'source' not in [c.lower() for c in unique_columns]:
+        columns.append('"source" TEXT')
+    if 'dump_priority' not in [c.lower() for c in unique_columns]:
+        columns.append('"dump_priority" INTEGER')
 
     create_table_sql = f"CREATE TABLE IF NOT EXISTS {table_name} (\n  {',\n  '.join(columns)}\n);"
     return create_table_sql
@@ -590,6 +609,11 @@ def generate_insert_sql(symbols: List[Dict[str, str]], field_mapping: Dict[str, 
     for symbol in symbols:
         # Prepare values, merging fields that map to the same column
         column_values = prepare_symbol_values(symbol, field_mapping)
+
+        # Auto-detect variant from symbol name (e.g., "_flipped" suffix)
+        part_locator = column_values.get('part_locator') or column_values.get('kicad_symbol') or ''
+        if not column_values.get('variant') and '_flipped' in part_locator:
+            column_values['variant'] = 'flipped'
 
         # Generate unique_id from manufacturer + mpn + variant
         manufacturer = column_values.get('manufacturer') or column_values.get('Manufacturer') or 'Unknown'

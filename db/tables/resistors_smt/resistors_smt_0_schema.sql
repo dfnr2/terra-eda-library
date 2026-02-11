@@ -1,11 +1,11 @@
--- Terra EDA Library - resistors Table Schema
+-- Terra EDA Library - resistors_smt Table Schema
 -- This file contains only the table definition
 -- Data is split by dump_priority and source into separate files
 --
 -- This file is auto-generated and suitable for git tracking.
 --
 
-CREATE TABLE resistors (
+CREATE TABLE resistors_smt (
         -- Core fields (shared across all component types)
         unique_id TEXT PRIMARY KEY,
         part_locator TEXT,

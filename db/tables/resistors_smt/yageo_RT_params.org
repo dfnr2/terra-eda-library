@@ -1,0 +1,182 @@
+#+TITLE: Yageo RT Thin-Film Resistor Series — Part Numbering + 50ppm Tables
+#+AUTHOR: 
+#+OPTIONS: toc:nil
+
+* Overview
+This document summarizes the Yageo *RT series* thin-film chip resistors, including:
+
+1. A precise, LLM-friendly description of the *global part number format*.
+2. Tables covering the *±0.1%, ±0.5%, and ±1%* tolerance grades for *50 ppm/°C* TCR, sizes *0402 through 2512*.
+3. Includes: size, tolerance, tempco, power rating, maximum working voltage, maximum overload voltage, and valid resistance range.
+
+All information is taken from the Yageo RT-series datasheet (Mar 13, 2023, V1.5).
+
+* Global Part Number Structure
+
+The global part number format is:
+
+#+begin_example
+RT [SIZE4] [TOL] [PACK] [TCR] [TAPE] [RV_CODE] L
+#+end_example
+
+** Field Definitions
+
+| Field     | Meaning |
+|-----------+-------------------------------------------------------------|
+| RT        | Series identifier (thin-film RT resistors)                 |
+| SIZE4     | 4-digit imperial package size                              |
+| TOL       | Tolerance code                                             |
+| PACK      | Packaging type                                             |
+| TCR       | Temperature coefficient of resistance code                 |
+| TAPE      | Taping reel code                                           |
+| RV_CODE   | Encoded resistance value using R/K/M as decimal markers    |
+| L         | Default ending code (order only)                           |
+
+** Package Size Codes
+| Code | Size  |
+|------+-------|
+| 0100 | 0100  |
+| 0201 | 0201  |
+| 0402 | 0402  |
+| 0603 | 0603  |
+| 0805 | 0805  |
+| 1206 | 1206  |
+| 1210 | 1210  |
+| 2010 | 2010  |
+| 2512 | 2512  |
+
+** Tolerance Codes
+| Code | Tolerance |
+|------+-----------|
+| L    | ±0.01%    |
+| P    | ±0.02%    |
+| W    | ±0.05%    |
+| B    | ±0.1%     |
+| C    | ±0.25%    |
+| D    | ±0.5%     |
+| F    | ±1%       |
+
+** Packaging Type Codes
+| Code | Description              |
+|------+--------------------------|
+| R    | Paper/PE taping          |
+| K    | Embossed taping          |
+
+** TCR Codes (ppm/°C)
+| Code | TCR |
+|------+-----|
+| A    | 5   |
+| B    | 10  |
+| C    | 15  |
+| D    | 25  |
+| E    | 50  |
+
+** Taping Reel Codes
+| Code | Description                           |
+|------+---------------------------------------|
+| 07   | 7-inch reel                           |
+| 10   | 10-inch reel                          |
+| 13   | 13-inch reel                          |
+| 7W   | 7-inch reel, *high-power version*     |
+
+** Resistance Value Encoding (RV_CODE)
+
+General rules:
+
+- 2–4 characters
+- R, K, M act as decimal points
+- No final zero after the unit letter:
+  - ~1K2~, not ~1K20~
+  - ~97R6~, not ~97R60~
+
+Examples by range:
+
+| Range         | Pattern | Example |
+|---------------+---------+---------|
+| 1–9.76 Ω      | XRXX    | 1R5     |
+| 10–97.6 Ω     | XXRX    | 47R5    |
+| 100–976 Ω     | XXXR    | 100R    |
+| 1–9.76 kΩ     | XKXX    | 9K76    |
+| 1–9.76 MΩ     | XMXX    | 1M00    |
+
+** Example Part Number
+RT0603DRE0756RL
+
+Decomposed:
+- RT = series
+- 0603 = size
+- D = ±0.5%
+- R = paper tape
+- E = 50 ppm
+- 07 = 7" reel
+- 56R = 56 Ω
+- L = default suffix
+
+* Electrical Characteristics (TCR = 50 ppm/°C)
+Values are identical across 0.1%, 0.5%, and 1% tolerance grades for a given size.
+
+** Legend
+- PR = Power Rating
+- MWV = Max Working Voltage
+- MOV = Max Overload Voltage
+- Range = Resistance Range (for ±0.1%, ±0.5%, ±1%, 50 ppm)
+
+* 0402 → 2512, TCR = 50 ppm, Tolerances = 0.1%, 0.5%, 1%
+
+** 0402 (RT0402)
+| Size | Tol | TCR | PR     | MWV | MOV | Range        |
+|------+-----+------+--------+-----+-----+--------------|
+| 0402 | 0.1% | 50ppm | 1/16W | 50V | 100V | 4.7Ω – 500kΩ |
+| 0402 | 0.5% | 50ppm | 1/16W | 50V | 100V | 4.7Ω – 500kΩ |
+| 0402 | 1%   | 50ppm | 1/16W | 50V | 100V | 4.7Ω – 500kΩ |
+
+** 0603 (RT0603)
+| Size | Tol | TCR | PR     | MWV | MOV | Range      |
+|------+-----+------+--------+-----+-----+------------|
+| 0603 | 0.1% | 50ppm | 1/10W | 75V | 150V | 1Ω – 2MΩ  |
+| 0603 | 0.5% | 50ppm | 1/10W | 75V | 150V | 1Ω – 2MΩ  |
+| 0603 | 1%   | 50ppm | 1/10W | 75V | 150V | 1Ω – 2MΩ  |
+
+** 0805 (RT0805)
+| Size | Tol | TCR | PR    | MWV | MOV | Range      |
+|------+-----+------+-------+-----+-----+------------|
+| 0805 | 0.1% | 50ppm | 1/8W | 150V | 300V | 1Ω – 3MΩ |
+| 0805 | 0.5% | 50ppm | 1/8W | 150V | 300V | 1Ω – 3MΩ |
+| 0805 | 1%   | 50ppm | 1/8W | 150V | 300V | 1Ω – 3MΩ |
+
+** 1206 (RT1206)
+| Size | Tol | TCR | PR    | MWV | MOV | Range      |
+|------+-----+------+-------+-----+-----+------------|
+| 1206 | 0.1% | 50ppm | 1/4W | 200V | 400V | 1Ω – 3MΩ |
+| 1206 | 0.5% | 50ppm | 1/4W | 200V | 400V | 1Ω – 3MΩ |
+| 1206 | 1%   | 50ppm | 1/4W | 200V | 400V | 1Ω – 3MΩ |
+
+** 1210 (RT1210)
+| Size | Tol | TCR | PR    | MWV | MOV | Range       |
+|------+-----+------+-------+-----+-----+-------------|
+| 1210 | 0.1% | 50ppm | 1/4W | 200V | 400V | 4.7Ω – 1MΩ |
+| 1210 | 0.5% | 50ppm | 1/4W | 200V | 400V | 4.7Ω – 1MΩ |
+| 1210 | 1%   | 50ppm | 1/4W | 200V | 400V | 4.7Ω – 1MΩ |
+
+** 2010 (RT2010)
+| Size | Tol | TCR | PR    | MWV | MOV | Range       |
+|------+-----+------+-------+-----+-----+-------------|
+| 2010 | 0.1% | 50ppm | 1/2W | 200V | 400V | 4.7Ω – 1MΩ |
+| 2010 | 0.5% | 50ppm | 1/2W | 200V | 400V | 4.7Ω – 1MΩ |
+| 2010 | 1%   | 50ppm | 1/2W | 200V | 400V | 4.7Ω – 1MΩ |
+
+** 2512 (RT2512 Standard, 3/4 W)
+| Size | Tol | TCR | PR    | MWV | MOV | Range       |
+|------+-----+------+-------+-----+-----+-------------|
+| 2512 | 0.1% | 50ppm | 3/4W | 200V | 400V | 4.7Ω – 1MΩ |
+| 2512 | 0.5% | 50ppm | 3/4W | 200V | 400V | 4.7Ω – 1MΩ |
+| 2512 | 1%   | 50ppm | 3/4W | 200V | 400V | 4.7Ω – 1MΩ |
+
+** 2512 (RT2512 High-Power, 1 W)
+| Size | Tol | TCR | PR  | MWV | MOV | Range        |
+|------+-----+------+-----+-----+-----+--------------|
+| 2512 | 0.1% | 50ppm | 1W | 200V | 400V | 10Ω – 1MΩ |
+| 2512 | 0.5% | 50ppm | 1W | 200V | 400V | 10Ω – 1MΩ |
+| 2512 | 1%   | 50ppm | 1W | 200V | 400V | 10Ω – 1MΩ |
+
+* End of Document

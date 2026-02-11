@@ -82,14 +82,50 @@ field_mapping_patterns: {}
 
 # Column edits
 column_edits:
+    # Core fields to add (per connectors_0_schema.sql)
     "part_locator": add
+    "lifecycle_status": add
+    "exclude_from_bom": add
+    "created_at": add
+    "updated_at": add
+    "created_by": add
     "source": add
     "dump_priority": add
     "altium_symbol": add
     "altium_footprint": add
+    "sim_params": add
 
-    # Remove fields not in capacitors schema
+    # Connector-specific fields to add (per connectors_0_schema.sql)
+    "connector_category": add
+    "connector_family": add
+    "connector_series": add
+    "row_pitch_mm": add
+    "termination_type": add
+    "polarized": add
+    "keying_detail": add
+    "locking_mechanism": add
+    "shielding": add
+    "panel_mount_style": add
+    "color": add
+    "contact_resistance_mohm": add
+    "insulation_resistance_mohm": add
+    "dielectric_withstand_vrms": add
+    "signal_type": add
+    "wire_gauge_min_awg": add
+    "wire_gauge_max_awg": add
+    "insulation_dia_min_mm": add
+    "insulation_dia_max_mm": add
+    "cable_type": add
+    "flammability_rating": add
+    "ip_rating": add
+    "creepage_clearance_note": add
+    "mating_family": add
+    "mating_part_hint": add
+
+    # Remove KiCad internal fields
     "^ki_.*": remove
+
+    # Remove legacy/unused fields
     "Class": remove
     "Component Type": remove
     "Component_Type": remove
