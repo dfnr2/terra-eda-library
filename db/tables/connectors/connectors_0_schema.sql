@@ -7,7 +7,8 @@
 
 CREATE TABLE connectors (
         -- Core fields (shared across all component types)
-        part_id TEXT PRIMARY KEY,
+        unique_id TEXT PRIMARY KEY,
+        part_locator TEXT,
         mpn TEXT,
         manufacturer TEXT,
         package TEXT,
