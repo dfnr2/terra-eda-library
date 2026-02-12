@@ -10,7 +10,7 @@ Datasheet Reference:
 https://www.yageogroup.com/content/datasheet/asset/file/KEM_C1003_C0G_SMD
 
 C0G Series Part Number Format:
-C [SIZE] C [CAP_CODE] [TOL] [VOLTAGE] G A C [PACKAGING]
+C [SIZE] C [CAP_CODE] [TOL] [VOLTAGE] [DIELECTRIC] A C [PACKAGING]
 
 Example: C1206C104J3GACTU
 - C = Ceramic
@@ -38,9 +38,23 @@ from typing import Dict, List, Tuple, Optional, Set
 # ============================================================================
 # Modify these sections to control what gets generated
 
+# ======================== DIELECTRIC CONFIGURATION ========================
+# Dielectric code → name mapping (KEMET MPN encoding)
+DIELECTRIC_CODES = {
+    "G": "C0G",  # Full range
+    "X": "X7R",  # Standard range (100pF–100nF)
+    "B": "X7R",  # Low capacitance range (≤100nF)
+    "R": "X7R",  # High capacitance range (≥1µF)
+    "Z": "X5R",  # Standard range (100pF–100nF)
+    "S": "X5R",  # High capacitance range (≥1µF)
+    "Y": "Y5V",  # Full range
+}
+DIELECTRIC_CODE = "G"
+
 # ======================== OUTPUT CONFIGURATION ========================
-OUTPUT_FILE = "capacitors_smt_generated_300_kemet_c0g_mlcc.sql"
-OUTPUT_CSV = "capacitors_smt_generated_300_kemet_c0g_mlcc.csv"
+DIELECTRIC = DIELECTRIC_CODES[DIELECTRIC_CODE]
+OUTPUT_FILE = f"capacitors_smt_generated_300_kemet_{DIELECTRIC.lower()}_mlcc.sql"
+OUTPUT_CSV = f"capacitors_smt_generated_300_kemet_{DIELECTRIC.lower()}_mlcc.csv"
 GENERATE_CSV = False  # Set to True to also generate CSV for inspection
 
 # ======================== PACKAGING CONFIGURATION ========================
@@ -158,7 +172,6 @@ DUMP_PRIORITY = 0  # Generated data priority
 # ======================== MANUFACTURER SPECIFICATION ========================
 MANUFACTURER = "KEMET"
 SERIES = "C"  # Standard ceramic series
-DIELECTRIC = "C0G"
 CAP_TYPE = "MLCC"
 LIFECYCLE_STATUS = "Active"
 ROHS_COMPLIANT = "Yes"
@@ -168,15 +181,15 @@ POLARIZED = "No"
 
 # ======================== URL TEMPLATES ========================
 URL_TEMPLATES = {
-    "datasheet": "https://www.yageogroup.com/content/datasheet/asset/file/KEM_C1003_C0G_SMD",
+    "datasheet": f"https://www.yageogroup.com/content/datasheet/asset/file/KEM_C1003_{DIELECTRIC}_SMD",
     "manufacturer_link": "https://www.yageogroup.com/products/Capacitors/part/{mpn}",
     "rohs_document": "https://www.yageogroup.com/component-documentation/download/rohs/{mpn}",
 }
 
 # ======================== STRING TEMPLATES ========================
 STRING_TEMPLATES = {
-    # MPN template: C [SIZE] C [CAP_CODE] [TOL] [VOLTAGE] G A C [PACKAGING]
-    "mpn": "C{size}C{cap_code}{tol_code}{voltage_code}GAC{packaging}",
+    # MPN template: C [SIZE] C [CAP_CODE] [TOL] [VOLTAGE] [DIELECTRIC] A C [PACKAGING]
+    "mpn": "C{size}C{cap_code}{tol_code}{voltage_code}{dielectric_code}AC{packaging}",
     # Description templates
     "description": "{manufacturer} {cap_type} capacitor {value_readable} {tolerance} {voltage}V {dielectric} {package}",
     # Part locator template (for finding equivalent parts)
@@ -701,6 +714,7 @@ def format_mpn(
         cap_code=cap_code,
         tol_code=tol_code,
         voltage_code=voltage_code,
+        dielectric_code=DIELECTRIC_CODE,
         packaging=packaging,
     )
 
