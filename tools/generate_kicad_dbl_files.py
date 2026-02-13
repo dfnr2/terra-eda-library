@@ -256,7 +256,7 @@ def main():
     print()
     print('Add to KiCad:')
     print('  Preferences -> Manage Symbol Libraries -> Database Libraries')
-    print('  Click + to add terra.kicad_dbl')
+    print('  Click + to add terra.kicad_dbl and terra_sym.kicad_sym')
     print()
     print(f'Libraries included: {", ".join(tables)}')
 
