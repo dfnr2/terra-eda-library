@@ -49,13 +49,14 @@ def get_display_name(table_name: str) -> str:
 
 def create_field_config(column: str) -> Dict:
     """Create field configuration for a column."""
-    # Skip internal/metadata columns
+    # Skip internal/metadata columns and columns handled as library-level properties
     skip_cols = {
         'unique_id',  # Internal primary key (used as key field, not displayed)
         'part_locator',  # Internal database locator
         'altium_symbol', 'altium_footprint',  # Not relevant for KiCad
         'sim_model_type', 'sim_device', 'sim_pins', 'sim_model_file', 'sim_params',  # SPICE internals
-        'source', 'dump_priority'  # Internal dump system metadata
+        'source', 'dump_priority',  # Internal dump system metadata
+        'exclude_from_bom',  # Handled as library-level property
     }
 
     if column in skip_cols:
@@ -90,24 +91,29 @@ def create_field_config(column: str) -> Dict:
     # Convert column name to display name
     display_name = display_name_map.get(column, column.replace('_', ' ').title())
 
-    field_config = {
+    return {
         'column': column,
         'name': display_name,
         'visible_on_add': visible_on_add,
         'visible_in_chooser': visible_in_chooser
     }
 
-    # Map to KiCad properties
-    if column == 'exclude_from_bom':
-        field_config['properties'] = {'exclude_from_bom': {}}
-
-    return field_config
-
 
 def create_library_config(conn: sqlite3.Connection, table_name: str) -> Dict:
     """Create library configuration for a specific table."""
     # Get all columns
     columns = get_table_columns(conn, table_name)
+
+    # Determine primary key column
+    cursor = conn.cursor()
+    cursor.execute(f"PRAGMA table_info({table_name})")
+    pk_col = None
+    for row in cursor.fetchall():
+        if row[5]:  # pk flag is non-zero
+            pk_col = row[1]
+            break
+    if pk_col is None:
+        pk_col = columns[0]  # fallback to first column
 
     # Create field configurations
     fields = []
@@ -116,14 +122,26 @@ def create_library_config(conn: sqlite3.Connection, table_name: str) -> Dict:
         if field:
             fields.append(field)
 
-    return {
+    # Build library-level properties mapping column names for KiCad properties
+    properties = {}
+    if 'description' in columns:
+        properties['description'] = 'description'
+    if 'exclude_from_bom' in columns:
+        properties['exclude_from_bom'] = 'exclude_from_bom'
+
+    config = {
         'name': table_name,
         'table': table_name,
-        'key': 'unique_id',
+        'key': pk_col,
         'symbols': 'kicad_symbol',
         'footprints': 'kicad_footprint',
         'fields': fields
     }
+
+    if properties:
+        config['properties'] = properties
+
+    return config
 
 
 def find_sqlite_odbc_driver() -> str:
@@ -175,7 +193,7 @@ def generate_unified_dbl_file(db_path: Path, output_dir: Path, tables: List[str]
     libraries = []
     for table in tables:
         libraries.append(create_library_config(conn, table))
-        print(f'  ✓ Added library: {table}')
+        print(f'  + Added library: {table}')
 
     conn.close()
 
@@ -189,7 +207,7 @@ def generate_unified_dbl_file(db_path: Path, output_dir: Path, tables: List[str]
     # Create the unified .kicad_dbl structure
     dbl_config = {
         'meta': {
-            'version': 0,
+            'version': 1,
             'filename': 'terra.kicad_dbl'
         },
         'name': 'Terra EDA Library',
@@ -210,7 +228,7 @@ def generate_unified_dbl_file(db_path: Path, output_dir: Path, tables: List[str]
     with open(output_file, 'w') as f:
         json.dump(dbl_config, f, indent=2)
 
-    print(f'\n✓ Created {output_file.name}')
+    print(f'\nCreated {output_file.name}')
 
 
 def main():
@@ -237,7 +255,7 @@ def main():
 
     print()
     print('Add to KiCad:')
-    print('  Preferences → Manage Symbol Libraries → Database Libraries')
+    print('  Preferences -> Manage Symbol Libraries -> Database Libraries')
     print('  Click + to add terra.kicad_dbl')
     print()
     print(f'Libraries included: {", ".join(tables)}')

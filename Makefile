@@ -14,13 +14,13 @@ VENV_MARKER := .venv/.synced
 # Directory structure:
 #   db/{table}.db                              - Per-table database (generated)
 #   db/tables/{table}/                         - Table source directory
-#     ├── run_N_description.py                 - Generator scripts (tracked)
-#     ├── {table}_N_source.sql                 - Static SQL (tracked, dump_priority=N)
-#     └── {table}_generated_N_source.sql       - Generated SQL (ignored, dump_priority=0)
+#     +-- run_N_description.py                 - Generator scripts (tracked)
+#     +-- {table}_N_source.sql                 - Static SQL (tracked, dump_priority=N)
+#     +-- {table}_generated_N_source.sql       - Generated SQL (ignored, dump_priority=0)
 #
 # Dependency chain per table:
-#   run_*.py → {table}_generated_*.sql → db/{table}.db
-#     ↓              ↓                      ↓
+#   run_*.py -> {table}_generated_*.sql -> db/{table}.db
+#     |              |                      |
 #   change       rebuild                rebuild
 #
 # Metadata in SQL for round-trip:
@@ -38,7 +38,7 @@ DB_FILES := $(patsubst %,db/%.db,$(TABLES))
 # Dynamic Per-Table Rules
 # ============================================================================
 # For each table, create variables and rules for:
-#   - {table}-generate: run all run_*.py scripts → {table}_generated_*.sql
+#   - {table}-generate: run all run_*.py scripts -> {table}_generated_*.sql
 #   - {table}-build: build db/{table}.db from all SQL
 #   - {table}-dump: dump db/{table}.db back to static SQL files
 #   - {table}-clean: remove generated SQL and database
@@ -58,12 +58,12 @@ $(1)_ALL_SQL := $$($(1)_STATIC_SQL) $$($(1)_GEN_SQL)
 .PHONY: $(1)-generate
 $(1)-generate: $$($(1)_GEN_SQL)
 
-# Rule: run_N_name.py → {table}_generated_N_name.sql
+# Rule: run_N_name.py -> {table}_generated_N_name.sql
 # If ANY generator script changes, rebuild ALL generated SQL for this table
 $$($(1)_DIR)/$(1)_generated_%.sql: $$($(1)_DIR)/run_%.py $$($(1)_GEN_SCRIPTS)
 	@echo "Running generator: $$<"
 	@cd $$($(1)_DIR) && $$(PYTHON) $$(notdir $$<)
-	@echo "✓ Generated: $$@"
+	@echo "+ Generated: $$@"
 
 # Target: build database for table $(1)
 .PHONY: $(1)-build
@@ -79,14 +79,14 @@ $$($(1)_DB): $$($(1)_ALL_SQL)
 		exit 1; \
 	fi
 	@cat $$(sort $$($(1)_ALL_SQL)) | sqlite3 $$@
-	@echo "✓ Built $$@ from $$(words $$($(1)_ALL_SQL)) SQL file(s)"
+	@echo "+ Built $$@ from $$(words $$($(1)_ALL_SQL)) SQL file(s)"
 
 # Target: dump database for table $(1)
 .PHONY: $(1)-dump
 $(1)-dump: $$(VENV_MARKER) $$($(1)_DB)
 	@echo "Dumping $(1) database to static SQL files..."
 	@$$(PYTHON) tools/db_to_tables.py $$($(1)_DB) db/tables/
-	@echo "✓ Done"
+	@echo "Done"
 
 # Target: clean generated files for table $(1)
 .PHONY: $(1)-clean
@@ -94,7 +94,7 @@ $(1)-clean:
 	@echo "Cleaning generated files for $(1)..."
 	@rm -f $$($(1)_GEN_SQL)
 	@rm -f $$($(1)_DB)
-	@echo "✓ Done"
+	@echo "Done"
 
 # Target: test table $(1)
 .PHONY: $(1)-test
@@ -148,17 +148,17 @@ db/terra.db: $(foreach table,$(TABLES),$($(table)_ALL_SQL))
 			cat $$sql_files | sqlite3 $@; \
 			if [ $$? -eq 0 ]; then \
 				count=$$(sqlite3 $@ "SELECT COUNT(*) FROM $$table_name" 2>/dev/null || echo "0"); \
-				echo "  ✓ Added $$count rows to $$table_name"; \
+				echo "  + Added $$count rows to $$table_name"; \
 			fi; \
 		fi; \
 	done
-	@echo "✓ Built $@ with $(words $(TABLES)) tables"
+	@echo "+ Built $@ with $(words $(TABLES)) tables"
 
 # Generate unified terra.kicad_dbl file
 terra.kicad_dbl: $(VENV_MARKER) db/terra.db
 	@echo "Generating terra.kicad_dbl..."
 	@$(PYTHON) tools/generate_kicad_dbl_files.py db/terra.db
-	@echo "✓ Done"
+	@echo "Done"
 
 # Convert KiCad symbol library to SQL (initial import)
 # Pattern: terra_sym.kicad_sym -> db/terra.sql
@@ -171,10 +171,10 @@ db/%.sql: %_sym.kicad_sym $(CONFIG)
 # Dump all databases back to static SQL files
 .PHONY: dump
 dump: $(foreach table,$(TABLES),$(table)-dump)
-	@echo "✓ All tables dumped. Review changes with 'git diff db/tables/' before committing."
+	@echo "All tables dumped. Review changes with 'git diff db/tables/' before committing."
 
 # Verify round-trip consistency
-# Process: Static SQL → [Generate] → DB → Dump → Compare Static SQL
+# Process: Static SQL -> [Generate] -> DB -> Dump -> Compare Static SQL
 # Generated SQL (source=''|NULL) should NOT appear in dump
 .PHONY: verify
 verify: $(VENV_MARKER)
@@ -203,10 +203,10 @@ verify: $(VENV_MARKER)
 		done; \
 	done
 	@if diff /tmp/terra_checksums_before.txt /tmp/terra_checksums_after.txt > /dev/null 2>&1; then \
-		echo "✓ Round-trip verification passed!"; \
+		echo "Round-trip verification passed."; \
 		rm -f /tmp/terra_checksums_before.txt /tmp/terra_checksums_after.txt; \
 	else \
-		echo "✗ Round-trip verification failed!"; \
+		echo "X Round-trip verification failed!"; \
 		echo "Static SQL files changed after dump:"; \
 		diff /tmp/terra_checksums_before.txt /tmp/terra_checksums_after.txt || true; \
 		rm -f /tmp/terra_checksums_before.txt /tmp/terra_checksums_after.txt; \
@@ -220,14 +220,14 @@ clean: $(foreach table,$(TABLES),$(table)-clean)
 	@rm -f db/*_test.sql db/*_test.db
 	@rm -f terra_*.kicad_dbl
 	@rm -f *.kicad_dbl
-	@echo "✓ Done. Static SQL files and venv preserved."
+	@echo "Done. Static SQL files and venv preserved."
 
 # Clean everything including venv (use with caution!)
 .PHONY: distclean
 distclean: clean
 	@echo "Cleaning all generated files including venv..."
 	@rm -rf .venv
-	@echo "✓ Done."
+	@echo "Done."
 
 # Show status
 .PHONY: status
@@ -272,7 +272,7 @@ help:
 	@echo "  make              Build terra.db from all db/tables/*/*.sql files"
 	@echo "  make sync         Ensure uv environment is set up"
 	@echo "  make dump         Dump terra.db back to db/tables/ structure"
-	@echo "  make verify       Verify round-trip consistency (SQL→DB→SQL→DB)"
+	@echo "  make verify       Verify round-trip consistency (SQL->DB->SQL->DB)"
 	@echo "  make status       Show status of all tables and database"
 	@echo "  make clean        Remove generated .db file (keep SQL and venv)"
 	@echo "  make distclean    Remove all generated files including SQL"
