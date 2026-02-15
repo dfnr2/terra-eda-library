@@ -2,17 +2,31 @@
 #
 # This Makefile automates the workflow for managing KiCad symbol libraries
 # as SQL-based databases with git tracking support.
+#
+# Two-phase build:
+#   Phase A: Master DB build (only when library changes)
+#            db/terra.db - contains all part tables, tags, empty config, views
+#   Phase B: Project DB build (per KiCad project, when config changes)
+#            ${KIPRJMOD}/terra_local.db - clone of master + project config applied
 
 # Configuration
 PYTHON := uv run python
 CONFIG := tools/field_mappings.yaml
 VENV_MARKER := .venv/.synced
 
+# Default tier cutoff when no terra_config.sql exists
+DEFAULT_TIER := 5
+
+# Override via command line: make TIER=3 TAGS=analog,passive
+TIER ?=
+TAGS ?=
+
 # ============================================================================
 # Per-Table Database Architecture with Generator Support
 # ============================================================================
 # Directory structure:
 #   db/{table}.db                              - Per-table database (generated)
+#   db/tables/_global/                         - Infrastructure tables (tags, config)
 #   db/tables/{table}/                         - Table source directory
 #     +-- run_N_description.py                 - Generator scripts (tracked)
 #     +-- {table}_N_source.sql                 - Static SQL (tracked, dump_priority=N)
@@ -29,10 +43,16 @@ VENV_MARKER := .venv/.synced
 #   - Dump reconstructs: {table}_{priority}_{source}.sql
 # ============================================================================
 
-# Discover all table directories
-TABLE_DIRS := $(wildcard db/tables/*/)
+# Discover all table directories (exclude _global which is infrastructure)
+TABLE_DIRS := $(filter-out db/tables/_global/,$(wildcard db/tables/*/))
 TABLES := $(patsubst db/tables/%/,%,$(TABLE_DIRS))
 DB_FILES := $(patsubst %,db/%.db,$(TABLES))
+
+# Global infrastructure SQL (loaded before any part tables)
+GLOBAL_SQL := $(sort $(wildcard db/tables/_global/*.sql))
+
+# Part tables that get filtered views (exclude _global)
+PART_TABLES := $(TABLES)
 
 # ============================================================================
 # Dynamic Per-Table Rules
@@ -69,8 +89,8 @@ $$($(1)_DIR)/$(1)_generated_%.sql: $$($(1)_DIR)/run_%.py $$($(1)_GEN_SCRIPTS)
 .PHONY: $(1)-build
 $(1)-build: $$($(1)_DB)
 
-# Rule: build db/{table}.db from all SQL files (static + generated)
-$$($(1)_DB): $$($(1)_ALL_SQL)
+# Rule: build db/{table}.db from all SQL files (global infra + static + generated)
+$$($(1)_DB): $$(GLOBAL_SQL) $$($(1)_ALL_SQL)
 	@echo "Building database: $$@"
 	@mkdir -p db
 	@rm -f $$@
@@ -78,7 +98,7 @@ $$($(1)_DB): $$($(1)_ALL_SQL)
 		echo "Error: No SQL files found for $(1)"; \
 		exit 1; \
 	fi
-	@cat $$(sort $$($(1)_ALL_SQL)) | sqlite3 $$@
+	@cat $$(GLOBAL_SQL) $$(sort $$($(1)_ALL_SQL)) | sqlite3 $$@
 	@echo "+ Built $$@ from $$(words $$($(1)_ALL_SQL)) SQL file(s)"
 
 # Target: dump database for table $(1)
@@ -112,7 +132,7 @@ endef
 # Global Targets (must be before dynamic rule generation)
 # ============================================================================
 
-# Default target: build all table databases and unified terra.db
+# Default target: build per-table DBs, master DB, and kicad_dbl
 .PHONY: all build
 all build: $(DB_FILES) db/terra.db terra.kicad_dbl
 
@@ -136,13 +156,23 @@ sync: $(VENV_MARKER)
 .PHONY: generate
 generate: $(foreach table,$(TABLES),$(table)-generate)
 
-# Build unified terra.db with all tables
-db/terra.db: $(foreach table,$(TABLES),$($(table)_ALL_SQL))
-	@echo "Building unified database: $@"
+# ============================================================================
+# Phase A: Master DB Build
+# ============================================================================
+# Build unified terra.db with all tables, tags, config schema, and views.
+# This is the "master" database that project DBs are cloned from.
+
+db/terra.db: $(GLOBAL_SQL) $(foreach table,$(TABLES),$($(table)_ALL_SQL))
+	@echo "Building master database: $@"
 	@mkdir -p db
 	@rm -f $@
-	@for table_dir in $$(ls -d db/tables/*/ | sort); do \
+	@echo "  Loading global infrastructure tables..."
+	@if [ -n "$(GLOBAL_SQL)" ]; then \
+		cat $(GLOBAL_SQL) | sqlite3 $@; \
+	fi
+	@for table_dir in $$(ls -d db/tables/*/ 2>/dev/null | sort); do \
 		table_name=$$(basename "$$table_dir"); \
+		if [ "$$table_name" = "_global" ]; then continue; fi; \
 		sql_files=$$(find "$$table_dir" -name "*.sql" -type f | sort); \
 		if [ -n "$$sql_files" ]; then \
 			cat $$sql_files | sqlite3 $@; \
@@ -152,7 +182,79 @@ db/terra.db: $(foreach table,$(TABLES),$($(table)_ALL_SQL))
 			fi; \
 		fi; \
 	done
+	@echo "  Inserting default config (tier=$(DEFAULT_TIER), no active tags)..."
+	@sqlite3 $@ "INSERT OR IGNORE INTO terra_tier_config VALUES ($(DEFAULT_TIER));"
+	@echo "  Creating tier indexes..."
+	@for table_name in $(PART_TABLES); do \
+		sqlite3 $@ "CREATE INDEX IF NOT EXISTS idx_$${table_name}_tier_uid ON $$table_name(tier, unique_id);" 2>/dev/null || true; \
+	done
+	@echo "  Creating filtered views..."
+	@for table_name in $(PART_TABLES); do \
+		sqlite3 $@ "CREATE VIEW IF NOT EXISTS $${table_name}_v AS \
+			SELECT p.* FROM $$table_name p \
+			LEFT JOIN active_tagged_ids a ON a.unique_id = p.unique_id \
+			WHERE p.tier <= (SELECT COALESCE(MAX(tier_level), $(DEFAULT_TIER)) FROM terra_tier_config) \
+			   OR a.unique_id IS NOT NULL;"; \
+	done
+	@echo "  Tier distribution:"
+	@for table_name in $(PART_TABLES); do \
+		dist=$$(sqlite3 $@ "SELECT tier, COUNT(*) FROM $$table_name GROUP BY tier ORDER BY tier" 2>/dev/null | tr '\n' ' ' || true); \
+		if [ -n "$$dist" ]; then \
+			echo "    $$table_name: $$dist"; \
+		fi; \
+	done
+	@tag_count=$$(sqlite3 $@ "SELECT COUNT(*) FROM tags" 2>/dev/null || echo "0"); \
+	echo "  Tags: $$tag_count entries"
 	@echo "+ Built $@ with $(words $(TABLES)) tables"
+
+# ============================================================================
+# Phase B: Project DB Build
+# ============================================================================
+# Build a project-local DB by cloning the master and applying project config.
+# Usage: make project-db KIPRJMOD=/path/to/kicad/project
+#
+# Inputs (optional, in ${KIPRJMOD}/):
+#   terra_config.sql  - tier cutoff and active tags
+#   terra_tags.sql    - user-specific part tags
+
+.PHONY: project-db
+project-db: db/terra.db
+ifndef KIPRJMOD
+	$(error KIPRJMOD is not set. Usage: make project-db KIPRJMOD=/path/to/project)
+endif
+	@echo "Building project database: $(KIPRJMOD)/terra_local.db"
+	@echo "  Cloning master database..."
+	@cp db/terra.db "$(KIPRJMOD)/terra_local.db.tmp"
+	@if [ -f "$(KIPRJMOD)/terra_config.sql" ]; then \
+		echo "  Applying project config: $(KIPRJMOD)/terra_config.sql"; \
+		sqlite3 "$(KIPRJMOD)/terra_local.db.tmp" < "$(KIPRJMOD)/terra_config.sql"; \
+	else \
+		echo "  No terra_config.sql found, using defaults (tier=$(DEFAULT_TIER))"; \
+	fi
+	@if [ -f "$(KIPRJMOD)/terra_tags.sql" ]; then \
+		echo "  Applying user tags: $(KIPRJMOD)/terra_tags.sql"; \
+		sqlite3 "$(KIPRJMOD)/terra_local.db.tmp" < "$(KIPRJMOD)/terra_tags.sql"; \
+	else \
+		echo "  No terra_tags.sql found, no user tags"; \
+	fi
+ifneq ($(TIER),)
+	@echo "  Overriding tier to $(TIER)"
+	@sqlite3 "$(KIPRJMOD)/terra_local.db.tmp" "DELETE FROM terra_tier_config; INSERT INTO terra_tier_config VALUES ($(TIER));"
+endif
+ifneq ($(TAGS),)
+	@echo "  Overriding active tags to $(TAGS)"
+	@sqlite3 "$(KIPRJMOD)/terra_local.db.tmp" "DELETE FROM terra_tag_config; $(foreach tag,$(subst $(comma), ,$(TAGS)),INSERT INTO terra_tag_config VALUES ('$(tag)');)"
+endif
+	@sqlite3 "$(KIPRJMOD)/terra_local.db.tmp" "PRAGMA journal_mode=WAL;" > /dev/null
+	@mv "$(KIPRJMOD)/terra_local.db.tmp" "$(KIPRJMOD)/terra_local.db"
+	@tier_val=$$(sqlite3 "$(KIPRJMOD)/terra_local.db" "SELECT tier_level FROM terra_tier_config LIMIT 1" 2>/dev/null || echo "$(DEFAULT_TIER)"); \
+	tag_count=$$(sqlite3 "$(KIPRJMOD)/terra_local.db" "SELECT COUNT(*) FROM terra_tag_config" 2>/dev/null || echo "0"); \
+	tagged_ids=$$(sqlite3 "$(KIPRJMOD)/terra_local.db" "SELECT COUNT(*) FROM active_tagged_ids" 2>/dev/null || echo "0"); \
+	echo "  Config: tier<=$$tier_val, $$tag_count active tags, $$tagged_ids tagged IDs"
+	@echo "+ Built $(KIPRJMOD)/terra_local.db"
+
+# Comma helper for $(subst)
+comma := ,
 
 # Generate unified terra.kicad_dbl file
 terra.kicad_dbl: $(VENV_MARKER) db/terra.db
@@ -184,7 +286,7 @@ verify: $(VENV_MARKER)
 	@for table_dir in $(TABLE_DIRS); do \
 		for sql in $$table_dir/*.sql; do \
 			if [ -f "$$sql" ] && [[ "$$(basename $$sql)" != *_generated_* ]]; then \
-				md5 -q "$$sql" >> /tmp/terra_checksums_before.txt; \
+				md5sum "$$sql" >> /tmp/terra_checksums_before.txt; \
 			fi; \
 		done; \
 	done
@@ -198,7 +300,7 @@ verify: $(VENV_MARKER)
 	@for table_dir in $(TABLE_DIRS); do \
 		for sql in $$table_dir/*.sql; do \
 			if [ -f "$$sql" ] && [[ "$$(basename $$sql)" != *_generated_* ]]; then \
-				md5 -q "$$sql" >> /tmp/terra_checksums_after.txt; \
+				md5sum "$$sql" >> /tmp/terra_checksums_after.txt; \
 			fi; \
 		done; \
 	done
@@ -218,6 +320,7 @@ verify: $(VENV_MARKER)
 clean: $(foreach table,$(TABLES),$(table)-clean)
 	@echo "Cleaning temporary files..."
 	@rm -f db/*_test.sql db/*_test.db
+	@rm -f db/terra.db
 	@rm -f terra_*.kicad_dbl
 	@rm -f *.kicad_dbl
 	@echo "Done. Static SQL files and venv preserved."
@@ -258,45 +361,48 @@ status:
 		fi; \
 	done
 	@echo ""
+	@if [ -f "db/terra.db" ]; then \
+		echo "Master DB: db/terra.db"; \
+		tier_val=$$(sqlite3 db/terra.db "SELECT tier_level FROM terra_tier_config LIMIT 1" 2>/dev/null || echo "?"); \
+		tag_count=$$(sqlite3 db/terra.db "SELECT COUNT(*) FROM tags" 2>/dev/null || echo "?"); \
+		echo "  Default tier: $$tier_val"; \
+		echo "  Tag entries: $$tag_count"; \
+		echo "  Tag distribution:"; \
+		sqlite3 db/terra.db "SELECT tag, COUNT(*) FROM tags GROUP BY tag ORDER BY tag" 2>/dev/null | while read line; do \
+			echo "    $$line"; \
+		done; \
+	fi
+	@echo ""
 
 # Help target
 help:
 	@echo "Terra EDA Library - Multi-Table Database Makefile"
 	@echo "=================================================="
 	@echo ""
-	@echo "Multi-Table Architecture:"
-	@echo "  SQL files:  db/tables/{component_type}/{component_type}.sql (source of truth)"
-	@echo "  Database:   db/terra.db (generated from all table SQL files)"
+	@echo "Two-Phase Build Architecture:"
+	@echo "  Phase A: Master DB    db/terra.db (all tables + tags + views)"
+	@echo "  Phase B: Project DB   \$${KIPRJMOD}/terra_local.db (master + config)"
 	@echo ""
 	@echo "Targets:"
-	@echo "  make              Build terra.db from all db/tables/*/*.sql files"
-	@echo "  make sync         Ensure uv environment is set up"
-	@echo "  make dump         Dump terra.db back to db/tables/ structure"
-	@echo "  make verify       Verify round-trip consistency (SQL->DB->SQL->DB)"
-	@echo "  make status       Show status of all tables and database"
-	@echo "  make clean        Remove generated .db file (keep SQL and venv)"
-	@echo "  make distclean    Remove all generated files including SQL"
-	@echo "  make help         Show this help"
+	@echo "  make                  Build per-table DBs, master DB, and .kicad_dbl"
+	@echo "  make project-db KIPRJMOD=/path  Build project-local DB from master"
+	@echo "  make generate         Run all generator scripts"
+	@echo "  make sync             Ensure uv environment is set up"
+	@echo "  make dump             Dump databases back to db/tables/ structure"
+	@echo "  make verify           Verify round-trip consistency (SQL->DB->SQL->DB)"
+	@echo "  make status           Show status of all tables and database"
+	@echo "  make clean            Remove generated files (keep SQL and venv)"
+	@echo "  make distclean        Remove all generated files including venv"
+	@echo "  make help             Show this help"
+	@echo ""
+	@echo "Override tier/tags for project-db:"
+	@echo "  make project-db KIPRJMOD=/path TIER=3 TAGS=analog,passive"
 	@echo ""
 	@echo "Workflow:"
-	@echo "  1. Build: Create database from table SQL files"
-	@echo "     make"
-	@echo ""
-	@echo "  2. Edit: Modify database directly"
-	@echo "     sqlite3 db/terra.db"
-	@echo "     > UPDATE resistors SET tolerance='1%' WHERE part_id='RES-001';"
-	@echo ""
-	@echo "  3. Dump: Export changes back to SQL files"
-	@echo "     make dump"
-	@echo ""
-	@echo "  4. Commit: Review and commit changes"
-	@echo "     git diff db/tables/"
-	@echo "     git add db/tables/resistors/resistors.sql"
-	@echo "     git commit -m 'Update resistor tolerance'"
-	@echo ""
-	@echo "Migration from Legacy:"
-	@echo "  python tools/migrate_to_tables.py db/terra.db db/terra_new.db --dump-sql db/tables/"
-	@echo ""
-	@echo "See MIGRATION_PLAN.md for details."
+	@echo "  1. Build master:  make"
+	@echo "  2. Build project: make project-db KIPRJMOD=\$$KIPRJMOD"
+	@echo "  3. Edit DB:       sqlite3 db/terra.db"
+	@echo "  4. Dump:          make dump"
+	@echo "  5. Commit:        git diff db/tables/ && git add ..."
 
-.PHONY: all sync dump verify clean distclean status help kicad-dbl-files
+.PHONY: all sync dump verify clean distclean status help project-db

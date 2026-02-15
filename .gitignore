@@ -43,6 +43,12 @@ Thumbs.db
 *.zip
 *.tar.gz
 terra_*.kicad_dbl
+
+# Project-local DB and config (per-project, not tracked)
+terra_local.db
+terra_local.db.tmp
+terra_tags.sql
+terra_config.sql
 # Generated SQL files from run_*.py generator scripts
 # Pattern: {table}_generated_*.sql (has dump_priority=0, not dumped back)
 db/tables/*/*_generated_*.sql

@@ -95,6 +95,23 @@ TOLERANCE_ENABLE = {
     "-20/+80%": "yes",
 }
 
+# ======================== VARIANT SELECTION CONFIGURATION ========================
+# When multiple parts share the same specs (value, tolerance, dielectric, size,
+# voltage) but differ in thickness or reel code, select one part per spec using:
+#   1. Closest thickness to PREFERRED_THICKNESS_MM (primary)
+#   2. Highest-priority reel code from REEL_PREFERENCE (tiebreaker)
+# Parts with a unique spec combination are always kept regardless.
+PREFERRED_THICKNESS_MM = 0.8
+
+# Reel codes in priority order (first = most preferred).
+# MPN positions 12–14: packaging/reel code.
+# Any reel code not listed is accepted but ranked last.
+REEL_PREFERENCE = [
+    "NNN",  # 7" reel
+    "NNW",  # 7" reel (alternate)
+    "NFN",  # 13" reel
+]
+
 # ======================== OUTPUT CONFIGURATION ========================
 OUTPUT_FILE = "capacitors_smt_generated_400_samsung_cl_mlcc.sql"
 CSV_FILE = "SEM_ComponentLibrary_MLCC_List.csv"
@@ -148,8 +165,10 @@ SQL_TEMPLATES = {
 BEGIN TRANSACTION;
 """,
     "section_header": "-- {dielectric} {package} {voltage}",
-    "insert": """INSERT INTO capacitors_smt (unique_id, part_locator, mpn, manufacturer, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, voltage_rating_v, tolerance, cap_type, dielectric_class, polarized, temp_operating, temp_soldering, temp_storage, lifecycle_status, rohs, allow_substitution, tracking, created_at, updated_at, created_by, height_max_mm)
-VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', '{package}', '{value_spice}', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, {voltage_rating}, '{tolerance}', '{cap_type}', '{dielectric_class}', '{polarized}', '{temp_operating}', '{temp_soldering}', '{temp_storage}', '{lifecycle_status}', '{rohs}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}', {height_max_mm});""",
+    "insert": """INSERT INTO capacitors_smt (unique_id, part_locator, mpn, manufacturer, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tier, tags, voltage_rating_v, tolerance, cap_type, dielectric_class, polarized, temp_operating, temp_soldering, temp_storage, lifecycle_status, rohs, allow_substitution, tracking, created_at, updated_at, created_by, height_max_mm)
+VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', '{package}', '{value_spice}', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, {tier}, '{tags}', {voltage_rating}, '{tolerance}', '{cap_type}', '{dielectric_class}', '{polarized}', '{temp_operating}', '{temp_soldering}', '{temp_storage}', '{lifecycle_status}', '{rohs}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}', {height_max_mm});""",
+
+    "tag_insert": "INSERT INTO tags (unique_id, tag) VALUES ('{unique_id}', '{tag}');",
     "file_footer": """COMMIT;
 
 -- Generated {total_parts} capacitor parts""",
@@ -476,6 +495,62 @@ def sort_key(row: Dict[str, str]) -> Tuple:
     return (dielectric, case_size, voltage, cap_pf, tolerance, mpn)
 
 
+def spec_key(row: Dict[str, str]) -> Tuple:
+    """
+    Return a tuple identifying the electrical spec of a part, ignoring thickness.
+
+    Used to group parts that differ only in thickness/height.
+    """
+    dielectric = row["TCC"].strip()
+    case_size, _ = parse_size(row["Size(inch/mm)"])
+    cap_pf = parse_capacitance_pf(row["Capacitance"])
+    voltage = parse_voltage(row["Rated Vdc"])
+    tolerance = parse_tolerance(row["Tolerance"])
+    return (dielectric, case_size, cap_pf, voltage, tolerance)
+
+
+def reel_code(row: Dict[str, str]) -> str:
+    """Extract the 3-character reel code from MPN positions 12-14."""
+    mpn = row["Part Number"].strip()
+    return mpn[11:14] if len(mpn) >= 14 else ""
+
+
+def reel_rank(code: str) -> int:
+    """Return the preference rank for a reel code (lower = more preferred)."""
+    try:
+        return REEL_PREFERENCE.index(code)
+    except ValueError:
+        return len(REEL_PREFERENCE)  # unlisted codes rank last
+
+
+def select_best_variant(rows: List[Dict[str, str]], target_mm: float) -> List[Dict[str, str]]:
+    """
+    For each unique spec group, keep one part using:
+      1. Closest thickness to target_mm (primary)
+      2. Highest-priority reel code from REEL_PREFERENCE (tiebreaker)
+
+    If a spec group has only one part, it is kept regardless.
+    """
+    from collections import defaultdict
+
+    groups: Dict[Tuple, List[Dict[str, str]]] = defaultdict(list)
+    for row in rows:
+        groups[spec_key(row)].append(row)
+
+    result = []
+    for key, group in groups.items():
+        if len(group) == 1:
+            result.append(group[0])
+        else:
+            best = min(group, key=lambda r: (
+                abs((parse_height_mm(r["T Size Max"]) or 999) - target_mm),
+                reel_rank(reel_code(r)),
+            ))
+            result.append(best)
+
+    return result
+
+
 def sql_escape(s: str) -> str:
     """Escape single quotes for SQL strings."""
     return s.replace("'", "''")
@@ -506,6 +581,9 @@ def generate_capacitors(csv_rows: List[Dict[str, str]]) -> str:
     if not filtered:
         print("Warning: No rows passed filters!")
         return ""
+
+    # Select one variant per spec group (closest thickness, then preferred reel)
+    filtered = select_best_variant(filtered, PREFERRED_THICKNESS_MM)
 
     # Sort for consistent output
     filtered.sort(key=sort_key)
@@ -611,6 +689,8 @@ def generate_capacitors(csv_rows: List[Dict[str, str]]) -> str:
             kicad_footprint=kicad_footprint,
             source=source_sql,
             dump_priority=DUMP_PRIORITY,
+            tier=5,
+            tags='passive',
             voltage_rating=voltage,
             tolerance=sql_escape(tolerance),
             cap_type=CAP_TYPE,
@@ -630,6 +710,8 @@ def generate_capacitors(csv_rows: List[Dict[str, str]]) -> str:
         )
 
         sql_lines.append(sql_line)
+        sql_lines.append(SQL_TEMPLATES["tag_insert"].format(
+            unique_id=sql_escape(unique_id), tag='passive'))
         total_parts += 1
 
     # Add footer
@@ -658,7 +740,6 @@ def main():
     enabled_sizes = [k for k, v in CASE_SIZE_ENABLE.items() if v.lower() == "yes"]
     enabled_voltages = [k for k, v in VOLTAGE_ENABLE.items() if v.lower() == "yes"]
     enabled_tolerances = [k for k, v in TOLERANCE_ENABLE.items() if v.lower() == "yes"]
-
     print(f"Samsung CL Series {CAP_TYPE} Capacitor Generator")
     print("=" * 50)
     print(f"\nCSV source: {csv_path.name} ({len(csv_rows)} rows)")
@@ -668,6 +749,8 @@ def main():
     print(f"  Case sizes: {', '.join(enabled_sizes)}")
     print(f"  Voltages: {', '.join(enabled_voltages)}")
     print(f"  Tolerances: {', '.join(enabled_tolerances)}")
+    print(f"  Preferred thickness: {PREFERRED_THICKNESS_MM}mm (closest match per spec)")
+    print(f"  Reel preference: {', '.join(REEL_PREFERENCE)} (tiebreaker)")
 
     # Count how many pass filter before generating
     filtered_count = sum(1 for r in csv_rows if is_enabled(r))

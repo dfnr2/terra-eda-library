@@ -140,8 +140,10 @@ BEGIN TRANSACTION;
 
     "package_header": "-- {package} Package ({power}, {tempco}, {working_voltage} working/{max_voltage} max)",
 
-    "insert": """INSERT INTO resistors_smt (unique_id, part_locator, mpn, manufacturer, variant, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tolerance, power_rating, temp_coeff, voltage_rating, composition, temp_operating, temp_soldering, temp_storage, sim_device, sim_pins, lifecycle_status, rohs, rohs_document_link, allow_substitution, tracking, created_at, updated_at, created_by)
-VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', {variant}, '{package}', '{value_sim}', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, '{tolerance}', '{power_rating}', '{temp_coeff}', '{voltage_rating}', '{composition}', '{temp_operating}', '{temp_soldering}', '{temp_storage}', '{sim_device}', '{sim_pins}', '{lifecycle_status}', '{rohs}', '{rohs_link}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}');""",
+    "insert": """INSERT INTO resistors_smt (unique_id, part_locator, mpn, manufacturer, variant, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tier, tags, tolerance, power_rating, temp_coeff, voltage_rating, composition, temp_operating, temp_soldering, temp_storage, sim_device, sim_pins, lifecycle_status, rohs, rohs_document_link, allow_substitution, tracking, created_at, updated_at, created_by)
+VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', {variant}, '{package}', '{value_sim}', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, {tier}, '{tags}', '{tolerance}', '{power_rating}', '{temp_coeff}', '{voltage_rating}', '{composition}', '{temp_operating}', '{temp_soldering}', '{temp_storage}', '{sim_device}', '{sim_pins}', '{lifecycle_status}', '{rohs}', '{rohs_link}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}');""",
+
+    "tag_insert": "INSERT INTO tags (unique_id, tag) VALUES ('{unique_id}', '{tag}');",
 
     "file_footer": """COMMIT;
 
@@ -813,15 +815,27 @@ def generate_resistors() -> str:
         print("Warning: No package/tempco combinations enabled!")
         return ""
 
-    # Generate resistance values by unioning requested E-series across global range
-    resistance_values = set()
+    # Generate resistance values per E-series for tier assignment
+    e24_values = set()
+    other_values = set()
     for series_num in enabled_series:
-        values = generate_resistance_values_in_range(
+        values = set(generate_resistance_values_in_range(
             GLOBAL_MIN_OHM, GLOBAL_MAX_OHM, series_num
-        )
-        resistance_values |= set(values)
+        ))
+        if series_num <= 24:
+            e24_values |= values
+        else:
+            other_values |= values
 
-    resistance_values = sorted(resistance_values)
+    # Build tier map: E24 values get tier 3, E96-only values get tier 6
+    tier_map = {}
+    for v in e24_values:
+        tier_map[v] = 3
+    for v in other_values:
+        if v not in tier_map:
+            tier_map[v] = 6
+
+    resistance_values = sorted(tier_map.keys())
 
     # KiCad symbol reference (same for all resistors)
     symbol_ref = KICAD_CONFIG["symbol"]
@@ -898,6 +912,9 @@ def generate_resistors() -> str:
             source_sql = "NULL" if SOURCE is None else f"'{SOURCE}'"
             variant_sql = "NULL"
 
+            # Determine tier: 0Ω jumpers get tier 3, others from tier_map
+            part_tier = 3 if resistance_ohms == 0 else tier_map.get(resistance_ohms, 5)
+
             # Generate INSERT statement - all fields from spec
             sql_line = SQL_TEMPLATES["insert"].format(
                 unique_id=unique_id,
@@ -914,6 +931,8 @@ def generate_resistors() -> str:
                 kicad_footprint=get_kicad_footprint(spec["package"]),
                 source=source_sql,
                 dump_priority=DUMP_PRIORITY,
+                tier=part_tier,
+                tags='passive',
                 tolerance=spec["tolerance"],
                 power_rating=spec["power"],
                 temp_coeff=spec["tempco"],
@@ -935,6 +954,8 @@ def generate_resistors() -> str:
             )
 
             sql_lines.append(sql_line)
+            sql_lines.append(SQL_TEMPLATES["tag_insert"].format(
+                unique_id=unique_id, tag='passive'))
             total_parts += 1
 
         sql_lines.append("")  # Blank line between specs

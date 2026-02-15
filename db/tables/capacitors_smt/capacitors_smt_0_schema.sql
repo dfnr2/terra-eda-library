@@ -32,6 +32,8 @@ CREATE TABLE capacitors_smt (
         created_by TEXT,
         source TEXT DEFAULT 'static',
         dump_priority INTEGER DEFAULT 1,
+        tier INTEGER DEFAULT 5,
+        tags TEXT DEFAULT '',
         sim_model_type TEXT,
         sim_device TEXT,
         sim_pins TEXT,

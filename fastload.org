@@ -1,0 +1,366 @@
+* Terra EDA Library: Tier & Tag System Specification
+
+** Motivation
+
+KiCad is slow to load very large sets of libraries. The Terra db lib is large
+and will grow, as parts are added by script. This spec outlines an approach to decreasing the visible footpring of the libray by applying project-appropriate filters, defined at the local project level.
+
+Two orthogonal selection criteria:
+
+1. *Tier* (staged inclusion): integer column on every part, 0 = highest
+   priority. A configurable cutoff includes all parts at or below the
+   requested tier.
+2. *Tags* (categorical inclusion): string labels attached to parts.
+   Parts matching any active tag are included regardless of tier.
+
+Logistically:
+
+- Master library is rebuilt only when the library changes.
+
+- Each KiCad project uses a *project-local* SQLite DB
+  =${KIPRJMOD}/terra_config.db= that is (a) a clone of the master DB and (b)
+  modified only by small project config SQL that sets tier cutoff and active
+  tags (and optionally user tags).
+
+- If project config files are missing, the system should behave as:
+  default tier cutoff and no tag-based inclusions.
+
+** Schema Changes
+
+*** Tier and Tags Columns (core fields on all part tables)
+
+Added to every =*_0_schema.sql= after =dump_priority=:
+
+#+begin_src sql
+tier INTEGER DEFAULT 5,
+tags TEXT DEFAULT '',
+#+end_src
+
+- =tier=: integer, 0 = most important. Lower numbers load first.
+
+- =tags=: comma-delimited string (e.g. ="passive,precision"=).
+  Redundant with the =tags= table, but provides a migration path
+  for when KiCad implements lazy loading and the join table can be
+  phased out.
+
+*** Tags Table (many-to-many, built by generators)
+
+Created by a new schema file loaded before any part tables:
+
+#+begin_src sql
+DROP TABLE IF EXISTS tags;
+CREATE TABLE tags (
+    unique_id TEXT NOT NULL,
+    tag TEXT NOT NULL,
+    PRIMARY KEY (unique_id, tag)
+);
+
+-- selection-direction index: given tag → unique_ids
+CREATE INDEX IF NOT EXISTS idx_tags_tag_uid ON tags(tag, unique_id);
+#+end_src
+
+Generators emit INSERT statements into this table alongside part INSERTs.
+Each part can have multiple tags. Tags are lowercase, hyphen-separated
+(e.g. =analog=, =high-rel=, =ttl=, =interface=).
+
+*** User Tags Table (project-specific; stored in project DB)
+
+Project SQL input file: =${KIPRJMOD}/terra_tags.sql=
+
+The project DB contains the table (even if empty):
+
+#+begin_src sql
+DROP TABLE IF EXISTS user_tags;
+CREATE TABLE user_tags (
+    unique_id TEXT NOT NULL,
+    tag TEXT NOT NULL,
+    PRIMARY KEY (unique_id, tag)
+);
+
+CREATE INDEX IF NOT EXISTS idx_user_tags_tag_uid ON user_tags(tag, unique_id);
+#+end_src
+
+The file can populate it, e.g.:
+
+#+begin_src sql
+BEGIN TRANSACTION;
+INSERT INTO user_tags VALUES ('Samsung-CL10A104KA8NNN', 'project-alpha');
+-- ...
+COMMIT;
+#+end_src
+
+- Can be tracked in git.
+- A future KiCad plugin can provide UI for selecting parts from BOM and
+  generating this file.
+
+*** Tier + Active Tag Config Tables (project-controlled; stored in project DB)
+
+Project SQL input file: =${KIPRJMOD}/terra_config.sql= (gitignored)
+
+#+begin_src sql
+DROP TABLE IF EXISTS terra_tier_config;
+CREATE TABLE terra_tier_config (
+    tier_level INTEGER NOT NULL
+);
+
+DROP TABLE IF EXISTS terra_tag_config;
+CREATE TABLE terra_tag_config (
+    tag TEXT NOT NULL PRIMARY KEY
+);
+
+-- Example config:
+INSERT INTO terra_tier_config VALUES (3);
+
+BEGIN TRANSACTION;
+INSERT INTO terra_tag_config VALUES ('analog');
+INSERT INTO terra_tag_config VALUES ('passive');
+COMMIT;
+#+end_src
+
+- =terra_tier_config=: one row, sets the active tier cutoff.
+- =terra_tag_config=: one row per active tag name.
+- Gitignored.
+- If the file does not exist (or is empty), behavior must be:
+  default tier cutoff and no active tags.
+
+** Tier Assignments
+
+| Source                        | Tier | Rationale                    |
+|-------------------------------+------+------------------------------|
+| Hand-curated static parts     |    5 | Default for all tables       |
+| E24 resistor/cap values       |    3 | Standard series, most common |
+| Samsung catalog caps          |    5 | Catalog parts                |
+| KEMET C0G caps (E24-based)    |    3 | Standard E24 values          |
+| E96 resistor values           |    6 | Fine-grained, less common    |
+| E192 resistor values (future) |    8 | Rarely needed                |
+
+** Default Tags
+
+Generators assign tags based on component type and characteristics:
+
+| Tag         | Applied to                              |
+|-------------+-----------------------------------------|
+| =passive=   | Resistors, capacitors, inductors        |
+| =analog=    | Op-amps, analog ICs, precision parts    |
+| =digital=   | Logic ICs, microcontrollers, memory     |
+| =interface= | Connectors, interface ICs               |
+| =ttl=       | TTL-family logic ICs                    |
+| =power=     | MOSFETs, drivers, voltage regulators    |
+| =precision= | Thin film resistors, C0G caps, 1% tol   |
+| =vintage=   | Legacy/obsolete parts kept for ref      |
+
+Tags are not mutually exclusive. A thin-film resistor might be tagged
+=passive,precision=.
+
+** KiCad .kicad_dbl Integration
+
+The =.kicad_dbl= must point to the *project DB*:
+
+- DSN: =${KIPRJMOD}/terra_local.db=
+- The generator references SQL *views* (=*_v=) rather than raw tables.
+
+Rationale:
+- KiCad queries a single SQLite DB file.
+- Per-project tuning is achieved by rebuilding =terra_local.db= from a
+  master DB plus small SQL deltas (tier and tags).
+
+*** Approach: SQL Views (fast and robust)
+
+Key refinements:
+- Avoid correlated per-row =EXISTS( UNION ALL ... )= where practical.
+- Ensure tier cutoff never evaluates to NULL (empty config must not blank
+  the library).
+
+Define a helper view to compute included IDs from active tags:
+
+#+begin_src sql
+CREATE VIEW active_tagged_ids AS
+SELECT DISTINCT t.unique_id
+FROM tags t
+JOIN terra_tag_config c ON t.tag = c.tag
+UNION
+SELECT DISTINCT u.unique_id
+FROM user_tags u
+JOIN terra_tag_config c ON u.tag = c.tag;
+#+end_src
+
+Then for each part table, create a filtered view:
+
+#+begin_src sql
+CREATE VIEW capacitors_smt_v AS
+SELECT p.*
+FROM capacitors_smt p
+LEFT JOIN active_tagged_ids a ON a.unique_id = p.unique_id
+WHERE p.tier <= (
+        SELECT COALESCE(MAX(tier_level), 5)   -- default cutoff if empty
+        FROM terra_tier_config
+      )
+   OR a.unique_id IS NOT NULL;
+#+end_src
+
+Important:
+- If =terra_tag_config= is empty → =active_tagged_ids= is empty → tag path adds nothing.
+- If =terra_tier_config= is empty → =COALESCE(..., 5)= ensures default tier cutoff.
+
+*** Index Requirements (for performance)
+
+The selection patterns require indexes in the “selection direction”:
+
+- Tags (already defined above):
+  - =tags(tag, unique_id)=
+  - =user_tags(tag, unique_id)=
+
+- Each part table should have:
+  - an index on =(tier, unique_id)= (or at minimum =tier=), e.g.:
+
+#+begin_src sql
+CREATE INDEX IF NOT EXISTS idx_caps_smt_tier_uid ON capacitors_smt(tier, unique_id);
+#+end_src
+
+(If =unique_id= is the PRIMARY KEY, a separate =unique_id= index is unnecessary.)
+
+** Generator Changes
+
+*** All Generators
+
+- Add =tier= and =tags= to INSERT column lists.
+- Emit =INSERT INTO tags= statements for each part.
+- Ensure tags are canonical: lowercase, hyphen-separated.
+
+*** Yageo Resistor Generators (run_200, run_210)
+
+Currently E24 and E96 values are unioned into a single set, losing
+series origin. Change to:
+
+1. Generate E24 values into a set.
+2. Generate E96 values into a separate set.
+3. For each value, determine tier:
+   - If value is in E24 set → tier 3
+   - If value is only in E96 set → tier 6
+4. Union the sets for iteration, but carry the tier per value.
+
+*** KEMET Cap Generator (run_300)
+
+- All values are E24-based → tier 3.
+- Tags: =passive=.
+
+*** Samsung Cap Generator (run_400)
+
+- All parts → tier 5 (catalog default).
+- Tags: =passive=.
+
+** Build System Changes
+
+There are two build phases with different triggers.
+
+*** Phase A: Master DB build (only when library changes)
+
+Output: =db/terra_master.db=
+
+Responsibilities:
+1. Create all part tables and populate them.
+2. Create =tags= and populate it (generator output).
+3. Create the project-config tables *empty* (optional but recommended for schema consistency):
+   - =terra_tier_config=
+   - =terra_tag_config=
+   - =user_tags=
+4. Create =active_tagged_ids= view.
+5. Create filtered views (=*_v=) for all part tables.
+6. Create required indexes.
+
+*** Phase B: Project DB build (per project; only when project config changes)
+
+Output: =${KIPRJMOD}/terra_local.db=
+
+Inputs (optional, may be missing):
+- =${KIPRJMOD}/terra_config.sql=
+- =${KIPRJMOD}/terra_tags.sql=
+
+Algorithm:
+1. Create =${KIPRJMOD}/terra_local.db= as a clone/copy of =db/terra_master.db=.
+   - Linux: =cp --reflink=auto db/terra_master.db ${KIPRJMOD}/terra_local.db=
+   - macOS (APFS): =cp -c db/terra_master.db ${KIPRJMOD}/terra_local.db=
+   - fallback: normal copy
+2. Apply default config *inside the project DB*:
+   - ensure config tables exist (they should from the master clone)
+   - set default tier cutoff row (e.g. 5)
+   - clear active tags and user tags (empty by default)
+3. If =terra_config.sql= exists, apply it (overrides defaults).
+4. If =terra_tags.sql= exists, apply it (populates/overrides =user_tags=).
+5. (Optional) Set WAL once for better read/write coexistence:
+   - =PRAGMA journal_mode=WAL;=
+6. Prefer atomic update to avoid KiCad reading a half-written DB:
+   - write to =terra_local.db.tmp= then rename to =terra_local.db=.
+
+*** Makefile Notes
+
+- The master build target should not depend on project config files.
+- Add a separate target to build the per-project DB, e.g.:
+  =make project-db KIPRJMOD=/path/to/project=
+- The .kicad_dbl generator should always reference =${KIPRJMOD}/terra_local.db=.
+
+*** .gitignore
+
+Add:
+#+begin_src
+terra_local.db
+terra_local.db.tmp
+terra_tags.sql
+terra_config.sql
+#+end_src
+
+** File Summary
+
+| File                              | Tracked | Purpose                                      |
+|-----------------------------------+---------+----------------------------------------------|
+| =db/tables/*/_0_schema.sql=       | Yes     | Add =tier=, =tags= columns                   |
+| =db/tables/_global/tags.sql=      | Yes     | =tags= table schema + indexes                |
+| =db/terra_master.db=             | Yes/No  | Master library DB artifact (policy)          |
+| =${KIPRJMOD}/terra_local.db=     | No      | Project DB consumed by KiCad                 |
+| =${KIPRJMOD}/terra_tags.sql=      | No      | Project user tags input                      |
+| =${KIPRJMOD}/terra_config.sql=    | No      | Project tier+active tag config input         |
+| =tools/generate_kicad_dbl_files.py= | Yes   | Use views (=*_v=) and DSN to project DB      |
+| All generator =run_*.py= files    | Yes     | Emit tier, tags, tag inserts                 |
+| =Makefile=                        | Yes     | Build master DB; build per-project DB        |
+
+** Verification
+
+*** Master DB
+
+#+begin_src shell
+make clean && make master-db
+sqlite3 db/terra_master.db "SELECT tier, COUNT(*) FROM resistors_smt GROUP BY tier"
+sqlite3 db/terra_master.db "SELECT tier, COUNT(*) FROM capacitors_smt GROUP BY tier"
+sqlite3 db/terra_master.db "SELECT tag, COUNT(*) FROM tags GROUP BY tag"
+sqlite3 db/terra_master.db "SELECT * FROM capacitors_smt_v LIMIT 5"
+#+end_src
+
+*** Project DB (no config files present)
+
+#+begin_src shell
+rm -f "${KIPRJMOD}/terra_local.db" "${KIPRJMOD}/terra_local.db.tmp"
+make project-db KIPRJMOD="${KIPRJMOD}"
+sqlite3 "${KIPRJMOD}/terra_local.db" "SELECT * FROM terra_tier_config"
+sqlite3 "${KIPRJMOD}/terra_local.db" "SELECT COUNT(*) FROM terra_tag_config"
+sqlite3 "${KIPRJMOD}/terra_local.db" "SELECT COUNT(*) FROM active_tagged_ids"
+sqlite3 "${KIPRJMOD}/terra_local.db" "SELECT COUNT(*) FROM capacitors_smt_v"
+#+end_src
+
+*** Project DB (with config)
+
+#+begin_src shell
+# create or update ${KIPRJMOD}/terra_config.sql and/or terra_tags.sql, then:
+make project-db KIPRJMOD="${KIPRJMOD}"
+sqlite3 "${KIPRJMOD}/terra_local.db" "SELECT * FROM terra_tier_config"
+sqlite3 "${KIPRJMOD}/terra_local.db" "SELECT * FROM terra_tag_config"
+sqlite3 "${KIPRJMOD}/terra_local.db" "SELECT COUNT(*) FROM active_tagged_ids"
+#+end_src
+
+** Future Work
+
+- KiCad plugin for BOM-driven tag assignment and config UI that writes
+  =terra_config.sql= and =terra_tags.sql= and triggers rebuild of
+  =terra_local.db=.
+- Consider integer surrogate keys for joins (optional); keep =unique_id=
+  as external identifier.
+- Evaluate additional pruning dimensions (e.g., “profiles” as curated tag sets).

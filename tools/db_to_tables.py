@@ -45,8 +45,14 @@ def sql_escape(value) -> str:
     return f"'{escaped}'"
 
 
+
+# Infrastructure tables managed by _global/tags_0_schema.sql
+# These are not dumped back to per-table directories
+SKIP_TABLES = {'tags', 'user_tags', 'terra_tier_config', 'terra_tag_config'}
+
+
 def get_all_tables(conn: sqlite3.Connection) -> List[str]:
-    """Get list of all user tables in database (excluding sqlite_* tables).
+    """Get list of all user tables in database (excluding sqlite_* and infrastructure tables).
 
     Args:
         conn: Database connection
@@ -61,7 +67,7 @@ def get_all_tables(conn: sqlite3.Connection) -> List[str]:
         AND name NOT LIKE 'sqlite_%'
         ORDER BY name
     """)
-    return [row[0] for row in cursor.fetchall()]
+    return [row[0] for row in cursor.fetchall() if row[0] not in SKIP_TABLES]
 
 
 def get_primary_key(conn: sqlite3.Connection, table_name: str) -> Optional[str]:

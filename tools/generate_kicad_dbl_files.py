@@ -22,14 +22,17 @@ def get_table_columns(conn: sqlite3.Connection, table_name: str) -> List[str]:
 
 
 def get_all_tables(conn: sqlite3.Connection) -> List[str]:
-    """Get all user tables (excluding sqlite_ tables)."""
+    """Get all part tables (excluding infrastructure and sqlite_ tables)."""
+    skip_tables = {
+        'tags', 'user_tags', 'terra_tier_config', 'terra_tag_config',
+    }
     cursor = conn.cursor()
     cursor.execute("""
         SELECT name FROM sqlite_master
         WHERE type='table' AND name NOT LIKE 'sqlite_%'
         ORDER BY name
     """)
-    return [row[0] for row in cursor.fetchall()]
+    return [row[0] for row in cursor.fetchall() if row[0] not in skip_tables]
 
 
 def get_display_name(table_name: str) -> str:
@@ -57,6 +60,7 @@ def create_field_config(column: str) -> Dict:
         'sim_model_type', 'sim_device', 'sim_pins', 'sim_model_file', 'sim_params',  # SPICE internals
         'source', 'dump_priority',  # Internal dump system metadata
         'exclude_from_bom',  # Handled as library-level property
+        'tier', 'tags',  # Tier/tag system internals
     }
 
     if column in skip_cols:
@@ -129,9 +133,12 @@ def create_library_config(conn: sqlite3.Connection, table_name: str) -> Dict:
     if 'exclude_from_bom' in columns:
         properties['exclude_from_bom'] = 'exclude_from_bom'
 
+    # Use the filtered view (*_v) instead of the raw table
+    view_name = f'{table_name}_v'
+
     config = {
         'name': table_name,
-        'table': table_name,
+        'table': view_name,
         'key': pk_col,
         'symbols': 'kicad_symbol',
         'footprints': 'kicad_footprint',
@@ -197,12 +204,13 @@ def generate_unified_dbl_file(db_path: Path, output_dir: Path, tables: List[str]
 
     conn.close()
 
-    # Use absolute path to the actual database file
-    db_absolute_path = db_path.absolute()
-
     # Auto-detect ODBC driver for this platform
     odbc_driver = find_sqlite_odbc_driver()
     print(f'  Using ODBC driver: {odbc_driver}')
+
+    # KiCad resolves ${KIPRJMOD} at runtime to the project directory.
+    # terra_local.db is the project-phase database with tier/tag filtering applied.
+    db_kicad_path = '${KIPRJMOD}/terra_local.db'
 
     # Create the unified .kicad_dbl structure
     dbl_config = {
@@ -218,7 +226,7 @@ def generate_unified_dbl_file(db_path: Path, output_dir: Path, tables: List[str]
             'username': '',
             'password': '',
             'timeout_seconds': 2,
-            'connection_string': f'DRIVER={odbc_driver};Database={db_absolute_path};Timeout=2000;'
+            'connection_string': f'DRIVER={odbc_driver};Database={db_kicad_path};Timeout=2000;'
         },
         'libraries': libraries
     }
@@ -248,7 +256,7 @@ def main():
     tables = get_all_tables(conn)
     conn.close()
 
-    print(f'Generating terra.kicad_dbl with {len(tables)} tables...')
+    print(f'Generating terra.kicad_dbl with {len(tables)} tables (using *_v filtered views)...')
     print()
 
     generate_unified_dbl_file(db_path, output_dir, tables)
