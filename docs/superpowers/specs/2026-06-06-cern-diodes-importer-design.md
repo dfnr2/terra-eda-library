@@ -160,10 +160,10 @@ CREATE TABLE cern_diodes (
 
 | terra column | CERN source | Transform / default |
 |---|---|---|
-| `unique_id` | `Manufacturer` + `Manufacturer Part Number` | Reconcile (§5.4); else `"<manufacturer>-<mpn>"` |
-| `mpn` | `Manufacturer Part Number` | trim |
+| `unique_id` | `Manufacturer` + `Manufacturer Part Number` | `"<manufacturer>-<mpn>"`; on intra-CERN MPN collision, disambiguate via `Part Number Nocolon` (§5.4) |
+| `mpn` | `Manufacturer Part Number` | trim (real MPN; may repeat across variants) |
 | `manufacturer` | `Manufacturer` | trim |
-| `part_locator` | `Part Number` | CERN internal PN |
+| `part_locator` | `Part Number Nocolon` | unique CERN id; carries variant suffix (`_h`/`_v`) |
 | `package` | `Case` | fallback `''` |
 | `value` | `Part Description` | CERN has no clean "value"; use description text |
 | `description` | `Part Description` | trim |
@@ -188,20 +188,29 @@ Unmapped CERN columns (`SCEM`, `Author`, `CreateDate`, `Sense*`, `Mounted`, `Soc
 `SMD`, `PressFit`, `Bonding`, `Database Name/Table`, `Component Kind/Type`) are **dropped**
 for the pilot — recorded here so the decision is explicit and revisitable.
 
-### 5.4 `unique_id` reconciliation (exact)
+### 5.4 `unique_id` and part identity
 
-Before minting an id, the importer queries **all existing terra part tables** for an exact
-match and reuses that `unique_id` if found (prevents duplicates across the catalog):
+terra's standard `unique_id` convention is `"<manufacturer>-<mpn>"` (e.g.
+`OnSemi-MBR0530T1G`). The pilot uses that directly and does **not** reconcile against
+existing terra parts — the `diodes` category is effectively new, so there is nothing to
+merge. Cross-catalog dedup/merge by MPN is deferred to the later fold-in/consolidation
+phase; the shared `tools/cern_reconcile.py` helper (built and tested) is reserved for the
+passive tables where pre-existing terra parts genuinely overlap.
 
-- **Primary key:** exact `(manufacturer, mpn)` — case-insensitive trim.
-- For diodes, MPN identity is the equivalence (no value/composition matching needed).
-- For passive tables (later), equivalence extends to exact `(type, value, package,
-  composition, tolerance)` so thick-film maps to thick-film — **never fuzzy**.
-- On match: reuse the existing `unique_id`, do **not** emit a duplicate row; optionally
-  record provenance. On no match: mint `"<manufacturer>-<mpn>"` (terra's existing
-  convention, e.g. `OnSemi-MBR0530T1G`).
-- Collisions within CERN (`…_bot`, `…_a` symbol variants sharing an MPN): dedup to one
-  part; secondary footprint variants are out of scope for the pilot (flag in `AUDIT.md`).
+**Intra-CERN MPN collisions (discovered during implementation).** CERN `Diodes` has 962
+rows but only **887 distinct** `(manufacturer, Manufacturer Part Number)` pairs: **60
+groups** where one MPN appears as several distinct library entries (footprint/mounting/reel
+variants such as `_h`/`_v`). `Manufacturer Part Number` is therefore **not** a unique key;
+`Part Number Nocolon` is (962/962). So:
+
+- `unique_id` = `"<manufacturer>-<mpn>"` for the 887 unambiguous parts.
+- On collision, disambiguate with the unique CERN id:
+  `"<manufacturer>-<Part Number Nocolon>"`. A safety gate raises if any duplicate survives,
+  so the build can never silently drop the 75 variant rows.
+- `mpn` column always holds the real `Manufacturer Part Number` (variants included).
+- `part_locator` = `Part Number Nocolon` — the unique CERN identity carrying the variant
+  suffix. (`part_locator` will need reconciliation for tables that overlap existing terra
+  parts; diodes is new, so not a concern here.)
 
 ### 5.5 Symbol & footprint libraries
 
