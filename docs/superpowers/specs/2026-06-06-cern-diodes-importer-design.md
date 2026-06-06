@@ -235,6 +235,9 @@ description)` to a real PDF on the web, then verify.
   not_found, ambiguous}` and `verify ∈ {ok, mpn_mismatch, unparseable, unchecked}`.
 - **Fetcher** (`tools/cern_datasheets/fetch.py`): resumable; skips already-resolved
   entries; rate-limited web search + download into `assets/datasheets/cern/`.
+  **Deferred — not built in the pilot** (see §8). The manifest builder, parse-verifier,
+  and path-rewriter around it are implemented and tested; the fetcher itself is a
+  post-pilot run-time tool, so the committed manifest is all `status=pending` until it runs.
 - **Parse-verification:** open each fetched PDF, extract text, and **require an exact
   match on the MPN**; additionally confirm the parameters CERN records (e.g. `Voltage`,
   `Power`) appear. Pass → `verify=ok`. Fail/unparseable → flag for **human review**
