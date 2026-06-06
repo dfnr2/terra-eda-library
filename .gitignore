@@ -52,3 +52,6 @@ terra_config.sql
 # Generated SQL files from run_*.py generator scripts
 # Pattern: {table}_generated_*.sql (has dump_priority=0, not dumped back)
 db/tables/*/*_generated_*.sql
+
+# Git worktrees (isolated workspaces)
+.worktrees/
