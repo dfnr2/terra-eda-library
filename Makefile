@@ -43,9 +43,16 @@ TAGS ?=
 #   - Dump reconstructs: {table}_{priority}_{source}.sql
 # ============================================================================
 
+# Tables to exclude from the build (space-separated names), e.g.:
+#   make EXCLUDE_TABLES="resistors_smt resistors_th"
+# Excluded tables get no per-table DB, no rows/indexes/views in the master DB,
+# and no entry in terra.kicad_dbl. Purely a build-time toggle; nothing on disk
+# is moved or deleted, so omitting the flag restores the full build.
+EXCLUDE_TABLES ?=
+
 # Discover all table directories (exclude _global which is infrastructure)
 TABLE_DIRS := $(filter-out db/tables/_global/,$(wildcard db/tables/*/))
-TABLES := $(patsubst db/tables/%/,%,$(TABLE_DIRS))
+TABLES := $(filter-out $(EXCLUDE_TABLES),$(patsubst db/tables/%/,%,$(TABLE_DIRS)))
 DB_FILES := $(patsubst %,db/%.db,$(TABLES))
 
 # Global infrastructure SQL (loaded before any part tables)
@@ -173,6 +180,7 @@ db/terra.db: $(GLOBAL_SQL) $(foreach table,$(TABLES),$($(table)_ALL_SQL))
 	@for table_dir in $$(ls -d db/tables/*/ 2>/dev/null | sort); do \
 		table_name=$$(basename "$$table_dir"); \
 		if [ "$$table_name" = "_global" ]; then continue; fi; \
+		case " $(EXCLUDE_TABLES) " in *" $$table_name "*) echo "  - skipping $$table_name (excluded)"; continue;; esac; \
 		sql_files=$$(find "$$table_dir" -name "*.sql" -type f | sort); \
 		if [ -n "$$sql_files" ]; then \
 			cat $$sql_files | sqlite3 $@; \
