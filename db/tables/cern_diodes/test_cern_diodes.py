@@ -75,3 +75,26 @@ def test_all_footprint_files_resolve():
         if not (ROOT / "assets/footprints/cern" / d / f"{name}.kicad_mod").is_file():
             missing.append(val)
     assert not missing, f"{len(missing)} unresolved footprints, e.g. {missing[:5]}"
+
+
+def test_all_symbol_items_resolve():
+    """Every kicad_symbol must name an item that exists in the copied symbol lib."""
+    import sys
+    sys.path.insert(0, str(ROOT))
+    from tools import cern_libmap as lm
+    nick_to_file = {v: f"{k}.kicad_sym" for k, v in lm.SYMBOL_LIB_NICK.items()}
+    cache = {}
+    con = _con()
+    missing = []
+    for (val,) in con.execute(
+            "SELECT DISTINCT kicad_symbol FROM cern_diodes WHERE kicad_symbol LIKE '%:%'"):
+        nick, name = val.split(":", 1)
+        fn = nick_to_file.get(nick)
+        if fn is None:
+            missing.append(f"{val} (unknown nick)")
+            continue
+        if fn not in cache:
+            cache[fn] = (ROOT / "assets/symbols/cern" / fn).read_text()
+        if f'(symbol "{name}"' not in cache[fn]:
+            missing.append(val)
+    assert not missing, f"{len(missing)} unresolved symbols, e.g. {missing[:5]}"

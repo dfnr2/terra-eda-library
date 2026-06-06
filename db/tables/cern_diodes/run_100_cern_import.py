@@ -131,7 +131,15 @@ def render(mapped: list[dict]) -> str:
 
 def main() -> None:
     mapped, seen = [], set()
-    for row in cern_source.rows(CERN_TABLE):
+    def _sort_key(r):
+        pnn = clean(r.get("Part Number Nocolon") or r.get("Part Number"))
+        mpn = clean(r.get("Manufacturer Part Number"))
+        # Within an MPN collision group put the row whose PNN == MPN first so it
+        # wins the bare mfr-mpn unique_id; variants (PNN != MPN) follow.
+        return (mpn, pnn != mpn, pnn)
+
+    rows = sorted(cern_source.rows(CERN_TABLE), key=_sort_key)
+    for row in rows:
         if is_denylisted(row):
             continue
         m = map_row(row)
