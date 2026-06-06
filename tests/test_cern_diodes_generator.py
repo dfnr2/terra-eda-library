@@ -48,8 +48,9 @@ def test_map_row_known_part():
         "Datasheet": "${CERN_DATASHEET_DIR}\\\\0402ESDA-MLP.pdf",
         "ComponentLink1URL": "",
     }
-    m = mod.map_row(row, existing_index={})
+    m = mod.map_row(row)
     assert m["unique_id"] == "EATON-0402ESDA-MLP"
+    assert m["part_locator"] == "0402ESDA-MLP"
     assert m["mpn"] == "0402ESDA-MLP"
     assert m["manufacturer"] == "EATON"
     assert m["package"] == "0402"
@@ -63,6 +64,20 @@ def test_map_row_known_part():
     assert m["kicad_footprint"] == "cern_ICs_SMD:EATON_0402ESDA-MLP"
     assert m["datasheet"] == "0402ESDA-MLP.pdf"
     assert m["tags"] == "diode"
+
+
+def test_finalize_unique_id_disambiguates_on_collision():
+    mod = _load()
+    seen = {"VISHAY-16CTQ100G"}
+    m = {"unique_id": "VISHAY-16CTQ100G", "manufacturer": "VISHAY"}
+    row = {"Part Number Nocolon": "16CTQ100GPBF_h"}
+    assert mod.finalize_unique_id(m, row, seen) == "VISHAY-16CTQ100GPBF_h"
+
+
+def test_finalize_unique_id_passthrough_when_unique():
+    mod = _load()
+    m = {"unique_id": "EATON-0402ESDA-MLP", "manufacturer": "EATON"}
+    assert mod.finalize_unique_id(m, {}, set()) == "EATON-0402ESDA-MLP"
 
 
 def test_denylist_filters_nonparts():
