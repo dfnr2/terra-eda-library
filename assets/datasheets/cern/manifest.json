@@ -1,0 +1,7514 @@
+{
+  "0402ESDA-MLP.pdf": {
+    "filename": "0402ESDA-MLP.pdf",
+    "local_path": "",
+    "manufacturer": "EATON",
+    "mpns": [
+      "0402ESDA-MLP"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "0603ESDA-MLP1.pdf": {
+    "filename": "0603ESDA-MLP1.pdf",
+    "local_path": "",
+    "manufacturer": "EATON",
+    "mpns": [
+      "0603ESDA-MLP1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1.5KE.pdf": {
+    "filename": "1.5KE.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "1.5KE10A",
+      "1.5KE10CA",
+      "1.5KE12A",
+      "1.5KE12CA",
+      "1.5KE15A",
+      "1.5KE15CA",
+      "1.5KE18CA",
+      "1.5KE200A",
+      "1.5KE24A",
+      "1.5KE24CA",
+      "1.5KE300CA",
+      "1.5KE33CA",
+      "1.5KE400A",
+      "1.5KE400CA",
+      "1.5KE510A",
+      "1.5KE6.8A",
+      "1.5KE8.2A",
+      "1.5KE8.2CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1.5SMC.pdf": {
+    "filename": "1.5SMC.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "1.5SMC300A",
+      "1.5SMC440A",
+      "1.5SMC480A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1.5SMCJ.pdf": {
+    "filename": "1.5SMCJ.pdf",
+    "local_path": "",
+    "manufacturer": "DIOTEC",
+    "mpns": [
+      "1.5SMCJ15A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "12CWQ10FNPbF.pdf": {
+    "filename": "12CWQ10FNPbF.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "12CWQ10FN"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "15MQ040NPbF.pdf": {
+    "filename": "15MQ040NPbF.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY INTERTECHNOLOGY, INC.",
+    "mpns": [
+      "15MQ040N"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "16CTQ100GPBF.pdf": {
+    "filename": "16CTQ100GPBF.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY HIGH POWER PRODUCTS",
+    "mpns": [
+      "16CTQ100G"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N4002G.pdf": {
+    "filename": "1N4002G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1N4002"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N4004W.pdf": {
+    "filename": "1N4004W.pdf",
+    "local_path": "",
+    "manufacturer": "RECTRON",
+    "mpns": [
+      "1N4004W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N4005G.pdf": {
+    "filename": "1N4005G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1N4005"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N4006.pdf": {
+    "filename": "1N4006.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1N4006"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N4007.pdf": {
+    "filename": "1N4007.pdf",
+    "local_path": "",
+    "manufacturer": "NTE ELECTRONICS INC.",
+    "mpns": [
+      "1N4007"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N4007FL.pdf": {
+    "filename": "1N4007FL.pdf",
+    "local_path": "",
+    "manufacturer": "SMC",
+    "mpns": [
+      "1N4007FL"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N4148.pdf": {
+    "filename": "1N4148.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "1N4148"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N4148WS-E3-08.pdf": {
+    "filename": "1N4148WS-E3-08.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "1N4148WS"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N4148WS.pdf": {
+    "filename": "1N4148WS.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "1N4148WS"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N4148WT.pdf": {
+    "filename": "1N4148WT.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "1N4148WT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N4151.pdf": {
+    "filename": "1N4151.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "1N4151"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N4151WS.pdf": {
+    "filename": "1N4151WS.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "1N4151WS"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N4448.pdf": {
+    "filename": "1N4448.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "1N4448"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N4448W.pdf": {
+    "filename": "1N4448W.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "1N4448W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N4448WS-7-F.pdf": {
+    "filename": "1N4448WS-7-F.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "1N4448WS-7-F"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N4448WSF.pdf": {
+    "filename": "1N4448WSF.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "1N4448WSF"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N457.pdf": {
+    "filename": "1N457.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1N457"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5062TR.pdf": {
+    "filename": "1N5062TR.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "1N5062"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5231B.pdf": {
+    "filename": "1N5231B.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "1N5231B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5333BG.pdf": {
+    "filename": "1N5333BG.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1N5333B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5341BG.pdf": {
+    "filename": "1N5341BG.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1N5341B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5345-88.pdf": {
+    "filename": "1N5345-88.pdf",
+    "local_path": "",
+    "manufacturer": "DIOTEC",
+    "mpns": [
+      "1N5372B",
+      "1N5361B",
+      "1N5370B",
+      "1N5364B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5348BG.pdf": {
+    "filename": "1N5348BG.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1N5348B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5350BG.pdf": {
+    "filename": "1N5350BG.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1N5350B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5351BG.pdf": {
+    "filename": "1N5351BG.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1N5351B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5352BG.pdf": {
+    "filename": "1N5352BG.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1N5352B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5368BG.pdf": {
+    "filename": "1N5368BG.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1N5368B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5383BG.pdf": {
+    "filename": "1N5383BG.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1N5383B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5399.pdf": {
+    "filename": "1N5399.pdf",
+    "local_path": "",
+    "manufacturer": "LITE-ON SEMICONDUCTOR",
+    "mpns": [
+      "1N5399"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N53_Series.pdf": {
+    "filename": "1N53_Series.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1N5335B",
+      "1N5338B",
+      "1N5359B",
+      "1N5360B",
+      "1N5363B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5404.pdf": {
+    "filename": "1N5404.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "1N5404"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5711.pdf": {
+    "filename": "1N5711.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "1N5711"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5711W-7-F.pdf": {
+    "filename": "1N5711W-7-F.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "1N5711W-7-F"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5817.pdf": {
+    "filename": "1N5817.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "1N5817"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5819.pdf": {
+    "filename": "1N5819.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "1N5819"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5821.pdf": {
+    "filename": "1N5821.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "1N5821"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5822.pdf": {
+    "filename": "1N5822.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "1N5822"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5908G.pdf": {
+    "filename": "1N5908G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1N5908"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5927BG.pdf": {
+    "filename": "1N5927BG.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1N5927B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N5934BG.pdf": {
+    "filename": "1N5934BG.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1N5934B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N6517.pdf": {
+    "filename": "1N6517.pdf",
+    "local_path": "",
+    "manufacturer": "VMI (VOLTAGE MULTIPLIER INC)",
+    "mpns": [
+      "1N6517"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N829A-1E1.pdf": {
+    "filename": "1N829A-1E1.pdf",
+    "local_path": "",
+    "manufacturer": "MICROSEMI",
+    "mpns": [
+      "1N829A-1E1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1N916.pdf": {
+    "filename": "1N916.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1N916"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1PS76SB10.pdf": {
+    "filename": "1PS76SB10.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "1PS76SB10"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1SMA5913BT3G.pdf": {
+    "filename": "1SMA5913BT3G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1SMA5913B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1SMA5918BT3G.pdf": {
+    "filename": "1SMA5918BT3G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1SMA5918B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1SMA5919BT3G.pdf": {
+    "filename": "1SMA5919BT3G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1SMA5919B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1SMA5931BT3G.pdf": {
+    "filename": "1SMA5931BT3G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1SMA5931B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1SMB5916BT3G.pdf": {
+    "filename": "1SMB5916BT3G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1SMB5916B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1SMB5917BT3G.pdf": {
+    "filename": "1SMB5917BT3G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1SMB5917B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1SMB5925BT3G.pdf": {
+    "filename": "1SMB5925BT3G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1SMB5925B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1SMB5949BT3G.pdf": {
+    "filename": "1SMB5949BT3G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "1SMB5949B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "1SS379.pdf": {
+    "filename": "1SS379.pdf",
+    "local_path": "",
+    "manufacturer": "THOSHIBA",
+    "mpns": [
+      "1SS379"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "26MT160PBF.pdf": {
+    "filename": "26MT160PBF.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY",
+    "mpns": [
+      "26MT160"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "2KBP005M-E4-51.pdf": {
+    "filename": "2KBP005M-E4-51.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "2KBP005M"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "2N6400G.pdf": {
+    "filename": "2N6400G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "2N6400"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "300-0050-08.pdf": {
+    "filename": "300-0050-08.pdf",
+    "local_path": "",
+    "manufacturer": "PHOTONIC",
+    "mpns": [
+      "300-0050-08"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "30CPF12PBF.pdf": {
+    "filename": "30CPF12PBF.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY HIGH POWER PRODUCTS",
+    "mpns": [
+      "30CPF12"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "50WQ06FNPbF.pdf": {
+    "filename": "50WQ06FNPbF.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY HIGH POWER PRODUCTS",
+    "mpns": [
+      "50WQ06FN"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "5KP26A.pdf": {
+    "filename": "5KP26A.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "5KP26A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "6CWQ03FNPbF.pdf": {
+    "filename": "6CWQ03FNPbF.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "6CWQ03FN"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "824015.pdf": {
+    "filename": "824015.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "824015"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "905D2S3J09FP-40 22-F-F-01.pdf": {
+    "filename": "905D2S3J09FP-40 22-F-F-01.pdf",
+    "local_path": "",
+    "manufacturer": "LASER-COMPONENTS",
+    "mpns": [
+      "905D2S3J09FP-40/22-F-F-01"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ADR5040.pdf": {
+    "filename": "ADR5040.pdf",
+    "local_path": "",
+    "manufacturer": "ANALOG DEVICES",
+    "mpns": [
+      "ADR5040BRT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ADS16B3.pdf": {
+    "filename": "ADS16B3.pdf",
+    "local_path": "",
+    "manufacturer": "SANAN SEMICONDUCTOR",
+    "mpns": [
+      "ADS16B3-ASARH"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "APA4401040001.pdf": {
+    "filename": "APA4401040001.pdf",
+    "local_path": "",
+    "manufacturer": "II-VI",
+    "mpns": [
+      "APA4401040001"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "APT2X101S20J.pdf": {
+    "filename": "APT2X101S20J.pdf",
+    "local_path": "",
+    "manufacturer": "MICROSEMI",
+    "mpns": [
+      "APT2X101S20J"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "AU3PM.pdf": {
+    "filename": "AU3PM.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "AU3PM-M3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "AZ23C33-7-F.pdf": {
+    "filename": "AZ23C33-7-F.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "AZ23C33"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "B140-13-F.pdf": {
+    "filename": "B140-13-F.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "B140"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "B240A-13-F.pdf": {
+    "filename": "B240A-13-F.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "B240A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "B240A-E3-61T.pdf": {
+    "filename": "B240A-E3-61T.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "B240A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "B330-13-F.pdf": {
+    "filename": "B330-13-F.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "B330"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "B330LA-M3.pdf": {
+    "filename": "B330LA-M3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "B330LA-M3",
+      "B340A-M3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "B330LA.pdf": {
+    "filename": "B330LA.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "B330LA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "B360B-13-F.pdf": {
+    "filename": "B360B-13-F.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "B360B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "B380-13-F.pdf": {
+    "filename": "B380-13-F.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "B380"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "B380C1000G-E4-51.pdf": {
+    "filename": "B380C1000G-E4-51.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "B380C1000G"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "B560C-13-F.pdf": {
+    "filename": "B560C-13-F.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "B560C"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BA159-E3-73.pdf": {
+    "filename": "BA159-E3-73.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "BA159"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAL74.pdf": {
+    "filename": "BAL74.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BAL74"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAP1321-04.pdf": {
+    "filename": "BAP1321-04.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BAP1321-04"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAR43A.pdf": {
+    "filename": "BAR43A.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "BAR43A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAR43AFILM.pdf": {
+    "filename": "BAR43AFILM.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "BAR43AFILM"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAR43C.pdf": {
+    "filename": "BAR43C.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "BAR43C"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAR63-04W.pdf": {
+    "filename": "BAR63-04W.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "BAR63-04W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAR66.pdf": {
+    "filename": "BAR66.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "BAR66"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS116LT1G.pdf": {
+    "filename": "BAS116LT1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "BAS116L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS125-04W.pdf": {
+    "filename": "BAS125-04W.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "BAS125-04W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS16.pdf": {
+    "filename": "BAS16.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "BAS16"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS16J.pdf": {
+    "filename": "BAS16J.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "BAS16J"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS16LP.pdf": {
+    "filename": "BAS16LP.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "BAS16LP"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS21.pdf": {
+    "filename": "BAS21.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "BAS21"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS216.pdf": {
+    "filename": "BAS216.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BAS216"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS28.pdf": {
+    "filename": "BAS28.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BAS28"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS3010A-03W.pdf": {
+    "filename": "BAS3010A-03W.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "BAS3010A-03W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS3010S-02LRH.pdf": {
+    "filename": "BAS3010S-02LRH.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "BAS3010S-02LRH"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS31.pdf": {
+    "filename": "BAS31.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "BAS31"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS316.pdf": {
+    "filename": "BAS316.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "BAS316"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS386.pdf": {
+    "filename": "BAS386.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BAS386"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS40-04-7-F.pdf": {
+    "filename": "BAS40-04-7-F.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "BAS40-04"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS416.pdf": {
+    "filename": "BAS416.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BAS416"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS516.pdf": {
+    "filename": "BAS516.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "BAS516"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS70-04W.pdf": {
+    "filename": "BAS70-04W.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BAS70-04W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS70-06W.pdf": {
+    "filename": "BAS70-06W.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BAS70-06W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS70LT1G.pdf": {
+    "filename": "BAS70LT1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "BAS70L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAS86-M.pdf": {
+    "filename": "BAS86-M.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BAS86-M"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT15-03W.pdf": {
+    "filename": "BAT15-03W.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "BAT15-03W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT15099E6327HTSA1.pdf": {
+    "filename": "BAT15099E6327HTSA1.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "BAT15099E6327HTSA1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT165.pdf": {
+    "filename": "BAT165.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "BAT165"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT41ZFILM.pdf": {
+    "filename": "BAT41ZFILM.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "BAT41ZFILM"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT42WS.pdf": {
+    "filename": "BAT42WS.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BAT42WS"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT46WJ.pdf": {
+    "filename": "BAT46WJ.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "BAT46WJ"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT54.pdf": {
+    "filename": "BAT54.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "BAT54"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT54A.pdf": {
+    "filename": "BAT54A.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "BAT54A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT54C.pdf": {
+    "filename": "BAT54C.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "BAT54C"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT54HT1G.pdf": {
+    "filename": "BAT54HT1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "BAT54H"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT54JFILM.pdf": {
+    "filename": "BAT54JFILM.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "BAT54JFILM"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT54S.pdf": {
+    "filename": "BAT54S.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "BAT54S"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT60A.pdf": {
+    "filename": "BAT60A.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "BAT60A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT64-04.pdf": {
+    "filename": "BAT64-04.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "BAT64-04"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT64-04W.pdf": {
+    "filename": "BAT64-04W.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "BAT64-04W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT68-04.pdf": {
+    "filename": "BAT68-04.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "BAT68-04"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT68-04W.pdf": {
+    "filename": "BAT68-04W.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "BAT68-04W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT721S.pdf": {
+    "filename": "BAT721S.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BAT721S"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAT86S.pdf": {
+    "filename": "BAT86S.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BAT86S"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAV103.pdf": {
+    "filename": "BAV103.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "BAV103"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAV199.pdf": {
+    "filename": "BAV199.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BAV199"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAV20W-7-F.pdf": {
+    "filename": "BAV20W-7-F.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "BAV20W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAV23A.pdf": {
+    "filename": "BAV23A.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "BAV23A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAV70.pdf": {
+    "filename": "BAV70.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BAV70"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAV99.pdf": {
+    "filename": "BAV99.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "BAV99"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAV99LT1.pdf": {
+    "filename": "BAV99LT1.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "BAV99L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAV99LT1G.pdf": {
+    "filename": "BAV99LT1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "BAV99L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAV99S.pdf": {
+    "filename": "BAV99S.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BAV99S"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAV99W.pdf": {
+    "filename": "BAV99W.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "BAV99W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BAW56LT1G.pdf": {
+    "filename": "BAW56LT1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "BAW56L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BB131,115.pdf": {
+    "filename": "BB131,115.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BB131,115"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BB148.pdf": {
+    "filename": "BB148.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BB148"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BB201.pdf": {
+    "filename": "BB201.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BB201"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BBY39.pdf": {
+    "filename": "BBY39.pdf",
+    "local_path": "",
+    "manufacturer": "PHILIPS SEMICONDUCTORS",
+    "mpns": [
+      "BBY39"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BBY40.pdf": {
+    "filename": "BBY40.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BBY40"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BY203-20S.pdf": {
+    "filename": "BY203-20S.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BY203-20S"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BY228.pdf": {
+    "filename": "BY228.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BY228"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BY527.pdf": {
+    "filename": "BY527.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BY527"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BYC8D-600.pdf": {
+    "filename": "BYC8D-600.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BYC8D-600"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BYG10D-E3-TR.pdf": {
+    "filename": "BYG10D-E3-TR.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "BYG10D"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BYG23T-M3.pdf": {
+    "filename": "BYG23T-M3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "BYG23T"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BYM10.pdf": {
+    "filename": "BYM10.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "BYM10-100",
+      "BYM10-1000",
+      "BYM10-200",
+      "BYM10-400",
+      "BYM10-50",
+      "BYM10-600",
+      "BYM10-800"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BYW29-200.pdf": {
+    "filename": "BYW29-200.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "BYW29\u2212200"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZA462A.pdf": {
+    "filename": "BZA462A.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BZA462A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZB784-C5V1.pdf": {
+    "filename": "BZB784-C5V1.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BZB784-C5V1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZG03C.pdf": {
+    "filename": "BZG03C.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZG03C10",
+      "BZG03C100",
+      "BZG03C11",
+      "BZG03C110",
+      "BZG03C12",
+      "BZG03C120",
+      "BZG03C13",
+      "BZG03C130",
+      "BZG03C15",
+      "BZG03C150",
+      "BZG03C16",
+      "BZG03C160",
+      "BZG03C18",
+      "BZG03C180",
+      "BZG03C20",
+      "BZG03C200",
+      "BZG03C22",
+      "BZG03C220",
+      "BZG03C24",
+      "BZG03C240",
+      "BZG03C27",
+      "BZG03C270",
+      "BZG03C30",
+      "BZG03C33",
+      "BZG03C36",
+      "BZG03C39",
+      "BZG03C43",
+      "BZG03C47",
+      "BZG03C51",
+      "BZG03C56",
+      "BZG03C62",
+      "BZG03C68",
+      "BZG03C75",
+      "BZG03C82",
+      "BZG03C91"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZG05C-M.pdf": {
+    "filename": "BZG05C-M.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZG05C6V8-M",
+      "BZG05C6V2-M",
+      "BZG05C8V2-M"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZM55.pdf": {
+    "filename": "BZM55.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZM55C3V3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZT03.pdf": {
+    "filename": "BZT03.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZT03C10",
+      "BZT03C12",
+      "BZT03C13",
+      "BZT03C15",
+      "BZT03C20",
+      "BZT03C51",
+      "BZT03C7V5"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZT52.pdf": {
+    "filename": "BZT52.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "BZT52B4V7"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZT52BXXX.pdf": {
+    "filename": "BZT52BXXX.pdf",
+    "local_path": "",
+    "manufacturer": "GOOD-ARK",
+    "mpns": [
+      "BZT52B15"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZT52C2V0-7-F.pdf": {
+    "filename": "BZT52C2V0-7-F.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "BZT52C2V0"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZT52C2V7-7-F.pdf": {
+    "filename": "BZT52C2V7-7-F.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "BZT52C2V7"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZT52C2V7.pdf": {
+    "filename": "BZT52C2V7.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "BZT52C2V7"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZT52C5V6-7-F.pdf": {
+    "filename": "BZT52C5V6-7-F.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "BZT52C5V6"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZT52C5V6.pdf": {
+    "filename": "BZT52C5V6.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "BZT52C5V6"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZV49.pdf": {
+    "filename": "BZV49.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BZV49-C3V9,115",
+      "BZV49-C4V7,115",
+      "BZV49-C6V2,115",
+      "BZV49-C8V2,115"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZV55.pdf": {
+    "filename": "BZV55.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "BZV55-B10",
+      "BZV55-B11",
+      "BZV55-B12",
+      "BZV55-B13",
+      "BZV55-B15",
+      "BZV55-B16",
+      "BZV55-B18",
+      "BZV55-B20",
+      "BZV55-B22",
+      "BZV55-B24",
+      "BZV55-B27",
+      "BZV55-B2V4",
+      "BZV55-B2V7",
+      "BZV55-B33",
+      "BZV55-B3V0",
+      "BZV55-B3V3",
+      "BZV55-B3V6",
+      "BZV55-B3V9",
+      "BZV55-B47",
+      "BZV55-B4V3",
+      "BZV55-B4V7",
+      "BZV55-B5V1",
+      "BZV55-B5V6",
+      "BZV55-B6V2",
+      "BZV55-B6V8",
+      "BZV55-B7V5",
+      "BZV55-B8V2",
+      "BZV55-B9V1",
+      "BZV55-C12",
+      "BZV55-C2V4",
+      "BZV55-C3V3",
+      "BZV55-C5V1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZV85-C3V6,133.pdf": {
+    "filename": "BZV85-C3V6,133.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "BZV85-C3V6,133"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZW50.pdf": {
+    "filename": "BZW50.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "BZW50-180"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX100A,115.pdf": {
+    "filename": "BZX100A,115.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BZX100A,115"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX384.pdf": {
+    "filename": "BZX384.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "BZX384-C5V1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX38450-Q.pdf": {
+    "filename": "BZX38450-Q.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "BZX38450-B3V6-Q"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX55C.pdf": {
+    "filename": "BZX55C.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "BZX55C10",
+      "BZX55C12",
+      "BZX55C15",
+      "BZX55C18",
+      "BZX55C22",
+      "BZX55C2V7",
+      "BZX55C33",
+      "BZX55C3V3",
+      "BZX55C4V7",
+      "BZX55C5V1",
+      "BZX55C5V6",
+      "BZX55C6V2",
+      "BZX55C8V2",
+      "BZX55C9V1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX79C.pdf": {
+    "filename": "BZX79C.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "BZX79C2V4",
+      "BZX79C3V9",
+      "BZX79C5V6"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84-A2V4.pdf": {
+    "filename": "BZX84-A2V4.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BZX84-A2V4"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84-A5V6.pdf": {
+    "filename": "BZX84-A5V6.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "BZX84-A5V6"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84.pdf": {
+    "filename": "BZX84.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZX84C12",
+      "BZX84C24",
+      "BZX84C27",
+      "BZX84C30"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84B.pdf": {
+    "filename": "BZX84B.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZX84B22",
+      "BZX84B2V4",
+      "BZX84B2V7",
+      "BZX84B6V2"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84B10V.pdf": {
+    "filename": "BZX84B10V.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZX84B10V"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84B18.pdf": {
+    "filename": "BZX84B18.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZX84B18"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84B3V0.pdf": {
+    "filename": "BZX84B3V0.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZX84B3V0"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84B3V3.pdf": {
+    "filename": "BZX84B3V3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZX84B3V3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84B3V9.pdf": {
+    "filename": "BZX84B3V9.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZX84B3V9"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84B5V1.pdf": {
+    "filename": "BZX84B5V1.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZX84B5V1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84B5V6.pdf": {
+    "filename": "BZX84B5V6.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZX84B5V6"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84B7V5.pdf": {
+    "filename": "BZX84B7V5.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZX84B7V5"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84C15.pdf": {
+    "filename": "BZX84C15.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "BZX84C15"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84C16.pdf": {
+    "filename": "BZX84C16.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "BZX84C16"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84C3V3.pdf": {
+    "filename": "BZX84C3V3.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "BZX84C3V3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84C3V6.pdf": {
+    "filename": "BZX84C3V6.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "BZX84C3V6"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84C4V7.pdf": {
+    "filename": "BZX84C4V7.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "BZX84C4V7"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84C51.pdf": {
+    "filename": "BZX84C51.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZX84C51"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84C56.pdf": {
+    "filename": "BZX84C56.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZX84C56"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84C5V1.pdf": {
+    "filename": "BZX84C5V1.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "BZX84C5V1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84C6V2.pdf": {
+    "filename": "BZX84C6V2.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZX84C6V2"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84C7V5.pdf": {
+    "filename": "BZX84C7V5.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "BZX84C7V5"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84CxxxLT1.pdf": {
+    "filename": "BZX84CxxxLT1.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "BZX84C3V3LT1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84J-B6V2.pdf": {
+    "filename": "BZX84J-B6V2.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "BZX84J-B6V2"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84J-B8V2.pdf": {
+    "filename": "BZX84J-B8V2.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "BZX84J-B8V2"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84W-B11.pdf": {
+    "filename": "BZX84W-B11.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "BZX84W-B11"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX84W-B8V2.pdf": {
+    "filename": "BZX84W-B8V2.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "BZX84W-B8V2"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "BZX85C.pdf": {
+    "filename": "BZX85C.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "BZX85C10",
+      "BZX85C11",
+      "BZX85C12",
+      "BZX85C13",
+      "BZX85C15",
+      "BZX85C16",
+      "BZX85C18",
+      "BZX85C20",
+      "BZX85C22",
+      "BZX85C24",
+      "BZX85C30",
+      "BZX85C33",
+      "BZX85C36",
+      "BZX85C39",
+      "BZX85C3V3",
+      "BZX85C3V6",
+      "BZX85C3V9",
+      "BZX85C47",
+      "BZX85C4V3",
+      "BZX85C4V7",
+      "BZX85C51",
+      "BZX85C56",
+      "BZX85C5V1",
+      "BZX85C5V6",
+      "BZX85C6V2",
+      "BZX85C6V8",
+      "BZX85C7V5",
+      "BZX85C8V2",
+      "BZX85C9V1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "C3D16065D.pdf": {
+    "filename": "C3D16065D.pdf",
+    "local_path": "",
+    "manufacturer": "WOLFSPEED/CREE",
+    "mpns": [
+      "C3D16065D"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "C3D20060D.pdf": {
+    "filename": "C3D20060D.pdf",
+    "local_path": "",
+    "manufacturer": "CREE INC.",
+    "mpns": [
+      "C3D20060D"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "CD214A-F150.pdf": {
+    "filename": "CD214A-F150.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "CD214A-F150"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "CDBU0520-HF.pdf": {
+    "filename": "CDBU0520-HF.pdf",
+    "local_path": "",
+    "manufacturer": "COMCHIP",
+    "mpns": [
+      "CDBU0520-HF"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "CDDFN10-0506N.pdf": {
+    "filename": "CDDFN10-0506N.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "CDDFN10-0506N"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "CDLL4689E3.pdf": {
+    "filename": "CDLL4689E3.pdf",
+    "local_path": "",
+    "manufacturer": "MICROSEMI",
+    "mpns": [
+      "CDLL4689E3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "CDNBS08-SRDA.pdf": {
+    "filename": "CDNBS08-SRDA.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "CDNBS08-SRDA05-4"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "CDSOD323-T12.pdf": {
+    "filename": "CDSOD323-T12.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "CDSOD323-T12",
+      "CDSOD323-T15"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "CDSOD323-T12C-DSL.pdf": {
+    "filename": "CDSOD323-T12C-DSL.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "CDSOD323-T12C-DSL"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "CDSOD323-T24C-DSL.pdf": {
+    "filename": "CDSOD323-T24C-DSL.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "CDSOD323-T24C-DSL"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "CDSOT23-SLVU2.8.pdf": {
+    "filename": "CDSOT23-SLVU2.8.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "CDSOT23-SLVU2.8"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "CDSOT23-SR208.pdf": {
+    "filename": "CDSOT23-SR208.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "CDSOT23-SR208"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "CDSOT23.pdf": {
+    "filename": "CDSOT23.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "CDSOT23-T03LC"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "CDZCFHT2RA6-8B.pdf": {
+    "filename": "CDZCFHT2RA6-8B.pdf",
+    "local_path": "",
+    "manufacturer": "ROHM SEMICONDUCTOR",
+    "mpns": [
+      "CDZCFHT2RA6.8B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "CLA60MT1200NTZ.pdf": {
+    "filename": "CLA60MT1200NTZ.pdf",
+    "local_path": "",
+    "manufacturer": "IXYS",
+    "mpns": [
+      "CLA60MT1200NTZ"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "CMDHS-3.pdf": {
+    "filename": "CMDHS-3.pdf",
+    "local_path": "",
+    "manufacturer": "CENTRAL SEMICONDUCTOR",
+    "mpns": [
+      "CMDD4448",
+      "CMDSH-3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "CMR1U-06M.pdf": {
+    "filename": "CMR1U-06M.pdf",
+    "local_path": "",
+    "manufacturer": "CENTRAL SEMICONDUCTOR",
+    "mpns": [
+      "CMR1U-06M"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "D3V3F4U6S.pdf": {
+    "filename": "D3V3F4U6S.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "D3V3F4U6S"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DB104G.pdf": {
+    "filename": "DB104G.pdf",
+    "local_path": "",
+    "manufacturer": "TAIWAN SEMICONDUCTOR",
+    "mpns": [
+      "DB104G"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DB2460600L.pdf": {
+    "filename": "DB2460600L.pdf",
+    "local_path": "",
+    "manufacturer": "PANASONIC",
+    "mpns": [
+      "DB2460600L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DB2730800L.pdf": {
+    "filename": "DB2730800L.pdf",
+    "local_path": "",
+    "manufacturer": "PANASONIC",
+    "mpns": [
+      "DB2730800L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DBLS105G RD.pdf": {
+    "filename": "DBLS105G RD.pdf",
+    "local_path": "",
+    "manufacturer": "TAIWAN SEMICONDUCTOR",
+    "mpns": [
+      "DBLS105G RD"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DDB6U145N16L.pdf": {
+    "filename": "DDB6U145N16L.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "DDB6U145N16L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DFL1506S-E3-45.pdf": {
+    "filename": "DFL1506S-E3-45.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "DFL1506S"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DFLS1100-7.pdf": {
+    "filename": "DFLS1100-7.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "DFLS1100-7"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DFLS1200-7.pdf": {
+    "filename": "DFLS1200-7.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "DFLS1200-7"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DFLS130.pdf": {
+    "filename": "DFLS130.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "DFLS130"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DFLS230.pdf": {
+    "filename": "DFLS230.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "DFLS230"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DGP15-E3-54.pdf": {
+    "filename": "DGP15-E3-54.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "DGP15"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DH2x61-18A.pdf": {
+    "filename": "DH2x61-18A.pdf",
+    "local_path": "",
+    "manufacturer": "IXYS",
+    "mpns": [
+      "DH2x61-18A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DRTR5V0U2SR.pdf": {
+    "filename": "DRTR5V0U2SR.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "DRTR5V0U2SR"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DRTR5V0U4SL.pdf": {
+    "filename": "DRTR5V0U4SL.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "DRTR5V0U4SL"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DS9503P+.pdf": {
+    "filename": "DS9503P+.pdf",
+    "local_path": "",
+    "manufacturer": "MAXIM",
+    "mpns": [
+      "DS9503P"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DSA2-16A.pdf": {
+    "filename": "DSA2-16A.pdf",
+    "local_path": "",
+    "manufacturer": "IXYS",
+    "mpns": [
+      "DSA2-16A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DSDI60-18A.pdf": {
+    "filename": "DSDI60-18A.pdf",
+    "local_path": "",
+    "manufacturer": "IXYS",
+    "mpns": [
+      "DSDI60-18A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DSEI2x101-12A.pdf": {
+    "filename": "DSEI2x101-12A.pdf",
+    "local_path": "",
+    "manufacturer": "IXYS",
+    "mpns": [
+      "DSEI2x101-12A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DSEI8-06AS.pdf": {
+    "filename": "DSEI8-06AS.pdf",
+    "local_path": "",
+    "manufacturer": "IXYS",
+    "mpns": [
+      "DSEI8-06AS"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DSEP2x25-12C.pdf": {
+    "filename": "DSEP2x25-12C.pdf",
+    "local_path": "",
+    "manufacturer": "IXYS",
+    "mpns": [
+      "DSEP2x25-12C"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DSI45-16A.pdf": {
+    "filename": "DSI45-16A.pdf",
+    "local_path": "",
+    "manufacturer": "IXYS",
+    "mpns": [
+      "DSI45-16A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DSS2x111-008A.pdf": {
+    "filename": "DSS2x111-008A.pdf",
+    "local_path": "",
+    "manufacturer": "IXYS",
+    "mpns": [
+      "DSS2x111-008A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DST2080C.pdf": {
+    "filename": "DST2080C.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "DST2080C"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DST3060LC.pdf": {
+    "filename": "DST3060LC.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "DST3060LC"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DSTF3060CR.pdf": {
+    "filename": "DSTF3060CR.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "DSTF3060CR"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DVIULC6-4SC6.pdf": {
+    "filename": "DVIULC6-4SC6.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "DVIULC6-4SC6"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DZ2S036M0L.pdf": {
+    "filename": "DZ2S036M0L.pdf",
+    "local_path": "",
+    "manufacturer": "PANASONIC",
+    "mpns": [
+      "DZ2S036M0L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DZ2W03900L.pdf": {
+    "filename": "DZ2W03900L.pdf",
+    "local_path": "",
+    "manufacturer": "PANASONIC",
+    "mpns": [
+      "DZ2W03900L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DZ2W04700L.pdf": {
+    "filename": "DZ2W04700L.pdf",
+    "local_path": "",
+    "manufacturer": "PANASONIC",
+    "mpns": [
+      "DZ2W04700L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DZ2W06200L.pdf": {
+    "filename": "DZ2W06200L.pdf",
+    "local_path": "",
+    "manufacturer": "PANASONIC",
+    "mpns": [
+      "DZ2W06200L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DZ2W08200L.pdf": {
+    "filename": "DZ2W08200L.pdf",
+    "local_path": "",
+    "manufacturer": "PANASONIC",
+    "mpns": [
+      "DZ2W08200L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "DZ3X062D0L.pdf": {
+    "filename": "DZ3X062D0L.pdf",
+    "local_path": "",
+    "manufacturer": "PANASONIC",
+    "mpns": [
+      "DZ3X062D0L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "E-103.pdf": {
+    "filename": "E-103.pdf",
+    "local_path": "",
+    "manufacturer": "SEMITEC",
+    "mpns": [
+      "E-103"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "E88CC.pdf": {
+    "filename": "E88CC.pdf",
+    "local_path": "",
+    "manufacturer": "JJ ELECTRONIC",
+    "mpns": [
+      "E88CC"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "EDA-02608-V1-0_misc1.pdf": {
+    "filename": "EDA-02608-V1-0_misc1.pdf",
+    "local_path": "",
+    "manufacturer": "CERN",
+    "mpns": [
+      "EDA-02608-V1-0_misc1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ES1D.pdf": {
+    "filename": "ES1D.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "ES1D"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ES1G-13-F.pdf": {
+    "filename": "ES1G-13-F.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "ES1G-13-F"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ES2A-TP.pdf": {
+    "filename": "ES2A-TP.pdf",
+    "local_path": "",
+    "manufacturer": "MICRO COMMERCIAL COMPONENTS",
+    "mpns": [
+      "ES2A-TP"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ES2A.pdf": {
+    "filename": "ES2A.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "ES2A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ES2D.pdf": {
+    "filename": "ES2D.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "ES2D"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ES2G-E3-52T.pdf": {
+    "filename": "ES2G-E3-52T.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "ES2G"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ESD122DMX.pdf": {
+    "filename": "ESD122DMX.pdf",
+    "local_path": "",
+    "manufacturer": "TEXAS INSTRUMENTS",
+    "mpns": [
+      "ESD122DMX"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ESD351DPY.pdf": {
+    "filename": "ESD351DPY.pdf",
+    "local_path": "",
+    "manufacturer": "TEXAS INSTRUMENTS",
+    "mpns": [
+      "ESD351DPY"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ESD3V3U4ULC.pdf": {
+    "filename": "ESD3V3U4ULC.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "ESD3V3U4ULC"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ESD5V3L1U-02LRH.pdf": {
+    "filename": "ESD5V3L1U-02LRH.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "ESD5V3L1U-02LRH"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ESD5V3U2U-03F.pdf": {
+    "filename": "ESD5V3U2U-03F.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "ESD5V3U2U-03F"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ESD5Z2.5T1G.pdf": {
+    "filename": "ESD5Z2.5T1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "ESD5Z2.5"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ESD7016MUTAG.pdf": {
+    "filename": "ESD7016MUTAG.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "ESD7016MUTA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ESD9R3.3ST5G.pdf": {
+    "filename": "ESD9R3.3ST5G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "ESD9R3.3ST5G"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ESDA25P35-1U1M.pdf": {
+    "filename": "ESDA25P35-1U1M.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "ESDA25P35-1U1M"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ESDA25W.pdf": {
+    "filename": "ESDA25W.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "ESDA25W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "FCI-InGaAs-120-XX.pdf": {
+    "filename": "FCI-InGaAs-120-XX.pdf",
+    "local_path": "",
+    "manufacturer": "OSI Optoelectronics",
+    "mpns": [
+      "FCI-InGaAs-120L-FC"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "FCI-InGaAs-120.pdf": {
+    "filename": "FCI-InGaAs-120.pdf",
+    "local_path": "",
+    "manufacturer": "OSI Optoelectronics",
+    "mpns": [
+      "FCI-InGaAs-120_FLAT",
+      "FCI-InGaAs-120_LENS"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "FFPF10H60S.pdf": {
+    "filename": "FFPF10H60S.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "FFPF10H60S"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "FP-1310-5I-50SMF-FCAPC.pdf": {
+    "filename": "FP-1310-5I-50SMF-FCAPC.pdf",
+    "local_path": "",
+    "manufacturer": "FINISAR",
+    "mpns": [
+      "FP-1310-5I-50SMF-FCAPC"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "FSV1060V.pdf": {
+    "filename": "FSV1060V.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "FSV1060V"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "GBPC2506W.pdf": {
+    "filename": "GBPC2506W.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "GBPC2506W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "GBPC3510W.pdf": {
+    "filename": "GBPC3510W.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "GBPC3510W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "GBU4D.pdf": {
+    "filename": "GBU4D.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "GBU4D"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "GBU4M.pdf": {
+    "filename": "GBU4M.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "GBU4M"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "GBU6B.pdf": {
+    "filename": "GBU6B.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "GBU6B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "GBU8K.pdf": {
+    "filename": "GBU8K.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "GBU8K"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "GE04MPS06E.pdf": {
+    "filename": "GE04MPS06E.pdf",
+    "local_path": "",
+    "manufacturer": "GENESIC",
+    "mpns": [
+      "GE04MPS06E"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "GI250-4.pdf": {
+    "filename": "GI250-4.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "GI250-4"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "GP30M-E3-54.pdf": {
+    "filename": "GP30M-E3-54.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "GP30M"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "HDMIULC6-4SC6.pdf": {
+    "filename": "HDMIULC6-4SC6.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "HDMIULC6-4SC6"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "HER208G.pdf": {
+    "filename": "HER208G.pdf",
+    "local_path": "",
+    "manufacturer": "TAIWAN SEMICONDUCTOR",
+    "mpns": [
+      "HER208G"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "HSMP-3866-BLKG.pdf": {
+    "filename": "HSMP-3866-BLKG.pdf",
+    "local_path": "",
+    "manufacturer": "AVAGO TECHNOLOGIES",
+    "mpns": [
+      "HSMP-3866-BLKG"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "HSMS-2802-TR1G.pdf": {
+    "filename": "HSMS-2802-TR1G.pdf",
+    "local_path": "",
+    "manufacturer": "AVAGO TECHNOLOGIES",
+    "mpns": [
+      "HSMS-2802"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "HSMS-2805-TR1G.pdf": {
+    "filename": "HSMS-2805-TR1G.pdf",
+    "local_path": "",
+    "manufacturer": "AVAGO TECHNOLOGIES",
+    "mpns": [
+      "HSMS-2805"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "HSMS-2812-TR1G.pdf": {
+    "filename": "HSMS-2812-TR1G.pdf",
+    "local_path": "",
+    "manufacturer": "AVAGO TECHNOLOGIES",
+    "mpns": [
+      "HSMS-2812"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "HSMS-281C-TR1G.pdf": {
+    "filename": "HSMS-281C-TR1G.pdf",
+    "local_path": "",
+    "manufacturer": "AVAGO TECHNOLOGIES",
+    "mpns": [
+      "HSMS-281C"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "HSMS-281L-TR1G.pdf": {
+    "filename": "HSMS-281L-TR1G.pdf",
+    "local_path": "",
+    "manufacturer": "AVAGO TECHNOLOGIES",
+    "mpns": [
+      "HSMS-281L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "HSMS-2820-TR1G.pdf": {
+    "filename": "HSMS-2820-TR1G.pdf",
+    "local_path": "",
+    "manufacturer": "AVAGO TECHNOLOGIES",
+    "mpns": [
+      "HSMS-2820"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "HSMS-2822-TR1G.pdf": {
+    "filename": "HSMS-2822-TR1G.pdf",
+    "local_path": "",
+    "manufacturer": "AVAGO TECHNOLOGIES",
+    "mpns": [
+      "HSMS-2822"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "HSMS-2825-TR1G.pdf": {
+    "filename": "HSMS-2825-TR1G.pdf",
+    "local_path": "",
+    "manufacturer": "AVAGO TECHNOLOGIES",
+    "mpns": [
+      "HSMS-2825"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "IDD03SG60C.pdf": {
+    "filename": "IDD03SG60C.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "IDD03SG60C"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "IDH02SG120.pdf": {
+    "filename": "IDH02SG120.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "IDH02SG120"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "IDH03SG60C.pdf": {
+    "filename": "IDH03SG60C.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "IDH03SG60C"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "IDL08G65C5.pdf": {
+    "filename": "IDL08G65C5.pdf",
+    "local_path": "",
+    "manufacturer": "INFINEON",
+    "mpns": [
+      "IDL08G65C5XUMA2"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "IXBOD 1-06.pdf": {
+    "filename": "IXBOD 1-06.pdf",
+    "local_path": "",
+    "manufacturer": "IXYS",
+    "mpns": [
+      "IXBOD1-06"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "IXBOD 1-08.pdf": {
+    "filename": "IXBOD 1-08.pdf",
+    "local_path": "",
+    "manufacturer": "IXYS",
+    "mpns": [
+      "IXBOD 1-08"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "IXBOD 1-09.pdf": {
+    "filename": "IXBOD 1-09.pdf",
+    "local_path": "",
+    "manufacturer": "IXYS",
+    "mpns": [
+      "IXBOD 1-09"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "IXBOD 1-12R.pdf": {
+    "filename": "IXBOD 1-12R.pdf",
+    "local_path": "",
+    "manufacturer": "IXYS",
+    "mpns": [
+      "IXBOD 1-12R"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "IXBOD 1-17RD.pdf": {
+    "filename": "IXBOD 1-17RD.pdf",
+    "local_path": "",
+    "manufacturer": "IXYS",
+    "mpns": [
+      "IXBOD 1-17RD"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "IXBOD 1-32RD.pdf": {
+    "filename": "IXBOD 1-32RD.pdf",
+    "local_path": "",
+    "manufacturer": "IXYS",
+    "mpns": [
+      "IXBOD 1-32RD"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "IXBOD 1-34R.pdf": {
+    "filename": "IXBOD 1-34R.pdf",
+    "local_path": "",
+    "manufacturer": "IXYS",
+    "mpns": [
+      "IXBOD 1-34R"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "IXBOD1-06..10.pdf": {
+    "filename": "IXBOD1-06..10.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "IXBOD1-07",
+      "IXBOD1-08"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "KBL10-E4-51.pdf": {
+    "filename": "KBL10-E4-51.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "KBL10"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "KBU6K-E4-51.pdf": {
+    "filename": "KBU6K-E4-51.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "KBU6K"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "LC03-3.3B.pdf": {
+    "filename": "LC03-3.3B.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "LC03-3.3B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "LCDA12.pdf": {
+    "filename": "LCDA12.pdf",
+    "local_path": "",
+    "manufacturer": "SEMTECH",
+    "mpns": [
+      "LCDA12"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "LITTELFUSE_P6KE.pdf": {
+    "filename": "LITTELFUSE_P6KE.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "P6KE68CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "LITTELFUSE_SMAJ.pdf": {
+    "filename": "LITTELFUSE_SMAJ.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "SMAJ26A",
+      "SMAJ26CA",
+      "SMAJ30A",
+      "SMAJ30CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "LITTELFUSE_SMBJ.pdf": {
+    "filename": "LITTELFUSE_SMBJ.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "SMBJ14CA",
+      "SMBJ28CA",
+      "SMBJ33A",
+      "SMBJ48CA",
+      "SMBJ7.0A",
+      "SMBJ75A",
+      "SMBJ22CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "LITTELFUSE_SMF.pdf": {
+    "filename": "LITTELFUSE_SMF.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "SMF17CA",
+      "SMF22A",
+      "SMF24CA",
+      "SMF5.0A",
+      "SMF5.0CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "LL103.pdf": {
+    "filename": "LL103.pdf",
+    "local_path": "",
+    "manufacturer": "DIOTEC",
+    "mpns": [
+      "LL103A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "LP1A4-SNC1.pdf": {
+    "filename": "LP1A4-SNC1.pdf",
+    "local_path": "",
+    "manufacturer": "LIGHTRON",
+    "mpns": [
+      "LP1A4-SNC1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "LVB2560-M3-45.pdf": {
+    "filename": "LVB2560-M3-45.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "LVB2560"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MB6S.pdf": {
+    "filename": "MB6S.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "MB6S"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MBR0520L.pdf": {
+    "filename": "MBR0520L.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "MBR0520L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MBR0530PBF.pdf": {
+    "filename": "MBR0530PBF.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY HIGH POWER PRODUCTS",
+    "mpns": [
+      "MBR0530"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MBR0530T1G.pdf": {
+    "filename": "MBR0530T1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MBR0530",
+      "STPS1L30U"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MBR0540T1G.pdf": {
+    "filename": "MBR0540T1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MBR0540"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MBR130LSF.pdf": {
+    "filename": "MBR130LSF.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MBR130LSF"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MBR140SFT1G.pdf": {
+    "filename": "MBR140SFT1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MBR140SF"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MBR20200CT.pdf": {
+    "filename": "MBR20200CT.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MBR20200CT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MBR2H200SF.pdf": {
+    "filename": "MBR2H200SF.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MBR2H200SF"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MBR40250G.pdf": {
+    "filename": "MBR40250G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MBR40250G"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MBR60H100CTG.pdf": {
+    "filename": "MBR60H100CTG.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MBR60H100CT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MBRA340T3G.pdf": {
+    "filename": "MBRA340T3G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MBRA340T3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MBRB20100CT.pdf": {
+    "filename": "MBRB20100CT.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MBRB20100CT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MBRB2060CT.pdf": {
+    "filename": "MBRB2060CT.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MBRB2060CT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MBRB30H45CT.pdf": {
+    "filename": "MBRB30H45CT.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY",
+    "mpns": [
+      "MBRB30H45CT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MBRD835LG.pdf": {
+    "filename": "MBRD835LG.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MBRD835L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MBRM120LT1G.pdf": {
+    "filename": "MBRM120LT1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MBRM120L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MBRM140T1G.pdf": {
+    "filename": "MBRM140T1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MBRM140"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MCL4148-TR3.pdf": {
+    "filename": "MCL4148-TR3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "MCL4148"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MCL4448.pdf": {
+    "filename": "MCL4448.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "MCL4448"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MEMS-VOA-5.5.pdf": {
+    "filename": "MEMS-VOA-5.5.pdf",
+    "local_path": "",
+    "manufacturer": "FS",
+    "mpns": [
+      "MEMS-VOA-5.5"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MM3Z12VB.pdf": {
+    "filename": "MM3Z12VB.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MM3Z12VB"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MM3Z2V4T1G.pdf": {
+    "filename": "MM3Z2V4T1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MM3Z2V4"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MM3Z2V7T1G.pdf": {
+    "filename": "MM3Z2V7T1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MM3Z2V7"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MM3Z3V3T1G.pdf": {
+    "filename": "MM3Z3V3T1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MM3Z3V3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MM3Z3V6T1G.pdf": {
+    "filename": "MM3Z3V6T1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MM3Z3V6"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MM3Z4V3T1G.pdf": {
+    "filename": "MM3Z4V3T1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MM3Z4V3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MM3Z5V6B.pdf": {
+    "filename": "MM3Z5V6B.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MM3Z5V6B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MM3Z8V2T1G.pdf": {
+    "filename": "MM3Z8V2T1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MM3Z8V2"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MM3ZxxxB.pdf": {
+    "filename": "MM3ZxxxB.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MM3Z10VB"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MM3ZxxxST1G.pdf": {
+    "filename": "MM3ZxxxST1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MM3Z3V3S",
+      "MM3Z5V6S"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MMBD150X.pdf": {
+    "filename": "MMBD150X.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MMBD1503A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MMBD301LT1G.pdf": {
+    "filename": "MMBD301LT1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MMBD301L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MMBD352WT1G.pdf": {
+    "filename": "MMBD352WT1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MMBD352W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MMBD4148.pdf": {
+    "filename": "MMBD4148.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "MMBD4148"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MMBD4448.pdf": {
+    "filename": "MMBD4448.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "MMBD4448"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MMBZ15VDL.pdf": {
+    "filename": "MMBZ15VDL.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "MMBZ15VDL"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MMBZ4617.pdf": {
+    "filename": "MMBZ4617.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "MMBZ4617"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MMSD4148.pdf": {
+    "filename": "MMSD4148.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MMSD4148"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MMSZ4678T1G.pdf": {
+    "filename": "MMSZ4678T1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MMSZ4678"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MMSZ4683T1G.pdf": {
+    "filename": "MMSZ4683T1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MMSZ4683"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MMSZ5248B-E3-08.pdf": {
+    "filename": "MMSZ5248B-E3-08.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "MMSZ5229C",
+      "MMSZ5236C",
+      "MMSZ5240C",
+      "MMSZ5243C",
+      "MMSZ5248B",
+      "MMSZ5252C",
+      "MMSZ5257C"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MMSZ52xxx.pdf": {
+    "filename": "MMSZ52xxx.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MMSZ5222B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MMSZ5V6T3G.pdf": {
+    "filename": "MMSZ5V6T3G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MMSZ5V6"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MRA4003T3G.pdf": {
+    "filename": "MRA4003T3G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MRA4003"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MSS1P2L-M3-89A.pdf": {
+    "filename": "MSS1P2L-M3-89A.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "MSS1P2L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MUN-PD-PIN-2G-SM-LA-NF.pdf": {
+    "filename": "MUN-PD-PIN-2G-SM-LA-NF.pdf",
+    "local_path": "",
+    "manufacturer": "MUNICOM",
+    "mpns": [
+      "MUN-PD-PIN-2G-SM-LA-NF"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MUN-PD-PIN-5G-NF-FC-APC.pdf": {
+    "filename": "MUN-PD-PIN-5G-NF-FC-APC.pdf",
+    "local_path": "",
+    "manufacturer": "MUNICOM",
+    "mpns": [
+      "MUN-PD-PIN-5G-NF-FC/APC"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MUR1620CTRG.pdf": {
+    "filename": "MUR1620CTRG.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MUR1620CTR"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MURA115T3G.pdf": {
+    "filename": "MURA115T3G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MURA115"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MURS160-E3-52T.pdf": {
+    "filename": "MURS160-E3-52T.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "MURS160"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "MURS360T3G.pdf": {
+    "filename": "MURS360T3G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "MURS360"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "NRVTSA4100ET3.pdf": {
+    "filename": "NRVTSA4100ET3.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "NRVTSA4100ET3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "NSI45015W.pdf": {
+    "filename": "NSI45015W.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "NSI45015W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "NSI50010YT1G.pdf": {
+    "filename": "NSI50010YT1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "NSI50010Y"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "NTE506.pdf": {
+    "filename": "NTE506.pdf",
+    "local_path": "",
+    "manufacturer": "NTE",
+    "mpns": [
+      "NTE506"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "NUP4114UPXV6T1G.pdf": {
+    "filename": "NUP4114UPXV6T1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "NUP4114UPXV6"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "NUP4201DR2G.pdf": {
+    "filename": "NUP4201DR2G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "NUP4201DR2"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "NYC0102BLT1G.pdf": {
+    "filename": "NYC0102BLT1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "NYC0102BL"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ON_S2B.pdf": {
+    "filename": "ON_S2B.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "S2B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6KE100A.pdf": {
+    "filename": "P6KE100A.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "P6KE100A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6KE12CA.pdf": {
+    "filename": "P6KE12CA.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "P6KE12CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6KE15A.pdf": {
+    "filename": "P6KE15A.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "P6KE15A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6KE15CA.pdf": {
+    "filename": "P6KE15CA.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "P6KE15CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6KE18A.pdf": {
+    "filename": "P6KE18A.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "P6KE18A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6KE20CA.pdf": {
+    "filename": "P6KE20CA.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "P6KE20CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6KE24CA.pdf": {
+    "filename": "P6KE24CA.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "P6KE24CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6KE27A.pdf": {
+    "filename": "P6KE27A.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "P6KE27A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6KE36A.pdf": {
+    "filename": "P6KE36A.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "P6KE36A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6KE47CA.pdf": {
+    "filename": "P6KE47CA.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "P6KE47CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6KE62A.pdf": {
+    "filename": "P6KE62A.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "P6KE62A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6KE6V8A.pdf": {
+    "filename": "P6KE6V8A.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "P6KE6V8A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6KE75A.pdf": {
+    "filename": "P6KE75A.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "P6KE75A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6SMB100A-E3-52.pdf": {
+    "filename": "P6SMB100A-E3-52.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "P6SMB100A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6SMB15A.pdf": {
+    "filename": "P6SMB15A.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "P6SMB15A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6SMB220A.pdf": {
+    "filename": "P6SMB220A.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "P6SMB220A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6SMB220CA.pdf": {
+    "filename": "P6SMB220CA.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "P6SMB220CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6SMB24A.pdf": {
+    "filename": "P6SMB24A.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "P6SMB24A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6SMB33A.pdf": {
+    "filename": "P6SMB33A.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "P6SMB33A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6SMB36A.pdf": {
+    "filename": "P6SMB36A.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "P6SMB36A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6SMB39A.pdf": {
+    "filename": "P6SMB39A.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "P6SMB39A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6SMB43A.pdf": {
+    "filename": "P6SMB43A.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "P6SMB43A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "P6SMB62AT3G.pdf": {
+    "filename": "P6SMB62AT3G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "P6SMB62A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PAD1.pdf": {
+    "filename": "PAD1.pdf",
+    "local_path": "",
+    "manufacturer": "INTERFET CORPORATION",
+    "mpns": [
+      "PAD1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PB4010-E3-45.pdf": {
+    "filename": "PB4010-E3-45.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "PB4010"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PB5010-E3-45.pdf": {
+    "filename": "PB5010-E3-45.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "PB5010"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PD10F1-T7W.pdf": {
+    "filename": "PD10F1-T7W.pdf",
+    "local_path": "",
+    "manufacturer": "ALBIS",
+    "mpns": [
+      "PD10F1-T7W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PDS5100.pdf": {
+    "filename": "PDS5100.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "PDS5100"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PDZVTFTR12B.pdf": {
+    "filename": "PDZVTFTR12B.pdf",
+    "local_path": "",
+    "manufacturer": "ROHM SEMICONDUCTOR",
+    "mpns": [
+      "PDZVTFTR12B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD0603-240.pdf": {
+    "filename": "PESD0603-240.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "PESD0603-240"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD12VL1BA.pdf": {
+    "filename": "PESD12VL1BA.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PESD12VL1BA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD15VL1BA.pdf": {
+    "filename": "PESD15VL1BA.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "PESD15VL1BA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD15VS5UD.pdf": {
+    "filename": "PESD15VS5UD.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PESD15VS5UD"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD1LVDS.pdf": {
+    "filename": "PESD1LVDS.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PESD1LVDS"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD24VL1BA.pdf": {
+    "filename": "PESD24VL1BA.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "PESD24VL1BA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD24VS5UD.pdf": {
+    "filename": "PESD24VS5UD.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PESD24VS5UD"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD3V3L1BA.pdf": {
+    "filename": "PESD3V3L1BA.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PESD3V3L1BA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD3V3L5UY.pdf": {
+    "filename": "PESD3V3L5UY.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PESD3V3L5UY"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD3V3S1UB.pdf": {
+    "filename": "PESD3V3S1UB.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "PESD3V3S1UB"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD3V3S2UAT.pdf": {
+    "filename": "PESD3V3S2UAT.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "PESD3V3S2UAT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD3V3S4UD.pdf": {
+    "filename": "PESD3V3S4UD.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "PESD3V3S4UD"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD3V3S5UD.pdf": {
+    "filename": "PESD3V3S5UD.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PESD3V3S5UD"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD5V0L1BA.pdf": {
+    "filename": "PESD5V0L1BA.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PESD5V0L1BA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD5V0S1BA.pdf": {
+    "filename": "PESD5V0S1BA.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PESD5V0S1BA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD5V0S1UA.pdf": {
+    "filename": "PESD5V0S1UA.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "PESD5V0S1UA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD5V0S1UB.pdf": {
+    "filename": "PESD5V0S1UB.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "PESD5V0S1UB"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD5V0S2UAT.pdf": {
+    "filename": "PESD5V0S2UAT.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "PESD5V0S2UAT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PESD5V2S2UT.pdf": {
+    "filename": "PESD5V2S2UT.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PESD5V2S2UT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PGB1010402.pdf": {
+    "filename": "PGB1010402.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "PGB1010402"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PGB1010603MRHF.pdf": {
+    "filename": "PGB1010603MRHF.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "PGB1010603MRHF"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PMEG2005EGW.pdf": {
+    "filename": "PMEG2005EGW.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PMEG2005EGW"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PMEG3030EP.pdf": {
+    "filename": "PMEG3030EP.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PMEG3030EP"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PMEG3050EP.pdf": {
+    "filename": "PMEG3050EP.pdf",
+    "local_path": "",
+    "manufacturer": "ROHM SEMICONDUCTOR",
+    "mpns": [
+      "PMEG3050EP"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PMEG4002EB.pdf": {
+    "filename": "PMEG4002EB.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "PMEG4002EB"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PMEG4002EJ.pdf": {
+    "filename": "PMEG4002EJ.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "PMEG4002EJ"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PMEG4005EJ.pdf": {
+    "filename": "PMEG4005EJ.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PMEG4005EJ"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PMEG4010BEA.pdf": {
+    "filename": "PMEG4010BEA.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "PMEG4010BEA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PMEG6010CEJ.pdf": {
+    "filename": "PMEG6010CEJ.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PMEG6010CEJ"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PMEG6020ER.pdf": {
+    "filename": "PMEG6020ER.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "PMEG6020ER"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PMLL4148L.pdf": {
+    "filename": "PMLL4148L.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "PMLL4148L"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PMLL4448.pdf": {
+    "filename": "PMLL4448.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "PMLL4448"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PRTR5V0U2X.pdf": {
+    "filename": "PRTR5V0U2X.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "PRTR5V0U2X"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PRTR5V0U4D.pdf": {
+    "filename": "PRTR5V0U4D.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PRTR5V0U4D"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PRTR5V0U4Y.pdf": {
+    "filename": "PRTR5V0U4Y.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "PRTR5V0U4Y"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PTVS10-320C-TH.pdf": {
+    "filename": "PTVS10-320C-TH.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "PTVS10-320C-TH"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PTVS12VP1UP.pdf": {
+    "filename": "PTVS12VP1UP.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PTVS12VP1UP"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PTVS15VP1UP.pdf": {
+    "filename": "PTVS15VP1UP.pdf",
+    "local_path": "",
+    "manufacturer": "NXP SEMICONDUCTORS",
+    "mpns": [
+      "PTVS15VP1UP"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PTVS5V0S1UR.pdf": {
+    "filename": "PTVS5V0S1UR.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PTVS5V0S1UR"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PTVSXS1UR.pdf": {
+    "filename": "PTVSXS1UR.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PTVS13VS1UR"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PUSB2X4Y.pdf": {
+    "filename": "PUSB2X4Y.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PUSB2X4Y"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "PUSB3AB4.pdf": {
+    "filename": "PUSB3AB4.pdf",
+    "local_path": "",
+    "manufacturer": "NEXPERIA",
+    "mpns": [
+      "PUSB3AB4"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "Pxxx2SxL.pdf": {
+    "filename": "Pxxx2SxL.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "P4202SB"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "R5000F.pdf": {
+    "filename": "R5000F.pdf",
+    "local_path": "",
+    "manufacturer": "RECTRON SEMICONDUCTOR",
+    "mpns": [
+      "R5000F"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "RB155.pdf": {
+    "filename": "RB155.pdf",
+    "local_path": "",
+    "manufacturer": "RECTRON SEMICONDUCTOR",
+    "mpns": [
+      "RB155"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "RB161M-20.pdf": {
+    "filename": "RB161M-20.pdf",
+    "local_path": "",
+    "manufacturer": "ROHM SEMICONDUCTOR",
+    "mpns": [
+      "RB161M-20"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "RB168MM200.pdf": {
+    "filename": "RB168MM200.pdf",
+    "local_path": "",
+    "manufacturer": "ROHM SEMICONDUCTOR",
+    "mpns": [
+      "RB168MM200"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "RB431VAM-50.pdf": {
+    "filename": "RB431VAM-50.pdf",
+    "local_path": "",
+    "manufacturer": "ROHM",
+    "mpns": [
+      "RB431VAM-50"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "RBQ20BM100AFH.pdf": {
+    "filename": "RBQ20BM100AFH.pdf",
+    "local_path": "",
+    "manufacturer": "ROHM SEMICONDUCTOR",
+    "mpns": [
+      "RBQ20BM100AFH"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "RBQ30NS65AFH.pdf": {
+    "filename": "RBQ30NS65AFH.pdf",
+    "local_path": "",
+    "manufacturer": "ROHM SEMICONDUCTOR",
+    "mpns": [
+      "RBQ30NS65AFH"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "RBR10BM30AFH.pdf": {
+    "filename": "RBR10BM30AFH.pdf",
+    "local_path": "",
+    "manufacturer": "ROHM SEMICONDUCTOR",
+    "mpns": [
+      "RBR10BM30AFH"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "RBR15BM30AFH.pdf": {
+    "filename": "RBR15BM30AFH.pdf",
+    "local_path": "",
+    "manufacturer": "ROHM SEMICONDUCTOR",
+    "mpns": [
+      "RBR15BM30AFH"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "RCLAMP0524PA.pdf": {
+    "filename": "RCLAMP0524PA.pdf",
+    "local_path": "",
+    "manufacturer": "SEMTECH",
+    "mpns": [
+      "RCLAMP0524PA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "RCLAMP0544T-TCT.pdf": {
+    "filename": "RCLAMP0544T-TCT.pdf",
+    "local_path": "",
+    "manufacturer": "SEMTECH",
+    "mpns": [
+      "RCLAMP0544T.TCT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "RF05VAM2STR.pdf": {
+    "filename": "RF05VAM2STR.pdf",
+    "local_path": "",
+    "manufacturer": "ROHM SEMICONDUCTOR",
+    "mpns": [
+      "RF05VAM2STR"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "RF05VYM1SFH.pdf": {
+    "filename": "RF05VYM1SFH.pdf",
+    "local_path": "",
+    "manufacturer": "ROHM SEMICONDUCTOR",
+    "mpns": [
+      "RF05VYM1SFH"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "RGP02-20E-E3-54.pdf": {
+    "filename": "RGP02-20E-E3-54.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "RGP02-20E"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "RS1MWF.pdf": {
+    "filename": "RS1MWF.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "RS1MWF"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "S-103T.pdf": {
+    "filename": "S-103T.pdf",
+    "local_path": "",
+    "manufacturer": "SEMITEC",
+    "mpns": [
+      "S-103T"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "S-202T.pdf": {
+    "filename": "S-202T.pdf",
+    "local_path": "",
+    "manufacturer": "SEMITEC",
+    "mpns": [
+      "S-202T"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "S-452T.pdf": {
+    "filename": "S-452T.pdf",
+    "local_path": "",
+    "manufacturer": "SEMITEC",
+    "mpns": [
+      "S-452T"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "S-562T.pdf": {
+    "filename": "S-562T.pdf",
+    "local_path": "",
+    "manufacturer": "SEMITEC",
+    "mpns": [
+      "S-562T"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "S1A.pdf": {
+    "filename": "S1A.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "S1A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "S1FLD-GS08.pdf": {
+    "filename": "S1FLD-GS08.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "S1FLD-GS08"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "S1M.pdf": {
+    "filename": "S1M.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "S1M"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "S2M.pdf": {
+    "filename": "S2M.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "S2M"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "S4016N.pdf": {
+    "filename": "S4016N.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "S4016N"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "S4PM-E3-86A.pdf": {
+    "filename": "S4PM-E3-86A.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "S4PM"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SB320.pdf": {
+    "filename": "SB320.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY",
+    "mpns": [
+      "SB320"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SB330.pdf": {
+    "filename": "SB330.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "SB330"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SB3H100.pdf": {
+    "filename": "SB3H100.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "SB3H100-E3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SB5100.pdf": {
+    "filename": "SB5100.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "SB5100"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SBR10U200P5.pdf": {
+    "filename": "SBR10U200P5.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "SBR10U200P5"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SBR1U400P1.pdf": {
+    "filename": "SBR1U400P1.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "SBR1U400P1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SBR8U60P5-13.pdf": {
+    "filename": "SBR8U60P5-13.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "SBR8U60P5-13"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SBYV27-200-E3.pdf": {
+    "filename": "SBYV27-200-E3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "SBYV27-200"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SD103ATW-7-F.pdf": {
+    "filename": "SD103ATW-7-F.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "SD103ATW-7-F"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SD103ATW.pdf": {
+    "filename": "SD103ATW.pdf",
+    "local_path": "",
+    "manufacturer": "MICRO COMMERCIAL COMPONENTS",
+    "mpns": [
+      "SD103ATW"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SD2114S040S8R0.pdf": {
+    "filename": "SD2114S040S8R0.pdf",
+    "local_path": "",
+    "manufacturer": "AVX",
+    "mpns": [
+      "SD2114S040S8R0"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SDM03U40-7.pdf": {
+    "filename": "SDM03U40-7.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "SDM03U40-7"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SEMIKRON_EDA-03946-V1-0.pdf": {
+    "filename": "SEMIKRON_EDA-03946-V1-0.pdf",
+    "local_path": "",
+    "manufacturer": "CERN",
+    "mpns": [
+      "EDA-03946-V1-0"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SEMIX302KT16S.pdf": {
+    "filename": "SEMIX302KT16S.pdf",
+    "local_path": "",
+    "manufacturer": "SEMIKRON",
+    "mpns": [
+      "SEMIX302KT16S"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SFH250.pdf": {
+    "filename": "SFH250.pdf",
+    "local_path": "",
+    "manufacturer": "AVAGO TECHNOLOGIES",
+    "mpns": [
+      "SFH250"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SFH756.pdf": {
+    "filename": "SFH756.pdf",
+    "local_path": "",
+    "manufacturer": "AVAGO TECHNOLOGIES",
+    "mpns": [
+      "SFH756"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SK 120 KQ 16.pdf": {
+    "filename": "SK 120 KQ 16.pdf",
+    "local_path": "",
+    "manufacturer": "SEMIKRON",
+    "mpns": [
+      "SK 120 KQ 16"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SK 70 KQ 12.pdf": {
+    "filename": "SK 70 KQ 12.pdf",
+    "local_path": "",
+    "manufacturer": "SEMIKRON",
+    "mpns": [
+      "SK 70 KQ 12",
+      "SK 70 KQ 08"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SK106-TP.pdf": {
+    "filename": "SK106-TP.pdf",
+    "local_path": "",
+    "manufacturer": "MICRO COMMERCIAL COMPONENTS",
+    "mpns": [
+      "SK106-TP"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SK16.pdf": {
+    "filename": "SK16.pdf",
+    "local_path": "",
+    "manufacturer": "DIOTEC",
+    "mpns": [
+      "SK16"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SK26A.pdf": {
+    "filename": "SK26A.pdf",
+    "local_path": "",
+    "manufacturer": "TAIWAN SEMICONDUCTOR",
+    "mpns": [
+      "SK26A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SK33.pdf": {
+    "filename": "SK33.pdf",
+    "local_path": "",
+    "manufacturer": "DIOTEC",
+    "mpns": [
+      "SK33"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SKA 3.pdf": {
+    "filename": "SKA 3.pdf",
+    "local_path": "",
+    "manufacturer": "SEMIKRON",
+    "mpns": [
+      "SKA 3/17"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SKD2508.pdf": {
+    "filename": "SKD2508.pdf",
+    "local_path": "",
+    "manufacturer": "SEMIKRON",
+    "mpns": [
+      "SKD25/08"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SKNA 20-13.pdf": {
+    "filename": "SKNA 20-13.pdf",
+    "local_path": "",
+    "manufacturer": "SEMIKRON",
+    "mpns": [
+      "SKNA 20/13"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SL03-GS08.pdf": {
+    "filename": "SL03-GS08.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "SL03-GS08"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SL12.pdf": {
+    "filename": "SL12.pdf",
+    "local_path": "",
+    "manufacturer": "SEMTECH",
+    "mpns": [
+      "SL12.TC"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SLVU2.8HTG.pdf": {
+    "filename": "SLVU2.8HTG.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "SLVU2.8HTG"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM15T200A.pdf": {
+    "filename": "SM15T200A.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SM15T200A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM15T220A.pdf": {
+    "filename": "SM15T220A.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SM15T220A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM15T6V8A.pdf": {
+    "filename": "SM15T6V8A.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SM15T6V8A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM15xxxA.pdf": {
+    "filename": "SM15xxxA.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SM15T12CA",
+      "SM15T200CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM2T3V3A.pdf": {
+    "filename": "SM2T3V3A.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SM2T3V3A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM6T10A.pdf": {
+    "filename": "SM6T10A.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SM6T10A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM6T12A.pdf": {
+    "filename": "SM6T12A.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SM6T12A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM6T15CA.pdf": {
+    "filename": "SM6T15CA.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SM6T15CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM6T22CA.pdf": {
+    "filename": "SM6T22CA.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SM6T22CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM6T24CA.pdf": {
+    "filename": "SM6T24CA.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SM6T24CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM6T30CA.pdf": {
+    "filename": "SM6T30CA.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SM6T30CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM6T39CA.pdf": {
+    "filename": "SM6T39CA.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SM6T39CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM6T56CA.pdf": {
+    "filename": "SM6T56CA.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SM6T56CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM6T68A.pdf": {
+    "filename": "SM6T68A.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SM6T68A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM6T68CA.pdf": {
+    "filename": "SM6T68CA.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SM6T68CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM6T6V8CA.pdf": {
+    "filename": "SM6T6V8CA.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SM6T6V8CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM6TxxCA.pdf": {
+    "filename": "SM6TxxCA.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SM6T33CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM712.TCT.pdf": {
+    "filename": "SM712.TCT.pdf",
+    "local_path": "",
+    "manufacturer": "SEMTECH",
+    "mpns": [
+      "SM712.TCT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM712.pdf": {
+    "filename": "SM712.pdf",
+    "local_path": "",
+    "manufacturer": "SEMTECH",
+    "mpns": [
+      "SM712"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SM74611KTT.pdf": {
+    "filename": "SM74611KTT.pdf",
+    "local_path": "",
+    "manufacturer": "TEXAS INSTRUMENTS",
+    "mpns": [
+      "SM74611KTT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ12A.pdf": {
+    "filename": "SMAJ12A.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "SMAJ12A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ12CA.pdf": {
+    "filename": "SMAJ12CA.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "SMAJ12CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ14A.pdf": {
+    "filename": "SMAJ14A.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "SMAJ14A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ14CA.pdf": {
+    "filename": "SMAJ14CA.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "SMAJ14CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ15A.pdf": {
+    "filename": "SMAJ15A.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "SMAJ15A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ15CA.pdf": {
+    "filename": "SMAJ15CA.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "SMAJ15CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ22CA.pdf": {
+    "filename": "SMAJ22CA.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "SMAJ22CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ24A-Q.pdf": {
+    "filename": "SMAJ24A-Q.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "SMAJ24A-Q"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ24A.pdf": {
+    "filename": "SMAJ24A.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "SMAJ24A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ24CA-Q.pdf": {
+    "filename": "SMAJ24CA-Q.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "SMAJ24CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ24CA.pdf": {
+    "filename": "SMAJ24CA.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "SMAJ24CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ250A.pdf": {
+    "filename": "SMAJ250A.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "SMAJ250A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ33A.pdf": {
+    "filename": "SMAJ33A.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "SMAJ33A",
+      "SMAJ33CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ40A.pdf": {
+    "filename": "SMAJ40A.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "SMAJ40A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ40CA.pdf": {
+    "filename": "SMAJ40CA.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "SMAJ40CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ48A.pdf": {
+    "filename": "SMAJ48A.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "SMAJ48A",
+      "SMAJ48CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ5.0A.pdf": {
+    "filename": "SMAJ5.0A.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "SMAJ5.0A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ5.0CA.pdf": {
+    "filename": "SMAJ5.0CA.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "SMAJ5.0CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ6.0A.pdf": {
+    "filename": "SMAJ6.0A.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "SMAJ6.0A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ6.0CA.pdf": {
+    "filename": "SMAJ6.0CA.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "SMAJ6.0CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMAJ60CA.pdf": {
+    "filename": "SMAJ60CA.pdf",
+    "local_path": "",
+    "manufacturer": "BOURNS",
+    "mpns": [
+      "SMAJ60CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMBJ.pdf": {
+    "filename": "SMBJ.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "SMBJ100A",
+      "SMBJ10A",
+      "SMBJ10CA",
+      "SMBJ120A",
+      "SMBJ12A",
+      "SMBJ12CA",
+      "SMBJ150A",
+      "SMBJ150CA",
+      "SMBJ15A",
+      "SMBJ15CA",
+      "SMBJ18A",
+      "SMBJ20A",
+      "SMBJ20CA",
+      "SMBJ22A",
+      "SMBJ24A",
+      "SMBJ24CA",
+      "SMBJ30CA",
+      "SMBJ33CA",
+      "SMBJ36A",
+      "SMBJ36CA",
+      "SMBJ48A",
+      "SMBJ5V0A",
+      "SMBJ5V0CA",
+      "SMBJ60A",
+      "SMBJ6V5A",
+      "SMBJ75CA",
+      "SMBJ16CA",
+      "SMBJ17CA",
+      "SMBJ18CA",
+      "SMBJ26CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMCJ.pdf": {
+    "filename": "SMCJ.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "SMCJ11A",
+      "SMCJ12CA",
+      "SMCJ13A",
+      "SMCJ150A",
+      "SMCJ15CA",
+      "SMCJ18CA",
+      "SMCJ28A",
+      "SMCJ28CA",
+      "SMCJ30CA",
+      "SMCJ33CA",
+      "SMCJ440CA",
+      "SMCJ48CA",
+      "SMCJ58CA"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMC_BD101.pdf": {
+    "filename": "SMC_BD101.pdf",
+    "local_path": "",
+    "manufacturer": "SMC",
+    "mpns": [
+      "DB105S"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMDA05CD.pdf": {
+    "filename": "SMDA05CD.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "SMDA05CD"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMDA12C.TBT.pdf": {
+    "filename": "SMDA12C.TBT.pdf",
+    "local_path": "",
+    "manufacturer": "SEMTECH",
+    "mpns": [
+      "SMDA12C.TBT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMLVT3V3.pdf": {
+    "filename": "SMLVT3V3.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SMLVT3V3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SMP100LC-65.pdf": {
+    "filename": "SMP100LC-65.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SMP100LC-65"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SP0080SDT.pdf": {
+    "filename": "SP0080SDT.pdf",
+    "local_path": "",
+    "manufacturer": "SETFUSE",
+    "mpns": [
+      "SP0080SDT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SP0503BAHTG.pdf": {
+    "filename": "SP0503BAHTG.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "SP0503BAHTG"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SP3012.pdf": {
+    "filename": "SP3012.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "SP3012-03UTG",
+      "SP3012-06UTG"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SP3051-04H.pdf": {
+    "filename": "SP3051-04H.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "SP3051-04H"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SP3205-01E.pdf": {
+    "filename": "SP3205-01E.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "SP3205-01E"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SP3213-01UTG.pdf": {
+    "filename": "SP3213-01UTG.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "SP3213-01UTG"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SP4020-01FTG.pdf": {
+    "filename": "SP4020-01FTG.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "SP4020-01FTG"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SP720.pdf": {
+    "filename": "SP720.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "SP720AP"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SPT02-236DDB.pdf": {
+    "filename": "SPT02-236DDB.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "SPT02-236DDB"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SRV05-4.TCT.pdf": {
+    "filename": "SRV05-4.TCT.pdf",
+    "local_path": "",
+    "manufacturer": "SEMTECH",
+    "mpns": [
+      "SRV05-4.TCT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SRV05-4ATCT.pdf": {
+    "filename": "SRV05-4ATCT.pdf",
+    "local_path": "",
+    "manufacturer": "SEMTECH",
+    "mpns": [
+      "SRV05-4ATCT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SS0540.pdf": {
+    "filename": "SS0540.pdf",
+    "local_path": "",
+    "manufacturer": "PANJIT",
+    "mpns": [
+      "SS0540"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SS10P3CL-M3.pdf": {
+    "filename": "SS10P3CL-M3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "SS10P3CL-M3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SS10P6.pdf": {
+    "filename": "SS10P6.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "SS10P6"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SS16.pdf": {
+    "filename": "SS16.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "SS16"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SS1H9.pdf": {
+    "filename": "SS1H9.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "SS1H9-E3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SS24FL.pdf": {
+    "filename": "SS24FL.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "SS24FL"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SS26.pdf": {
+    "filename": "SS26.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "SS26"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SS34.pdf": {
+    "filename": "SS34.pdf",
+    "local_path": "",
+    "manufacturer": "FAIRCHILD SEMICONDUCTOR",
+    "mpns": [
+      "SS34"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SS8P3LHM3_A.pdf": {
+    "filename": "SS8P3LHM3_A.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "SS8P3LHM3_A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SSTPAD5-T1-E3.pdf": {
+    "filename": "SSTPAD5-T1-E3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SILICONIX",
+    "mpns": [
+      "SSTPAD5-T1-E3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STPS15H100C.pdf": {
+    "filename": "STPS15H100C.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STPS15H100C"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STPS15L30CB.pdf": {
+    "filename": "STPS15L30CB.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STPS15L30CB"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STPS1H100A.pdf": {
+    "filename": "STPS1H100A.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STPS1H100A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STPS200170TV1.pdf": {
+    "filename": "STPS200170TV1.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STPS200170TV1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STPS2060CT.pdf": {
+    "filename": "STPS2060CT.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STPS2060CT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STPS20L25CT.pdf": {
+    "filename": "STPS20L25CT.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STPS20L25CT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STPS20L60CG.pdf": {
+    "filename": "STPS20L60CG.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STPS20L60CG"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STPS20M60D.pdf": {
+    "filename": "STPS20M60D.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STPS20M60D"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STPS20M60SG.pdf": {
+    "filename": "STPS20M60SG.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STPS20M60SG"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STPS2L60A.pdf": {
+    "filename": "STPS2L60A.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STPS2L60A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STPS30M60S.pdf": {
+    "filename": "STPS30M60S.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STPS30M60ST"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STPS30M60SG.pdf": {
+    "filename": "STPS30M60SG.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STPS30M60SG"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STPS340U.pdf": {
+    "filename": "STPS340U.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STPS340U"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STPS41L30CG.pdf": {
+    "filename": "STPS41L30CG.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STPS41L30CG"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STPS5H100B.pdf": {
+    "filename": "STPS5H100B.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STPS5H100B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STPSC10H065DI.pdf": {
+    "filename": "STPSC10H065DI.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STPSC10H065DI"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STTH102A.pdf": {
+    "filename": "STTH102A.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STTH102A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STTH112A.pdf": {
+    "filename": "STTH112A.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STTH112A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STTH112U.pdf": {
+    "filename": "STTH112U.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STTH112U"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STTH1512G.pdf": {
+    "filename": "STTH1512G.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STTH1512G"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STTH16003TV1.pdf": {
+    "filename": "STTH16003TV1.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STTH16003TV1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STTH16L06CG-TR.pdf": {
+    "filename": "STTH16L06CG-TR.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STTH16L06CG"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STTH1L06A.pdf": {
+    "filename": "STTH1L06A.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STTH1L06A"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STTH1R06.pdf": {
+    "filename": "STTH1R06.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STTH1R06"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STTH208U.pdf": {
+    "filename": "STTH208U.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STTH208U"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STTH3010D.pdf": {
+    "filename": "STTH3010D.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STTH3010D"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STTH3010W.pdf": {
+    "filename": "STTH3010W.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STTH3010W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STTH312B.pdf": {
+    "filename": "STTH312B.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STTH312B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STTH3R02.pdf": {
+    "filename": "STTH3R02.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STTH3R02"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STTH512B.pdf": {
+    "filename": "STTH512B.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STTH512B"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STTH6004W.pdf": {
+    "filename": "STTH6004W.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STTH6004W"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STTH812D.pdf": {
+    "filename": "STTH812D.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STTH812D"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "STTH812DI.pdf": {
+    "filename": "STTH812DI.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "STTH812DI"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SUMITOMO_STH1W44-LP.pdf": {
+    "filename": "SUMITOMO_STH1W44-LP.pdf",
+    "local_path": "",
+    "manufacturer": "SUMITOMO",
+    "mpns": [
+      "STH1W44-LPK60S"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SZESD7462N2T5G.pdf": {
+    "filename": "SZESD7462N2T5G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "SZESD7462N2"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SZMM3Z4V3T1G.pdf": {
+    "filename": "SZMM3Z4V3T1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "SZMM3Z4V3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "SZMMSZ5V1T1G.pdf": {
+    "filename": "SZMMSZ5V1T1G.pdf",
+    "local_path": "",
+    "manufacturer": "ON SEMICONDUCTOR",
+    "mpns": [
+      "SZMMSZ5V1"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "TPA62.pdf": {
+    "filename": "TPA62.pdf",
+    "local_path": "",
+    "manufacturer": "ST MICROELECTRONICS",
+    "mpns": [
+      "TPA62"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "TPD1E05U06DPY.pdf": {
+    "filename": "TPD1E05U06DPY.pdf",
+    "local_path": "",
+    "manufacturer": "TEXAS INSTRUMENTS",
+    "mpns": [
+      "TPD1E05U06DPY"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "TS4148 RZG.pdf": {
+    "filename": "TS4148 RZG.pdf",
+    "local_path": "",
+    "manufacturer": "TAIWAN SEMICONDUCTOR",
+    "mpns": [
+      "TS4148 RZG"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "TZMC3V9.pdf": {
+    "filename": "TZMC3V9.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "TZMC3V9"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "UCLAMP3301H.pdf": {
+    "filename": "UCLAMP3301H.pdf",
+    "local_path": "",
+    "manufacturer": "SEMTECH",
+    "mpns": [
+      "UCLAMP3301H"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "UF2006.pdf": {
+    "filename": "UF2006.pdf",
+    "local_path": "",
+    "manufacturer": "DIODES INCORPORATED",
+    "mpns": [
+      "UF2006"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "UF4007-M3.pdf": {
+    "filename": "UF4007-M3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "UF4007-M3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "UF5400.pdf": {
+    "filename": "UF5400.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "UF5400"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "UJ3D1250K.pdf": {
+    "filename": "UJ3D1250K.pdf",
+    "local_path": "",
+    "manufacturer": "UNITED SIC",
+    "mpns": [
+      "UJ3D1250K"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ULM850-14-TT-N0104U.pdf": {
+    "filename": "ULM850-14-TT-N0104U.pdf",
+    "local_path": "",
+    "manufacturer": "PHILIPS",
+    "mpns": [
+      "ULM850-14-TT-N0104U"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ULMPIN-14-TT-N0101U.pdf": {
+    "filename": "ULMPIN-14-TT-N0101U.pdf",
+    "local_path": "",
+    "manufacturer": "PHILIPS",
+    "mpns": [
+      "ULMPIN-14-TT-N0101U"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "US1M-E3-5AT.pdf": {
+    "filename": "US1M-E3-5AT.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "US1M-E3/5AT"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "UX-FOB.pdf": {
+    "filename": "UX-FOB.pdf",
+    "local_path": "",
+    "manufacturer": "HVCA & CKE",
+    "mpns": [
+      "UX-FOB"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "V1F22.pdf": {
+    "filename": "V1F22.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "V1F22"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VESD01C1-02VHG3.pdf": {
+    "filename": "VESD01C1-02VHG3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "VESD01C1-02VHG3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VISHAY_BZX84-Series.pdf": {
+    "filename": "VISHAY_BZX84-Series.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "BZX84B3V6",
+      "BZX84C3V9"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VISHAY_P600.pdf": {
+    "filename": "VISHAY_P600.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "P600D"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VISHAY_SMBJ3V3.pdf": {
+    "filename": "VISHAY_SMBJ3V3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "SMBJ3V3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-10BQ015PbF.pdf": {
+    "filename": "VS-10BQ015PbF.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "VS-10BQ015"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-10BQ040HM3.pdf": {
+    "filename": "VS-10BQ040HM3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "VS-10BQ040HM3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-10BQ100-M3.pdf": {
+    "filename": "VS-10BQ100-M3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "VS-10BQ100"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-12CWQ04FN-M3.pdf": {
+    "filename": "VS-12CWQ04FN-M3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "VS-12CWQ04FN"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-12CWQ10FNPbF.pdf": {
+    "filename": "VS-12CWQ10FNPbF.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "VS-12CWQ10FN"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-15MQ040H.pdf": {
+    "filename": "VS-15MQ040H.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY Semi",
+    "mpns": [
+      "VS-15MQ040H"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-15MQ040NPbF.pdf": {
+    "filename": "VS-15MQ040NPbF.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY INTERTECHNOLOGY, INC.",
+    "mpns": [
+      "VS-15MQ040N"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-16CTQ100-N3.pdf": {
+    "filename": "VS-16CTQ100-N3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "VS-16CTQ100"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-16CTQ100PBF.pdf": {
+    "filename": "VS-16CTQ100PBF.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "VS-16CTQ100"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-19TQ015SPBF.pdf": {
+    "filename": "VS-19TQ015SPBF.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY HIGH POWER PRODUCTS",
+    "mpns": [
+      "VS-19TQ015S"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-20TQ045STRLH.pdf": {
+    "filename": "VS-20TQ045STRLH.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY HIGH POWER PRODUCTS",
+    "mpns": [
+      "VS-20TQ045STRLH"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-2KBB.pdf": {
+    "filename": "VS-2KBB.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY",
+    "mpns": [
+      "VS-2KBB80R"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-30BQ100-M3.pdf": {
+    "filename": "VS-30BQ100-M3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "VS-30BQ100"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-40HF100.pdf": {
+    "filename": "VS-40HF100.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "VS-40HF100"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-45xPS16L-M3.pdf": {
+    "filename": "VS-45xPS16L-M3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY",
+    "mpns": [
+      "VS-45EPS16L-M3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-48CTQ060SPbF.pdf": {
+    "filename": "VS-48CTQ060SPbF.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY HIGH POWER PRODUCTS",
+    "mpns": [
+      "VS-48CTQ060S"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-65xPS12L-M3.pdf": {
+    "filename": "VS-65xPS12L-M3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY",
+    "mpns": [
+      "VS-65EPS12L-M3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-6CWQ03FNPbF.pdf": {
+    "filename": "VS-6CWQ03FNPbF.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "VS-6CWQ03FN"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-70HFR120.pdf": {
+    "filename": "VS-70HFR120.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "VS-70HFR120"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-8TQ100PbF.pdf": {
+    "filename": "VS-8TQ100PbF.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "VS-8TQ100"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-MBR1035-M3.pdf": {
+    "filename": "VS-MBR1035-M3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "VS-MBR1035-M3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VS-STPS1L30UPBF.pdf": {
+    "filename": "VS-STPS1L30UPBF.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY HIGH POWER PRODUCTS",
+    "mpns": [
+      "VS-STPS1L30U"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VSSAF3103.pdf": {
+    "filename": "VSSAF3103.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "VSSAF3103-M3"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "VT10200C-M3.pdf": {
+    "filename": "VT10200C-M3.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "VT10200C"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "W005G-E4-51.pdf": {
+    "filename": "W005G-E4-51.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY GENERAL SEMICONDUCTOR",
+    "mpns": [
+      "W005G-E4/51"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ZEN056V130A24LS.pdf": {
+    "filename": "ZEN056V130A24LS.pdf",
+    "local_path": "",
+    "manufacturer": "LITTELFUSE",
+    "mpns": [
+      "ZEN056V130A24LS"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ZMSW-1211.pdf": {
+    "filename": "ZMSW-1211.pdf",
+    "local_path": "",
+    "manufacturer": "MINI-CIRCUITS",
+    "mpns": [
+      "ZMSW-1211"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  },
+  "ZMY12.pdf": {
+    "filename": "ZMY12.pdf",
+    "local_path": "",
+    "manufacturer": "VISHAY SEMICONDUCTORS",
+    "mpns": [
+      "ZMY12"
+    ],
+    "source_url": "",
+    "status": "pending",
+    "verify": "unchecked"
+  }
+}
