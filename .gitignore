@@ -43,6 +43,7 @@ Thumbs.db
 *.zip
 *.tar.gz
 terra_*.kicad_dbl
+terra.kicad_dbl
 
 # Project-local DB and config (per-project, not tracked)
 terra_local.db

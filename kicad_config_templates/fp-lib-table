@@ -2,4 +2,7 @@
   (version 7)
   (lib (name "Terra_Custom")(type "KiCad")(uri "${TERRA_EDA_LIB}/assets/footprints/Custom.pretty")(options "")(descr "Terra custom footprints"))
   (lib (name "Terra_Standard")(type "KiCad")(uri "${TERRA_EDA_LIB}/assets/footprints/Standard.pretty")(options "")(descr "Terra standard footprints"))
+  (lib (name "cern_ICs_SMD")(type "KiCad")(uri "${TERRA_EDA_LIB}/assets/footprints/cern/ICs And Semiconductors SMD.pretty")(options "")(descr "CERN IC/semiconductor SMD footprints"))
+  (lib (name "cern_ICs_THD")(type "KiCad")(uri "${TERRA_EDA_LIB}/assets/footprints/cern/ICs And Semiconductors THD.pretty")(options "")(descr "CERN IC/semiconductor THD footprints"))
+  (lib (name "cern_ICs_BONDING")(type "KiCad")(uri "${TERRA_EDA_LIB}/assets/footprints/cern/ICs And Semiconductors BONDING.pretty")(options "")(descr "CERN IC/semiconductor bonding footprints"))
 )
