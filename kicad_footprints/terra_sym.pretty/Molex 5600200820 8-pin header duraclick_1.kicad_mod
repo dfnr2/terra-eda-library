@@ -1,0 +1,131 @@
+(footprint "Molex 5600200820 8-pin header duraclick_1"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "J**"
+		(at -5.334 -6.096 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "60a7dcc1-b459-4b69-be02-f48b66a815f0")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "Molex 5600200320 3-pin header duraclick_1"
+		(at -0.635 -12.065 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "fbca7d5b-4a19-4f46-9697-74b3068179aa")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "3ae385d0-5088-408b-ae29-0408f57b2d98")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "ab133477-698b-4ac0-bd37-9574b10fe0ec")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_rect
+		(start -6.731 -2.159)
+		(end 6.731 4.318)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "8c65d639-2c7e-432d-bc2d-cd7263d4f689")
+	)
+	(fp_rect
+		(start 6.604 -5.08)
+		(end -6.731 4.318)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "fedb7d4b-8ca2-493c-b9a1-22e781d6d436")
+	)
+	(fp_text user "${REFERENCE}"
+		(at -15.24 -13.335 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "7401f61b-dc36-4f5a-ba3e-b101a22bf1fc")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at -2 -3.548)
+		(size 1.2 2.2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "33ef82c8-b659-42b6-9429-5436a00e7b54")
+	)
+	(pad "2" smd rect
+		(at 0 -3.548)
+		(size 1.2 2.2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "937928d4-4dfb-4f2f-91d0-697ec54ac283")
+	)
+	(pad "3" smd rect
+		(at 2 -3.548)
+		(size 1.2 2.2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "3b9ce6b0-047c-4e71-81a7-b0a5c13aa4d2")
+	)
+	(pad "M" smd rect
+		(at -5.6 2.032)
+		(size 2 4.2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "01106a52-6b7d-40fd-b165-c927be1f6a1d")
+	)
+	(pad "M" smd rect
+		(at 5.6 2.032)
+		(size 2 4.2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "2952439a-4d93-45a3-a998-2b2fce2c5fe9")
+	)
+	(embedded_fonts no)
+	(model "${TERRA_EDA_LIB}/assets/3dmodels/legacy.3dshapes/5600200320.stp"
+		(offset
+			(xyz 0 0 3.1)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 -0 -0)
+		)
+	)
+)

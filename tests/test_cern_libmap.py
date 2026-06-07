@@ -3,12 +3,12 @@ from tools import cern_libmap as lm
 
 def test_symbol_rewrite():
     assert lm.rewrite_ref("Diodes:Diode TVS Bi-Directional", lm.SYMBOL_LIB_NICK) \
-        == "cern_Diodes:Diode TVS Bi-Directional"
+        == "cern-diodes:Diode TVS Bi-Directional"
 
 
 def test_footprint_rewrite():
     assert lm.rewrite_ref("ICs And Semiconductors SMD:EATON_0402ESDA-MLP", lm.FOOTPRINT_LIB_NICK) \
-        == "cern_ICs_SMD:EATON_0402ESDA-MLP"
+        == "cern-ics-and-semiconductors-smd:EATON_0402ESDA-MLP"
 
 
 def test_unknown_lib_passthrough():

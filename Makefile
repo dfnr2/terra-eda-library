@@ -139,9 +139,15 @@ endef
 # Global Targets (must be before dynamic rule generation)
 # ============================================================================
 
-# Default target: build per-table DBs, master DB, and kicad_dbl
+# Default target: build per-table DBs, master DB, kicad_dbl, and lib-tables
 .PHONY: all build
-all build: $(DB_FILES) db/terra.db terra.kicad_dbl
+all build: $(DB_FILES) db/terra.db terra.kicad_dbl lib-tables
+
+# Generate the symbol/footprint lib-tables from the kicad_symbols/ and
+# kicad_footprints/ hierarchy (registration is an output of the build).
+.PHONY: lib-tables
+lib-tables: $(VENV_MARKER)
+	@$(PYTHON) tools/generate_lib_tables.py
 
 # Generate rules for all discovered tables
 $(foreach table,$(TABLES),$(eval $(call TABLE_RULES,$(table))))

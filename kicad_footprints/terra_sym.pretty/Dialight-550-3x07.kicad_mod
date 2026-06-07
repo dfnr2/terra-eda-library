@@ -1,0 +1,220 @@
+(footprint "Dialight-550-3x07"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "Dialight-550-3x07 series LED")
+	(property "Reference" "LED**"
+		(at 0.14 -1.95 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "2e01c881-20f8-473c-9d51-04dbdef19db4")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "5MM LED"
+		(at -6.94 6.42 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "fd659fa0-471d-498e-9943-08dacd12f8f5")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" "https://www.mouser.com/catalog/specsheets/550-3x07-010.pdf"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a9a75dde-fbb9-4d00-9594-1a7067ccb114")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" "5mm CBI 1x1 LED, BiColor R/G"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "765ed7f7-595c-479b-991a-cca7daeddadb")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_line
+		(start -3.1 -1)
+		(end -3.1 7.74)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "b887b378-def8-4cac-b52f-443a9d0bc4c0")
+	)
+	(fp_line
+		(start -2.5 7.74)
+		(end -2.5 10.24)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "c3cef329-bf96-439f-a254-a569632dff2e")
+	)
+	(fp_line
+		(start 2.5 7.74)
+		(end 2.5 10.24)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "784d13d3-6952-4b9c-9daf-e6a40d77f301")
+	)
+	(fp_line
+		(start 3.1 -1)
+		(end 3.1 7.74)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "9398f4a0-41f3-47a4-becb-0a8a21bc052e")
+	)
+	(fp_rect
+		(start -3.1 -1)
+		(end 3.1 -1)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "07ef5ba6-15be-42d6-b962-2ac080f291bf")
+	)
+	(fp_rect
+		(start -3.1 7.74)
+		(end 3.1 7.74)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "b0accb46-0c94-4e78-a307-7ab6ac0626c9")
+	)
+	(fp_arc
+		(start 2.5 10.24)
+		(mid 0 12.74)
+		(end -2.5 10.24)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "0406d29b-1f9e-471c-b7e8-5369f8bb2f77")
+	)
+	(fp_line
+		(start -3.3 12.9)
+		(end -3.3 -1.2)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "14315c43-730b-4256-b855-7e9fd89c1c05")
+	)
+	(fp_line
+		(start -3.3 12.9)
+		(end 3.3 12.9)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "7acd6a0e-faee-4437-b677-0e2bef597632")
+	)
+	(fp_line
+		(start 3.3 -1.2)
+		(end -3.3 -1.2)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "663dd6cf-c64d-4cf9-a170-c24f63359e42")
+	)
+	(fp_line
+		(start 3.3 12.9)
+		(end 3.3 -1.2)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "1e8935fb-755d-458c-8799-17a38efbe610")
+	)
+	(fp_text user "${REFERENCE}"
+		(at -11.5 14 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "50efcc39-1b7a-4f35-b4ff-7c01626fb608")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at 0.01 0)
+		(size 1.524 1.524)
+		(drill 1.1684)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "2606be4a-5727-4ada-9456-b7a62430bdaf")
+	)
+	(pad "2" thru_hole circle
+		(at -1.27 2.54)
+		(size 1.524 1.524)
+		(drill 1.1684)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "091b5d2f-3c4a-4361-a963-f4a6cc416080")
+	)
+	(pad "3" thru_hole circle
+		(at 1.27 2.54)
+		(size 1.524 1.524)
+		(drill 1.1684)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "8d066f3f-cec7-45e6-b0c4-57392608746f")
+	)
+	(embedded_fonts no)
+	(model "${TERRA_EDA_LIB}/assets/3dmodels/legacy.3dshapes/dialight-550-35xF.step"
+		(offset
+			(xyz -3 -7.6 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 -0 -0)
+		)
+	)
+)

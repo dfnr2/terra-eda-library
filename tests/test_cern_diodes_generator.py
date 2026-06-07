@@ -60,8 +60,8 @@ def test_map_row_known_part():
     assert m["component_height"] == "0.44mm"
     assert m["lifecycle_status"] == "Active"
     assert m["diode_type"] == "TVS Bi-Directional"
-    assert m["kicad_symbol"] == "cern_Diodes:Diode TVS Bi-Directional"
-    assert m["kicad_footprint"] == "cern_ICs_SMD:EATON_0402ESDA-MLP"
+    assert m["kicad_symbol"] == "cern-diodes:Diode TVS Bi-Directional"
+    assert m["kicad_footprint"] == "cern-ics-and-semiconductors-smd:EATON_0402ESDA-MLP"
     assert m["datasheet"] == "0402ESDA-MLP.pdf"
     assert m["tags"] == "diode"
 

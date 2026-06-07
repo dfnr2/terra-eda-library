@@ -39,14 +39,14 @@ def test_known_part_mapping():
     assert r["component_height"] == "0.44mm"
     assert r["lifecycle_status"] == "Active"
     assert r["diode_type"] == "TVS Bi-Directional"
-    assert r["kicad_symbol"] == "cern_Diodes:Diode TVS Bi-Directional"
-    assert r["kicad_footprint"] == "cern_ICs_SMD:EATON_0402ESDA-MLP"
+    assert r["kicad_symbol"] == "cern-diodes:Diode TVS Bi-Directional"
+    assert r["kicad_footprint"] == "cern-ics-and-semiconductors-smd:EATON_0402ESDA-MLP"
 
 
 def test_all_symbol_nicks_registered():
     con = _con()
-    sym = (ROOT / "kicad_config_templates/sym-lib-table").read_text()
-    fp = (ROOT / "kicad_config_templates/fp-lib-table").read_text()
+    sym = (ROOT / "kicad_symbols/sym-lib-table").read_text()
+    fp = (ROOT / "kicad_footprints/fp-lib-table").read_text()
     for (val,) in con.execute(
             "SELECT DISTINCT kicad_symbol FROM cern_diodes WHERE kicad_symbol != ''"):
         nick = val.split(":", 1)[0]
@@ -58,43 +58,32 @@ def test_all_symbol_nicks_registered():
 
 
 def test_all_footprint_files_resolve():
-    """Every kicad_footprint must point at an actual .kicad_mod in the copied libs."""
-    import sys
-    sys.path.insert(0, str(ROOT))
-    from tools import cern_libmap as lm
-    nick_to_dir = {v: f"{k}.pretty" for k, v in lm.FOOTPRINT_LIB_NICK.items()}
+    """Every kicad_footprint must point at an actual .kicad_mod in kicad_footprints/.
+    The nickname equals the copied lib's filename stem (<nick>.pretty)."""
     con = _con()
     missing = []
     for (val,) in con.execute(
             "SELECT DISTINCT kicad_footprint FROM cern_diodes WHERE kicad_footprint LIKE '%:%'"):
         nick, name = val.split(":", 1)
-        d = nick_to_dir.get(nick)
-        if d is None:
-            missing.append(f"{val} (unknown nick)")
-            continue
-        if not (ROOT / "assets/footprints/cern" / d / f"{name}.kicad_mod").is_file():
+        if not (ROOT / "kicad_footprints" / f"{nick}.pretty" / f"{name}.kicad_mod").is_file():
             missing.append(val)
     assert not missing, f"{len(missing)} unresolved footprints, e.g. {missing[:5]}"
 
 
 def test_all_symbol_items_resolve():
-    """Every kicad_symbol must name an item that exists in the copied symbol lib."""
-    import sys
-    sys.path.insert(0, str(ROOT))
-    from tools import cern_libmap as lm
-    nick_to_file = {v: f"{k}.kicad_sym" for k, v in lm.SYMBOL_LIB_NICK.items()}
+    """Every kicad_symbol must name an item that exists in kicad_symbols/<nick>.kicad_sym."""
     cache = {}
     con = _con()
     missing = []
     for (val,) in con.execute(
             "SELECT DISTINCT kicad_symbol FROM cern_diodes WHERE kicad_symbol LIKE '%:%'"):
         nick, name = val.split(":", 1)
-        fn = nick_to_file.get(nick)
-        if fn is None:
-            missing.append(f"{val} (unknown nick)")
+        f = ROOT / "kicad_symbols" / f"{nick}.kicad_sym"
+        if not f.is_file():
+            missing.append(f"{val} (no lib {nick}.kicad_sym)")
             continue
-        if fn not in cache:
-            cache[fn] = (ROOT / "assets/symbols/cern" / fn).read_text()
-        if f'(symbol "{name}"' not in cache[fn]:
+        if nick not in cache:
+            cache[nick] = f.read_text()
+        if f'(symbol "{name}"' not in cache[nick]:
             missing.append(val)
     assert not missing, f"{len(missing)} unresolved symbols, e.g. {missing[:5]}"

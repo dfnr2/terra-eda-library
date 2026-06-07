@@ -1,0 +1,221 @@
+(footprint "Dialight-550-series"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "Dialight-550-series LED")
+	(property "Reference" "LED**"
+		(at 0.14 -1.95 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "2e01c881-20f8-473c-9d51-04dbdef19db4")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "5MM LED"
+		(at -6.94 6.42 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "fd659fa0-471d-498e-9943-08dacd12f8f5")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" "https://s3-us-west-2.amazonaws.com/catsy.557/C17264.pdf"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a9a75dde-fbb9-4d00-9594-1a7067ccb114")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" "5mm CBI 1x1 LED"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "765ed7f7-595c-479b-991a-cca7daeddadb")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_line
+		(start -3.7138 7.3965)
+		(end -3.7138 5.105398)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "ef42777f-6cda-4299-97ff-02e0b7643fa6")
+	)
+	(fp_line
+		(start 1.27 7.3965)
+		(end 1.27 5.1)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "a5c399c7-928f-4737-8623-8c2d9d4db72a")
+	)
+	(fp_rect
+		(start -4.3842 -0.889)
+		(end 1.8642 5.1054)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "07ef5ba6-15be-42d6-b962-2ac080f291bf")
+	)
+	(fp_arc
+		(start 1.27 7.3965)
+		(mid -1.2219 9.8884)
+		(end -3.7138 7.3965)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "0406d29b-1f9e-471c-b7e8-5369f8bb2f77")
+	)
+	(fp_line
+		(start -4.5 -1.02)
+		(end -4.5 5.25)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "9d2f5aeb-7adf-46cf-89ef-de9b891a2ed6")
+	)
+	(fp_line
+		(start -4.5 5.25)
+		(end -3.87 5.25)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "83467331-06b5-494f-83ed-71104cff0686")
+	)
+	(fp_line
+		(start -3.87 5.25)
+		(end -3.87 9.99)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "83c4ed2a-6b03-49c3-97cc-018ec9f33cba")
+	)
+	(fp_line
+		(start -3.87 10)
+		(end 1.37 10)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "7acd6a0e-faee-4437-b677-0e2bef597632")
+	)
+	(fp_line
+		(start 1.37 5.23)
+		(end 1.99 5.23)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "3803cb44-01f3-4d95-b470-39821eb91fd1")
+	)
+	(fp_line
+		(start 1.37 10)
+		(end 1.37 5.23)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "5a35e7e0-3ea4-4b6c-ad17-3fb88bdc8a9e")
+	)
+	(fp_line
+		(start 1.99 -1.02)
+		(end -4.5 -1.02)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "663dd6cf-c64d-4cf9-a170-c24f63359e42")
+	)
+	(fp_line
+		(start 1.99 5.23)
+		(end 1.99 -1.02)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "1e8935fb-755d-458c-8799-17a38efbe610")
+	)
+	(fp_text user "${REFERENCE}"
+		(at -1.905 10.795 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "50efcc39-1b7a-4f35-b4ff-7c01626fb608")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at 0.01 0)
+		(size 1.524 1.524)
+		(drill 1.1684)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "2606be4a-5727-4ada-9456-b7a62430bdaf")
+	)
+	(pad "2" thru_hole circle
+		(at -2.53 0)
+		(size 1.524 1.524)
+		(drill 1.1684)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "091b5d2f-3c4a-4361-a963-f4a6cc416080")
+	)
+	(embedded_fonts no)
+	(model "${TERRA_EDA_LIB}/assets/3dmodels/legacy.3dshapes/550XX05F.stp"
+		(offset
+			(xyz -4.25 -5.4 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 -0 -0)
+		)
+	)
+)

@@ -1,5 +1,5 @@
 (sym_lib_table
   (version 7)
-  (lib (name "terra_sym")(type "KiCad")(uri "${TERRA_EDA_LIB}/terra_sym.kicad_sym")(options "")(descr "Terra EDA Symbol Library"))
-  (lib (name "cern_Diodes")(type "KiCad")(uri "${TERRA_EDA_LIB}/assets/symbols/cern/Diodes.kicad_sym")(options "")(descr "CERN diode symbols"))
+  ; terra-owned symbol libs — generated table (kicad_symbols/sym-lib-table) included as one entry
+  (lib (name "terra_symbols")(type "Table")(uri "${TERRA_EDA_LIB}/kicad_symbols/sym-lib-table")(options "")(descr "Terra + vendor symbol libraries"))
 )

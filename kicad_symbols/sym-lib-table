@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "cern-diodes")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-diodes.kicad_sym")(options "")(descr ""))
+  (lib (name "terra_sym")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_sym.kicad_sym")(options "")(descr ""))
+)
