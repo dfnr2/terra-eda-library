@@ -91,5 +91,6 @@ CREATE TABLE connectors (
 
         -- Mating / System Integration
         mating_family TEXT,           -- e.g. 'mates with MicroFit receptacles'
-        mating_part_hint TEXT         -- free text for common mating MPNs / internal part_id
+        mating_part_hint TEXT,        -- free text for common mating MPNs / internal part_id
+        "variant" TEXT
     );

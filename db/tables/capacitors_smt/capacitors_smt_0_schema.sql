@@ -61,5 +61,6 @@ CREATE TABLE capacitors_smt (
         aec_q_rating TEXT,
 
         -- Mechanical
-        height_max_mm REAL
+        height_max_mm REAL,
+    "variant" TEXT
     );

@@ -47,7 +47,14 @@ CREATE TABLE IF NOT EXISTS inductors (
   "source" TEXT,
   "dump_priority" INTEGER,
     "tier" INTEGER DEFAULT 5,
-    "tags" TEXT DEFAULT ''
+    "tags" TEXT DEFAULT '',
+    "lifecycle_status" TEXT DEFAULT 'Active',
+    "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "created_by" TEXT,
+    "sim_model_type" TEXT,
+    "sim_model_file" TEXT,
+    "sim_params" TEXT
 );
 
 -- Insert symbols

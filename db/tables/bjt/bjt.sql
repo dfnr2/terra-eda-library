@@ -53,7 +53,11 @@ CREATE TABLE bjt (
     temp_storage TEXT,
     temp_junction_max TEXT,
     "tier" INTEGER DEFAULT 5,
-    "tags" TEXT DEFAULT ''
+    "tags" TEXT DEFAULT '',
+    "part_locator" TEXT,
+    "variant" TEXT,
+    "source" TEXT DEFAULT 'static',
+    "dump_priority" INTEGER DEFAULT 1
 );
 
 -- No data in table bjt

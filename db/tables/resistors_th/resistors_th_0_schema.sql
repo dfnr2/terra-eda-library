@@ -52,5 +52,6 @@ CREATE TABLE resistors_th (
         composition TEXT,
         temp_operating TEXT,
         temp_soldering TEXT,
-        temp_storage TEXT
+        temp_storage TEXT,
+    "package" TEXT
     );

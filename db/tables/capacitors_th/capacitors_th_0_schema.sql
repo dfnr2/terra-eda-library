@@ -64,5 +64,7 @@ CREATE TABLE capacitors_th (
         temp_soldering TEXT,
         temp_storage TEXT,
         lifetime_hours_at_max_temp INTEGER,
-        aec_q_rating TEXT
+        aec_q_rating TEXT,
+    "variant" TEXT,
+    "package" TEXT
     );
