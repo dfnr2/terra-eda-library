@@ -208,11 +208,12 @@ def generate_unified_dbl_file(db_path: Path, output_dir: Path, tables: List[str]
     odbc_driver = find_sqlite_odbc_driver()
     print(f'  Using ODBC driver: {odbc_driver}')
 
-    # Point at the master DB via ${TERRA_EDA_LIB}, a globally-registered KiCad path
-    # substitution that is available when a global database library connects.
-    # (${KIPRJMOD} is a project-context variable that is NOT resolved at global
-    # DB-lib connect time, so it produced "[SQLite]connect failed".)
-    db_kicad_path = '${TERRA_EDA_LIB}/db/terra.db'
+    # KiCad does NOT expand path variables inside the ODBC connection string
+    # (only in the lib-table file URI) — ${KIPRJMOD} and ${TERRA_EDA_LIB} both
+    # produced "[SQLite]connect failed". The connection string is handed to the
+    # driver verbatim, so emit an absolute path to the master DB. terra.kicad_dbl
+    # is generated/gitignored and rebuilt per machine, so this stays correct.
+    db_kicad_path = str(db_path.resolve())
 
     # Create the unified .kicad_dbl structure
     dbl_config = {
