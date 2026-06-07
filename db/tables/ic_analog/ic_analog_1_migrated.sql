@@ -45,7 +45,9 @@ CREATE TABLE IF NOT EXISTS ic_analog (
   "altium_symbol" TEXT,
   "variant" TEXT,
   "source" TEXT,
-  "dump_priority" INTEGER
+  "dump_priority" INTEGER,
+    "tier" INTEGER DEFAULT 5,
+    "tags" TEXT DEFAULT ''
 );
 
 -- Insert symbols

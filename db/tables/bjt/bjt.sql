@@ -1,6 +1,6 @@
 -- Terra EDA Library - bjt Table
 -- Number of components: 0
--- Sorted by: part_id
+-- Sorted by: unique_id
 --
 -- This file is auto-generated and suitable for git tracking.
 -- Rows are sorted deterministically to ensure consistent diffs.
@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS bjt;
 
 CREATE TABLE bjt (
     -- Core fields (same as all tables)
-    part_id TEXT PRIMARY KEY,
+    unique_id TEXT PRIMARY KEY,
     mpn TEXT NOT NULL,
     manufacturer TEXT NOT NULL,
     package TEXT,
@@ -51,7 +51,9 @@ CREATE TABLE bjt (
     transition_freq TEXT,    -- fT
     temp_operating TEXT,
     temp_storage TEXT,
-    temp_junction_max TEXT
+    temp_junction_max TEXT,
+    "tier" INTEGER DEFAULT 5,
+    "tags" TEXT DEFAULT ''
 );
 
 -- No data in table bjt
