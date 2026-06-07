@@ -198,11 +198,16 @@ db/terra.db: $(GLOBAL_SQL) $(foreach table,$(TABLES),$($(table)_ALL_SQL))
 	done
 	@echo "  Creating filtered views..."
 	@for table_name in $(PART_TABLES); do \
-		sqlite3 $@ "CREATE VIEW IF NOT EXISTS $${table_name}_v AS \
-			SELECT p.* FROM $$table_name p \
-			LEFT JOIN active_tagged_ids a ON a.unique_id = p.unique_id \
-			WHERE p.tier <= (SELECT COALESCE(MAX(tier_level), $(DEFAULT_TIER)) FROM terra_tier_config) \
-			   OR a.unique_id IS NOT NULL;"; \
+		has_tier=$$(sqlite3 $@ "SELECT COUNT(*) FROM pragma_table_info('$$table_name') WHERE name='tier';"); \
+		if [ "$$has_tier" = "1" ]; then \
+			sqlite3 $@ "CREATE VIEW IF NOT EXISTS $${table_name}_v AS \
+				SELECT p.* FROM $$table_name p \
+				LEFT JOIN active_tagged_ids a ON a.unique_id = p.unique_id \
+				WHERE p.tier <= (SELECT COALESCE(MAX(tier_level), $(DEFAULT_TIER)) FROM terra_tier_config) \
+				   OR a.unique_id IS NOT NULL;"; \
+		else \
+			sqlite3 $@ "CREATE VIEW IF NOT EXISTS $${table_name}_v AS SELECT * FROM $$table_name;"; \
+		fi; \
 	done
 	@echo "  Tier distribution:"
 	@for table_name in $(PART_TABLES); do \
