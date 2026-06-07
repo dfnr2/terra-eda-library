@@ -1,0 +1,240 @@
+* Terra EDA Library: Tier & Tag System Specification
+
+** Motivation
+
+KiCad does not implement lazy part evaluation, so loading large libraries
+is slow. We need a mechanism to control which parts are visible without
+regenerating the library. Two orthogonal selection criteria:
+
+1. *Tier* (staged inclusion): integer column on every part, 0 = highest
+   priority. A configurable cutoff includes all parts at or below the
+   requested tier.
+2. *Tags* (categorical inclusion): string labels attached to parts.
+   Parts matching any active tag are included regardless of tier.
+
+** Schema Changes
+
+*** Tier Column (core field on all part tables)
+
+Added to every =*_0_schema.sql= after =dump_priority=:
+
+#+begin_src sql
+tier INTEGER DEFAULT 5,
+tags TEXT DEFAULT '',
+#+end_src
+
+- =tier=: integer, 0 = most important. Lower numbers load first.
+- =tags=: comma-delimited string (e.g. ="passive,precision"=).
+  Redundant with the =tags= table, but provides a migration path
+  for when KiCad implements lazy loading and the join table can be
+  phased out.
+
+*** Tags Table (many-to-many, built by generators)
+
+Created by a new schema file loaded before any part tables:
+
+#+begin_src sql
+DROP TABLE IF EXISTS tags;
+CREATE TABLE tags (
+    unique_id TEXT NOT NULL,
+    tag TEXT NOT NULL,
+    PRIMARY KEY (unique_id, tag)
+);
+#+end_src
+
+Generators emit INSERT statements into this table alongside part INSERTs.
+Each part can have multiple tags. Tags are lowercase, hyphen-separated
+(e.g. =analog=, =high-rel=, =ttl=, =interface=).
+
+*** User Tags Table (project-specific, gitignored)
+
+File: =terra_tags.sql= (root of repo, gitignored)
+
+#+begin_src sql
+DROP TABLE IF EXISTS user_tags;
+CREATE TABLE user_tags (
+    unique_id TEXT NOT NULL,
+    tag TEXT NOT NULL,
+    PRIMARY KEY (unique_id, tag)
+);
+
+BEGIN TRANSACTION;
+INSERT INTO user_tags VALUES ('Samsung-CL10A104KA8NNN', 'project-alpha');
+-- ...
+COMMIT;
+#+end_src
+
+- Not tracked in git.
+- Makefile creates an empty default if the file does not exist.
+- Future plugin will provide UI for selecting parts from BOM and
+  generating this file.
+
+*** Tier Config Table (user-controlled)
+
+File: =terra_config.sql= (root of repo, gitignored)
+
+#+begin_src sql
+DROP TABLE IF EXISTS terra_tier_config;
+CREATE TABLE terra_tier_config (
+    tier_level INTEGER NOT NULL
+);
+INSERT INTO terra_tier_config VALUES (3);
+
+DROP TABLE IF EXISTS terra_tag_config;
+CREATE TABLE terra_tag_config (
+    tag TEXT NOT NULL PRIMARY KEY
+);
+
+BEGIN TRANSACTION;
+INSERT INTO terra_tag_config VALUES ('analog');
+INSERT INTO terra_tag_config VALUES ('passive');
+COMMIT;
+#+end_src
+
+- =terra_tier_config=: single row, sets the active tier cutoff.
+- =terra_tag_config=: one row per active tag name.
+- Gitignored. Makefile generates a sensible default (tier=5, no tags)
+  if the file does not exist.
+
+** Tier Assignments
+
+| Source                        | Tier | Rationale                    |
+|-------------------------------+------+------------------------------|
+| Hand-curated static parts     |    5 | Default for all tables       |
+| E24 resistor/cap values       |    3 | Standard series, most common |
+| Samsung catalog caps          |    5 | Catalog parts                |
+| KEMET C0G caps (E24-based)    |    3 | Standard E24 values          |
+| E96 resistor values           |    6 | Fine-grained, less common    |
+| E192 resistor values (future) |    8 | Rarely needed                |
+
+** Default Tags
+
+Generators assign tags based on component type and characteristics:
+
+| Tag         | Applied to                              |
+|-------------+-----------------------------------------|
+| =passive=   | Resistors, capacitors, inductors        |
+| =analog=    | Op-amps, analog ICs, precision parts    |
+| =digital=   | Logic ICs, microcontrollers, memory     |
+| =interface= | Connectors, interface ICs               |
+| =ttl=       | TTL-family logic ICs                    |
+| =power=     | MOSFETs, drivers, voltage regulators    |
+| =precision= | Thin film resistors, C0G caps, 1% tol  |
+| =vintage=   | Legacy/obsolete parts kept for ref      |
+
+Tags are not mutually exclusive. A thin-film resistor might be tagged
+=passive,precision=.
+
+** KiCad .kicad_dbl Integration
+
+The =.kicad_dbl= generator must be updated to use SQL views or queries
+instead of raw table names, so that tier and tag filtering is applied.
+
+*** Approach: SQL Views
+
+For each part table, create a view that applies the tier/tag filter:
+
+#+begin_src sql
+CREATE VIEW capacitors_smt_v AS
+SELECT p.* FROM capacitors_smt p
+WHERE p.tier <= (SELECT tier_level FROM terra_tier_config LIMIT 1)
+   OR EXISTS (
+       SELECT 1 FROM (
+           SELECT unique_id, tag FROM tags
+           UNION ALL
+           SELECT unique_id, tag FROM user_tags
+       ) t
+       JOIN terra_tag_config c ON t.tag = c.tag
+       WHERE t.unique_id = p.unique_id
+   );
+#+end_src
+
+The =.kicad_dbl= generator references the view name (=capacitors_smt_v=)
+instead of the raw table name. If no config tables exist, the view
+degrades gracefully (show all parts).
+
+*** Fallback When No Config Exists
+
+Views should handle missing config gracefully. If =terra_tier_config= is
+empty or missing, default to showing all parts. The Makefile ensures
+config tables always exist (even if empty/default).
+
+** Generator Changes
+
+*** All Generators
+
+- Add =tier= and =tags= to INSERT column lists.
+- Emit =INSERT INTO tags= statements for each part.
+
+*** Yageo Resistor Generators (run_200, run_210)
+
+Currently E24 and E96 values are unioned into a single set, losing
+series origin. Change to:
+
+1. Generate E24 values into a set.
+2. Generate E96 values into a separate set.
+3. For each value, determine tier:
+   - If value is in E24 set → tier 3
+   - If value is only in E96 set → tier 6
+4. Union the sets for iteration, but carry the tier per value.
+
+*** KEMET Cap Generator (run_300)
+
+- All values are E24-based → tier 3.
+- Tags: =passive=.
+
+*** Samsung Cap Generator (run_400)
+
+- All parts → tier 5 (catalog default).
+- Tags: =passive=.
+
+** Build System Changes
+
+*** Makefile
+
+1. Add a =db/tables/_global/= directory (or similar) containing the
+   =tags= table schema, loaded before all part tables.
+2. After building =terra.db= from part tables, conditionally apply:
+   - =terra_tags.sql= (if exists) — user tags
+   - =terra_config.sql= (if exists) — tier/tag config
+   - If =terra_config.sql= does not exist, generate a default.
+3. Create filtered views for each part table.
+4. Add =TIER= and =TAGS= make variables for command-line override:
+   =make TIER=3 TAGS=analog,passive=
+
+*** .gitignore
+
+Add:
+#+begin_src
+terra_tags.sql
+terra_config.sql
+#+end_src
+
+** File Summary
+
+| File                              | Tracked | Purpose                        |
+|-----------------------------------+---------+--------------------------------|
+| =db/tables/*/_0_schema.sql=      | Yes     | Add =tier=, =tags= columns     |
+| =db/tables/_global/tags.sql=     | Yes     | =tags= table schema            |
+| =terra_tags.sql=                  | No      | User project tags              |
+| =terra_config.sql=                | No      | User tier/tag config           |
+| =tools/generate_kicad_dbl_files.py= | Yes  | Use views instead of tables    |
+| All generator =run_*.py= files   | Yes     | Emit tier, tags, tag inserts   |
+| =Makefile=                        | Yes     | Config defaults, view creation |
+
+** Verification
+
+#+begin_src shell
+make clean && make
+sqlite3 db/terra.db "SELECT tier, COUNT(*) FROM resistors_smt GROUP BY tier"
+sqlite3 db/terra.db "SELECT tier, COUNT(*) FROM capacitors_smt GROUP BY tier"
+sqlite3 db/terra.db "SELECT tag, COUNT(*) FROM tags GROUP BY tag"
+sqlite3 db/terra.db "SELECT * FROM capacitors_smt_v LIMIT 5"
+#+end_src
+
+** Future Work
+
+- KiCad plugin for BOM-driven tag assignment and config UI.
+- Lazy loading in KiCad would allow phasing out the =tags= join table
+  in favor of the =tags= TEXT column on each part.
+- Per-project =terra_config.sql= tied to KiCad project directories.

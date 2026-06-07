@@ -815,27 +815,22 @@ def generate_resistors() -> str:
         print("Warning: No package/tempco combinations enabled!")
         return ""
 
-    # Generate resistance values per E-series for tier assignment
-    e24_values = set()
-    other_values = set()
+    # Generate resistance values by unioning all enabled E-series
+    resistance_values = set()
     for series_num in enabled_series:
-        values = set(generate_resistance_values_in_range(
+        values = generate_resistance_values_in_range(
             GLOBAL_MIN_OHM, GLOBAL_MAX_OHM, series_num
-        ))
-        if series_num <= 24:
-            e24_values |= values
-        else:
-            other_values |= values
+        )
+        resistance_values |= set(values)
 
-    # Build tier map: E24 values get tier 3, E96-only values get tier 6
-    tier_map = {}
-    for v in e24_values:
-        tier_map[v] = 3
-    for v in other_values:
-        if v not in tier_map:
-            tier_map[v] = 6
+    resistance_values = sorted(resistance_values)
 
-    resistance_values = sorted(tier_map.keys())
+    # Tier is determined by package size, not E-series origin
+    PACKAGE_TIER = {
+        "0603": 0, "0805": 0,
+        "0402": 1, "1206": 1,
+        "0201": 2, "2512": 2,
+    }
 
     # KiCad symbol reference (same for all resistors)
     symbol_ref = KICAD_CONFIG["symbol"]
@@ -912,8 +907,8 @@ def generate_resistors() -> str:
             source_sql = "NULL" if SOURCE is None else f"'{SOURCE}'"
             variant_sql = "NULL"
 
-            # Determine tier: 0Ω jumpers get tier 3, others from tier_map
-            part_tier = 3 if resistance_ohms == 0 else tier_map.get(resistance_ohms, 5)
+            # Tier by package size (0Ω jumpers same tier as their package)
+            part_tier = PACKAGE_TIER.get(spec["package"], 2)
 
             # Generate INSERT statement - all fields from spec
             sql_line = SQL_TEMPLATES["insert"].format(

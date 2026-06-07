@@ -556,6 +556,59 @@ def sql_escape(s: str) -> str:
     return s.replace("'", "''")
 
 
+# E12 mantissa values for capacitance tier classification
+E12_MANTISSAS = {1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2}
+
+
+def is_e12_value(cap_pf: float) -> bool:
+    """
+    Check if a capacitance value's mantissa matches the E12 series.
+
+    Normalizes the value to [1.0, 10.0) and checks against E12 mantissas.
+    """
+    if cap_pf <= 0:
+        return False
+    import math
+    exp = math.floor(math.log10(cap_pf))
+    mantissa = round(cap_pf / (10 ** exp), 2)
+    # Handle floating point edge cases (e.g. 0.99999 → 1.0)
+    if mantissa < 1.0:
+        mantissa *= 10
+    return mantissa in E12_MANTISSAS
+
+
+def assign_tier(dielectric: str, case_size: str, voltage: float, cap_pf: float) -> int:
+    """
+    Assign tier based on dielectric, E12 membership, case size, and voltage.
+
+    Tier rules (from spec):
+      Y5V or 1812 case → 4
+      C0G              → 3
+      Non-E12 + X7R/X5R → 2
+      E12 + X7R/X5R + >50V → 2
+      E12 + X7R/X5R + 1206/1210 + ≤50V → 1
+      E12 + X7R/X5R + 0402/0603/0805 + ≤50V → 0
+    """
+    # Normalize dielectric for comparison
+    diel = dielectric.upper().replace("(S)", "")
+
+    if diel == "Y5V" or case_size == "1812":
+        return 4
+    if diel == "C0G":
+        return 3
+    # X7R or X5R
+    if not is_e12_value(cap_pf):
+        return 2
+    if voltage > 50:
+        return 2
+    if case_size in ("1206", "1210"):
+        return 1
+    if case_size in ("0402", "0603", "0805"):
+        return 0
+    # Fallback for other sizes
+    return 2
+
+
 # ============================================================================
 # ======================== MAIN GENERATION FUNCTION ==========================
 # ============================================================================
@@ -675,6 +728,9 @@ def generate_capacitors(csv_rows: List[Dict[str, str]]) -> str:
         source_sql = "NULL" if SOURCE is None else f"'{SOURCE}'"
         height_sql = str(height_mm) if height_mm is not None else "NULL"
 
+        # Assign tier based on dielectric, E12 membership, case size, voltage
+        part_tier = assign_tier(dielectric, case_size, voltage, cap_pf)
+
         sql_line = SQL_TEMPLATES["insert"].format(
             unique_id=sql_escape(unique_id),
             part_locator=sql_escape(part_locator),
@@ -689,7 +745,7 @@ def generate_capacitors(csv_rows: List[Dict[str, str]]) -> str:
             kicad_footprint=kicad_footprint,
             source=source_sql,
             dump_priority=DUMP_PRIORITY,
-            tier=5,
+            tier=part_tier,
             tags='passive',
             voltage_rating=voltage,
             tolerance=sql_escape(tolerance),

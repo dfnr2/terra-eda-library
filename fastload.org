@@ -1,29 +1,19 @@
-* Terra EDA Library: Tier & Tag System Specification
+* Terra EDA Library: HTTP Library Architecture
 
 ** Motivation
 
 KiCad is slow to load very large sets of libraries. The Terra db lib is large
-and will grow, as parts are added by script. This spec outlines an approach to decreasing the visible footpring of the libray by applying project-appropriate filters, defined at the local project level.
+and will grow, as parts are added by script.
 
-Two orthogonal selection criteria:
+KiCad HTTP libraries (=.kicad_httplib=, KiCad 8+) solve this naturally:
+they enumerate only *categories* (libraries) until expanded, then fetch
+parts within a category on demand. Full part data is fetched only when a
+part is selected. Search operates only over expanded categories.
 
-1. *Tier* (staged inclusion): integer column on every part, 0 = highest
-   priority. A configurable cutoff includes all parts at or below the
-   requested tier.
-2. *Tags* (categorical inclusion): string labels attached to parts.
-   Parts matching any active tag are included regardless of tier.
-
-Logistically:
-
-- Master library is rebuilt only when the library changes.
-
-- Each KiCad project uses a *project-local* SQLite DB
-  =${KIPRJMOD}/terra_config.db= that is (a) a clone of the master DB and (b)
-  modified only by small project config SQL that sets tier cutoff and active
-  tags (and optionally user tags).
-
-- If project config files are missing, the system should behave as:
-  default tier cutoff and no tag-based inclusions.
+This lazy-loading model eliminates the need for tier-based filtering or
+SQL views. Instead, the library is split into fine-grained categories
+(e.g. "SMT Resistors / 0603 / Thick Film") so each category stays small
+(50–200 parts). Every part is discoverable — just organized, not hidden.
 
 ** Schema Changes
 
@@ -32,7 +22,7 @@ Logistically:
 Added to every =*_0_schema.sql= after =dump_priority=:
 
 #+begin_src sql
-tier INTEGER DEFAULT 5,
+tier INTEGER DEFAULT 0,
 tags TEXT DEFAULT '',
 #+end_src
 
@@ -125,14 +115,71 @@ COMMIT;
 
 ** Tier Assignments
 
-| Source                        | Tier | Rationale                    |
-|-------------------------------+------+------------------------------|
-| Hand-curated static parts     |    5 | Default for all tables       |
-| E24 resistor/cap values       |    3 | Standard series, most common |
-| Samsung catalog caps          |    5 | Catalog parts                |
-| KEMET C0G caps (E24-based)    |    3 | Standard E24 values          |
-| E96 resistor values           |    6 | Fine-grained, less common    |
-| E192 resistor values (future) |    8 | Rarely needed                |
+*** Tier Definitions
+
+| Tier | Meaning               | Contents                                       |
+|------+-----------------------+------------------------------------------------|
+|    0 | Daily driver / curated | E96 1% 0603+0805 resistors, E12 caps in        |
+|      |                       | common dielectrics/sizes/voltages, ALL static   |
+|      |                       | (hand-curated) parts                            |
+|    1 | Common passives       | E96 1% in 0402+1206, E12 caps in 1206/1210     |
+|    2 | Extended passives     | E96 1% in 0201/2512, non-E12 or >50V caps      |
+|    3 | Specialty SMT         | Thin film resistors, C0G caps (KEMET+Samsung)   |
+|    4 | Deep catalog          | Y5V caps, 1812 case size                        |
+|    5 | Schema default        | Fallback for tables without generator assignment |
+
+The default tier cutoff (=DEFAULT_TIER= in Makefile) is *2*, so tiers
+0+1+2 are visible by default. Tier 3+ requires explicit config or tags.
+
+*** Per-Generator Tier Rules
+
+**** run_200 — Yageo RC thick film resistors (~9,600 parts)
+
+Tier is determined by package size alone. All E-series values (E24 and
+E96) within a package get the same tier — no E24/E96 split.
+
+| Condition                         | Tier |
+|-----------------------------------+------|
+| 0603 or 0805 (any value incl 0Ω) |    0 |
+| 0402 or 1206 (any value incl 0Ω) |    1 |
+| 0201, 2512 (any value incl 0Ω)   |    2 |
+
+**** run_210 — Yageo RT thin film resistors (~46,500 parts)
+
+All thin film → tier 3 (specialty/precision). No size differentiation;
+thin film is already a niche choice.
+
+**** run_300 — KEMET C0G MLCC caps (~7,200 parts)
+
+All C0G → tier 3. C0G is specialty (precision/RF/low-loss).
+
+**** run_400 — Samsung CL MLCC caps (~2,500 parts)
+
+Tier depends on dielectric, whether the value is in the E12 series,
+case size, and voltage.
+
+| Condition                                     | Tier |
+|-----------------------------------------------+------|
+| E12 value, X7R/X5R, 0402/0603/0805, ≤50V     |    0 |
+| E12 value, X7R/X5R, 1206/1210, ≤50V          |    1 |
+| E12 value, X7R/X5R, any size, >50V            |    2 |
+| Non-E12 value, X7R/X5R                        |    2 |
+| C0G dielectric (Samsung)                      |    3 |
+| Y5V dielectric                                |    4 |
+| 1812 case size                                |    4 |
+
+E12 detection: check if the capacitance value's mantissa matches
+{1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2}.
+
+**** Static parts (all other tables)
+
+Schema default is changed from 5 to 0, so hand-curated parts (diodes,
+ICs, MOSFETs, LEDs, etc.) are always in tier 0.
+
+**** Through-hole (resistors_th, capacitors_th)
+
+Currently empty. When populated, mirror SMT tiers with common values
+at tier 3 and unusual at tier 4.
 
 ** Default Tags
 
@@ -192,7 +239,7 @@ SELECT p.*
 FROM capacitors_smt p
 LEFT JOIN active_tagged_ids a ON a.unique_id = p.unique_id
 WHERE p.tier <= (
-        SELECT COALESCE(MAX(tier_level), 5)   -- default cutoff if empty
+        SELECT COALESCE(MAX(tier_level), 2)   -- default cutoff if empty
         FROM terra_tier_config
       )
    OR a.unique_id IS NOT NULL;
@@ -356,11 +403,204 @@ sqlite3 "${KIPRJMOD}/terra_local.db" "SELECT * FROM terra_tag_config"
 sqlite3 "${KIPRJMOD}/terra_local.db" "SELECT COUNT(*) FROM active_tagged_ids"
 #+end_src
 
+** HTTP Library Architecture (Preferred — Supersedes Copy/Modify Model)
+
+The copy/modify model above (Phase B, project DB, config tables, SQL views)
+is superseded by a lightweight HTTP server approach. The tier column, tags
+column, and tags table remain useful as metadata for the server to filter on,
+but KiCad no longer consumes the SQLite DB directly.
+
+*** Why HTTP Libraries
+
+KiCad 8+ supports HTTP libraries (=.kicad_httplib=) as an alternative to
+ODBC-based =.kicad_dbl= files. A local server reads the master DB and serves
+a REST API that KiCad queries for parts.
+
+Advantages over the ODBC/copy model:
+
+| Problem                        | ODBC model                          | HTTP model                          |
+|--------------------------------+-------------------------------------+-------------------------------------|
+| Filtering (tier, tags, mfr)    | Pre-built SQL views or pruned copy  | Server filters dynamically          |
+| Per-project config             | Copy DB + apply SQL + prune         | JSON config file, no DB copy        |
+| ODBC driver dependency         | Platform-specific driver install    | None — just HTTP                    |
+| Discoverability                | Invisible parts, no search          | Web UI for browsing full catalog    |
+| Upgrading master library       | Re-copy, re-apply config            | Symlink or share DB; restart server |
+| Category granularity           | One table = one KiCad library       | Server splits into subcategories    |
+| Composable filters             | One view per combination            | Server composes on the fly          |
+
+*** Architecture
+
+#+begin_src
+Master DB (immutable, built by make)
+    ↓
+Terra Server (localhost, reads DB + project config)
+    ↓  REST API
+KiCad (just a .kicad_httplib pointing at localhost:PORT)
+    ↑
+Web UI (browse, search, tag — same server)
+#+end_src
+
+- Master DB is the single source of truth, built by =make= as today.
+- Server reads the DB read-only. No copies, no clones, no ATTACH.
+- Project config is a JSON file in =${KIPRJMOD}/terra.json=.
+- KiCad sees a =.kicad_httplib= file, not a =.kicad_dbl=.
+- The same server hosts a web UI for browsing and tagging.
+
+*** KiCad HTTP Library API (v1)
+
+KiCad expects these endpoints:
+
+#+begin_src
+GET /v1/categories.json              → [{id, name, description?}]
+GET /v1/parts/category/{id}.json     → [{id, name, description?}]
+GET /v1/parts/{id}.json              → {id, name, symbolIdStr, fields: {key: {value, visible?}}}
+#+end_src
+
+Category listing is fast (just names). Part listing within a category
+returns only id/name/description. Full field data is fetched per-part
+when the user clicks on it.
+
+*Important*: KiCad fetches each part individually (N+1 pattern). The
+mitigation is server-controlled category granularity — keep categories
+small (50–200 parts).
+
+*** .kicad_httplib Config
+
+#+begin_src json
+{
+  "meta": {"version": 1.0},
+  "name": "Terra EDA Library",
+  "source": {
+    "type": "REST_API",
+    "api_version": "v1",
+    "root_url": "http://localhost:8361/",
+    "token": ""
+  }
+}
+#+end_src
+
+Placed in =${KIPRJMOD}/= or symlinked from =${TERRA_EDA_LIB}/=.
+
+*** Project Config (=${KIPRJMOD}/terra.json=)
+
+#+begin_src json
+{
+  "tier": 1,
+  "include_tags": ["automotive", "low-noise"],
+  "manufacturers": ["Yageo", "Samsung", "KEMET"],
+  "hide_obsolete": true
+}
+#+end_src
+
+- Git-trackable per project.
+- Server watches or re-reads on request; KiCad sees changes on next
+  category refresh.
+- If absent, server uses sensible defaults (all tiers, no tag filter).
+
+*** Dynamic Categories
+
+The server builds categories from DB metadata. Instead of one flat
+"resistors_smt" table with 20k parts, the server presents:
+
+#+begin_src
+SMT Resistors / 0402
+SMT Resistors / 0603
+SMT Resistors / 0603 / Thin Film
+SMT Resistors / 0805
+SMT Resistors / 1206
+SMT Capacitors / X7R / 0402
+SMT Capacitors / X7R / 0603
+SMT Capacitors / C0G / 0603
+...
+#+end_src
+
+Category tree is generated from columns like =package=, =dielectric=,
+=tolerance=, etc. Each leaf category stays small enough (50–200 parts)
+that the N+1 fetch pattern is tolerable over localhost.
+
+*** Web UI
+
+The same server provides a browser-based interface:
+
+- Full-catalog browsing with search, filter, sort
+- Datasheet links, parametric tables
+- Per-project tagging: click to add/remove parts from project config
+- Writes back to =${KIPRJMOD}/terra.json= (or uploads via the UI)
+- Solves the discoverability problem — every part is visible and
+  searchable regardless of what KiCad currently shows
+
+*** Tier Column Under HTTP Model
+
+Tiers are no longer load-bearing architecture. With server-controlled
+categories, every part is reachable — just organized into subcategories.
+
+The tier column remains useful as soft metadata:
+
+- Category ordering: tier 0 parts sort to top within subcategories
+- "Favorites" virtual category: cross-type collection of daily drivers
+- Web UI: tier 0 expanded by default, higher tiers collapsed
+- Default filtering: project config can still say ="tier": 1= to limit
+  what KiCad sees, but it's optional rather than required for performance
+
+*** Server Implementation
+
+Lightweight Python server (FastAPI or Flask). Key components:
+
+- SQLite read-only connection to master DB
+- Category builder: queries distinct values from package/dielectric/type
+  columns, builds hierarchical category tree
+- Part serializer: maps DB columns to KiCad HTTP API field format
+- Config loader: reads =${KIPRJMOD}/terra.json= for filtering
+- Web UI: static HTML + JS for browsing/tagging (served by same process)
+
+The server runs locally. Startup:
+
+#+begin_src shell
+terra-server --db /path/to/terra.db --project /path/to/project/
+# or
+terra-server --db ${TERRA_EDA_LIB}/db/terra.db --project ${KIPRJMOD}/
+#+end_src
+
+*** What Changes vs. ODBC Model
+
+| Component                        | ODBC model (above)        | HTTP model                  |
+|----------------------------------+---------------------------+-----------------------------|
+| =terra_tier_config= table        | Needed                    | Removed (use terra.json)    |
+| =terra_tag_config= table         | Needed                    | Removed (use terra.json)    |
+| =user_tags= table                | Needed                    | Removed (use terra.json)    |
+| =active_tagged_ids= view         | Needed                    | Removed                     |
+| =*_v= filtered views             | Needed                    | Removed                     |
+| =.kicad_dbl= files               | Primary integration       | Replaced by =.kicad_httplib= |
+| =project-db= Makefile target     | Needed                    | Removed                     |
+| ODBC driver                      | Required                  | Not needed                  |
+| =tier= column                    | Hard filter               | Soft metadata               |
+| =tags= column                    | Searched via SQL views    | Searched by server           |
+| =tags= table                     | Joined in views           | Queried by server            |
+| Master DB                        | Copied per project        | Shared read-only             |
+| =tools/generate_kicad_dbl_files.py= | Generates =.kicad_dbl= | Generates =.kicad_httplib=   |
+| New: =tools/terra_server.py=     | N/A                       | HTTP server + web UI         |
+
+*** Open Questions
+
+- *N+1 performance threshold*: Need to prototype and measure. How many
+  parts per category before KiCad becomes sluggish over localhost HTTP?
+  Target: validate with 50, 200, and 500 parts per category.
+
+- *Server lifecycle*: Auto-start on KiCad launch? Systemd user service?
+  Manual start? Tray icon?
+
+- *Multi-project*: Can one server instance serve multiple projects with
+  different configs? (Probably yes — route by port or path prefix.)
+
+- *Offline/portable*: If the server isn't running, KiCad shows empty
+  libraries. Acceptable? Or keep a =.kicad_dbl= fallback for offline use?
+
 ** Future Work
 
-- KiCad plugin for BOM-driven tag assignment and config UI that writes
-  =terra_config.sql= and =terra_tags.sql= and triggers rebuild of
-  =terra_local.db=.
+- Prototype HTTP server and validate N+1 performance with real part counts.
+- Web UI for full-catalog browsing, search, and per-project tagging.
 - Consider integer surrogate keys for joins (optional); keep =unique_id=
   as external identifier.
-- Evaluate additional pruning dimensions (e.g., “profiles” as curated tag sets).
+- File KiCad upstream issue for =WHERE= clause in =.kicad_dbl= (benefits
+  the broader community even if we use HTTP model).
+- Evaluate KiCad HTTP library v2 API if/when bulk fetch is implemented.

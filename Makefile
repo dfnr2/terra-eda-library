@@ -15,7 +15,7 @@ CONFIG := tools/field_mappings.yaml
 VENV_MARKER := .venv/.synced
 
 # Default tier cutoff when no terra_config.sql exists
-DEFAULT_TIER := 5
+DEFAULT_TIER := 2
 
 # Override via command line: make TIER=3 TAGS=analog,passive
 TIER ?=
