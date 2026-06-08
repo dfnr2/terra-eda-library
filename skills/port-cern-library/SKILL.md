@@ -91,10 +91,19 @@ three strategies, tried in order — extend whichever fits the package:
   `fp_leads`) and the resolver builds `<family>-<leads>_<orientation>.step`, verifying it
   exists (KiCad ships only Vertical TO-247, so horizontal TO-247 declines).
 
+- **Bridges + blank-package bodies** (`resolve_from_footprint`, `BRIDGE_BODY`,
+  `SMD_BODY_DIRECT`): CERN often leaves `package` blank but encodes the body in the
+  *footprint name* (`FAIRCHILD_GBU_V`, `SODFL3516X80N`, `DIOMELF1911N`, `DO-201`).
+  `apply_3d_models` falls back to `resolve_from_footprint`, which maps bridge codes →
+  `Diode_Bridge_*`, SMD body codes (SODFL→SOD-123F/128, DIOMELF→MELF family by size,
+  PowerDI/PowerMite), then any known package key embedded in the name.
+
 When one footprint's parts carry conflicting package labels (CERN data quirk), the label
 backing the most parts wins. Record deliberate non-mappings in `SKIP_REASON` with the reason
 so the gaps are documented, not mysterious. Lock new rules with a case in
-`tests/test_model_map.py`. Unmapped/blank packages → download tail + human (phase 2b).
+`tests/test_model_map.py`. Don't build a per-MPN web downloader — KiCad ships models for
+almost every body; extend the codified map instead. The genuine residual (power modules,
+exotic SMD, orientations KiCad lacks) goes to a human drop-folder under `kicad_3dmodels/`.
 
 ## 6. Tests + audit
 `db/tables/cern_<name>/test_cern_<name>.py`: row count; no duplicate `unique_id`; known-part

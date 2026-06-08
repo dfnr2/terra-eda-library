@@ -414,7 +414,7 @@
 		(uuid "2fb5b00f-07af-4c7d-bfa7-c0b0e2d659a4")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/SOD-523F.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_SOD-523.step"
 		(offset
 			(xyz 0.0001 0.00007 0)
 		)

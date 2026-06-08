@@ -27,7 +27,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from tools.model_map import resolve_model  # noqa: E402
+from tools.model_map import resolve_from_footprint, resolve_model  # noqa: E402
 
 _MODEL_PATH = re.compile(r'(\(model\s+")[^"]*(")')
 _PAD_AT = re.compile(r"\(at\s+(-?[0-9.]+)\s+(-?[0-9.]+)")
@@ -108,7 +108,14 @@ def run(table: str, dry_run: bool) -> int:
                                 orientation=ori, leads=leads)
             if ref:
                 ref_weight[ref] += count
-        if not ref_weight:                        # nothing maps
+        if not ref_weight:
+            # package column gave nothing; the footprint name often encodes the
+            # body (bridges, blank-package SMD/axial parts).
+            fref = resolve_from_footprint(name, pad_pitch_mm=pitch,
+                                          orientation=ori, leads=leads)
+            if fref:
+                ref_weight[fref] = fp_parts[fpref]
+        if not ref_weight:                        # still nothing maps
             single = len(variants) == 1
             for (pkg, _), count in variants.items():
                 unmapped[pkg or "(blank)"] += fp_parts[fpref] if single else count

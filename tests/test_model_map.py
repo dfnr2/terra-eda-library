@@ -6,7 +6,7 @@ These tests pin the decisions so a future edit can't silently change them.
 import pytest
 
 from tools.model_map import (
-    AXIAL_PITCH_TOL_MM, kicad_3dmodel_dir, resolve_model,
+    kicad_3dmodel_dir, resolve_from_footprint, resolve_model,
 )
 
 _HAVE_KICAD = kicad_3dmodel_dir() is not None
@@ -44,11 +44,38 @@ def test_axial_nearest_within_tolerance():
 
 
 @_needs_kicad
+def test_axial_wide_best_effort_largest():
+    # DO-201AD footprint at 20.32mm has no exact model; nearest (15.24, the
+    # largest) is within the best-effort cap, so we take it rather than decline.
+    ref = resolve_model("DO-201AD", pad_pitch_mm=20.32)
+    assert ref is not None and ref.endswith("_P15.24mm_Horizontal.step")
+
+
+@_needs_kicad
 def test_axial_gross_mismatch_declined():
-    # DO-201AD footprint at 20.32mm exceeds any bundled model -> no fit.
-    assert resolve_model("DO-201AD", pad_pitch_mm=20.32) is None
-    # DO-41 ships 7.62/10.16/12.70mm; 20mm is beyond all of them -> declined.
-    assert resolve_model("DO-41", pad_pitch_mm=20.0) is None
+    # DO-41 ships up to 12.70mm; 40mm is beyond the cap -> no plausible model.
+    assert resolve_model("DO-41", pad_pitch_mm=40.0) is None
+
+
+@_needs_kicad
+def test_bridge_from_footprint_name():
+    ref = resolve_from_footprint("FAIRCHILD_GBU_V")
+    assert ref.endswith("/Diode_Bridge_Vishay_GBU.step")
+    assert resolve_from_footprint("VISHAY_KBU").endswith("/Diode_Bridge_Vishay_KBU.step")
+
+
+def test_smd_body_from_footprint_name():
+    # SOD flat-lead: narrow -> SOD-123F, wide -> SOD-128 (no KiCad dir needed).
+    assert resolve_from_footprint("SODFL3516X80N").endswith("/D_SOD-123F.step")
+    assert resolve_from_footprint("SODFL5336X130N").endswith("/D_SOD-128.step")
+    # MELF size split.
+    assert resolve_from_footprint("DIOMELF1911N").endswith("/D_MicroMELF.step")
+    assert resolve_from_footprint("DIOMELF5025N").endswith("/D_MELF.step")
+    assert resolve_from_footprint("DIODES-INC_POWERDI123").endswith("/D_PowerDI-123.step")
+
+
+def test_unmapped_footprint_name_is_none():
+    assert resolve_from_footprint("IXYS_IXBOD 1-12R..42") is None
 
 
 @_needs_kicad

@@ -55,8 +55,18 @@ their `(model …)` lines in place is fine and committed.
 
 - **2a (reliable win):** package→bundled map + `apply_3d_models.py`; rewrite matched diode
   footprints; report coverage + the unmatched list. No network.
-- **2b (tail):** the web-download subsystem for unmatched/blank-package parts; embed-vs-
-  reference decision; per-package default offsets.
+- **2b (tail) — REVISED:** Investigation showed the tail clusters by *body type*, not
+  random MPNs, and **KiCad already ships models for almost all of it** (bridge rectifiers
+  `Diode_Bridge_Vishay_*`, wide axials `D_DO-201*_P15.24mm`, `D_PowerDI-123`, MELF family,
+  `D_SOD-123F`). So the per-MPN web downloader is unnecessary. Instead 2b *extends the
+  codified map*: a bridge body-code map, an SMD body-code layer (SODFL→SOD-123F/128,
+  DIOMELF→MELF family, PowerDI/PowerMite), and a footprint-name fallback
+  (`resolve_from_footprint`) for blank-package parts whose body is in the footprint name.
+  Wide axials take a capped best-effort to the largest bundled model. This raised diode
+  coverage to **82%** with no network/accounts. The genuine residual (~18%: power modules
+  SOT-227B/SEMITOP/IXBOD, exotic SMD SOD57/DFN2/SON10, horizontal TO-247 which KiCad lacks,
+  one-off cans) goes to a **human drop-folder** under `kicad_3dmodels/` — sized small and
+  body-clustered. The web-download subsystem is deferred indefinitely (kept on file).
 
 ## 6. Out of scope
 - Exact-geometry guarantee (bundled models are package-generic).

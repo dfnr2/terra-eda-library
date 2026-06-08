@@ -524,7 +524,7 @@
 		(uuid "419e97d7-d3b8-4714-8e97-98f1b80db4a5")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/VISHAY_KBL.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_THT.3dshapes/Diode_Bridge_Vishay_KBL.step"
 		(offset
 			(xyz 0.00004 0.00005 0)
 		)

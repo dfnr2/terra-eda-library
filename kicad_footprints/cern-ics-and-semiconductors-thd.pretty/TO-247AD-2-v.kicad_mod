@@ -449,7 +449,7 @@
 		(uuid "92e8ff3b-ad4e-41fd-a049-09416d70f454")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/TO-247AD-2-V.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-247-2_Vertical.step"
 		(offset
 			(xyz 0.00011 0.00005 0)
 		)

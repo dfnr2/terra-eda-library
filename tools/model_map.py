@@ -37,11 +37,14 @@ from pathlib import Path
 
 ENV = "${KICAD10_3DMODEL_DIR}"
 
-# How far a footprint's measured lead pitch may sit from the nearest bundled
-# axial model before we decline (mm). 1.5mm tolerates the standard half-step
-# offsets (e.g. DO-15 at 13.97mm -> the 15.24mm model, off by 1.27) but rejects
-# gross mismatches where no shipped model spans the leads.
-AXIAL_PITCH_TOL_MM = 1.5
+# Axial models are chosen by nearest lead pitch. Two thresholds:
+#  - GOODFIT: within this the model matches the footprint cleanly (e.g. DO-15 at
+#    13.97mm -> the 15.24mm model, off by 1.27).
+#  - MAX_DELTA: a hard cap. Within it we still take the nearest as a best effort
+#    (e.g. DO-201AD at 20.32mm -> the 15.24mm model, leads render a touch short;
+#    a human repositions). Beyond it no shipped model plausibly fits -> decline.
+AXIAL_GOODFIT_TOL_MM = 1.5
+AXIAL_MAX_DELTA_MM = 8.0
 
 _DIODE_SMD = "Diode_SMD.3dshapes"
 _DIODE_THT = "Diode_THT.3dshapes"
@@ -113,6 +116,27 @@ TO_FAMILY = {
 }
 _TO_LEADS = (2, 3, 4, 5)  # lead counts KiCad ships models for
 
+# --- 4. Bridge rectifiers: body code (in footprint name) -> bridge model -------
+# The package column is usually blank for these; the body code lives in the
+# footprint name (e.g. FAIRCHILD_GBU_V, VISHAY_KBU). Only codes with an exact
+# Diode_Bridge model are mapped; others (GBPC/GSIB/WOG/PB) are in SKIP_REASON.
+BRIDGE_BODY = {
+    "GBU": "Diode_Bridge_Vishay_GBU.step",
+    "KBPM": "Diode_Bridge_Vishay_KBPM.step",
+    "KBU": "Diode_Bridge_Vishay_KBU.step",
+    "KBL": "Diode_Bridge_Vishay_KBL.step",
+    "GBL": "Diode_Bridge_Vishay_GBL.step",
+}
+
+# --- 5. SMD body codes embedded in footprint names (package blank) ------------
+# IPC/vendor footprint names encode the body but the package column is blank.
+# SODFL = SOD flat-lead, DIOMELF = MELF; both size-split via the digits that
+# follow the token (e.g. SODFL3516 -> 3.5mm wide). PowerDI/PowerMite are direct.
+SMD_BODY_DIRECT = {
+    "POWERDI123": (_DIODE_SMD, "D_PowerDI-123.step"),
+    "POWERMITE": (_DIODE_SMD, "D_Powermite_LargeCathode.step"),
+}
+
 # --- Deliberate non-mappings: package -> reason (documented, not silent) -------
 # These have no bundled KiCad model that fits; they go to the download tail /
 # human review. Recorded here so future runs don't re-investigate them.
@@ -126,7 +150,14 @@ SKIP_REASON = {
              "TO-46 cans — bundled TO-46 model geometry would not match",
     "TO-277A (SMPC)": "SMPC power package; no exact bundled model",
     "DO-219AB": "MicroSMF; no bundled model",
+    "GBPC": "no exact KiCad GBPC bridge model (KBPC differs physically)",
+    "GSIB": "in-line GSIB bridge; no bundled model",
+    "WOG": "round WOG bridge; no exact bundled model",
+    "PB": "Vishay PB bridge; no bundled model",
 }
+
+# All package keys the package-based resolver knows, for footprint-name fallback.
+_PACKAGE_KEYS = set(SMD_PACKAGE_MODEL) | set(THT_AXIAL_FAMILY) | set(TO_FAMILY)
 
 _PITCH_RE = re.compile(r"_P([0-9.]+)mm_Horizontal\.step$")
 
@@ -164,8 +195,9 @@ def _ref(lib: str, fname: str) -> str:
 def _nearest_axial(lib: str, prefix: str, pitch_mm: float) -> str | None:
     """Pick the horizontal model in ``lib`` whose pitch is nearest ``pitch_mm``.
 
-    Returns None if no model is within AXIAL_PITCH_TOL_MM (or the KiCad dir is
-    unavailable) — i.e. no shipped geometry actually fits the footprint.
+    Takes the nearest model as a best effort up to AXIAL_MAX_DELTA_MM; beyond
+    that no shipped geometry plausibly fits, so returns None (also None if the
+    KiCad dir is unavailable).
     """
     root = kicad_3dmodel_dir()
     if root is None:
@@ -179,9 +211,59 @@ def _nearest_axial(lib: str, prefix: str, pitch_mm: float) -> str | None:
         delta = abs(float(m.group(1)) - pitch_mm)
         if best is None or delta < best[0]:
             best = (delta, f.name)
-    if best is None or best[0] > AXIAL_PITCH_TOL_MM:
+    if best is None or best[0] > AXIAL_MAX_DELTA_MM:
         return None
     return _ref(lib, best[1])
+
+
+_BODY_WIDTH_RE_CACHE: dict[str, re.Pattern] = {}
+
+
+def _body_width(name_uc: str, token: str) -> int | None:
+    """Width tens-digits following a body token: 'SODFL3516..' / token 'SODFL' -> 35."""
+    pat = _BODY_WIDTH_RE_CACHE.get(token)
+    if pat is None:
+        pat = _BODY_WIDTH_RE_CACHE[token] = re.compile(re.escape(token) + r"(\d{2})")
+    m = pat.search(name_uc)
+    return int(m.group(1)) if m else None
+
+
+def resolve_from_footprint(name: str, *, pad_pitch_mm: float | None = None,
+                           orientation: str | None = None,
+                           leads: int | None = None) -> str | None:
+    """Resolve a model from a footprint *name* when the package column is blank.
+
+    CERN leaves ``package`` empty for many parts but encodes the body in the
+    footprint name (``FAIRCHILD_GBU_V``, ``SODFL3516X80N``, ``DIOMELF1911N``).
+    Handles bridges, SMD flat-lead/MELF bodies, then falls back to any known
+    package token embedded in the name.
+    """
+    uc = name.upper().replace(" ", "")
+    root = kicad_3dmodel_dir()
+    for code, fname in BRIDGE_BODY.items():
+        if code in uc and (root is None or (root / _DIODE_THT / fname).is_file()):
+            return _ref(_DIODE_THT, fname)
+    if "SODFL" in uc:  # SOD flat-lead; wide ones use the larger SOD-128 body
+        w = _body_width(uc, "SODFL")
+        return _ref(_DIODE_SMD, "D_SOD-128.step" if w and w >= 45 else "D_SOD-123F.step")
+    if "MELF" in uc:   # DIOMELF<WWLL>: 50->MELF, 30->MiniMELF, else MicroMELF
+        w = _body_width(uc, "MELF")
+        f = ("D_MELF.step" if w and w >= 50
+             else "D_MiniMELF.step" if w and w >= 30 else "D_MicroMELF.step")
+        return _ref(_DIODE_SMD, f)
+    for token, (lib, fname) in SMD_BODY_DIRECT.items():
+        if token in uc:
+            return _ref(lib, fname)
+    # last resort: a known package key appears in the footprint name (compare
+    # with hyphens stripped on both sides, so 'DO-201' matches footprint 'DO-201')
+    uc_nodash = uc.replace("-", "")
+    for k in sorted(_PACKAGE_KEYS, key=len, reverse=True):
+        if k.upper().replace("-", "") in uc_nodash:
+            r = resolve_model(k, pad_pitch_mm=pad_pitch_mm,
+                              orientation=orientation, leads=leads)
+            if r:
+                return r
+    return None
 
 
 def _resolve_to(family: str, orientation: str | None,

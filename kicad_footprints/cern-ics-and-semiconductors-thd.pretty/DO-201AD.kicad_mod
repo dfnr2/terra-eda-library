@@ -492,7 +492,7 @@
 		(uuid "6d3a67ae-3916-4144-ae14-71197902d91d")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/DO-201AD.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-201AD_P15.24mm_Horizontal.step"
 		(offset
 			(xyz 0.00006 0.00008 0)
 		)

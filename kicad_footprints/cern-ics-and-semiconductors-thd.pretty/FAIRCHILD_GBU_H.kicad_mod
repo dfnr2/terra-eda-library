@@ -1059,7 +1059,7 @@
 		(uuid "abd38ccf-bb3e-41a2-ba06-814a4abe5240")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/FAIRCHILD_GBU-H.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_THT.3dshapes/Diode_Bridge_Vishay_GBU.step"
 		(offset
 			(xyz 0.00004 0.00007 0)
 		)

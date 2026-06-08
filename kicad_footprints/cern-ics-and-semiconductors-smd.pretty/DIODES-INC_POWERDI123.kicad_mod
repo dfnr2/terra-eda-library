@@ -454,7 +454,7 @@
 		(uuid "cfc5d4ea-b01f-42e4-b8ea-55f5005666c4")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/DIODES-INC_POWERDI123.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_PowerDI-123.step"
 		(offset
 			(xyz 0.00005 0.00011 0)
 		)
