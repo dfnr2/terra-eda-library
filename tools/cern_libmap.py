@@ -26,6 +26,19 @@ FOOTPRINT_LIB_NICK = {
     "ICs And Semiconductors SMD_BGA": "cern-ics-and-semiconductors-smd-bga",
     "MOLEX SMD": "cern-molex-smd",
     "MOLEX THD": "cern-molex-thd",
+    # connector vendors (share the "Connectors" symbol lib; per-vendor footprints)
+    "SAMTEC SMD": "cern-samtec-smd", "SAMTEC THD": "cern-samtec-thd",
+    "TYCO SMD": "cern-tyco-smd", "TYCO THD": "cern-tyco-thd",
+    "3M SMD": "cern-3m-smd", "3M THD": "cern-3m-thd",
+    "PHOENIX SMD": "cern-phoenix-smd", "PHOENIX THD": "cern-phoenix-thd",
+    "HARTING SMD": "cern-harting-smd", "HARTING THD": "cern-harting-thd",
+    "AMPHENOL SMD": "cern-amphenol-smd", "AMPHENOL THD": "cern-amphenol-thd",
+    "HARWIN SMD": "cern-harwin-smd", "HARWIN THD": "cern-harwin-thd",
+    "SOURIAU THD": "cern-souriau-thd", "LEMO THD": "cern-lemo-thd",
+    "FCI SMD": "cern-fci-smd", "FCI THD": "cern-fci-thd",
+    "ERNI SMD": "cern-erni-smd", "ERNI THD": "cern-erni-thd",
+    "WEIDMULLER THD": "cern-weidmuller-thd", "COMATEL THD": "cern-comatel-thd",
+    "MENTOR THD": "cern-mentor-thd",
 }
 
 
@@ -42,6 +55,7 @@ ITEM_FIXUP = {
     "INFININEON_PG-DSO-14-71": "INFINEON_PG-DSO-14-71",
     "QFP80P900X900X160-32AN": "QFP80P900X900X160-32N",
     "TEXAS_DYY0016A": "TEXAS_DYY0016A - duplicate",  # Altium export suffix
+    "ERNI_214012": "ERNI_214012 - duplicate",        # Altium export suffix
     # symbols
     "TXS0108ERGY": "TXS0108E_a",   # QFN variant; symbol never created, same logic
 }
