@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "VECTRON Case G218C, SMD Oscillator, Side Convave, 6 pins, 9.5 x 14.4mm, VX-501 Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -8.175 0)
 		(layer "F.SilkS")

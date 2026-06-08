@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SOT223, 2.30mm pitch; 3 pin, 3.70mm W X 6.70mm L, IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -4.325 0)
 		(layer "F.SilkS")

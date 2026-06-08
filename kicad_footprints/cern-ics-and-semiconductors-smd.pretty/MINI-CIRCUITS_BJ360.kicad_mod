@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS BJ360 Case, Body 20.32mm L X 11.43mm W X 6.35mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.04 -11.135 0)
 		(layer "F.SilkS")

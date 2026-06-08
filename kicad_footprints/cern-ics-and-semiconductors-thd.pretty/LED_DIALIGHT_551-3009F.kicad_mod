@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Single 3mm Blue LED, Body 4.06 x 5.33mm, Pin spacing 2.54mm")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at -2.224 -3.007 0)
 		(layer "F.SilkS")

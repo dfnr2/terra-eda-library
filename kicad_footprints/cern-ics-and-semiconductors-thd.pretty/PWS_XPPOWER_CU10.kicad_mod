@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "CU10 Series , Body 65.02x45mm, Power Supply")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -23.47501 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "PullBack Leads QFN, 1.00mm Pitch, Square; 32 Pin, 10.95mm L X 10.95mm W X 2.62mm H Body, Telit SE868-V3 Case")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.22875 -6.525 0)
 		(layer "F.SilkS")

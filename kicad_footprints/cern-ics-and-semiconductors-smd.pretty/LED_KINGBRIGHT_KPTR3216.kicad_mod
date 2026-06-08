@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Reverse Mount LED 3216, Hole 2.1x2.3mm 0.35mm Height")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -2.475 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "PANASONIC Serie AQY22(SON)  Small Outline No Lead, 4 pins, 2.2x2.95mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.325 -2.075 0)
 		(layer "F.SilkS")

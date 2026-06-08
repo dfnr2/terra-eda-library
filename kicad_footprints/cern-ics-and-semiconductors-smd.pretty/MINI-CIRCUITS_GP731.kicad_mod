@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS GP731 Case, 8 Pin, 8.89mm W X 8.89mm L")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.076725 -5.928 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "ANAREN D10AA30Z4, 4 Pin Attenuator, Size 2010, 5.08mm L x W 2.54mm W x 0.635mm H body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -2.75 0)
 		(layer "F.SilkS")

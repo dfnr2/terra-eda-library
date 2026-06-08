@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "36-Lead Plastic QFN (5mm × 6mm), LINEAR UHE Package Variation: UHE28MA")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.35 -4.025 0)
 		(layer "F.SilkS")

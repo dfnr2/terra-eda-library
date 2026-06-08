@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "10 x 10mm2, SMD Silicon Photodiode, Body 30 x 60 x 7mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -30.975 0)
 		(layer "F.SilkS")

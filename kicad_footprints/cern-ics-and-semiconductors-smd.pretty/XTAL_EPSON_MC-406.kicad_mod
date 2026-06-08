@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "EPSON Crystal; 10.41mm L X 4.06mm W X 3.6mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.26 -7.025 0)
 		(layer "F.SilkS")

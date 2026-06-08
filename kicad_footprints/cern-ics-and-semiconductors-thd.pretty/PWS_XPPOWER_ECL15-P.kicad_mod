@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "ECL15-P Series , Body 63.5x31.75mm, Power Supply")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -16.85001 0)
 		(layer "F.SilkS")

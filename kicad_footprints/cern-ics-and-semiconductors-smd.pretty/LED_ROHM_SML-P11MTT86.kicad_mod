@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Red Chip LED, 2-Leads, Body 1.0x0.6mm (0402), SML-P11MT Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2875 -1.275 0)
 		(layer "F.SilkS")

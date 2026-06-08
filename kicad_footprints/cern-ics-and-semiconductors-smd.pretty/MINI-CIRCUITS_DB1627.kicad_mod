@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS Case Style DB1627 - Body 4.06X3.81mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.1225 -3.39 0)
 		(layer "F.SilkS")

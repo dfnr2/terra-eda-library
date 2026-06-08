@@ -50,7 +50,7 @@
 			)
 		)
 	)
-	(attr allow_missing_courtyard)
+	(attr through_hole allow_missing_courtyard)
 	(fp_line
 		(start -9.75 -4.9)
 		(end 9.75 -4.9)

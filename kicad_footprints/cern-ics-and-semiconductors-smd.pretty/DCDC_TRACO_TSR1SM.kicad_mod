@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TSR 1 SM Series, DC/DC Converter,  Body 15.24 x 11.8 x 7.62mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -8.59501 0)
 		(layer "F.SilkS")

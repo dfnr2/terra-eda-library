@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "DICONEX, 3 Pin SMD Attenuator, L 6.35 x W 6.35 x H 0.635mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -4.85 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TRN 1 SM Series, DC/DC Converter,  Body 12.1 x 11.9 x 7.6mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -7.515 0)
 		(layer "F.SilkS")

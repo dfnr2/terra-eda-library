@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS Case Style B1QFN, QFN, 0.90mm Pitch, Square; 39 Pin, 11.00mm L X 9mm W X 2.9mm H body (w/thermal tab 1.5 X 1.5mm + 2 x 3.0 X 2.24mm )")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -6.05 0)
 		(layer "F.SilkS")

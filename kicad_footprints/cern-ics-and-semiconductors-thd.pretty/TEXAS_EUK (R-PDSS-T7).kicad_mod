@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Texas EUK (R-PDSS-T7) Case, Body W 22.1 x L 37.97 x H9mm")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -12.28001 0)
 		(layer "F.SilkS")

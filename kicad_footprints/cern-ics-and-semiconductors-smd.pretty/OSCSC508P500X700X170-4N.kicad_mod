@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SMD Oscillator, side convave, 4 pins, 5.00x7.00mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.0625 -4.89 0)
 		(layer "F.SilkS")

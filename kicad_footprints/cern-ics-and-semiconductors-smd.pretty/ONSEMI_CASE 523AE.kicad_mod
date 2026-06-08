@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "QFN, ONSEMI Case 523AE; 0.40mm Pitch; Rect. 12 Pin, 1.70mm L  X 2.00mm W X 0.55mm H Body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2875 -2.125 0)
 		(layer "F.SilkS")

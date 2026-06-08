@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS CD636 Case, 2.54mm pitch; 6 pin, 5.59mm W X 7.87mm L")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -4.92498 0)
 		(layer "F.SilkS")

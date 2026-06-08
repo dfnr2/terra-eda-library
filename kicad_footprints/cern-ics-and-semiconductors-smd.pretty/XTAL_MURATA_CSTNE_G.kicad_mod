@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SMD Ceramic Resonator, 3 Pins, Body 3.20mm L X 1.30mm W X 0.80mm H, CSTNE_G Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -2.45 0)
 		(layer "F.SilkS")

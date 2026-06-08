@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS DF782 Case, 1.50mm pitch; 4 pin, 2.44mm W X 4.49mm L")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -3.64 0)
 		(layer "F.SilkS")

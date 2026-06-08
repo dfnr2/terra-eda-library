@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SOTFL (SOT666), 0.50mm Pitch; 6 Pin, 1.20mm W X 1.60mm L X 0.60mm H body, IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.275 -1.725 0)
 		(layer "F.SilkS")

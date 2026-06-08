@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS DV874 Case, 2.54mm pitch; 16 pins, Square Body 12.7mm W X 12.7mm L X 4.95mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.25752 -7.835 0)
 		(layer "F.SilkS")

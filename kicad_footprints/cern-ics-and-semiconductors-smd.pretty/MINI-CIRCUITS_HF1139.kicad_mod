@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS HF1139 Case, Body 18.80mm L X 11.18mm W X 6.86mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.325 -10.375 0)
 		(layer "F.SilkS")

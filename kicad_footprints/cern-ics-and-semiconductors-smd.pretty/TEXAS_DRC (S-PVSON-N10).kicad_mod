@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SON, TEXAS DRC (S-PVSON-N10), 0.50mm Pitch, 10-pin, 3.00mm W  X 3.00mm L X 1.00mm Height, (w/thermal tab 1.65 X 2.40 mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2125 -2.6 0)
 		(layer "F.SilkS")

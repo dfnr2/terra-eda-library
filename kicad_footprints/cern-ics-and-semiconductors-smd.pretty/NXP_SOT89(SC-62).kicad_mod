@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SOT89, (SC-62), TO-243, 3-Leads, Body 2.5x4.5mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -3.3 0)
 		(layer "F.SilkS")

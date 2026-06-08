@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MURATA OKL2-T/20-W12 Series, 10 Pin Land Grid Array 100W DC-DC Converter, Body 13.46 x 33.02mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.125 -18.355 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SON, 0.50mm pitch, 6 pin, 2.0mm X 1.8mm X 0.6mm H body,  ON SEMICONDUCTOR Case 517BA-01")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2375 -1.875 0)
 		(layer "F.SilkS")

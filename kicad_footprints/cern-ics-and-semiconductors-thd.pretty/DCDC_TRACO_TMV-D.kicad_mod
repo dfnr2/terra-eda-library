@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TMV Series, Dual Output DC/DC Converter,  Body 19.5x6.1mm")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at -0.0124 -2.35 0)
 		(layer "F.SilkS")

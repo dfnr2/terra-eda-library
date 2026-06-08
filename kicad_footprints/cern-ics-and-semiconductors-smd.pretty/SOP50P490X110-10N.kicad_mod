@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MSOP, 10-Leads, Body 3.1x3.1mm (max), Pitch 0.50mm, IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -2.6 0)
 		(layer "F.SilkS")

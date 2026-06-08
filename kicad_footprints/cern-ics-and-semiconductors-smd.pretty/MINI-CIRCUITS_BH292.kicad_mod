@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS BH292 Case, 2.54mm Pitch, Body 8.64X7.49mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.27 -5.29284 0)
 		(layer "F.SilkS")

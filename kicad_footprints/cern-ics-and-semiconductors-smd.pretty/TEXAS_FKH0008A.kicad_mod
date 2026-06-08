@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS Case Style FKH0008A, LCCC, 1.27mm Pitch, 8 Pin, 5mm W X 5.00mm L X 1.60mm H body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2875 -3.975 0)
 		(layer "F.SilkS")

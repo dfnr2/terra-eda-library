@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "ADP Series , Body 25.5x20.5mm, high voltage DC-DC converter")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -11.725 0)
 		(layer "F.SilkS")

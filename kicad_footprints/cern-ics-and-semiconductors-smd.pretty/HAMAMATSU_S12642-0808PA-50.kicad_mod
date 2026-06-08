@@ -50,7 +50,7 @@
 			)
 		)
 	)
-	(attr allow_missing_courtyard)
+	(attr smd allow_missing_courtyard)
 	(fp_line
 		(start -12.90001 -12.90001)
 		(end 12.90001 -12.90001)

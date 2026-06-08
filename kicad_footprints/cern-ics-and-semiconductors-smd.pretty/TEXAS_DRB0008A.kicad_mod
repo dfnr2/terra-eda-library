@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS Case Style DRB0008A, SON, 0.65mm Pitch, 8 Pin, 3.00mm W X 3.00mm L X 1.00mm H body (w/Thermal Tab 1.60 X 1.85mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2375 -2.575 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS AH202-1 Case, Body 12.7mm L X 9.65mm W X 6.35mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2836 -7.325 0)
 		(layer "F.SilkS")

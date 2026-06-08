@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MACOM Case Style FP-3 - Body W 15.9 x L 15.9 H 3.8mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.00008 -17.89992 0)
 		(layer "F.SilkS")

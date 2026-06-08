@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SON, 1.27mm pitch, 8 pin, 6.00mm W X 5.00mm L X 0.80mm H body (w/thermal tab  2.40 X 4.10 mm), IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.21258 -3.52492 0)
 		(layer "F.SilkS")

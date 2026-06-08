@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "PERICOM TQFN Code ZBB20, 0.50mm Pitch, Rect.; 20 Pin, 2.50mm L X 4.50mm W X 0.90mm H Body (W/Thermal Tab 1.2mm X 3.2mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -4.05 0)
 		(layer "F.SilkS")

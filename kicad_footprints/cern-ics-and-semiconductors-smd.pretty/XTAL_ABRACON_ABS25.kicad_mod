@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "4 Pins, 8mm L X 3.8mm W X 2.7mm H, SMD Crystal, ABS25 Serie")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -4.975 0)
 		(layer "F.SilkS")

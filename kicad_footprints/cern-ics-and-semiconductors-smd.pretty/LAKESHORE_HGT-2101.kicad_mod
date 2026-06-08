@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "0.9mm Ptich; 4 Pin, 1.5mm W X 1.5mm L X 0.6mm H Body, LAKESHORE HGT-2101")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -1.8 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Hermetic Ceramic SOIC, 1.27mm Pitch; 24 Pin, 7.62mm W X 15.59mm L X 3.048mm H Body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -8.775 0)
 		(layer "F.SilkS")

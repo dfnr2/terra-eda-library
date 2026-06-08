@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Oscillator Si549 Series, 8 pins, 5x7mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.3 -4.9 0)
 		(layer "F.SilkS")

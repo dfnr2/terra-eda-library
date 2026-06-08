@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "3.84X3.74mm, 4×4 NUV-MT Silicon Photomultiplier Array, Body 16 x 16 x 1.23mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -8.975 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Single-channel Attenuator, Body Dia. 5.40, Body H 30.0mm")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0.134925 -3.94485 0)
 		(layer "F.SilkS")

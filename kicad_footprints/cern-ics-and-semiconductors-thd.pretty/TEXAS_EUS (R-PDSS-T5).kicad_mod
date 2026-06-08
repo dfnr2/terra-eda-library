@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Texas EUS (R-PDSS-T5) Case")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -7.52 0)
 		(layer "F.SilkS")

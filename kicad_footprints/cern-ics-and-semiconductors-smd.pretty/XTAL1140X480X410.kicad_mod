@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HC-49/S3 Case, SMD Crystal; 2 Pins, Body 11.4mm L X 4.80mm W X 4.10mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -3.375 0)
 		(layer "F.SilkS")

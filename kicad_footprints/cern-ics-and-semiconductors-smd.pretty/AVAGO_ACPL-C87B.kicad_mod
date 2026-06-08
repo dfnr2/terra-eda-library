@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "8-Leads Stretched Surface Mount SO Package, Body 6.807x5.859mm, Pitch 1.27mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.000045 -4.027 0)
 		(layer "F.SilkS")

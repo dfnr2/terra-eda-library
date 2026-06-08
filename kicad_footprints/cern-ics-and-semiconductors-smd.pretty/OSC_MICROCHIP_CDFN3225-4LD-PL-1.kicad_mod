@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MICROCHIP Case CDFN3225-4LD-PL-1, SMD Oscillator, QFN, 4 pins, 3.2mm x 2.5mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2625 -2.575 0)
 		(layer "F.SilkS")

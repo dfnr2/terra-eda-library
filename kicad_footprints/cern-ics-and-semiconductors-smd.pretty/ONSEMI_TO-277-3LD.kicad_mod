@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "ON SEMICONDUCTOR TO-277-3LD Case, 3-Leads, Pitch 2.10mm, Body 6.15 X 4.63mm X 1.20mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2875 -3.195 0)
 		(layer "F.SilkS")

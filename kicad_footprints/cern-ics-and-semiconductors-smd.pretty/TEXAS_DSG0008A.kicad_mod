@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS Case Style DSG(WSON-N8), SON, 0.50mm Pitch, 8 Pin, 3.00mm X 3.00mm X 0.80mm H body (w/Thermal Tab 1.00 X 1.70mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2625 -2.025 0)
 		(layer "F.SilkS")

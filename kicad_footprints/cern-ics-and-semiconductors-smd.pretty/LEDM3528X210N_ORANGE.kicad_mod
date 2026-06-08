@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Molded SMD ORANGE LED, 2-Leads, Body 3.5x2.8mm, IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.0625 -2.6 0)
 		(layer "F.SilkS")

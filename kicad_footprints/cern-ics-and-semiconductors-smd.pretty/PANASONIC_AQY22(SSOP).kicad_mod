@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "PANASONIC Serie AQY22(SSOP) Flat Leads SSOP  4 pins, 4.45x2.65mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2375 -2.25 0)
 		(layer "F.SilkS")

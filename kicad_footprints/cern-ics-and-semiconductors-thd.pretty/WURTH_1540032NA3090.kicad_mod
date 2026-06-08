@@ -50,7 +50,7 @@
 			)
 		)
 	)
-	(attr allow_missing_courtyard)
+	(attr through_hole allow_missing_courtyard)
 	(fp_arc
 		(start -1.526978 -1.172161)
 		(mid 0 -1.925)

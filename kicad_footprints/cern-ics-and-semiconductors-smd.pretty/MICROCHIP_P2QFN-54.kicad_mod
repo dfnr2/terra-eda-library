@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MICROCHIP P2QFN106-54LD-PL-1, 0.50mm Pitch, Rectangular, 54 Pin, 6mm L X 10mm W X 2.1mm H Body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.0875 -6.35 0)
 		(layer "F.SilkS")

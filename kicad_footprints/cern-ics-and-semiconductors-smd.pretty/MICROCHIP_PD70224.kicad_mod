@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MICROCHIP PD70224 Case, 0.50mm Pitch; 40 Pin, 6.00mm L X 8.00mm W X 1.00mm H body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.1375 -5.18 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS Case Style DQN (S-PX2SON-N4), SON, 0.65mm Pitch, Square; 4 Pin, 1.00mm L X 1.00mm W X 0.4mm H body (w/thermal tab 0.5 X 0.5mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.25748 -1.475 0)
 		(layer "F.SilkS")

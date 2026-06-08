@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS Case Style DNH, VSON, 0.65mm pitch, 8 pin, 3mm X 3.15mm X 0.9mm H body (w/thermal tab 1.84 X 2.45mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2625 -2.6 0)
 		(layer "F.SilkS")

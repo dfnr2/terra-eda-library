@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Red/Green Chip LED, 4-Leads, Body 1.6x0.8mm (0603), SML-D22x Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.25 -1.475 0)
 		(layer "F.SilkS")

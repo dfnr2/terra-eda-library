@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Oscillator MICROCHIP VCC6 Series, 6 pins, 5.0x7.0mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.244455 -4.87891 0)
 		(layer "F.SilkS")

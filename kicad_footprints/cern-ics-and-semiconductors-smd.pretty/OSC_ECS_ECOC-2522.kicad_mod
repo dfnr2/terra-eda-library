@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "5 Pins, 25.4m x 22mm, SMD OCXO")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.41 -12.025 0)
 		(layer "F.SilkS")

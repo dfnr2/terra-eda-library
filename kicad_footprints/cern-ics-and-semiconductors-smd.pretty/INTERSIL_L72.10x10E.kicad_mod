@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "INTERSIL Case Style L72.10x10E, QFN, 0.50mm Pitch, Square; 72 Pin, 10.00mm L X 10.00mm W X 1.00mm H body (w/ Thermal Tab 7.15 X 6mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.00002 -7.452044 0)
 		(layer "F.SilkS")

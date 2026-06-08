@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MEE3 Series , Body 14.15 x 8.15mm, SIP Package")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -5.05 0)
 		(layer "F.SilkS")

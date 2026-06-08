@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS TDZ943 Case, 10 pin,  7.62mm W X 6.35mm L")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2325 -4.785 0)
 		(layer "F.SilkS")

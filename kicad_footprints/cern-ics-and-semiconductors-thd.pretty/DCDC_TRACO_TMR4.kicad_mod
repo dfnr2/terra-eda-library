@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TMR 4 Series , Body 21.8x9.3mm, Compact SIP-8 Package")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at -0.002105 -6.07612 0)
 		(layer "F.SilkS")

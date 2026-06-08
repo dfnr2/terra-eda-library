@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Red Diffused Chip LED, 2-Leads, Body 2.0 x 1.20mm, IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2625 -1.575 0)
 		(layer "F.SilkS")

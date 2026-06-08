@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SOIC, 2.54mm Pitch, 6 Pin, Body 6.35mm W X 8.5mm L X 5.08mm H, FAIRCHILD MDIP 6L")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -5.42 0)
 		(layer "F.SilkS")

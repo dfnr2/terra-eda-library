@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS MT1818 Case, Body 2.06mm L X 2.06mm W X 0.61mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.06496 -2.25 0)
 		(layer "F.SilkS")

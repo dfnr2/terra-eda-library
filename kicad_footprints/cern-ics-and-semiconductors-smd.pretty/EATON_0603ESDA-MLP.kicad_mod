@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "0603, 2-Leads, Body 1.57mm L X 0.81mm W X 0.38mm H body, IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -1.475 0)
 		(layer "F.SilkS")

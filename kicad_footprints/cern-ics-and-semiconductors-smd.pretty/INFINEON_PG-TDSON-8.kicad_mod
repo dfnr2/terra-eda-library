@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TDSON, 8-Leads, Body 6.15x5.15mm, Pitch 1.27mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.237475 -3.67 0)
 		(layer "F.SilkS")

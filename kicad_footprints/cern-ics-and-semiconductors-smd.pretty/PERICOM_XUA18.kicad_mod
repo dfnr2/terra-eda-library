@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "PERICOM X2QFN Code XUA18, 0.40mm Pitch, Rect.; 18 Pin, 2mm L X 2mm W X 0.4mm H Body (W/Thermal Tab 0.9mm X 0.9mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2875 -2.225 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TDN 5WISM Series , Body 13.2x9.1mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.679915 -5.77484 0)
 		(layer "F.SilkS")

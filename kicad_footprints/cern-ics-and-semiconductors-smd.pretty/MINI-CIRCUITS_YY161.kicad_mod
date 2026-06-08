@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS YY161 Case, Body 19.05mm L X 9.65mm W X 7.11mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.00016 -10.49984 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "3.0 x 3.0mm2, 25um Microcell Type, SMD Silicon Photomultiplier, Body 3.315mm x 3.315mm X 0.725mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -3.15 0)
 		(layer "F.SilkS")

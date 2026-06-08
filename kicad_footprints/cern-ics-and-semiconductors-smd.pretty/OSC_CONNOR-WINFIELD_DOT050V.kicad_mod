@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SMD VCTCXO, Side Concave, 6 Pins, 9.00x14.00mm, DOT050V Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -7.775 0)
 		(layer "F.SilkS")

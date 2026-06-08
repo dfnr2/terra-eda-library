@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS DL805 Case, 0.66mm Pitch, Square; 8 Pin, 3.25mm L X3.25mm W X 0.90mm H body (w/Thermal Tab 1.22 X 4.01mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.285 -2.98 0)
 		(layer "F.SilkS")

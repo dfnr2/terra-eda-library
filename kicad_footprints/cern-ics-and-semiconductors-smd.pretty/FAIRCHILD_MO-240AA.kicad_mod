@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "JEDEC MO-240AA, Fairchild PQFN, 1.27mm pitch, 8 pin, 6.25mm X 5.2mm X 1.10mm H body (w/thermal tab 3.75 X 3.91mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2527 -3.575 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS QQQ569 Case, 2.54mm pitch; 6 pin, 9.91mm W X 7.87mm L")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.26575 -5.293 0)
 		(layer "F.SilkS")

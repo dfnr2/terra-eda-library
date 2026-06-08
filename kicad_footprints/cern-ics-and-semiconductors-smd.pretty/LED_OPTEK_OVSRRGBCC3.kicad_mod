@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Top Mount, Full-Color (RGB), 1204 Surface Mount LED (150° Viewing Angle)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -1.92502 0)
 		(layer "F.SilkS")

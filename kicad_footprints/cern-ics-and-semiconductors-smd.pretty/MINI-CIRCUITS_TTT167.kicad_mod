@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS TTT167 Case, 6 pin, 9.65mm W X 12.7mm L")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -6.288 0)
 		(layer "F.SilkS")

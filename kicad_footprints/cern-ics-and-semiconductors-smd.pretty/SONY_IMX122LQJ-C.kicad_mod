@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "LGA, 94-Leads, Body 12.80x11.60mmx2.15mm, Pitch 1.00mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -7.3 0)
 		(layer "F.SilkS")

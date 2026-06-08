@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "VISHAY Low Profile DFS Case Style")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.000045 -5.2302 0)
 		(layer "F.SilkS")

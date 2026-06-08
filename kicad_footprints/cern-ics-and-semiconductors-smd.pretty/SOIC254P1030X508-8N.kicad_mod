@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "DIP Gull Wing Surface Mount, 8-Leads, Body 9.9x6.9mm (max), Pitch 2.54mm, IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -6.235 0)
 		(layer "F.SilkS")

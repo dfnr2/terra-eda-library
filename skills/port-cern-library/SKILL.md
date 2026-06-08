@@ -66,6 +66,10 @@ terra owns its libs under `kicad_symbols/` (`.kicad_sym`) and `kicad_footprints/
   `kicad_symbols/cern-foo.kicad_sym`; `PcbLib/BAR.pretty` → `kicad_footprints/cern-bar.pretty`.
 - Add the CERN→terra nickname entries to `tools/cern_libmap.py`; the generator rewrites each
   part's `kicad_symbol`/`kicad_footprint` to the terra nicknames.
+- **After copying a new PcbLib**, run `uv run python tools/fix_footprint_attrs.py` — the CERN
+  conversion leaves footprints with no `(attr …)` type, so KiCad shows them as "Other/Virtual"
+  (excluded from pos files). The tool derives `smd`/`through_hole` from the pads (idempotent)
+  and reports any footprint filed in the wrong lib (smd pads in a THD lib, etc.).
 
 ## 4. Build
 `CERN_SQLITE=… make EXCLUDE_TABLES="resistors_smt resistors_th" [DEFAULT_TIER=5]` builds

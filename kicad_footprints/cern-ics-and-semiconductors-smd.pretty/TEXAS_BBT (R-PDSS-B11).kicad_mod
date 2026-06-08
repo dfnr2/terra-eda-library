@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS BBT (R-PDSS-B11) Case")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -9.10701 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "DBE Series, Body 58.4x22.9mm, Height 13.2mm")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -12.917 0)
 		(layer "F.SilkS")

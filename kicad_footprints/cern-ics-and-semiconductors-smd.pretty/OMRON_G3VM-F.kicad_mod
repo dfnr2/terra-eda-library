@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "OMRON OMRON Surface Mount DIP 8, Pitch 2.54 mm, G3VM-61 Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -6.03 0)
 		(layer "F.SilkS")

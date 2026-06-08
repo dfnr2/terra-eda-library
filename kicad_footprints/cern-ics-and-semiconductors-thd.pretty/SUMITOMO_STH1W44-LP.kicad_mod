@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "CWDM MQW-DFB Laser Diode (Transmitter Optical Sub-Assembly) for 10Gb/s Applications")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 5.935 -3.775 0)
 		(layer "F.SilkS")

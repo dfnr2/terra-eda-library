@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Tri-Color (Red/Green/Blue), 3mm Prism Surface Mount LED, 591 Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -1.335 -3.13492 0)
 		(layer "F.SilkS")

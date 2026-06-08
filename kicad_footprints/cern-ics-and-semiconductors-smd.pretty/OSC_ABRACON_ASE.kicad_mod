@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SMD Oscillator, Body 3.20mm L X 2.50mm W X 1.20mm H, ASE Serie")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.3125 -2.675 0)
 		(layer "F.SilkS")

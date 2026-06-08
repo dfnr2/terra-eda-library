@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS DG983-2 Case, 0.50mm Pitch, Square; 5 Pin X 5 Pin, 4mm X 4mm Body (w/Thermal Tab 2.31 X 2.31mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.00008 -3.225 0)
 		(layer "F.SilkS")

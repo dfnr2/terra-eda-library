@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "QFN, 0.50mm pitch,square; 12 Pin, 3mm X 3mm X 0.92mm H body (With Pullback Leads,Thermal Tab 1.65 X 1.65mm),  IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2625 -2.575 0)
 		(layer "F.SilkS")

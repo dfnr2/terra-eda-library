@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "AG Series, DC/HVDC Converter, Body W 11.43mm x L 23.37mm x H 6.35mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -10.4 0)
 		(layer "F.SilkS")

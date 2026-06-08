@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS JY2179 Case, 0.50mm Pitch, Square; 8 Pin X 8 Pin, 5mm X 5mm Body (w/Thermal Tab 3.35 X 3.35mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2375 -3.575 0)
 		(layer "F.SilkS")

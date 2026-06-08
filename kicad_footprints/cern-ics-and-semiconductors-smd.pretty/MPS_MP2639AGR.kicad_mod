@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MPS QFN-26 (4mmx4mm) Case")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.15 -3.275 0)
 		(layer "F.SilkS")

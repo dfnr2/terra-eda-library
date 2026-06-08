@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SOD80, MELF Diode, 2-Leads, Body 3.5x1.5mm, IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2375 -1.875 0)
 		(layer "F.SilkS")

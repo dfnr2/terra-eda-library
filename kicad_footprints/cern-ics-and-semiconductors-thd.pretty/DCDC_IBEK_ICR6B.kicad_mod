@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "ICR6 Series , Body 50.8x50.8mm")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at -0.397495 -26.87502 0)
 		(layer "F.SilkS")

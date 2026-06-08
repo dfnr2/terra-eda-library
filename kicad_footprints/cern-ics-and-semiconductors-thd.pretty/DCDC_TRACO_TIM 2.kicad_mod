@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TIM 2 Series Case, 7-Pin, Pitch 2.54mm, Body 24.3x14.4mm")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -8.175 0)
 		(layer "F.SilkS")

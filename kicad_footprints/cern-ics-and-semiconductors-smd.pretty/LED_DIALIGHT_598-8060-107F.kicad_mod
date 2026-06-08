@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SMT Yellow-Green LED, Body 1.6x0.8mm, 0603 Case,  DIALIGHT 598 Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -1.8 0)
 		(layer "F.SilkS")

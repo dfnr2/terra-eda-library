@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "DO-214-AB/SMC Molded Diode, Body 7.95x2.62mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.00008 -2.1275 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TES 3 WI Series, 2.54mm Pitch, 12 Pin of 24, Boby 14.8 W X 32.3mm L X 10.45mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -17.275 0)
 		(layer "F.SilkS")

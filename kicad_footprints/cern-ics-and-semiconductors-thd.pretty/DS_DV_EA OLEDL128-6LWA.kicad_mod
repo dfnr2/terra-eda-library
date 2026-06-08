@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Graphic LCD Display Module White OLED - Passive Matrix I2C, SPI 128 x 64, Body 67.8mm x 47.96mm")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -28.185 0)
 		(layer "F.SilkS")

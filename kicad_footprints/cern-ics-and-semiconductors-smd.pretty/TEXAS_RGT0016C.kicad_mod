@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS_RGT0016C, 0.50mm Pitch, Square; 4 Pin X 4 Pin, 3mm X 3mm X 1.00mm H body (w/Thermal Tab 1.68 X 1.68mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2875 -2.675 0)
 		(layer "F.SilkS")

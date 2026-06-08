@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TDK, iBH Series, Non-Isolated DC-DC Converter, Body 20.3x11.4mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -6.69 0)
 		(layer "F.SilkS")

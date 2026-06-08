@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "INFINEON VSON-4 Package, QFN 5 Pin, 2mm Pitch, Square; 8mm X 8mm X 1.1mm H Body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -4.97492 0)
 		(layer "F.SilkS")

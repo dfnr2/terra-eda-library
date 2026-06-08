@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS Case Style NGD0006A, SON, 0.95mm Pitch; 6 Pin, 2.92mm W X 3.29mm L X 0.80mm H body (w/Thermal Tab 1.30 X 2.02mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.265 -2.435 0)
 		(layer "F.SilkS")

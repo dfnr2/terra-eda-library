@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Yellow Chip LED, 2-Leads, Body 2.0x1.25mm, IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2375 -1.675 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "ON SEMICONDUCTOR POWERMITE Case, 2-Leads, Body 1.965 x 1.9mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.04984 -3.45 0)
 		(layer "F.SilkS")

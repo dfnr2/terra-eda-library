@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS QFN (RDB) , 0.50mm Pitch, 51 Pin, 5.50mm L X 8.00mm W X 1.80mm H body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2625 -5.25 0)
 		(layer "F.SilkS")

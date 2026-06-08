@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Oscillator, J-lead; 5.08mm pitch; 4 pin, 10.5mm L X 5.0mm W X 2.7mm H, EPSON SG-3030JC Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.6625 -6.225 0)
 		(layer "F.SilkS")

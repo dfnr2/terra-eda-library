@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS CK1113 Case, 2.54mm pitch; 12 pins, Body 12.7mm W X 12.7mm L X 5.59 H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.27 -7.835 0)
 		(layer "F.SilkS")

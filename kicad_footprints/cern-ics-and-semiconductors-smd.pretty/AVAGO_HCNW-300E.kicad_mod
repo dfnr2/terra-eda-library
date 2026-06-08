@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SOIC, 2.54mm Pitch; 8 Pin, 9.00mm W X 11.23mm L X 4.00mm H body, AVAGO Package With Gull Wing Surface Mount")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -6.625 0)
 		(layer "F.SilkS")

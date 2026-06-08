@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS MC1630 Case, 0.65mm pitch, 6 pin, 2mm X 2mm X 0.85mm H body (w/thermal tab 0.65 X 1.25mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.11925 -2.4135 0)
 		(layer "F.SilkS")

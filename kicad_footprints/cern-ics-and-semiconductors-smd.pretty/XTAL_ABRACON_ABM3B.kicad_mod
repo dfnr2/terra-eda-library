@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "ABM3B Serie, SMD Cristal, Body 5.x3.2mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.25 -3.875 0)
 		(layer "F.SilkS")

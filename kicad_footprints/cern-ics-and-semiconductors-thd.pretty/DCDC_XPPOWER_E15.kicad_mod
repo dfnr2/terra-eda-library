@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "E Series, Single Output DC/DC Converter, Body W 38.1mm x L 63.5mm x H 21.6mm")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -20.525 0)
 		(layer "F.SilkS")

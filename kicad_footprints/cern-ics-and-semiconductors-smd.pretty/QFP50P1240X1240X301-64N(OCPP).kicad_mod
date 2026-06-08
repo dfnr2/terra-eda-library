@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "OCPP (Open Cavity Plastic Package) QFP, 0.50mm Pitch, Square; 64 Pin, 10.0mm L X 10.0mm W X 3.01mm H body, IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -7.65 0)
 		(layer "F.SilkS")

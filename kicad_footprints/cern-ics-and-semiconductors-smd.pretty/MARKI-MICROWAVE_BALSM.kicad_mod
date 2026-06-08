@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Marki microwave Case BALSM, 8.13mm L X 8.13mm W X 3.94mm H Body")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -5.723 0)
 		(layer "F.SilkS")

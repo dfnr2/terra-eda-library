@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS Case Style (R-VQFN-HR-N11), 0.50mm Pitch, 11-pin, 2.00mm W X 3.00mm L X 1.00mm H Body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.26242 -2.875 0)
 		(layer "F.SilkS")

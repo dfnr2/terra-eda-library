@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "ST MICROELECTRONICS LGA-22, 0.40mm Pitch, Square; 22 pin, 3.00mm L X 3.00mm W X 1.03mm H body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.237435 -2.475 0)
 		(layer "F.SilkS")

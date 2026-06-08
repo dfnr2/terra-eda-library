@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS Case Style PAP, QFP, 0.50mm Pitch, Square; 64 Pin, 10.00mm L X 10.00mm W X 1.20mm H body (w/Thermal Tab 8.00 X 8.00mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -7.425 0)
 		(layer "F.SilkS")

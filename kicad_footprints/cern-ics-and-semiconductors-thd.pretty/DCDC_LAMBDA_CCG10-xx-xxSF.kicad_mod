@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TDK, CCG Series, Isolated DC-DC Converter, Body 19.0x12.4mm")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -7.175 0)
 		(layer "F.SilkS")

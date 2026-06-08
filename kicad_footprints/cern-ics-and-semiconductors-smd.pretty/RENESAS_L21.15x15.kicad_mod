@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "RENESAS, mutipl Pitch, Square; 33 Pin, 15mm L X 15mm W X 3.70mm H body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -9.275 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Fiber Optic Photodiode Detector, Anode and Cathode Wire Bonding on Front Side")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -1.175 0)
 		(layer "F.SilkS")

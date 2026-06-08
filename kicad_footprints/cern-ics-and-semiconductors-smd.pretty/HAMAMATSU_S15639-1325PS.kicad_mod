@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "1.1x1.3mm, 50µm Pixel Pitch, SMD MPPC (Multi-Pixel Photon Counter), Body 1.72 x 1.69 x 0.8mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.1375 -1.82 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MACOM H-36248-2 Case, Body 9.78mm W X  34.04mm L X1.85mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -9.815 0)
 		(layer "F.SilkS")

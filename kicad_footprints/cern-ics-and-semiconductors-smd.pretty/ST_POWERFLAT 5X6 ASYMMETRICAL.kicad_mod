@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "PowerFLAT 5x6, 1.27mm Pitch; 9 Pin, Body 5.00mm W X 6.00mm L X 1.00mm H, with Two Thermal Pad (Asymmetrical Double Island)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.249725 -3.525 0)
 		(layer "F.SilkS")

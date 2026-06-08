@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "PSON, JEDEC MO-241BA, TEXAS RGY (S-PVQFNN14), 0.50mm Pitch, Square; 5 Pin X 4 Pin, 3.5mm X 3.5mm X 1.00mm H body (w/Thermal Tab 2.05 X 2.05mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -3.75 0)
 		(layer "F.SilkS")

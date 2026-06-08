@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Oscillator MICROCHIP VC-830 Series, 6 pins, 2.5x3.2mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.244455 -3.18891 0)
 		(layer "F.SilkS")

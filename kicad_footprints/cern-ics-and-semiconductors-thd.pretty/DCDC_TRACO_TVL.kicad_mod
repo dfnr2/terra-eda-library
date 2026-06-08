@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TVL Series , Body 51.3x51.3mm")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at -0.27249 -27.12501 0)
 		(layer "F.SilkS")

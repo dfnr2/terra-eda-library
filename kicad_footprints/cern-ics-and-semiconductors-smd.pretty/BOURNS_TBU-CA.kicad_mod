@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "DFN, 3-Leads, Body 6.5 x 4mm, BOURNS TBU-CA Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.3 -2.975 0)
 		(layer "F.SilkS")

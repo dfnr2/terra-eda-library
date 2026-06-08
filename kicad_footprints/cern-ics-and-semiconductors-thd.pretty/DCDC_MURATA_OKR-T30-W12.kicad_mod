@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MURATA OKR-T/30-W12 Series, 2.00 Pitch; 13 Pin, 30.5mm W X 18.1mm L X 15.5mm H body")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0.005 -7.585 0)
 		(layer "F.SilkS")

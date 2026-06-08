@@ -50,7 +50,7 @@
 			)
 		)
 	)
-	(attr allow_missing_courtyard)
+	(attr smd allow_missing_courtyard)
 	(fp_circle
 		(center -14.05 -7.5)
 		(end -14.05 -7.75)

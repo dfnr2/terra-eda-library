@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS WQFN Case RVR0019A, 0.50mm Pitch, Rect.; 21 Pin, 4.0mm L X 3.0mm W X 0.80mm H Body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2625 -2.675 0)
 		(layer "F.SilkS")

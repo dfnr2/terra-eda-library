@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SOIC, 2.54mm Pitch, 8 Pin, Body 6.64mm W X 9.77mm L X 4.059mm H, VISHAY SMD-8 Option 9")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -6.29 0)
 		(layer "F.SilkS")

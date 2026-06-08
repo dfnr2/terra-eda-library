@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "ON SEMICONDUCTOR WDFN8 3.3X3.3, 0.65P, CASE 511DH ISSUE O, 0.65mm Pitch, 8 pin, 3.3mm X 3.3mm X 0.8mm H body (w/thermal tab 1.7 X2.37mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -2.675 0)
 		(layer "F.SilkS")

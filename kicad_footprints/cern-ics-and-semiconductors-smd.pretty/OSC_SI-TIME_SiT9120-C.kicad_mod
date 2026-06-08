@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SiT9120 Series Package C, Oscillators, Version 3.2mmx5mm, Pitch 1.27mm; 6 Pin")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2975 -3.525 0)
 		(layer "F.SilkS")

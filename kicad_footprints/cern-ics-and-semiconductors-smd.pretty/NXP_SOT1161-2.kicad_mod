@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "NXP SOT1174-1, Plastic, Extremely Thin Quad Flat Package; No Leads; 12 Terminals; Body 1.70 x 2.00 x 0.50 mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2625 -2.425 0)
 		(layer "F.SilkS")

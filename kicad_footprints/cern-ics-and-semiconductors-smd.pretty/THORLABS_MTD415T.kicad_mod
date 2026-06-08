@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "THORLABS MTD415T Case, 1.27mm pitch, 16 Pins, 21mm X 12.4mm X 3.10mm H Body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2875 -7.175 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "LGA, 0.85mm Pitch, 49 Pin, 18mm L X 19.2mm W X 3.35mm H body (9X w/Thermal Tab 0.9 X 0.9mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -10.575 0)
 		(layer "F.SilkS")

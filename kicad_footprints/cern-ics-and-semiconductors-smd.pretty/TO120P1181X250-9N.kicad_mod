@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "L-TOGL, 1.2mm pitch, 8 pin,  10.24mm X 12.11mm X 2.50mm H body (w/thermal tab 9.15mm X 9.87mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -7.4 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Marki microwave EZ Style Doubler Outline, 15.24mm L X 8.13mm W X 4.3mm H Body")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0.000085 -5.672 0)
 		(layer "F.SilkS")

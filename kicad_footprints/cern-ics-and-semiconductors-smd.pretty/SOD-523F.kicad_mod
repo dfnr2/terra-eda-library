@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Small Outline Diode Flat Lead (SOD-523F), Body; 1.80mm L X 1mm W X 0.85mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2875 -1.475 0)
 		(layer "F.SilkS")

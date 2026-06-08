@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "BGA, 0.40mm Pitch, Rect.; 70 Pin, 10 columns X 7 rows, 4.12mm L X 3.17mm W X 6.90mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -3.325 0)
 		(layer "F.SilkS")

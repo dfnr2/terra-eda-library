@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "QFN, (MO-220-VHHD-4) 0.50mm pitch,square; 8 pin X 8 pin, 5mm X 5mm X 1.00mm H body (w/thermal tab 3.65 X 3.65mm), SEALICON FGD-03F")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.325 -3.8 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TOSHIBA SSOP4, 1.27mm Pitch; 4 Pin, 2.04mm L X 3.8mm W X 1.8mm H Body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.00005 -2.475 0)
 		(layer "F.SilkS")

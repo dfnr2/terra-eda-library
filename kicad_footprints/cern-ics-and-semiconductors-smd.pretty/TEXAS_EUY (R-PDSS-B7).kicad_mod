@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS EUY (R-PDSS-B7)  Case")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.00004 -9.105 0)
 		(layer "F.SilkS")

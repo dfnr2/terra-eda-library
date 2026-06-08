@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TOM12W Single Output Series , Body 65x32mm, Power Supply")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -16.97501 0)
 		(layer "F.SilkS")

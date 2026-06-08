@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "BOSCH Case for BME280, 8 Pin, Pitch 0.65mm, Body 2.5 x 2.5mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.2625 -2.225 0)
 		(layer "F.SilkS")

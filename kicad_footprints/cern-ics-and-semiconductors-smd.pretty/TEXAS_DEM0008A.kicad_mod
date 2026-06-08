@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS WSON8, Pitch 0.5mm - Body 2x2mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2875 -1.975 0)
 		(layer "F.SilkS")

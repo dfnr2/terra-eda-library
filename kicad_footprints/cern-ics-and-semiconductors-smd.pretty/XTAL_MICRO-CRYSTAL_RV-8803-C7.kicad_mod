@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Crystal 8 Pins, 3.2 x 1.5 x 0.8mm, SMD Crystal, I2C")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.375 -2.575 0)
 		(layer "F.SilkS")

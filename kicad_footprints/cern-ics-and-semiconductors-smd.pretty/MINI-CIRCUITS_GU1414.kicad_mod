@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS GU1414 Case, 2.54mm pitch; 4 pin, 3.81mm L X 3.81mm W X 3.56mm H Body (w/Thermal Tab 0.76 X 2mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.111875 -3.1725 0)
 		(layer "F.SilkS")

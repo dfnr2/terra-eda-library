@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS Case Style RSH, QFN, 0.40mm Pitch, Square; 56 Pin, 7.00mm L X 7.00mm W X 1.00mm H body (3x thermal tab)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2625 -4.925 0)
 		(layer "F.SilkS")

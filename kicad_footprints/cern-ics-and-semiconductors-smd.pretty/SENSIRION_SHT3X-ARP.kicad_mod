@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SON, 1.00mm Pitch, 8 Pin, 2.5mm W X 2.5mm L X 1mm H Body (W/Thermal Tab 1.2 X 1.9mm), SENSIRION SON.")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2375 -2.275 0)
 		(layer "F.SilkS")

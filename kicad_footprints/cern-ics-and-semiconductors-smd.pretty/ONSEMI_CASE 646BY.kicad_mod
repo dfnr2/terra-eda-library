@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "ON SEMICONDUCTOR, 2.54mm Pitch, 6 Pin, 6.35mm W X 8.5mm L X 4.80mm H Body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -5.23 0)
 		(layer "F.SilkS")

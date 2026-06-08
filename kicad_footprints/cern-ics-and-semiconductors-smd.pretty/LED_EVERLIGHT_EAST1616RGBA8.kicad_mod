@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Tricolor (RGB) Surface Mount LED, Body 1.6mm X 1.6mm X 0.35mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.237715 -1.9 0)
 		(layer "F.SilkS")

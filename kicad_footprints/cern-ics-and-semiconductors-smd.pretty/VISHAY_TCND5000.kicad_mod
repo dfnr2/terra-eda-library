@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "VISHAY Package, 3.88mm Pitch; 4 Pin,4.3mm W x 6mm L x 3.8mm H body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -3.6 0)
 		(layer "F.SilkS")

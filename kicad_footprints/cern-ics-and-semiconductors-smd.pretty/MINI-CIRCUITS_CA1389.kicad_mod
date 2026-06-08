@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS CA1389 Case, 0.65mm Pitch; 6 Pin, 1.25mm W X 2.05mm L X 1.00mm H body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -2.35 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "DO-403-AC Molded Diode, Body 7.95mm L X 5.90mm W X 2.61mm H, IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -4.125 0)
 		(layer "F.SilkS")

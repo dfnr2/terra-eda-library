@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SMD Crystal, Corner Concave; 4 Pins, 1.60mm L X 2.00mm W X 0.8mm H Body, ECS-TXO-2016MV Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2625 -2.025 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TAPP Case 5mm X 7mm X 0.8mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -6.494944 0)
 		(layer "F.SilkS")

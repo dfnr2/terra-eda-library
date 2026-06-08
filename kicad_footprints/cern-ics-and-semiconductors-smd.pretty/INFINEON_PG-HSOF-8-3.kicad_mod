@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "INFINEON Case Style PG-HSOF-8-3; 9 Pin, 9.90mm W X 10.38mm L X 2.40mm H body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.0875 -7.36 0)
 		(layer "F.SilkS")

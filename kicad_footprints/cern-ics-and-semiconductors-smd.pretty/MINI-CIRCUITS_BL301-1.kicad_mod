@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS BL301-1 Case, 2.54mm pitch; 25 pin, 23.62mm W X 32mm L")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.1375 -17.1 0)
 		(layer "F.SilkS")

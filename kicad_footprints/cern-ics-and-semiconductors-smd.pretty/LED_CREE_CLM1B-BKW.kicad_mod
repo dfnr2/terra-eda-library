@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "PLCC2 1 in 1 Surface Mount Blue LED, Body 3.2mm X 2.8mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2875 -2.375 0)
 		(layer "F.SilkS")

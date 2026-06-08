@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Bonding, Body 3.00x3.00mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -3.425 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SOT89, 1.50mm Pitch; 3-Leads, 2.5mm W X 4.5mm L X 1.6mm H body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.34 -3.4 0)
 		(layer "F.SilkS")

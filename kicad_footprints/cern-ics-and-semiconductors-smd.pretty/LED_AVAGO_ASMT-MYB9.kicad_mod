@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Warm White LED, Body 10x10.6mm, Pin spacing 5.08mm (Exposed Pad 10.7mm x 8.4mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -7.675 0)
 		(layer "F.SilkS")

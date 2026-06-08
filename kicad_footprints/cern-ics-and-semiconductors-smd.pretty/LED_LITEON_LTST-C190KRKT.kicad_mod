@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SMD AlInGaP Red LED, Lens Water Clear, 2-Leads, Body 1.6x0.8mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -1.95 0)
 		(layer "F.SilkS")

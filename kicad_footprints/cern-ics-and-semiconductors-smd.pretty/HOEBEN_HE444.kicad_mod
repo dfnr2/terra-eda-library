@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HE444 Series 3D Analog Hall sensor, Body 3.3mm x 3.3mm X 3.3mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2875 -2.975 0)
 		(layer "F.SilkS")

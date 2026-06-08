@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "ECX-3SX SMD Crystal, Body 12.5 L X 4.60mm W X 3.70mm H, Pitch 9.4mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -3.625 0)
 		(layer "F.SilkS")

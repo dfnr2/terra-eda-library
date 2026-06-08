@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "LGA, 9-Pin, Body 2.8mm x 2.6mm, MURATA LXDC2XQ Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.3125 -2.37811 0)
 		(layer "F.SilkS")

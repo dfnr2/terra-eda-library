@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "2.28mm pitch; 3 pin, 5.375mm L X 3.975mm W X 1.150mm H body, POWERDI 5")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.000045 -2.9625 0)
 		(layer "F.SilkS")

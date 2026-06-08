@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "QFN, (MO-220WHHD-5) 0.50mm Pitch, Square; 8 Pin X 8 Pin, 5mm X 5mm X 0.80mm H Body (w/Thermal Tab 3.75 X 3.75mm),  IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2625 -3.925 0)
 		(layer "F.SilkS")

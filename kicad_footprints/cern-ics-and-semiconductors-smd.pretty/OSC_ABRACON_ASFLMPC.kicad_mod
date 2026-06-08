@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "4 Pins, 5x3.2mm, Performance Plastic Package Ultra Miniature Pure Silicon Clock Oscillator, ASFLMPC Series, CMOS Version")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2875 -3.5 0)
 		(layer "F.SilkS")

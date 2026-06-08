@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "QFN, SKY13351-378LF Case, 0.35mm pitch, 6 Pin,  1mm X 1mm X 0.5mm H Body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.218125 -1.74375 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "D2PAK TO-263, TO, 2.54mm Pitch; 2 Pin, 15.30mm L X 10.0mm W X 4.50mm H body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.1 -6.275 0)
 		(layer "F.SilkS")

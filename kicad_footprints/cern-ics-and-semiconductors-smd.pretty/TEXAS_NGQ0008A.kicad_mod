@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS Case Style NGQ(WSON-N9), SON, 0.50mm Pitch, Square; 8 Pin, 3.00mm L X 3.00mm W X 0.80mm H body (w/Thermal Tab 1.70 X 2.10mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.3 -2.475 0)
 		(layer "F.SilkS")

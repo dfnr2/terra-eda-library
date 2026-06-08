@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SOIC, 2.54mm Pitch; 8 Pin, 12.065mm W X 12.065mm L X 9.906mm H Body FREESCALE Case 1351-01")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -13.36001 0)
 		(layer "F.SilkS")

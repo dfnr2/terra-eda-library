@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "LCC, 0.889mm Pitch, Rect.; 101 Pin, 33.274mm L X 30.48mm W X 3.35mm H Body, FAIRCHILD LCC101")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -18.85 0)
 		(layer "F.SilkS")

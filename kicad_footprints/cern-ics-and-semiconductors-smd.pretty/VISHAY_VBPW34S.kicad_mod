@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SMT Silicon PIN Photodiode, Photosensitive Area 2.65 x 2.65 mm, with Daylight Filter")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -2.975 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MEJ2 Series , Body 19.65 x 9.95mm, SIP-7")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -6 0)
 		(layer "F.SilkS")

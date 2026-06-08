@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SEMTECH, SOIC,1.27mm Pitch, SOIC; 8 Pin, 4mm L X 5mm W X 1.75mm H body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -3.705 0)
 		(layer "F.SilkS")

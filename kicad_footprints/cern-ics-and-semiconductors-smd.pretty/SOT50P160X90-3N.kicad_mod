@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SC-75/SOT-416, SOT, 0.50mm Pitch; 3 Pin,0.80mm W X 1.60mm L X 0.90mm H Body, IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -2.1 0)
 		(layer "F.SilkS")

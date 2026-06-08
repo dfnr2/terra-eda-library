@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Surface Mount RGB LED with Intelligent control, Body 5mm X 5mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.0125 -3.475 0)
 		(layer "F.SilkS")

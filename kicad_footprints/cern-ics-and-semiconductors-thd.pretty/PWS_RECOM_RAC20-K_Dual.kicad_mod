@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "RAC20-K Series, Body 52.5x27.4mm")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -14.75635 0)
 		(layer "F.SilkS")

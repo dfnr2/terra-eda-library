@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SMD Crystal NDK, 4 Pins,2.0mm L X 1.6mm W X 0.5mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -1.875 0)
 		(layer "F.SilkS")

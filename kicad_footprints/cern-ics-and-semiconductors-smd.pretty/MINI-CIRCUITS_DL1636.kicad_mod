@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS DL1636 Case, 1.27mm pitch; 8 pin, 6.00mm W X 4.90mm L")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.28 -3.425 0)
 		(layer "F.SilkS")

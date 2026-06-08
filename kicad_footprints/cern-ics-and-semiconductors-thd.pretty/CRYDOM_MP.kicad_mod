@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "CRYDOM MP Serie, 4 Leads, Body 43.1mm x10.2mm, Mini-SIP SSR (Solid State Relay)")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -7.075 0)
 		(layer "F.SilkS")

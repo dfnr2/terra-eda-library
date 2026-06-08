@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "2 x LED (Red, IR) , SMD Package LX2530")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.0875 -2.325 0)
 		(layer "F.SilkS")

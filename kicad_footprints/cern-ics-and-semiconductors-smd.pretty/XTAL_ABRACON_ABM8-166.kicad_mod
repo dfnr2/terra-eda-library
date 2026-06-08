@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "4 Pins, SMD Crystal, Body 3.2x2.5mm, ABM8 Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2646 -2.625 0)
 		(layer "F.SilkS")

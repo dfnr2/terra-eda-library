@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS NL1008C-8 Case, Body 2.5mm L X 2mm W X 1.1mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2375 -2.225 0)
 		(layer "F.SilkS")

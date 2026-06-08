@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "VISHAY PolarPAK Case Option L, 10-Leads - Body 6.3x5.31mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -3.955 0)
 		(layer "F.SilkS")

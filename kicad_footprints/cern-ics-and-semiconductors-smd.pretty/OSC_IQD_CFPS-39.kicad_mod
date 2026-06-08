@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Oscillator, Side Concave, 2.20mm Pitch, 4 Pins, 2.70mm L X 3.40mm W X 1.20mm H, CFPS-39 Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2 -2.675 0)
 		(layer "F.SilkS")

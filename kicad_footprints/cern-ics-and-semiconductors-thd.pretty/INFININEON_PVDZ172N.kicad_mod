@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "DIP 8, 4 Leads; Row Spacing 7.62 mm; Pitch 2.54 mm")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -6.055 0)
 		(layer "F.SilkS")

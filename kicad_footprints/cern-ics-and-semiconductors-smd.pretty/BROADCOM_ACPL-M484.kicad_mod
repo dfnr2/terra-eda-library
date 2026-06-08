@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SO-5, 1.27mm Pitch; 5 Pin,7.00mm W X3.6mm L X 2.5mm H body, BROADCOM ACPL-M484")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -3.115 0)
 		(layer "F.SilkS")

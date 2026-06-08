@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "THN 15 Series , Body 25.4x25.4mm, Height 9.9mm")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -13.95001 0)
 		(layer "F.SilkS")

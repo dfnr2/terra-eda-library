@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "APC 855 Case, Crystal; 2 Pins, Body 11.0mm D X 2.00mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -6.85 0)
 		(layer "F.SilkS")

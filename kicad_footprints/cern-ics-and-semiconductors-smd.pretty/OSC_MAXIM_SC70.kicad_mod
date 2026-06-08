@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MAXIM SL70, SOT23 3-Leads, Pitch 0.65mm - Body 1.25x2.00mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2375 -1.975 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "PSON, 0.50mm Pitch; 6 Pin, 1.00mm W X 1.45mm L X 0.55mm H body (w/Pullback Leads), IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2125 -1.725 0)
 		(layer "F.SilkS")

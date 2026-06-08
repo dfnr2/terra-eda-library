@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "LQFN, 16-Lead, 0.50mm Pitch; 3.50mm W X 3.50mm L X 0.83mm H body (with 4 Tab 0.375 X0.375mm and with a Thermal Tab 1.43 X1.43mm)# 05-08-1798")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2377 -2.725 0)
 		(layer "F.SilkS")

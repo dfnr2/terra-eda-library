@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "ST Microelectronics FLAT-10 Case, 1.27mm pitch, 10 pin, 6.48mm W X 6.48mm L X 2.62mm H Body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -3.874125 -14.025 0)
 		(layer "F.SilkS")

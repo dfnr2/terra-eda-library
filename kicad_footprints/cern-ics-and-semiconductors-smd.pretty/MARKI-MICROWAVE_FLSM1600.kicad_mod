@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Marki microwave Case FLSM1600, 40.64mm L X 8.13mm W X 2.794mm H Body")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -5.672 0)
 		(layer "F.SilkS")

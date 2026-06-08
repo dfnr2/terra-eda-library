@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "DE Series , Body 63.5x44mm, high voltage DC-DC converter")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at -0.000015 -23.22499 0)
 		(layer "F.SilkS")

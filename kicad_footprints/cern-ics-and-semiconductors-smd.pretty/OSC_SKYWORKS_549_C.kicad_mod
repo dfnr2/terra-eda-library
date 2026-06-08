@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Oscillator SKYWORKS 549 Series, 8 pins, 2.5x3.2mm, Pitch 1.1mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.3125 -2.575 0)
 		(layer "F.SilkS")

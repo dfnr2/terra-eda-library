@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS Case Style DYY0016A, SOT, 0.50mm Pitch, Rect.; 16 Pin, 2.00mm L X 4.2mm W X 1.1mm H body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -3.325 0)
 		(layer "F.SilkS")

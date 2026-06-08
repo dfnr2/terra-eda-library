@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TDK, CCG Series, Isolated DC-DC Converter, Body 15.7x10.4mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.4875 -6.175 0)
 		(layer "F.SilkS")

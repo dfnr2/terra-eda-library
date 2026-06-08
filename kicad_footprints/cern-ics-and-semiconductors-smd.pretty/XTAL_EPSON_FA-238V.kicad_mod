@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Crystal FA-238V Series, Corner Concave; 4 pin, 2.50mm L X 3.2mm W X 0.7mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.27498 -2.775 0)
 		(layer "F.SilkS")

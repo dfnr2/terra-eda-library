@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Tolerance: ±10ppm, -40°C to +110°C, 6pF, 3 Leads Case-Grounded SMD Low Profile MEMS Resonator, XRCGB Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -1.825 0)
 		(layer "F.SilkS")

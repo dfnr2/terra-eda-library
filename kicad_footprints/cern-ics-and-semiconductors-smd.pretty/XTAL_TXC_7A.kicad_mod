@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "2 Pins, 3.2x5mm, SMD Glass Seam Sealing Crystal, 7A Serie")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.000045 -2.575 0)
 		(layer "F.SilkS")

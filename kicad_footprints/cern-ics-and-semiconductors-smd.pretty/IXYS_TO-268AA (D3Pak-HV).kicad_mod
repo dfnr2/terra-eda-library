@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "IXYS D3Pak-HV TO-268AA TO, 5.45mm Pitch; 2 Pin,18.90mm L X 14.975mm W X 5.10mm H Body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -9.475 0)
 		(layer "F.SilkS")

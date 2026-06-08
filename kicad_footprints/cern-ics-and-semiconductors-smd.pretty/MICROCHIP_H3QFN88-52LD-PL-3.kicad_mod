@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MICROCHIP_H3QFN88-52LD-PL-3, 0.50mm Pitch, Square, 52 Pin, 8mm L X 8mm W X 3mm H Body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.09996 -5.35 0)
 		(layer "F.SilkS")

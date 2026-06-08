@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "0.96\" TFT Display, 80x160 Pixels RGB, 4-Line SPI Interface, Body 27.948x13.3mm, PCB Thick 1.6mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -3.31454 -7.625 0)
 		(layer "F.SilkS")

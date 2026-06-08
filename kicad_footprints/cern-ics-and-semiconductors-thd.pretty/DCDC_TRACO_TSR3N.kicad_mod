@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TRACO TSR-3N, DC/DC Converter,  Body W 7.6mm x L 14.0mm x H 10.2mm")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0 -3.2 0)
 		(layer "F.SilkS")

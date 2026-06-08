@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "1.6mm Bi-Level (Top: Yellow, Bot: Yellow) Prism CBI Bi-color Surface Mount LED 596 Serie")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -1.26 -2.87 0)
 		(layer "F.SilkS")

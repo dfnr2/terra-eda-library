@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "DWM1000 Case, 1.40mm Pitch; 24 Pins, 23.0mm W X 13.2mm L X 3.15mm H body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.51 -17.575 0)
 		(layer "F.SilkS")

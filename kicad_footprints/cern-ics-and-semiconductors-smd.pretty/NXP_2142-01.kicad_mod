@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SOT89A, 3-Leads, Body 2.5x4.5mm, NXP 2142-01 Case")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.34 -3.4 0)
 		(layer "F.SilkS")

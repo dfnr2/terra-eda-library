@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "2X2mm, 1584 Pixels, MPPC (Multi-Pixel Photon Counter)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -2.175 0)
 		(layer "F.SilkS")

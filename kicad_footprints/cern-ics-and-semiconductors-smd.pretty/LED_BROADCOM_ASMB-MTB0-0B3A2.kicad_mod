@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "RGB LEDS, Body 3.2mm x 2.8mm x 2.1mm 4-PLCC")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2375 -2.375 0)
 		(layer "F.SilkS")

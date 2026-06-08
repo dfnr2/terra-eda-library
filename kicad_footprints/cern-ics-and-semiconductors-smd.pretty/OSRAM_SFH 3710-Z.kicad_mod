@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Chip, 2 leads, Body 2.00 x 1.35 mm; Pin spacing 2.2mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2375 -1.6 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "VCO, 5.08mm Pitch; 4 Pin, 5.08mm L X 7.5mm W X 2.5mm H")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.3225 -4.725 0)
 		(layer "F.SilkS")

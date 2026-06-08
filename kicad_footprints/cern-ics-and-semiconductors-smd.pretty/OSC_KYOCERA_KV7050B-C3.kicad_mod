@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Oscillator, Side Concave, 2.54mm Pitch, 6 Pins, 5.00mm L X 7.00mm W X 1.60mm H, KV7050B-C3 Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.15 -4.99 0)
 		(layer "F.SilkS")

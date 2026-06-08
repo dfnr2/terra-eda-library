@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "JEDEC MO-240BA, Fairchild MLP08T, 0.65mm Pitch, 8 Pin, Body 3.3mm X 3.3mm X 0.8mm, with Thermal Pad")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.24285 -2.67501 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "INFINEON PG-IQFN-34-900 Package, QFN 26 Pin, 0.50mm Pitch, Rectangular; 5mm X 7mm X 1mm H Body (w/thermal tab)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2745 -4.75 0)
 		(layer "F.SilkS")

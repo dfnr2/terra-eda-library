@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "INTERNATIONAL RECTIFIER DirectFET L8 (Large Size Can) Outline, Body 9.1x6.97mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -4.4625 0)
 		(layer "F.SilkS")

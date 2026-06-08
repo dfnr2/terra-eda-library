@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Surface Mount Green LED, Body 6.1mm X4.32mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -1.335 -3.135 0)
 		(layer "F.SilkS")

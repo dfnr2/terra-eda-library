@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Bicolor Red/Green SMD LED, Body L 3mm x  W 2.5mm, DIALIGHT 597 Series, IPC Density Level C")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.3875 -2.175 0)
 		(layer "F.SilkS")

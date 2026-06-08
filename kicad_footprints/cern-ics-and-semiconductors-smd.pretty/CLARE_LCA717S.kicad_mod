@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SOIC, 2.54mm, Pitch; 6 Pin, 6.35mm W X 8.382mm L X 4.699mm H body, CLARE LCA717S Serie")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -5.375 0)
 		(layer "F.SilkS")

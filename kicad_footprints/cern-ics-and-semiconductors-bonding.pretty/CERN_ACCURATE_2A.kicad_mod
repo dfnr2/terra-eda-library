@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Wire Bonding Chip, Body 1.473x1.323mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -2.8365 0)
 		(layer "F.SilkS")

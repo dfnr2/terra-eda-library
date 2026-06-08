@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS Case Style RDA0015A, DFN, 0.65mm Pitch; 14 Pin, 5.00mm W X 5.50mm L X 4.10mm H body (w/Thermal Tab 2.55 X 4.65mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2875 -3.725 0)
 		(layer "F.SilkS")

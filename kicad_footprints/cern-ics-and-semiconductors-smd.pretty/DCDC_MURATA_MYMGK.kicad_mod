@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "LGA, 23-Pin, Body 7.5mm x 9.0mm, MURATA MYMGK Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2875 -5.475 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "QFN, 0.65mm Pitch, 100 Pin,27.35mm L X 27.35mm W X 2.3mm H Body (w/Thermal Tab 24.3 X 24.3mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2375 -15.175 0)
 		(layer "F.SilkS")

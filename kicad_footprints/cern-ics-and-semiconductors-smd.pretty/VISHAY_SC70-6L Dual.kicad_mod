@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "VISHAY_SC70-6L Dual, 8-Leads, Body 2.05x2.05mm, Pitch 0.8mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.25 -2 0)
 		(layer "F.SilkS")

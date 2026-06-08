@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Oscillator ABRACON AK7 Series, 6 pins, 5x7mm, Pitch 2.54mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.325 -2.325 0)
 		(layer "F.SilkS")

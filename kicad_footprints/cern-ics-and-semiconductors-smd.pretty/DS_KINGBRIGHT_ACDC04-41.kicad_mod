@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "20-Leads, Body 18.5x15mm, Pitch 1.88mm, Hyper Red SMD Common Cathode Dual 7-SegmentDisplay")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.4675 -9.975 0)
 		(layer "F.SilkS")

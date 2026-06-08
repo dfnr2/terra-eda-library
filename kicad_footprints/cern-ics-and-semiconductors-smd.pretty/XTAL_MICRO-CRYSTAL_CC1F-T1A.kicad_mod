@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "2 Pins, 8x3.7mm, Inverted Mesa AT-Cut Crystal")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -3.075 0)
 		(layer "F.SilkS")

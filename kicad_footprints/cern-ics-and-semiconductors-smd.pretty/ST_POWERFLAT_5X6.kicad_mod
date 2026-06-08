@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "ST Case Style POWERFLAT_5X6, TDSON, 1.27mm pitch, 8 pin, 4.9mm X 6.15mm X 0.9mm H body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -4.275 0)
 		(layer "F.SilkS")

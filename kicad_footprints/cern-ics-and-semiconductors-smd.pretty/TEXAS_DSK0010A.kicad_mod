@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS Case Style DSK0010A, SON, 0.50mm Pitch, 10 Pin, 2.50mm W  X 2.50mm L X 0.80mm H body, (w/Thermal Tab 1.30 X 2.10mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.3125 -2.225 0)
 		(layer "F.SilkS")

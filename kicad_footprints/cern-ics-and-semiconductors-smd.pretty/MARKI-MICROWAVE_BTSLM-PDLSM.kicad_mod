@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Marki microwave BTSLM-PDLSM Style, 11.43mm L X 3.81mm W X 1.77mm H Body")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0.000045 -3.513 0)
 		(layer "F.SilkS")

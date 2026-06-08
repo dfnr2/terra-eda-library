@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TES 1 Series Dual Output, DC/DC Converter, Body 11x13.7mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -9.22 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TOSHIBA Case 11-4L1S, SOIC, 1.27mm Pitch; 5  Pin, 3.7mm W X 4.55mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -2.95 0)
 		(layer "F.SilkS")

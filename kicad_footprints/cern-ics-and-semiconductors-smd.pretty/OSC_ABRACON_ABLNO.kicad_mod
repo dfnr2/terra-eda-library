@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Oscillator, 5.08mm Pitch; 4 Pin, 8.70mm L X 14.3mm W X 5.50mm H, ABLNO Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -8.125 0)
 		(layer "F.SilkS")

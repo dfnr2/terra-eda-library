@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Blue SMD LED, Case 2012, Body L 2.00mm X  W 1.25mm X H 0.75mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.1875 -1.6 0)
 		(layer "F.SilkS")

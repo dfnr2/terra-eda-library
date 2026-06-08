@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TEXAS Case Style RHL (S-PVQFN-N20), QFN, 0.50mm Pitch, Rectangular; 20 Pin, 4.50mm L X 3.50mm W X 1mm H body (w/thermal tab 3.05 X 2.05mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.00004 -4.225 0)
 		(layer "F.SilkS")

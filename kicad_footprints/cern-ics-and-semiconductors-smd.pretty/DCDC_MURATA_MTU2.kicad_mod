@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MTU2 Series, Body 8.2 x 8.4, Height 8.5mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.1375 -5.075 0)
 		(layer "F.SilkS")

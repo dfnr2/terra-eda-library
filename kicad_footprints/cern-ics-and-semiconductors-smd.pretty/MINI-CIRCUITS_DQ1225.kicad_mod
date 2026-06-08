@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "MINI-CIRCUITS DQ1225 Case, 0.51mm pitch, 8 pin, 3mm X 3mm X 0.89mm H body (w/thermal tab 1.45 X 1.45mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.08248 -2.725 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "QFP, 144-Leads, Body 20x20mm (BSC), Pitch 0.50mm, IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -12.425 0)
 		(layer "F.SilkS")

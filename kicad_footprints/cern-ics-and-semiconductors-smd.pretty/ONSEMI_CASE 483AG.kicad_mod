@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "JEDEC MO-240 ISSUE A VARIATION AA, ON SEMICONDUCTOR PQFN8 5X6, CASE 483AG ISSUE O, 1.27mm Pitch, 8 pin, 6.075mm X 5mm X 1.10mm H body (w/thermal tab 3.86 X4.23mm)")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at -0.2402 -3.5154 0)
 		(layer "F.SilkS")

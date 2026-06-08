@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TT ELECTRONICS 4N49U Series, LCC,1.27mm Pitch, Rect.; 6 Pin, 6.22mm L X 4.32mm W X 1.85mm H Body")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -5.3 0)
 		(layer "F.SilkS")

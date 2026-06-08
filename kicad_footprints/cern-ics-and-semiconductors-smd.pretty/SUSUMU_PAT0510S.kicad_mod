@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SUSUMU PAT0510S, 4 Pin Attenuator, Sise 0402, L 1.00 x W 0.5 H 0.39mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -1.98 0)
 		(layer "F.SilkS")

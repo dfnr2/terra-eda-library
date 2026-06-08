@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SOT764-1, MO-241,QFN, 0.50mm Pitch, Rect.; 20 Pin, 2.50mm L X 4.50mm W X 1.00mm H Body (w/Thermal Tab 1.15 X 3.15mm),  IPC Medium Density")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -4.2 0)
 		(layer "F.SilkS")

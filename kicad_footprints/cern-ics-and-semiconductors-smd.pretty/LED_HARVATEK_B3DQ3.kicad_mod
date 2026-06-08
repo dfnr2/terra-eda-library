@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "Tri-Color (Red/Green/Blue), 3.2mm x 1.5mm  Surface Mount LED, B3DQ3 Series")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0.2075 -2.675 0)
 		(layer "F.SilkS")

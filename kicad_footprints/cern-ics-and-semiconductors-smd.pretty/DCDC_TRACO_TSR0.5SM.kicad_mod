@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "TSRN 0.5SM Series, Case, 10 Pin, Pitch 2.54mm, Body 9.6 x 15.3mm")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -8.875 0)
 		(layer "F.SilkS")

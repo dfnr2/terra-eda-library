@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HC/49US (AT49) SMD Cristal, Body 11.4x4.7mm, ABLS Serie")
+	(attr smd)
 	(property "Reference" "REF**"
 		(at 0 -3.425 0)
 		(layer "F.SilkS")

@@ -4,6 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SOT409A, 1.27mm pitch; 8 pin, 4.47mm W X 5.485mm L X 2.36mm H body (w/thermal tab 3.6mm X 4.6mm)")
+	(attr through_hole)
 	(property "Reference" "REF**"
 		(at 0.0675 -3.7175 0)
 		(layer "F.SilkS")
