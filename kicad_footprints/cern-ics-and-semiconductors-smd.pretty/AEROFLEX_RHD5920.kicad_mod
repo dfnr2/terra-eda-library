@@ -349,7 +349,7 @@
 		(uuid "82b17dbb-3e7f-46a9-bbc9-610755a9efa9")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/AEROFLEX_RHD5920.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-24W_7.5x15.4mm_P1.27mm.step"
 		(offset
 			(xyz 0.00007 0.0001 0)
 		)

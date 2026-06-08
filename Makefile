@@ -149,6 +149,21 @@ all build: $(DB_FILES) db/terra.db terra.kicad_dbl lib-tables
 lib-tables: $(VENV_MARKER)
 	@$(PYTHON) tools/generate_lib_tables.py
 
+# Footprint maintenance pass over the copied cern-* .kicad_mod files. Two steps,
+# same lifecycle moment (after a CERN PcbLib is copied / a table is built):
+#   1. fix_footprint_attrs - set smd/through_hole type (per library, no DB)
+#   2. apply_3d_models      - assign KiCad 3D models + alignment offsets (per
+#                             table, reads db/terra.db)
+# This EDITS committed source files, so it is a deliberate maintenance target,
+# NOT part of all/build (which must not dirty the tree). Idempotent.
+.PHONY: normalize-footprints
+normalize-footprints: $(VENV_MARKER) db/terra.db
+	@$(PYTHON) tools/fix_footprint_attrs.py
+	@for t in $(filter cern_%,$(TABLES)); do \
+		echo "3d models: $$t"; \
+		$(PYTHON) tools/apply_3d_models.py --table $$t; \
+	done
+
 # Generate rules for all discovered tables
 $(foreach table,$(TABLES),$(eval $(call TABLE_RULES,$(table))))
 
@@ -406,6 +421,7 @@ help:
 	@echo "  make                  Build per-table DBs, master DB, and .kicad_dbl"
 	@echo "  make project-db KIPRJMOD=/path  Build project-local DB from master"
 	@echo "  make generate         Run all generator scripts"
+	@echo "  make normalize-footprints  Set footprint types + assign 3D models (edits cern-* .kicad_mod)"
 	@echo "  make sync             Ensure uv environment is set up"
 	@echo "  make dump             Dump databases back to db/tables/ structure"
 	@echo "  make verify           Verify round-trip consistency (SQL->DB->SQL->DB)"
@@ -424,4 +440,4 @@ help:
 	@echo "  4. Dump:          make dump"
 	@echo "  5. Commit:        git diff db/tables/ && git add ..."
 
-.PHONY: all sync dump verify clean distclean status help project-db
+.PHONY: all sync dump verify clean distclean status help project-db normalize-footprints

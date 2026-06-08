@@ -310,7 +310,7 @@
 		(uuid "52cb927e-d650-4142-99c3-e223a03a67d2")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-14_W7.62mm.step"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-5-3.step"
 		(offset
 			(xyz -2.54 0.8467 0)
 		)

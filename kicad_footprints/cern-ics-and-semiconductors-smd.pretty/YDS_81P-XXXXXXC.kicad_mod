@@ -2069,7 +2069,7 @@
 		(uuid "ea601222-1f42-4b87-bac1-d5ef35cf89d4")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/YDS_81P-XXXXXXC.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-24W_7.5x15.4mm_P1.27mm.step"
 		(offset
 			(xyz 0.00006 0.00012 0)
 		)

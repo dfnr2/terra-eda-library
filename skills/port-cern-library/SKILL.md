@@ -66,10 +66,11 @@ terra owns its libs under `kicad_symbols/` (`.kicad_sym`) and `kicad_footprints/
   `kicad_symbols/cern-foo.kicad_sym`; `PcbLib/BAR.pretty` → `kicad_footprints/cern-bar.pretty`.
 - Add the CERN→terra nickname entries to `tools/cern_libmap.py`; the generator rewrites each
   part's `kicad_symbol`/`kicad_footprint` to the terra nicknames.
-- **After copying a new PcbLib**, run `uv run python tools/fix_footprint_attrs.py` — the CERN
-  conversion leaves footprints with no `(attr …)` type, so KiCad shows them as "Other/Virtual"
-  (excluded from pos files). The tool derives `smd`/`through_hole` from the pads (idempotent)
-  and reports any footprint filed in the wrong lib (smd pads in a THD lib, etc.).
+- **Footprint normalization** is the `make normalize-footprints` target (after the build): it
+  runs `fix_footprint_attrs` (sets `smd`/`through_hole` type from the pads — the CERN
+  conversion leaves none, so KiCad shows them "Other/Virtual"; reports any footprint filed in
+  the wrong lib) then `apply_3d_models` per `cern_*` table (§5). Idempotent; it re-resolves
+  shared footprints as the part population grows, so re-run it after each new table.
 
 ## 4. Build
 `CERN_SQLITE=… make EXCLUDE_TABLES="resistors_smt resistors_th" [DEFAULT_TIER=5]` builds
@@ -80,9 +81,10 @@ catalog parts are visible.)
 
 ## 5. 3D models
 All mapping rules live in `tools/model_map.py` (codified once, never re-derived). Add this
-part type's packages there, then `uv run python tools/apply_3d_models.py --table cern_<name>`
-(rewrites footprint `(model …)` refs; offsets left for human positioning). The resolver has
-three strategies, tried in order — extend whichever fits the package:
+part type's packages there, then run `make normalize-footprints` (or, for one table while
+iterating, `uv run python tools/apply_3d_models.py --table cern_<name>`) to rewrite footprint
+`(model …)` refs and set alignment offsets. The resolver has these strategies, tried in
+order — extend whichever fits the package:
 - **Exact SMD** (`SMD_PACKAGE_MODEL`): one package string → one model file (SMD has one
   canonical model per package).
 - **THT axial families** (`THT_AXIAL_FAMILY`): KiCad parameterizes axial models by lead
