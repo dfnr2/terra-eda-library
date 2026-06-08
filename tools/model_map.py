@@ -85,8 +85,14 @@ SMD_PACKAGE_MODEL = {
     "DPAK": (_TO_SOT_SMD, "TO-252-2.step"), "D-PAK": (_TO_SOT_SMD, "TO-252-2.step"),
     "D2PAK": (_TO_SOT_SMD, "TO-263-2.step"),
     "SOT223": (_TO_SOT_SMD, "SOT-223.step"), "SOT-223": (_TO_SOT_SMD, "SOT-223.step"),
+    "SOT353": (_TO_SOT_SMD, "SOT-353_SC-70-5.step"),
+    # TO-263 (D2PAK) multi-lead; tab defaults to the centre-ish pin.
+    "TO-263-3": (_TO_SOT_SMD, "TO-263-3_TabPin2.step"),
+    "TO-263-5": (_TO_SOT_SMD, "TO-263-5_TabPin3.step"),
+    "TO-263-7": (_TO_SOT_SMD, "TO-263-7_TabPin4.step"),
     # SOIC (multi-diode arrays); CERN SOIC8 == SOIC-8 3.9x4.9 P1.27
     "SOIC8": (_SO, "SOIC-8_3.9x4.9mm_P1.27mm.step"),
+    "MSOP8": (_SO, "MSOP-8_3x3mm_P0.65mm.step"),
     # TO-92 (THT): many footprint variants; inline 3-lead is the common default.
     "TO-92": (_TO_SOT_THT, "TO-92_Inline.step"),
 }

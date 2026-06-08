@@ -1242,7 +1242,7 @@
 		(uuid "3b252b39-c750-4f73-b7cf-7ff8a8f53c8b")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/TO127P1377X467-8N-R535X854.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/TO-263-7_TabPin4.step"
 		(offset
 			(xyz 0.00009 0.00004 0)
 		)

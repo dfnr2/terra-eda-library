@@ -9,6 +9,7 @@ from __future__ import annotations
 SYMBOL_LIB_NICK = {
     "Diodes": "cern-diodes",
     "Transistors": "cern-transistors",
+    "Regulators": "cern-regulators",
 }
 
 FOOTPRINT_LIB_NICK = {
@@ -19,9 +20,21 @@ FOOTPRINT_LIB_NICK = {
 }
 
 
+# CERN data-entry errors: a few rows reference a footprint item whose name does
+# not match any real .kicad_mod in the PcbLib (typo / spurious or dropped
+# suffix). Map the bad item name -> the actual file stem. Deterministic, exact;
+# symbol names never collide with these keys, so it is safe to apply globally.
+FOOTPRINT_ITEM_FIXUP = {
+    "BGA144C127P12X12_1600X1600X521": "BGA144C127P12X12_1600X1600X521R",
+    "TEXAS_RGY (S-PVQFN-N14)+THERMAL": "TEXAS_RGY (S-PVQFN-N14)",
+    "SOT95P2d80X100-6N": "SOT95P280X100-6N",
+}
+
+
 def rewrite_ref(ref: str, nickmap: dict) -> str:
-    """Rewrite the library-nickname portion of a 'Lib:Item' reference."""
+    """Rewrite the library nickname of a 'Lib:Item' ref and fix known item typos."""
     if not ref or ":" not in ref:
         return ref
     nick, name = ref.split(":", 1)
+    name = FOOTPRINT_ITEM_FIXUP.get(name, name)
     return f"{nickmap.get(nick, nick)}:{name}"

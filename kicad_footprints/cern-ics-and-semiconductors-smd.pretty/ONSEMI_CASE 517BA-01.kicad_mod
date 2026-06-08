@@ -718,7 +718,7 @@
 		(uuid "17e22fbf-eeec-4f3f-bc27-b2720050fb87")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/ONSEMI_CASE 517BA-01.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/SOT-223.step"
 		(offset
 			(xyz 0.00006 0.00008 0)
 		)

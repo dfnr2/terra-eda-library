@@ -100,6 +100,12 @@ def test_tht_to92_default():
     assert resolve_model("TO-92").endswith("/Package_TO_SOT_THT.3dshapes/TO-92_Inline.step")
 
 
+def test_smd_ic_packages():
+    assert resolve_model("MSOP8").endswith("/Package_SO.3dshapes/MSOP-8_3x3mm_P0.65mm.step")
+    assert resolve_model("SOT353").endswith("/Package_TO_SOT_SMD.3dshapes/SOT-353_SC-70-5.step")
+    assert resolve_model("TO-263-5").endswith("/Package_TO_SOT_SMD.3dshapes/TO-263-5_TabPin3.step")
+
+
 @_needs_kicad
 def test_plain_to220_family():
     v = resolve_model("TO-220", orientation="v", leads=3)

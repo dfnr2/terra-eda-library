@@ -128,3 +128,12 @@ string is an absolute path to `db/terra.db`, emitted by `tools/generate_kicad_db
   (`no such column: p.tier` / `p.unique_id`).
 - Pass `EXCLUDE_TABLES`/`DEFAULT_TIER`/`CERN_SQLITE` on EVERY `make` (incl. `project-db`) —
   make rebuilds prerequisites, so omitting them silently re-includes resistors / wrong tier.
+- `make` does NOT track `tools/cern_libmap.py` or `tools/model_map.py` as build deps. After
+  editing them (new nickname, footprint fixup, package map), the affected table's
+  `*_generated_*.sql` is considered up-to-date and won't regenerate. Force it: `rm` the
+  table's `*_generated_*.sql` + `db/<table>.db`, then rebuild. `apply_3d_models` reads the
+  *master* `db/terra.db`, so rebuild the master (full `make`) before re-running it.
+- CERN `LibFootprint`/`LibSymbol` fields occasionally contain typos or spurious/dropped
+  suffixes that don't match any real file (e.g. `SOT95P2d80X100-6N`, a `…521`/`…521R`
+  mismatch, a `+THERMAL` suffix). The footprint-resolution test catches these; correct them
+  in `cern_libmap.FOOTPRINT_ITEM_FIXUP` (deterministic bad-name → real-name map).
