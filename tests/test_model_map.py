@@ -90,3 +90,25 @@ def test_to_orientation_and_leads():
 def test_to_horizontal_to247_declined():
     # KiCad ships only Vertical TO-247 models; horizontal has no fit.
     assert resolve_model("TO-247", orientation="h", leads=2) is None
+
+
+def test_smd_sot223():
+    assert resolve_model("SOT223").endswith("/Package_TO_SOT_SMD.3dshapes/SOT-223.step")
+
+
+def test_tht_to92_default():
+    assert resolve_model("TO-92").endswith("/Package_TO_SOT_THT.3dshapes/TO-92_Inline.step")
+
+
+@_needs_kicad
+def test_plain_to220_family():
+    v = resolve_model("TO-220", orientation="v", leads=3)
+    assert v.endswith("/Package_TO_SOT_THT.3dshapes/TO-220-3_Vertical.step")
+
+
+@_needs_kicad
+def test_metal_can_by_leads():
+    # Cans are named <family>-<leads>.step (no orientation); pin 4 clamps to 3.
+    assert resolve_model("TO-18", pin_count=3).endswith("/TO-18-3.step")
+    assert resolve_model("TO-39", pin_count=2).endswith("/TO-39-2.step")
+    assert resolve_model("TO-5", pin_count=4).endswith("/TO-5-3.step")

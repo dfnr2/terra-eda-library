@@ -8,12 +8,14 @@ from __future__ import annotations
 
 SYMBOL_LIB_NICK = {
     "Diodes": "cern-diodes",
+    "Transistors": "cern-transistors",
 }
 
 FOOTPRINT_LIB_NICK = {
     "ICs And Semiconductors SMD": "cern-ics-and-semiconductors-smd",
     "ICs And Semiconductors THD": "cern-ics-and-semiconductors-thd",
     "ICs And Semiconductors BONDING": "cern-ics-and-semiconductors-bonding",
+    "ICs And Semiconductors SMD_BGA": "cern-ics-and-semiconductors-smd-bga",
 }
 
 

@@ -475,7 +475,7 @@
 		(uuid "b4cf6a4e-6005-4e10-8ec3-812623269855")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/IXYS_ISOPLUS i5-Pak_V.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-264-3_Vertical.step"
 		(offset
 			(xyz 0 -0 0)
 		)

@@ -458,7 +458,7 @@
 		(uuid "d14e6ee8-e4d8-4a29-9b36-a2f1fd4ddf84")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/TOSHIBA_TO-3P(N)_v.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-3P-3_Vertical.step"
 		(offset
 			(xyz 0.00011 0.0001 0)
 		)

@@ -728,7 +728,7 @@
 		(uuid "343ded75-02be-4bb4-bc6f-ce906a967aa8")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/ROHM_SOT89.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/SOT-89-3.step"
 		(offset
 			(xyz 0.00007 0.00004 0)
 		)

@@ -494,7 +494,7 @@
 		(uuid "c8b766a0-3838-478f-abe6-0296b4060f7f")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/INFINEON_PG-TO247-3_v.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-247-3_Vertical.step"
 		(offset
 			(xyz 0.00008 0.00011 0)
 		)

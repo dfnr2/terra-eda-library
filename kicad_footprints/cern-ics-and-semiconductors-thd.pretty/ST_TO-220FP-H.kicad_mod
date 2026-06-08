@@ -746,7 +746,7 @@
 		(uuid "6db6e967-26d3-46c3-8670-35071ebd35ff")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/ST_TO-220FP-H.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-220-3_Horizontal_TabUp.step"
 		(offset
 			(xyz 0.00005 0.00011 0)
 		)

@@ -263,7 +263,7 @@
 		(uuid "8ff5ee1c-c272-4834-a006-6a34121d2b2f")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/TO-92AA-P254.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-92_Inline.step"
 		(offset
 			(xyz 0.00005 0.00005 0)
 		)

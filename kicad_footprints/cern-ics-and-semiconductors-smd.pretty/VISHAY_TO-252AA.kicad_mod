@@ -830,7 +830,7 @@
 		(uuid "b6460e8d-08de-4b5c-bcc6-ffc71844d67a")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/VISHAY_TO-252AA.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/TO-252-2.step"
 		(offset
 			(xyz 0 -0 0)
 		)

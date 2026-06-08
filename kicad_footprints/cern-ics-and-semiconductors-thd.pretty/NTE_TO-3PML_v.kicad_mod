@@ -398,7 +398,7 @@
 		(uuid "213b6aab-e2b7-4ce0-9322-41c264e38697")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/NTE_TO-3PML.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-3P-3_Vertical.step"
 		(offset
 			(xyz 0.00008 0.00005 0)
 		)

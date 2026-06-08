@@ -270,7 +270,7 @@
 		(uuid "8471848e-10dd-4133-9ab7-f16f97ab3850")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/SOT460P700X180-3N.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/SOT-223.step"
 		(offset
 			(xyz 0.00007 0.00008 0)
 		)

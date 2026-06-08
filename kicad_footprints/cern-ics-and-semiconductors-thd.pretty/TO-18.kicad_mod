@@ -183,7 +183,7 @@
 		(uuid "4623bba3-3907-4362-b10f-e6b9719518be")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/TO-18.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-18-3.step"
 		(offset
 			(xyz 0.0001 0.00008 0)
 		)

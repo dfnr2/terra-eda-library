@@ -546,7 +546,7 @@
 		(uuid "d13f4edf-1955-424c-9a0c-4778cb372c56")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/INFINEON_TO-220 FULL-PAK-v.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-220-3_Vertical.step"
 		(offset
 			(xyz 0.00009 -0 0)
 		)

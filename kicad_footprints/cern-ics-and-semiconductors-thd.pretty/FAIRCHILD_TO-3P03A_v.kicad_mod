@@ -418,7 +418,7 @@
 		(uuid "5f6fc02d-cfbb-4861-acff-d873a6307cae")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/FAIRCHILD_TO-3P03A_v.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-3P-3_Vertical.step"
 		(offset
 			(xyz 0.00007 0.00011 0)
 		)

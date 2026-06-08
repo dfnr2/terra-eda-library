@@ -84,8 +84,11 @@ SMD_PACKAGE_MODEL = {
     "SOT89": (_TO_SOT_SMD, "SOT-89-3.step"),
     "DPAK": (_TO_SOT_SMD, "TO-252-2.step"), "D-PAK": (_TO_SOT_SMD, "TO-252-2.step"),
     "D2PAK": (_TO_SOT_SMD, "TO-263-2.step"),
+    "SOT223": (_TO_SOT_SMD, "SOT-223.step"), "SOT-223": (_TO_SOT_SMD, "SOT-223.step"),
     # SOIC (multi-diode arrays); CERN SOIC8 == SOIC-8 3.9x4.9 P1.27
     "SOIC8": (_SO, "SOIC-8_3.9x4.9mm_P1.27mm.step"),
+    # TO-92 (THT): many footprint variants; inline 3-lead is the common default.
+    "TO-92": (_TO_SOT_THT, "TO-92_Inline.step"),
 }
 
 # --- 2. THT axial families: CERN package -> (lib, model filename prefix) -------
@@ -111,10 +114,19 @@ THT_AXIAL_FAMILY = {
 # name. So the resolver takes orientation + leads from the caller (derived from
 # the footprint) and builds the filename, verifying it exists before using it.
 TO_FAMILY = {
-    "TO-220-V": "TO-220", "TO-220-H": "TO-220", "TO-220-2": "TO-220",
-    "TO-220AC": "TO-220", "TO-247": "TO-247",
+    "TO-220": "TO-220", "TO-220-V": "TO-220", "TO-220-H": "TO-220",
+    "TO-220-2": "TO-220", "TO-220AC": "TO-220",
+    "TO-247": "TO-247",
+    "TO-126": "TO-126", "TO-264": "TO-264",
+    "TO-3P": "TO-3P", "TO-3PN": "TO-3P",
 }
 _TO_LEADS = (2, 3, 4, 5)  # lead counts KiCad ships models for
+
+# Metal-can families: models are named "<family>-<leads>.step" (no orientation),
+# e.g. TO-18-3, TO-39-2. Lead count from pin_count, clamped to what ships (2/3).
+# (TO-46 is intentionally excluded — CERN's TO-46 parts are fiber-coupled
+# detectors, not plain cans; see SKIP_REASON.)
+CAN_FAMILY = {"TO-5", "TO-18", "TO-39", "TO-52"}
 
 # --- 4. Bridge rectifiers: body code (in footprint name) -> bridge model -------
 # The package column is usually blank for these; the body code lives in the
@@ -287,6 +299,20 @@ def _resolve_to(family: str, orientation: str | None,
     return None
 
 
+def _resolve_can(family: str, leads: int | None) -> str | None:
+    """Metal-can model '<family>-<leads>.step'; leads clamped to what ships (2/3)."""
+    root = kicad_3dmodel_dir()
+    if root is None:
+        return None
+    libdir = root / _TO_SOT_THT
+    want = leads if leads in (2, 3) else 3  # transistors are typically 3-lead
+    for n in (want, 3, 2):
+        fname = f"{family}-{n}.step"
+        if (libdir / fname).is_file():
+            return _ref(_TO_SOT_THT, fname)
+    return None
+
+
 def resolve_model(package: str, *, pad_pitch_mm: float | None = None,
                   pin_count: int | None = None,
                   orientation: str | None = None,
@@ -310,6 +336,8 @@ def resolve_model(package: str, *, pad_pitch_mm: float | None = None,
     to = TO_FAMILY.get(p)
     if to:
         return _resolve_to(to, orientation, leads if leads is not None else pin_count)
+    if p in CAN_FAMILY:
+        return _resolve_can(p, leads if leads is not None else pin_count)
     return None
 
 

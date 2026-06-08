@@ -383,7 +383,7 @@
 		(uuid "67dc6671-d9e3-4f8d-9fa8-5798a91a31c8")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/ZETEX_E-LINE.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-92_Inline.step"
 		(offset
 			(xyz 0.00008 0.00008 0)
 		)
