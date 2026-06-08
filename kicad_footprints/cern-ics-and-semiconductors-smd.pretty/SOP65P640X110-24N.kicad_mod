@@ -348,7 +348,7 @@
 		(uuid "abd231e1-3183-4580-aefe-21fa381cfc69")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/TSSOP-24_4.4x7.8mm_P0.65mm.step"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-24W_7.5x15.4mm_P1.27mm.step"
 		(offset
 			(xyz 0.00005 0.0001 0)
 		)

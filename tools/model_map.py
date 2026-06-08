@@ -97,6 +97,7 @@ SMD_PACKAGE_MODEL = {
     "SOIC16": (_SO, "SOIC-16_3.9x9.9mm_P1.27mm.step"),
     "SOIC16W": (_SO, "SOIC-16W_7.5x10.3mm_P1.27mm.step"),
     "SOIC20": (_SO, "SOIC-20W_7.5x12.8mm_P1.27mm.step"),
+    "SOIC24": (_SO, "SOIC-24W_7.5x15.4mm_P1.27mm.step"),
     "SOIC28": (_SO, "SOIC-28W_7.5x17.9mm_P1.27mm.step"),
     "MSOP8": (_SO, "MSOP-8_3x3mm_P0.65mm.step"),
     "MSOP10": (_SO, "MSOP-10_3x3mm_P0.5mm.step"),
@@ -105,12 +106,14 @@ SMD_PACKAGE_MODEL = {
     "TSSOP16": (_SO, "TSSOP-16_4.4x5mm_P0.65mm.step"),
     "TSSOP20": (_SO, "TSSOP-20_4.4x6.5mm_P0.65mm.step"),
     "TSSOP24": (_SO, "TSSOP-24_4.4x7.8mm_P0.65mm.step"),
+    "TSSOP48": (_SO, "TSSOP-48_6.1x12.5mm_P0.5mm.step"),
     "SSOP16": (_SO, "SSOP-16_3.9x4.9mm_P0.635mm.step"),
     "SSOP28": (_SO, "SSOP-28_5.3x10.2mm_P0.65mm.step"),
     # DIP (THT); CERN <pkg>-300 == 300mil == W7.62mm
     "DIP8-300": (_DIP, "DIP-8_W7.62mm.step"),
     "DIP14-300": (_DIP, "DIP-14_W7.62mm.step"),
     "DIP16-300": (_DIP, "DIP-16_W7.62mm.step"),
+    "DIP20-300": (_DIP, "DIP-20_W7.62mm.step"),
     # TO-92 (THT): many footprint variants; inline 3-lead is the common default.
     "TO-92": (_TO_SOT_THT, "TO-92_Inline.step"),
 }

@@ -12,6 +12,7 @@ SYMBOL_LIB_NICK = {
     "Regulators": "cern-regulators",
     "Operational Amplifiers": "cern-operational-amplifiers",
     "Analog & Interface": "cern-analog-interface",
+    "Standard Logic": "cern-standard-logic",
 }
 
 FOOTPRINT_LIB_NICK = {
@@ -34,6 +35,7 @@ ITEM_FIXUP = {
     "SOT95P2d80X100-6N": "SOT95P280X100-6N",
     "INFININEON_PG-DSO-14-71": "INFINEON_PG-DSO-14-71",
     "QFP80P900X900X160-32AN": "QFP80P900X900X160-32N",
+    "TEXAS_DYY0016A": "TEXAS_DYY0016A - duplicate",  # Altium export suffix
     # symbols
     "TXS0108ERGY": "TXS0108E_a",   # QFN variant; symbol never created, same logic
 }
