@@ -249,9 +249,9 @@
 		(uuid "5cc6362f-df76-4041-907d-11a5ea6d06cf")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/PANASONIC_AQV11(DIP).stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-6_W7.62mm.step"
 		(offset
-			(xyz 0.00005 0.00009 0)
+			(xyz -3.81 2.54 0)
 		)
 		(scale
 			(xyz 1 1 1)

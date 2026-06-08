@@ -1022,7 +1022,7 @@
 		(uuid "9617b98d-f1dc-409a-a098-bdab48148a13")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/AVAGO_HCPL-2601-300E.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-8_3.9x4.9mm_P1.27mm.step"
 		(offset
 			(xyz 0.00006 0.00008 0)
 		)

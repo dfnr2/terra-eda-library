@@ -625,9 +625,9 @@
 		(uuid "cfaafacb-1f7e-463c-b24d-f54b640bb871")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/OMRON_G3VM-C.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-8_W7.62mm.step"
 		(offset
-			(xyz 0.00011 0.00008 0)
+			(xyz -3.81 3.81 0)
 		)
 		(scale
 			(xyz 1 1 1)

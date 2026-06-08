@@ -1022,7 +1022,7 @@
 		(uuid "40258230-adc6-46e6-9001-0d1ab84d0643")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/AVAGO_HCNR200-300E.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-8_3.9x4.9mm_P1.27mm.step"
 		(offset
 			(xyz 0.00005 0.00006 0)
 		)

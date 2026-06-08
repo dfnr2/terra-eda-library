@@ -253,7 +253,7 @@
 		(uuid "0fd0074d-64ce-47bc-947b-71bbbe12817e")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/SOIC127P700X220-8N.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-8_3.9x4.9mm_P1.27mm.step"
 		(offset
 			(xyz 0.00009 0.00008 0)
 		)

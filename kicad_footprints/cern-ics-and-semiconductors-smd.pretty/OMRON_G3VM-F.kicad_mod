@@ -1662,7 +1662,7 @@
 		(uuid "aa0a03b4-ef93-46e7-8c54-ff4493d3fde3")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/OMRON_G3VM-F.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-8_3.9x4.9mm_P1.27mm.step"
 		(offset
 			(xyz 0.00006 0.00005 0)
 		)

@@ -1192,7 +1192,7 @@
 		(uuid "433008fe-63a7-4791-8ef3-ece4b056326f")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/VISHAY_SFH6343T.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-8_3.9x4.9mm_P1.27mm.step"
 		(offset
 			(xyz 0.00012 0.00007 0)
 		)

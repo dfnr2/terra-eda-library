@@ -15,6 +15,7 @@ SYMBOL_LIB_NICK = {
     "Standard Logic": "cern-standard-logic",
     "Logic": "cern-logic",
     "DC-DC Converters": "cern-dc-dc-converters",
+    "Optocouplers": "cern-optocouplers",
 }
 
 FOOTPRINT_LIB_NICK = {

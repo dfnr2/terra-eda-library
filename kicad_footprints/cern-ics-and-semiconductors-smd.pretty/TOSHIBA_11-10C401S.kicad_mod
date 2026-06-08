@@ -293,7 +293,7 @@
 		(uuid "b70cf62f-f8a1-43ff-8f5a-7fc87fbaff57")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/TOSHIBA_11-10C401S.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-8_3.9x4.9mm_P1.27mm.step"
 		(offset
 			(xyz 0 -0 0)
 		)
