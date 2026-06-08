@@ -95,6 +95,16 @@ def test_qfp_dimension_resolver():
     assert "LQFP-64" in r64 and "10x10mm_P0.5mm" in r64
 
 
+@_needs_kicad
+def test_bga_dimension_resolver():
+    # Exact ball count + pitch; pitch disambiguates same-ball-count bodies.
+    r256 = resolve_from_footprint("BGA256C100P16X16_1700X1700X155")
+    assert "BGA-256_17.0x17.0mm" in r256 and "P1.0mm" in r256
+    assert "BGA-324_19.0x19.0mm" in resolve_from_footprint("BGA324C100P18X18_1900X1900X155")
+    # KiCad's only BGA-484 is 23x23 P1.0; CERN's is 0.8mm pitch -> no fit.
+    assert resolve_from_footprint("BGA484C80P22X22_1900X1900X325") is None
+
+
 @pytest.mark.skipif(kicad_footprint_dir() is None,
                     reason="KiCad bundled footprints not installed")
 def test_native_centroid_origin_convention():

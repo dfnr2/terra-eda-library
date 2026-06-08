@@ -3019,7 +3019,7 @@
 		(uuid "ab9cf9eb-4ad0-472c-a608-15c499ef931b")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/BGA324C80P18X18_1500X1500X150.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_BGA.3dshapes/BGA-324_15.0x15.0mm_Layout18x18_P0.8mm_Ball0.5mm_Pad0.4mm_NSMD.step"
 		(offset
 			(xyz 0.00007 0.00009 0)
 		)

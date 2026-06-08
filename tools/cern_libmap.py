@@ -13,6 +13,7 @@ SYMBOL_LIB_NICK = {
     "Operational Amplifiers": "cern-operational-amplifiers",
     "Analog & Interface": "cern-analog-interface",
     "Standard Logic": "cern-standard-logic",
+    "Logic": "cern-logic",
 }
 
 FOOTPRINT_LIB_NICK = {

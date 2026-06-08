@@ -1165,7 +1165,7 @@
 		(uuid "c11bf0bd-e0ad-4ac9-803d-d1536e013ae7")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/QFP65P3000X3000X160-160N.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_QFP.3dshapes/PQFP-160_28x28mm_P0.65mm.step"
 		(offset
 			(xyz 0.00009 0.00012 0)
 		)

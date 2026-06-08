@@ -682,7 +682,7 @@
 		(uuid "258adb9b-eab4-4d41-9336-b529db465948")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/QFN50P900X900X100-65N-S485.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/QFN-64-1EP_9x9mm_P0.5mm_EP4.1x4.1mm.step"
 		(offset
 			(xyz 0.00009 0.00009 0)
 		)

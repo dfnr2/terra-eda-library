@@ -714,7 +714,7 @@
 		)
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/QFP40P900X900X120-65N-S550.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_QFP.3dshapes/LQFP-64_7x7mm_P0.4mm.step"
 		(offset
 			(xyz 0.00008 0.00009 0)
 		)

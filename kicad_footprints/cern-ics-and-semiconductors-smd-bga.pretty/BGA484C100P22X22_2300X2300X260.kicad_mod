@@ -4313,7 +4313,7 @@
 		(uuid "d9186d61-d9b3-42e1-bc5d-f6347662bb78")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/BGA484C100P22X22_2300X2300X260.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_BGA.3dshapes/BGA-484_23.0x23.0mm_Layout22x22_P1.0mm.step"
 		(offset
 			(xyz 0.00006 0.00006 0)
 		)

@@ -2446,7 +2446,7 @@
 		(uuid "6f5f3606-f29f-47d0-9512-df03d9d11935")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/BGA256C100P16X16_1700X1700X210.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_BGA.3dshapes/BGA-256_17.0x17.0mm_Layout16x16_P1.0mm_Ball0.5mm_Pad0.4mm_NSMD.step"
 		(offset
 			(xyz 0 -0 0)
 		)

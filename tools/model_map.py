@@ -335,6 +335,45 @@ _QFN_DFN = "Package_DFN_QFN.3dshapes"
 _QFP = "Package_QFP.3dshapes"
 _QFP_PREFER = ("LQFP", "TQFP", "QFP", "PQFP")
 
+# CERN BGA footprint name, e.g. "BGA484C80P22X22_1900X1900X325" = 484 balls,
+# 0.80mm pitch, 22x22 grid, 19.00x19.00mm body.
+_BGA_RE = re.compile(r"^BGA(\d+)C(\d+)P\d+X\d+_(\d+)X(\d+)X", re.I)
+# KiCad model, e.g. "BGA-256_17.0x17.0mm_Layout16x16_P1.0mm_…" (vendor prefix optional).
+_BGA_MODEL_RE = re.compile(
+    r"^(?:[A-Za-z0-9]+_)?BGA-(\d+)_([0-9.]+)x([0-9.]+)mm_Layout\d+x\d+_P([0-9.]+)mm", re.I)
+_BGA = "Package_BGA.3dshapes"
+
+
+def _resolve_bga(name: str) -> str | None:
+    """Dimensioned BGA model from the IPC footprint name.
+
+    Matches exact ball count + pitch (which disambiguates same-ball-count bodies,
+    e.g. BGA-256 at 0.5/0.8/1.0mm) + nearest body. None if KiCad has no model for
+    that ball count (large FPGA counts like 676/672/1517 aren't bundled).
+    """
+    m = _BGA_RE.match(name)
+    if not m:
+        return None
+    root = kicad_3dmodel_dir()
+    if root is None:
+        return None
+    balls = int(m.group(1))
+    pitch = int(m.group(2)) / 100
+    bx, by = int(m.group(3)) / 100, int(m.group(4)) / 100
+    best = None
+    for f in (root / _BGA).glob(f"*BGA-{balls}_*"):
+        mm = _BGA_MODEL_RE.match(f.name)
+        if not mm or int(mm.group(1)) != balls:
+            continue
+        if abs(float(mm.group(4)) - pitch) > 0.02:
+            continue
+        d = abs(float(mm.group(2)) - bx) + abs(float(mm.group(3)) - by)
+        if best is None or d < best[0]:
+            best = (d, f.name)
+    if best is None or best[0] > 3.0:
+        return None
+    return _ref(_BGA, best[1])
+
 
 def _best_quad(libdir, rx, fams, leads, pitch, tx, ty, tol):
     """Pick the model whose body is nearest (tx,ty) among matching family/leads/pitch."""
@@ -393,9 +432,12 @@ def resolve_from_footprint(name: str, *, pad_pitch_mm: float | None = None,
     """
     uc = name.upper().replace(" ", "")
     root = kicad_3dmodel_dir()
-    quad = _resolve_quad(name)             # dimensioned QFN/DFN by IPC name
+    quad = _resolve_quad(name)             # dimensioned QFN/DFN/QFP by IPC name
     if quad:
         return quad
+    bga = _resolve_bga(name)               # dimensioned BGA by IPC name
+    if bga:
+        return bga
     for code, fname in BRIDGE_BODY.items():
         if code in uc and (root is None or (root / _DIODE_THT / fname).is_file()):
             return _ref(_DIODE_THT, fname)

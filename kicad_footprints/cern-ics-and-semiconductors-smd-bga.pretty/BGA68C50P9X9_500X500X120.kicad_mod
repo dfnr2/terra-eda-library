@@ -811,7 +811,7 @@
 		(uuid "9d7bb00d-0f2a-450a-b4c2-8b6252ae112e")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/BGA68C50P9X9_500X500X120.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_BGA.3dshapes/BGA-68_5.0x5.0mm_Layout9x9_P0.5mm_Ball0.3mm_Pad0.25mm_NSMD.step"
 		(offset
 			(xyz 0.00012 0.00005 0)
 		)

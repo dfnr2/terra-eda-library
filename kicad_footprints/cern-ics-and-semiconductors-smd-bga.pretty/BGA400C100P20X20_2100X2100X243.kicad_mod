@@ -3653,7 +3653,7 @@
 		(uuid "e995c9d9-ceb9-40a0-95ea-4a583ff901b0")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/BGA400C100P20X20_2100X2100X243.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_BGA.3dshapes/BGA-400_21.0x21.0mm_Layout20x20_P1.0mm.step"
 		(offset
 			(xyz 0.00006 0.0001 0)
 		)
