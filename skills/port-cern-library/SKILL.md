@@ -112,10 +112,13 @@ the generated lib-tables. Run `make cern_<name>-test` and `uv run pytest tests/ 
 `AUDIT.md` (sample N parts vs datasheets, sign-off).
 
 ## 7. KiCad registration (one-time, never per-table)
-Two `(type "Table")` includes — one symbol, one footprint — pointing at the generated
-lib-tables; `make` keeps them current as libs are added. Do NOT hand-add libs via the KiCad
-GUI (nickname typos → "footprint not found"). The `terra` database library's connection
-string is an absolute path to `db/terra.db`, emitted by `tools/generate_kicad_dbl_files.py`.
+Register globally: the `terra` database lib + two `(type "Table")` includes (symbol +
+footprint) pointing at the generated lib-tables; `make` keeps them current as libs are added,
+so no KiCad edit per ported table. Do NOT hand-add individual libs via the GUI (nickname
+typos / partial per-project entries → "footprint not found" / missing fields). The `terra`
+database connection string is an absolute path to `db/terra.db` (vars aren't expanded there).
+**Full procedure:** `docs/kicad-registration.md` (preconditions, exact lib lines, project
+de-duplication, verify, rollback).
 
 ## Gotchas (hard-won)
 - `Manufacturer Part Number` is not unique → disambiguate `unique_id` by Part Number Nocolon.
