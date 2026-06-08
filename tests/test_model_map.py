@@ -6,7 +6,8 @@ These tests pin the decisions so a future edit can't silently change them.
 import pytest
 
 from tools.model_map import (
-    kicad_3dmodel_dir, resolve_from_footprint, resolve_model,
+    kicad_3dmodel_dir, kicad_footprint_dir, native_centroid,
+    resolve_from_footprint, resolve_model,
 )
 
 _HAVE_KICAD = kicad_3dmodel_dir() is not None
@@ -76,6 +77,21 @@ def test_smd_body_from_footprint_name():
 
 def test_unmapped_footprint_name_is_none():
     assert resolve_from_footprint("IXYS_IXBOD 1-12R..42") is None
+
+
+@pytest.mark.skipif(kicad_footprint_dir() is None,
+                    reason="KiCad bundled footprints not installed")
+def test_native_centroid_origin_convention():
+    # DIP models are pin1-origin: the native footprint's pad centroid is the
+    # body center (3.81, 3.81 for DIP-8), so CERN center-origin footprints must
+    # offset the model by that much.
+    dip = native_centroid("${KICAD10_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-8_W7.62mm.step")
+    assert dip is not None
+    assert abs(dip[0] - 3.81) < 0.01 and abs(dip[1] - 3.81) < 0.01
+    # SOIC models are center-origin: native centroid ~ (0, 0).
+    soic = native_centroid(
+        "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-8_3.9x4.9mm_P1.27mm.step")
+    assert soic is not None and abs(soic[0]) < 0.1 and abs(soic[1]) < 0.1
 
 
 @_needs_kicad

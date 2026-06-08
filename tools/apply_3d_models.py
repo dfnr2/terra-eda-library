@@ -27,10 +27,25 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from tools.model_map import resolve_from_footprint, resolve_model  # noqa: E402
+from tools.model_map import (  # noqa: E402
+    native_centroid, resolve_from_footprint, resolve_model)
 
 _MODEL_PATH = re.compile(r'(\(model\s+")[^"]*(")')
 _PAD_AT = re.compile(r"\(at\s+(-?[0-9.]+)\s+(-?[0-9.]+)")
+# The offset xyz inside the (model …) block: model path, then (offset (xyz X Y Z)).
+_MODEL_OFFSET = re.compile(
+    r'(\(model\s+"[^"]*"\s*\(offset\s*\(xyz\s+)(-?[0-9.]+)\s+(-?[0-9.]+)\s+(-?[0-9.]+)',
+    re.S)
+
+
+def pad_centroid(txt: str) -> tuple[float, float] | None:
+    """Mean of pad centers in a footprint (mm), or None if fewer than one pad."""
+    cs = [(float(m.group(1)), float(m.group(2)))
+          for chunk in txt.split("(pad ")[1:]
+          for m in [_PAD_AT.search(chunk)] if m]
+    if not cs:
+        return None
+    return (sum(x for x, _ in cs) / len(cs), sum(y for _, y in cs) / len(cs))
 
 
 def fp_orientation(name: str) -> str | None:
@@ -125,6 +140,22 @@ def run(table: str, dry_run: bool) -> int:
         if n == 0:
             no_model_line += 1
             continue
+        # Align the model: KiCad models are authored origin-at-(native pad
+        # centroid). CERN footprints use a different origin, so offset the model
+        # by (CERN centroid - native centroid). Only when the current offset is
+        # ~0, so manual positioning is never clobbered.
+        nat = native_centroid(ref)
+        cc = pad_centroid(txt)
+        if nat and cc:
+            dx, dy = cc[0] - nat[0], cc[1] - nat[1]
+
+            def _set_offset(m, dx=dx, dy=dy):
+                cur = (float(m.group(2)), float(m.group(3)))
+                if abs(cur[0]) > 0.01 or abs(cur[1]) > 0.01:
+                    return m.group(0)              # human-positioned; leave it
+                return f"{m.group(1)}{dx:.4g} {-dy:.4g} {m.group(4)}"
+            if abs(dx) > 0.05 or abs(dy) > 0.05:
+                new = _MODEL_OFFSET.sub(_set_offset, new, count=1)
         if new != txt and not dry_run:
             f.write_text(new)
         rewritten += 1

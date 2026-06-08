@@ -404,9 +404,9 @@
 		(uuid "088a1a2e-3837-4b83-98b8-2829d09b6da3")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LINEAR_MS16(12).stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SSOP-16_3.9x4.9mm_P0.635mm.step"
 		(offset
-			(xyz 0.00009 0.00005 0)
+			(xyz 0 -0.25 0)
 		)
 		(scale
 			(xyz 1 1 1)

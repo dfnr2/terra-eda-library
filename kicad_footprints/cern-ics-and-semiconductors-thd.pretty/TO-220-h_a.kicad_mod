@@ -1139,7 +1139,7 @@
 	(embedded_fonts no)
 	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-220-3_Horizontal_TabUp.step"
 		(offset
-			(xyz 0.00009 0.00004 0)
+			(xyz -2.541 4.165 0)
 		)
 		(scale
 			(xyz 1 1 1)

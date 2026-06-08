@@ -1929,9 +1929,9 @@
 		(uuid "3c92ed40-6a8c-45b1-836b-91d224f23334")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/WOLFSPEED_TO-263-7.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/TO-263-7_TabPin4.step"
 		(offset
-			(xyz 0 -0 0)
+			(xyz 3.852 -6.583 0)
 		)
 		(scale
 			(xyz 1 1 1)

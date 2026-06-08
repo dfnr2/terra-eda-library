@@ -636,7 +636,7 @@
 	(embedded_fonts no)
 	(model "${KICAD10_3DMODEL_DIR}/Diode_THT.3dshapes/Diode_Bridge_Vishay_GBU.step"
 		(offset
-			(xyz 0.0001 0.00005 0)
+			(xyz -7.62 -0 0)
 		)
 		(scale
 			(xyz 1 1 1)

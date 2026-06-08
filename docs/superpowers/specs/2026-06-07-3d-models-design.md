@@ -33,9 +33,13 @@ at a missing file. We have only a filename hint + each part's MPN/manufacturer/p
   keeps footprints small and matches how we handle symbols/footprints. **Open question:**
   embed vs terra-reference for downloaded models — default to reference unless portability
   of individual `.kicad_mod` files is required.)
-- **Positioning:** a KiCad package-generic model dropped into a CERN footprint may be
-  mis-aligned (different origin/pad layout). Default offset/rotation/scale = 0; a **human
-  positions** per the user's plan. Optionally seed a per-package default offset later.
+- **Positioning (auto-offset):** KiCad models are authored origin-at-(native footprint pad
+  centroid) — pin1 for DIP-family, body-center for SOIC/QFN/SOD/SOT. CERN footprints use a
+  different origin (often center for DIP, or off-origin for vendor/DCDC parts), so a 0-offset
+  model lands wrong (e.g. a DIP body's pin1 at the CERN footprint center). `apply_3d_models`
+  now sets the model offset to `(CERN pad-centroid − native pad-centroid)` (Y negated): zero
+  for already-aligned parts, the exact correction otherwise. It only writes when the existing
+  offset is ~0, so manual positioning is never clobbered. Rotation is still left to a human.
 
 ## 4. Mechanism
 

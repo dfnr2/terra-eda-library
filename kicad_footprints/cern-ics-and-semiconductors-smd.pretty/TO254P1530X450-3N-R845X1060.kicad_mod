@@ -632,7 +632,7 @@
 	(embedded_fonts no)
 	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/TO-263-2.step"
 		(offset
-			(xyz 0.00008 0.0001 0)
+			(xyz -1.844 -0 0)
 		)
 		(scale
 			(xyz 1 1 1)

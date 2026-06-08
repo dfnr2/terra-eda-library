@@ -400,7 +400,7 @@
 	(embedded_fonts no)
 	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-3P-3_Vertical.step"
 		(offset
-			(xyz 0.00008 0.00005 0)
+			(xyz -5.45 -0 0)
 		)
 		(scale
 			(xyz 1 1 1)

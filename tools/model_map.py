@@ -220,6 +220,60 @@ def _ref(lib: str, fname: str) -> str:
     return f"{ENV}/{lib}/{fname}"
 
 
+_fp_dir_cache: list[Path | None] = []
+_native_centroid_cache: dict[str, tuple[float, float] | None] = {}
+_PAD_AT_RE = re.compile(r"\(at\s+(-?[0-9.]+)\s+(-?[0-9.]+)")
+
+
+def kicad_footprint_dir() -> Path | None:
+    """Resolve the real path of KiCad's bundled footprint (.pretty) root."""
+    if _fp_dir_cache:
+        return _fp_dir_cache[0]
+    candidates = [
+        os.environ.get("KICAD10_FOOTPRINT_DIR"),
+        os.environ.get("KICAD9_FOOTPRINT_DIR"),
+        "/usr/share/kicad/footprints",
+        os.path.expanduser("~/.local/share/kicad/10.0/footprints"),
+        os.path.expanduser("~/.local/share/kicad/9.0/footprints"),
+        "/usr/local/share/kicad/footprints",
+        "/opt/kicad/share/kicad/footprints",
+    ]
+    found = next((Path(c) for c in candidates if c and Path(c).is_dir()), None)
+    _fp_dir_cache.append(found)
+    return found
+
+
+def native_centroid(model_ref: str) -> tuple[float, float] | None:
+    """Pad centroid of the KiCad *native* footprint that owns ``model_ref``.
+
+    A model ``…/<Lib>.3dshapes/<stem>.step`` is authored for the same-stem
+    footprint ``<Lib>.pretty/<stem>.kicad_mod`` placed at offset 0. Its pad
+    centroid tells us where the model's origin sits relative to the pads, so a
+    CERN footprint can offset the model to match. Returns None if not found.
+    """
+    if model_ref in _native_centroid_cache:
+        return _native_centroid_cache[model_ref]
+    root = kicad_footprint_dir()
+    result = None
+    try:
+        rel = model_ref.split("}/", 1)[1]                 # Lib.3dshapes/stem.step
+        lib3d, fname = rel.split("/", 1)
+        stem = fname.rsplit(".step", 1)[0].rsplit(".stp", 1)[0]
+        pretty = lib3d.replace(".3dshapes", ".pretty")
+        f = (root / pretty / f"{stem}.kicad_mod") if root else None
+        if f and f.is_file():
+            cs = [(float(m.group(1)), float(m.group(2)))
+                  for ch in f.read_text().split("(pad ")[1:]
+                  for m in [_PAD_AT_RE.search(ch)] if m]
+            if cs:
+                result = (sum(x for x, _ in cs) / len(cs),
+                          sum(y for _, y in cs) / len(cs))
+    except (IndexError, ValueError, OSError):
+        result = None
+    _native_centroid_cache[model_ref] = result
+    return result
+
+
 def _nearest_axial(lib: str, prefix: str, pitch_mm: float) -> str | None:
     """Pick the horizontal model in ``lib`` whose pitch is nearest ``pitch_mm``.
 

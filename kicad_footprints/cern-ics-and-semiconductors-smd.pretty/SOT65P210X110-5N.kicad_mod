@@ -314,7 +314,7 @@
 	(embedded_fonts no)
 	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/SOT-353_SC-70-5.step"
 		(offset
-			(xyz 0.00005 0.00009 0)
+			(xyz -0.0525 -0 0)
 		)
 		(scale
 			(xyz 1 1 1)
