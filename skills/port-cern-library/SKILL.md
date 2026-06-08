@@ -17,12 +17,19 @@ Import one CERN table (e.g. `Diodes`, `SAMTEC`, `Operational Amplifiers`) into t
 `docs/superpowers/specs/2026-06-06-cern-diodes-importer-design.md`,
 `…/2026-06-07-symbol-footprint-hierarchy-design.md`, `…/2026-06-07-3d-models-design.md`.
 
-**Everything is regenerable** — edit schema/scripts and re-run; no live-DB migration. Set
-`CERN_SQLITE=/users/dave/vsrc/cern-kicad-libs/CERN.sqlite` for any build that regenerates a
-`cern_*` table. Source DB: `CERN.sqlite`. Existing scaffolding to reuse:
-`tools/cern_source.py` (read CERN.sqlite), `tools/cern_libmap.py` (nickname map),
-`tools/cern_reconcile.py`, `tools/generate_lib_tables.py`, `tools/model_map.py`,
-`tools/apply_3d_models.py`, and `db/tables/cern_diodes/` as the worked example.
+**Everything is regenerable** — edit schema/scripts and re-run; no live-DB migration.
+
+**Source layout:** the CERN repo is vendored in-tree at `vendor/cern-kicad-libs/` (a
+gitignored shallow clone — set it up once with
+`git clone --depth 1 <cern-kicad-libs> vendor/cern-kicad-libs`). `tools/cern_source.py`
+finds `CERN.sqlite` there automatically, so builds need **no** `CERN_SQLITE` env var (set it
+only to point elsewhere). The CERN symbol/footprint libraries to copy live under
+`vendor/cern-kicad-libs/SchLib/` and `vendor/cern-kicad-libs/PcbLib/`.
+
+Existing scaffolding to reuse: `tools/cern_source.py` (read CERN.sqlite),
+`tools/cern_libmap.py` (nickname map + `ITEM_FIXUP`), `tools/cern_reconcile.py`,
+`tools/generate_lib_tables.py`, `tools/model_map.py`, `tools/apply_3d_models.py`,
+`tools/fix_footprint_attrs.py`, and `db/tables/cern_diodes/` as the worked example.
 
 ## 0. Inspect the CERN table
 - List columns + fill rates; identify the **type-specific tail** (columns beyond CERN's
@@ -61,9 +68,10 @@ Copy the diode generator as a template. Field mapping:
 terra owns its libs under `kicad_symbols/` (`.kicad_sym`) and `kicad_footprints/`
 (`.pretty`); parts reference terra nicknames, never KiCad's built-in `Device:`/`Diode_SMD:`.
 - Find the CERN SchLib + PcbLibs the parts reference (`LibSymbol`/`LibFootprint`).
-- **Copy** each into terra with a normalized name (lowercase, non-alphanumerics→`-`,
-  `cern-` prefix; nickname = filename stem): `SchLib/Foo.kicad_sym` →
-  `kicad_symbols/cern-foo.kicad_sym`; `PcbLib/BAR.pretty` → `kicad_footprints/cern-bar.pretty`.
+- **Copy** each from `vendor/cern-kicad-libs/` into terra with a normalized name (lowercase,
+  non-alphanumerics→`-`, `cern-` prefix; nickname = filename stem):
+  `vendor/cern-kicad-libs/SchLib/Foo.kicad_sym` → `kicad_symbols/cern-foo.kicad_sym`;
+  `vendor/cern-kicad-libs/PcbLib/BAR.pretty` → `kicad_footprints/cern-bar.pretty`.
 - Add the CERN→terra nickname entries to `tools/cern_libmap.py`; the generator rewrites each
   part's `kicad_symbol`/`kicad_footprint` to the terra nicknames.
 - **Footprint normalization** is the `make normalize-footprints` target (after the build): it
@@ -73,11 +81,11 @@ terra owns its libs under `kicad_symbols/` (`.kicad_sym`) and `kicad_footprints/
   shared footprints as the part population grows, so re-run it after each new table.
 
 ## 4. Build
-`CERN_SQLITE=… make EXCLUDE_TABLES="resistors_smt resistors_th" [DEFAULT_TIER=5]` builds
-`db/cern_<name>.db`, master `db/terra.db`, `terra.kicad_dbl` (absolute DB path — KiCad does
-NOT expand path vars in the dbl connection string), and the generated
-`kicad_symbols/sym-lib-table` + `kicad_footprints/fp-lib-table`. (`DEFAULT_TIER=5` so tier-5
-catalog parts are visible.)
+`make EXCLUDE_TABLES="resistors_smt resistors_th" [DEFAULT_TIER=5]` builds `db/cern_<name>.db`,
+master `db/terra.db`, `terra.kicad_dbl` (absolute DB path — KiCad does NOT expand path vars in
+the dbl connection string), and the generated `kicad_symbols/sym-lib-table` +
+`kicad_footprints/fp-lib-table`. (`DEFAULT_TIER=5` so tier-5 catalog parts are visible.)
+CERN.sqlite is found in `vendor/` automatically — no `CERN_SQLITE` needed.
 
 ## 5. 3D models
 All mapping rules live in `tools/model_map.py` (codified once, never re-derived). Add this

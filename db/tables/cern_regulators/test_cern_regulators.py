@@ -1,4 +1,3 @@
-import os
 import sqlite3
 import subprocess
 from pathlib import Path
@@ -8,9 +7,8 @@ DB = ROOT / "db/cern_regulators.db"
 
 
 def _con():
-    env = {**os.environ, "CERN_SQLITE": "/users/dave/vsrc/cern-kicad-libs/CERN.sqlite"}
-    subprocess.run(["make", "cern_regulators-build"], cwd=ROOT, check=True,
-                   capture_output=True, env=env)
+    # CERN.sqlite is resolved by tools.cern_source (vendored clone or $CERN_SQLITE).
+    subprocess.run(["make", "cern_regulators-build"], cwd=ROOT, check=True, capture_output=True)
     return sqlite3.connect(DB)
 
 

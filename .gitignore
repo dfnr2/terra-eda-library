@@ -56,3 +56,6 @@ db/tables/*/*_generated_*.sql
 
 # Git worktrees (isolated workspaces)
 .worktrees/
+
+# Vendored CERN source (shallow clone of cern-kicad-libs; the import source, not committed)
+/vendor/
