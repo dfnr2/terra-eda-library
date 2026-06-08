@@ -323,7 +323,7 @@
 		(uuid "41c7d1d3-0610-45bd-8c3d-97383468ef63")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/EATON_0402ESDA-MLP.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_0402_1005Metric.step"
 		(offset
 			(xyz 0.00011 0.00011 0)
 		)

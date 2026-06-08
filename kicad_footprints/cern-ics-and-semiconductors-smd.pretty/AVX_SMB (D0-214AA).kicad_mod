@@ -536,7 +536,7 @@
 		(uuid "f6c70593-72b5-409c-a41a-c3e5a95edc8b")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/AVX_SMB (D0-214AA).stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_SMB.step"
 		(offset
 			(xyz 0.00006 0.00007 0)
 		)

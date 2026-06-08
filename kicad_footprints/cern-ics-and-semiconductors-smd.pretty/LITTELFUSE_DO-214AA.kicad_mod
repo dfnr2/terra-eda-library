@@ -583,7 +583,7 @@
 		(uuid "f0084356-aedc-4f12-80c7-e4a656ea7705")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LITTELFUSE_DO-214AA.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_SMB.step"
 		(offset
 			(xyz 0 -0 0)
 		)

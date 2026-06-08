@@ -265,7 +265,7 @@
 		(uuid "e458f27b-1697-4962-945d-50401dc26915")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/DIOMELF3515N.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_MiniMELF.step"
 		(offset
 			(xyz 0.0001 0.00012 0)
 		)

@@ -244,7 +244,7 @@
 		(uuid "40203735-246f-4369-a9a1-ae7f1432cbc4")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/DIOMELF5025N.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_MiniMELF.step"
 		(offset
 			(xyz 0.0001 0.00008 0)
 		)

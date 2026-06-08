@@ -554,7 +554,7 @@
 		(uuid "3f599618-1f8c-4075-8844-49ab8dd0ca0d")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/DIOM5026X235N.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_SMA.step"
 		(offset
 			(xyz 0.0001 0.0001 0)
 		)

@@ -240,7 +240,7 @@
 		(uuid "dcd810b0-5ca5-4aaf-8f26-1c0552beab27")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/TO230P1000X230-3N-R530X540.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/TO-252-2.step"
 		(offset
 			(xyz 0.00008 0.00012 0)
 		)
