@@ -328,7 +328,7 @@
 		(uuid "3a7e0e10-b3d7-407e-ab4a-676d94ec1feb")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/DIP16-300.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-16_W7.62mm.step"
 		(offset
 			(xyz 0.0001 0.00011 0)
 		)

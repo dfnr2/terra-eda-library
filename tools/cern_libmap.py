@@ -10,6 +10,7 @@ SYMBOL_LIB_NICK = {
     "Diodes": "cern-diodes",
     "Transistors": "cern-transistors",
     "Regulators": "cern-regulators",
+    "Operational Amplifiers": "cern-operational-amplifiers",
 }
 
 FOOTPRINT_LIB_NICK = {

@@ -1439,7 +1439,7 @@
 		(uuid "a3c509ad-cd51-4257-a96a-d6a6bd12e623")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/AMPTEK_A225.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-14_W7.62mm.step"
 		(offset
 			(xyz 0.00008 0.00011 0)
 		)

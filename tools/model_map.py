@@ -51,6 +51,7 @@ _DIODE_THT = "Diode_THT.3dshapes"
 _TO_SOT_SMD = "Package_TO_SOT_SMD.3dshapes"
 _TO_SOT_THT = "Package_TO_SOT_THT.3dshapes"
 _SO = "Package_SO.3dshapes"
+_DIP = "Package_DIP.3dshapes"
 
 # --- 1. Exact SMD: CERN package -> (kicad 3dshapes lib, model filename) -------
 SMD_PACKAGE_MODEL = {
@@ -77,7 +78,7 @@ SMD_PACKAGE_MODEL = {
     "0603": (_DIODE_SMD, "D_0603_1608Metric.step"),
     # SOT / power SMD
     "SOT23-3": (_TO_SOT_SMD, "SOT-23.step"), "SOT23-5": (_TO_SOT_SMD, "SOT-23-5.step"),
-    "SOT23-6": (_TO_SOT_SMD, "SOT-23-6.step"),
+    "SOT23-6": (_TO_SOT_SMD, "SOT-23-6.step"), "SOT23-8": (_TO_SOT_SMD, "SOT-23-8.step"),
     "SOT323": (_TO_SOT_SMD, "SOT-323_SC-70.step"),
     "SOT363": (_TO_SOT_SMD, "SOT-363_SC-70-6.step"),
     "SOT143": (_TO_SOT_SMD, "SOT-143.step"), "SOT143B": (_TO_SOT_SMD, "SOT-143.step"),
@@ -90,9 +91,18 @@ SMD_PACKAGE_MODEL = {
     "TO-263-3": (_TO_SOT_SMD, "TO-263-3_TabPin2.step"),
     "TO-263-5": (_TO_SOT_SMD, "TO-263-5_TabPin3.step"),
     "TO-263-7": (_TO_SOT_SMD, "TO-263-7_TabPin4.step"),
-    # SOIC (multi-diode arrays); CERN SOIC8 == SOIC-8 3.9x4.9 P1.27
+    # SO / MSOP / TSSOP / SSOP small-outline IC bodies (op-amps, logic, analog)
     "SOIC8": (_SO, "SOIC-8_3.9x4.9mm_P1.27mm.step"),
+    "SOIC14": (_SO, "SOIC-14_3.9x8.7mm_P1.27mm.step"),
+    "SOIC16": (_SO, "SOIC-16_3.9x9.9mm_P1.27mm.step"),
     "MSOP8": (_SO, "MSOP-8_3x3mm_P0.65mm.step"),
+    "MSOP10": (_SO, "MSOP-10_3x3mm_P0.5mm.step"),
+    "TSSOP14": (_SO, "TSSOP-14_4.4x5mm_P0.65mm.step"),
+    "SSOP16": (_SO, "SSOP-16_3.9x4.9mm_P0.635mm.step"),
+    # DIP (THT); CERN <pkg>-300 == 300mil == W7.62mm
+    "DIP8-300": (_DIP, "DIP-8_W7.62mm.step"),
+    "DIP14-300": (_DIP, "DIP-14_W7.62mm.step"),
+    "DIP16-300": (_DIP, "DIP-16_W7.62mm.step"),
     # TO-92 (THT): many footprint variants; inline 3-lead is the common default.
     "TO-92": (_TO_SOT_THT, "TO-92_Inline.step"),
 }

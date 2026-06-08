@@ -1217,7 +1217,7 @@
 		(uuid "d4c77d71-a372-4075-926f-4cddea13a867")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/NXP_2142-01.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/SOT-89-3.step"
 		(offset
 			(xyz 0.00007 -0.00012 0)
 		)

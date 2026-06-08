@@ -106,6 +106,14 @@ def test_smd_ic_packages():
     assert resolve_model("TO-263-5").endswith("/Package_TO_SOT_SMD.3dshapes/TO-263-5_TabPin3.step")
 
 
+def test_so_dip_ic_packages():
+    assert resolve_model("SOIC14").endswith("/Package_SO.3dshapes/SOIC-14_3.9x8.7mm_P1.27mm.step")
+    assert resolve_model("TSSOP14").endswith("/Package_SO.3dshapes/TSSOP-14_4.4x5mm_P0.65mm.step")
+    assert resolve_model("SSOP16").endswith("/Package_SO.3dshapes/SSOP-16_3.9x4.9mm_P0.635mm.step")
+    assert resolve_model("DIP8-300").endswith("/Package_DIP.3dshapes/DIP-8_W7.62mm.step")
+    assert resolve_model("DIP16-300").endswith("/Package_DIP.3dshapes/DIP-16_W7.62mm.step")
+
+
 @_needs_kicad
 def test_plain_to220_family():
     v = resolve_model("TO-220", orientation="v", leads=3)
