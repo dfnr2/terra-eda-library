@@ -4,5 +4,7 @@
   (lib (name "cern-ics-and-semiconductors-smd-bga")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-ics-and-semiconductors-smd-bga.pretty")(options "")(descr ""))
   (lib (name "cern-ics-and-semiconductors-smd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-ics-and-semiconductors-smd.pretty")(options "")(descr ""))
   (lib (name "cern-ics-and-semiconductors-thd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-ics-and-semiconductors-thd.pretty")(options "")(descr ""))
+  (lib (name "cern-molex-smd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-molex-smd.pretty")(options "")(descr ""))
+  (lib (name "cern-molex-thd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-molex-thd.pretty")(options "")(descr ""))
   (lib (name "terra_sym")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/terra_sym.pretty")(options "")(descr ""))
 )

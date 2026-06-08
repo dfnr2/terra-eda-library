@@ -16,6 +16,7 @@ SYMBOL_LIB_NICK = {
     "Logic": "cern-logic",
     "DC-DC Converters": "cern-dc-dc-converters",
     "Optocouplers": "cern-optocouplers",
+    "Connectors": "cern-connectors",   # shared symbol lib for all connector vendors
 }
 
 FOOTPRINT_LIB_NICK = {
@@ -23,6 +24,8 @@ FOOTPRINT_LIB_NICK = {
     "ICs And Semiconductors THD": "cern-ics-and-semiconductors-thd",
     "ICs And Semiconductors BONDING": "cern-ics-and-semiconductors-bonding",
     "ICs And Semiconductors SMD_BGA": "cern-ics-and-semiconductors-smd-bga",
+    "MOLEX SMD": "cern-molex-smd",
+    "MOLEX THD": "cern-molex-thd",
 }
 
 
