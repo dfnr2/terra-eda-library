@@ -32,8 +32,12 @@ Existing scaffolding to reuse: `tools/cern_source.py` (read CERN.sqlite),
 `tools/fix_footprint_attrs.py`, and `db/tables/cern_diodes/` as the worked example.
 
 ## 0. Inspect the CERN table
-- List columns + fill rates; identify the **type-specific tail** (columns beyond CERN's
-  28-col core) — e.g. `Pin Count`, `Voltage`, `Power`, `TC`, `Tolerance`, `Color`, `Family`.
+- List columns + fill rates; identify the **type-specific tail**. Reality check: CERN's
+  `Component Type`/`Component Kind` columns are almost always uniformly `Standard` (useless),
+  and parametric columns (voltage/power/etc.) are usually absent — so the tail is typically
+  **derived from the `LibSymbol` name** (see §2). Grab-bag categories with device-named
+  symbols and no single type dimension (e.g. Analog & Interface, Logic, Standard Logic,
+  DC-DC) get **no tail at all** — that's a legitimate, common outcome.
 - **Exclude rule** — drop only true non-parts: (a) `Manufacturer ∈ (GENERIC,Undefined,'')`
   **only for passive tables** (resistors/caps); (b) a doc/graphical **denylist** everywhere
   (`%Read Me%`, `%Drill-Drawing%`, `CERN_OHL%`, `Empty`, copyright). Keep real
@@ -61,6 +65,13 @@ Copy the diode generator as a template. Field mapping:
 - **Reconciliation:** none for a new category. For passive tables overlapping existing terra
   parts, use `tools/cern_reconcile.py` (exact match on type/value/package/composition/
   tolerance — never fuzzy).
+- **Type tail from the symbol name** (the usual source — CERN has no parametric columns):
+  take the `LibSymbol` item name, cut the trailing pinout / `Type N` / `xN` / `[alt]` / `_a`
+  descriptors to get the base type, and keep it only if it matches a type keyword for this
+  part type (`NPN|PNP|MOSFET|JFET|IGBT…`, `Optocoupler|PhotoMOS|Relay…`, `REG|VREF|REF…`);
+  otherwise leave blank (a bare device-named symbol like `IXGR32N170H1` → blank). Pull a
+  `channels` column from the `xN` token when present. Worked examples: the diodes /
+  transistors / regulators / op_amps / optocouplers generators.
 - Escape single quotes in SQL. Emit one `tags` insert per part. `source='cern_import'`,
   `dump_priority=0`.
 
@@ -74,6 +85,9 @@ terra owns its libs under `kicad_symbols/` (`.kicad_sym`) and `kicad_footprints/
   `vendor/cern-kicad-libs/PcbLib/BAR.pretty` → `kicad_footprints/cern-bar.pretty`.
 - Add the CERN→terra nickname entries to `tools/cern_libmap.py`; the generator rewrites each
   part's `kicad_symbol`/`kicad_footprint` to the terra nicknames.
+- CERN symbol libs contain literal `[alt]` (De Morgan) variants as **distinct symbols** — keep
+  the `LibSymbol` ref as-is (don't strip `[alt]`); it resolves to the real symbol. The
+  symbol-resolution test catches any that don't.
 - **Footprint normalization** is the `make normalize-footprints` target (after the build): it
   runs `fix_footprint_attrs` (sets `smd`/`through_hole` type from the pads — the CERN
   conversion leaves none, so KiCad shows them "Other/Virtual"; reports any footprint filed in
@@ -110,10 +124,18 @@ order — extend whichever fits the package:
   `apply_3d_models` falls back to `resolve_from_footprint`, which handles: dimensioned
   **QFN/DFN/QFP** via `_resolve_quad` (parses IPC names like `QFN50P700X700X90-49N` /
   `QFP50P900X900X160-48N` → matches KiCad parametric model by family+pitch+leads(N or N-1)
-  +nearest body; QFP name is the lead-span so body = span−2mm); bridge codes →
-  `Diode_Bridge_*`; SMD body codes (SODFL→SOD-123F/128, DIOMELF→MELF by size,
-  PowerDI/PowerMite); then any known package key embedded in the name. The QFN/QFP resolver
-  lifts every IC table at once — extend it rather than hand-listing dimensioned variants.
+  +nearest body; QFP name is the lead-span so body = span−2mm); dimensioned **BGA** via
+  `_resolve_bga` (`BGA<balls>C<pitch>P<RxC>_<body>` → exact ball count + pitch, which
+  disambiguates same-ball-count bodies, + nearest body; declines ball counts/pitches KiCad
+  doesn't ship); bridge codes → `Diode_Bridge_*`; SMD body codes (SODFL→SOD-123F/128,
+  DIOMELF→MELF by size, PowerDI/PowerMite); then any known package key embedded in the name.
+  These dimension resolvers lift every IC table at once — extend them rather than hand-listing
+  dimensioned variants.
+
+**3D coverage varies by category, and low is often correct, not a failure.** IC tables land
+~60–90%; **vendor power modules (DC-DC) are ~0%** (bespoke footprints, no KiCad models) and
+niche packages (optocoupler SOIC-4/5/6, exotic FPGA BGA ball counts) stay low. Note the
+expectation in `AUDIT.md` so a low number isn't read as a regression.
 
 When one footprint's parts carry conflicting package labels (CERN data quirk), the label
 backing the most parts wins. Record deliberate non-mappings in `SKIP_REASON` with the reason
@@ -146,14 +168,18 @@ de-duplication, verify, rollback).
   config; a second launch while one runs just hands off (no log output).
 - Every part table needs `unique_id` and `tier`, or its `_v` view fails
   (`no such column: p.tier` / `p.unique_id`).
-- Pass `EXCLUDE_TABLES`/`DEFAULT_TIER`/`CERN_SQLITE` on EVERY `make` (incl. `project-db`) —
-  make rebuilds prerequisites, so omitting them silently re-includes resistors / wrong tier.
+- Pass `EXCLUDE_TABLES`/`DEFAULT_TIER` on EVERY `make` (incl. `project-db`) — make rebuilds
+  prerequisites, so omitting them silently re-includes resistors / wrong tier. (`CERN_SQLITE`
+  is no longer needed — `cern_source` finds the vendored clone.)
 - `make` does NOT track `tools/cern_libmap.py` or `tools/model_map.py` as build deps. After
   editing them (new nickname, footprint fixup, package map), the affected table's
   `*_generated_*.sql` is considered up-to-date and won't regenerate. Force it: `rm` the
   table's `*_generated_*.sql` + `db/<table>.db`, then rebuild. `apply_3d_models` reads the
   *master* `db/terra.db`, so rebuild the master (full `make`) before re-running it.
-- CERN `LibFootprint`/`LibSymbol` fields occasionally contain typos or spurious/dropped
-  suffixes that don't match any real file (e.g. `SOT95P2d80X100-6N`, a `…521`/`…521R`
-  mismatch, a `+THERMAL` suffix). The footprint-resolution test catches these; correct them
-  in `cern_libmap.FOOTPRINT_ITEM_FIXUP` (deterministic bad-name → real-name map).
+- CERN `LibFootprint`/`LibSymbol` fields occasionally name an item that matches no real file/
+  symbol — typos (`SOT95P2d80X100-6N`, `…-32AN`, `INFININEON…`), dropped/spurious suffixes
+  (`…521` vs `…521R`, a `+THERMAL` suffix), an Altium export artifact (`TEXAS_DYY0016A` whose
+  file is `TEXAS_DYY0016A - duplicate.kicad_mod`), or a variant symbol that was never created
+  (`TXS0108ERGY` → use `TXS0108E_a`). The footprint/symbol resolution tests catch these;
+  correct them in `cern_libmap.ITEM_FIXUP` (one deterministic bad-name → real-name map applied
+  to both symbol and footprint refs).
