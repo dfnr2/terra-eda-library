@@ -75,9 +75,26 @@ NOT expand path vars in the dbl connection string), and the generated
 catalog parts are visible.)
 
 ## 5. 3D models
-Extend `tools/model_map.py` with this part type's packages → KiCad bundled models, then
-`uv run python tools/apply_3d_models.py --table cern_<name>` (rewrites footprint `(model …)`
-refs; offsets left for human positioning). Unmapped/blank packages → download tail + human.
+All mapping rules live in `tools/model_map.py` (codified once, never re-derived). Add this
+part type's packages there, then `uv run python tools/apply_3d_models.py --table cern_<name>`
+(rewrites footprint `(model …)` refs; offsets left for human positioning). The resolver has
+three strategies, tried in order — extend whichever fits the package:
+- **Exact SMD** (`SMD_PACKAGE_MODEL`): one package string → one model file (SMD has one
+  canonical model per package).
+- **THT axial families** (`THT_AXIAL_FAMILY`): KiCad parameterizes axial models by lead
+  pitch+orientation, so a package alone is not enough. `apply_3d_models` *measures* the
+  footprint's pad pitch and the resolver picks the nearest horizontal model within
+  `AXIAL_PITCH_TOL_MM` (1.5mm) — declining when no shipped geometry fits (e.g. DO-201AD at
+  20.32mm), rather than mis-mapping.
+- **THT TO families** (`TO_FAMILY`): orientation (-v/-h/FLIP) and lead count live in the
+  *footprint name*, not the package; `apply_3d_models` parses them (`fp_orientation`,
+  `fp_leads`) and the resolver builds `<family>-<leads>_<orientation>.step`, verifying it
+  exists (KiCad ships only Vertical TO-247, so horizontal TO-247 declines).
+
+When one footprint's parts carry conflicting package labels (CERN data quirk), the label
+backing the most parts wins. Record deliberate non-mappings in `SKIP_REASON` with the reason
+so the gaps are documented, not mysterious. Lock new rules with a case in
+`tests/test_model_map.py`. Unmapped/blank packages → download tail + human (phase 2b).
 
 ## 6. Tests + audit
 `db/tables/cern_<name>/test_cern_<name>.py`: row count; no duplicate `unique_id`; known-part
