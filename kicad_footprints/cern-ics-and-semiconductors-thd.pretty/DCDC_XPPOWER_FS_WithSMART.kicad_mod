@@ -1177,9 +1177,9 @@
 		(uuid "a4091a3a-42b4-4387-b37a-fe80de9e629e")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/DCDC_XPPOWER_FS_WithSMART.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_SMA.step"
 		(offset
-			(xyz 0.00005 0.00008 0)
+			(xyz -5.987 4.367 0)
 		)
 		(scale
 			(xyz 1 1 1)

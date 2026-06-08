@@ -14,6 +14,7 @@ SYMBOL_LIB_NICK = {
     "Analog & Interface": "cern-analog-interface",
     "Standard Logic": "cern-standard-logic",
     "Logic": "cern-logic",
+    "DC-DC Converters": "cern-dc-dc-converters",
 }
 
 FOOTPRINT_LIB_NICK = {

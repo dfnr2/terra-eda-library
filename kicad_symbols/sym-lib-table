@@ -1,6 +1,7 @@
 (sym_lib_table
   (version 7)
   (lib (name "cern-analog-interface")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-analog-interface.kicad_sym")(options "")(descr ""))
+  (lib (name "cern-dc-dc-converters")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-dc-dc-converters.kicad_sym")(options "")(descr ""))
   (lib (name "cern-diodes")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-diodes.kicad_sym")(options "")(descr ""))
   (lib (name "cern-logic")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-logic.kicad_sym")(options "")(descr ""))
   (lib (name "cern-operational-amplifiers")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-operational-amplifiers.kicad_sym")(options "")(descr ""))
