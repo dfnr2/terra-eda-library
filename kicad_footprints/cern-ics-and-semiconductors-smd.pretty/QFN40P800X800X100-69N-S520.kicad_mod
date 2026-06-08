@@ -705,7 +705,7 @@
 		(uuid "95ff7f01-de1f-4afc-90eb-55ca2c5cabb4")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/QFN40P800X800X100-65N-S520.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/QFN-68-1EP_8x8mm_P0.4mm_EP5.2x5.2mm.step"
 		(offset
 			(xyz 0.00009 0.00009 0)
 		)

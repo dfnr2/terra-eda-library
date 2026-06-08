@@ -646,7 +646,7 @@
 		(uuid "ef8ff1f7-f3d4-420d-bcf2-672884a1b4fe")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/ATCERAMICS_AT0603.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_0603_1608Metric.step"
 		(offset
 			(xyz 0.00008 0.00008 0)
 		)

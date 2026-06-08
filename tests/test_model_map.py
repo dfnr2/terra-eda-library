@@ -79,6 +79,22 @@ def test_unmapped_footprint_name_is_none():
     assert resolve_from_footprint("IXYS_IXBOD 1-12R..42") is None
 
 
+@_needs_kicad
+def test_qfn_dimension_resolver():
+    # CERN QFN body in name is the true body; N may include the thermal pad.
+    assert resolve_from_footprint("QFN50P700X700X90-49N-S580").endswith(
+        "/Package_DFN_QFN.3dshapes/QFN-48-1EP_7x7mm_P0.5mm_EP5.15x5.15mm.step")
+    assert "QFN-32-1EP_5x5mm_P0.5mm" in resolve_from_footprint("QFN50P500X500X100-33N-S330")
+
+
+@_needs_kicad
+def test_qfp_dimension_resolver():
+    # CERN QFP body in name is the lead-span; KiCad body ≈ span − 2mm; prefer LQFP.
+    assert "LQFP-48" in resolve_from_footprint("QFP50P900X900X160-48N")
+    r64 = resolve_from_footprint("QFP50P1200X1200X160-64N")
+    assert "LQFP-64" in r64 and "10x10mm_P0.5mm" in r64
+
+
 @pytest.mark.skipif(kicad_footprint_dir() is None,
                     reason="KiCad bundled footprints not installed")
 def test_native_centroid_origin_convention():

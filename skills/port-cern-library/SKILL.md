@@ -91,12 +91,15 @@ three strategies, tried in order — extend whichever fits the package:
   `fp_leads`) and the resolver builds `<family>-<leads>_<orientation>.step`, verifying it
   exists (KiCad ships only Vertical TO-247, so horizontal TO-247 declines).
 
-- **Bridges + blank-package bodies** (`resolve_from_footprint`, `BRIDGE_BODY`,
-  `SMD_BODY_DIRECT`): CERN often leaves `package` blank but encodes the body in the
-  *footprint name* (`FAIRCHILD_GBU_V`, `SODFL3516X80N`, `DIOMELF1911N`, `DO-201`).
-  `apply_3d_models` falls back to `resolve_from_footprint`, which maps bridge codes →
-  `Diode_Bridge_*`, SMD body codes (SODFL→SOD-123F/128, DIOMELF→MELF family by size,
-  PowerDI/PowerMite), then any known package key embedded in the name.
+- **Bridges + blank-package bodies + dimensioned IC packages** (`resolve_from_footprint`):
+  CERN often leaves `package` blank/coarse but encodes the body in the *footprint name*.
+  `apply_3d_models` falls back to `resolve_from_footprint`, which handles: dimensioned
+  **QFN/DFN/QFP** via `_resolve_quad` (parses IPC names like `QFN50P700X700X90-49N` /
+  `QFP50P900X900X160-48N` → matches KiCad parametric model by family+pitch+leads(N or N-1)
+  +nearest body; QFP name is the lead-span so body = span−2mm); bridge codes →
+  `Diode_Bridge_*`; SMD body codes (SODFL→SOD-123F/128, DIOMELF→MELF by size,
+  PowerDI/PowerMite); then any known package key embedded in the name. The QFN/QFP resolver
+  lifts every IC table at once — extend it rather than hand-listing dimensioned variants.
 
 When one footprint's parts carry conflicting package labels (CERN data quirk), the label
 backing the most parts wins. Record deliberate non-mappings in `SKIP_REASON` with the reason

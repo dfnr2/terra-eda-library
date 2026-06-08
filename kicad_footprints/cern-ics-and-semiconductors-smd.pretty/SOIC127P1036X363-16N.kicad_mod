@@ -320,7 +320,7 @@
 		(uuid "497f5303-8e0a-4f41-9046-c210b38c0df2")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/SOIC127P1036X363-16N.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-16W_7.5x10.3mm_P1.27mm.step"
 		(offset
 			(xyz 0.00006 0.00009 0)
 		)

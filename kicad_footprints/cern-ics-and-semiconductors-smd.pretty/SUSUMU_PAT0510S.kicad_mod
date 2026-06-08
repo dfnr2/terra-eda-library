@@ -505,9 +505,9 @@
 		(uuid "2693dd7a-c50f-4cd9-b5e6-beaf59cdd7bc")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/SUSUMU_PAT0510S.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_0402_1005Metric.step"
 		(offset
-			(xyz 0 -0 0)
+			(xyz 0 -0.072 0)
 		)
 		(scale
 			(xyz 1 1 1)

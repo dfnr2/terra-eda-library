@@ -1282,7 +1282,7 @@
 		(uuid "9b614893-03e6-4d61-969d-823f106e61fe")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/TEXAS_DWZ0008A.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-8_3.9x4.9mm_P1.27mm.step"
 		(offset
 			(xyz 0.00008 0.00012 0)
 		)

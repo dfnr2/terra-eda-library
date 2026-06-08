@@ -2263,7 +2263,7 @@
 		(uuid "6eed05b8-9725-4c2b-a7c3-fe5ba8cb5705")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/TEXAS_PWP0020AA.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/TSSOP-20_4.4x6.5mm_P0.65mm.step"
 		(offset
 			(xyz 0 -0 0)
 		)

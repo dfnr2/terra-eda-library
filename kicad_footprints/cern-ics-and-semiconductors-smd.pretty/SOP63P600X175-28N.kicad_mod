@@ -372,7 +372,7 @@
 		(uuid "5e9fd126-ae5f-4509-a0a9-a4bee497fa9e")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/SOP63P600X175-28N.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SSOP-28_5.3x10.2mm_P0.65mm.step"
 		(offset
 			(xyz 0.00007 0.00005 0)
 		)

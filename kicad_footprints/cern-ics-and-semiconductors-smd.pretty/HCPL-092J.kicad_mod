@@ -2210,7 +2210,7 @@
 		(uuid "8f52b0da-64dd-48e3-9102-0e818d3d2c11")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/BROADCOM_HCPL-09X.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-16_3.9x9.9mm_P1.27mm.step"
 		(offset
 			(xyz 0.00022 -0 0)
 		)

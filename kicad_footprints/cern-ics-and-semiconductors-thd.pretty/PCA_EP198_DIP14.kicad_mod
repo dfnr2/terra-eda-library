@@ -310,9 +310,9 @@
 		(uuid "d9f0f9c1-3369-43a8-b05b-dfbee52e1f9e")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/PCA_EP198_DIP14.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-14_W7.62mm.step"
 		(offset
-			(xyz 0.0001 0.00011 0)
+			(xyz -3.81 7.62 0)
 		)
 		(scale
 			(xyz 1 1 1)

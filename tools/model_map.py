@@ -95,10 +95,18 @@ SMD_PACKAGE_MODEL = {
     "SOIC8": (_SO, "SOIC-8_3.9x4.9mm_P1.27mm.step"),
     "SOIC14": (_SO, "SOIC-14_3.9x8.7mm_P1.27mm.step"),
     "SOIC16": (_SO, "SOIC-16_3.9x9.9mm_P1.27mm.step"),
+    "SOIC16W": (_SO, "SOIC-16W_7.5x10.3mm_P1.27mm.step"),
+    "SOIC20": (_SO, "SOIC-20W_7.5x12.8mm_P1.27mm.step"),
+    "SOIC28": (_SO, "SOIC-28W_7.5x17.9mm_P1.27mm.step"),
     "MSOP8": (_SO, "MSOP-8_3x3mm_P0.65mm.step"),
     "MSOP10": (_SO, "MSOP-10_3x3mm_P0.5mm.step"),
+    "TSSOP8": (_SO, "TSSOP-8_3x3mm_P0.65mm.step"),
     "TSSOP14": (_SO, "TSSOP-14_4.4x5mm_P0.65mm.step"),
+    "TSSOP16": (_SO, "TSSOP-16_4.4x5mm_P0.65mm.step"),
+    "TSSOP20": (_SO, "TSSOP-20_4.4x6.5mm_P0.65mm.step"),
+    "TSSOP24": (_SO, "TSSOP-24_4.4x7.8mm_P0.65mm.step"),
     "SSOP16": (_SO, "SSOP-16_3.9x4.9mm_P0.635mm.step"),
+    "SSOP28": (_SO, "SSOP-28_5.3x10.2mm_P0.65mm.step"),
     # DIP (THT); CERN <pkg>-300 == 300mil == W7.62mm
     "DIP8-300": (_DIP, "DIP-8_W7.62mm.step"),
     "DIP14-300": (_DIP, "DIP-14_W7.62mm.step"),
@@ -310,6 +318,66 @@ def _body_width(name_uc: str, token: str) -> int | None:
     return int(m.group(1)) if m else None
 
 
+# CERN IPC footprint name for a quad/dual flat(-no-lead) part, e.g.
+# "QFN50P700X700X90-49N-S580" = QFN, 0.50mm pitch, 7.00x7.00mm body, 49 pads;
+# "QFP50P900X900X160-48N"     = QFP, 0.50mm pitch, 9.00x9.00mm lead-span, 48 leads.
+_QUAD_RE = re.compile(r"^[PVT]?(QFN|DFN|QFP|LQFP|TQFP)(\d+)P(\d+)X(\d+)X\d+-(\d+)N", re.I)
+# KiCad parametric model names (optionally vendor-prefixed):
+_QFNDFN_MODEL = re.compile(
+    r"^(QFN|DFN)-(\d+)(?:-\d+EP)?_([0-9.]+)x([0-9.]+)mm_P([0-9.]+)mm", re.I)
+_QFP_MODEL = re.compile(
+    r"^(?:[A-Za-z0-9]+_)?(LQFP|TQFP|QFP|PQFP)-(\d+)(?:-\d+EP)?_"
+    r"([0-9.]+)x([0-9.]+)mm_P([0-9.]+)mm", re.I)
+_QFN_DFN = "Package_DFN_QFN.3dshapes"
+_QFP = "Package_QFP.3dshapes"
+_QFP_PREFER = ("LQFP", "TQFP", "QFP", "PQFP")
+
+
+def _best_quad(libdir, rx, fams, leads, pitch, tx, ty, tol):
+    """Pick the model whose body is nearest (tx,ty) among matching family/leads/pitch."""
+    best = None
+    for f in libdir.glob("*.step"):
+        mm = rx.match(f.name)
+        if not mm or mm.group(1).upper() not in fams:
+            continue
+        if int(mm.group(2)) not in leads or abs(float(mm.group(5)) - pitch) > 0.02:
+            continue
+        d = abs(float(mm.group(3)) - tx) + abs(float(mm.group(4)) - ty)
+        pri = _QFP_PREFER.index(mm.group(1).upper()) if mm.group(1).upper() in _QFP_PREFER else 0
+        key = (round(d, 2), pri)
+        if best is None or key < best[0]:
+            best = (key, f.name)
+    if best is None or best[0][0] > tol:
+        return None
+    return _ref(libdir.name, best[1])
+
+
+def _resolve_quad(name: str) -> str | None:
+    """Resolve a dimensioned QFN/DFN/QFP model from the IPC footprint name.
+
+    Matches family + pitch + lead count (N or N-1, since CERN's pad count may
+    include the thermal pad) + nearest body. QFN/DFN body in the name is the true
+    body; QFP names give the lead-span, so subtract ~2mm to get the model body.
+    Returns None if nothing is within tolerance or the KiCad dir is unavailable.
+    """
+    m = _QUAD_RE.match(name)
+    if not m:
+        return None
+    root = kicad_3dmodel_dir()
+    if root is None:
+        return None
+    fam = m.group(1).upper()
+    pitch = int(m.group(2)) / 100
+    bx, by = int(m.group(3)) / 100, int(m.group(4)) / 100
+    n = int(m.group(5))
+    leads = {n, n - 1}
+    if fam in ("QFN", "DFN"):
+        return _best_quad(root / _QFN_DFN, _QFNDFN_MODEL, {fam}, leads, pitch, bx, by, 1.5)
+    # QFP family: CERN body == lead-span; KiCad body ≈ span − 2mm.
+    return _best_quad(root / _QFP, _QFP_MODEL, set(_QFP_PREFER), leads, pitch,
+                      bx - 2.0, by - 2.0, 2.0)
+
+
 def resolve_from_footprint(name: str, *, pad_pitch_mm: float | None = None,
                            orientation: str | None = None,
                            leads: int | None = None) -> str | None:
@@ -322,6 +390,9 @@ def resolve_from_footprint(name: str, *, pad_pitch_mm: float | None = None,
     """
     uc = name.upper().replace(" ", "")
     root = kicad_3dmodel_dir()
+    quad = _resolve_quad(name)             # dimensioned QFN/DFN by IPC name
+    if quad:
+        return quad
     for code, fname in BRIDGE_BODY.items():
         if code in uc and (root is None or (root / _DIODE_THT / fname).is_file()):
             return _ref(_DIODE_THT, fname)

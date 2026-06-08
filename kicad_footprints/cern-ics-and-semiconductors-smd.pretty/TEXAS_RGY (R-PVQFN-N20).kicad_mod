@@ -2118,7 +2118,7 @@
 		(uuid "270bad45-449d-471d-8cc6-3d01851a0ab7")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/TEXAS_RGY (R-PVQFN-N20).stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/TSSOP-20_4.4x6.5mm_P0.65mm.step"
 		(offset
 			(xyz 0.00009 0.00005 0)
 		)

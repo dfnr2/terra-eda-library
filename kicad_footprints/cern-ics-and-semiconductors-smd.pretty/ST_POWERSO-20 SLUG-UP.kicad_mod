@@ -648,7 +648,7 @@
 		(uuid "13e93962-a052-43ed-97e1-aaff6426e749")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/ST_POWERSO-20 SLUG-UP.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-20W_7.5x12.8mm_P1.27mm.step"
 		(offset
 			(xyz 0.00014 0.00007 0)
 		)
