@@ -1405,9 +1405,9 @@
 		(uuid "a65888a9-5ad9-48df-9c7c-1703c24b82fe")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/MURATA_OKI-78SR(H).stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x03_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00009 0.00009 0)
+			(xyz 0 2.54 0)
 		)
 		(scale
 			(xyz 1 1 1)

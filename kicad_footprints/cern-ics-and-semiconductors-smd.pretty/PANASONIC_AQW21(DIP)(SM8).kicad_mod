@@ -922,9 +922,9 @@
 		(uuid "14d6d3cf-da2d-4484-8788-c97b38be9ac2")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/PANASONIC_AQW21(DIP)(SM8).stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x04_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00009 0.00011 0)
+			(xyz -1.27 3.81 0)
 		)
 		(scale
 			(xyz 1 1 1)

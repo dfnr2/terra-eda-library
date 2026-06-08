@@ -3678,9 +3678,9 @@
 		(uuid "8de10ea8-a70c-43c0-aecf-87ce9f54deeb")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/SAMTEC_TSM-107-01-L-DV.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x07_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.0001 0.00005 0)
+			(xyz -1.27 7.62 0)
 		)
 		(scale
 			(xyz 1 1 1)

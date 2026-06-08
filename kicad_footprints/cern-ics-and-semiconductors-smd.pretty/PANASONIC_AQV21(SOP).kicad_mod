@@ -791,9 +791,9 @@
 		(uuid "1be1f183-2e17-473f-9150-92624b80fb95")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/PANASONIC_AQV21(SOP).stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x03_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00012 0.0001 0)
+			(xyz -1.27 2.54 0)
 		)
 		(scale
 			(xyz 1 1 1)

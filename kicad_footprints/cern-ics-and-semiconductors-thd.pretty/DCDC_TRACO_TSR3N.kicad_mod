@@ -483,9 +483,9 @@
 		(uuid "eb6c7fce-35e7-4f1b-985e-f53124eb4b08")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/DCDC_TRACO_TSR3N.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x03_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00008 0.00008 0)
+			(xyz 0 2.54 0)
 		)
 		(scale
 			(xyz 1 1 1)

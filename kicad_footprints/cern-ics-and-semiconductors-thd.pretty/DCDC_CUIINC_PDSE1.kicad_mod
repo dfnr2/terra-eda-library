@@ -507,9 +507,9 @@
 		(uuid "1e3a663e-eea0-406d-84ab-39166702dc30")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/DCDC_CUIINC_PDSE1.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x04_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.0001 0.00012 0)
+			(xyz 0 1.71 0)
 		)
 		(scale
 			(xyz 1 1 1)

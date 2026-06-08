@@ -816,9 +816,9 @@
 		(uuid "03c9e9af-802e-42dd-9287-a156c41bb2a2")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/TYCO_280377-1.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x02_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00008 0.00005 0)
+			(xyz 0 1.27 0)
 		)
 		(scale
 			(xyz 1 1 1)

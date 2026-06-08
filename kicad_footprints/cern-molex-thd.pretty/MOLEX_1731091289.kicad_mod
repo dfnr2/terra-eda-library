@@ -3717,9 +3717,9 @@
 		(uuid "6cf9f1a4-1e00-4cb8-ba37-48a2decc7859")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/MOLEX_1731091289.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_Dsub.3dshapes/DSUB-15_Pins_Horizontal_P2.77x2.84mm_EdgePinOffset14.56mm_Housed_MountingHolesOffset15.98mm.step"
 		(offset
-			(xyz 0 -0 0)
+			(xyz -9.695 1.262 0)
 		)
 		(scale
 			(xyz 1 1 1)

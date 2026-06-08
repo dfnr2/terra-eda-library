@@ -422,6 +422,84 @@ def _resolve_quad(name: str) -> str | None:
                       bx - 2.0, by - 2.0, 2.0)
 
 
+# --- Connectors: description-series + geometry -> KiCad Connector_* models ----
+_PINHDR = "Connector_PinHeader_{p}mm.3dshapes"
+_PINSKT = "Connector_PinSocket_{p}mm.3dshapes"
+_DSUB = "Connector_Dsub.3dshapes"
+_MOLEX = "Connector_Molex.3dshapes"
+_STD_PITCH = (2.54, 2.00, 1.27, 1.00)
+_DSUB_POS = (9, 15, 25, 37, 44, 62)
+
+
+def _nearest_std_pitch(p: float) -> float | None:
+    for s in _STD_PITCH:
+        if abs(p - s) <= 0.05:
+            return s
+    return None
+
+
+def _glob_first(libdir, pattern, prefer=None):
+    """First model matching pattern (prefer a name containing `prefer`)."""
+    files = sorted(f.name for f in libdir.glob(pattern)) if libdir.is_dir() else []
+    if not files:
+        return None
+    if prefer:
+        pref = [f for f in files if prefer in f]
+        if pref:
+            return pref[0]
+    return files[0]
+
+
+def resolve_connector(description: str, *, pins: int | None = None,
+                      rows: int | None = None, perrow: int | None = None,
+                      pitch_mm: float | None = None,
+                      orientation: str | None = None) -> str | None:
+    """Resolve a KiCad Connector_* model from a CERN connector's description +
+    footprint grid geometry. Covers D-Sub, Molex series KiCad ships (KK-254,
+    PicoBlade), and generic pin headers/sockets (clean standard-pitch grids).
+    Returns None for proprietary/irregular connectors (-> drop-folder).
+    """
+    root = kicad_3dmodel_dir()
+    if root is None:
+        return None
+    d = (description or "")
+    dl = d.lower()
+    is_socket = any(k in dl for k in ("socket", "receptacle", "jack"))
+
+    # 1. D-Sub: positions + gender.
+    if "d-sub" in dl or "dsub" in dl or "d-subminiature" in dl:
+        pos = next((n for n in _DSUB_POS if re.search(rf"\b{n}\b", d)), None)
+        if pos:
+            gender = "Socket" if is_socket or "female" in dl else "Pins"
+            m = _glob_first(root / _DSUB, f"DSUB-{pos}_{gender}_*.step",
+                            prefer="Housed_MountingHoles")
+            if m:
+                return _ref(_DSUB, m)
+
+    # 2. Molex series KiCad actually ships (KK-254, PicoBlade), matched by pins.
+    if pins:
+        if re.search(r"\bKK\b", d) and "2.5" in d:
+            m = _glob_first(root / _MOLEX, f"Molex_KK-254_*_1x{pins:02d}_*.step")
+            if m:
+                return _ref(_MOLEX, m)
+        if "picoblade" in dl:
+            m = _glob_first(root / _MOLEX, f"Molex_PicoBlade_*_1x{pins:02d}_*.step")
+            if m:
+                return _ref(_MOLEX, m)
+
+    # 3. Generic pin header / socket from a clean rectangular grid.
+    if rows and perrow and pitch_mm:
+        sp = _nearest_std_pitch(pitch_mm)
+        if sp and rows in (1, 2, 3, 4):
+            sp_s = f"{sp:g}"
+            lib = (_PINSKT if is_socket else _PINHDR).format(p=sp_s)
+            kind = "PinSocket" if is_socket else "PinHeader"
+            fname = f"{kind}_{rows}x{perrow:02d}_P{sp_s}mm_Vertical.step"
+            if (root / lib / fname).is_file():
+                return _ref(lib, fname)
+    return None
+
+
 def resolve_from_footprint(name: str, *, pad_pitch_mm: float | None = None,
                            orientation: str | None = None,
                            leads: int | None = None) -> str | None:

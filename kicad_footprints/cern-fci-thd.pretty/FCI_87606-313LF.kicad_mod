@@ -3549,9 +3549,9 @@
 		(uuid "70c38066-3922-4780-b05a-f15bf3a2a1e5")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/FCI_87606-313LF.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_2x13_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00006 0.00011 0)
+			(xyz 1.27 15.24 0)
 		)
 		(scale
 			(xyz 1 1 1)

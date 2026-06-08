@@ -2418,7 +2418,7 @@
 		(uuid "0d12b825-3b96-44b5-8eb1-65cc13f50cdc")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/SAMTEC_SMB5-J-P-H-RA-TH1_Washer.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_SMB.step"
 		(offset
 			(xyz 0 -0 0)
 		)

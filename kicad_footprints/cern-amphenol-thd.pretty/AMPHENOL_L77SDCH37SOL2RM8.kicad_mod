@@ -4049,9 +4049,9 @@
 		(uuid "f82f265b-5050-4fff-8eeb-652cbbab7597")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/AMPHENOL_L77SDCH37SOL2RM8.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_Dsub.3dshapes/DSUB-37_Socket_Horizontal_P2.77x2.84mm_EdgePinOffset14.56mm_Housed_MountingHolesOffset15.98mm.step"
 		(offset
-			(xyz 0.00006 0.00009 0)
+			(xyz 24.93 1.42 0)
 		)
 		(scale
 			(xyz 1 1 1)

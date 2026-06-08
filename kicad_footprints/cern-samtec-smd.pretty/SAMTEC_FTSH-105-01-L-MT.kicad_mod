@@ -2038,9 +2038,9 @@
 		(uuid "bbc0646d-14fe-4615-9b22-d2b4269ba8dc")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/SAMTEC_FTSH-105-01-L-MT.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_1.27mm.3dshapes/PinHeader_2x05_P1.27mm_Vertical.step"
 		(offset
-			(xyz 0.0001 0.00011 0)
+			(xyz -0.635 2.54 0)
 		)
 		(scale
 			(xyz 1 1 1)

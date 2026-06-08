@@ -1303,9 +1303,9 @@
 		(uuid "44a142d1-2214-40a4-9934-eecbda3d6828")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LEMO_EDA-02782-V1-0_misc1_Part3.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_2x02_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00012 0.00009 0)
+			(xyz 1.27 1.27 0)
 		)
 		(scale
 			(xyz 1 1 1)

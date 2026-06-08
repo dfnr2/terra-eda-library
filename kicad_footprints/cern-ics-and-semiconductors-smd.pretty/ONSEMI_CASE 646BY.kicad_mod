@@ -703,9 +703,9 @@
 		(uuid "319ae86b-2f19-40d0-9ebd-026d75a329a2")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/ONSEMI_CASE 646BY.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x03_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00009 0.00009 0)
+			(xyz -1.27 2.54 0)
 		)
 		(scale
 			(xyz 1 1 1)

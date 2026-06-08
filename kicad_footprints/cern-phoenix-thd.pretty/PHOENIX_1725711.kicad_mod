@@ -1448,9 +1448,9 @@
 		(uuid "b87c768f-72ef-40c6-9cc6-558b3291b41f")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/PHOENIX_1725711.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x08_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00006 0.00006 0)
+			(xyz 0 8.89 0)
 		)
 		(scale
 			(xyz 1 1 1)

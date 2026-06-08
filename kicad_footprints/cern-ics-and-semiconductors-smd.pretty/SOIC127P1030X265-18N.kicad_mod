@@ -313,9 +313,9 @@
 		(uuid "dc2927be-d810-4fa3-8d2c-cab76893190d")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/SOIC127P1030X265-18N.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_1.27mm.3dshapes/PinHeader_2x09_P1.27mm_Vertical.step"
 		(offset
-			(xyz 0.00008 0.00005 0)
+			(xyz -0.635 5.08 0)
 		)
 		(scale
 			(xyz 1 1 1)

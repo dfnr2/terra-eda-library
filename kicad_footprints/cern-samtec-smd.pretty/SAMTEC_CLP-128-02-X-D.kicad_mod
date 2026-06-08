@@ -7830,9 +7830,9 @@
 		(uuid "a4aca945-ad14-4c30-9bcb-f559b1a515d9")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/SAMTEC_CLP-128-02-X-D.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinSocket_1.27mm.3dshapes/PinSocket_2x28_P1.27mm_Vertical.step"
 		(offset
-			(xyz 0.00033 0.00008 0)
+			(xyz 0.6353 17.15 0)
 		)
 		(scale
 			(xyz 1 1 1)

@@ -5635,9 +5635,9 @@
 		(uuid "376dfd9c-241a-45a7-a243-ae3c84c2b1b4")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/AMPHENOL_51720-10402404AB.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_0402_1005Metric.step"
 		(offset
-			(xyz 0 0.00008 0)
+			(xyz 3.838 31.11 0)
 		)
 		(scale
 			(xyz 1 1 1)

@@ -14,8 +14,7 @@ Source: CERN `STELVIO-KONTEK COMATEL` connectors (106 parts). Generated via `too
 
 ## Notes
 - [ ] Connector vendor; shares the "Connectors" symbol lib; no type tail.
-- [ ] 3D: deferred to the combined connector pass (description-series + pin-count resolver
-      against KiCad's Connector_* models). Until then → human drop-folder.
+- [ ] 3D: best-effort via resolve_connector (D-Sub, Molex KK-254/PicoBlade, generic pin headers/sockets from clean standard-pitch grids); proprietary/mezzanine -> human drop-folder.
 - [ ] No terra reconciliation (new category).
 
 ## Sign-off

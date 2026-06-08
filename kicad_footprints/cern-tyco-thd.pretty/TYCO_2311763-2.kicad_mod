@@ -1877,9 +1877,9 @@
 		(uuid "b773a47a-d987-41f2-b177-c257b922f717")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/TYCO_2311763-2.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_Dsub.3dshapes/DSUB-15_Socket_Horizontal_P2.77x2.84mm_EdgePinOffset14.56mm_Housed_MountingHolesOffset15.98mm.step"
 		(offset
-			(xyz 0.00009 0.0001 0)
+			(xyz 9.811 1.336 0)
 		)
 		(scale
 			(xyz 1 1 1)

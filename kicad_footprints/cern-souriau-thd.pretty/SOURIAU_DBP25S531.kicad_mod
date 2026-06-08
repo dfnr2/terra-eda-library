@@ -3650,9 +3650,9 @@
 		(uuid "5a91b71f-ed7b-45d6-87d9-d969737b55a3")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/SOURIAU_DBP25S531.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_Dsub.3dshapes/DSUB-25_Socket_Horizontal_P2.77x2.84mm_EdgePinOffset14.56mm_Housed_MountingHolesOffset15.98mm.step"
 		(offset
-			(xyz 0.00007 0.00008 0)
+			(xyz 16.63 1.32 0)
 		)
 		(scale
 			(xyz 1 1 1)

@@ -1697,9 +1697,9 @@
 		(uuid "d8badbf6-d5b4-4686-b1e1-50bd609be446")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/FCI_D09S13A4GV00LF.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_Dsub.3dshapes/DSUB-9_Socket_Horizontal_P2.77x2.84mm_EdgePinOffset14.56mm_Housed_MountingHolesOffset15.98mm.step"
 		(offset
-			(xyz 0.00009 0.00006 0)
+			(xyz 5.54 1.175 0)
 		)
 		(scale
 			(xyz 1 1 1)

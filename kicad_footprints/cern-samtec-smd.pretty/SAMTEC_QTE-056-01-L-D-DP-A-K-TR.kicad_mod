@@ -12351,9 +12351,9 @@
 		(uuid "4ed498f8-4f6f-4deb-b953-815e325c1a63")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/SAMTEC_QTE-056-01-L-D-DP-A-K-TR.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/TO-252-2.step"
 		(offset
-			(xyz 0.00014 0.00005 0)
+			(xyz 0.54 0.0313 0)
 		)
 		(scale
 			(xyz 1 1 1)

@@ -2600,9 +2600,9 @@
 		(uuid "f40d0f38-17f1-4047-a755-ba1fbdcfbec1")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/HARTING_EDA-04065-V1-0_part2.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_Dsub.3dshapes/DSUB-25_Socket_Horizontal_P2.77x2.84mm_EdgePinOffset14.56mm_Housed_MountingHolesOffset15.98mm.step"
 		(offset
-			(xyz 0.00017 0.00007 0)
+			(xyz 16.64 1.42 0)
 		)
 		(scale
 			(xyz 1 1 1)

@@ -3073,9 +3073,9 @@
 		(uuid "391dbea0-4eb5-427e-b462-566e191b7ae8")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/STELVIO-KONTEK_3860334120440.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x20_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00008 0.0001 0)
+			(xyz 24.13 24.13 0)
 		)
 		(scale
 			(xyz 1 1 1)

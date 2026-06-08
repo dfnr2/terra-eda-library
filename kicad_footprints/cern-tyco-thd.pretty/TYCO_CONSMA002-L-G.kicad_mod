@@ -1234,7 +1234,7 @@
 		(uuid "c79cc689-222c-4089-a60b-e66cc427145a")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/TYCO_CONSMA002-L-G_part2.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_SMA.step"
 		(offset
 			(xyz 0 -0 0)
 		)

@@ -3128,9 +3128,9 @@
 		(uuid "cd578618-1392-45de-830b-cec7ff0dc3c0")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/AMPHENOL_L17H2440121.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_Dsub.3dshapes/DSUB-15_Socket_Horizontal_P2.77x2.84mm_EdgePinOffset14.56mm_Housed_MountingHolesOffset15.98mm.step"
 		(offset
-			(xyz 0 -0 0)
+			(xyz 9.695 1.625 0)
 		)
 		(scale
 			(xyz 1 1 1)

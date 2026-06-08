@@ -3073,9 +3073,9 @@
 		(uuid "4ea6dad8-10c9-4262-b78f-89de72b288d4")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/COMATEL_385.0334.1.20.400.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x20_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00008 0.00007 0)
+			(xyz 24.13 24.13 0)
 		)
 		(scale
 			(xyz 1 1 1)

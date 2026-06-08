@@ -7,7 +7,7 @@ import pytest
 
 from tools.model_map import (
     kicad_3dmodel_dir, kicad_footprint_dir, native_centroid,
-    resolve_from_footprint, resolve_model,
+    resolve_connector, resolve_from_footprint, resolve_model,
 )
 
 _HAVE_KICAD = kicad_3dmodel_dir() is not None
@@ -103,6 +103,29 @@ def test_bga_dimension_resolver():
     assert "BGA-324_19.0x19.0mm" in resolve_from_footprint("BGA324C100P18X18_1900X1900X155")
     # KiCad's only BGA-484 is 23x23 P1.0; CERN's is 0.8mm pitch -> no fit.
     assert resolve_from_footprint("BGA484C80P22X22_1900X1900X325") is None
+
+
+@_needs_kicad
+def test_connector_pin_header_socket():
+    # Clean grid + standard pitch -> generic PinHeader/PinSocket.
+    h = resolve_connector("4 Contacts, Pitch 2.54mm, Single Row Header",
+                          pins=4, rows=1, perrow=4, pitch_mm=2.54)
+    assert h.endswith("/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x04_P2.54mm_Vertical.step")
+    s = resolve_connector("Dual Row 2.54mm Socket Receptacle",
+                          pins=20, rows=2, perrow=10, pitch_mm=2.54)
+    assert "PinSocket_2x10_P2.54mm_Vertical" in s
+
+
+def test_connector_non_standard_pitch_declined():
+    # No clean grid / non-standard pitch -> None (proprietary -> drop-folder).
+    assert resolve_connector("Mezzanine board-to-board", pins=80) is None
+    assert resolve_connector("0.8mm header", pins=10, rows=1, perrow=10, pitch_mm=0.8) is None
+
+
+@_needs_kicad
+def test_connector_dsub():
+    r = resolve_connector("Right Angle D-Sub 9 Male Contacts")
+    assert r is not None and "DSUB-9_Pins" in r
 
 
 @pytest.mark.skipif(kicad_footprint_dir() is None,

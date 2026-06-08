@@ -4549,9 +4549,9 @@
 		(uuid "f50c6fe3-d393-4ea6-acaa-776c3e6418b7")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/HARTING_15 25 040 2601 000.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_0402_1005Metric.step"
 		(offset
-			(xyz 0.00011 0.0001 0)
+			(xyz 0 -0.3437 0)
 		)
 		(scale
 			(xyz 1 1 1)

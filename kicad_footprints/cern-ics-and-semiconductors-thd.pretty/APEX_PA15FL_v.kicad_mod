@@ -1184,9 +1184,9 @@
 		(uuid "e1de7d8d-e247-45f9-ac30-12de04ceb5e9")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/APEX_PA15FL_v.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x10_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00008 0.00008 0)
+			(xyz 0 11.43 0)
 		)
 		(scale
 			(xyz 1 1 1)

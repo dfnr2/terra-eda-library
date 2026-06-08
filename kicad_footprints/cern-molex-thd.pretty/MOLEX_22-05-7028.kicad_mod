@@ -775,9 +775,9 @@
 		(uuid "7706fb4f-0b0f-46bf-beb5-98de1a1873ce")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/MOLEX_22-05-7028.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_Molex.3dshapes/Molex_KK-254_AE-6410-02A_1x02_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00004 0.00006 0)
+			(xyz -1.27 -0 0)
 		)
 		(scale
 			(xyz 1 1 1)

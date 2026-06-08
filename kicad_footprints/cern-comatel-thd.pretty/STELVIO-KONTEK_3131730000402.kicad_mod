@@ -161,7 +161,7 @@
 		(uuid "c266e8b8-74f7-459d-9d24-7e58ec8dc8c0")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/STELVIO-KONTEK_3131730000402.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_0402_1005Metric.step"
 		(offset
 			(xyz 0.00008 0.0001 0)
 		)

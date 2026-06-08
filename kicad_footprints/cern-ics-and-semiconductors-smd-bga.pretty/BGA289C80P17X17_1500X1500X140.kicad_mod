@@ -2759,7 +2759,7 @@
 		(uuid "8bf71978-4606-4b8d-bb2c-2242cd9259fc")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/BGA289C80P17X17_1500X1500X140.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_BGA.3dshapes/Texas_BGA-289_15x15mm_Layout17x17_P0.8mm.step"
 		(offset
 			(xyz 0.00007 0.00012 0)
 		)

@@ -28,7 +28,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from tools.model_map import (  # noqa: E402
-    native_centroid, resolve_from_footprint, resolve_model)
+    native_centroid, resolve_connector, resolve_from_footprint, resolve_model)
 
 _MODEL_PATH = re.compile(r'(\(model\s+")[^"]*(")')
 _PAD_AT = re.compile(r"\(at\s+(-?[0-9.]+)\s+(-?[0-9.]+)")
@@ -85,13 +85,41 @@ def measure_pitch(txt: str) -> float | None:
     return max(math.dist(a, b) for i, a in enumerate(centers) for b in centers[i + 1:])
 
 
+def grid_geometry(txt: str):
+    """(pins, rows, perrow, pitch) when pads form a clean rectangular grid at a
+    uniform pitch (a real pin header/socket); None for irregular layouts. This is
+    the self-gate that keeps proprietary connectors out of the generic resolver."""
+    cs = [(round(float(m.group(1)), 2), round(float(m.group(2)), 2))
+          for chunk in txt.split("(pad ")[1:]
+          for m in [_PAD_AT.search(chunk)] if m]
+    if len(cs) < 2:
+        return None
+    xs = sorted({x for x, _ in cs})
+    ys = sorted({y for _, y in cs})
+    if len(xs) * len(ys) != len(cs):     # not a full rectangular grid
+        return None
+
+    def uniform(vals):
+        if len(vals) < 2:
+            return None
+        ds = {round(vals[i + 1] - vals[i], 2) for i in range(len(vals) - 1)}
+        return next(iter(ds)) if len(ds) == 1 else None
+
+    if len(xs) >= len(ys):
+        perrow, rows, p = len(xs), len(ys), uniform(xs)
+    else:
+        perrow, rows, p = len(ys), len(xs), uniform(ys)
+    return (len(cs), rows, perrow, p) if p else None
+
+
 def run(table: str, dry_run: bool) -> int:
     con = sqlite3.connect(ROOT / "db" / "terra.db")
     # footprint -> Counter of (package, pin_count) by part count
     fp_variants: dict[str, Counter] = {}
     fp_parts: Counter = Counter()
-    for fpref, pkg, pin in con.execute(
-        f"SELECT kicad_footprint, package, pin_count FROM {table} "
+    fp_desc: dict[str, Counter] = {}      # footprint -> description frequencies
+    for fpref, pkg, pin, desc in con.execute(
+        f"SELECT kicad_footprint, package, pin_count, description FROM {table} "
         "WHERE kicad_footprint LIKE '%:%'"
     ):
         try:
@@ -99,6 +127,7 @@ def run(table: str, dry_run: bool) -> int:
         except (TypeError, ValueError):
             pin_i = None
         fp_variants.setdefault(fpref, Counter())[((pkg or "").strip(), pin_i)] += 1
+        fp_desc.setdefault(fpref, Counter())[(desc or "").strip()] += 1
         fp_parts[fpref] += 1
 
     rewritten = no_model_line = missing_file = 0
@@ -130,6 +159,16 @@ def run(table: str, dry_run: bool) -> int:
                                           orientation=ori, leads=leads)
             if fref:
                 ref_weight[fref] = fp_parts[fpref]
+        if not ref_weight:
+            # connectors: description series + footprint grid geometry.
+            desc = fp_desc[fpref].most_common(1)[0][0]
+            g = grid_geometry(txt)
+            cref = resolve_connector(
+                desc, pins=(g[0] if g else None), rows=(g[1] if g else None),
+                perrow=(g[2] if g else None), pitch_mm=(g[3] if g else None),
+                orientation=ori)
+            if cref:
+                ref_weight[cref] = fp_parts[fpref]
         if not ref_weight:                        # still nothing maps
             single = len(variants) == 1
             for (pkg, _), count in variants.items():

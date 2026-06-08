@@ -3623,9 +3623,9 @@
 		(uuid "7359887a-cc24-45ee-ae40-ab0cbd6c9506")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/MOLEX_90130-1124.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x12_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00005 0.0001 0)
+			(xyz -1.27 13.97 0)
 		)
 		(scale
 			(xyz 1 1 1)

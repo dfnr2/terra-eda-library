@@ -3515,7 +3515,7 @@
 		(uuid "1bd03e1a-c26d-47cb-a4e6-c8c24fbd96bc")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/CERDIP40-600_WINDOW.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x20_P2.54mm_Vertical.step"
 		(offset
 			(xyz 0.0501 0.05005 0)
 		)

@@ -6083,9 +6083,9 @@
 		(uuid "b1056475-23ed-4c81-8fb9-bd099e4afc13")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/TYCO_5530843-5.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_2x25_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00005 0.00007 0)
+			(xyz 1.27 30.48 0)
 		)
 		(scale
 			(xyz 1 1 1)

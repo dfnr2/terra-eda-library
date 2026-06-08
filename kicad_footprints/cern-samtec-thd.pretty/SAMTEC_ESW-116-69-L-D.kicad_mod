@@ -3414,9 +3414,9 @@
 		(uuid "44570f49-5b12-446f-8699-7b0ae2f6f8c6")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/SAMTEC_ESW-116-69-L-D.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_2x16_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00012 0.00009 0)
+			(xyz 1.27 19.05 0)
 		)
 		(scale
 			(xyz 1 1 1)

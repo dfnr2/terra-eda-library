@@ -998,9 +998,9 @@
 		(uuid "0f12099b-e734-4898-9d1e-9239448cf32d")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/SAMTEC_SSW-105-01-L-S.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_1x05_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00008 0.00008 0)
+			(xyz 0 5.08 0)
 		)
 		(scale
 			(xyz 1 1 1)

@@ -1847,9 +1847,9 @@
 		)
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/TYCO_1932144-1.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_Dsub.3dshapes/DSUB-15_Socket_Horizontal_P2.77x2.84mm_EdgePinOffset14.56mm_Housed_MountingHolesOffset15.98mm.step"
 		(offset
-			(xyz 0.00016 0.0001 0)
+			(xyz 9.811 1.336 0)
 		)
 		(scale
 			(xyz 1 1 1)

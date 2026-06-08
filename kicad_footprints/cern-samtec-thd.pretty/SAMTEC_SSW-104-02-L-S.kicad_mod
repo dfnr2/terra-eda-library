@@ -869,7 +869,7 @@
 		(uuid "0c55a52f-14da-44ec-8647-20ede211ef2d")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/SAMTEC_SSW-104-02-L-S.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_0402_1005Metric.step"
 		(offset
 			(xyz 0.00008 0.00008 0)
 		)

@@ -632,9 +632,9 @@
 		(uuid "9f44397f-a776-42d4-9798-f63f8aca89c9")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/MINI-CIRCUITS_CD636.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x03_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00006 0.00005 0)
+			(xyz -1.27 2.54 0)
 		)
 		(scale
 			(xyz 1 1 1)

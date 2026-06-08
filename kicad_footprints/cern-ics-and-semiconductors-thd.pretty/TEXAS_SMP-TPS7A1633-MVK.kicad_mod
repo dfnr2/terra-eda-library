@@ -3058,9 +3058,9 @@
 		(uuid "8b2e29e9-1669-435d-839d-c3bb9d0d8478")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/TEXAS_SMP-TPS7A1633-MVK.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x06_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00009 0.00005 0)
+			(xyz -1.27 6.35 0)
 		)
 		(scale
 			(xyz 1 1 1)

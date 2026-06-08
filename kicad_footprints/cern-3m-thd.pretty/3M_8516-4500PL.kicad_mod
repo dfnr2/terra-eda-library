@@ -3386,9 +3386,9 @@
 		(uuid "b349cf2e-798c-4d81-9a72-3dafd31efea4")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/3M_8516-4500PL.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_2x08_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00005 0.0001 0)
+			(xyz 1.27 8.89 0)
 		)
 		(scale
 			(xyz 1 1 1)

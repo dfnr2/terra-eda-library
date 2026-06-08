@@ -3974,9 +3974,9 @@
 		(uuid "dfa0e158-9595-4d65-b32b-df8cc7be4284")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/HARWIN_M50-3121042.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinSocket_1.27mm.3dshapes/PinSocket_2x10_P1.27mm_Vertical.step"
 		(offset
-			(xyz 0.0001 0.00012 0)
+			(xyz 0.635 5.715 0)
 		)
 		(scale
 			(xyz 1 1 1)
