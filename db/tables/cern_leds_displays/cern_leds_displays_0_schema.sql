@@ -42,6 +42,12 @@ CREATE TABLE cern_leds_displays (
     pin_count TEXT,
     component_height TEXT,
 
-    -- LED-specific tail
-    color TEXT
+    -- LED-specific tail. color/wavelength_nm are populated from CERN data;
+    -- luminous_intensity/forward_voltage_v/current_max_ma are not in the CERN
+    -- database (datasheet parameters) and are filled by the datasheet sweep.
+    color TEXT,
+    wavelength_nm TEXT,
+    luminous_intensity TEXT,
+    forward_voltage_v TEXT,
+    current_max_ma TEXT
 );

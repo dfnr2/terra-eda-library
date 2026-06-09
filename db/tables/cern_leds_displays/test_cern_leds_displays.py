@@ -37,13 +37,25 @@ def test_known_part_mapping():
     assert r["kicad_footprint"] == "cern-ics-and-semiconductors-smd:LED_DIALIGHT_597-3301-507F"
 
 
-def test_color_values_sane():
-    """color is a colour word from the symbol (or blank); never a pinout token."""
+def test_color_from_cern_column():
+    """color comes from CERN's Color column (e.g. Green, Red/Green/Blue, '3x Red/Green'),
+    falling back to the symbol name; most parts are coloured."""
     con = _con()
     assert con.execute(
         "SELECT COUNT(*) FROM cern_leds_displays WHERE color='Green'").fetchone()[0] > 0
+    assert con.execute(
+        "SELECT COUNT(*) FROM cern_leds_displays WHERE color != ''").fetchone()[0] > 400
+
+
+def test_wavelength_parsed_from_description():
+    """wavelength_nm is parsed where the description states it (e.g. '590nm' -> 590);
+    blank otherwise. The other parametric columns are datasheet-sourced (blank now)."""
+    con = _con()
+    assert con.execute(
+        "SELECT COUNT(*) FROM cern_leds_displays WHERE wavelength_nm != ''").fetchone()[0] > 0
     bad = con.execute(
-        "SELECT COUNT(*) FROM cern_leds_displays WHERE color GLOB '*[0-9]*'").fetchone()[0]
+        "SELECT COUNT(*) FROM cern_leds_displays WHERE wavelength_nm != '' "
+        "AND wavelength_nm NOT GLOB '[0-9]*'").fetchone()[0]
     assert bad == 0
 
 

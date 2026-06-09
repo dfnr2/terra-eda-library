@@ -11,10 +11,14 @@ Source: CERN `LEDs & Displays` (514 parts). Generated via `tools/cern_import.gen
 - [ ] MPN matches the datasheet; `color` matches; `package`/`pin_count` match.
 - [ ] `kicad_symbol` and `kicad_footprint` render in KiCad.
 
-## tail derivation (color)
-- [ ] `color` is a colour word parsed from the symbol name (Green 107, Red 87, Yellow 49,
-      Blue 48, Red-Green 25, …); blank (176) for light pipes, bargraphs, 7-segment without a
-      colour word, and device-named symbols. Confirm acceptable.
+## tail derivation (color, wavelength_nm, + datasheet params)
+- [ ] `color` comes from CERN's dedicated `Color` column (Green/Red/Blue/Yellow/Red-Green/
+      Red/Green/Blue/'3x Red/Green'/…), falling back to the symbol name where the column is
+      blank — 442/514 coloured.
+- [ ] `wavelength_nm` parsed from the description where stated ("590nm"→590) — 16 parts.
+- [ ] `luminous_intensity`, `forward_voltage_v`, `current_max_ma`: **not in the CERN
+      database** (datasheet parameters). Columns added; blank now, to be filled by the
+      datasheet sweep. Confirm the column names/units.
 
 ## 3D model coverage
 - [ ] 222/514 (43%). Chip LEDs at 0402/0603 map to KiCad diode chip models (D_0402/0603 —
