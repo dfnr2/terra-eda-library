@@ -640,3 +640,63 @@ def test_parts_id_no_json_booleans_over_wire(client):
                 assert_no_bools(v)
 
     assert_no_bools(parsed)
+
+
+# --------------------------------------------------------------------------- #
+# Display-column selection (legacy tables whose first field is unhelpful)
+# --------------------------------------------------------------------------- #
+
+_DIODES_DBL = {
+    "libraries": [
+        {
+            "name": "Diodes",
+            "table": "diodes_v",
+            "key": "unique_id",
+            "symbols": "kicad_symbol",
+            "footprints": "kicad_footprint",
+            "fields": [
+                # allow_substitution is FIRST — must NOT be chosen as the name prefix.
+                {"column": "allow_substitution", "name": "Allow Substitution", "visible_in_chooser": True},
+                {"column": "description", "name": "Description", "visible_in_chooser": True},
+                {"column": "mpn", "name": "Manufacturer PN", "visible_in_chooser": True},
+                {"column": "kicad_symbol", "name": "Symbol", "visible_in_chooser": False},
+                {"column": "kicad_footprint", "name": "Footprint", "visible_in_chooser": True},
+            ],
+        }
+    ]
+}
+
+
+def test_load_spec_prefers_mpn_over_unhelpful_first_field(tmp_path):
+    dbl = tmp_path / "diodes.kicad_dbl"
+    dbl.write_text(json.dumps(_DIODES_DBL))
+    s = load_spec(str(dbl))[0]
+    assert s["display_col"] == "mpn"           # not "allow_substitution"
+    assert s["desc_col"] == "description"
+
+
+def test_category_listing_uses_mpn_name_and_includes_description(tmp_path):
+    db = tmp_path / "diodes.db"
+    conn = sqlite3.connect(str(db))
+    conn.execute(
+        "CREATE TABLE diodes (unique_id TEXT, allow_substitution TEXT, description TEXT,"
+        " mpn TEXT, kicad_symbol TEXT, kicad_footprint TEXT, tier INTEGER)"
+    )
+    conn.execute(
+        "INSERT INTO diodes VALUES ('Diodes-MMBD914-7-F','Yes','Fast switching diode',"
+        "'MMBD914-7-F','Diode:D','SOT:SOT-23',0)"
+    )
+    conn.commit()
+    conn.close()
+    dbl = tmp_path / "diodes.kicad_dbl"
+    dbl.write_text(json.dumps(_DIODES_DBL))
+
+    c = TestClient(create_app(str(db), str(dbl)))
+    parts = c.get("/v1/parts/category/diodes.json").json()
+    assert len(parts) == 1
+    part = parts[0]
+    # name prefix is the MPN, not the "Yes" allow_substitution value
+    assert part["name"].startswith("MMBD914-7-F_")
+    assert not part["name"].startswith("Yes_")
+    # description surfaced in the listing
+    assert part["description"] == "Fast switching diode"

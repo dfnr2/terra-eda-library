@@ -47,14 +47,24 @@ def load_spec(dbl_path: str | Path) -> list[dict]:
         symbols = lib["symbols"]
         footprints = lib["footprints"]
 
-        # The display column is the first field whose column is neither the
-        # symbol nor the footprint column, so the chooser name reflects real
-        # part data rather than the library asset references.
+        # The display column drives the human-readable name prefix. Prefer the
+        # manufacturer part number, then a value, because some legacy tables list
+        # an unhelpful column (e.g. allow_substitution -> "Yes") as their first
+        # field. Fall back to the first non-asset field, then the key.
+        field_cols = [
+            f["column"] for f in lib["fields"] if f["column"] not in (symbols, footprints)
+        ]
         display_col = None
-        for field in lib["fields"]:
-            if field["column"] not in (symbols, footprints):
-                display_col = field["column"]
+        for preferred in ("mpn", "value"):
+            if preferred in field_cols:
+                display_col = preferred
                 break
+        if display_col is None:
+            display_col = field_cols[0] if field_cols else None
+
+        # Optional description column, surfaced in the category listing so KiCad
+        # shows a meaningful description in the chooser.
+        desc_col = "description" if "description" in field_cols else None
 
         specs.append(
             {
@@ -65,6 +75,7 @@ def load_spec(dbl_path: str | Path) -> list[dict]:
                 "symbols": symbols,
                 "footprints": footprints,
                 "display_col": display_col,
+                "desc_col": desc_col,
                 "fields": lib["fields"],
             }
         )
@@ -187,7 +198,12 @@ def create_app(db_path: str, dbl_path: str, tier: int = 2):
         for row in rows:
             uid = row[spec["key"]]
             pid = part_id(uid)
-            result.append({"id": pid, "name": build_name(display_value(row, spec), pid)})
+            entry = {"id": pid, "name": build_name(display_value(row, spec), pid)}
+            if spec["desc_col"]:
+                desc = row[spec["desc_col"]]
+                if desc:
+                    entry["description"] = str(desc)
+            result.append(entry)
         return result
 
     @app.get("/v1/parts/{pid}.json")
