@@ -216,6 +216,8 @@ db/terra.db: $(GLOBAL_SQL) $(foreach table,$(TABLES),$($(table)_ALL_SQL))
 	done
 	@echo "  Re-tiering static/curated tables to tier 0..."
 	@$(PYTHON) tools/retier_static.py $@ $(PARAMETRIC_TIER_TABLES)
+	@echo "  Resolving cross-table duplicate unique_ids..."
+	@$(PYTHON) tools/dedup_cross_table.py $@
 	@echo "  Inserting default config (tier=$(DEFAULT_TIER), no active tags)..."
 	@sqlite3 $@ "INSERT OR IGNORE INTO terra_tier_config VALUES ($(DEFAULT_TIER));"
 	@echo "  Creating tier indexes..."
