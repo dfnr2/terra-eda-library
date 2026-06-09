@@ -12,8 +12,9 @@ field/library spec source — see below)
 KiCad loads the terra database library slowly. The `.kicad_dbl`/ODBC path
 materializes the whole catalog up front. KiCad's HTTP library (KiCad 8+) loads
 lazily — enumerate categories, fetch a category's part list on expand, fetch full
-part data only on selection — and caches by `max_age`. Moving to a local HTTP
-server over the *same* SQLite gets that lazy behavior at localhost latency.
+part data only on selection — and caches per the `timeout_parts_seconds` /
+`timeout_categories_seconds` TTLs. Moving to a local HTTP server over the *same*
+SQLite gets that lazy behavior at localhost latency.
 
 The symbol and footprint **graphics do not move**. HTTP libraries, like database
 libraries, only supply part *metadata* and reference symbols/footprints by
@@ -90,22 +91,32 @@ Contract details that drive the serializer:
   `"Library:FootprintName"`. KiCad lower-cases field names when applying built-ins,
   so any generic field also named `Footprint` collides with this canonical key
   (see "footprint/symbol columns" below).
-- **`id` is an opaque, URL-safe surrogate — NOT `unique_id`.** Two reasons,
-  both verified against `db/terra.db`:
-  - `unique_id` (mfr-mpn) is **not globally unique**: 5 cross-table collisions
-    exist (e.g. `SAMTEC-CES-110-01-T-S` in both `cern_samtec` and `cern_sockets`).
-    A global `unique_id → table` index would be ambiguous.
-  - `unique_id` values contain spaces, dots, and slashes (e.g.
-    `MURATA POWER SOLUTIONS-OKI-78SR-3.3/1.5-W36H-C`) — unusable as a URL path
-    segment in `/v1/parts/{id}.json`.
+- **`id` must be globally unique, URL-safe, AND stable across DB rebuilds.** The
+  third requirement is the load-bearing one: KiCad stores the part `id` in the
+  schematic as the placed symbol's identifier and feeds it back on *Update Symbols
+  from Library* (KiCad DB-library docs: the unique-ID column "is used as the
+  identifier for a symbol placed from that table"). An id that changes on `make`
+  regenerate would orphan every placed terra part at the next update. So the id
+  must be a **pure function of stable source identity**, never of storage position.
+  - This rules out `rowid` (insertion-order; renumbers when parts are added/removed
+    or generator order changes).
+  - It also rules out raw `unique_id` directly: not globally unique (5 cross-table
+    collisions, e.g. `SAMTEC-CES-110-01-T-S` in both `cern_samtec` and
+    `cern_sockets`) and not URL-safe (values contain spaces, dots, slashes, e.g.
+    `MURATA POWER SOLUTIONS-OKI-78SR-3.3/1.5-W36H-C`).
 
-  v1 id = **`{table}:{rowid}`** (SQLite integer `rowid`): table-namespaced so it is
-  globally unique, integer-tailed so it is URL- and route-safe (no spaces, dots, or
-  slashes). The server resolves `{table}:{rowid}` directly — no global index, no
-  collision. The real MPN/`unique_id` still appears in the part's `fields`.
-  `rowid` is not stable across DB rebuilds, which is acceptable: KiCad copies a
-  placed part's symbol+fields into the schematic, so browse-time ids need not
-  survive a regenerate.
+  **v1 id = a deterministic hash of `unique_id`** (e.g. first 16 hex chars of
+  `sha1(unique_id)`). Stable (pure function of the part's MPN identity), globally
+  unique (given the build invariant below), and URL-safe (hex). The id is opaque
+  plumbing; the real MPN stays in the part's `fields`. The server builds a
+  `hash → (table, rowid)` map once at startup to resolve `/v1/parts/{id}.json`.
+
+  **Build invariant (the actual stability guarantee):** the regenerate asserts that
+  `unique_id` is non-null and **globally unique across all base tables**, failing
+  loudly otherwise — so ids can never silently shift or merge. The 5 current
+  cross-table duplicates must be resolved to satisfy this (they are the *same*
+  physical part cross-listed; collapsing each to a single canonical row/category is
+  the correct model, not a workaround). Exact resolution of the 5 is a plan item.
 - **Auth:** KiCad sends `Authorization: Token <token>`. v1 binds `127.0.0.1` and
   ignores the header.
 
@@ -142,20 +153,22 @@ larger values are exactly what speeds up chooser open for static data):
   `_v` suffix (or maps view→base via a known rule) to read all parts. Verified: all
   44 dbl libraries have a resolvable base table in `db/terra.db`. Document the exact
   rule in the plan.
-- **Part id = `{table}:{rowid}`** (see contract). No global index, no collision
-  handling — the table is embedded in the id, so `/v1/parts/{id}.json` resolves with
-  one `SELECT ... WHERE rowid = ?` against the named table.
+- **Part id = `hash(unique_id)`** (see contract). At startup the server scans every
+  base table's `unique_id` column and builds a `hash → (table, rowid)` map; the
+  build invariant guarantees this map is 1:1. A duplicate hash discovered at startup
+  is a hard error (means the invariant was bypassed).
 - **Endpoints:**
   - `/v1/` (root): return `{"categories": "v1/categories.json", "parts": "v1/parts"}`
     (KiCad validates only that the keys exist).
   - `categories.json`: one entry per dbl library — `id` = base table name,
     `name` = library `name`, `description` = `""` (or library description if present).
-  - `parts/category/{id}.json`: `SELECT rowid, <name col> FROM <table>`, emit
-    `{id: f"{table}:{rowid}", name: <name col>}`.
+  - `parts/category/{id}.json`: `SELECT unique_id, <name col> FROM <table>`, emit
+    `{id: hash(unique_id), name: <name col>}`.
     **Name column:** the library's designated display field, defaulting to the
     first non-reserved `fields[]` entry (typically `Manufacturer PN`), falling back
     to `unique_id`.
-  - `parts/{id}.json`: split `{table}:{rowid}`, fetch the row by `rowid`, then:
+  - `parts/{id}.json`: resolve `id → (table, rowid)` via the startup map, fetch the
+    row, then:
     - `symbolIdStr` ← row[symbols column]
     - `fields.footprint` ← `{value: row[footprints column],
       visible: <Footprint field's visible_in_chooser>}` (omit if null/empty)
@@ -187,14 +200,16 @@ Expose the server as a `terra-server` console script via `pyproject.toml`.
 
 ### 4. Tests (`tests/`)
 
-Pytest against a small fixture DB (a few rows across 2-3 tables, **including a
-deliberate cross-table `unique_id` duplicate** to lock in the surrogate-id fix)
-using FastAPI's `TestClient`:
+Pytest against a small fixture DB (a few rows across 2-3 tables) using FastAPI's
+`TestClient`:
 
 - `/v1/` root returns a dict containing both `categories` and `parts` keys.
 - `categories.json` returns the expected set, correct shape.
-- `parts/category/{id}.json` returns `{id, name}` pairs; every `id` matches the
-  `{table}:{rowid}` form.
+- `parts/category/{id}.json` returns `{id, name}` pairs; every `id` equals
+  `hash(unique_id)` for its row.
+- **id stability:** the id for a fixture row equals the hash of its `unique_id` and
+  does **not** change if the row is re-inserted at a different position (guards
+  against any rowid/order dependence creeping back in).
 - `parts/{id}.json` for a known part:
   - `symbolIdStr` matches the symbols-column value,
   - `fields.footprint.value` matches the footprints-column value,
@@ -202,8 +217,9 @@ using FastAPI's `TestClient`:
     and **no `Symbol` field** (symbol/footprint columns are skipped),
   - every boolean is a JSON string, not a JSON boolean,
   - a `visible_in_chooser: false` field serializes `visible: "false"`.
-- A part whose `unique_id` collides across two tables resolves to the correct row
-  via its `{table}:{rowid}` id (no ambiguity).
+- **Build invariant:** a fixture with a duplicate/null `unique_id` makes the
+  uniqueness check fail loudly (and the server's startup map build raises on a
+  duplicate hash).
 - Unknown id → 404; unknown category → 404 or empty list (match KiCad's tolerance).
 - **Generated `terra.kicad_httplib` schema:** asserts `source.type == "REST_API"`,
   `api_version == "v1"`, and that `timeout_parts_seconds` /
@@ -224,10 +240,9 @@ KiCad  ← terra.kicad_httplib (generated)
 ## Error handling
 
 - DB missing / unreadable at startup → exit non-zero with a clear message.
-- Malformed part id (not `{table}:{rowid}`, unknown table, or non-integer rowid)
-  → HTTP 404. (The surrogate-id scheme removes the cross-table collision failure
-  mode entirely — no global index to collide.)
-- Unknown part id → HTTP 404. Unknown category id → HTTP 404.
+- Duplicate `unique_id` hash while building the startup map → exit non-zero (the
+  build invariant should have prevented this; fail rather than serve ambiguous ids).
+- Unknown part id (hash not in the map) → HTTP 404. Unknown category id → HTTP 404.
 - Null/empty cell values → omit that field rather than emitting `"None"`.
 - Server not running → KiCad shows empty libraries; acceptable for v1 (an offline
   `.kicad_dbl` fallback is a deferred consideration noted in `fastload.org`).
@@ -238,7 +253,35 @@ KiCad  ← terra.kicad_httplib (generated)
   libraries; confirm no edge cases where the base name differs).
 - Per-library "name column" choice (default-to-first-non-reserved-field may be wrong
   for some tables; confirm during the port).
-- Confirm KiCad tolerates a `{table}:{rowid}` id containing a colon in the
-  `/v1/parts/{id}.json` path (expected fine — colon is a valid path char; rowid is
-  integer so no dot/slash ambiguity with the `.json` suffix). Validate end-to-end in
-  a real KiCad before declaring v1 done.
+- Exact resolution of the 5 cross-table `unique_id` duplicates (assign each to one
+  canonical category, vs. list one id under multiple categories). v1 leans toward
+  single canonical category for a clean 1:1 map; confirm none of the 5 must remain
+  visible in both categories.
+- Hash choice (algorithm + truncation length) — verify no collisions across the full
+  ~11k `unique_id` set at the chosen length; `sha1`-16-hex has ample headroom.
+- Validate end-to-end in a real KiCad: place a part, regenerate the DB, then run
+  *Update Symbols from Library* and confirm the placed part still re-resolves by id
+  (the whole point of the stable-id design).
+
+## Future direction (v2) — part-locator normalization
+
+Planned data-model change, **out of scope for v1** but recorded here because it
+determines the long-term id story:
+
+- The **part** becomes an abstract entity keyed by an internal `part_locator` UID.
+  The primary part tables **drop the manufacturer/MPN columns**.
+- A separate mapping table holds `(manufacturer, mpn, FK → part_locator)`, so one
+  `part_locator` can have **many** manufacturer/MPN rows (alternates / second
+  sources).
+
+Id consequence: in v2 the HTTP part `id` becomes `part_locator` directly — opaque,
+stable, and MPN-independent by construction (no hashing needed, and recategorization
+or MPN edits no longer touch identity).
+
+**Migration cost, accepted:** v1→v2 changes every id (from `hash(unique_id)` to
+`part_locator`), so parts placed under v1 orphan once at that major-version
+boundary. This is a deliberate trade — it's the reason v1 keeps the id scheme
+minimal (a hash) rather than over-investing. After v2, `part_locator` is the durable
+id and never changes again. The v1 build invariant (global `unique_id` uniqueness)
+is also a natural stepping stone: it's exactly the precondition for assigning one
+`part_locator` per distinct part during the v2 migration.
