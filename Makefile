@@ -17,6 +17,9 @@ VENV_MARKER := .venv/.synced
 # Default tier cutoff when no terra_config.sql exists
 DEFAULT_TIER := 2
 
+# Tables with deliberately-assigned tiers; everything else is re-tiered to 0.
+PARAMETRIC_TIER_TABLES := resistors_smt capacitors_smt
+
 # Override via command line: make TIER=3 TAGS=analog,passive
 TIER ?=
 TAGS ?=
@@ -211,6 +214,8 @@ db/terra.db: $(GLOBAL_SQL) $(foreach table,$(TABLES),$($(table)_ALL_SQL))
 			fi; \
 		fi; \
 	done
+	@echo "  Re-tiering static/curated tables to tier 0..."
+	@$(PYTHON) tools/retier_static.py $@ $(PARAMETRIC_TIER_TABLES)
 	@echo "  Inserting default config (tier=$(DEFAULT_TIER), no active tags)..."
 	@sqlite3 $@ "INSERT OR IGNORE INTO terra_tier_config VALUES ($(DEFAULT_TIER));"
 	@echo "  Creating tier indexes..."
