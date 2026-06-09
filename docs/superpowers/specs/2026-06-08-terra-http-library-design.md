@@ -113,13 +113,17 @@ Contract details that drive the serializer:
   `"Library:FootprintName"`. KiCad lower-cases field names when applying built-ins,
   so any generic field also named `Footprint` collides with this canonical key
   (see "footprint/symbol columns" below).
-- **`id` must be globally unique, URL-safe, AND stable across DB rebuilds.** The
-  third requirement is the load-bearing one: KiCad stores the part `id` in the
-  schematic as the placed symbol's identifier and feeds it back on *Update Symbols
-  from Library* (KiCad DB-library docs: the unique-ID column "is used as the
-  identifier for a symbol placed from that table"). An id that changes on `make`
-  regenerate would orphan every placed terra part at the next update. So the id
-  must be a **pure function of stable source identity**, never of storage position.
+- **`id` is KiCad's fetch/cache key, not the durable schematic handle.** For HTTP
+  libraries KiCad does **not** store `id` in the schematic — the placed symbol's
+  `LIB_ID` is `nickname:category:name` (see the `name` bullet below). `id` is only
+  the key KiCad uses to fetch a part (`/v1/parts/{id}.json`) and to organize its
+  in-memory cache, so it must be **globally unique** and **URL-safe**.
+  - **`id` must nonetheless be stable across rebuilds — transitively.** The durable
+    handle is `name`, and v1 constructs `name` to embed `id` (for uniqueness; see
+    below). So an `id` that changed on `make` regenerate would change every `name`
+    and orphan placed parts at the next *Update from Library*. The stability burden
+    lives on `name`; embedding `id` propagates it to `id`. Either way, both must be
+    a **pure function of stable source identity**, never of storage position.
   - This rules out `rowid` (insertion-order; renumbers when parts are added/removed
     or generator order changes).
   - It also rules out raw `unique_id` directly: not globally unique (5 cross-table
@@ -156,11 +160,24 @@ Contract details that drive the serializer:
     illegal-LIB_ID-character sanitization (which replaces `/`, spaces, etc. with
     `_` — itself a collision source).
 
-  v1 `name = sanitize(mpn-or-key) + "_" + id` (the `id` hash suffix makes the name's
-  uniqueness identical to `id`'s, and stable; the leading sanitized MPN keeps it
-  human-recognizable). The **pretty MPN, manufacturer, and description go in
-  `fields`** (`Manufacturer PN`, `Value`, `Description`), which is what the chooser
-  shows in columns. Fall back to `id` alone when no MPN/key is present.
+  v1 `name = sanitize(mpn-or-key) + "_" + id`, where:
+  - **`sanitize(s)`** maps every character outside the allow-list `[A-Za-z0-9._-]`
+    to `_`. That allow-list is a strict subset of KiCad's legal LIB_ID symbol-name
+    characters (KiCad rejects `/`, `:`, and whitespace and replaces them with `_`;
+    `_` `-` `.` and alphanumerics are legal). Because our output already contains
+    only legal characters, **KiCad's own `FixIllegalChars` is a no-op on it** — so
+    the name KiCad stores byte-matches the name we serve. No second normalization
+    pass, no surprise rename.
+  - **Uniqueness survives sanitization** because it is carried entirely by the
+    `_<id>` suffix (`id` is a unique, already-legal hex hash), not by the sanitized
+    prefix. Two different MPNs that sanitize to the same prefix still differ in the
+    suffix, so names stay globally unique even after any normalization.
+  - The leading sanitized MPN is only for human-recognizability; fall back to `id`
+    alone when no MPN/key is present.
+
+  The **pretty MPN, manufacturer, and description go in `fields`**
+  (`Manufacturer PN`, `Value`, `Description`), which is what the chooser shows in
+  columns.
 - **Auth:** KiCad sends `Authorization: Token <token>`. v1 binds `127.0.0.1` and
   ignores the header.
 
@@ -268,6 +285,11 @@ Pytest against a small fixture DB (a few rows across 2-3 tables) using FastAPI's
   row whose first field is `Allow Substitution`) still yields **distinct, non-empty
   `name`s**, and the `name` from `parts/category` byte-matches the `name` from
   `parts/{id}` for the same part.
+- **name normalization-safety:** every generated `name` contains only
+  `[A-Za-z0-9._-]`, and applying a KiCad-style `FixIllegalChars` (replace `/`, `:`,
+  whitespace, and any non-allow-list char with `_`) leaves it **unchanged**
+  (idempotent) — and the set of names is still fully unique after that pass. Include
+  a fixture MPN containing `/`, space, and `:` to exercise this.
 - `parts/{id}.json` for a known part:
   - `symbolIdStr` matches the symbols-column value,
   - `fields.footprint.value` matches the footprints-column value,
