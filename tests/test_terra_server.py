@@ -17,12 +17,12 @@ import sqlite3
 import pytest
 
 from tools.terra_server import (
+    assert_unique_names,
     build_id_map,
-    build_name,
     create_app,
-    display_value,
     load_spec,
     part_id,
+    part_name,
     sanitize,
     serialize_part,
 )
@@ -198,40 +198,57 @@ def test_sanitize_output_is_allow_list_only():
 
 
 # --------------------------------------------------------------------------- #
-# build_name
+# part_name
 # --------------------------------------------------------------------------- #
 
-def test_build_name_combines_sanitized_display_and_pid():
-    pid = part_id("CERN-BJT-0001")
-    assert build_name("BC847", pid) == f"BC847_{pid}"
+def test_part_name_is_sanitized_unique_id():
+    assert part_name("CERN-BJT-0001") == sanitize("CERN-BJT-0001")
+    assert part_name(SLASHED_MPN) == sanitize(SLASHED_MPN)
 
 
-def test_build_name_falls_back_to_pid_when_display_empty():
-    pid = part_id("CERN-BJT-0001")
-    assert build_name(None, pid) == pid
-    assert build_name("", pid) == pid
-
-
-def test_build_name_sanitizes_slash_in_display():
-    pid = part_id("CERN-BJT-0002")
-    name = build_name(SLASHED_MPN, pid)
-    assert name == f"{sanitize(SLASHED_MPN)}_{pid}"
-    assert "/" not in name and ":" not in name and " " not in name
-
-
-def test_build_name_is_allow_list_and_fix_illegal_is_noop():
+def test_part_name_is_allow_list_and_fix_illegal_is_noop():
     # name must contain only allow-list chars, and KiCad's FixIllegalChars is a no-op.
-    pid = part_id("CERN-BJT-0002")
-    name = build_name(SLASHED_MPN, pid)
+    name = part_name(SLASHED_MPN)
     assert ALLOWED_CHARS.fullmatch(name)
     assert _kicad_fix_illegal_chars(name) == name
 
 
-def test_build_name_unique_for_same_display_different_pid():
-    # Two rows with the same MPN still get distinct names via the pid suffix.
-    n1 = build_name("BC847", part_id("CERN-BJT-0001"))
-    n2 = build_name("BC847", part_id("CERN-BJT-9999"))
+def test_part_name_distinguishes_variant_unique_ids():
+    # The two unique_ids differ only in the variant suffix; names stay distinct.
+    n1 = part_name("ANALOG DEVICES-AD620AN")
+    n2 = part_name("ANALOG DEVICES-AD620ANZ [alt]")
+    assert n1 == "ANALOG_DEVICES-AD620AN"
+    assert n2 == "ANALOG_DEVICES-AD620ANZ__alt_"
     assert n1 != n2
+
+
+# --------------------------------------------------------------------------- #
+# assert_unique_names
+# --------------------------------------------------------------------------- #
+
+def test_assert_unique_names_raises_on_sanitize_collision(tmp_path):
+    # Two distinct unique_ids that sanitize to the same name within one table.
+    db = tmp_path / "collide.db"
+    conn = sqlite3.connect(str(db))
+    conn.execute(
+        "CREATE TABLE bjt (unique_id TEXT, mpn TEXT, value TEXT,"
+        " kicad_symbol TEXT, kicad_footprint TEXT, tier INTEGER)"
+    )
+    conn.execute("INSERT INTO bjt VALUES ('X/Y', 'A', 'v', 'Lib:S', 'Lib:F', 0)")
+    conn.execute("INSERT INTO bjt VALUES ('X Y', 'B', 'v', 'Lib:S', 'Lib:F', 0)")
+    conn.commit()
+
+    dbl = tmp_path / "collide.kicad_dbl"
+    dbl.write_text(json.dumps(_dbl_spec()))
+    cs = load_spec(str(dbl))
+    conn.row_factory = sqlite3.Row
+    with pytest.raises(ValueError):
+        assert_unique_names(conn, cs)
+    conn.close()
+
+    # create_app should also raise on the same colliding fixture.
+    with pytest.raises(ValueError):
+        create_app(str(db), str(dbl))
 
 
 # --------------------------------------------------------------------------- #
@@ -248,32 +265,11 @@ def test_load_spec_carries_key_symbols_footprints(spec):
     assert spec["footprints"] == "kicad_footprint"
 
 
-def test_load_spec_display_col_is_first_non_symbol_footprint_field(spec):
-    # First field column not equal to the symbols/footprints column -> "mpn".
-    assert spec["display_col"] == "mpn"
-
-
 def test_load_spec_name_and_fields_present(spec):
     assert spec["name"] == "Bipolar Transistors"
     # carries the field definitions
     field_cols = {f["column"] for f in spec["fields"]}
     assert {"mpn", "value", "kicad_symbol", "kicad_footprint"} <= field_cols
-
-
-# --------------------------------------------------------------------------- #
-# display_value
-# --------------------------------------------------------------------------- #
-
-def test_display_value_uses_display_col_when_truthy(spec):
-    row = {"unique_id": "CERN-BJT-0001", "mpn": "BC847"}
-    assert display_value(row, spec) == "BC847"
-
-
-def test_display_value_falls_back_to_key_when_display_empty(spec):
-    row = {"unique_id": "CERN-BJT-0004", "mpn": None}
-    assert display_value(row, spec) == "CERN-BJT-0004"
-    row2 = {"unique_id": "CERN-BJT-0004", "mpn": ""}
-    assert display_value(row2, spec) == "CERN-BJT-0004"
 
 
 # --------------------------------------------------------------------------- #
@@ -397,7 +393,7 @@ def test_serialize_part_basic_shape_and_string_booleans(spec):
     part = serialize_part(row, spec, pid)
 
     assert part["id"] == pid
-    assert part["name"] == build_name("BC847", pid)
+    assert part["name"] == sanitize("CERN-BJT-0001")
     assert part["symbolIdStr"] == "Transistor_BJT:BC847"
 
     # All booleans are STRINGS, never JSON booleans.
@@ -667,11 +663,10 @@ _DIODES_DBL = {
 }
 
 
-def test_load_spec_prefers_mpn_over_unhelpful_first_field(tmp_path):
+def test_load_spec_desc_col_is_description(tmp_path):
     dbl = tmp_path / "diodes.kicad_dbl"
     dbl.write_text(json.dumps(_DIODES_DBL))
     s = load_spec(str(dbl))[0]
-    assert s["display_col"] == "mpn"           # not "allow_substitution"
     assert s["desc_col"] == "description"
 
 
@@ -695,8 +690,7 @@ def test_category_listing_uses_mpn_name_and_includes_description(tmp_path):
     parts = c.get("/v1/parts/category/diodes.json").json()
     assert len(parts) == 1
     part = parts[0]
-    # name prefix is the MPN, not the "Yes" allow_substitution value
-    assert part["name"].startswith("MMBD914-7-F_")
-    assert not part["name"].startswith("Yes_")
+    # name is the sanitized unique_id: no mpn prefix, no hash suffix
+    assert part["name"] == "Diodes-MMBD914-7-F"
     # description surfaced in the listing
     assert part["description"] == "Fast switching diode"

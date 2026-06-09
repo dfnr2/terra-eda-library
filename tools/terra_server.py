@@ -28,11 +28,14 @@ def sanitize(s: str) -> str:
     return "".join(c if (c.isalnum() and c.isascii()) or c in "._-" else "_" for c in s)
 
 
-def build_name(display: str | None, pid: str) -> str:
-    """Compose a part display name, suffixing the stable id for uniqueness."""
-    if display:
-        return f"{sanitize(display)}_{pid}"
-    return pid
+def part_name(unique_id: str) -> str:
+    """The KiCad symbol name: the sanitized unique_id.
+
+    unique_id is globally unique and sanitizes to a name that is unique within
+    every category, so it needs no disambiguating suffix. It already carries the
+    manufacturer and the real part/variant identifier.
+    """
+    return sanitize(unique_id)
 
 
 def load_spec(dbl_path: str | Path) -> list[dict]:
@@ -47,20 +50,9 @@ def load_spec(dbl_path: str | Path) -> list[dict]:
         symbols = lib["symbols"]
         footprints = lib["footprints"]
 
-        # The display column drives the human-readable name prefix. Prefer the
-        # manufacturer part number, then a value, because some legacy tables list
-        # an unhelpful column (e.g. allow_substitution -> "Yes") as their first
-        # field. Fall back to the first non-asset field, then the key.
         field_cols = [
             f["column"] for f in lib["fields"] if f["column"] not in (symbols, footprints)
         ]
-        display_col = None
-        for preferred in ("mpn", "value"):
-            if preferred in field_cols:
-                display_col = preferred
-                break
-        if display_col is None:
-            display_col = field_cols[0] if field_cols else None
 
         # Optional description column, surfaced in the category listing so KiCad
         # shows a meaningful description in the chooser.
@@ -74,25 +66,11 @@ def load_spec(dbl_path: str | Path) -> list[dict]:
                 "key": lib["key"],
                 "symbols": symbols,
                 "footprints": footprints,
-                "display_col": display_col,
                 "desc_col": desc_col,
                 "fields": lib["fields"],
             }
         )
     return specs
-
-
-def display_value(row, spec) -> str | None:
-    """Return the part's display value, falling back to its key column.
-
-    ``row`` may be a sqlite3.Row or a dict; both support ``row[colname]``.
-    """
-    display_col = spec["display_col"]
-    if display_col:
-        value = row[display_col]
-        if value:
-            return value
-    return row[spec["key"]]
 
 
 def build_id_map(conn: sqlite3.Connection, specs: list[dict]) -> dict[str, tuple[str, str]]:
@@ -119,6 +97,24 @@ def build_id_map(conn: sqlite3.Connection, specs: list[dict]) -> dict[str, tuple
                 raise ValueError(f"hash collision for unique_id {uid}")
             id_map[pid] = (table, uid)
     return id_map
+
+
+def assert_unique_names(conn, specs) -> None:
+    """Fail loudly if sanitize(unique_id) is not unique within a category.
+
+    Names are the LIB_ID handle KiCad keys on; a collision would silently shadow
+    a part. unique_id is globally unique, so this only trips if two unique_ids
+    sanitize to the same string within one table.
+    """
+    for spec in specs:
+        seen = {}
+        for (uid,) in conn.execute(f'SELECT "{spec["key"]}" FROM "{spec["base_table"]}"'):
+            nm = part_name(uid)
+            if nm in seen:
+                raise ValueError(
+                    f"name collision in {spec['base_table']}: {uid!r} and {seen[nm]!r} -> {nm!r}"
+                )
+            seen[nm] = uid
 
 
 def serialize_part(row, spec, pid: str) -> dict:
@@ -151,7 +147,7 @@ def serialize_part(row, spec, pid: str) -> dict:
 
     return {
         "id": pid,
-        "name": build_name(display_value(row, spec), pid),
+        "name": part_name(row[spec["key"]]),
         "symbolIdStr": str(row[spec["symbols"]] or ""),
         "exclude_from_bom": "false",
         "exclude_from_board": "false",
@@ -169,6 +165,7 @@ def create_app(db_path: str, dbl_path: str, tier: int = 2):
 
     specs = load_spec(dbl_path)
     id_map = build_id_map(conn, specs)
+    assert_unique_names(conn, specs)
     specs_by_category = {spec["category_id"]: spec for spec in specs}
 
     app = FastAPI()
@@ -198,7 +195,7 @@ def create_app(db_path: str, dbl_path: str, tier: int = 2):
         for row in rows:
             uid = row[spec["key"]]
             pid = part_id(uid)
-            entry = {"id": pid, "name": build_name(display_value(row, spec), pid)}
+            entry = {"id": pid, "name": part_name(uid)}
             if spec["desc_col"]:
                 desc = row[spec["desc_col"]]
                 if desc:
