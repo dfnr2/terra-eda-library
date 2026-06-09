@@ -97,6 +97,13 @@ the next step is the **subcategory splitter** (by package, etc.) for the generat
 tables — which is also what would eventually let the tier cutoff be raised or
 dropped. Until measured, keep the flat-with-cutoff shape.
 
+**End-state intent (not v1):** the tier cutoff is a temporary v1 stopgap. The target
+is **every part visible but still fast**, achieved by organizing the catalog into
+fine-grained categories (the splitter), at which point the default cutoff is relaxed
+or removed entirely. v1 hides the parametric tails only because the flat categories
+can't yet stay small; nothing about the design treats those parts as permanently
+hidden.
+
 ## KiCad HTTP Library v1 contract (authoritative)
 
 Source: KiCad developer docs, "HTTP Libraries"; verified against a known-good
