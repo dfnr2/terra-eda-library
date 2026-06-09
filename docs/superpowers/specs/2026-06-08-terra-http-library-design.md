@@ -344,8 +344,9 @@ KiCad  ← terra.kicad_httplib (generated)
   `unique_id` set (**41,050 distinct** of 41,055 rows; the 5-row gap is the
   cross-table dups) at the chosen length; `sha1`-16-hex has ample headroom.
 - Validate end-to-end in a real KiCad: place a part, regenerate the DB, then run
-  *Update Symbols from Library* and confirm the placed part still re-resolves by id
-  (the whole point of the stable-id design).
+  *Update Symbols from Library* and confirm the placed part still re-resolves by its
+  generated `name` (the LIB_ID handle, which embeds the stable `id`) — the whole
+  point of the stable-name/id design.
 
 ## Future direction (v2) — part-locator normalization
 
@@ -362,8 +363,9 @@ Id consequence: in v2 the HTTP part `id` becomes `part_locator` directly — opa
 stable, and MPN-independent by construction (no hashing needed, and recategorization
 or MPN edits no longer touch identity).
 
-**Migration cost, accepted:** v1→v2 changes every id (from `hash(unique_id)` to
-`part_locator`), so parts placed under v1 orphan once at that major-version
+**Migration cost, accepted:** v1→v2 changes every generated `name`, because the
+embedded `id` changes (from `hash(unique_id)` to `part_locator`). Since `name` is the
+durable LIB_ID handle, parts placed under v1 orphan once at that major-version
 boundary. This is a deliberate trade — it's the reason v1 keeps the id scheme
 minimal (a hash) rather than over-investing. After v2, `part_locator` is the durable
 id and never changes again. The v1 build invariant (global `unique_id` uniqueness)
