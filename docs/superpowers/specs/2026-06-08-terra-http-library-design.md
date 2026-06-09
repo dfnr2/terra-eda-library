@@ -48,10 +48,29 @@ libraries, only supply part *metadata* and reference symbols/footprints by
 
 ### Deferred decision, validated empirically after v1
 
-Ship flat, then benchmark the largest categories — **Regulators (~1056)**,
-**SAMTEC (~1363)** — to measure KiCad's per-part fetch (N+1) behavior on category
-expand/selection. Build the subcategory splitter only if the numbers require it.
-This answers the `fastload.org` open question with real data.
+Ship flat, then benchmark the **actual** largest categories. Because v1 reads base
+tables (all rows, no tier filter), the giants are the generated tables, not the CERN
+ones — verified counts in `db/terra.db`:
+
+| table | rows |
+|---|---|
+| `resistors_smt` | **22,539** |
+| `capacitors_smt` | 4,863 |
+| `cern_analog_interface` | 2,199 |
+| `cern_op_amps` | 1,569 |
+| `cern_samtec` | 1,363 |
+| `cern_regulators` | 1,056 |
+
+(~41,000 parts total across 44 tables.) Benchmark `resistors_smt` and
+`capacitors_smt` **first** — a 22.5k flat category is the real stress case, far
+beyond the earlier (stale) Regulators/SAMTEC estimate.
+
+**Risk to the flat decision:** today the `.kicad_dbl` reads the *tier-filtered* `*_v`
+views, so KiCad currently never sees all 22.5k resistors. v1 deliberately drops that
+filter (HTTP lazy loading is meant to replace it). If a single 22.5k flat category
+proves too slow on category expand, the fallback for **just the generated tables**
+is to either retain a tier/parametric filter or pull the subcategory splitter
+forward — decided by the benchmark, not guessed now.
 
 ## KiCad HTTP Library v1 contract (authoritative)
 
@@ -60,7 +79,7 @@ Source: KiCad developer docs, "HTTP Libraries"; verified against a known-good
 
 | Endpoint | Returns |
 |---|---|
-| `GET /v1/` (root) | `{ "categories": "...", "parts": "..." }` — **only keys are validated**; values may be blank. KiCad hits this first to validate the connection before syncing. |
+| `GET /v1/` (root) | `{ "categories": "...", "parts": "..." }` — both keys required **with non-empty values** (KiCad checks `!.empty()` on each). KiCad hits this first to validate the connection before syncing. |
 | `GET /v1/categories.json` | `[{ "id", "name", "description" }]` |
 | `GET /v1/parts/category/{id}.json` | `[{ "id", "name"?, "description"? }]` (cheap: id/name only) |
 | `GET /v1/parts/{id}.json` | full part object (below) |
@@ -117,6 +136,27 @@ Contract details that drive the serializer:
   cross-table duplicates must be resolved to satisfy this (they are the *same*
   physical part cross-listed; collapsing each to a single canonical row/category is
   the correct model, not a workaround). Exact resolution of the 5 is a plan item.
+
+- **`name` is NOT a display label — it is the symbol's identity, and the durable
+  schematic handle.** Verified in KiCad source (`sch_io_http_lib.cpp`):
+  `wxString libIDString( part.name ); … symbol->SetName(...)` — `part.name` becomes
+  the LIB_SYMBOL name and the placed symbol's `LIB_ID` is
+  `nickname:category:name`. Consequences:
+  - **Duplicate names overwrite each other** during category enumeration — the
+    shadowed parts become unplaceable. Using the obvious display field (MPN) as
+    `name` is unsafe: `db/terra.db` has **3,227 within-table duplicate MPNs**, and
+    legacy generated tables whose first field is `Allow Substitution` would name
+    every row `"Yes"`/`"No"`. So `name` must be **globally unique**.
+  - It is the handle KiCad stores in the schematic and re-resolves on *Update from
+    Library*, so it must also be **stable across rebuilds** and survive KiCad's
+    illegal-LIB_ID-character sanitization (which replaces `/`, spaces, etc. with
+    `_` — itself a collision source).
+
+  v1 `name = sanitize(mpn-or-key) + "_" + id` (the `id` hash suffix makes the name's
+  uniqueness identical to `id`'s, and stable; the leading sanitized MPN keeps it
+  human-recognizable). The **pretty MPN, manufacturer, and description go in
+  `fields`** (`Manufacturer PN`, `Value`, `Description`), which is what the chooser
+  shows in columns. Fall back to `id` alone when no MPN/key is present.
 - **Auth:** KiCad sends `Authorization: Token <token>`. v1 binds `127.0.0.1` and
   ignores the header.
 
@@ -159,16 +199,17 @@ larger values are exactly what speeds up chooser open for static data):
   is a hard error (means the invariant was bypassed).
 - **Endpoints:**
   - `/v1/` (root): return `{"categories": "v1/categories.json", "parts": "v1/parts"}`
-    (KiCad validates only that the keys exist).
+    — both values **non-empty** (KiCad checks `!.empty()` on each, not just key
+    presence).
   - `categories.json`: one entry per dbl library — `id` = base table name,
     `name` = library `name`, `description` = `""` (or library description if present).
-  - `parts/category/{id}.json`: `SELECT unique_id, <name col> FROM <table>`, emit
-    `{id: hash(unique_id), name: <name col>}`.
-    **Name column:** the library's designated display field, defaulting to the
-    first non-reserved `fields[]` entry (typically `Manufacturer PN`), falling back
-    to `unique_id`.
+  - `parts/category/{id}.json`: `SELECT unique_id, <display col> FROM <table>`, emit
+    `{id: hash(unique_id), name: sanitize(<display col>) + "_" + id}` (see the `name`
+    contract bullet — `name` must be globally unique, not the raw display field).
   - `parts/{id}.json`: resolve `id → (table, rowid)` via the startup map, fetch the
     row, then:
+    - `name` ← `sanitize(mpn-or-key) + "_" + id` — **must byte-match** the `name`
+      returned by the category listing for the same part (KiCad keys on it).
     - `symbolIdStr` ← row[symbols column]
     - `fields.footprint` ← `{value: row[footprints column],
       visible: <Footprint field's visible_in_chooser>}` (omit if null/empty)
@@ -203,13 +244,18 @@ Expose the server as a `terra-server` console script via `pyproject.toml`.
 Pytest against a small fixture DB (a few rows across 2-3 tables) using FastAPI's
 `TestClient`:
 
-- `/v1/` root returns a dict containing both `categories` and `parts` keys.
+- `/v1/` root returns a dict with `categories` and `parts` keys whose values are
+  **non-empty** strings.
 - `categories.json` returns the expected set, correct shape.
 - `parts/category/{id}.json` returns `{id, name}` pairs; every `id` equals
   `hash(unique_id)` for its row.
 - **id stability:** the id for a fixture row equals the hash of its `unique_id` and
   does **not** change if the row is re-inserted at a different position (guards
   against any rowid/order dependence creeping back in).
+- **name uniqueness:** a fixture with two rows sharing the same MPN (and a legacy
+  row whose first field is `Allow Substitution`) still yields **distinct, non-empty
+  `name`s**, and the `name` from `parts/category` byte-matches the `name` from
+  `parts/{id}` for the same part.
 - `parts/{id}.json` for a known part:
   - `symbolIdStr` matches the symbols-column value,
   - `fields.footprint.value` matches the footprints-column value,
@@ -251,8 +297,10 @@ KiCad  ← terra.kicad_httplib (generated)
 
 - Exact view→base-table resolution rule (the `_v` strip is verified to cover all 44
   libraries; confirm no edge cases where the base name differs).
-- Per-library "name column" choice (default-to-first-non-reserved-field may be wrong
-  for some tables; confirm during the port).
+- Which display column leads the human-readable prefix of `name` (the MPN is the
+  obvious choice, but legacy generated tables whose first field is
+  `Allow Substitution` need a real MPN/key column picked instead). Uniqueness is
+  already guaranteed by the `id` suffix regardless; this is only about readability.
 - Exact resolution of the 5 cross-table `unique_id` duplicates (assign each to one
   canonical category, vs. list one id under multiple categories). v1 leans toward
   single canonical category for a clean 1:1 map; confirm none of the 5 must remain
