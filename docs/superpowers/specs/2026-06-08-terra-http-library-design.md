@@ -75,8 +75,10 @@ libraries, only supply part *metadata* and reference symbols/footprints by
 ### Deferred decision, validated empirically after v1
 
 With the default `tier <= 2` cutoff **and the static→0 re-tier fix applied**, the
-largest **visible** categories are (verified in `db/terra.db`; CERN counts assume the
-re-tier — as-is they are 0 because CERN is tier 5):
+largest **visible** categories are below. Raw `rows` are verified in the current
+`db/terra.db`; the visible column is **projected from those raw counts after the
+required static→0 re-tier** — against the DB as-is, `tier <= 2` returns only 5,511
+parts and **0** CERN/curated rows (all CERN/static is currently tier 5):
 
 | table | rows | visible (`tier<=2`, post-re-tier) |
 |---|---|---|
