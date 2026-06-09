@@ -31,13 +31,27 @@ libraries, only supply part *metadata* and reference symbols/footprints by
   `terra.kicad_dbl` — no dynamic subcategory engine.
 - Reads the existing master `db/terra.db` **read-only**, from the **base tables**
   (e.g. `bjt`, not the `bjt_v` view), with a **default tier cutoff applied
-  server-side** (`WHERE tier <= 2`, the `fastload` `DEFAULT_TIER`). All 44 base
-  tables have a populated `tier` column. The cutoff is a server flag (`--tier N`),
-  not per-project config. This keeps the big generated tables manageable
-  (`resistors_smt` 22,539 → 4,805 visible; `capacitors_smt` 4,863 → 706) without the
-  subcategory splitter. The cutoff filters the **category listings**; `parts/{id}`
-  still resolves any valid id regardless of tier (so a previously-placed
-  higher-tier part keeps re-resolving even if the cutoff later tightens).
+  server-side** (`WHERE tier <= 2`, the `fastload` `DEFAULT_TIER`), as a server flag
+  (`--tier N`), not per-project config. The cutoff trims the parametric tails of the
+  generated tables (`resistors_smt` 22,539 → 4,805; `capacitors_smt` 4,863 → 706)
+  while keeping all curated content — **but only after the re-tier fix below**.
+- **Required build fix — re-tier static/curated tables to 0.** *Currently every
+  CERN table and every hand-curated table is `tier = 5`* (the schema default); only
+  `resistors_smt` / `capacitors_smt` are tiered 0–4. So `tier <= 2` against the DB
+  as-is returns **zero CERN and zero curated parts** — it would ship a library of
+  only resistors and capacitors. `fastload` already intends static parts to be
+  tier 0 ("schema default changed from 5 to 0 … hand-curated parts are always in
+  tier 0"); v1 must actually apply that in the regenerate (CERN import + static
+  generators set `tier = 0`). After the fix, `tier <= 2` shows **19,164** parts (all
+  curated + common passives); only the ~21.9k parametric tails (tier 3–4) are hidden.
+- **The cutoff is a real visibility boundary, not just a display filter.** It filters
+  the category listings, and KiCad rebuilds its name→id map *from those listings*
+  before fetching a part — so a part hidden by the cutoff is **not resolvable**, even
+  on *Update from Library* (KiCad never learns its id). Serving `parts/{id}` for any
+  id is harmless but does **not** rescue hidden placed parts. Practical rule:
+  **lowering the cutoff below a placed part's tier can orphan it** on the next cache
+  refresh; the default must therefore contain the expected working set (which the
+  re-tier fix ensures). This needs a real-KiCad characterization test (below).
 - Reuses `terra.kicad_dbl` as the **library/field spec** (single source of truth
   for table names, key column, symbol/footprint columns, field name + visibility).
   No new config format.
@@ -60,22 +74,22 @@ libraries, only supply part *metadata* and reference symbols/footprints by
 
 ### Deferred decision, validated empirically after v1
 
-With the default `tier <= 2` cutoff, the largest **visible** categories are
-`resistors_smt` (**4,805**) and `capacitors_smt` (**706**) — verified in
-`db/terra.db` (raw row / `tier<=2` counts):
+With the default `tier <= 2` cutoff **and the static→0 re-tier fix applied**, the
+largest **visible** categories are (verified in `db/terra.db`; CERN counts assume the
+re-tier — as-is they are 0 because CERN is tier 5):
 
-| table | rows | visible (`tier<=2`) |
+| table | rows | visible (`tier<=2`, post-re-tier) |
 |---|---|---|
-| `resistors_smt` | 22,539 | **4,805** |
-| `capacitors_smt` | 4,863 | 706 |
-| `cern_analog_interface` | 2,199 | 2,199 |
-| `cern_op_amps` | 1,569 | 1,569 |
-| `cern_samtec` | 1,363 | 1,363 |
-| `cern_regulators` | 1,056 | 1,056 |
+| `resistors_smt` | 22,539 | **4,805** (tiered) |
+| `cern_analog_interface` | 2,199 | 2,199 (→ tier 0) |
+| `cern_op_amps` | 1,569 | 1,569 (→ tier 0) |
+| `cern_samtec` | 1,363 | 1,363 (→ tier 0) |
+| `cern_regulators` | 1,056 | 1,056 (→ tier 0) |
+| `capacitors_smt` | 4,863 | 706 (tiered) |
 
-(The CERN tables are mostly tier 0, so the cutoff barely changes them.) Benchmark
-`resistors_smt` at ~4.8k **first** — it remains the stress case, but is now ~5×
-smaller than the unfiltered 22.5k, and well short of needing the splitter on day one.
+(~19,164 parts visible total; ~21,891 parametric-tail parts hidden.) Benchmark
+`resistors_smt` at ~4.8k **first** — it remains the stress case, ~5× smaller than the
+unfiltered 22.5k and short of needing the splitter on day one.
 
 **What the benchmark decides:** `fastload`'s target is 50–200 parts/category, which a
 4.8k category still exceeds. If KiCad's per-category enumeration is sluggish at 4.8k,
@@ -227,10 +241,13 @@ larger values are exactly what speeds up chooser open for static data):
   base table's `unique_id` column and builds a `hash → (table, rowid)` map; the
   build invariant guarantees this map is 1:1. A duplicate hash discovered at startup
   is a hard error (means the invariant was bypassed). The map covers **all** rows
-  regardless of tier (so any placed part re-resolves even after the cutoff tightens).
+  regardless of tier, but note this does **not** make hidden parts resolvable on
+  *Update from Library* — KiCad gets the id from the (filtered) category listing, so
+  a part below the cutoff is effectively unreachable regardless of the map.
 - **Tier cutoff:** a server flag `--tier N` (default **2**). Applied as
   `WHERE tier <= N` in the **category listing** query only. All 44 base tables have a
-  `tier` column. Per-project override is out of scope (see Deferred).
+  `tier` column. Depends on the static→0 re-tier (Scope) — without it the default
+  hides all CERN/curated parts. Per-project override is out of scope (see Deferred).
 - **Endpoints:**
   - `/v1/` (root): return `{"categories": "v1/categories.json", "parts": "v1/parts"}`
     — both values **non-empty** (KiCad checks `!.empty()` on each, not just key
@@ -294,9 +311,11 @@ Pytest against a small fixture DB (a few rows across 2-3 tables) using FastAPI's
 - `parts/category/{id}.json` returns `{id, name}` pairs; every `id` equals
   `hash(unique_id)` for its row.
 - **tier cutoff:** with a fixture containing `tier` 0–3 rows, the default
-  (`tier<=2`) category listing **excludes** the tier-3 rows; `--tier 3` includes
-  them; and `parts/{id}` resolves a tier-3 part's id **regardless** of the cutoff
-  (placed-part re-resolution must not depend on the current cutoff).
+  (`tier<=2`) category listing **excludes** the tier-3 rows and `--tier 3` includes
+  them. `parts/{id}` directly fetched still returns a tier-3 part (the map is
+  tier-agnostic) — but this is a server-behavior unit test only; whether KiCad can
+  *use* it for a hidden placed part is a real-KiCad question (see end-to-end items),
+  not asserted here.
 - **id stability:** the id for a fixture row equals the hash of its `unique_id` and
   does **not** change if the row is re-inserted at a different position (guards
   against any rowid/order dependence creeping back in).
@@ -349,6 +368,10 @@ KiCad  ← terra.kicad_httplib (generated)
 
 ## Open items for the implementation plan
 
+- Where to apply the static→0 re-tier in the regenerate (CERN import in
+  `tools/cern_import.py` / the porting path, plus any hand-curated static generators)
+  so all non-parametric tables land at `tier = 0`. Add a build check that no
+  curated/CERN table is left at the schema default 5.
 - Exact view→base-table resolution rule (the `_v` strip is verified to cover all 44
   libraries; confirm no edge cases where the base name differs).
 - Which display column leads the human-readable prefix of `name` (the MPN is the
@@ -366,6 +389,13 @@ KiCad  ← terra.kicad_httplib (generated)
   *Update Symbols from Library* and confirm the placed part still re-resolves by its
   generated `name` (the LIB_ID handle, which embeds the stable `id`) — the whole
   point of the stable-name/id design.
+- **Characterize the hidden-part case in real KiCad:** place a `tier ≤ 2` part, then
+  tighten `--tier` (or place a tier-3 part via a widened cutoff, then lower it),
+  expire the cache, and run *Update from Library*. Confirm whether KiCad orphans the
+  part (expected, per the listing→name→id path) so the orphaning rule is documented
+  behavior, not a surprise. If orphaning is unacceptable, the fallback is to include
+  placed/known parts in the listings regardless of cutoff — out of scope unless the
+  test shows it's needed.
 
 ## Future direction (v2) — part-locator normalization
 
