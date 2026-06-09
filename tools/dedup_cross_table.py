@@ -8,6 +8,7 @@ table and delete it from every other table, making unique_id globally unique.
 """
 import sqlite3
 import sys
+from collections.abc import Iterable
 
 # unique_id -> canonical table that KEEPS the row; deleted everywhere else.
 RESOLUTIONS: dict[str, str] = {
@@ -31,16 +32,24 @@ def tables_with_unique_id(conn: sqlite3.Connection) -> list[str]:
     return out
 
 
-def dedup(conn: sqlite3.Connection, resolutions: dict[str, str]) -> dict[str, list[str]]:
-    """Delete each duplicate unique_id from every table except its canonical one.
+def dedup(
+    conn: sqlite3.Connection,
+    resolutions: dict[str, str],
+    part_tables: Iterable[str],
+) -> dict[str, list[str]]:
+    """Delete each duplicate unique_id from every part table except its canonical one.
 
     For each (uid, keep_table) in `resolutions`, delete uid from every table in
-    `tables_with_unique_id(conn)` that is not keep_table and currently contains
-    it. Returns {uid: [tables_dropped_from]}, omitting uids where nothing was
-    dropped. If keep_table holds no row for the uid, the deletions still happen
-    (a warning is printed) so the build does not crash.
+    `part_tables` that is not keep_table and currently contains it. Returns
+    {uid: [tables_dropped_from]}, omitting uids where nothing was dropped. If
+    keep_table holds no row for the uid, the deletions still happen (a warning
+    is printed) so the build does not crash.
+
+    Only `part_tables` are scanned. Infra tables that also carry a unique_id
+    column — notably the `tags` join table — must be spared, or the kept
+    canonical row would lose its tag associations.
     """
-    tables = tables_with_unique_id(conn)
+    tables = list(part_tables)
     dropped: dict[str, list[str]] = {}
     for uid, keep_table in resolutions.items():
         kept = conn.execute(
@@ -64,9 +73,17 @@ def dedup(conn: sqlite3.Connection, resolutions: dict[str, str]) -> dict[str, li
 
 
 def main() -> None:
+    from pathlib import Path
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from tools.terra_server import load_spec
+
     db = sys.argv[1]
     conn = sqlite3.connect(db)
-    dropped = dedup(conn, RESOLUTIONS)
+    # Confine dedup to the dbl part base tables; infra tables like `tags` are
+    # never in this list and so keep their unique_id rows intact.
+    part_tables = [s["base_table"] for s in load_spec("terra.kicad_dbl")]
+    dropped = dedup(conn, RESOLUTIONS, part_tables)
     for uid, tables in dropped.items():
         print(f"  deduped {uid}: dropped from {', '.join(tables)}")
     conn.close()
