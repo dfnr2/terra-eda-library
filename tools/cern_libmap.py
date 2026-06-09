@@ -17,6 +17,7 @@ SYMBOL_LIB_NICK = {
     "DC-DC Converters": "cern-dc-dc-converters",
     "Optocouplers": "cern-optocouplers",
     "Connectors": "cern-connectors",   # shared symbol lib for all connector vendors
+    "Sockets": "cern-sockets",
 }
 
 FOOTPRINT_LIB_NICK = {
@@ -39,6 +40,7 @@ FOOTPRINT_LIB_NICK = {
     "ERNI SMD": "cern-erni-smd", "ERNI THD": "cern-erni-thd",
     "WEIDMULLER THD": "cern-weidmuller-thd", "COMATEL THD": "cern-comatel-thd",
     "MENTOR THD": "cern-mentor-thd",
+    "Sockets": "cern-sockets",
 }
 
 

@@ -8,6 +8,7 @@
   (lib (name "cern-operational-amplifiers")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-operational-amplifiers.kicad_sym")(options "")(descr ""))
   (lib (name "cern-optocouplers")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-optocouplers.kicad_sym")(options "")(descr ""))
   (lib (name "cern-regulators")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-regulators.kicad_sym")(options "")(descr ""))
+  (lib (name "cern-sockets")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-sockets.kicad_sym")(options "")(descr ""))
   (lib (name "cern-standard-logic")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-standard-logic.kicad_sym")(options "")(descr ""))
   (lib (name "cern-transistors")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-transistors.kicad_sym")(options "")(descr ""))
   (lib (name "terra_sym")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_sym.kicad_sym")(options "")(descr ""))

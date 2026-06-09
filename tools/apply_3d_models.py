@@ -106,10 +106,19 @@ def grid_geometry(txt: str):
         return next(iter(ds)) if len(ds) == 1 else None
 
     if len(xs) >= len(ys):
-        perrow, rows, p = len(xs), len(ys), uniform(xs)
+        perrow, rows, p, minor = len(xs), len(ys), uniform(xs), ys
     else:
-        perrow, rows, p = len(ys), len(xs), uniform(ys)
-    return (len(cs), rows, perrow, p) if p else None
+        perrow, rows, p, minor = len(ys), len(xs), uniform(ys), xs
+    if not p:
+        return None
+    # Multi-row: require row spacing == pitch (a true uniform pin grid). This
+    # declines DIP-spaced parts (rows 7.62mm apart, pitch 2.54) so they don't get
+    # a wrong 2.54mm-row PinHeader/PinSocket model.
+    if rows > 1:
+        rp = uniform(minor)
+        if rp is None or abs(rp - p) > 0.05:
+            return None
+    return (len(cs), rows, perrow, p)
 
 
 def run(table: str, dry_run: bool) -> int:
