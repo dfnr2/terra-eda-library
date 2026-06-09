@@ -36,7 +36,10 @@ libraries, only supply part *metadata* and reference symbols/footprints by
   No new config format.
 - A generator `tools/generate_kicad_httplib.py` emitting `terra.kicad_httplib`.
 - A `make serve` target for manual launch.
-- Pytest coverage of the three endpoints against a small fixture DB.
+- Pytest coverage of all four endpoints (root + the three data endpoints) against a
+  small fixture DB.
+- The packaging to support the above: new runtime/dev dependencies and a console
+  script in `pyproject.toml` (see Component 3).
 
 ### Out (deferred — tracked in `fastload.org`)
 
@@ -144,9 +147,10 @@ Contract details that drive the serializer:
   `nickname:category:name`. Consequences:
   - **Duplicate names overwrite each other** during category enumeration — the
     shadowed parts become unplaceable. Using the obvious display field (MPN) as
-    `name` is unsafe: `db/terra.db` has **3,227 within-table duplicate MPNs**, and
-    legacy generated tables whose first field is `Allow Substitution` would name
-    every row `"Yes"`/`"No"`. So `name` must be **globally unique**.
+    `name` is unsafe: across base tables there are **~3,200 within-table duplicate
+    values** in the would-be name column, and legacy generated tables whose first
+    field is `Allow Substitution` would name every row `"Yes"`/`"No"`. So `name`
+    must be **globally unique**.
   - It is the handle KiCad stores in the schematic and re-resolves on *Update from
     Library*, so it must also be **stable across rebuilds** and survive KiCad's
     illegal-LIB_ID-character sanitization (which replaces `/`, spaces, etc. with
@@ -237,7 +241,15 @@ serve:
 ```
 
 Manual launch; KiCad must find the server already running. Auto-start deferred.
-Expose the server as a `terra-server` console script via `pyproject.toml`.
+
+**Packaging (`pyproject.toml`) — currently absent, must be added by the plan:**
+
+- Add runtime deps: `fastapi`, `uvicorn` (the existing deps are only `pyyaml`,
+  `sexpdata`).
+- Add dev dep: `httpx` (required by FastAPI's `TestClient`); `pytest` already
+  present.
+- Add `[project.scripts]` `terra-server = "tools.terra_server:main"` (or equivalent)
+  so `uv run terra-server` and the `make serve` target resolve.
 
 ### 4. Tests (`tests/`)
 
@@ -266,7 +278,8 @@ Pytest against a small fixture DB (a few rows across 2-3 tables) using FastAPI's
 - **Build invariant:** a fixture with a duplicate/null `unique_id` makes the
   uniqueness check fail loudly (and the server's startup map build raises on a
   duplicate hash).
-- Unknown id → 404; unknown category → 404 or empty list (match KiCad's tolerance).
+- Unknown part id → 404; **unknown category → 404** (the server validates the
+  category id before querying — single, consistent behavior).
 - **Generated `terra.kicad_httplib` schema:** asserts `source.type == "REST_API"`,
   `api_version == "v1"`, and that `timeout_parts_seconds` /
   `timeout_categories_seconds` are present (not `timeout_seconds`).
@@ -306,7 +319,8 @@ KiCad  ← terra.kicad_httplib (generated)
   single canonical category for a clean 1:1 map; confirm none of the 5 must remain
   visible in both categories.
 - Hash choice (algorithm + truncation length) — verify no collisions across the full
-  ~11k `unique_id` set at the chosen length; `sha1`-16-hex has ample headroom.
+  `unique_id` set (**41,050 distinct** of 41,055 rows; the 5-row gap is the
+  cross-table dups) at the chosen length; `sha1`-16-hex has ample headroom.
 - Validate end-to-end in a real KiCad: place a part, regenerate the DB, then run
   *Update Symbols from Library* and confirm the placed part still re-resolves by id
   (the whole point of the stable-id design).
