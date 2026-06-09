@@ -30,7 +30,14 @@ libraries, only supply part *metadata* and reference symbols/footprints by
 - **44 categories mapped 1:1** to the libraries currently defined in
   `terra.kicad_dbl` — no dynamic subcategory engine.
 - Reads the existing master `db/terra.db` **read-only**, from the **base tables**
-  (e.g. `bjt`, not the `bjt_v` view) — i.e. **all parts, no tier filter**.
+  (e.g. `bjt`, not the `bjt_v` view), with a **default tier cutoff applied
+  server-side** (`WHERE tier <= 2`, the `fastload` `DEFAULT_TIER`). All 44 base
+  tables have a populated `tier` column. The cutoff is a server flag (`--tier N`),
+  not per-project config. This keeps the big generated tables manageable
+  (`resistors_smt` 22,539 → 4,805 visible; `capacitors_smt` 4,863 → 706) without the
+  subcategory splitter. The cutoff filters the **category listings**; `parts/{id}`
+  still resolves any valid id regardless of tier (so a previously-placed
+  higher-tier part keeps re-resolving even if the cutoff later tightens).
 - Reuses `terra.kicad_dbl` as the **library/field spec** (single source of truth
   for table names, key column, symbol/footprint columns, field name + visibility).
   No new config format.
@@ -45,35 +52,36 @@ libraries, only supply part *metadata* and reference symbols/footprints by
 
 - Dynamic subcategories / category splitter.
 - Web UI for browsing/tagging.
-- Tier / tag filtering and `${KIPRJMOD}/terra.json` project config.
+- **Per-project, user-adjustable** tier/tag config (`${KIPRJMOD}/terra.json`
+  overrides, tag filtering). A *fixed default tier cutoff* is in v1 (above); only the
+  per-project override and tag filtering are deferred.
 - Auto-start (systemd/launchd) service.
 - Authentication / non-localhost hosting (the Cloudflare-worker option B).
 
 ### Deferred decision, validated empirically after v1
 
-Ship flat, then benchmark the **actual** largest categories. Because v1 reads base
-tables (all rows, no tier filter), the giants are the generated tables, not the CERN
-ones — verified counts in `db/terra.db`:
+With the default `tier <= 2` cutoff, the largest **visible** categories are
+`resistors_smt` (**4,805**) and `capacitors_smt` (**706**) — verified in
+`db/terra.db` (raw row / `tier<=2` counts):
 
-| table | rows |
-|---|---|
-| `resistors_smt` | **22,539** |
-| `capacitors_smt` | 4,863 |
-| `cern_analog_interface` | 2,199 |
-| `cern_op_amps` | 1,569 |
-| `cern_samtec` | 1,363 |
-| `cern_regulators` | 1,056 |
+| table | rows | visible (`tier<=2`) |
+|---|---|---|
+| `resistors_smt` | 22,539 | **4,805** |
+| `capacitors_smt` | 4,863 | 706 |
+| `cern_analog_interface` | 2,199 | 2,199 |
+| `cern_op_amps` | 1,569 | 1,569 |
+| `cern_samtec` | 1,363 | 1,363 |
+| `cern_regulators` | 1,056 | 1,056 |
 
-(~41,000 parts total across 44 tables.) Benchmark `resistors_smt` and
-`capacitors_smt` **first** — a 22.5k flat category is the real stress case, far
-beyond the earlier (stale) Regulators/SAMTEC estimate.
+(The CERN tables are mostly tier 0, so the cutoff barely changes them.) Benchmark
+`resistors_smt` at ~4.8k **first** — it remains the stress case, but is now ~5×
+smaller than the unfiltered 22.5k, and well short of needing the splitter on day one.
 
-**Risk to the flat decision:** today the `.kicad_dbl` reads the *tier-filtered* `*_v`
-views, so KiCad currently never sees all 22.5k resistors. v1 deliberately drops that
-filter (HTTP lazy loading is meant to replace it). If a single 22.5k flat category
-proves too slow on category expand, the fallback for **just the generated tables**
-is to either retain a tier/parametric filter or pull the subcategory splitter
-forward — decided by the benchmark, not guessed now.
+**What the benchmark decides:** `fastload`'s target is 50–200 parts/category, which a
+4.8k category still exceeds. If KiCad's per-category enumeration is sluggish at 4.8k,
+the next step is the **subcategory splitter** (by package, etc.) for the generated
+tables — which is also what would eventually let the tier cutoff be raised or
+dropped. Until measured, keep the flat-with-cutoff shape.
 
 ## KiCad HTTP Library v1 contract (authoritative)
 
@@ -211,20 +219,26 @@ larger values are exactly what speeds up chooser open for static data):
   `footprints` (column holding `lib:fp`), and `fields[]`
   (`column`, `name`, `visible_in_chooser`).
 - **Base-table mapping:** the dbl `table` points at the `*_v` view; v1 strips the
-  `_v` suffix (or maps view→base via a known rule) to read all parts. Verified: all
+  `_v` suffix (or maps view→base via a known rule) to read the base table directly
+  (the tier cutoff is applied per-query, below — not via the view). Verified: all
   44 dbl libraries have a resolvable base table in `db/terra.db`. Document the exact
   rule in the plan.
 - **Part id = `hash(unique_id)`** (see contract). At startup the server scans every
   base table's `unique_id` column and builds a `hash → (table, rowid)` map; the
   build invariant guarantees this map is 1:1. A duplicate hash discovered at startup
-  is a hard error (means the invariant was bypassed).
+  is a hard error (means the invariant was bypassed). The map covers **all** rows
+  regardless of tier (so any placed part re-resolves even after the cutoff tightens).
+- **Tier cutoff:** a server flag `--tier N` (default **2**). Applied as
+  `WHERE tier <= N` in the **category listing** query only. All 44 base tables have a
+  `tier` column. Per-project override is out of scope (see Deferred).
 - **Endpoints:**
   - `/v1/` (root): return `{"categories": "v1/categories.json", "parts": "v1/parts"}`
     — both values **non-empty** (KiCad checks `!.empty()` on each, not just key
     presence).
   - `categories.json`: one entry per dbl library — `id` = base table name,
     `name` = library `name`, `description` = `""` (or library description if present).
-  - `parts/category/{id}.json`: `SELECT unique_id, <display col> FROM <table>`, emit
+  - `parts/category/{id}.json`:
+    `SELECT unique_id, <display col> FROM <table> WHERE tier <= <cutoff>`, emit
     `{id: hash(unique_id), name: sanitize(<display col>) + "_" + id}` (see the `name`
     contract bullet — `name` must be globally unique, not the raw display field).
   - `parts/{id}.json`: resolve `id → (table, rowid)` via the startup map, fetch the
@@ -254,10 +268,11 @@ static data) — **not** `timeout_seconds`.
 
 ```
 serve:
-	uv run terra-server --db db/terra.db
+	uv run terra-server --db db/terra.db --tier 2
 ```
 
 Manual launch; KiCad must find the server already running. Auto-start deferred.
+`--tier` defaults to 2, so the flag is shown for discoverability, not necessity.
 
 **Packaging (`pyproject.toml`) — currently absent, must be added by the plan:**
 
@@ -278,6 +293,10 @@ Pytest against a small fixture DB (a few rows across 2-3 tables) using FastAPI's
 - `categories.json` returns the expected set, correct shape.
 - `parts/category/{id}.json` returns `{id, name}` pairs; every `id` equals
   `hash(unique_id)` for its row.
+- **tier cutoff:** with a fixture containing `tier` 0–3 rows, the default
+  (`tier<=2`) category listing **excludes** the tier-3 rows; `--tier 3` includes
+  them; and `parts/{id}` resolves a tier-3 part's id **regardless** of the cutoff
+  (placed-part re-resolution must not depend on the current cutoff).
 - **id stability:** the id for a fixture row equals the hash of its `unique_id` and
   does **not** change if the row is re-inserted at a different position (guards
   against any rowid/order dependence creeping back in).
@@ -311,7 +330,7 @@ Pytest against a small fixture DB (a few rows across 2-3 tables) using FastAPI's
 ```
 terra.kicad_dbl (library + field spec, read at startup)
         +
-db/terra.db base tables (read-only, all parts)
+db/terra.db base tables (read-only; default tier<=2 cutoff on listings)
         ↓
 tools/terra_server.py  (FastAPI, 127.0.0.1:8361)
         ↓  GET /v1/...  (lazy: categories → category parts → part on select)
