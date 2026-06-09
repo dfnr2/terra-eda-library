@@ -126,7 +126,92 @@ If you're using custom footprints in `assets/footprints/Custom.pretty/`:
 (lib (name "Terra_Custom")(type "KiCad")(uri "${TERRA_EDA_LIB}/assets/footprints/Custom.pretty")(options "")(descr "Terra custom footprints"))
 ```
 
-## Step 5: Add Database Library
+## Step 5: Use the HTTP Library (recommended — replaces the database library)
+
+KiCad 8+ can source parts from a small local HTTP server instead of the ODBC
+database library. It loads categories lazily and caches them, so it is much faster
+than the `.kicad_dbl`/ODBC path on a large library, and it needs **no ODBC driver**.
+Use the HTTP library **or** the database library (Step 6), not both.
+
+The HTTP library supplies only part *metadata*. The symbol and footprint *graphics*
+still come from the libraries registered in Steps 3–4 (`kicad_symbols/` and
+`kicad_footprints/`), so those must be in place first.
+
+### Prerequisites
+
+1. **KiCad 8.0 or newer** (HTTP libraries do not exist in KiCad 7).
+2. **`TERRA_EDA_LIB`** set (Step 2) and the **symbol/footprint library tables**
+   registered (Steps 3–4). Regenerate the generated tables after a library update:
+   ```bash
+   make lib-tables   # writes kicad_symbols/sym-lib-table and kicad_footprints/fp-lib-table
+   ```
+3. **Build the database and the connection file:**
+   ```bash
+   make            # builds db/terra.db and terra.kicad_dbl
+   make httplib    # generates terra.kicad_httplib
+   ```
+
+### Step 5a: Start the server
+
+The server must be running whenever KiCad uses the library.
+
+```bash
+cd "$TERRA_EDA_LIB"   # the terra-eda-library checkout
+make serve
+```
+
+This serves `db/terra.db` on `http://127.0.0.1:8361` at the default tier cutoff
+(`--tier 2`: curated parts plus common passives; the long parametric resistor/cap
+tails are hidden). To widen what is visible, stop it and restart with a higher
+cutoff, e.g.:
+```bash
+uv run python tools/terra_server.py --db db/terra.db --dbl terra.kicad_dbl --tier 3
+```
+Leave the server running in its own terminal; `Ctrl-C` stops it.
+
+### Step 5b: Register the HTTP library in KiCad
+
+1. **Preferences → Manage Symbol Libraries…**
+2. **Global Libraries** tab → **Add** (the + / folder icon)
+3. For **Library Path**, browse to **or type**: `${TERRA_EDA_LIB}/terra.kicad_httplib`
+4. Set **Nickname:** `terra`
+5. Click **OK**. KiCad recognizes the HTTP type from the `.kicad_httplib` extension
+   and fills in the rest.
+
+The resulting `sym-lib-table` entry looks like:
+```lisp
+(lib (name "terra")(type "HTTP")(uri "${TERRA_EDA_LIB}/terra.kicad_httplib")(options "")(descr "Terra EDA HTTP Library"))
+```
+Add it through the dialog rather than by hand so KiCad sets the type and version
+correctly.
+
+### Step 5c: Verify
+
+1. With `make serve` running, open the **Symbol Chooser** in Eeschema (press **A**).
+2. The **terra** library expands into ~44 categories.
+3. Expand a category (e.g. `cern_regulators`) — its parts list loads on demand.
+4. Place a part; confirm its symbol and footprint resolve and its fields
+   (MPN, Manufacturer, Datasheet, …) are populated.
+
+### Notes & troubleshooting
+
+- **`terra` shows nothing / empty categories:** the server is not running. Start
+  `make serve` and reopen the Symbol Chooser.
+- **Categories don't change after a rebuild:** KiCad caches categories until you
+  restart it, and parts per the `timeout_*_seconds` in `terra.kicad_httplib`.
+  Restart KiCad after rebuilding `db/terra.db`.
+- **A placed part disappears after lowering `--tier`:** the tier cutoff is a
+  visibility filter — parts below it are not served, and KiCad re-resolves placed
+  parts from the (filtered) category listing. Keep the cutoff at or above the tier
+  of parts you have placed.
+- **Start the server before opening a project** so KiCad finds it on first use.
+  Auto-start (a systemd/launchd service) is a planned enhancement.
+
+## Step 6: Add Database Library (legacy — superseded by the HTTP Library above)
+
+> Use this only if you are not using the HTTP Library (Step 5). It requires a
+> platform-specific SQLite ODBC driver (see Troubleshooting) and loads the whole
+> catalog up front, which is slow on the full Terra library.
 
 ### Copy .kicad_dbl to KiCad Configuration
 
@@ -156,7 +241,7 @@ For per-project use, copy `terra.kicad_dbl` to your project directory.
 3. Select it and browse components
 4. Components should show metadata (MPN, Manufacturer, etc.)
 
-## Step 6: Verify Setup
+## Step 7: Verify Setup
 
 ### Test Symbol Placement
 
