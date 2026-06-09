@@ -60,7 +60,7 @@ def is_denylisted(row: dict) -> bool:
     return any(p.search(blob) for p in DENY_PATTERNS)
 
 
-def map_row(row: dict, tag: str) -> dict:
+def map_row(row: dict, tag: str, extra=None) -> dict:
     mfr = clean(row.get("Manufacturer"))
     mpn = clean(row.get("Manufacturer Part Number"))
     pnn = clean(row.get("Part Number Nocolon") or row.get("Part Number"))
@@ -90,6 +90,12 @@ def map_row(row: dict, tag: str) -> dict:
     }
 
 
+def _augment(m: dict, row: dict, extra) -> dict:
+    if extra:
+        m.update(extra(row))
+    return m
+
+
 def _finalize_unique_id(m: dict, row: dict, seen: set) -> str:
     uid = m["unique_id"]
     if uid in seen:
@@ -106,12 +112,12 @@ def _sort_key(r: dict):
     return (mpn, pnn != mpn, pnn)
 
 
-def _render(out_table: str, tag: str, mapped: list[dict]) -> str:
+def _render(out_table: str, tag: str, mapped: list[dict], cols: list[str]) -> str:
     lines = ["BEGIN TRANSACTION;"]
-    cols_sql = ", ".join(INSERT_COLS)
+    cols_sql = ", ".join(cols)
     for m in mapped:
         vals = [str(m[c]) if c in ("dump_priority", "tier") else sqlstr(m[c])
-                for c in INSERT_COLS]
+                for c in cols]
         lines.append(f"INSERT INTO {out_table} ({cols_sql}) VALUES ({', '.join(vals)});")
     for m in mapped:
         lines.append("INSERT INTO tags (unique_id, tag) VALUES "
@@ -120,17 +126,23 @@ def _render(out_table: str, tag: str, mapped: list[dict]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def generate(cern_table: str, out_table: str, output_file: str, tag: str) -> None:
-    """Generate `output_file` (relative to cwd) from a CERN table, no type tail."""
+def generate(cern_table: str, out_table: str, output_file: str, tag: str,
+             extra_cols=None, extra=None) -> None:
+    """Generate `output_file` (relative to cwd) from a CERN table.
+
+    `extra_cols` / `extra` add a type-specific tail: extra_cols lists the column
+    names; extra(row) returns a dict of their values for each row.
+    """
+    cols = INSERT_COLS + list(extra_cols or [])
     mapped, seen = [], set()
     for row in sorted(cern_source.rows(cern_table), key=_sort_key):
         if is_denylisted(row):
             continue
-        m = map_row(row, tag)
+        m = _augment(map_row(row, tag), row, extra)
         m["unique_id"] = _finalize_unique_id(m, row, seen)
         if m["unique_id"] in seen:
             raise SystemExit(f"duplicate unique_id after fallback: {m['unique_id']}")
         seen.add(m["unique_id"])
         mapped.append(m)
-    Path(output_file).write_text(_render(out_table, tag, mapped))
+    Path(output_file).write_text(_render(out_table, tag, mapped, cols))
     print(f"+ Wrote {output_file}: {len(mapped)} {out_table} parts")

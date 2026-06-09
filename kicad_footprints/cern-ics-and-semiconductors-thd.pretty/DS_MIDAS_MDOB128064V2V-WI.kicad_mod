@@ -1737,9 +1737,9 @@
 		(uuid "55c336ef-7563-4796-9110-960f929c0531")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/DS_MIDAS_MDOB128064V2V-WI.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x04_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00022 0.00011 0)
+			(xyz 0 15.81 0)
 		)
 		(scale
 			(xyz 1 1 1)

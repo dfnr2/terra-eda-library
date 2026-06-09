@@ -438,7 +438,7 @@
 		(uuid "84b708ef-e813-4a67-8483-b9b71f67b73e")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LEDLP_BIVAR_SLP3-150-450-R.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x02_P2.54mm_Vertical.step"
 		(opacity 0.0000)
 		(offset
 			(xyz 0 -0 0)

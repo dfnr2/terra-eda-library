@@ -870,7 +870,7 @@
 		(uuid "1561b3a7-169d-4a5b-ac65-86cb46f108ae")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LED_BROADCOM_ASMB-MTB0-0B3A2.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_SMB.step"
 		(offset
 			(xyz 0.00009 0.00008 0)
 		)

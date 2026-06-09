@@ -315,7 +315,7 @@
 		(uuid "54d3eef5-efb5-4fc4-b523-5cf1761b8367")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LED_DIALIGHT_599-1A80-147F-Part2.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_0402_1005Metric.step"
 		(opacity 0.0000)
 		(offset
 			(xyz 0.00004 0.00012 0)

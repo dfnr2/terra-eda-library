@@ -752,9 +752,9 @@
 		(uuid "21a54a5b-1f45-42cd-a88d-1201dd4a3a51")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LED_MARL_122-311-01.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x02_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00006 0.00004 0)
+			(xyz -1.27 1.27 0)
 		)
 		(scale
 			(xyz 1 1 1)

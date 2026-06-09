@@ -375,7 +375,7 @@
 		(uuid "91e01cea-54ad-4ff1-ac45-014259d75fd5")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LED_LITEON_LTST-C193KRKT-5A.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_0603_1608Metric.step"
 		(offset
 			(xyz 0.00005 0.00007 0)
 		)

@@ -802,9 +802,9 @@
 		(uuid "6f928cb3-24d1-4637-9081-454533d09d78")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LED_BIVAR_H485CHHGGDL.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x04_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00012 0.00004 0)
+			(xyz -1.27 3.81 0)
 		)
 		(scale
 			(xyz 1 1 1)

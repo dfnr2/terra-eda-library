@@ -898,9 +898,9 @@
 		(uuid "ea931acb-b67c-4952-ba6d-0b32bc1f3d7c")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LED_DIALIGHT_571-0112-100F.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x04_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00008 0.00005 0)
+			(xyz 3.81 3.81 0)
 		)
 		(scale
 			(xyz 1 1 1)

@@ -365,7 +365,7 @@
 		(uuid "e9967869-12ae-49e5-b629-abd3cce37338")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LED_KINGBRIGHT_KP-1608QBC-D.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_0603_1608Metric.step"
 		(offset
 			(xyz 0 -0 0)
 		)

@@ -465,7 +465,7 @@
 		(uuid "50244a36-4f77-4af3-bef2-b00a6b224968")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LED_OSRAM_LGL29K.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_0603_1608Metric.step"
 		(offset
 			(xyz 0.00012 0.00005 0)
 		)

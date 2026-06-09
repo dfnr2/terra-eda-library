@@ -18,6 +18,7 @@ SYMBOL_LIB_NICK = {
     "Optocouplers": "cern-optocouplers",
     "Connectors": "cern-connectors",   # shared symbol lib for all connector vendors
     "Sockets": "cern-sockets",
+    "LEDs & Displays": "cern-leds-displays",
 }
 
 FOOTPRINT_LIB_NICK = {

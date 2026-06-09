@@ -365,9 +365,9 @@
 		(uuid "06edc50a-90b6-457e-8876-7b11691ca272")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LED_AVAGO_HSMC-C120.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_SMC.step"
 		(offset
-			(xyz -0.0001 -0.00005 0)
+			(xyz 0 -0.1167 0)
 		)
 		(scale
 			(xyz 1 1 1)

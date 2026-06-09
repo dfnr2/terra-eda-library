@@ -377,7 +377,7 @@
 		(uuid "b2322b89-2ff3-4980-89b4-3827bfecb34b")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LED_LITEON_LTST-C190KRKT_part2.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_0603_1608Metric.step"
 		(opacity 0.0000)
 		(offset
 			(xyz 0 -0 0)

@@ -335,7 +335,7 @@
 		(uuid "92a0e8f1-e7c8-45be-95b5-9484e3e680e7")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LED_KINGBRIGHT_APHHS1005CGCK-Part-2.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_0402_1005Metric.step"
 		(opacity 0.0000)
 		(offset
 			(xyz 0 -0 0)

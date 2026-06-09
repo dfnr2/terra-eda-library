@@ -364,9 +364,9 @@
 		(uuid "4f74bfe9-ffe4-4b14-a3eb-f07edfea6e3e")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LED_VISHAY_TLHB4400.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x02_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00012 0.00009 0)
+			(xyz 0 1.27 0)
 		)
 		(scale
 			(xyz 1 1 1)

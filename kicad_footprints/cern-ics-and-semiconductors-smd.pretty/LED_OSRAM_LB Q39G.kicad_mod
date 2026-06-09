@@ -548,7 +548,7 @@
 		(uuid "72b0cf31-1eeb-4b96-8af9-45489df2decb")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LED_OSRAM_LB Q39G-part-1.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_0603_1608Metric.step"
 		(offset
 			(xyz 0 -0 0)
 		)

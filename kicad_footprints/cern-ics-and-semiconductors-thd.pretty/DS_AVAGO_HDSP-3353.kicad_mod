@@ -1408,9 +1408,9 @@
 		(uuid "7f3fe7f6-8d4d-4d84-afef-01ca0a0f5bf4")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/DS_AVAGO_HDSP-3353.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-14_W7.62mm.step"
 		(offset
-			(xyz 0.00007 0.00007 0)
+			(xyz -3.81 7.62 0)
 		)
 		(scale
 			(xyz 1 1 1)

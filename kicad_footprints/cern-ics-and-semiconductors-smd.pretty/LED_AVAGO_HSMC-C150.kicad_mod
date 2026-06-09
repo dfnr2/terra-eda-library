@@ -275,7 +275,7 @@
 		(uuid "b43bf650-fd04-4c70-9a22-13bc16064ddc")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LED_AVAGO_HSMC-C150.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_SMC.step"
 		(offset
 			(xyz 0.00012 0.00008 0)
 		)

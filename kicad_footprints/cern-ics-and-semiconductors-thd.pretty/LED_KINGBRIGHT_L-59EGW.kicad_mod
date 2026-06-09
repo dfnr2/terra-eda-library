@@ -626,9 +626,9 @@
 		(uuid "24721bb4-94b7-4d05-91a8-022e77b7fce0")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LED_KINGBRIGHT_L-59EGW.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x03_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00009 0.00009 0)
+			(xyz 0 2.54 0)
 		)
 		(scale
 			(xyz 1 1 1)

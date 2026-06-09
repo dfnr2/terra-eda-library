@@ -517,7 +517,7 @@
 		(uuid "c8ffb845-4502-4884-be4c-65d55cd07caa")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/LED_ROHM_SML-D22MUWT86.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_0603_1608Metric.step"
 		(offset
 			(xyz 0.00009 0.00012 0)
 		)
