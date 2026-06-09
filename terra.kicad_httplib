@@ -1,0 +1,14 @@
+{
+  "meta": {
+    "version": 1.0
+  },
+  "name": "Terra EDA Library",
+  "source": {
+    "type": "REST_API",
+    "api_version": "v1",
+    "root_url": "http://127.0.0.1:8361/",
+    "token": "",
+    "timeout_parts_seconds": 3600,
+    "timeout_categories_seconds": 86400
+  }
+}

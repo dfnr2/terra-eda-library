@@ -152,6 +152,16 @@ all build: $(DB_FILES) db/terra.db terra.kicad_dbl lib-tables
 lib-tables: $(VENV_MARKER)
 	@$(PYTHON) tools/generate_lib_tables.py
 
+# Serve the library over HTTP for KiCad's HTTP Library backend.
+.PHONY: serve
+serve: db/terra.db terra.kicad_dbl
+	$(PYTHON) tools/terra_server.py --db db/terra.db --dbl terra.kicad_dbl --tier 2
+
+# Generate the terra.kicad_httplib connection file (KiCad HTTP Library v1).
+.PHONY: httplib
+httplib terra.kicad_httplib:
+	$(PYTHON) tools/generate_kicad_httplib.py terra.kicad_httplib
+
 # Footprint maintenance pass over the copied cern-* .kicad_mod files. Two steps,
 # same lifecycle moment (after a CERN PcbLib is copied / a table is built):
 #   1. fix_footprint_attrs - set smd/through_hole type (per library, no DB)
