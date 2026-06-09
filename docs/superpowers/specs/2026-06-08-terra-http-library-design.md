@@ -1,7 +1,7 @@
 # Terra HTTP Library — v1 Design
 
 **Date:** 2026-06-08
-**Status:** Approved, ready for implementation plan
+**Status:** Implemented (v1) and reconciled to as-built; real-KiCad validation (update-from-library, benchmark) in progress
 **Supersedes for KiCad integration:** the ODBC `.kicad_dbl` path (kept only as the
 field/library spec source — see below)
 **Parent vision:** `fastload.org` § "HTTP Library Architecture". This spec is the
@@ -149,12 +149,12 @@ Contract details that drive the serializer:
   `LIB_ID` is `nickname:category:name` (see the `name` bullet below). `id` is only
   the key KiCad uses to fetch a part (`/v1/parts/{id}.json`) and to organize its
   in-memory cache, so it must be **globally unique** and **URL-safe**.
-  - **`id` must nonetheless be stable across rebuilds — transitively.** The durable
-    handle is `name`, and v1 constructs `name` to embed `id` (for uniqueness; see
-    below). So an `id` that changed on `make` regenerate would change every `name`
-    and orphan placed parts at the next *Update from Library*. The stability burden
-    lives on `name`; embedding `id` propagates it to `id`. Either way, both must be
-    a **pure function of stable source identity**, never of storage position.
+  - **`id` must also be stable across rebuilds.** Both `id` and the durable handle
+    `name` are derived directly from `unique_id` — `id = hash(unique_id)`,
+    `name = sanitize(unique_id)` — so both are stable exactly as long as `unique_id`
+    is. An id (or name) derived from storage position would orphan placed parts at
+    the next *Update from Library*. Both must be a **pure function of stable source
+    identity**, never of storage position.
   - This rules out `rowid` (insertion-order; renumbers when parts are added/removed
     or generator order changes).
   - It also rules out raw `unique_id` directly: not globally unique (5 cross-table
@@ -166,14 +166,19 @@ Contract details that drive the serializer:
   `sha1(unique_id)`). Stable (pure function of the part's MPN identity), globally
   unique (given the build invariant below), and URL-safe (hex). The id is opaque
   plumbing; the real MPN stays in the part's `fields`. The server builds a
-  `hash → (table, rowid)` map once at startup to resolve `/v1/parts/{id}.json`.
+  `hash → (table, unique_id)` map once at startup and resolves `/v1/parts/{id}.json`
+  by fetching the row by its `unique_id` primary key.
 
   **Build invariant (the actual stability guarantee):** the regenerate asserts that
   `unique_id` is non-null and **globally unique across all base tables**, failing
   loudly otherwise — so ids can never silently shift or merge. The 5 current
   cross-table duplicates must be resolved to satisfy this (they are the *same*
   physical part cross-listed; collapsing each to a single canonical row/category is
-  the correct model, not a workaround). Exact resolution of the 5 is a plan item.
+  the correct model, not a workaround). **Resolved in `tools/dedup_cross_table.py`:**
+  each of the 5 is kept in one canonical table (`cern_3m`, `cern_regulators`, `leds`,
+  `cern_analog_interface`, `cern_samtec`) and deleted from the others during the
+  build. The dedup is scoped to the dbl part tables, so the `tags` join table is
+  left intact.
 
 - **`name` is NOT a display label — it is the symbol's identity, and the durable
   schematic handle.** Verified in KiCad source (`sch_io_http_lib.cpp`):
@@ -191,24 +196,31 @@ Contract details that drive the serializer:
     illegal-LIB_ID-character sanitization (which replaces `/`, spaces, etc. with
     `_` — itself a collision source).
 
-  v1 `name = sanitize(mpn-or-key) + "_" + id`, where:
+  v1 `name = sanitize(unique_id)` — no hash suffix — where:
   - **`sanitize(s)`** maps every character outside the allow-list `[A-Za-z0-9._-]`
     to `_`. That allow-list is a strict subset of KiCad's legal LIB_ID symbol-name
-    characters (KiCad rejects `/`, `:`, and whitespace and replaces them with `_`;
-    `_` `-` `.` and alphanumerics are legal). Because our output already contains
-    only legal characters, **KiCad's own `FixIllegalChars` is a no-op on it** — so
-    the name KiCad stores byte-matches the name we serve. No second normalization
-    pass, no surprise rename.
-  - **Uniqueness survives sanitization** because it is carried entirely by the
-    `_<id>` suffix (`id` is a unique, already-legal hex hash), not by the sanitized
-    prefix. Two different MPNs that sanitize to the same prefix still differ in the
-    suffix, so names stay globally unique even after any normalization.
-  - The leading sanitized MPN is only for human-recognizability; fall back to `id`
-    alone when no MPN/key is present.
+    characters (KiCad rejects `/`, `:`, and whitespace), so **KiCad's own
+    `FixIllegalChars` is a no-op** and the name KiCad stores byte-matches what we
+    serve.
+  - **`unique_id` is the base, not the `mpn` column, and no hash is needed.**
+    `unique_id` is globally unique, and `sanitize(unique_id)` is unique *within every
+    category* — verified **0 collisions across all 41,050 parts** — so the name needs
+    no disambiguating suffix. `unique_id` also already carries the manufacturer and
+    the *real* part/variant: the `mpn` column is lossy (two distinct
+    `AD620AN`/`AD620ANZ [alt]` rows both collapse to `mpn = "AD620AN"`), whereas
+    `unique_id` preserves it, so names read e.g. `ANALOG_DEVICES-AD620AN` vs
+    `ANALOG_DEVICES-AD620ANZ__alt_`. (An earlier draft used
+    `sanitize(mpn) + "_" + id`; the hash was dropped once the data showed
+    `sanitize(unique_id)` is already collision-free and more informative.)
+  - **`assert_unique_names`** runs at startup and fails loudly if two `unique_id`s in
+    one category ever sanitize to the same name (none today), keeping the no-hash
+    scheme safe across future data changes.
 
   The **pretty MPN, manufacturer, and description go in `fields`**
-  (`Manufacturer PN`, `Value`, `Description`), which is what the chooser shows in
-  columns.
+  (`Manufacturer PN`, `Value`, `Description`), which the chooser shows as columns.
+  The **category listing additionally emits a top-level `description`** (from each
+  library's `description` column, when present) so the chooser shows it while
+  browsing, before a part is fetched.
 - **Auth:** KiCad sends `Authorization: Token <token>`. v1 binds `127.0.0.1` and
   ignores the header.
 
@@ -247,12 +259,15 @@ larger values are exactly what speeds up chooser open for static data):
   44 dbl libraries have a resolvable base table in `db/terra.db`. Document the exact
   rule in the plan.
 - **Part id = `hash(unique_id)`** (see contract). At startup the server scans every
-  base table's `unique_id` column and builds a `hash → (table, rowid)` map; the
+  base table's `unique_id` column and builds a `hash → (table, unique_id)` map; the
   build invariant guarantees this map is 1:1. A duplicate hash discovered at startup
   is a hard error (means the invariant was bypassed). The map covers **all** rows
   regardless of tier, but note this does **not** make hidden parts resolvable on
   *Update from Library* — KiCad gets the id from the (filtered) category listing, so
   a part below the cutoff is effectively unreachable regardless of the map.
+- **Name-uniqueness guard:** `assert_unique_names` also runs at startup and raises if
+  two `unique_id`s in one category sanitize to the same `name`, so the no-hash name
+  scheme can never silently shadow a part.
 - **Tier cutoff:** a server flag `--tier N` (default **2**). Applied as
   `WHERE tier <= N` in the **category listing** query only. All 44 base tables have a
   `tier` column. Depends on the static→0 re-tier (Scope) — without it the default
@@ -264,13 +279,13 @@ larger values are exactly what speeds up chooser open for static data):
   - `categories.json`: one entry per dbl library — `id` = base table name,
     `name` = library `name`, `description` = `""` (or library description if present).
   - `parts/category/{id}.json`:
-    `SELECT unique_id, <display col> FROM <table> WHERE tier <= <cutoff>`, emit
-    `{id: hash(unique_id), name: sanitize(<display col>) + "_" + id}` (see the `name`
-    contract bullet — `name` must be globally unique, not the raw display field).
-  - `parts/{id}.json`: resolve `id → (table, rowid)` via the startup map, fetch the
-    row, then:
-    - `name` ← `sanitize(mpn-or-key) + "_" + id` — **must byte-match** the `name`
-      returned by the category listing for the same part (KiCad keys on it).
+    `SELECT * FROM <table> WHERE tier <= <cutoff>`, emit
+    `{id: hash(unique_id), name: sanitize(unique_id)}` per row — plus a top-level
+    `description` key when the library has a `description` column with a value.
+  - `parts/{id}.json`: resolve `id → (table, unique_id)` via the startup map, fetch
+    the row by its `unique_id` primary key, then:
+    - `name` ← `sanitize(unique_id)` — **must byte-match** the `name` returned by the
+      category listing for the same part (KiCad keys on it).
     - `symbolIdStr` ← row[symbols column]
     - `fields.footprint` ← `{value: row[footprints column],
       visible: <Footprint field's visible_in_chooser>}` (omit if null/empty)
@@ -306,8 +321,10 @@ Manual launch; KiCad must find the server already running. Auto-start deferred.
   `sexpdata`).
 - Add dev dep: `httpx` (required by FastAPI's `TestClient`); `pytest` already
   present.
-- Add `[project.scripts]` `terra-server = "tools.terra_server:main"` (or equivalent)
-  so `uv run terra-server` and the `make serve` target resolve.
+- **As built, no `[project.scripts]` entry was added** — `tools/` is not a declared
+  package and there is no build backend, so a console script would pull in packaging
+  setup for no functional gain. `make serve` runs `uv run python tools/terra_server.py`,
+  which fully covers it. (Intentional deviation from the original plan.)
 
 ### 4. Tests (`tests/`)
 
@@ -317,8 +334,9 @@ Pytest against a small fixture DB (a few rows across 2-3 tables) using FastAPI's
 - `/v1/` root returns a dict with `categories` and `parts` keys whose values are
   **non-empty** strings.
 - `categories.json` returns the expected set, correct shape.
-- `parts/category/{id}.json` returns `{id, name}` pairs; every `id` equals
-  `hash(unique_id)` for its row.
+- `parts/category/{id}.json` returns `{id, name, description?}` per row; every `id`
+  equals `hash(unique_id)` and every `name` equals `sanitize(unique_id)`; a populated
+  `description` column is surfaced as the `description` key.
 - **tier cutoff:** with a fixture containing `tier` 0–3 rows, the default
   (`tier<=2`) category listing **excludes** the tier-3 rows and `--tier 3` includes
   them. `parts/{id}` directly fetched still returns a tier-3 part (the map is
@@ -328,10 +346,11 @@ Pytest against a small fixture DB (a few rows across 2-3 tables) using FastAPI's
 - **id stability:** the id for a fixture row equals the hash of its `unique_id` and
   does **not** change if the row is re-inserted at a different position (guards
   against any rowid/order dependence creeping back in).
-- **name uniqueness:** a fixture with two rows sharing the same MPN (and a legacy
-  row whose first field is `Allow Substitution`) still yields **distinct, non-empty
-  `name`s**, and the `name` from `parts/category` byte-matches the `name` from
-  `parts/{id}` for the same part.
+- **name from `unique_id`:** `name == sanitize(unique_id)`. Two rows sharing an
+  `mpn` but with distinct `unique_id`s (e.g. `AD620AN` vs `AD620ANZ [alt]`) get
+  **distinct names**, and `parts/category`'s `name` byte-matches `parts/{id}`'s.
+  `assert_unique_names` raises when two `unique_id`s in one category sanitize to the
+  same name.
 - **name normalization-safety:** every generated `name` contains only
   `[A-Za-z0-9._-]`, and applying a KiCad-style `FixIllegalChars` (replace `/`, `:`,
   whitespace, and any non-allow-list char with `_`) leaves it **unchanged**
@@ -375,29 +394,27 @@ KiCad  ← terra.kicad_httplib (generated)
 - Server not running → KiCad shows empty libraries; acceptable for v1 (an offline
   `.kicad_dbl` fallback is a deferred consideration noted in `fastload.org`).
 
-## Open items for the implementation plan
+## Resolution status (as built)
 
-- Where to apply the static→0 re-tier in the regenerate (CERN import in
-  `tools/cern_import.py` / the porting path, plus any hand-curated static generators)
-  so all non-parametric tables land at `tier = 0`. Add a build check that no
-  curated/CERN table is left at the schema default 5.
-- Exact view→base-table resolution rule (the `_v` strip is verified to cover all 44
-  libraries; confirm no edge cases where the base name differs).
-- Which display column leads the human-readable prefix of `name` (the MPN is the
-  obvious choice, but legacy generated tables whose first field is
-  `Allow Substitution` need a real MPN/key column picked instead). Uniqueness is
-  already guaranteed by the `id` suffix regardless; this is only about readability.
-- Exact resolution of the 5 cross-table `unique_id` duplicates (assign each to one
-  canonical category, vs. list one id under multiple categories). v1 leans toward
-  single canonical category for a clean 1:1 map; confirm none of the 5 must remain
-  visible in both categories.
-- Hash choice (algorithm + truncation length) — verify no collisions across the full
-  `unique_id` set (**41,050 distinct** of 41,055 rows; the 5-row gap is the
-  cross-table dups) at the chosen length; `sha1`-16-hex has ample headroom.
-- Validate end-to-end in a real KiCad: place a part, regenerate the DB, then run
-  *Update Symbols from Library* and confirm the placed part still re-resolves by its
-  generated `name` (the LIB_ID handle, which embeds the stable `id`) — the whole
-  point of the stable-name/id design.
+- **Static→0 re-tier — done:** `tools/retier_static.py` promotes every non-parametric
+  table to `tier = 0` during the `db/terra.db` build (parametric set kept as-is:
+  `resistors_smt`, `capacitors_smt`); a verification step confirms no `cern_*` table
+  is left above tier 0.
+- **view→base-table rule — done:** strip a trailing `_v`; verified across all 44
+  libraries.
+- **Display column for the name — moot:** `name = sanitize(unique_id)`, so no display
+  column is chosen. A `description` column, when present, is surfaced in the category
+  listing instead.
+- **5 cross-table duplicates — resolved:** `tools/dedup_cross_table.py` keeps each in
+  one canonical table (`cern_3m` / `cern_regulators` / `leds` /
+  `cern_analog_interface` / `cern_samtec`) and is scoped to part tables so `tags` is
+  untouched.
+- **Hash choice — settled:** `sha1`, first 16 hex; 0 collisions across the **41,050**
+  distinct `unique_id`s (of 41,055 rows; the 5-row gap was the cross-table dups).
+- **Still open — real-KiCad validation:** browse/place is confirmed; the
+  *Update-from-Library across a rebuild* and `resistors_smt` (~4.8k) expand-timing
+  checks remain. Placed parts re-resolve by their generated
+  `name = sanitize(unique_id)`, which is stable because `unique_id` is.
 - **Characterize the hidden-part case in real KiCad:** place a `tier ≤ 2` part, then
   tighten `--tier` (or place a tier-3 part via a widened cutoff, then lower it),
   expire the cache, and run *Update from Library*. Confirm whether KiCad orphans the
@@ -417,15 +434,17 @@ determines the long-term id story:
   `part_locator` can have **many** manufacturer/MPN rows (alternates / second
   sources).
 
-Id consequence: in v2 the HTTP part `id` becomes `part_locator` directly — opaque,
-stable, and MPN-independent by construction (no hashing needed, and recategorization
-or MPN edits no longer touch identity).
+Id/name consequence: in v2 the identity moves from `unique_id` to `part_locator`. The
+HTTP `id` becomes `hash(part_locator)` (or `part_locator` directly), and the `name`
+becomes a `part_locator`-derived string — both MPN-independent, so recategorization or
+MPN edits no longer touch identity.
 
-**Migration cost, accepted:** v1→v2 changes every generated `name`, because the
-embedded `id` changes (from `hash(unique_id)` to `part_locator`). Since `name` is the
-durable LIB_ID handle, parts placed under v1 orphan once at that major-version
-boundary. This is a deliberate trade — it's the reason v1 keeps the id scheme
-minimal (a hash) rather than over-investing. After v2, `part_locator` is the durable
-id and never changes again. The v1 build invariant (global `unique_id` uniqueness)
-is also a natural stepping stone: it's exactly the precondition for assigning one
-`part_locator` per distinct part during the v2 migration.
+**Migration cost, accepted:** because v1 derives both `id` and `name` from
+`unique_id`, moving the identity to `part_locator` changes both for every part. Since
+`name` is the durable LIB_ID handle, parts placed under v1 orphan once at that
+major-version boundary. This is a deliberate trade — it's why v1 keeps the identity
+scheme minimal (derive from `unique_id`) rather than over-investing. After v2,
+`part_locator` is the durable identity and never changes again. The v1 build
+invariant (global `unique_id` uniqueness) is also a natural stepping stone: it's
+exactly the precondition for assigning one `part_locator` per distinct part during
+the v2 migration.
