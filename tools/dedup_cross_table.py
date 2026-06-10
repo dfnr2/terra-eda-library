@@ -75,6 +75,24 @@ def dedup(
     return dropped
 
 
+def find_cross_table_duplicates(
+    conn: sqlite3.Connection,
+    part_tables: Iterable[str],
+) -> dict[str, list[str]]:
+    """Return {uid: [tables]} for every unique_id present in more than one part table.
+
+    The HTTP server requires unique_id to be globally unique across part tables;
+    `dedup` is supposed to leave the DB in that state. This re-derives the
+    invariant straight from the data so any duplicate not covered by RESOLUTIONS
+    is caught (e.g. a new import that collides with an existing part).
+    """
+    seen: dict[str, list[str]] = {}
+    for table in part_tables:
+        for (uid,) in conn.execute(f'SELECT unique_id FROM "{table}"'):
+            seen.setdefault(uid, []).append(table)
+    return {uid: tables for uid, tables in seen.items() if len(tables) > 1}
+
+
 def main() -> None:
     from pathlib import Path
 
@@ -93,7 +111,22 @@ def main() -> None:
     dropped = dedup(conn, RESOLUTIONS, part_tables)
     for uid, tables in dropped.items():
         print(f"  deduped {uid}: dropped from {', '.join(tables)}")
+
+    # Guard the invariant the HTTP server relies on: after dedup, no unique_id
+    # may live in two part tables. A residual duplicate means a new import
+    # collided with an existing part and needs a RESOLUTIONS entry. Fail the
+    # build here, loudly, rather than letting `make serve` crash later.
+    residual = find_cross_table_duplicates(conn, part_tables)
     conn.close()
+    if residual:
+        print(
+            "  ERROR: unresolved cross-table duplicate unique_id(s) "
+            "(add a tools/dedup_cross_table.RESOLUTIONS entry):",
+            file=sys.stderr,
+        )
+        for uid, tables in sorted(residual.items()):
+            print(f"    {uid}: in {', '.join(sorted(tables))}", file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

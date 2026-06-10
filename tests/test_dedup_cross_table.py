@@ -1,5 +1,5 @@
 import sqlite3
-from tools.dedup_cross_table import dedup, RESOLUTIONS
+from tools.dedup_cross_table import dedup, find_cross_table_duplicates, RESOLUTIONS
 
 
 def test_resolutions_has_six_entries():
@@ -49,3 +49,28 @@ def test_dedup_does_not_touch_non_part_tables():
     assert conn.execute("SELECT COUNT(*) FROM cern_3m WHERE unique_id='3M-P50E-100P1-SR1-EA'").fetchone()[0] == 1
     # infra table untouched
     assert conn.execute("SELECT COUNT(*) FROM tags WHERE unique_id='3M-P50E-100P1-SR1-EA'").fetchone()[0] == 1
+
+
+def test_find_cross_table_duplicates_flags_residual():
+    """A uid in two part tables is reported; a uid in one table is not."""
+    conn = sqlite3.connect(":memory:")
+    for t in ("cern_relays", "cern_sockets"):
+        conn.execute(f"CREATE TABLE {t} (unique_id TEXT)")
+    conn.execute("INSERT INTO cern_relays VALUES ('DUP')")
+    conn.execute("INSERT INTO cern_sockets VALUES ('DUP')")
+    conn.execute("INSERT INTO cern_sockets VALUES ('SOLO')")
+    conn.commit()
+    residual = find_cross_table_duplicates(conn, ["cern_relays", "cern_sockets"])
+    assert residual == {"DUP": ["cern_relays", "cern_sockets"]}
+
+
+def test_find_cross_table_duplicates_clean_after_dedup():
+    """After dedup resolves a collision, no residual duplicate remains."""
+    conn = sqlite3.connect(":memory:")
+    for t in ("cern_relays", "cern_sockets"):
+        conn.execute(f"CREATE TABLE {t} (unique_id TEXT)")
+    conn.execute("INSERT INTO cern_relays VALUES ('DUP')")
+    conn.execute("INSERT INTO cern_sockets VALUES ('DUP')")
+    conn.commit()
+    dedup(conn, {"DUP": "cern_sockets"}, part_tables=["cern_relays", "cern_sockets"])
+    assert find_cross_table_duplicates(conn, ["cern_relays", "cern_sockets"]) == {}
