@@ -237,7 +237,7 @@ SIMULATION = {
 
 # ======================== KICAD CONFIGURATION ========================
 KICAD_CONFIG = {
-    "symbol": "Device:C",
+    "symbol": "Device:C_US",  # 'Device:C' (European) or 'Device:C_US' (American)
     "footprint_prefix": "Capacitor_SMD:C_",
     "footprint_suffix": "Metric",
 }
