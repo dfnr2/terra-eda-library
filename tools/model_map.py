@@ -632,8 +632,11 @@ def _body_width(name_uc: str, token: str) -> int | None:
 
 # CERN IPC footprint name for a quad/dual flat(-no-lead) part, e.g.
 # "QFN50P700X700X90-49N-S580" = QFN, 0.50mm pitch, 7.00x7.00mm body, 49 pads;
-# "QFP50P900X900X160-48N"     = QFP, 0.50mm pitch, 9.00x9.00mm lead-span, 48 leads.
-_QUAD_RE = re.compile(r"^[PVT]?(QFN|DFN|QFP|LQFP|TQFP)(\d+)P(\d+)X(\d+)X\d+-(\d+)N", re.I)
+# "QFP50P900X900X160-48N"     = QFP, 0.50mm pitch, 9.00x9.00mm lead-span, 48 leads;
+# "SON95P300X300X80-7N"       = SON, 0.95mm pitch, 3.00x3.00mm body, 7 pads (the
+#   dual-row small-outline no-lead body — physically identical to DFN, which is
+#   where KiCad files its model, so SON resolves through the DFN family).
+_QUAD_RE = re.compile(r"^[PVT]?(QFN|DFN|SON|QFP|LQFP|TQFP)(\d+)P(\d+)X(\d+)X\d+-(\d+)N", re.I)
 # KiCad parametric model names (optionally vendor-prefixed):
 _QFNDFN_MODEL = re.compile(
     r"^(QFN|DFN)-(\d+)(?:-\d+EP)?_([0-9.]+)x([0-9.]+)mm_P([0-9.]+)mm", re.I)
@@ -722,6 +725,8 @@ def _resolve_quad(name: str) -> str | None:
     bx, by = int(m.group(3)) / 100, int(m.group(4)) / 100
     n = int(m.group(5))
     leads = {n, n - 1}
+    if fam == "SON":
+        fam = "DFN"  # SON == DFN body; KiCad files the model under DFN.
     if fam in ("QFN", "DFN"):
         return _best_quad(root / _QFN_DFN, _QFNDFN_MODEL, {fam}, leads, pitch, bx, by, 1.5)
     # QFP family: CERN body == lead-span; KiCad body ≈ span − 2mm.
@@ -736,6 +741,16 @@ _DSUB = "Connector_Dsub.3dshapes"
 _MOLEX = "Connector_Molex.3dshapes"
 _STD_PITCH = (2.54, 2.00, 1.27, 1.00)
 _DSUB_POS = (9, 15, 25, 37, 44, 62)
+# Generic pin-header/socket fallback (#3) keys off pure grid geometry, so it must
+# only fire when the part is actually a connector — otherwise a bespoke 2-pad
+# sensor module on a clean 2.54mm grid (Hamamatsu SiPM, Teviso radiation sensor)
+# gets a wrong PinHeader body. Every real CERN connector description carries one
+# of these keywords; sensor/IC descriptions do not.
+_CONNECTOR_KW = (
+    "connector", "header", "socket", "receptacle", "contact", "terminal",
+    "mezzanine", "board to board", "board-to-board", "wire to board",
+    "pin strip", "pin row", "jumper", "shunt", "d-sub", "dsub", "idc",
+)
 
 
 def _nearest_std_pitch(p: float) -> float | None:
@@ -794,8 +809,10 @@ def resolve_connector(description: str, *, pins: int | None = None,
             if m:
                 return _ref(_MOLEX, m)
 
-    # 3. Generic pin header / socket from a clean rectangular grid.
-    if rows and perrow and pitch_mm:
+    # 3. Generic pin header / socket from a clean rectangular grid — only when the
+    # description is actually connector-like (guards against bespoke 2-pad sensor
+    # modules that happen to sit on a 2.54mm grid).
+    if rows and perrow and pitch_mm and any(k in dl for k in _CONNECTOR_KW):
         sp = _nearest_std_pitch(pitch_mm)
         if sp and rows in (1, 2, 3, 4):
             sp_s = f"{sp:g}"

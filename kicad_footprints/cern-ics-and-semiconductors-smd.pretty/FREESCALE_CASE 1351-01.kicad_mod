@@ -1701,7 +1701,7 @@
 		(uuid "9aa23724-1ab7-489d-a361-abd6ebe37b23")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/FREESCALE_CASE 1351-01.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-8_3.9x4.9mm_P1.27mm.step"
 		(offset
 			(xyz 0.00011 0.00011 0)
 		)

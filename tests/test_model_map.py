@@ -88,6 +88,21 @@ def test_qfn_dimension_resolver():
 
 
 @_needs_kicad
+def test_son_dimension_resolver():
+    # SON is the dual-row small-outline no-lead body == DFN; KiCad files the model
+    # under DFN, so a CERN SON IPC name resolves through the DFN family (CERN
+    # sensors: LM75/TMP temperature sensors in SON-6/SON-8). N includes the EP.
+    assert resolve_from_footprint("SON95P300X300X80-7N").endswith(
+        "/Package_DFN_QFN.3dshapes/DFN-6-1EP_3x3mm_P0.95mm_EP1.7x2.6mm.step")
+    assert "DFN-6-1EP_2x2mm_P0.65mm" in resolve_from_footprint("SON65P200X200X80-7N")
+    assert "DFN-8-1EP_3x3mm_P0.65mm" in resolve_from_footprint("SON65P300X300X80-9N")
+    assert "DFN-8-1EP_3x2mm_P0.5mm" in resolve_from_footprint("SON50P300X200X100-9N")
+    # KiCad ships no 1.0mm-pitch or 1.5mm-body SON/DFN here -> decline, no mis-map.
+    assert resolve_from_footprint("SON100P300X300X80-7N") is None
+    assert resolve_from_footprint("SON80P150X150X80-4N") is None
+
+
+@_needs_kicad
 def test_qfp_dimension_resolver():
     # CERN QFP body in name is the lead-span; KiCad body ≈ span − 2mm; prefer LQFP.
     assert "LQFP-48" in resolve_from_footprint("QFP50P900X900X160-48N")
@@ -120,6 +135,19 @@ def test_connector_non_standard_pitch_declined():
     # No clean grid / non-standard pitch -> None (proprietary -> drop-folder).
     assert resolve_connector("Mezzanine board-to-board", pins=80) is None
     assert resolve_connector("0.8mm header", pins=10, rows=1, perrow=10, pitch_mm=0.8) is None
+
+
+def test_generic_pinheader_requires_connector_description():
+    # A bespoke 2-pad sensor module on a clean 2.54mm grid must NOT get a generic
+    # PinHeader body — the generic fallback fires only for connector-like parts.
+    # (CERN sensors: Hamamatsu SiPM / Teviso radiation sensor.)
+    assert resolve_connector("3x3mm Single Element MPPC (Multi-Pixel Photon Counter)",
+                             pins=2, rows=1, perrow=2, pitch_mm=2.54) is None
+    assert resolve_connector("Nuclear Beta and Gamma Radiation Sensor",
+                             pins=3, rows=1, perrow=3, pitch_mm=2.54) is None
+    # but a real header with the same grid still resolves.
+    assert resolve_connector("2-Pin Header 2.54mm",
+                             pins=2, rows=1, perrow=2, pitch_mm=2.54) is not None
 
 
 @_needs_kicad
