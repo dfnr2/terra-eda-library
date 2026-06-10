@@ -66,14 +66,18 @@ the invariant is **one fragment, two includers, identical columns**.
   rolling collection, record `download_url`+`sha256` in the manifest.
 - `tools/cern_datasheets/prune.py` — maintainer. Delete release assets whose `sha256` is
   no longer referenced by the current manifest (anti-staleness).
-- `tools/cern_datasheets/download.py` — consumer/online, once. Read the manifest, fetch
-  each `download_url` into a **gitignored** local dir, verify `sha256`. Lazy, resumable.
-- `tools/cern_datasheets/apply_harvest.py` — offline post-load build step, keyed by
-  `unique_id` (like `retier_static.py`/`dedup_cross_table.py`), applied to the built DB so
-  it works for **static** native tables *and* generator-backed tables alike. Fills blank
-  allowlist columns **fill-blanks-only** (curated values win; conflicts logged) and
-  repoints `datasheet` to the local file **only when present-and-verified in the local
-  cache**. Supersedes the CERN-only filename-match in `rewrite_datasheets.py`.
+- `tools/cern_datasheets/apply_harvest.py` — **deterministic** post-load step in the
+  master `db/terra.db` recipe, keyed by `unique_id` (like
+  `retier_static.py`/`dedup_cross_table.py`), so it covers **static** native tables *and*
+  generator-backed tables alike. From committed inputs only (manifest + sidecars): fills
+  blank allowlist columns **fill-blanks-only** (curated values win; conflicts logged) and
+  sets `datasheet` to the manifest `download_url` (our durable Release copy). Supersedes
+  the CERN-only filename-match in `rewrite_datasheets.py`.
+- `tools/cern_datasheets/download.py` (`make datasheets`) + `localize_datasheets.py`
+  (`make localize-datasheets`) — **optional, per-user** offline-convenience layer. Download
+  fetches PDFs into a **gitignored** local dir and records a local-cache index; localize
+  repoints `datasheet` from the Release URL to the local file for cached hashes. Neither is
+  a prerequisite of `make all`, so gitignored local state never forks the canonical DB.
 - A **GitHub Pages catalog index** — a small static site listing part types / parts with
   links to the Release-hosted datasheets (and, later, a browse front-end for the terra
   HTTP library). Generated from the DB + manifest; well under the Pages 1 GB limit
@@ -110,20 +114,36 @@ the invariant is **one fragment, two includers, identical columns**.
    post-load step `apply_harvest.py` (keyed by `unique_id`), not by per-table generators —
    so it covers the many static native tables too. No manual live-DB edits; the DB rebuilds
    deterministically from `CERN.sqlite`/generators/static SQL + committed sidecars.
-8. **Offline build:** `make` never touches the network. Nexar lookups and `gh` uploads
-   happen only in maintainer-run phases.
+8. **Offline + deterministic build:** `make` never touches the network, and `make all`
+   builds an identical `db/terra.db` for everyone from committed inputs only (manifest +
+   sidecars) — `datasheet` points at the Release `download_url`. The gitignored local-cache
+   and the local-only `localize-datasheets` step are never prerequisites of `all`, so they
+   cannot fork the canonical DB. Nexar lookups and `gh` uploads happen only in
+   maintainer-run phases.
 9. **Phase-0 gate:** schema consolidation precedes any harvest.
 
 ## Pipeline (5 phases; 2 online, 1 consumer-facing)
 
 ```
 Phase 0  schema consolidation        maintainer, offline, blocking gate
-Phase 1  harvest   (Nexar)           maintainer, ONLINE   -> manifest source_url + params sidecar
-Phase 2  mirror    (gh release)      maintainer, ONLINE   -> manifest download_url + sha256
+Phase 1  harvest   (Nexar)           maintainer, ONLINE   -> manifest source_urls + params sidecar (datasheet_source_url)
+Phase 2  mirror    (gh release)      maintainer, ONLINE   -> manifest re-keyed to sha256 + download_url
          prune     (gh release)      maintainer, ONLINE   -> delete unreferenced assets
-Phase 3  download  (make datasheets) consumer,   ONLINE   -> gitignored local PDFs, sha256-verified
-Phase 4  build     (make)            anyone,     OFFLINE  -> apply_harvest (by unique_id): fill blanks + datasheet rewrite
+Phase 4  build     (make)            anyone,     OFFLINE  -> apply_harvest: fill blank params + datasheet = download_url
+                                                              (DETERMINISTIC: committed manifest + sidecars only)
+-- optional, per-user, NOT part of the canonical build: --
+Phase 3  download  (make datasheets) consumer,   ONLINE   -> gitignored local PDFs, sha256-verified -> local-cache index
+Phase 5  localize  (make localize-datasheets) consumer, OFFLINE -> repoint datasheet to local file for cached hashes
 ```
+
+Phases 0/1/2/4 produce a **deterministic** `db/terra.db` from committed inputs only —
+every consumer who runs plain `make` gets the identical DB, with `datasheet` pointing at
+the stable Release `download_url`. Phases 3/5 are an **optional offline-convenience layer**:
+a user who wants datasheets served from local files runs `make datasheets` then
+`make localize-datasheets`. Neither is a prerequisite of `make all`, so the gitignored
+local-cache state can never fork the canonical build (resolves the determinism hazard).
+`db/terra.db` depends on the committed manifest + sidecars, so harvested-data edits do
+trigger a rebuild; the local cache state, deliberately, does not.
 
 The periodic refresh ("update the collection along with the native terra collection") is
 the maintainer routine **harvest → mirror → prune**, run across all tables. Because it is
@@ -150,7 +170,7 @@ set by the maintainer in Phase 2 — it says nothing about any consumer's local 
     "filenames": ["0402ESDA-MLP.pdf"],    // upstream name(s) this content was known by
     "mpns": ["0402ESDA-MLP"],
     "manufacturer": "STMicroelectronics",
-    "source_url": "https://www.st.com/resource/.../0402esda.pdf",   // upstream, fetch-only
+    "source_urls": ["https://www.st.com/resource/.../0402esda.pdf"], // upstream(s), fetch-only; the sidecar join key
     "download_url": "https://github.com/dfnr2/terra-eda-library/releases/download/terra-datasheets/ab12….pdf",
     "size": 184213,
     "license_note": "",                   // redistribution caveat if known
@@ -158,6 +178,11 @@ set by the maintainer in Phase 2 — it says nothing about any consumer's local 
   }
 }
 ```
+
+`source_urls` is a list because content-dedup can merge several upstream URLs onto one
+`sha256`. `apply_harvest` builds a reverse index `source_url → entry` from it, which is how
+a sidecar's `datasheet_source_url` (known at harvest, before any hash) resolves to the
+final `download_url` — **no sidecar ever needs patching when Phase 2 re-keys to `sha256`.**
 
 ### 2. Per-table sidecar — `db/tables/<table>/<table>_harvest.json`
 
@@ -169,7 +194,7 @@ and filename-collision problems). `original_datasheet` records the pre-existing 
 ```json
 {
   "STMicroelectronics-0402ESDA-MLP": {
-    "datasheet_sha256": "ab12…",                       // -> collection manifest
+    "datasheet_source_url": "https://www.st.com/resource/.../0402esda.pdf",  // join key into manifest; known at harvest
     "original_datasheet": "0402ESDA-MLP.pdf",          // pre-existing row value (filename or URL)
     "package": "SOT-23",
     "manufacturer_link": "https://www.st.com/en/...",
@@ -191,54 +216,66 @@ Any Nexar attribute mapping outside that union is dropped. (Curated columns like
 ### 3. `harvest.py` (online)
 
 For each part across all tables: query Nexar by `mpn`+`manufacturer`. On a high-confidence
-match, (a) ensure a collection-manifest entry keyed by the datasheet's eventual `sha256`
-carrying its `source_url`; (b) write the row's `datasheet_sha256`, `original_datasheet`,
-and the allowlisted params to that table's sidecar. A per-type Nexar→terra **field map**
-translates attribute names to allowlist columns; unmapped attributes are dropped.
-Rate-limited, checkpointed (resume mid-sweep), incremental (skip already-resolved rows
-unless `--refresh`), and records `no-match`/`low-confidence` rather than guessing.
-
-(Note: `source_url`'s `sha256` isn't known until the PDF is fetched in Phase 2; harvest
-keys the manifest entry provisionally by `source_url` and Phase 2 re-keys to the real
-`sha256` once computed.)
+match, (a) ensure a collection-manifest entry carrying this datasheet's `source_url` in its
+`source_urls` list (provisionally keyed by `source_url` until Phase 2 computes the hash);
+(b) write the row's `datasheet_source_url`, `original_datasheet`, and the allowlisted params
+to that table's sidecar. The sidecar's join key is the **`source_url`** — known now, stable
+across the later re-key — so harvest output is final and never rewritten by Phase 2. A
+per-type Nexar→terra **field map** translates attribute names to allowlist columns; unmapped
+attributes are dropped. Rate-limited, checkpointed (resume mid-sweep), incremental (skip
+already-resolved rows unless `--refresh`), records `no-match`/`low-confidence` not guesses.
 
 ### 4. `mirror.py` + `prune.py` (online, `gh`)
 
-`mirror`: for each manifest entry not yet `archive_ok`, download from `source_url`, compute
-`sha256`, re-key the entry to that hash, `gh release upload --clobber <tag> <sha256>.pdf`,
-set `download_url`+`size`+`archive_ok=true`. Skip upload if a `<sha256>.pdf` asset already
-exists. `prune`: list release assets, delete any whose `sha256` is absent from the current
-manifest. A `source_url` that 404s → entry left without `download_url` (surfaced by audit).
+`mirror`: for each manifest entry not yet `archive_ok`, download from a `source_url`,
+compute `sha256`, **re-key the entry from its provisional `source_url` key to `sha256`**
+(keeping the full `source_urls` list intact so the sidecar join still resolves),
+`gh release upload --clobber <tag> <sha256>.pdf`, set `download_url`+`size`+`archive_ok=true`.
+Skip upload if a `<sha256>.pdf` asset already exists. **No sidecar is touched.** `prune`:
+list release assets, delete any whose `sha256` is absent from the current manifest. A
+`source_url` that 404s → entry left without `download_url` (surfaced by audit).
 
-### 5. `download.py` / `make datasheets` (consumer, online, once) + local-cache index
+### 5. `download.py` / `make datasheets` (consumer, **optional**, online, once) + local-cache index
 
 Read the manifest, fetch each `download_url` into a **gitignored** `assets/datasheets/files/`
 (served via `${TERRA_EDA_LIB}`), verify each against its `sha256`. Writes a **gitignored**
 `assets/datasheets/.cache-state.json` recording which `sha256`s are present-and-verified
-**locally**. This local-cache state is what the build trusts — never the committed
-`archive_ok`. Resumable; re-running fetches only missing/changed files. On a `sha256`
-mismatch: re-fetch once, then mark that hash unavailable and skip (never install an
-unverified PDF).
+locally. **Not a prerequisite of `make all`** — purely to enable the optional local
+localization in §6b. Resumable; on a `sha256` mismatch, re-fetch once, then mark the hash
+unavailable and skip (never installs an unverified PDF).
 
-### 6. `apply_harvest.py` (offline post-load build step) — replaces generator-merge + filename rewrite
+### 6. `apply_harvest.py` (deterministic, in the `db/terra.db` recipe) — replaces generator-merge + filename rewrite
 
-Runs in `make project-db` as a post-load pass over the built DB, **keyed by `unique_id`**,
-exactly like the existing `retier_static.py`/`dedup_cross_table.py` steps — so it works
-uniformly for **both** generator-backed tables (`resistors_smt`, CERN imports) **and** the
-many **static** native tables (`diodes`, `bjt`, `ic_*`, `leds`, …) that have no generator
-to hook. For each sidecar row, by `unique_id`:
+Runs in the **master `db/terra.db` build recipe** (the step `make project-db` triggers),
+as a post-load pass **keyed by `unique_id`**, exactly like the adjacent
+`retier_static.py`/`dedup_cross_table.py` steps — operating on the master only (per-table
+`db/<table>.db` are build intermediates and are not harvested). Because it works on the
+built DB rather than per-table generators, it covers **both** generator-backed tables
+(`resistors_smt`, CERN imports) **and** the many **static** native tables (`diodes`, `bjt`,
+`ic_*`, `leds`, …) uniformly. Inputs are **committed only** (manifest + sidecars), so the
+result is deterministic — every plain `make` produces the same `db/terra.db`. For each
+sidecar row, by `unique_id`:
 - **Params:** set any **blank** allowlist column from the sidecar; never overwrite a
   non-blank curated value; append disagreements to `<table>_conflicts.log`.
-- **Datasheet:** if `datasheet_sha256` is present-and-verified in the **local-cache index**,
-  `UPDATE <table> SET datasheet = <local_path> WHERE unique_id = ?`. Otherwise leave the
-  row's existing `datasheet` (CERN filename or native URL) untouched — so a consumer who
-  skipped Phase 3 never gets a DB pointing at absent local PDFs.
+- **Datasheet:** resolve `datasheet_source_url` → manifest entry (via the `source_urls`
+  reverse index) → `download_url`, and `UPDATE <table> SET datasheet = <download_url>
+  WHERE unique_id = ?`. The DB thus points at our durable, content-addressed Release copy —
+  no local files required, no dependence on whether anyone ran Phase 3.
 
-Reading a committed sidecar in a deterministic build step keeps the DB **regenerable** (no
-manual live-DB edits); this supersedes the old `rewrite_datasheets.py` filename-match,
-which only worked for CERN rows.
+`db/terra.db` lists the manifest + sidecars as prerequisites, so harvested-data edits
+trigger a rebuild. This supersedes the CERN-only `rewrite_datasheets.py` filename-match.
 
-### 8. GitHub Pages catalog index
+### 6b. `localize_datasheets.py` / `make localize-datasheets` (optional, local, offline)
+
+A **separate opt-in** target for users who want datasheets served from local files instead
+of the Release URL. Over the built DB, for each row whose `datasheet_source_url` resolves to
+a `sha256` that is **present-and-verified in the local-cache index** (§5), rewrite
+`datasheet` to the local `${TERRA_EDA_LIB}` file path; leave all others at the
+`download_url`. This is the **only** step that reads the gitignored local-cache state, and
+it is never a prerequisite of `make all` — so non-deterministic local state cannot fork the
+canonical DB (it only ever swaps a stable URL for a local path on the user's own machine).
+
+### 7. GitHub Pages catalog index
 
 A static-site generator (`tools/cern_datasheets/build_catalog.py` → `docs/` or a
 `gh-pages` artifact) that renders, from `db/terra.db` + manifest, a browsable index of
@@ -271,10 +308,11 @@ review — turning the harvest into a passive data-quality probe as a side effec
 - **mirror:** a `source_url` that 404s → entry left without `download_url`/`archive_ok`;
   surfaced by audit.
 - **download:** `sha256` mismatch → re-fetch once, then mark that hash absent in the
-  local-cache index and skip (never installs an unverified PDF). `apply_harvest` then leaves
-  those rows' original `datasheet` untouched.
-- **Offline guarantee:** `make` targets that build the DB depend only on committed files;
-  the online phases are separate targets that are never prerequisites of `all`.
+  local-cache index and skip (never installs an unverified PDF). `localize_datasheets` then
+  leaves those rows at the Release `download_url`.
+- **Offline + determinism guarantee:** `db/terra.db` depends only on committed files
+  (manifest + sidecars); the online phases and the local-cache-dependent `localize` step are
+  separate targets, never prerequisites of `all`.
 
 ## Testing
 
@@ -282,15 +320,19 @@ review — turning the harvest into a passive data-quality probe as a side effec
   schemas, and that the resulting tables expose an identical type-column set.
 - `harvest`: fixture Nexar responses → asserts field-map output respects the
   `CORE_HARVEST_COLUMNS` + type-fragment allowlist (and drops everything else);
-  low-confidence handling; sidecar carries `datasheet_sha256` + `original_datasheet`.
-- `apply_harvest`: fixture sidecar + built DB → asserts blanks filled, non-blanks
-  preserved, conflicts logged, and rewrite-by-`unique_id` hits a **static** native table
-  (URL-valued `datasheet`) as well as a generator/CERN table.
-- local-cache gating: `apply_harvest` rewrites datasheet only when the hash is in the
-  local-cache index; with an empty cache, original `datasheet` values are left intact.
+  low-confidence handling; sidecar carries `datasheet_source_url` + `original_datasheet`.
+- `apply_harvest` (deterministic): fixture sidecar + manifest + built DB → asserts blanks
+  filled, non-blanks preserved, conflicts logged, and `datasheet` set to the resolved
+  `download_url` by `unique_id` on a **static** native table (URL-valued `datasheet`) as
+  well as a generator/CERN table. Resolution survives a Phase-2 re-key (sidecar
+  `source_url` still joins to the now-`sha256`-keyed entry).
+- **determinism:** `apply_harvest` produces an identical DB with an empty vs populated
+  local cache (it never reads the cache).
 - `mirror`/`prune`: fake release-asset listing → asserts content-addressed upload, clobber,
-  and that exactly the unreferenced hashes are pruned.
-- `download`: sha256 verify pass/mismatch paths update the local-cache index correctly.
+  re-key keeps `source_urls`, and exactly the unreferenced hashes are pruned.
+- `download`/`localize`: sha256 pass/mismatch updates the local-cache index correctly;
+  `localize` rewrites to a local path only for cached hashes and leaves the rest at
+  `download_url`.
 - manifest round-trip / schema validation; catalog builds from a fixture DB.
 
 ## Open questions
