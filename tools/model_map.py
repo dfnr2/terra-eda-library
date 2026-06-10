@@ -565,6 +565,21 @@ SKIP_REASON = {
                         "models only for the Omron B3F/B3S/B3U tactile, Omron A6S/"
                         "A6H DIP-slide, and C&K FSMSM/JS202011CQN/PCM12/PCM13 bodies "
                         "(mapped above). The rest go to the human drop-folder.",
+    # transformers (footprint-name families; package column is blank)
+    "XFMR vendor core": "CERN Transformers are bespoke vendor magnetics — BLOCK "
+                        "(VB/PT/FL/AVB mains), Myrra (EI/UI mains), Talema/Nuvotem "
+                        "(toroidal AC), Coilcraft/Mini-Circuits/Macom/MiniRF (RF "
+                        "balun/wideband), Pulse/Wurth (pulse/CMC/Ethernet magnetics "
+                        "modules), VAC (current-sense cores), Schaffner/Vigortronix/"
+                        "ERA/Triad/Hammond (signal & power), CERN-custom HCRA*/EDA-* "
+                        "cores. KiCad's Transformer_THT/SMD libs ship only a handful "
+                        "of unrelated vendor-specific bodies (Breve TEZ, Hahn/CHK "
+                        "EI, Lundahl, ETAL, Triad VPP16-310, Halo TG111-MSC13) — "
+                        "none of which is the body of any CERN Transformers part "
+                        "(CERN's lone Halo is TG111-E001J24RL on the J24 body, its "
+                        "Triads are CST/CSE/TY/FS/SP series, not VPP16). 0/230 "
+                        "covered is correct, not a regression; these go to the human "
+                        "drop-folder under kicad_3dmodels/.",
 }
 
 # All package keys the package-based resolver knows, for footprint-name fallback.

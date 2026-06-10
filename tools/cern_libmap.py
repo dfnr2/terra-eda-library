@@ -24,6 +24,7 @@ SYMBOL_LIB_NICK = {
     "Fuses": "cern-fuses",
     "Sensors": "cern-sensors",
     "Switches": "cern-switches",
+    "Inductors & Transformers": "cern-inductors-transformers",
 }
 
 FOOTPRINT_LIB_NICK = {
@@ -50,6 +51,7 @@ FOOTPRINT_LIB_NICK = {
     "Relays": "cern-relays",
     "Fuses": "cern-fuses",
     "Switches": "cern-switches",
+    "Transformers": "cern-transformers",
 }
 
 

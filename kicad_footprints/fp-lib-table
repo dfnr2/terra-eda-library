@@ -30,6 +30,7 @@
   (lib (name "cern-sockets")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-sockets.pretty")(options "")(descr ""))
   (lib (name "cern-souriau-thd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-souriau-thd.pretty")(options "")(descr ""))
   (lib (name "cern-switches")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-switches.pretty")(options "")(descr ""))
+  (lib (name "cern-transformers")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-transformers.pretty")(options "")(descr ""))
   (lib (name "cern-tyco-smd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-tyco-smd.pretty")(options "")(descr ""))
   (lib (name "cern-tyco-thd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-tyco-thd.pretty")(options "")(descr ""))
   (lib (name "cern-weidmuller-thd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-weidmuller-thd.pretty")(options "")(descr ""))
