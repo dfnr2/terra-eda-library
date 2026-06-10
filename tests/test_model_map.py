@@ -233,3 +233,32 @@ def test_metal_can_by_leads():
     assert resolve_model("TO-18", pin_count=3).endswith("/TO-18-3.step")
     assert resolve_model("TO-39", pin_count=2).endswith("/TO-39-2.step")
     assert resolve_model("TO-5", pin_count=4).endswith("/TO-5-3.step")
+
+
+def test_relay_footprint_exact():
+    # Vendor-series relay bodies KiCad ships, by exact CERN footprint name.
+    assert resolve_from_footprint("REL_OMRON_G5V-1").endswith(
+        "/Relay_THT.3dshapes/Relay_SPDT_Omron_G5V-1.step")
+    assert resolve_from_footprint("REL_OMRON_G6K-2F-Y").endswith(
+        "/Relay_SMD.3dshapes/Relay_DPDT_Omron_G6K-2F-Y.step")
+    assert resolve_from_footprint("REL_FINDER_30.22").endswith(
+        "/Relay_THT.3dshapes/Relay_DPDT_Finder_30.22.step")
+    assert resolve_from_footprint("REL_TYCO_SCHRACK_RT42XXXX").endswith(
+        "/Relay_THT.3dshapes/Relay_DPDT_Schrack-RT2-FormC_RM5mm.step")
+
+
+def test_relay_same_case_variants():
+    # Latching / sibling variants reuse the non-latching series body.
+    assert resolve_from_footprint("REL_OMRON_G6SU-2G").endswith(
+        "/Relay_SMD.3dshapes/Relay_DPDT_Omron_G6S-2G.step")
+    assert resolve_from_footprint("REL_FINDER_40.61").endswith(
+        "/Relay_THT.3dshapes/Relay_SPDT_Finder_40.51.step")
+
+
+def test_relay_unmapped_declines():
+    # No bundled body -> None; and REL/RELS names never fall through to the
+    # generic package-token scan (the 'SMA' in a Finder socket variant must not
+    # resolve to a diode SMA model).
+    assert resolve_from_footprint("REL_PANASONIC_TQ2") is None
+    assert resolve_from_footprint("REL_TYCO_IMXXXGX") is None
+    assert resolve_from_footprint("RELS_FINDER_94.13SMA") is None

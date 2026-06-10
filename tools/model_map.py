@@ -290,6 +290,72 @@ def _resolve_xtal_osc(name: str) -> str | None:
     return _ref(_CRYSTAL if uc.startswith("XTAL") else _OSC, table[best])
 
 
+# --- 7. Relays: CERN footprint name -> bundled Relay_THT/Relay_SMD model ------
+# CERN relay footprints are vendor-series named (REL_<MFR>_<SERIES>) and the
+# package column is blank, so resolution is an exact footprint-name map onto the
+# relay series KiCad ships. Same-case variants reuse the series model:
+#   - Finder 40.61/40.62 share the 40-series case with 40.51/40.52;
+#   - Omron latching variants (G6AU/G6KU/G6SU) share the non-latching case;
+#   - Schrack RT relays (RT1/RT2/RT3/RT4/RTD MPN families) all share the RT case
+#     with RM5mm pinning - 1-pole families take the RT1 model, 2-pole the RT2.
+# Several CERN footprints are drawn 90 degrees rotated relative to the KiCad
+# native footprint; the model body still matches (human sets rotate-Z on review).
+_RELAY_THT = "Relay_THT.3dshapes"
+_RELAY_SMD = "Relay_SMD.3dshapes"
+
+RELAY_FOOTPRINT_MODEL = {
+    # Finder PCB relays
+    "REL_FINDER_30.22": (_RELAY_THT, "Relay_DPDT_Finder_30.22.step"),
+    "REL_FINDER_32.21": (_RELAY_THT, "Relay_SPDT_Finder_32.21-x000.step"),
+    "REL_FINDER_32.21.X.XXX.X300": (_RELAY_THT, "Relay_SPST_Finder_32.21-x300.step"),
+    "REL_FINDER_36.11": (_RELAY_THT, "Relay_SPDT_Finder_36.11.step"),
+    "REL_FINDER_40.51": (_RELAY_THT, "Relay_SPDT_Finder_40.51.step"),
+    "REL_FINDER_40.52": (_RELAY_THT, "Relay_DPDT_Finder_40.52.step"),
+    "REL_FINDER_40.61": (_RELAY_THT, "Relay_SPDT_Finder_40.51.step"),    # same 40-series case
+    "REL_FINDER_40.61.8": (_RELAY_THT, "Relay_SPDT_Finder_40.51.step"),  # same 40-series case
+    "REL_FINDER_40.62": (_RELAY_THT, "Relay_DPDT_Finder_40.52.step"),    # same 40-series case
+    # Omron signal relays (THT)
+    "REL_OMRON_G5V-1": (_RELAY_THT, "Relay_SPDT_Omron_G5V-1.step"),
+    "REL_OMRON_G5V-2": (_RELAY_THT, "Relay_DPDT_Omron_G5V-2.step"),
+    "REL_OMRON_G6A-2": (_RELAY_THT, "Relay_DPDT_Omron_G6A.step"),
+    "REL_OMRON_G6AK-2": (_RELAY_THT, "Relay_DPDT_Omron_G6AK.step"),
+    "REL_OMRON_G6AU-2": (_RELAY_THT, "Relay_DPDT_Omron_G6A.step"),       # latching, same case
+    "REL_OMRON_G6E-134P": (_RELAY_THT, "Relay_SPDT_Omron_G6E.step"),
+    "REL_OMRON_G6H-2": (_RELAY_THT, "Relay_DPDT_Omron_G6H-2.step"),
+    "REL_OMRON_G6K-2P-Y": (_RELAY_THT, "Relay_DPDT_Omron_G6K-2P-Y.step"),
+    "REL_OMRON_G6S-2": (_RELAY_THT, "Relay_DPDT_Omron_G6S-2.step"),
+    "REL_OMRON_G2RL-24": (_RELAY_THT, "Relay_DPDT_Omron_G2RL.step"),
+    "REL_OMRON_G2RL-2A": (_RELAY_THT, "Relay_DPDT_Omron_G2RL.step"),     # DPST, same G2RL case
+    # Omron signal relays (SMD)
+    "REL_OMRON_G6K-2F": (_RELAY_SMD, "Relay_DPDT_Omron_G6K-2F.step"),
+    "REL_OMRON_G6K-2F-Y": (_RELAY_SMD, "Relay_DPDT_Omron_G6K-2F-Y.step"),
+    "REL_OMRON_G6K-2G-Y": (_RELAY_SMD, "Relay_DPDT_Omron_G6K-2G-Y.step"),
+    "REL_OMRON_G6KU-2F-Y": (_RELAY_SMD, "Relay_DPDT_Omron_G6K-2F-Y.step"),  # latching, same case
+    "REL_OMRON_G6S-2F": (_RELAY_SMD, "Relay_DPDT_Omron_G6S-2F.step"),
+    "REL_OMRON_G6S-2G": (_RELAY_SMD, "Relay_DPDT_Omron_G6S-2G.step"),
+    "REL_OMRON_G6SU-2G": (_RELAY_SMD, "Relay_DPDT_Omron_G6S-2G.step"),   # latching, same case
+    # Kemet / Fujitsu(FCL) / Hongfa power relays
+    "REL_KEMET_EC2_NU": (_RELAY_THT, "Relay_DPDT_Kemet_EC2_NU.step"),
+    "REL_FCL_FTR-F1C": (_RELAY_THT, "Relay_DPDT_Fujitsu_FTR-F1C.step"),
+    "REL_HONGFA_HF115F-2Z4": (_RELAY_THT, "Relay_DPDT_Hongfa_HF115F-2Z-x4.step"),
+    # Tyco/Schrack RYII + RT series
+    "REL_TYCO_SCHRACK_RYII_CO": (_RELAY_THT, "Relay_1-Form-C_Schrack-RYII_RM3.2mm.step"),
+    "REL_TYCO_SCHRACK_RYII_NO": (_RELAY_THT, "Relay_1-Form-A_Schrack-RYII_RM5mm.step"),
+    "REL_TYCO_SCHRACK_RT21xxxx": (_RELAY_THT, "Relay_SPDT_Schrack-RT1-FormC_RM5mm.step"),
+    "REL_TYCO_SCHRACK_RT31xxxx": (_RELAY_THT, "Relay_SPDT_Schrack-RT1-FormC_RM5mm.step"),
+    "REL_TYCO_SCHRACK_RT314FXX": (_RELAY_THT, "Relay_SPDT_Schrack-RT1-FormC_RM5mm.step"),
+    "REL_TYCO_SCHRACK_RTD1xxxx": (_RELAY_THT, "Relay_SPDT_Schrack-RT1-FormC_RM5mm.step"),
+    "REL_TYCO_SCHRACK_RT42XXXX": (_RELAY_THT, "Relay_DPDT_Schrack-RT2-FormC_RM5mm.step"),
+    "REL_TYCO_SCHRACK_RT44XXXX": (_RELAY_THT, "Relay_DPDT_Schrack-RT2-FormC_RM5mm.step"),
+}
+
+
+def _resolve_relay(name: str) -> str | None:
+    """Resolve a relay model from a CERN REL_* footprint name (exact map)."""
+    hit = RELAY_FOOTPRINT_MODEL.get(name)
+    return _ref(*hit) if hit else None
+
+
 # --- Deliberate non-mappings: package -> reason (documented, not silent) -------
 # These have no bundled KiCad model that fits; they go to the download tail /
 # human review. Recorded here so future runs don't re-investigate them.
@@ -320,6 +386,21 @@ SKIP_REASON = {
                             "ships only CC*V-T1A / MS1V bodies — geometry differs",
     "XTAL cylinder/THT misc": "MC-406 / ABL / ZTB / ATS / SMU5 cylinder and THT "
                               "bodies — no matching bundled model",
+    # relays (footprint-name families; package column is blank)
+    "REL TE Axicom IM": "KiCad ships only the J-leg IM model, authored 90° "
+                        "rotated; CERN's gull-wing (IMxxxGX/IMExxxGX) and THT "
+                        "(IMxxxTX/IMBxxTX) variants would render wrong",
+    "REL reed (Coto/Meder/Pickering/Cynergy3/Celduc/Littelfuse)": "bespoke reed "
+                        "relay bodies (Coto 23xx/9xxx, Meder BE/HI/LI/MRE/SHV/CRF/"
+                        "CRR/DIL/KT, Pickering 1xx/63/200RF, Cynergy3 D-series) — "
+                        "KiCad's StandexMeder SIL/DIP bodies don't match",
+    "REL vendor power/industrial": "bespoke vendor bodies with no bundled model "
+                        "(Finder 41/46/50/55/62/66/67, Omron G2R/G2RG/G5Q/G6B/G6C/"
+                        "G6J/G6L/G6RL/G3VM, Panasonic AGN/AGQ/DK/DS/DSP/JS/NC4D/S/"
+                        "SF/SFS/SP/ST/TQ/TX/TXS, Tyco-Axicom FP2/HF3/HF6/MT2/P2/"
+                        "V23026/V23079, Schrack MSR/SNR/MT32/PT2/SR4/SR6, ABB/"
+                        "Enerdis/Guenther/Teledyne/Zettler/NTE/etc.)",
+    "RELS sockets": "relay sockets are bespoke vendor bodies; no bundled model",
 }
 
 # All package keys the package-based resolver knows, for footprint-name fallback.
@@ -637,6 +718,14 @@ def resolve_from_footprint(name: str, *, pad_pitch_mm: float | None = None,
     """
     uc = name.upper().replace(" ", "")
     root = kicad_3dmodel_dir()
+    relay = _resolve_relay(name)           # relay vendor-series bodies by name
+    if relay:
+        return relay
+    if uc.startswith(("REL_", "RELS_")):
+        # Relay/socket footprints resolve ONLY via the exact map above; the
+        # generic package-token scan below would mis-read vendor suffixes (e.g.
+        # the 'SMA' in RELS_FINDER_94.13SMA is a socket variant, not a diode).
+        return None
     xo = _resolve_xtal_osc(name)           # crystal/oscillator bodies by name
     if xo:
         return xo

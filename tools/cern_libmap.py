@@ -20,6 +20,7 @@ SYMBOL_LIB_NICK = {
     "Connectors": "cern-connectors",   # shared symbol lib for all connector vendors
     "Sockets": "cern-sockets",
     "LEDs & Displays": "cern-leds-displays",
+    "Relays": "cern-relays",
 }
 
 FOOTPRINT_LIB_NICK = {
@@ -43,6 +44,7 @@ FOOTPRINT_LIB_NICK = {
     "WEIDMULLER THD": "cern-weidmuller-thd", "COMATEL THD": "cern-comatel-thd",
     "MENTOR THD": "cern-mentor-thd",
     "Sockets": "cern-sockets",
+    "Relays": "cern-relays",
 }
 
 

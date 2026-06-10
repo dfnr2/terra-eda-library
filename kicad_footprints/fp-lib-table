@@ -23,6 +23,7 @@
   (lib (name "cern-molex-thd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-molex-thd.pretty")(options "")(descr ""))
   (lib (name "cern-phoenix-smd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-phoenix-smd.pretty")(options "")(descr ""))
   (lib (name "cern-phoenix-thd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-phoenix-thd.pretty")(options "")(descr ""))
+  (lib (name "cern-relays")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-relays.pretty")(options "")(descr ""))
   (lib (name "cern-samtec-smd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-samtec-smd.pretty")(options "")(descr ""))
   (lib (name "cern-samtec-thd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-samtec-thd.pretty")(options "")(descr ""))
   (lib (name "cern-sockets")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-sockets.pretty")(options "")(descr ""))
