@@ -26,6 +26,7 @@ SYMBOL_LIB_NICK = {
     "Sensors": "cern-sensors",
     "Switches": "cern-switches",
     "Inductors & Transformers": "cern-inductors-transformers",
+    "Resistors": "cern-resistors",   # shared symbol lib (thermistors/varistors/TCO)
 }
 
 FOOTPRINT_LIB_NICK = {
@@ -53,6 +54,7 @@ FOOTPRINT_LIB_NICK = {
     "Fuses": "cern-fuses",
     "Switches": "cern-switches",
     "Transformers": "cern-transformers",
+    "Thermistors And Varistors": "cern-thermistors-and-varistors",
 }
 
 

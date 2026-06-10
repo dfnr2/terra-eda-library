@@ -373,3 +373,29 @@ def test_fuse_declines():
     assert resolve_from_footprint("FUSH_KEYSTONE_3576") is None
     assert resolve_from_footprint("SAR_TDK_A81-C90X") is None
     assert resolve_from_footprint("FUSC_LITTELFUSE_466") is None        # TR5 radial
+
+
+@_needs_kicad
+def test_thermistor_varistor_chip_bodies():
+    # Dimensioned SMD chip thermistor/varistor footprints map to the matching
+    # KiCad Resistor_SMD chip model (a thermistor/varistor chip shares the
+    # resistor chip body), never the diode chip from the package path.
+    assert resolve_from_footprint("THERMC1608X90N").endswith(
+        "/Resistor_SMD.3dshapes/R_0603_1608Metric.step")
+    assert resolve_from_footprint("THERMC2013X95N").endswith("/R_0805_2012Metric.step")
+    assert resolve_from_footprint("THERMC3216X130N").endswith("/R_1206_3216Metric.step")
+    assert resolve_from_footprint("THERMC3225X180N").endswith("/R_1210_3225Metric.step")
+    assert resolve_from_footprint("VAR_1005X55N").endswith("/R_0402_1005Metric.step")
+    assert resolve_from_footprint("VAR_3220X25").endswith("/R_1206_3216Metric.step")  # 3.2x2.0 nearest 1206
+
+
+def test_thermistor_varistor_declines():
+    # Bespoke vendor disc/leaded bodies, the metal THERMM body, and the lone
+    # TCO/polarized-PTC footprints have no bundled chip model and decline; the
+    # THERM*/VAR* names never fall through to the generic package-token scan.
+    assert resolve_from_footprint("THERM_VISHAY_2381 640 5XXXX") is None
+    assert resolve_from_footprint("THERM_EPCOS_B57153S0") is None
+    assert resolve_from_footprint("THERMM10080X380N") is None   # 10.0x8.0mm metal body
+    assert resolve_from_footprint("VAR_EPCOS_B72205S0250K101") is None
+    assert resolve_from_footprint("TCO_TDK-LAMBDA_A5MC") is None
+    assert resolve_from_footprint("TEXAS_DYA0002A") is None

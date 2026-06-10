@@ -439,6 +439,61 @@ def _resolve_fuse(name: str) -> str | None:
     return None
 
 
+# --- 8b. Thermistors & Varistors: SMD chip bodies ------------------------------
+# CERN's Thermistors And Varistors footprints encode SMD chip bodies as a
+# dimensioned IPC-ish name (THERMC1608X90N = 1.6x0.8mm == 0603; VAR_3220X25 =
+# 3.2x2.0mm; VAR_1005X55N = 1.0x0.5mm == 0402). These map to KiCad's
+# Resistor_SMD chip models (a thermistor/varistor chip shares the resistor chip
+# body). The `package` column also carries the size (0402/0603/0805/1206/1210),
+# but it collides with the diode chip keys in SMD_PACKAGE_MODEL, so — like fuses
+# — these footprints resolve purely from the footprint name (apply_3d_models
+# routes THERM*/VAR_*/TCO*/TEXAS* names here, never through the package path).
+# Bespoke vendor disc/leaded/metal bodies (THERM_<mfr>_*, VAR_<mfr>_*, the metal
+# THERMM10080X380N, TCO/TEXAS) have no bundled chip model -> SKIP_REASON.
+_RES_SMD = "Resistor_SMD.3dshapes"
+
+# Standard SMD chip body size -> KiCad metric resistor chip model.
+_TV_CHIP_MODEL = {
+    "0402": "R_0402_1005Metric.step",
+    "0603": "R_0603_1608Metric.step",
+    "0805": "R_0805_2012Metric.step",
+    "1206": "R_1206_3216Metric.step",
+    "1210": "R_1210_3225Metric.step",
+}
+# (long_mm, short_mm) of each chip body -> size code, for nearest-body matching.
+_TV_CHIP_BODY = {
+    (1.0, 0.5): "0402", (1.6, 0.8): "0603", (2.0, 1.3): "0805",
+    (3.2, 1.6): "1206", (3.2, 2.5): "1210",
+}
+_TV_BODY_TOL_MM = 0.7
+# Dimensioned chip body in the footprint name: a 'C'/'M'-cased token or a
+# VAR_<dims> tail, '<LL><WW>X<height>' with LL/WW the body length/width in 0.1mm.
+# THERMC1608X90N -> 16,08; VAR_3220X25 -> 32,20; VAR_1005X55N -> 10,05.
+_TV_DIM_RE = re.compile(r"(?:THERMC|VAR_?)(\d\d)(\d\d)X\d+", re.I)
+
+
+def _resolve_thermistor_varistor(name: str) -> str | None:
+    """Resolve a chip thermistor/varistor model from a CERN footprint name.
+
+    Only the dimensioned SMD chip-body names (THERMC<LLWW>X.., VAR_<LLWW>X..)
+    resolve, onto the matching KiCad Resistor_SMD chip model. Bespoke vendor
+    disc/leaded/metal bodies decline (no bundled model).
+    """
+    uc = name.upper()
+    if not uc.startswith(("THERM", "VAR")):
+        return None
+    m = _TV_DIM_RE.match(uc)
+    if not m:
+        return None
+    a, b = int(m.group(1)) / 10, int(m.group(2)) / 10  # LL, WW in 0.1mm
+    dims = (max(a, b), min(a, b))
+    best = min(_TV_CHIP_BODY,
+               key=lambda k: abs(k[0] - dims[0]) + abs(k[1] - dims[1]))
+    if abs(best[0] - dims[0]) + abs(best[1] - dims[1]) > _TV_BODY_TOL_MM:
+        return None  # e.g. THERMM10080X380N (10.0x8.0mm metal body) -> no model
+    return _ref(_RES_SMD, _TV_CHIP_MODEL[_TV_CHIP_BODY[best]])
+
+
 # --- 9. Switches: CERN footprint name -> bundled Button_Switch model ----------
 # CERN's Switches footprints leave `package` blank and are vendor-series named
 # (PB_<MFR>_<SERIES>, SW_<MFR>_<SERIES>), so resolution is an exact footprint-name
@@ -936,6 +991,14 @@ def resolve_from_footprint(name: str, *, pad_pitch_mm: float | None = None,
         # generic package-token scan below would mis-read embedded size codes
         # (e.g. the '0603' in FUSC_AVX_F0603G as a diode 0603 model).
         return _resolve_fuse(name)
+    if uc.startswith(("THERM", "VAR")):
+        # Thermistor/varistor footprints resolve ONLY via the chip resolver; the
+        # generic scan below would mis-read an embedded size as a diode chip or a
+        # dimensioned token as a quad. Only the dimensioned chip bodies map;
+        # bespoke vendor disc/leaded/metal bodies (THERM_<mfr>_*, VAR_<mfr>_*,
+        # THERMM10080X380N) decline. The lone CERN TCO_*/TEXAS_* (TCO resistor
+        # +fuse, polarized PTC) have no bundled body and fall through to None.
+        return _resolve_thermistor_varistor(name)
     quad = _resolve_quad(name)             # dimensioned QFN/DFN/QFP by IPC name
     if quad:
         return quad
