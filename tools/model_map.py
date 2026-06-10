@@ -439,6 +439,53 @@ def _resolve_fuse(name: str) -> str | None:
     return None
 
 
+# --- 9. Switches: CERN footprint name -> bundled Button_Switch model ----------
+# CERN's Switches footprints leave `package` blank and are vendor-series named
+# (PB_<MFR>_<SERIES>, SW_<MFR>_<SERIES>), so resolution is an exact footprint-name
+# map onto the switch bodies KiCad ships under Button_Switch_SMD/THT. The map
+# covers the standard tactile (Omron B3F THT, B3S/B3U SMD), the Omron A6S/A6H DIP
+# slide-switch arrays (keyed by switch-count series), and the C&K toggle/slide
+# bodies KiCad authors (FSMSM, JS202011CQN, PCM12/PCM13). The bulk of the table is
+# bespoke vendor switch bodies with no bundled KiCad model -> SKIP_REASON.
+_BSW_SMD = "Button_Switch_SMD.3dshapes"
+_BSW_THT = "Button_Switch_THT.3dshapes"
+
+SWITCH_FOOTPRINT_MODEL = {
+    # Omron tactile, THT (B3F series; CERN B3F-1xx0 -> KiCad B3F-1xxx family)
+    "PB_OMRON_B3F-1000": (_BSW_THT, "SW_TH_Tactile_Omron_B3F-100x.step"),
+    "PB_OMRON_B3F-1060": (_BSW_THT, "SW_TH_Tactile_Omron_B3F-106x.step"),
+    "PB_OMRON_B3F-1070": (_BSW_THT, "SW_TH_Tactile_Omron_B3F-107x.step"),
+    # Omron tactile, SMD (B3S / B3U series)
+    "PB_OMRON_B3S-1000": (_BSW_SMD, "SW_SPST_B3S-1000.step"),
+    "PB_OMRON_B3U-1100P": (_BSW_SMD, "SW_SPST_B3U-1100P.step"),
+    "SW_OMRON_B3U-3000PM": (_BSW_SMD, "SW_SPST_B3U-3000P.step"),  # 3000PM, same 3000P body
+    # Tyco / C&K toggle & slide bodies KiCad authors
+    "PB_TYCO_FSMSM": (_BSW_SMD, "SW_SPST_FSMSM.step"),
+    "SW_C&K_JS202011CQN": (_BSW_THT, "SW_CK_JS202011CQN_DPDT_Straight.step"),
+    "SW_C&K_PCM12SMTR": (_BSW_SMD, "SW_SPDT_PCM12.step"),
+    "SW_C&K_PCM13SMTR": (_BSW_SMD, "SW_SP3T_PCM13.step"),
+    # Omron A6S/A6H DIP slide-switch arrays, keyed by switch count (CERN -x102/-x102-H
+    # -> KiCad -x10x series body). A6S = W8.9mm P2.54mm, A6H = W6.15mm P1.27mm.
+    "SW_OMRON_A6S-2102-H": (_BSW_SMD, "SW_DIP_SPSTx02_Slide_Omron_A6S-210x_W8.9mm_P2.54mm.step"),
+    "SW_OMRON_A6S-4102-H": (_BSW_SMD, "SW_DIP_SPSTx04_Slide_Omron_A6S-410x_W8.9mm_P2.54mm.step"),
+    "SW_OMRON_A6S-8102-H": (_BSW_SMD, "SW_DIP_SPSTx08_Slide_Omron_A6S-810x_W8.9mm_P2.54mm.step"),
+    "SW_OMRON_A6H-2102": (_BSW_SMD, "SW_DIP_SPSTx02_Slide_Omron_A6H-2101_W6.15mm_P1.27mm.step"),
+    "SW_OMRON_A6H-4102": (_BSW_SMD, "SW_DIP_SPSTx04_Slide_Omron_A6H-4101_W6.15mm_P1.27mm.step"),
+    "SW_OMRON_A6H-6102": (_BSW_SMD, "SW_DIP_SPSTx06_Slide_Omron_A6H-6101_W6.15mm_P1.27mm.step"),
+    "SW_OMRON_A6H-8102": (_BSW_SMD, "SW_DIP_SPSTx08_Slide_Omron_A6H-8101_W6.15mm_P1.27mm.step"),
+}
+
+
+def _resolve_switch(name: str) -> str | None:
+    """Resolve a switch model from a CERN PB_*/SW_*/KNB_*/JUMP* footprint name.
+
+    Exact map only: CERN switch footprints are bespoke vendor-series bodies, so
+    only the ones KiCad ships a matching model for resolve; the rest decline.
+    """
+    hit = SWITCH_FOOTPRINT_MODEL.get(name)
+    return _ref(*hit) if hit else None
+
+
 # --- Deliberate non-mappings: package -> reason (documented, not silent) -------
 # These have no bundled KiCad model that fits; they go to the download tail /
 # human review. Recorded here so future runs don't re-investigate them.
@@ -502,6 +549,22 @@ SKIP_REASON = {
                         "exact bundled model",
     "Surge Arrester": "GDT / surge-arrester bodies (Bourns 20xx, Littelfuse CG/SE, "
                         "TDK/Epcos, Siemens, Dexerials) — no bundled KiCad model",
+    # switches (footprint-name families; package column is blank)
+    "SWITCH bespoke vendor body": "most CERN switch bodies are bespoke vendor "
+                        "series with no bundled KiCad model: pushbuttons (APEM "
+                        "MJTP2205/TP32/PT65, MultiMec 3ET/5GT, Mentor, Schneider "
+                        "ZB6, Wurth, ALPS SKHH/SPUJ, MEC, E-Switch TL2243/TL3315, "
+                        "C&K 8xxx/E1xx/KSC/KMR/KSS), toggle/slide/rocker (C&K 7101/"
+                        "1101/AYZ/OS/JS-SCQN, NKK, APEM NDS/P36/P60, EAO, EOZ, "
+                        "Knitter, NIDEC/Copal CS/CVS/CAS/CJS, Multicomp, RS, TT "
+                        "EN16, TWSwitches), rotary/coded (C&K A20615/RB-231, CTS "
+                        "20x, Lorlin CK, ERG SCS/SDD/SDES/SDLS/DS16, Tyco 15xx/18xx "
+                        "GDH/ADE/ADP, EOZ, Hartmann, NIDEC, Unimec), encoders (ALPS "
+                        "EC11/SRBM, Bourns), knobs (Mentor 1840, Omron B32), and "
+                        "the SMD solder jumpers (JUMPSM3P/JUMPSMD0805) — KiCad ships "
+                        "models only for the Omron B3F/B3S/B3U tactile, Omron A6S/"
+                        "A6H DIP-slide, and C&K FSMSM/JS202011CQN/PCM12/PCM13 bodies "
+                        "(mapped above). The rest go to the human drop-folder.",
 }
 
 # All package keys the package-based resolver knows, for footprint-name fallback.
@@ -847,6 +910,12 @@ def resolve_from_footprint(name: str, *, pad_pitch_mm: float | None = None,
     xo = _resolve_xtal_osc(name)           # crystal/oscillator bodies by name
     if xo:
         return xo
+    if uc.startswith(("PB_", "SW_", "KNB_", "JUMP")) or "DIP_SW" in uc:
+        # Switch/knob/jumper footprints resolve ONLY via the exact switch map;
+        # the generic package-token scan below would mis-read embedded vendor
+        # codes (e.g. a '0805' in JUMPSMD0805 as a diode 0805 chip, or 'TO'-like
+        # runs in a vendor part number).
+        return _resolve_switch(name)
     if uc.startswith(("FUSC", "FUSE", "FUSR", "FUSH", "SAR")):
         # Fuse/holder/arrester footprints resolve ONLY via the fuse resolver; the
         # generic package-token scan below would mis-read embedded size codes

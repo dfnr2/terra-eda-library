@@ -324,6 +324,35 @@ def test_fuse_holder_vendor_exact():
         "/Fuseholder_Cylinder-5x20mm_Bulgin_FX0457_Horizontal_Closed.step")
 
 
+def test_switch_footprint_exact():
+    # Vendor-series switch bodies KiCad ships, by exact CERN footprint name
+    # (no KiCad dir needed; the map is a fixed filename lookup).
+    assert resolve_from_footprint("PB_OMRON_B3F-1000").endswith(
+        "/Button_Switch_THT.3dshapes/SW_TH_Tactile_Omron_B3F-100x.step")
+    assert resolve_from_footprint("PB_OMRON_B3S-1000").endswith(
+        "/Button_Switch_SMD.3dshapes/SW_SPST_B3S-1000.step")
+    assert resolve_from_footprint("PB_TYCO_FSMSM").endswith(
+        "/Button_Switch_SMD.3dshapes/SW_SPST_FSMSM.step")
+    assert resolve_from_footprint("SW_C&K_PCM13SMTR").endswith(
+        "/Button_Switch_SMD.3dshapes/SW_SP3T_PCM13.step")
+    # Omron DIP slide arrays keyed by switch count (CERN -x102 -> KiCad -x10x).
+    assert resolve_from_footprint("SW_OMRON_A6H-6102").endswith(
+        "/Button_Switch_SMD.3dshapes/SW_DIP_SPSTx06_Slide_Omron_A6H-6101_W6.15mm_P1.27mm.step")
+    assert resolve_from_footprint("SW_OMRON_A6S-4102-H").endswith(
+        "/Button_Switch_SMD.3dshapes/SW_DIP_SPSTx04_Slide_Omron_A6S-410x_W8.9mm_P2.54mm.step")
+
+
+def test_switch_declines():
+    # Bespoke vendor switch bodies have no bundled model; and PB_/SW_/JUMP names
+    # never fall through to the generic package-token scan (the '0805' in the
+    # solder-jumper footprint must not resolve to a diode 0805 chip, and an A6SN
+    # series without a KiCad model must not borrow the A6S model).
+    assert resolve_from_footprint("PB_APEM_MJTP2205B") is None
+    assert resolve_from_footprint("SW_OMRON_A6SN-2101") is None
+    assert resolve_from_footprint("JUMPSMD0805_G50") is None
+    assert resolve_from_footprint("SW_NKK_A11JV1") is None
+
+
 def test_fuse_declines():
     # Bare cartridge bodies, big SMD chips, bespoke PTC/holders and arresters
     # have no bundled model. Embedded part-number digit runs must never be read

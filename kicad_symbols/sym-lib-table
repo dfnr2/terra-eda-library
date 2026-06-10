@@ -15,6 +15,7 @@
   (lib (name "cern-sensors")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-sensors.kicad_sym")(options "")(descr ""))
   (lib (name "cern-sockets")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-sockets.kicad_sym")(options "")(descr ""))
   (lib (name "cern-standard-logic")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-standard-logic.kicad_sym")(options "")(descr ""))
+  (lib (name "cern-switches")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-switches.kicad_sym")(options "")(descr ""))
   (lib (name "cern-transistors")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-transistors.kicad_sym")(options "")(descr ""))
   (lib (name "terra_sym")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_sym.kicad_sym")(options "")(descr ""))
 )
