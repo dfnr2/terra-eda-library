@@ -258,7 +258,7 @@
 		(uuid "eb41d484-6faa-43a0-b757-532e085af9d1")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/OSCSC254P320X500X130-4N.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Oscillator.3dshapes/Oscillator_SMD_EuroQuartz_XO53-4Pin_5.0x3.2mm.step"
 		(offset
 			(xyz 0.00006 0.00011 0)
 		)

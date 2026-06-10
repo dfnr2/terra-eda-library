@@ -564,7 +564,7 @@
 		(uuid "9d251d7f-edfc-4d68-b1b0-782fce04bc84")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/XTAL_ABRACON_ABM3.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Crystal.3dshapes/Crystal_SMD_Abracon_ABM3B-4Pin_5.0x3.2mm.step"
 		(offset
 			(xyz -0.00195 0.00005 0)
 		)

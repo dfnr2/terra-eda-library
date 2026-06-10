@@ -518,9 +518,9 @@
 		(uuid "e3a16979-7390-4b3e-aca7-58ff9714bb6e")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/OSCDIP14-300_L2080T1320H598-4A.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Oscillator.3dshapes/Oscillator_DIP-14.step"
 		(offset
-			(xyz 0.00005 0.00012 0)
+			(xyz -7.62 -3.81 0)
 		)
 		(scale
 			(xyz 1 1 1)

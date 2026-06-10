@@ -262,7 +262,7 @@
 		)
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/OSC_FOX_FXO-HC73.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Oscillator.3dshapes/Oscillator_SMD_Abracon_ASV-4Pin_7.0x5.1mm.step"
 		(offset
 			(xyz 0.00012 0.00004 0)
 		)

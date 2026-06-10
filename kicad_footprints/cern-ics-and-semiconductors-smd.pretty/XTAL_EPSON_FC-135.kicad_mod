@@ -492,7 +492,7 @@
 		(uuid "a6afa2a8-c72f-4b75-8a19-4b743a15128c")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/XTAL_EPSON_FC-135.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Crystal.3dshapes/Crystal_SMD_3215-2Pin_3.2x1.5mm.step"
 		(offset
 			(xyz 0.00007 0.00007 0)
 		)

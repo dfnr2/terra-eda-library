@@ -238,9 +238,9 @@
 		(uuid "170a93b8-7b85-45c1-b309-95887d6ff94d")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/XTAL_HC-49-U.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Crystal.3dshapes/Crystal_HC49-4H_Vertical.step"
 		(offset
-			(xyz 0.00012 0.00008 0)
+			(xyz -2.44 -0 0)
 		)
 		(scale
 			(xyz 1 1 1)

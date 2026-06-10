@@ -822,7 +822,7 @@
 		(uuid "6da6f208-b892-4595-a9ab-6598b9889a1a")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/OSC_EPSON_SG5032VAN.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Oscillator.3dshapes/Oscillator_SMD_EuroQuartz_XO53-4Pin_5.0x3.2mm.step"
 		(offset
 			(xyz 0.00006 0.0001 0)
 		)

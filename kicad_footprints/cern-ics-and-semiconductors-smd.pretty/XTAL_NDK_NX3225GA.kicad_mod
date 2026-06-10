@@ -571,7 +571,7 @@
 		(uuid "f142b332-f0d8-4eff-a2e5-aceddda0418b")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/XTAL_NDK_NX3225GA.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Crystal.3dshapes/Crystal_SMD_3225-4Pin_3.2x2.5mm.step"
 		(offset
 			(xyz 0.00005 0.00007 0)
 		)

@@ -1414,7 +1414,7 @@
 		)
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/OSC_FOX_FXO-HC52.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Oscillator.3dshapes/Oscillator_SMD_EuroQuartz_XO53-4Pin_5.0x3.2mm.step"
 		(offset
 			(xyz 0.00012 0.00005 0)
 		)

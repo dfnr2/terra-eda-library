@@ -185,6 +185,48 @@ def test_plain_to220_family():
     assert v.endswith("/Package_TO_SOT_THT.3dshapes/TO-220-3_Vertical.step")
 
 
+def test_xtal_osc_size_token():
+    # Standard body-size code embedded in the vendor footprint name.
+    assert resolve_from_footprint("XTAL_KYOCERA_CX3225SB").endswith(
+        "/Crystal.3dshapes/Crystal_SMD_3225-4Pin_3.2x2.5mm.step")
+    assert resolve_from_footprint("XTAL_NDK_NX2016SA").endswith(
+        "/Crystal.3dshapes/Crystal_SMD_2016-4Pin_2.0x1.6mm.step")
+    assert resolve_from_footprint("OSC_EPSON_SG7050VEN").endswith(
+        "/Oscillator.3dshapes/Oscillator_SMD_Abracon_ASV-4Pin_7.0x5.1mm.step")
+    assert resolve_from_footprint("OSC_EPSON_SG5032VAN").endswith(
+        "/Oscillator.3dshapes/Oscillator_SMD_EuroQuartz_XO53-4Pin_5.0x3.2mm.step")
+    assert resolve_from_footprint("OSC_MICREL_2520").endswith(
+        "/Oscillator.3dshapes/Oscillator_SMD_SeikoEpson_SG210-4Pin_2.5x2.0mm.step")
+
+
+def test_xtal_osc_dimensioned_name():
+    # Dimensioned name in 0.01mm units; nearest body within tolerance wins.
+    assert resolve_from_footprint("XTAL1160X490X430").endswith(
+        "/Crystal.3dshapes/Crystal_SMD_HC49-SD.step")
+    assert resolve_from_footprint("OSCSC254P500X700X190-6N").endswith(
+        "/Oscillator.3dshapes/Oscillator_SMD_Abracon_ASV-4Pin_7.0x5.1mm.step")
+    assert resolve_from_footprint("OSCCC320X500X160-4N").endswith(
+        "/Oscillator.3dshapes/Oscillator_SMD_EuroQuartz_XO53-4Pin_5.0x3.2mm.step")
+
+
+def test_xtal_osc_vendor_exact():
+    # Vendor series KiCad ships the exact model for, plus HC-49 THT and DIP cans.
+    assert resolve_from_footprint("XTAL_EPSON_TSX-3225").endswith(
+        "/Crystal_SMD_SeikoEpson_TSX3225-4Pin_3.2x2.5mm.step")
+    assert resolve_from_footprint("XTAL_HC-49_U").endswith("/Crystal_HC49-U_Vertical.step")
+    assert resolve_from_footprint("OSCDIP14-300_L2080T1320H598-4A").endswith(
+        "/Oscillator.3dshapes/Oscillator_DIP-14.step")
+
+
+def test_xtal_osc_declines():
+    # No 3.2x2.5mm oscillator body ships; nearest (2520) is out of tolerance.
+    assert resolve_from_footprint("OSC_MICROCHIP_CDFN3225-4LD-PL-1") is None
+    # Part-number digits must never be read as a body size code.
+    assert resolve_from_footprint("OSC_CRYSTEK_CVCO55CC-1912-2114") is None
+    # Bespoke vendor oscillator body without a size code -> drop-folder.
+    assert resolve_from_footprint("OSC_SI-TIME_SiT9365-B") is None
+
+
 @_needs_kicad
 def test_metal_can_by_leads():
     # Cans are named <family>-<leads>.step (no orientation); pin 4 clamps to 3.

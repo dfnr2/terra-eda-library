@@ -487,7 +487,7 @@
 		(uuid "54a2602c-aaf7-4b03-9948-41992ee219c3")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/OSCSC508P500X700X170-4N.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Oscillator.3dshapes/Oscillator_SMD_Abracon_ASV-4Pin_7.0x5.1mm.step"
 		(offset
 			(xyz 0.00012 0.00004 0)
 		)

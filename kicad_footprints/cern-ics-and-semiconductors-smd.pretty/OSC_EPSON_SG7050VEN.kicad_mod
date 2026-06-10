@@ -730,7 +730,7 @@
 		(uuid "c5bddd1b-4038-4521-b845-9de9995a0ccb")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/OSC_EPSON_SG7050VEN.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Oscillator.3dshapes/Oscillator_SMD_Abracon_ASV-4Pin_7.0x5.1mm.step"
 		(offset
 			(xyz 0.00006 0.0001 0)
 		)

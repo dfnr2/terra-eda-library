@@ -178,6 +178,118 @@ SMD_BODY_DIRECT = {
     "POWERMITE": (_DIODE_SMD, "D_Powermite_LargeCathode.step"),
 }
 
+# --- 6. Crystals & oscillators: standard SMD bodies + vendor series -----------
+# CERN's Crystals & Oscillators footprints leave `package` blank and encode the
+# body in the footprint name, three ways:
+#   a. vendor series KiCad ships a model for (XTAL_EPSON_TSX-3225, XTAL_TXC_7M);
+#   b. a standard body-size code embedded in the name (CX3225SB, SG7050VEN);
+#   c. a dimensioned IPC-ish name (XTAL1160X490X430, OSCSC254P500X700X190-6N).
+# Body-size tables are keyed by (long, short) mm; the generic 7050/5032/2520
+# oscillator bodies use KiCad's Abracon ASV / EuroQuartz XO53 / Epson SG210
+# models (same industry-standard 4-pad ceramic bodies).
+_CRYSTAL = "Crystal.3dshapes"
+_OSC = "Oscillator.3dshapes"
+
+XTAL_BODY_MODEL = {
+    (11.05, 4.65): "Crystal_SMD_HC49-SD.step",
+    (6.0, 3.5): "Crystal_SMD_0603-4Pin_6.0x3.5mm.step",  # crystal "0603" = 6.0x3.5mm
+    (5.0, 3.2): "Crystal_SMD_5032-2Pin_5.0x3.2mm.step",
+    (3.2, 2.5): "Crystal_SMD_3225-4Pin_3.2x2.5mm.step",
+    (3.2, 1.5): "Crystal_SMD_3215-2Pin_3.2x1.5mm.step",
+    (2.5, 2.0): "Crystal_SMD_2520-4Pin_2.5x2.0mm.step",
+    (2.0, 1.6): "Crystal_SMD_2016-4Pin_2.0x1.6mm.step",
+    (1.2, 1.0): "Crystal_SMD_1210-4Pin_1.2x1.0mm.step",
+}
+OSC_BODY_MODEL = {
+    (7.0, 5.0): "Oscillator_SMD_Abracon_ASV-4Pin_7.0x5.1mm.step",        # 7050
+    (5.0, 3.2): "Oscillator_SMD_EuroQuartz_XO53-4Pin_5.0x3.2mm.step",    # 5032
+    (2.5, 2.0): "Oscillator_SMD_SeikoEpson_SG210-4Pin_2.5x2.0mm.step",   # 2520
+}
+_XTAL_OSC_BODY_TOL_MM = 1.0  # max |dL|+|dW| between named dims and a body entry
+
+# Size codes that are unambiguous body dimensions when embedded in a vendor name
+# (restricted set so part-number digits like CVCO55CC-1912-2114 never match).
+_XTAL_OSC_SIZE_TOKEN = {
+    "3225": (3.2, 2.5), "2520": (2.5, 2.0), "2016": (2.0, 1.6),
+    "5032": (5.0, 3.2), "1210": (1.2, 1.0), "3215": (3.2, 1.5),
+    "7050": (7.0, 5.0),
+}
+
+# Vendor footprints whose body is known (KiCad ships the series model, or the
+# series is a documented standard body the generic models match).
+XTAL_OSC_FOOTPRINT_MODEL = {
+    # crystals — KiCad ships the exact vendor series model
+    "XTAL_EPSON_TSX-3225": (_CRYSTAL, "Crystal_SMD_SeikoEpson_TSX3225-4Pin_3.2x2.5mm.step"),
+    "XTAL_EPSON_FA-238": (_CRYSTAL, "Crystal_SMD_SeikoEpson_FA238-4Pin_3.2x2.5mm.step"),
+    "XTAL_EPSON_FA-238V": (_CRYSTAL, "Crystal_SMD_SeikoEpson_FA238V-4Pin_3.2x2.5mm.step"),
+    "XTAL_EPSON_MA-506": (_CRYSTAL, "Crystal_SMD_SeikoEpson_MA506-4Pin_12.7x5.1mm.step"),
+    "XTAL_TXC_7M": (_CRYSTAL, "Crystal_SMD_TXC_7M-4Pin_3.2x2.5mm.step"),
+    "XTAL_ABRACON_ABM3B": (_CRYSTAL, "Crystal_SMD_Abracon_ABM3B-4Pin_5.0x3.2mm.step"),
+    "XTAL_ABRACON_ABM8G": (_CRYSTAL, "Crystal_SMD_Abracon_ABM8G-4Pin_3.2x2.5mm.step"),
+    "XTAL_MURATA_CSTNE_G": (_CRYSTAL, "Resonator_SMD_Murata_CSTxExxV-3Pin_3.0x1.1mm.step"),
+    # crystals — documented standard bodies
+    "XTAL_EPSON_FA-20H": (_CRYSTAL, "Crystal_SMD_2016-4Pin_2.0x1.6mm.step"),   # 2.0x1.6mm
+    "XTAL_EPSON_FC-135": (_CRYSTAL, "Crystal_SMD_3215-2Pin_3.2x1.5mm.step"),   # 3.2x1.5mm tuning fork
+    "XTAL_ABRACON_ABM3": (_CRYSTAL, "Crystal_SMD_Abracon_ABM3B-4Pin_5.0x3.2mm.step"),  # same 5.0x3.2 body
+    "XTAL_ABRACON_ABLS": (_CRYSTAL, "Crystal_SMD_HC49-SD.step"),    # HC-49/US SMD 11.5x4.8
+    "XTAL_ABRACON_ABLS2": (_CRYSTAL, "Crystal_SMD_HC49-SD.step"),
+    "XTAL_ABRACON_ABLSG": (_CRYSTAL, "Crystal_SMD_HC49-SD.step"),
+    "XTAL_TXC_7A": (_CRYSTAL, "Crystal_SMD_HC49-SD.step"),          # HC-49S SMD 11.4x4.8
+    "XTAL_CITIZEN_HCM49": (_CRYSTAL, "Crystal_SMD_HC49-SD.step"),   # SMD HC-49
+    "XTAL_HC-49_U": (_CRYSTAL, "Crystal_HC49-U_Vertical.step"),
+    "XTAL_HC-49_U-S": (_CRYSTAL, "Crystal_HC49-4H_Vertical.step"),  # HC-49/US low profile
+    # oscillators — vendor series on the standard 7050 / 5032 / 2520 bodies
+    "OSC_EPSON_SG-210STF": (_OSC, "Oscillator_SMD_SeikoEpson_SG210-4Pin_2.5x2.0mm.step"),
+    "OSC_EPSON_SG-8002CA": (_OSC, OSC_BODY_MODEL[(7.0, 5.0)]),   # SG-8002CA = 7.0x5.0
+    "OSC_EPSON_EG-2121CA": (_OSC, OSC_BODY_MODEL[(7.0, 5.0)]),   # 7.0x5.0
+    "OSC_EPSON_EG-2102CA": (_OSC, OSC_BODY_MODEL[(7.0, 5.0)]),   # 7.0x5.0
+    "OSC_IQD_CFPS-73": (_OSC, OSC_BODY_MODEL[(7.0, 5.0)]),       # CFPS-73 = 7.0x5.0
+    "OSC_IQD_CFPS-73_180": (_OSC, OSC_BODY_MODEL[(7.0, 5.0)]),
+    "OSC_IQD_CFPS-72": (_OSC, OSC_BODY_MODEL[(5.0, 3.2)]),       # CFPS-72 = 5.0x3.2
+    "OSC_FOX_FXO-HC73": (_OSC, OSC_BODY_MODEL[(7.0, 5.0)]),      # HC73 = 7.0x5.0
+    "OSC_FOX_FXO-HC52": (_OSC, OSC_BODY_MODEL[(5.0, 3.2)]),      # HC52 = 5.0x3.2
+    "OSC_ABRACON_ASFL1": (_OSC, OSC_BODY_MODEL[(5.0, 3.2)]),     # ASFL1 = 5.0x3.2
+    "OSC_ABRACON_ASFLMPC": (_OSC, OSC_BODY_MODEL[(5.0, 3.2)]),   # ASFLMPC = 5.0x3.2
+}
+
+# Dimensioned crystal/oscillator footprint name, body dims in 0.01mm:
+# "XTAL1160X490X430" (11.6x4.9), "OSCSC254P500X700X190-6N" (5.0x7.0, SC=side
+# concave + 2.54mm pitch token), "OSCCC320X500X160-4N" (corner concave).
+_XTAL_OSC_DIM_RE = re.compile(
+    r"^(XTAL|OSC)[A-Z]{0,2}(?:\d+P)?(\d{3,4})X(\d{3,4})X\d+", re.I)
+_OSC_DIP_RE = re.compile(r"^OSCDIP(\d+)", re.I)
+
+
+def _resolve_xtal_osc(name: str) -> str | None:
+    """Resolve a crystal/oscillator model from a CERN XTAL_*/OSC_* footprint name."""
+    hit = XTAL_OSC_FOOTPRINT_MODEL.get(name)
+    if hit:
+        return _ref(*hit)
+    uc = name.upper()
+    if not uc.startswith(("XTAL", "OSC")):
+        return None
+    m = _OSC_DIP_RE.match(uc)                 # DIP-cased oscillator (metal can)
+    if m and m.group(1) in ("8", "14"):
+        return _ref(_OSC, f"Oscillator_DIP-{m.group(1)}.step")
+    dims = None
+    m = _XTAL_OSC_DIM_RE.match(uc)
+    if m:
+        a, b = int(m.group(2)) / 100, int(m.group(3)) / 100
+        dims = (max(a, b), min(a, b))
+    else:
+        for tok, d in _XTAL_OSC_SIZE_TOKEN.items():
+            if tok in uc:
+                dims = d
+                break
+    if dims is None:
+        return None
+    table = XTAL_BODY_MODEL if uc.startswith("XTAL") else OSC_BODY_MODEL
+    best = min(table, key=lambda k: abs(k[0] - dims[0]) + abs(k[1] - dims[1]))
+    if abs(best[0] - dims[0]) + abs(best[1] - dims[1]) > _XTAL_OSC_BODY_TOL_MM:
+        return None
+    return _ref(_CRYSTAL if uc.startswith("XTAL") else _OSC, table[best])
+
+
 # --- Deliberate non-mappings: package -> reason (documented, not silent) -------
 # These have no bundled KiCad model that fits; they go to the download tail /
 # human review. Recorded here so future runs don't re-investigate them.
@@ -195,6 +307,19 @@ SKIP_REASON = {
     "GSIB": "in-line GSIB bridge; no bundled model",
     "WOG": "round WOG bridge; no exact bundled model",
     "PB": "Vishay PB bridge; no bundled model",
+    # crystals & oscillators (footprint-name families; package column is blank)
+    "OSC 3225": "3.2x2.5mm oscillator body — KiCad ships no 3225 oscillator "
+                "model (CFPS-32, SG-310, SG-8018CE, ASE/ASEMPC, Si510/511 3.2x5)",
+    "OSC vendor body": "bespoke vendor oscillator bodies (IQD CFPT/CFPS-39/-69, "
+                       "SiTime, SiLabs Si5xx 5x7, Crystek CVHD/CCHD/CCLD, "
+                       "Connor-Winfield, Rakon, Abracon AST/AOCJY) — no bundled model",
+    "OCXO/VCO module": "OCXO cans and RF VCO modules (Wenzel, Morion MV209, KVG, "
+                       "AXTAL, Mini-Circuits ROS/CK, Crystek CVCO/CVCSO/CVSS) — "
+                       "no bundled model",
+    "XTAL_MICRO-CRYSTAL_*": "CERN parts are CC1F/CC6F/MS3V/RV-8803 variants; KiCad "
+                            "ships only CC*V-T1A / MS1V bodies — geometry differs",
+    "XTAL cylinder/THT misc": "MC-406 / ABL / ZTB / ATS / SMU5 cylinder and THT "
+                              "bodies — no matching bundled model",
 }
 
 # All package keys the package-based resolver knows, for footprint-name fallback.
@@ -512,6 +637,9 @@ def resolve_from_footprint(name: str, *, pad_pitch_mm: float | None = None,
     """
     uc = name.upper().replace(" ", "")
     root = kicad_3dmodel_dir()
+    xo = _resolve_xtal_osc(name)           # crystal/oscillator bodies by name
+    if xo:
+        return xo
     quad = _resolve_quad(name)             # dimensioned QFN/DFN/QFP by IPC name
     if quad:
         return quad

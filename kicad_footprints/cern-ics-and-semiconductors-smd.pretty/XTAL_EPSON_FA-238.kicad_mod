@@ -571,7 +571,7 @@
 		(uuid "f08fbe0d-7db8-489a-87c6-b0a221bf2c22")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/XTAL_EPSON_FA-238.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Crystal.3dshapes/Crystal_SMD_SeikoEpson_FA238-4Pin_3.2x2.5mm.step"
 		(offset
 			(xyz 0.00012 0.00005 0)
 		)

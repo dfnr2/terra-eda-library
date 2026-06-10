@@ -677,7 +677,7 @@
 		(uuid "5030199f-f6cb-4180-865e-1b197b60e481")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/XTAL_EPSON_MA-506.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Crystal.3dshapes/Crystal_SMD_SeikoEpson_MA506-4Pin_12.7x5.1mm.step"
 		(offset
 			(xyz 0.00008 0.00005 0)
 		)

@@ -81,8 +81,12 @@ def main() -> None:
     db = sys.argv[1]
     conn = sqlite3.connect(db)
     # Confine dedup to the dbl part base tables; infra tables like `tags` are
-    # never in this list and so keep their unique_id rows intact.
-    part_tables = [s["base_table"] for s in load_spec("terra.kicad_dbl")]
+    # never in this list and so keep their unique_id rows intact. The dbl may be
+    # stale relative to this build (e.g. EXCLUDE_TABLES drops a table it still
+    # lists), so keep only tables actually present in the DB.
+    present = set(tables_with_unique_id(conn))
+    part_tables = [s["base_table"] for s in load_spec("terra.kicad_dbl")
+                   if s["base_table"] in present]
     dropped = dedup(conn, RESOLUTIONS, part_tables)
     for uid, tables in dropped.items():
         print(f"  deduped {uid}: dropped from {', '.join(tables)}")

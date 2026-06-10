@@ -582,7 +582,7 @@
 		(uuid "29b48bc0-cd24-4082-827c-9d4ba68442ab")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/XTAL_TXC_7M.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Crystal.3dshapes/Crystal_SMD_TXC_7M-4Pin_3.2x2.5mm.step"
 		(offset
 			(xyz 0.00005 0.00007 0)
 		)

@@ -578,7 +578,7 @@
 		(uuid "1803a10a-4724-448c-bc68-b4b9f5e7db12")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/OSC_MICROCHIP_CDFN2520-4LD-PL-1.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Oscillator.3dshapes/Oscillator_SMD_SeikoEpson_SG210-4Pin_2.5x2.0mm.step"
 		(offset
 			(xyz 0.00016 0.00011 0)
 		)

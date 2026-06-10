@@ -830,7 +830,7 @@
 		(uuid "68da1bca-eefd-4e52-9e73-46e76c57b5ca")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/XTAL_KYOCERA_KC3225A-C3.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Crystal.3dshapes/Crystal_SMD_3225-4Pin_3.2x2.5mm.step"
 		(offset
 			(xyz 0.0001 -0.00006 0)
 		)

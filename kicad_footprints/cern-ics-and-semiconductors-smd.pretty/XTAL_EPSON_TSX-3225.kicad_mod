@@ -602,7 +602,7 @@
 		(uuid "5820880a-46f2-4d59-8329-b73916c3cf9f")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/XTAL_EPSON_TSX-3225.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Crystal.3dshapes/Crystal_SMD_SeikoEpson_TSX3225-4Pin_3.2x2.5mm.step"
 		(offset
 			(xyz 0.00009 0.00004 0)
 		)

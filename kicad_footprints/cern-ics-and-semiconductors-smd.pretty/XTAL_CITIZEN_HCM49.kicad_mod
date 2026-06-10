@@ -616,7 +616,7 @@
 		(uuid "18060f40-5ae3-4f37-9774-9bfa147b4e98")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/XTAL_CITIZEN_HCM49.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Crystal.3dshapes/Crystal_SMD_HC49-SD.step"
 		(offset
 			(xyz 0.00007 0.00007 0)
 		)

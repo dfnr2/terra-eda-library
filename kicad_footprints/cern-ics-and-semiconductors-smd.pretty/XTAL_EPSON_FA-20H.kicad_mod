@@ -571,7 +571,7 @@
 		(uuid "55864dbc-3c3f-417f-a734-b64ff791a12a")
 	)
 	(embedded_fonts no)
-	(model "${CERN_3DMODEL_DIR}/XTAL_EPSON_FA-20H.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Crystal.3dshapes/Crystal_SMD_2016-4Pin_2.0x1.6mm.step"
 		(offset
 			(xyz 0.00012 0.00005 0)
 		)
