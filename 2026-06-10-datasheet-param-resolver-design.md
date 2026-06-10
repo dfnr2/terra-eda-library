@@ -108,8 +108,10 @@ the invariant is **one fragment, two includers, identical columns**.
    unwieldy), updated in place with `--clobber`. No versioned snapshot accumulation.
 5. **Data source:** Nexar/Octopart API, keyed by `mpn`+`manufacturer`, returns datasheet
    URL + structured params in one call.
-6. **Reconciliation:** **fill-blanks-only.** Harvest never overwrites a non-empty curated
-   value; disagreements go to a conflicts report for human review.
+6. **Reconciliation:** **fill-blanks-only for params** — harvest never overwrites a
+   non-empty curated param value; disagreements go to a conflicts report. **`datasheet` is
+   the sole exception:** it is always repointed to the durable Release `download_url` when
+   one exists (the goal is to replace rotting/internal links), never blanked otherwise.
 7. **Regenerable:** harvested data is a committed **sidecar** applied by the offline
    post-load step `apply_harvest.py` (keyed by `unique_id`), not by per-table generators —
    so it covers the many static native tables too. No manual live-DB edits; the DB rebuilds
@@ -255,12 +257,18 @@ built DB rather than per-table generators, it covers **both** generator-backed t
 `ic_*`, `leds`, …) uniformly. Inputs are **committed only** (manifest + sidecars), so the
 result is deterministic — every plain `make` produces the same `db/terra.db`. For each
 sidecar row, by `unique_id`:
-- **Params:** set any **blank** allowlist column from the sidecar; never overwrite a
-  non-blank curated value; append disagreements to `<table>_conflicts.log`.
-- **Datasheet:** resolve `datasheet_source_url` → manifest entry (via the `source_urls`
-  reverse index) → `download_url`, and `UPDATE <table> SET datasheet = <download_url>
-  WHERE unique_id = ?`. The DB thus points at our durable, content-addressed Release copy —
-  no local files required, no dependence on whether anyone ran Phase 3.
+- **Params (fill-blanks-only):** set any **blank** allowlist column from the sidecar;
+  never overwrite a non-blank curated value; record disagreements (see conflicts report).
+- **Datasheet (deliberate exception to fill-blanks-only — always repoint):** resolve
+  `datasheet_source_url` → manifest entry (via the `source_urls` reverse index). **Only if**
+  that entry exists and is `archive_ok` with a `download_url`, `UPDATE <table> SET datasheet
+  = <download_url> WHERE unique_id = ?` — overwriting the row's prior value **even when it
+  was a non-blank curated URL** (the whole point: repoint to our durable, content-addressed
+  Release copy; native rows' rotting manufacturer URLs are exactly what this fixes). **If the
+  sidecar has no entry, or it doesn't resolve, or the entry is unmirrored (no `archive_ok`/
+  `download_url`), leave the existing `datasheet` untouched** — never write an empty/dangling
+  value. (Curation note: harvest prefers to mirror the row's *existing* URL when it already
+  has one, so repointing preserves the curated document, just served from our durable host.)
 
 `db/terra.db` lists the manifest + sidecars as prerequisites, so harvested-data edits
 trigger a rebuild. This supersedes the CERN-only `rewrite_datasheets.py` filename-match.
@@ -268,12 +276,15 @@ trigger a rebuild. This supersedes the CERN-only `rewrite_datasheets.py` filenam
 ### 6b. `localize_datasheets.py` / `make localize-datasheets` (optional, local, offline)
 
 A **separate opt-in** target for users who want datasheets served from local files instead
-of the Release URL. Over the built DB, for each row whose `datasheet_source_url` resolves to
-a `sha256` that is **present-and-verified in the local-cache index** (§5), rewrite
-`datasheet` to the local `${TERRA_EDA_LIB}` file path; leave all others at the
-`download_url`. This is the **only** step that reads the gitignored local-cache state, and
-it is never a prerequisite of `make all` — so non-deterministic local state cannot fork the
-canonical DB (it only ever swaps a stable URL for a local path on the user's own machine).
+of the Release URL. It works **purely from the built DB + the local-cache index** — no
+sidecars: each datasheet that `apply_harvest` set is a `download_url` of the form
+`…/<sha256>.pdf`, so localize parses the `sha256` from the URL, and **iff** that hash is
+present-and-verified in the local-cache index (§5), rewrites `datasheet` to the local
+`${TERRA_EDA_LIB}` file path. Rows whose datasheet is not a Release `download_url` (left
+untouched by `apply_harvest`), or whose hash isn't cached, stay as-is. This is the **only**
+step that reads the gitignored local-cache state, and is never a prerequisite of `make all`
+— so non-deterministic local state cannot fork the canonical DB (it only swaps a stable URL
+for a local path on the user's own machine).
 
 ### 7. GitHub Pages catalog index
 
@@ -296,10 +307,18 @@ terra HTTP library.
 
 ## Reconciliation
 
-Fill-blanks-only, enforced in `apply_harvest.py` (§6) over the built DB. Curated
-CERN/native values always win; harvested values fill only `NULL`/empty allowlist columns.
-Every overwrite that *would* have happened is logged to `<table>_conflicts.log` for human
-review — turning the harvest into a passive data-quality probe as a side effect.
+Fill-blanks-only for every allowlist column **except `datasheet`**, enforced in
+`apply_harvest.py` (§6) over the built DB. For params, curated CERN/native values always
+win; harvested values fill only `NULL`/empty columns. **`datasheet` is the deliberate
+exception:** it is always repointed to the Release `download_url` when one is available
+(§6), because repointing rotting/internal links to our durable mirror is the goal — but
+it is never blanked when no mirror exists.
+
+Every param overwrite that *would* have happened (non-blank curated value disagreeing with
+a harvested one) is written to a conflicts report — turning the harvest into a passive
+data-quality probe. The report is a **single gitignored file** (`build/harvest_conflicts.tsv`,
+in `.gitignore`) **truncated and rewritten deterministically each build** — never appended,
+so repeated builds neither duplicate entries nor dirty the tree.
 
 ## Error handling & rate limits
 
