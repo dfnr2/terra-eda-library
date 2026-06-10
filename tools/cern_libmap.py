@@ -21,6 +21,7 @@ SYMBOL_LIB_NICK = {
     "Sockets": "cern-sockets",
     "LEDs & Displays": "cern-leds-displays",
     "Relays": "cern-relays",
+    "Fuses": "cern-fuses",
 }
 
 FOOTPRINT_LIB_NICK = {
@@ -45,6 +46,7 @@ FOOTPRINT_LIB_NICK = {
     "MENTOR THD": "cern-mentor-thd",
     "Sockets": "cern-sockets",
     "Relays": "cern-relays",
+    "Fuses": "cern-fuses",
 }
 
 

@@ -9,6 +9,7 @@
   (lib (name "cern-erni-thd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-erni-thd.pretty")(options "")(descr ""))
   (lib (name "cern-fci-smd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-fci-smd.pretty")(options "")(descr ""))
   (lib (name "cern-fci-thd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-fci-thd.pretty")(options "")(descr ""))
+  (lib (name "cern-fuses")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-fuses.pretty")(options "")(descr ""))
   (lib (name "cern-harting-smd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-harting-smd.pretty")(options "")(descr ""))
   (lib (name "cern-harting-thd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-harting-thd.pretty")(options "")(descr ""))
   (lib (name "cern-harwin-smd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-harwin-smd.pretty")(options "")(descr ""))

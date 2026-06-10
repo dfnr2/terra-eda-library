@@ -155,12 +155,19 @@ def run(table: str, dry_run: bool) -> int:
         # A footprint is one physical body. When its parts carry conflicting
         # package labels that resolve to different models, the label backing the
         # most parts wins (ties broken by name for determinism).
+        #
+        # Footprints owned by a name-only resolver (fuses, relays, sockets) skip
+        # the generic package path: their CERN `Case` collides with diode/IC
+        # package keys (a fuse `Case`='0603' would resolve to the diode D_0603
+        # chip), so they must resolve purely from the footprint name below.
         ref_weight: Counter = Counter()
-        for (pkg, pin), count in variants.items():
-            ref = resolve_model(pkg, pad_pitch_mm=pitch, pin_count=pin,
-                                orientation=ori, leads=leads)
-            if ref:
-                ref_weight[ref] += count
+        if not name.upper().startswith(("FUSC", "FUSE", "FUSR", "FUSH", "SAR",
+                                        "REL_", "RELS_")):
+            for (pkg, pin), count in variants.items():
+                ref = resolve_model(pkg, pad_pitch_mm=pitch, pin_count=pin,
+                                    orientation=ori, leads=leads)
+                if ref:
+                    ref_weight[ref] += count
         if not ref_weight:
             # package column gave nothing; the footprint name often encodes the
             # body (bridges, blank-package SMD/axial parts).

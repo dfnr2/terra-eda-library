@@ -262,3 +262,48 @@ def test_relay_unmapped_declines():
     assert resolve_from_footprint("REL_PANASONIC_TQ2") is None
     assert resolve_from_footprint("REL_TYCO_IMXXXGX") is None
     assert resolve_from_footprint("RELS_FINDER_94.13SMA") is None
+
+
+def test_fuse_smd_chip_from_footprint_name():
+    # Standard SMD chip-fuse size code embedded in the footprint name -> the
+    # KiCad metric chip-fuse model (no KiCad dir needed; exact filename map).
+    assert resolve_from_footprint("FUSC_AVX_F0402G").endswith(
+        "/Fuse.3dshapes/Fuse_0402_1005Metric.step")
+    assert resolve_from_footprint("FUSC_AVX_F0603G").endswith(
+        "/Fuse.3dshapes/Fuse_0603_1608Metric.step")
+    assert resolve_from_footprint("FUSC_BOURNS_SF-1206S").endswith(
+        "/Fuse.3dshapes/Fuse_1206_3216Metric.step")
+    # resettable chip PTC carries the same body code in its name
+    assert resolve_from_footprint("FUSR_LITTELFUSE_1210L").endswith(
+        "/Fuse.3dshapes/Fuse_1210_3225Metric.step")
+
+
+def test_fuse_dimensioned_resettable_name():
+    # FUSRC<LL><WW>X<height>N: LL/WW are body L/W in 0.1mm -> nearest chip body.
+    assert resolve_from_footprint("FUSRC3216X100N").endswith(
+        "/Fuse.3dshapes/Fuse_1206_3216Metric.step")    # 3.2x1.6 == 1206
+    assert resolve_from_footprint("FUSRC3226X62N").endswith(
+        "/Fuse.3dshapes/Fuse_1210_3225Metric.step")    # 3.2x2.6 ~ 1210
+    # 4.6x3.2 (1812) has no chip-fuse model -> decline.
+    assert resolve_from_footprint("FUSRC4632X150N") is None
+
+
+def test_fuse_holder_vendor_exact():
+    # Cylinder PCB holders KiCad ships an exact model for.
+    assert resolve_from_footprint("FUSH_SCHURTER_0031.7701").endswith(
+        "/Fuse.3dshapes/Fuseholder_Schurter_0031.7701.xx.step")
+    assert resolve_from_footprint("FUSH_BULGIN_FX0457").endswith(
+        "/Fuseholder_Cylinder-5x20mm_Bulgin_FX0457_Horizontal_Closed.step")
+
+
+def test_fuse_declines():
+    # Bare cartridge bodies, big SMD chips, bespoke PTC/holders and arresters
+    # have no bundled model. Embedded part-number digit runs must never be read
+    # as a body size (the '1206' in PTS120660 is bounded by digits -> rejected),
+    # and FUS*/SAR names never fall through to the generic package-token scan.
+    assert resolve_from_footprint("FUSE_5X20_GLASS_V") is None
+    assert resolve_from_footprint("FUSR_LITTELFUSE_1812L020") is None   # no 1812 model
+    assert resolve_from_footprint("FUSR_BUSSMANN_PTS120660V005") is None
+    assert resolve_from_footprint("FUSH_KEYSTONE_3576") is None
+    assert resolve_from_footprint("SAR_TDK_A81-C90X") is None
+    assert resolve_from_footprint("FUSC_LITTELFUSE_466") is None        # TR5 radial

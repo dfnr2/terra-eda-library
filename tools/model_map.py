@@ -356,6 +356,89 @@ def _resolve_relay(name: str) -> str | None:
     return _ref(*hit) if hit else None
 
 
+# --- 8. Fuses: SMD chip bodies + vendor cylinder/holder footprints ------------
+# CERN's Fuses footprints leave `package` blank and encode the body in the
+# footprint name, three ways:
+#   a. SMD chip-fuse and chip-PTC bodies — a standard size code (0402/0603/0805/
+#      1206/1210) embedded in the name (FUSC_AVX_F0603G, FUSR_LITTELFUSE_1206L012),
+#      mapped to KiCad's Fuse_<size>_<metric> chip models;
+#   b. dimensioned resettable IPC name (FUSRC3216X100N = 3.2x1.6mm body == 1206);
+#   c. a vendor holder series KiCad ships an exact model for (Schurter 0031.7701
+#      / 0031.8002 cylinder holders, Bulgin FX0457). Larger SMD bodies (1812/
+#      2410/2920/3812) and bespoke holders/clips/arresters have no bundled model
+#      -> SKIP_REASON / human drop-folder.
+_FUSE = "Fuse.3dshapes"
+
+# Standard SMD chip-fuse body size -> KiCad metric chip-fuse model. KiCad ships
+# chip models only up to 1210; larger codes (1812/2410/2920/3812) decline.
+_FUSE_CHIP_MODEL = {
+    "0402": "Fuse_0402_1005Metric.step",
+    "0603": "Fuse_0603_1608Metric.step",
+    "0805": "Fuse_0805_2012Metric.step",
+    "1206": "Fuse_1206_3216Metric.step",
+    "1210": "Fuse_1210_3225Metric.step",
+}
+# Chip body codes appearing as discrete tokens in a fuse footprint name. A size
+# code must be bounded by a non-digit (or the string end) on both sides so a
+# part-number run of digits never matches (e.g. the '1206' in 'PTS181216' must
+# not register — it is bounded by digits and is rejected).
+_FUSE_CHIP_RE = re.compile(r"(?<!\d)(0402|0603|0805|1206|1210)(?!\d)")
+# Larger SMD bodies KiCad ships no chip-fuse model for; matched so the resolver
+# can decline explicitly rather than fall through to a wrong token.
+_FUSE_BIG_CHIP_RE = re.compile(r"(?<!\d)(1812|2410|2920|3812|2016)(?!\d)")
+# Dimensioned resettable footprint 'FUSRC<LL><WW>X<height>N': LL/WW are body
+# length/width in 0.1mm, e.g. 'FUSRC3216X100N' = 3.2 x 1.6mm (== 1206),
+# 'FUSRC4632X150N' = 4.6 x 3.2mm (1812 - no chip model). Classify to the nearest
+# chip body by (long, short) in mm.
+_FUSE_DIM_RE = re.compile(r"^FUSRC(\d\d)(\d\d)X\d+N?$", re.I)
+_FUSE_CHIP_BODY = {  # (long_mm, short_mm) -> code, nearest-match within tol
+    (1.0, 0.5): "0402", (1.6, 0.8): "0603", (2.0, 1.2): "0805",
+    (3.2, 1.6): "1206", (3.2, 2.5): "1210",
+}
+_FUSE_BODY_TOL_MM = 0.7
+
+# Vendor holder/fuse footprints KiCad ships an exact model for (5x20 / 6.3x32mm
+# cylinder PCB holders). Bespoke clips, blade holders, TR5 radials and arresters
+# have no exact bundled body -> SKIP_REASON.
+FUSE_FOOTPRINT_MODEL = {
+    "FUSH_SCHURTER_0031.7701": (_FUSE, "Fuseholder_Schurter_0031.7701.xx.step"),
+    "FUSH_SCHURTER_0031.8002": (
+        _FUSE, "Fuseholder_Cylinder-6.3x32mm_Schurter_0031-8002_Horizontal_Open.step"),
+    "FUSH_BULGIN_FX0457": (
+        _FUSE, "Fuseholder_Cylinder-5x20mm_Bulgin_FX0457_Horizontal_Closed.step"),
+}
+
+
+def _resolve_fuse(name: str) -> str | None:
+    """Resolve a fuse/holder model from a CERN FUS*_ footprint name.
+
+    Order: exact vendor-holder map, then dimensioned resettable body, then a
+    standard SMD chip-fuse size token. Larger SMD bodies and non-chip dimensioned
+    bodies have no bundled model and decline.
+    """
+    hit = FUSE_FOOTPRINT_MODEL.get(name)
+    if hit:
+        return _ref(*hit)
+    uc = name.upper()
+    if not uc.startswith(("FUSC", "FUSE", "FUSR", "FUSH", "FUSRC", "SAR")):
+        return None
+    m = _FUSE_DIM_RE.match(uc)               # dimensioned resettable body
+    if m:
+        a, b = int(m.group(1)) / 10, int(m.group(2)) / 10  # LL, WW in 0.1mm
+        dims = (max(a, b), min(a, b))
+        best = min(_FUSE_CHIP_BODY,
+                   key=lambda k: abs(k[0] - dims[0]) + abs(k[1] - dims[1]))
+        if abs(best[0] - dims[0]) + abs(best[1] - dims[1]) <= _FUSE_BODY_TOL_MM:
+            return _ref(_FUSE, _FUSE_CHIP_MODEL[_FUSE_CHIP_BODY[best]])
+        return None
+    if _FUSE_BIG_CHIP_RE.search(uc):         # 1812/2410/2920/3812/2016 -> no model
+        return None
+    m = _FUSE_CHIP_RE.search(uc)             # standard SMD chip-fuse size code
+    if m:
+        return _ref(_FUSE, _FUSE_CHIP_MODEL[m.group(1)])
+    return None
+
+
 # --- Deliberate non-mappings: package -> reason (documented, not silent) -------
 # These have no bundled KiCad model that fits; they go to the download tail /
 # human review. Recorded here so future runs don't re-investigate them.
@@ -401,6 +484,24 @@ SKIP_REASON = {
                         "V23026/V23079, Schrack MSR/SNR/MT32/PT2/SR4/SR6, ABB/"
                         "Enerdis/Guenther/Teledyne/Zettler/NTE/etc.)",
     "RELS sockets": "relay sockets are bespoke vendor bodies; no bundled model",
+    # fuses (footprint-name families; package column is blank)
+    "FUSE cylinder cartridge": "5x20 / 6.3x32 / 10x38 / 6x46mm cartridge fuse "
+                        "bodies (FUSE_5X20_*, FUSE_6.3X32_*, FUSE_10X38_*, vendor "
+                        "MSF/MST/MGA/HVJ/TDC10/SFH/SR-5/186000) — KiCad ships the "
+                        "matching cylinder *holders* but no bare-cartridge model",
+    "FUSE big SMD chip": "1812/2410/2920/3812 SMD chip-fuse bodies — KiCad ships "
+                        "Fuse chip models only up to 1210",
+    "FUSE PTC vendor body": "bespoke resettable PTC bodies (Bourns MF-R/MF-RX "
+                        "radial, MF-SM/NSMF/PSMF/USMF disc, Littelfuse NANOSMD/"
+                        "MICROSMD/RXEF/RUEF/RHEF, BelFuse 0ZCJ, Bussmann PTS) — no "
+                        "matching bundled chip/disc model",
+    "FUSE holder/clip/cover": "fuse holders, clips and covers that are bespoke "
+                        "vendor bodies (Keystone 3576/4245 5AG/6.3x32 holders, "
+                        "Schurter OGN/3101/0031.25xx/35xx, Littelfuse 5xx/1xxxxx "
+                        "blocks, Bussmann/Eaton/Mersen holders, TR5 radials) — no "
+                        "exact bundled model",
+    "Surge Arrester": "GDT / surge-arrester bodies (Bourns 20xx, Littelfuse CG/SE, "
+                        "TDK/Epcos, Siemens, Dexerials) — no bundled KiCad model",
 }
 
 # All package keys the package-based resolver knows, for footprint-name fallback.
@@ -729,6 +830,11 @@ def resolve_from_footprint(name: str, *, pad_pitch_mm: float | None = None,
     xo = _resolve_xtal_osc(name)           # crystal/oscillator bodies by name
     if xo:
         return xo
+    if uc.startswith(("FUSC", "FUSE", "FUSR", "FUSH", "SAR")):
+        # Fuse/holder/arrester footprints resolve ONLY via the fuse resolver; the
+        # generic package-token scan below would mis-read embedded size codes
+        # (e.g. the '0603' in FUSC_AVX_F0603G as a diode 0603 model).
+        return _resolve_fuse(name)
     quad = _resolve_quad(name)             # dimensioned QFN/DFN/QFP by IPC name
     if quad:
         return quad
