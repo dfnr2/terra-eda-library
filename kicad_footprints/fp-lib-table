@@ -4,6 +4,7 @@
   (lib (name "cern-3m-thd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-3m-thd.pretty")(options "")(descr ""))
   (lib (name "cern-amphenol-smd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-amphenol-smd.pretty")(options "")(descr ""))
   (lib (name "cern-amphenol-thd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-amphenol-thd.pretty")(options "")(descr ""))
+  (lib (name "cern-batteries")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-batteries.pretty")(options "")(descr ""))
   (lib (name "cern-comatel-thd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-comatel-thd.pretty")(options "")(descr ""))
   (lib (name "cern-erni-smd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-erni-smd.pretty")(options "")(descr ""))
   (lib (name "cern-erni-thd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-erni-thd.pretty")(options "")(descr ""))

@@ -399,3 +399,32 @@ def test_thermistor_varistor_declines():
     assert resolve_from_footprint("VAR_EPCOS_B72205S0250K101") is None
     assert resolve_from_footprint("TCO_TDK-LAMBDA_A5MC") is None
     assert resolve_from_footprint("TEXAS_DYA0002A") is None
+
+
+def test_battery_footprint_exact():
+    # Vendor-series battery holder/clip bodies KiCad ships, by exact CERN
+    # footprint name (no KiCad dir needed; the map is a fixed filename lookup).
+    assert resolve_from_footprint("BATH_KEYSTONE_103").endswith(
+        "/Battery.3dshapes/BatteryHolder_Keystone_103_1x20mm.step")
+    assert resolve_from_footprint("BATH_KEYSTONE_3000").endswith(
+        "/Battery.3dshapes/BatteryHolder_Keystone_3000_1x12mm.step")
+    assert resolve_from_footprint("BATH_KEYSTONE_2466").endswith(
+        "/Battery.3dshapes/BatteryHolder_Keystone_2466_1xAAA.step")
+    # The Keystone 54 clip — both base and the '_a' variant footprint are the
+    # same physical clip and resolve to the one bundled clip model.
+    assert resolve_from_footprint("BATH_KEYSTONE_54").endswith(
+        "/Battery.3dshapes/BatteryClip_Keystone_54_D16-19mm.step")
+    assert resolve_from_footprint("BATH_KEYSTONE_54_a").endswith(
+        "/Battery.3dshapes/BatteryClip_Keystone_54_D16-19mm.step")
+
+
+def test_battery_declines():
+    # Bespoke holder SKUs KiCad lacks, bare cells, and SMD coin holders have no
+    # bundled body. BAT*/BATH names never fall through to the generic
+    # package-token scan: the '103' in KEYSTONE_103 is the SKU, and the digit
+    # runs in VARTA/Panasonic cells must never be read as a chip/package size.
+    assert resolve_from_footprint("BATH_KEYSTONE_1028") is None   # AA holder, no model
+    assert resolve_from_footprint("BATH_RENATA_SMTU2032") is None  # SMD coin holder
+    assert resolve_from_footprint("BAT_VARTA_CR2032") is None      # bare coin cell
+    assert resolve_from_footprint("BAT_PANASONIC_NCR18650B") is None  # bare 18650 cell
+    assert resolve_from_footprint("BATH_MPD_BK-18650-PC8") is None

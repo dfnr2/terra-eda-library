@@ -162,7 +162,8 @@ def run(table: str, dry_run: bool) -> int:
         # chip), so they must resolve purely from the footprint name below.
         ref_weight: Counter = Counter()
         if not name.upper().startswith(("FUSC", "FUSE", "FUSR", "FUSH", "SAR",
-                                        "REL_", "RELS_", "THERM", "VAR")):
+                                        "REL_", "RELS_", "THERM", "VAR",
+                                        "BAT_", "BATH")):
             for (pkg, pin), count in variants.items():
                 ref = resolve_model(pkg, pad_pitch_mm=pitch, pin_count=pin,
                                     orientation=ori, leads=leads)

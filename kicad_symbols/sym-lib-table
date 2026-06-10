@@ -1,6 +1,7 @@
 (sym_lib_table
   (version 7)
   (lib (name "cern-analog-interface")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-analog-interface.kicad_sym")(options "")(descr ""))
+  (lib (name "cern-batteries")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-batteries.kicad_sym")(options "")(descr ""))
   (lib (name "cern-connectors")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-connectors.kicad_sym")(options "")(descr ""))
   (lib (name "cern-crystals-oscillators")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-crystals-oscillators.kicad_sym")(options "")(descr ""))
   (lib (name "cern-dc-dc-converters")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-dc-dc-converters.kicad_sym")(options "")(descr ""))

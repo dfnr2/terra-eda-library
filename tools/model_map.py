@@ -494,6 +494,37 @@ def _resolve_thermistor_varistor(name: str) -> str | None:
     return _ref(_RES_SMD, _TV_CHIP_MODEL[_TV_CHIP_BODY[best]])
 
 
+# --- 8c. Batteries: CERN footprint name -> bundled Battery holder/clip model ---
+# CERN's Batteries footprints leave `package` blank and are vendor-series named
+# (BATH_<MFR>_<SERIES> holders/clips, BAT_<MFR>_<SERIES> bare cells), so
+# resolution is an exact footprint-name map onto the battery bodies KiCad ships
+# under Battery.3dshapes. Only the series KiCad authors an exact model for map;
+# the bulk (most Keystone holder SKUs, the bare VARTA/Panasonic coin & 18650
+# cells, the Renata SMD holder) have no matching bundled body -> SKIP_REASON.
+_BATTERY = "Battery.3dshapes"
+
+BATTERY_FOOTPRINT_MODEL = {
+    # Keystone holders/clips KiCad ships the exact series model for
+    "BATH_KEYSTONE_103": (_BATTERY, "BatteryHolder_Keystone_103_1x20mm.step"),
+    "BATH_KEYSTONE_3000": (_BATTERY, "BatteryHolder_Keystone_3000_1x12mm.step"),
+    "BATH_KEYSTONE_2466": (_BATTERY, "BatteryHolder_Keystone_2466_1xAAA.step"),
+    # Keystone 54 battery clip (16-19mm) — both the base and the '_a' variant
+    # footprint are the same physical clip (MPN 54).
+    "BATH_KEYSTONE_54": (_BATTERY, "BatteryClip_Keystone_54_D16-19mm.step"),
+    "BATH_KEYSTONE_54_A": (_BATTERY, "BatteryClip_Keystone_54_D16-19mm.step"),
+}
+
+
+def _resolve_battery(name: str) -> str | None:
+    """Resolve a battery holder/clip model from a CERN BAT*_ footprint name.
+
+    Exact map only: CERN battery footprints are bespoke vendor-series bodies, so
+    only the series KiCad ships a matching model resolve; the rest decline.
+    """
+    hit = BATTERY_FOOTPRINT_MODEL.get(name.upper())
+    return _ref(*hit) if hit else None
+
+
 # --- 9. Switches: CERN footprint name -> bundled Button_Switch model ----------
 # CERN's Switches footprints leave `package` blank and are vendor-series named
 # (PB_<MFR>_<SERIES>, SW_<MFR>_<SERIES>), so resolution is an exact footprint-name
@@ -620,6 +651,19 @@ SKIP_REASON = {
                         "models only for the Omron B3F/B3S/B3U tactile, Omron A6S/"
                         "A6H DIP-slide, and C&K FSMSM/JS202011CQN/PCM12/PCM13 bodies "
                         "(mapped above). The rest go to the human drop-folder.",
+    # batteries (footprint-name families; package column is blank)
+    "BATTERY bespoke body": "most CERN battery footprints have no exact bundled "
+                        "model: holders/clips whose Keystone SKU KiCad does not "
+                        "ship (1028 AA, 1043/1048P/1049 18650, 1065 coin, 1294 "
+                        "9V, 2224 C, 2460 AA, 2998 button, 92 'A/AA' clip), the "
+                        "Bulgin BX0034 AAA holder, MPD BHAA-3 / BK-18650-PC8 "
+                        "holders, the Renata SMTU2032 SMD holder, and the bare "
+                        "cells (Panasonic ML-621S/DN coin & NCR18650B cylindrical, "
+                        "VARTA CR1220/CR2016/CR2025/CR2032 coin cells & V364 "
+                        "silver-oxide button) — KiCad ships no matching cell body. "
+                        "Only Keystone 103/3000/2466 holders + the Keystone 54 "
+                        "clip map (~17% of parts). The rest go to the human "
+                        "drop-folder under kicad_3dmodels/.",
     # transformers (footprint-name families; package column is blank)
     "XFMR vendor core": "CERN Transformers are bespoke vendor magnetics — BLOCK "
                         "(VB/PT/FL/AVB mains), Myrra (EI/UI mains), Talema/Nuvotem "
@@ -991,6 +1035,12 @@ def resolve_from_footprint(name: str, *, pad_pitch_mm: float | None = None,
         # generic package-token scan below would mis-read embedded size codes
         # (e.g. the '0603' in FUSC_AVX_F0603G as a diode 0603 model).
         return _resolve_fuse(name)
+    if uc.startswith(("BAT_", "BATH")):
+        # Battery cell/holder footprints resolve ONLY via the exact battery map;
+        # the generic package-token scan below would mis-read embedded digit runs
+        # (e.g. a vendor SKU like KEYSTONE_103 or VARTA CR2016). Only the series
+        # KiCad ships a model for map; bare cells and bespoke holders decline.
+        return _resolve_battery(name)
     if uc.startswith(("THERM", "VAR")):
         # Thermistor/varistor footprints resolve ONLY via the chip resolver; the
         # generic scan below would mis-read an embedded size as a diode chip or a
