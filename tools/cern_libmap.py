@@ -15,6 +15,7 @@ SYMBOL_LIB_NICK = {
     "Standard Logic": "cern-standard-logic",
     "Logic": "cern-logic",
     "DC-DC Converters": "cern-dc-dc-converters",
+    "Power Supplies": "cern-power-supplies",
     "Optocouplers": "cern-optocouplers",
     "Crystals & Oscillators": "cern-crystals-oscillators",
     "Connectors": "cern-connectors",   # shared symbol lib for all connector vendors

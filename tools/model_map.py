@@ -960,11 +960,18 @@ def resolve_from_footprint(name: str, *, pad_pitch_mm: float | None = None,
     # with hyphens stripped on both sides, so 'DO-201' matches footprint 'DO-201')
     uc_nodash = uc.replace("-", "")
     for k in sorted(_PACKAGE_KEYS, key=len, reverse=True):
-        if k.upper().replace("-", "") in uc_nodash:
-            r = resolve_model(k, pad_pitch_mm=pad_pitch_mm,
-                              orientation=orientation, leads=leads)
-            if r:
-                return r
+        ku = k.upper().replace("-", "")
+        if ku not in uc_nodash:
+            continue
+        # A pure-digit chip key (0402/0603) must be bounded by non-digits, or a
+        # vendor part number's digit run would mis-match it (e.g. the '0402' in a
+        # power-supply footprint 'PWS_HAMAMATSU_C11204-02' is not a 0402 chip).
+        if ku.isdigit() and not re.search(rf"(?<!\d){re.escape(ku)}(?!\d)", uc_nodash):
+            continue
+        r = resolve_model(k, pad_pitch_mm=pad_pitch_mm,
+                          orientation=orientation, leads=leads)
+        if r:
+            return r
     return None
 
 

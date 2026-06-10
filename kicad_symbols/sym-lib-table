@@ -11,6 +11,7 @@
   (lib (name "cern-logic")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-logic.kicad_sym")(options "")(descr ""))
   (lib (name "cern-operational-amplifiers")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-operational-amplifiers.kicad_sym")(options "")(descr ""))
   (lib (name "cern-optocouplers")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-optocouplers.kicad_sym")(options "")(descr ""))
+  (lib (name "cern-power-supplies")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-power-supplies.kicad_sym")(options "")(descr ""))
   (lib (name "cern-regulators")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-regulators.kicad_sym")(options "")(descr ""))
   (lib (name "cern-relays")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-relays.kicad_sym")(options "")(descr ""))
   (lib (name "cern-sensors")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-sensors.kicad_sym")(options "")(descr ""))

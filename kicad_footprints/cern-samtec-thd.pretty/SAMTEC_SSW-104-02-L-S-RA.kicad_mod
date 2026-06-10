@@ -909,9 +909,9 @@
 		(uuid "20f5a108-c4a1-4323-9228-2f06bd3f3efa")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_0402_1005Metric.step"
+	(model "${KICAD10_3DMODEL_DIR}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_1x04_P2.54mm_Vertical.step"
 		(offset
-			(xyz 0.00008 0.00008 0)
+			(xyz 8e-05 3.81 0)
 		)
 		(scale
 			(xyz 1 1 1)

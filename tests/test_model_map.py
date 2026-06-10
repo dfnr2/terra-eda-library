@@ -79,6 +79,15 @@ def test_unmapped_footprint_name_is_none():
     assert resolve_from_footprint("IXYS_IXBOD 1-12R..42") is None
 
 
+def test_chip_size_token_needs_digit_boundary():
+    # A pure-digit chip key (0402/0603) embedded in a vendor part-number digit run
+    # must NOT mis-resolve to a diode chip model. CERN power-supply footprint
+    # PWS_HAMAMATSU_C11204-02 contains '0402' as part of the MPN, not a 0402 chip.
+    assert resolve_from_footprint("PWS_HAMAMATSU_C11204-02") is None
+    # A genuine boundary-clean 0402 token still resolves.
+    assert resolve_from_footprint("D_0402_1005Metric").endswith("/D_0402_1005Metric.step")
+
+
 @_needs_kicad
 def test_qfn_dimension_resolver():
     # CERN QFN body in name is the true body; N may include the thermal pad.
