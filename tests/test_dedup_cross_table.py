@@ -2,9 +2,10 @@ import sqlite3
 from tools.dedup_cross_table import dedup, RESOLUTIONS
 
 
-def test_resolutions_has_five_entries():
-    assert len(RESOLUTIONS) == 5
+def test_resolutions_has_six_entries():
+    assert len(RESOLUTIONS) == 6
     assert RESOLUTIONS["SAMTEC-CES-110-01-T-S"] == "cern_samtec"
+    assert RESOLUTIONS["TYCO ELECTRONICS-1415044-1"] == "cern_sockets"
 
 
 def test_dedup_keeps_canonical_drops_others():

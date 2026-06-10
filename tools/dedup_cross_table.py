@@ -17,6 +17,9 @@ RESOLUTIONS: dict[str, str] = {
     "Broadcom-ASMT-SWB5-NW703": "leds",
     "NXP SEMICONDUCTORS-SC18IM700IPW": "cern_analog_interface",
     "SAMTEC-CES-110-01-T-S": "cern_samtec",
+    # CERN lists this relay socket in both its Relays and Sockets libraries;
+    # keep it in the dedicated sockets table.
+    "TYCO ELECTRONICS-1415044-1": "cern_sockets",
 }
 
 
