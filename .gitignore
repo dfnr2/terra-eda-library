@@ -54,6 +54,11 @@ terra_config.sql
 # Pattern: {table}_generated_*.sql (has dump_priority=0, not dumped back)
 db/tables/*/*_generated_*.sql
 
+# Datasheet/param resolver: build outputs and local-only state (not tracked)
+build/
+assets/datasheets/files/
+assets/datasheets/.cache-state.json
+
 # Git worktrees (isolated workspaces)
 .worktrees/
 

@@ -83,6 +83,10 @@ the invariant is **one fragment, two includers, identical columns**.
   HTTP library). Generated from the DB + manifest; well under the Pages 1 GB limit
   because it holds HTML/JSON only, never PDFs.
 - Make targets wiring the consumer-facing and offline steps.
+- **`.gitignore` additions** (a deliverable, so the "gitignored" claims hold): `build/`
+  (conflicts report), `assets/datasheets/files/` (PDF cache),
+  `assets/datasheets/.cache-state.json` (local-cache index). The localized DB
+  `db/terra_local.db` is already covered by the existing `db/*.db` rule.
 
 ### Out (deferred)
 
@@ -135,7 +139,7 @@ Phase 4  build     (make)            anyone,     OFFLINE  -> apply_harvest: fill
                                                               (DETERMINISTIC: committed manifest + sidecars only)
 -- optional, per-user, NOT part of the canonical build: --
 Phase 3  download  (make datasheets) consumer,   ONLINE   -> gitignored local PDFs, sha256-verified -> local-cache index
-Phase 5  localize  (make localize-datasheets) consumer, OFFLINE -> repoint datasheet to local file for cached hashes
+Phase 5  localize  (make localize-datasheets) consumer, OFFLINE -> db/terra_local.db (copy) with local paths for cached hashes
 ```
 
 Phases 0/1/2/4 produce a **deterministic** `db/terra.db` from committed inputs only —
@@ -229,13 +233,24 @@ already-resolved rows unless `--refresh`), records `no-match`/`low-confidence` n
 
 ### 4. `mirror.py` + `prune.py` (online, `gh`)
 
-`mirror`: for each manifest entry not yet `archive_ok`, download from a `source_url`,
-compute `sha256`, **re-key the entry from its provisional `source_url` key to `sha256`**
-(keeping the full `source_urls` list intact so the sidecar join still resolves),
+`mirror` (default, incremental): for each manifest entry not yet `archive_ok`, download from
+a `source_url`, compute `sha256`, **re-key the entry from its provisional `source_url` key to
+`sha256`** (keeping the full `source_urls` list intact so the sidecar join still resolves),
 `gh release upload --clobber <tag> <sha256>.pdf`, set `download_url`+`size`+`archive_ok=true`.
-Skip upload if a `<sha256>.pdf` asset already exists. **No sidecar is touched.** `prune`:
-list release assets, delete any whose `sha256` is absent from the current manifest. A
-`source_url` that 404s → entry left without `download_url` (surfaced by audit).
+Skip upload if a `<sha256>.pdf` asset already exists. **No sidecar is touched.**
+
+`mirror --refresh [--since <date> | --manufacturer <m> | --url <u>]` (content-revision
+detection): the incremental default never re-fetches an already-`archive_ok` URL, so a
+datasheet **re-issued at the same URL** would otherwise go unnoticed. `--refresh` re-fetches
+the selected `source_url`s and recomputes `sha256`; on a **changed** hash it migrates that
+`source_url` out of its old content entry into the entry for the new hash (creating it and
+uploading the new asset), so the sidecar's `source_url` join now resolves to the new
+`download_url`. Selective by design — re-fetching all ~11k every cycle is wasteful — and the
+old asset is removed by the next `prune` once unreferenced. (The same recompute-and-compare
+is what the `audit` archive check reports without mutating.)
+
+`prune`: list release assets, delete any whose `sha256` is absent from the current manifest.
+A `source_url` that 404s → entry left without `download_url` (surfaced by audit).
 
 ### 5. `download.py` / `make datasheets` (consumer, **optional**, online, once) + local-cache index
 
@@ -276,15 +291,21 @@ trigger a rebuild. This supersedes the CERN-only `rewrite_datasheets.py` filenam
 ### 6b. `localize_datasheets.py` / `make localize-datasheets` (optional, local, offline)
 
 A **separate opt-in** target for users who want datasheets served from local files instead
-of the Release URL. It works **purely from the built DB + the local-cache index** — no
-sidecars: each datasheet that `apply_harvest` set is a `download_url` of the form
-`…/<sha256>.pdf`, so localize parses the `sha256` from the URL, and **iff** that hash is
-present-and-verified in the local-cache index (§5), rewrites `datasheet` to the local
-`${TERRA_EDA_LIB}` file path. Rows whose datasheet is not a Release `download_url` (left
-untouched by `apply_harvest`), or whose hash isn't cached, stay as-is. This is the **only**
-step that reads the gitignored local-cache state, and is never a prerequisite of `make all`
-— so non-deterministic local state cannot fork the canonical DB (it only swaps a stable URL
-for a local path on the user's own machine).
+of the Release URL. **It never mutates the canonical `db/terra.db` in place.** It reads
+`db/terra.db` and writes a **separate, gitignored** output `db/terra_local.db` (the existing
+project-local-DB convention; cf. `make project-db`), so a later plain `make all` can never
+find local file paths in the canonical DB — there is nothing to "rebuild away," because the
+canonical DB was never touched. KiCad/users who want local serving point at
+`db/terra_local.db`.
+
+It works **purely from the built DB + the local-cache index** — no sidecars: each datasheet
+that `apply_harvest` set is a `download_url` of the form `…/<sha256>.pdf`, so localize parses
+the `sha256` from the URL, and **iff** that hash is present-and-verified in the local-cache
+index (§5), writes the local `${TERRA_EDA_LIB}` file path into the *copy*. Rows whose
+datasheet is not a Release `download_url` (left untouched by `apply_harvest`), or whose hash
+isn't cached, stay as-is. This is the **only** step that reads the gitignored local-cache
+state, is never a prerequisite of `make all`, and only ever writes a gitignored DB copy — so
+non-deterministic local state cannot touch, let alone fork, the canonical `db/terra.db`.
 
 ### 7. GitHub Pages catalog index
 
@@ -348,10 +369,13 @@ so repeated builds neither duplicate entries nor dirty the tree.
 - **determinism:** `apply_harvest` produces an identical DB with an empty vs populated
   local cache (it never reads the cache).
 - `mirror`/`prune`: fake release-asset listing → asserts content-addressed upload, clobber,
-  re-key keeps `source_urls`, and exactly the unreferenced hashes are pruned.
+  re-key keeps `source_urls`, exactly the unreferenced hashes are pruned, and `--refresh`
+  on a changed-content URL migrates it to a new hash entry (old asset then prunable).
 - `download`/`localize`: sha256 pass/mismatch updates the local-cache index correctly;
-  `localize` rewrites to a local path only for cached hashes and leaves the rest at
-  `download_url`.
+  `localize` writes a **separate `db/terra_local.db`** (canonical `db/terra.db` byte-identical
+  before/after), with local paths only for cached hashes and the rest left at `download_url`.
+- conflicts report is rewritten (not appended): two successive builds yield identical
+  `build/harvest_conflicts.tsv`.
 - manifest round-trip / schema validation; catalog builds from a fixture DB.
 
 ## Open questions
