@@ -77,11 +77,13 @@ def _adi(item: dict) -> list[str]:
     return [f"{base}/{s}.pdf", f"{base}/{s.upper()}.pdf"]
 
 
-# manufacturer substring (upper) -> resolver
+# manufacturer substring (upper) -> resolver.
+# NOTE: Analog Devices (analog.com) drops non-browser connections (curl -> code 000),
+# so ADI is a Playwright-tier vendor, not a curl-tier one — _adi is kept for reference
+# but intentionally NOT registered here.
 RESOLVERS = [
     ("TEXAS INSTRUMENTS", _ti),
     ("ALPHA & OMEGA", _aos),
-    ("ANALOG DEVICES", _adi),
 ]
 
 
