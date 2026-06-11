@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 LOG = ROOT / "assets/datasheets/acquisition.jsonl"
-FIELDS = ("filename", "status", "source", "source_tier", "final_url",
+FIELDS = ("filename", "status", "source", "source_tier", "source_domain", "final_url",
           "sha256", "size_bytes", "pages", "mpn_in_doc", "quarantine_reason", "notes")
 
 

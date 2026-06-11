@@ -67,6 +67,7 @@ const SCHEMA = {
     size_bytes: { type: 'integer' },
     pages: { type: 'integer' },
     mpn_in_doc: { type: 'boolean' },
+    source_domain: { type: 'string' },
     quarantine_reason: { type: 'string' },
     notes: { type: 'string' },
   },
@@ -81,14 +82,14 @@ Your work item:
 - manufacturer: ${item.manufacturer || '(unknown)'}
 - example MPN(s) sharing this sheet: ${mpns || '(none)'}
 
-GOAL: find the official datasheet PDF for this part (a documented family/series sheet is acceptable if the exact-MPN sheet does not exist), download it, verify it, store it content-addressed.
+GOAL: find the datasheet PDF FROM THIS PART'S OWN MANUFACTURER (a documented family/series sheet from that manufacturer is fine), download it, verify it, store it content-addressed. The point is a datasheet that MATCHES the part's manufacturer — do not substitute a different maker's equivalent.
 
-SOURCE PREFERENCE — try in order, stop at the first GOOD result:
-  1. Manufacturer's own website (most reliable)
-  2. Tier-1 distributors: Mouser, Digi-Key, Farnell/Newark, Octopart, RS, Arrow, TME
-  3. Other reputable distributors
-  AVOID no-name datasheet mirrors (alldatasheet clones, ic-components.ru, *.ru mirrors, unknown aggregators). If ONLY such a mirror has it, you may download it but you MUST set source_tier="mirror" and status="quarantine".
-Use WebSearch (e.g. "<manufacturer> <first mpn> datasheet pdf") and WebFetch to locate the real PDF link.
+SOURCE PREFERENCE — strongly prefer the part's own manufacturer, in this order:
+  1. The PART'S OWN MANUFACTURER ("${item.manufacturer || ''}"). WebSearch "${item.manufacturer || ''} ${(item.mpns||[''])[0]} datasheet pdf"; the results usually include the manufacturer's DIRECT asset-CDN PDF (e.g. assets.nexperia.com/documents/data-sheet/<...>.pdf, st.com/resource/..., ti.com/lit/ds/symlink/...). Those asset URLs curl fine even though the product page is JS-walled — grab the PDF URL from the search results and curl it.
+  2. The manufacturer's ACQUISITION SUCCESSOR, when applicable — these ARE the current maker, so their datasheet matches: National Semiconductor→ti.com, Fairchild→onsemi.com, Maxim & Linear Technology→analog.com, Cypress & International Rectifier→infineon.com, Freescale→nxp.com, Atmel→microchip.com. Note the successor in 'notes'.
+  3. ONLY if the manufacturer (and successor) genuinely has no datasheet: a tier-1 distributor (Mouser, Digi-Key, Farnell, Octopart) hosting that manufacturer's sheet.
+  AVOID no-name mirrors (alldatasheet clones, *.ru, oneyac, unknown aggregators). If only a mirror has it → source_tier="mirror", status="quarantine".
+Record the host you downloaded from in 'source_domain' (e.g. "assets.nexperia.com").
 
 DOWNLOAD with a UNIQUE temp file (NEVER a shared path — critical for parallel safety):
   TMP=$(mktemp /tmp/ds.XXXXXX.pdf)
@@ -116,7 +117,7 @@ STORE content-addressed (sha256 IS the filename; identical content dedups automa
   mv "$TMP" "/users/dave/vsrc/terra-eda-library/assets/datasheets/quarantine/$H.pdf"
 Both dirs are gitignored. Do NOT git add or commit. Touch no files other than the one PDF you store.
 
-Return the structured result: filename (from your item), status, source (site name), source_tier, final_url, sha256 (or ""), size_bytes (or 0), pages (or 0), mpn_in_doc (true/false), quarantine_reason (or ""), notes (brief).`
+Return the structured result: filename (from your item), status, source (site name), source_tier, source_domain (host you downloaded from), final_url, sha256 (or ""), size_bytes (or 0), pages (or 0), mpn_in_doc (true/false), quarantine_reason (or ""), notes (brief; note any acquisition-successor source).`
 }
 
 phase('Fetch')
