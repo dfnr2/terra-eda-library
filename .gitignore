@@ -65,3 +65,6 @@ assets/datasheets/.cache-state.json
 
 # Vendored CERN source (shallow clone of cern-kicad-libs; the import source, not committed)
 /vendor/
+
+# Playwright CLI scratch (snapshots/console)
+.playwright-cli/
