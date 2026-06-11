@@ -49,155 +49,174 @@
   Decision: DROP-ALL (yes/no)
 
 * diodes   (tables: diodes, cern_diodes)
-| Decision | Column | Type | In | Rationale |
-|----------+--------+------+----+-----------|
-| keep | diode_type | TEXT | cern | Type: rectifier/schottky/zener/tvs/small-signal (CLAUDE.md, CERN) |
-| keep | voltage_rating | TEXT | cern | Vr reverse standoff/working (CLAUDE.md, CERN) |
-| add | forward_voltage | TEXT | NEW | Vf (CLAUDE.md) |
-| add | forward_current | TEXT | NEW | If (CLAUDE.md) |
-| keep | current_rating | TEXT | native | Io rectifier average (CLAUDE.md) |
-| keep | power_rating | TEXT | cern+native | Pd for TVS/zener (CERN) |
-| drop? | tolerance | - | native | existing column not in proposal — drop, rename, or keep? |
+| Decision | Column          | Type | In          | Rationale                                                         |
+|----------+-----------------+------+-------------+-------------------------------------------------------------------|
+| keep     | diode_type      | TEXT | cern        | Type: rectifier/schottky/zener/tvs/small-signal (CLAUDE.md, CERN) |
+| keep     | voltage_rating  | TEXT | cern        | Vr reverse standoff/working (CLAUDE.md, CERN)                     |
+| add      | forward_voltage | TEXT | NEW         | Vf (CLAUDE.md)                                                    |
+| add      | forward_current | TEXT | NEW         | If (CLAUDE.md)                                                    |
+| keep     | current_rating  | TEXT | native      | Io rectifier average (CLAUDE.md)                                  |
+| keep     | power_rating    | TEXT | cern+native | Pd for TVS/zener (CERN)                                           |
+| drop     | tolerance       | -    | native      | existing column not in proposal — drop, rename, or keep?          |
 
 * transistors   (tables: bjt, mosfet, cern_transistors)
-| Decision | Column | Type | In | Rationale |
-|----------+--------+------+----+-----------|
-| keep | transistor_type | TEXT | cern | npn/pnp/nmos/pmos/igbt/jfet (CLAUDE.md, CERN) |
-| add | channels | INTEGER | NEW | dual/single packages |
-| add | v_ce_ds_max | TEXT | NEW | Vce(BJT)/Vds(FET) (CLAUDE.md) |
-| add | i_c_d_max | TEXT | NEW | Ic/Id (CLAUDE.md) |
-| keep | power_dissipation | TEXT | native | Pd (bjt schema) |
-| keep | hfe_typ | TEXT | native | BJT gain; null for FET (bjt schema) |
-| add | rds_on | TEXT | NEW | FET on-resistance; null for BJT |
-| add | vgs_th | TEXT | NEW | FET threshold; null for BJT |
-| keep | transition_freq | TEXT | native | ft (bjt schema) |
-| keep | temp_junction_max | TEXT | native | Tj max (bjt schema) |
-| drop? | bjt_type | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | hfe_max | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | hfe_min | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | ib_max | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | ic_max | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | power_rating | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | tolerance | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | vcb_max | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | vce_max | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | veb_max | - | native | existing column not in proposal — drop, rename, or keep? |
+| Decision | Column            | Type    | In     | Rationale                                                |
+|----------+-------------------+---------+--------+----------------------------------------------------------|
+| keep     | transistor_type   | TEXT    | cern   | npn/pnp/nmos/pmos/igbt/jfet (CLAUDE.md, CERN)            |
+| add      | channels          | INTEGER | NEW    | dual/single packages                                     |
+| add      | v_ce_ds_max       | TEXT    | NEW    | Vce(BJT)/Vds(FET) (CLAUDE.md)                            |
+| add      | i_c_d_max         | TEXT    | NEW    | Ic/Id (CLAUDE.md)                                        |
+| keep     | power_dissipation | TEXT    | native | Pd (bjt schema)                                          |
+| keep     | hfe_typ           | TEXT    | native | BJT gain; null for FET (bjt schema)                      |
+| add      | rds_on            | TEXT    | NEW    | FET on-resistance; null for BJT                          |
+| add      | vgs_th            | TEXT    | NEW    | FET threshold; null for BJT                              |
+| keep     | transition_freq   | TEXT    | native | ft (bjt schema)                                          |
+| keep     | temp_junction_max | TEXT    | native | Tj max (bjt schema)                                      |
+| drop     | bjt_type          | -       | native | existing column not in proposal — drop, rename, or keep? |
+| drop     | hfe_max           | -       | native | existing column not in proposal — drop, rename, or keep? |
+| drop     | hfe_min           | -       | native | existing column not in proposal — drop, rename, or keep? |
+| drop     | ib_max            | -       | native | existing column not in proposal — drop, rename, or keep? |
+| drop     | ic_max            | -       | native | existing column not in proposal — drop, rename, or keep? |
+| drop     | power_rating      | -       | native | existing column not in proposal — drop, rename, or keep? |
+| drop     | tolerance         | -       | native | existing column not in proposal — drop, rename, or keep? |
+| drop     | vcb_max           | -       | native | existing column not in proposal — drop, rename, or keep? |
+| drop     | vce_max           | -       | native | existing column not in proposal — drop, rename, or keep? |
+| drop     | veb_max           | -       | native | existing column not in proposal — drop, rename, or keep? |
 
 * op_amps   (tables: ic_opamp, cern_op_amps)
-| Decision | Column | Type | In | Rationale |
-|----------+--------+------+----+-----------|
-| keep | amplifier_type | TEXT | cern | voltage-fb/current-fb/instrumentation (CERN) |
-| keep | channels | INTEGER | cern | channel count (CLAUDE.md, CERN) |
-| add | gain_bandwidth | TEXT | NEW | GBW (CLAUDE.md) |
-| add | slew_rate | TEXT | NEW | slew rate (CLAUDE.md) |
-| add | input_offset | TEXT | NEW | input offset (CLAUDE.md) |
-| add | input_noise | TEXT | NEW | noise (CLAUDE.md) |
-| add | supply_voltage | TEXT | NEW | supply range |
-| drop? | power_rating | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | tolerance | - | native | existing column not in proposal — drop, rename, or keep? |
+| Decision | Column             | Type    | In     | Rationale                                          |
+|----------+--------------------+---------+--------+----------------------------------------------------|
+| keep     | amplifier_type     | TEXT    | cern   | voltage-fb/current-fb/instrumentation (CERN)       |
+| keep     | channels           | INTEGER | cern   | channel count (CLAUDE.md, CERN)                    |
+| add      | gain_bandwidth     | TEXT    | NEW    | GBW (CLAUDE.md)                                    |
+| add      | slew_rate          | TEXT    | NEW    | slew rate (CLAUDE.md)                              |
+| add      | input_offset       | TEXT    | NEW    | input offset (CLAUDE.md)                           |
+| add      | input_noise        | TEXT    | NEW    | noise (CLAUDE.md)                                  |
+| add      | supply_voltage_min | NUMBER  | NEW    | Minimum supply voltage                             |
+| add      | supply_voltage_max | NUMBER  | NEW    | Maximum supply voltage                             |
+| keep     | power_rating       | -       | native | if specified; n/a if not specified or extractabale |
+
 
 * logic   (tables: ic_logic, cern_logic, cern_standard_logic)
-| Decision | Column | Type | In | Rationale |
-|----------+--------+------+----+-----------|
-| add | logic_family | TEXT | NEW | 74HC/74LVC/4000 (CLAUDE.md) |
-| add | gate_function | TEXT | NEW | and/or/nand/mux/ff/buffer (CLAUDE.md) |
-| add | channels | INTEGER | NEW | gates/bits per package |
-| add | propagation_delay | TEXT | NEW | tpd (CLAUDE.md) |
-| add | supply_voltage | TEXT | NEW | voltage (CLAUDE.md) |
-| drop? | power_rating | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | tolerance | - | native | existing column not in proposal — drop, rename, or keep? |
+| Decision | Column             | Type    | In     | Rationale                                                |
+|----------+--------------------+---------+--------+----------------------------------------------------------|
+| add      | logic_family       | TEXT    | NEW    | 74HC/74LVC/4000 (CLAUDE.md)                              |
+| add      | gate_function      | TEXT    | NEW    | and/or/nand/mux/ff/buffer (CLAUDE.md)                    |
+| add      | channels           | INTEGER | NEW    | gates/bits per package                                   |
+| add      | propagation_delay  | TEXT    | NEW    | tpd (CLAUDE.md)                                          |
+| add      | supply_voltage_min | NUMBER  | NEW    | Minimum supply voltage                                   |
+| add      | supply_voltage_max | NUMBER  | NEW    | Maximum supply voltage                                   |
+| drop     | power_rating       | -       | native | existing column not in proposal — drop, rename, or keep? |
+| drop     | tolerance          | -       | native | existing column not in proposal — drop, rename, or keep? |
 
 * analog   (tables: ic_analog, cern_analog_interface)
-| Decision | Column | Type | In | Rationale |
-|----------+--------+------+----+-----------|
-| add | function_type | TEXT | NEW | adc/dac/comparator/mux/vref/interface (CLAUDE.md) |
-| add | channels | INTEGER | NEW | channel count |
-| add | resolution_bits | TEXT | NEW | ADC/DAC resolution |
-| add | interface | TEXT | NEW | spi/i2c/parallel |
-| add | supply_voltage | TEXT | NEW | supply range |
-| drop? | power_rating | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | tolerance | - | native | existing column not in proposal — drop, rename, or keep? |
+| Decision | Column             | Type    | In  | Rationale                                         |
+|----------+--------------------+---------+-----+---------------------------------------------------|
+| add      | function_type      | TEXT    | NEW | adc/dac/comparator/mux/vref/interface (CLAUDE.md) |
+| add      | channels           | INTEGER | NEW | channel count                                     |
+| add      | resolution_bits    | TEXT    | NEW | ADC/DAC resolution                                |
+| add      | interface          | TEXT    | NEW | spi/i2c/parallel                                  |
+| add      | supply_voltage_min | NUMBER  | NEW | Minimum supply voltage                            |
+| add      | supply_voltage_max | NUMBER  | NEW | Maximum supply voltage                            |
+
 
 * leds   (tables: leds, cern_leds_displays)
-| Decision | Column | Type | In | Rationale |
-|----------+--------+------+----+-----------|
-| keep | color | TEXT | cern | color (CLAUDE.md, CERN) |
-| keep | wavelength_nm | TEXT | cern | wavelength (CLAUDE.md, CERN) |
-| keep | forward_voltage_v | TEXT | cern | Vf (CLAUDE.md, CERN) |
-| keep | current_max_ma | TEXT | cern | If max (CERN) |
-| keep | luminous_intensity | TEXT | cern | intensity (CLAUDE.md, CERN) |
-| add | viewing_angle | TEXT | NEW | viewing angle (CLAUDE.md) |
-| drop? | current_rating | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | tolerance | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | voltage_rating | - | native | existing column not in proposal — drop, rename, or keep? |
+| Decision | Column             | Type | In     | Rationale                                                |
+|----------+--------------------+------+--------+----------------------------------------------------------|
+| keep     | color              | TEXT | cern   | color (CLAUDE.md, CERN)                                  |
+| keep     | wavelength_nm      | TEXT | cern   | wavelength (CLAUDE.md, CERN)                             |
+| keep     | forward_voltage_v  | TEXT | cern   | Vf (CLAUDE.md, CERN)                                     |
+| keep     | current_max_ma     | TEXT | cern   | If max (CERN)                                            |
+| keep     | luminous_intensity | TEXT | cern   | intensity (CLAUDE.md, CERN)                              |
+| add      | viewing_angle      | TEXT | NEW    | viewing angle (CLAUDE.md)                                |
+| drop     | current_rating     | -    | native | existing column not in proposal — drop, rename, or keep? |
+| drop     | tolerance          | -    | native | existing column not in proposal — drop, rename, or keep? |
+| drop     | voltage_rating     | -    | native | existing column not in proposal — drop, rename, or keep? |
 
 * switches   (tables: switches, cern_switches)
-| Decision | Column | Type | In | Rationale |
-|----------+--------+------+----+-----------|
-| keep | switch_type | TEXT | cern | tactile/toggle/dip/rotary/slide (CLAUDE.md, CERN) |
-| add | poles | INTEGER | NEW | poles (CLAUDE.md) |
-| add | throws | INTEGER | NEW | throws (CLAUDE.md) |
-| keep | current_rating | TEXT | native | contact current |
-| add | voltage_rating | TEXT | NEW | contact voltage |
-| add | actuation_force | TEXT | NEW | actuation force (CLAUDE.md) |
-| drop? | tolerance | - | native | existing column not in proposal — drop, rename, or keep? |
+| Decision | Column          | Type    | In     | Rationale                                                |
+|----------+-----------------+---------+--------+----------------------------------------------------------|
+| keep     | switch_type     | TEXT    | cern   | tactile/toggle/dip/rotary/slide (CLAUDE.md, CERN)        |
+| add      | poles           | INTEGER | NEW    | poles (CLAUDE.md)                                        |
+| add      | throws          | INTEGER | NEW    | throws (CLAUDE.md)                                       |
+| keep     | current_rating  | TEXT    | native | contact current                                          |
+| add      | voltage_rating  | TEXT    | NEW    | contact voltage                                          |
+| add      | actuation_force | TEXT    | NEW    | actuation force (CLAUDE.md)                              |
+| drop     | tolerance       | -       | native | existing column not in proposal — drop, rename, or keep? |
 
 * inductors   (tables: inductors)
-| Decision | Column | Type | In | Rationale |
-|----------+--------+------+----+-----------|
-| add | inductance | TEXT | NEW | inductance (CLAUDE.md) |
-| keep | tolerance | TEXT | native | tolerance (CLAUDE.md) |
-| keep | current_rating | TEXT | native | rated current (CLAUDE.md) |
-| add | saturation_current | TEXT | NEW | Isat (CLAUDE.md) |
-| add | dcr | TEXT | NEW | DC resistance |
-| add | srf | TEXT | NEW | self-resonant freq |
+| Decision | Column             | Type | In     | Rationale                 |
+|----------+--------------------+------+--------+---------------------------|
+| add      | inductance         | TEXT | NEW    | inductance (CLAUDE.md)    |
+| keep     | tolerance          | TEXT | native | tolerance (CLAUDE.md)     |
+| keep     | current_rating     | TEXT | native | rated current (CLAUDE.md) |
+| add      | saturation_current | TEXT | NEW    | Isat (CLAUDE.md)          |
+| add      | dc_resistance      | TEXT | NEW    | DC resistance             |
+| add      | self_res_freq      | TEXT | NEW    | self-resonant freq        |
 
 * ferrites   (tables: ferrites)
-| Decision | Column | Type | In | Rationale |
-|----------+--------+------+----+-----------|
-| add | impedance_at_freq | TEXT | NEW | impedance @ freq (CLAUDE.md) |
-| add | dc_resistance | TEXT | NEW | DCR (CLAUDE.md) |
-| add | current_rating | TEXT | NEW | rated current (CLAUDE.md) |
-| drop? | power_rating | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | tolerance | - | native | existing column not in proposal — drop, rename, or keep? |
+| Decision | Column            | Type | In     | Rationale                                                |
+|----------+-------------------+------+--------+----------------------------------------------------------|
+| add      | impedance_at_freq | TEXT | NEW    | impedance @ freq (CLAUDE.md)                             |
+| add      | dc_resistance     | TEXT | NEW    | DCR (CLAUDE.md)                                          |
+| add      | current_rating    | TEXT | NEW    | rated current (CLAUDE.md)                                |
+| keep     | power_rating      | TEXT | native | existing column not in proposal — drop, rename, or keep? |
+| keep     | tolerance         | TEXT | native | existing column not in proposal — drop, rename, or keep? |
 
 * ic_drivers   (tables: ic_drivers)
-| Decision | Column | Type | In | Rationale |
-|----------+--------+------+----+-----------|
-| add | driver_type | TEXT | NEW | gate/motor/led/line driver |
-| add | output_current | TEXT | NEW | output current (CLAUDE.md) |
-| add | channels | INTEGER | NEW | channels (CLAUDE.md) |
-| add | logic_level | TEXT | NEW | logic level (CLAUDE.md) |
-| drop? | current_rating | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | power_rating | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | tolerance | - | native | existing column not in proposal — drop, rename, or keep? |
+| Decision | Column             | Type    | In     | Rationale                                                |
+|----------+--------------------+---------+--------+----------------------------------------------------------|
+| add      | driver_type        | TEXT    | NEW    | gate/motor/led/line driver                               |
+| add      | channels           | INTEGER | NEW    | channels (CLAUDE.md)                                     |
+| add      | supply_voltage_min | NUMBER  | NEW    | Minimum supply voltage                                   |
+| add      | supply_voltage_max | NUMBER  | NEW    | Maximum supply voltage                                   |
+| add      | i_max_device       | TEXT    | NEW    | max device current current                               |
+| add      | i_max_channel      | TEXT    | NEW    | max current per channel                                  |
+| add      | logic_polarity     | TEXT    | NEW    | logic polarity (inverting, noninverting, both)           |
+| add      | output_type        | TEXT    | NEW    | active/totem/open-collector/current-loop                 |
+| drop     | current_rating     | -       | native | existing column not in proposal — drop, rename, or keep? |
+| keep     | power_rating       | TEXT    | native | existing column not in proposal — drop, rename, or keep? |
+| drop     | tolerance          | -       | native | existing column not in proposal — drop, rename, or keep? |
 
 * ic_memory   (tables: ic_memory)
-| Decision | Column | Type | In | Rationale |
-|----------+--------+------+----+-----------|
-| add | memory_type | TEXT | NEW | sram/dram/flash/eeprom (CLAUDE.md) |
-| add | capacity | TEXT | NEW | capacity (CLAUDE.md) |
-| add | speed | TEXT | NEW | speed (CLAUDE.md) |
-| add | interface | TEXT | NEW | spi/i2c/parallel (CLAUDE.md) |
-| drop? | power_rating | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | tolerance | - | native | existing column not in proposal — drop, rename, or keep? |
+| Decision | Column             | Type | In     | Rationale                                                                     |
+|----------+--------------------+------+--------+-------------------------------------------------------------------------------|
+| add      | memory_type        | TEXT | NEW    | sram/dram/flash/eeprom (CLAUDE.md)                                            |
+| add      | capacity           | TEXT | NEW    | capacity (CLAUDE.md)                                                          |
+| add      | word_size          | TEXT | NEW    | word width (CLAUDE.md)                                                        |
+| add      | speed              | TEXT | NEW    | speed (CLAUDE.md)                                                             |
+| add      | interface          | TEXT | NEW    | spi/i2c/parallel (CLAUDE.md)                                                  |
+| add      | persistence_cycles | TEXT | NEW    | for re-writable devices, number of cycles before degradation                  |
+| add      | persistence_years  | TEXT | NEW    | for re-writable devices, number of years of static storage before degradation |
+| drop     | power_rating       | -    | native | existing column not in proposal — drop, rename, or keep?                      |
+| drop     | tolerance          | -    | native | existing column not in proposal — drop, rename, or keep?                      |
 
 * ic_microcontrollers   (tables: ic_microcontrollers)
-| Decision | Column | Type | In | Rationale |
-|----------+--------+------+----+-----------|
-| add | family | TEXT | NEW | family (CLAUDE.md) |
-| add | flash_size | TEXT | NEW | flash (CLAUDE.md) |
-| add | ram_size | TEXT | NEW | RAM (CLAUDE.md) |
-| add | gpio_count | INTEGER | NEW | GPIO count (CLAUDE.md) |
-| add | core | TEXT | NEW | CPU core |
-| drop? | power_rating | - | native | existing column not in proposal — drop, rename, or keep? |
-| drop? | tolerance | - | native | existing column not in proposal — drop, rename, or keep? |
+| Decision | Column             | Type    | In  | Rationale                               |
+|----------+--------------------+---------+-----+-----------------------------------------|
+| add      | family             | TEXT    | NEW | family (CLAUDE.md)                      |
+| add      | core               | TEXT    | NEW | CPU core                                |
+| add      | supply_voltage_min | NUMBER  | NEW | Minimum supply voltage                  |
+| add      | supply_voltage_max | NUMBER  | NEW | Maximum supply voltage                  |
+| add      | pin_count          | TEXT    | NEW | Number of pins                          |
+| add      | flash_size         | TEXT    | NEW | flash (CLAUDE.md)                       |
+| add      | eeprom_size        | TEXT    | NEW | flash (CLAUDE.md)                       |
+| add      | ram_size           | TEXT    | NEW | RAM (CLAUDE.md)                         |
+| add      | gpio_count         | INTEGER | NEW | GPIO count (CLAUDE.md)                  |
+| add      | uart_count         | INTEGER | NEW | UART count (CLAUDE.md)                  |
+| add      | i2c_count          | INTEGER | NEW | i2c count (CLAUDE.md)                   |
+| add      | timer_count        | INTEGER | NEW | timer count (CLAUDE.md)                 |
+| add      | uart_count         | INTEGER | NEW | GPIO count (CLAUDE.md)                  |
+| add      | special_features   | TEXT    | NEW | Brief URL-safe list of special features |
+
 
 * connectors   (tables: connectors, cern_molex, cern_samtec)
   Adopt the existing native `connectors` 38-column schema verbatim for all 17 connector tables. Decision: ADOPT (yes/no).
   current native tail columns: 37
 
 * CERN-only types — CONFIRM existing tail as canonical (light review)
+Let's defer the CERN work on these for now.
+
 | Confirm | Type | Current tail columns |
 |---------+------+----------------------|
 | yes | regulators | regulator_type |
