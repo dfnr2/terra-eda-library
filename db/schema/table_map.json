@@ -18,5 +18,6 @@
   "inductors":              { "type": "inductors", "tier_default": 2, "dump_priority_default": 1 },
   "ferrites":               { "type": "ferrites",  "tier_default": 2, "dump_priority_default": 1 },
   "ic_drivers":             { "type": "ic_drivers", "tier_default": 2, "dump_priority_default": 1 },
-  "ic_memory":              { "type": "ic_memory",  "tier_default": 2, "dump_priority_default": 1 }
+  "ic_memory":              { "type": "ic_memory",  "tier_default": 2, "dump_priority_default": 1 },
+  "ic_microcontrollers":    { "type": "ic_microcontrollers", "tier_default": 2, "dump_priority_default": 1 }
 }
