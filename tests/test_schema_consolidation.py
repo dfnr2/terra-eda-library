@@ -1,5 +1,8 @@
 # tests/test_schema_consolidation.py
+import json
 import sqlite3
+import subprocess
+import sys
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -30,3 +33,13 @@ def test_diodes_cern_and_native_identical_columns():
     assert "diode_type" in cern and "forward_voltage" in cern
     assert "pin_count" in cern and "temp_operating_min" in cern   # core present
     assert "tolerance" not in cern and "component_type" not in cern  # legacy dropped
+
+
+def test_committed_schemas_match_generator():
+    table_map = json.loads((ROOT/"db/schema/table_map.json").read_text())
+    for table in table_map:
+        gen = subprocess.run([sys.executable, str(ROOT/"tools/gen_schema.py"),
+                              "--print", table], capture_output=True, text=True,
+                             cwd=ROOT).stdout
+        on_disk = (ROOT/f"db/tables/{table}/{table}_0_schema.sql").read_text()
+        assert gen == on_disk, f"{table}_0_schema.sql is stale — run `make schema`"

@@ -193,6 +193,12 @@ $(VENV_MARKER): pyproject.toml
 .PHONY: sync
 sync: $(VENV_MARKER)
 
+# Regenerate all _0_schema.sql files from db/schema/ sources
+.PHONY: schema
+schema: $(VENV_MARKER)
+	@echo "Regenerating part-table schemas from db/schema/ ..."
+	@$(PYTHON) tools/gen_schema.py
+
 # Global generate target: run all table generators
 .PHONY: generate
 generate: $(foreach table,$(TABLES),$(table)-generate)
@@ -457,4 +463,4 @@ help:
 	@echo "  4. Dump:          make dump"
 	@echo "  5. Commit:        git diff db/tables/ && git add ..."
 
-.PHONY: all sync dump verify clean distclean status help project-db normalize-footprints
+.PHONY: all sync schema dump verify clean distclean status help project-db normalize-footprints
