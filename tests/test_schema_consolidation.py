@@ -56,3 +56,36 @@ def test_data_inserts_are_column_qualified():
         for m in bare.finditer(Path(f).read_text()):
             bad.append(f"{Path(f).name}: bare INSERT INTO {m.group(1)} VALUES")
     assert not bad, "positional INSERTs break under core reorder:\n" + "\n".join(bad[:20])
+
+
+import pytest
+
+PAIRS = {  # type -> list of all tables that must share columns
+    "diodes": ["cern_diodes", "diodes"],
+    "transistors": ["bjt", "mosfet", "cern_transistors"],
+    "op_amps": ["ic_opamp", "cern_op_amps"],
+    "logic": ["ic_logic", "cern_logic", "cern_standard_logic"],
+    "analog": ["ic_analog", "cern_analog_interface"],
+    "leds": ["leds", "cern_leds_displays"],
+    "switches": ["switches", "cern_switches"],
+    "inductors": ["inductors"],
+    "ferrites": ["ferrites"],
+    "ic_drivers": ["ic_drivers"],
+    "ic_memory": ["ic_memory"],
+    "ic_microcontrollers": ["ic_microcontrollers"],
+    "connectors": ["connectors", "cern_3m", "cern_amphenol", "cern_erni", "cern_fci",
+                   "cern_harting", "cern_harwin", "cern_lemo", "cern_mentor",
+                   "cern_molex", "cern_phoenix", "cern_samtec", "cern_sockets",
+                   "cern_souriau", "cern_stelvio_kontek_comatel", "cern_tyco",
+                   "cern_weidmuller"],
+}
+
+@pytest.mark.parametrize("type_,tables", PAIRS.items())
+def test_type_tables_share_columns(type_, tables):
+    present = {t: _table_cols(ROOT/f"db/tables/{t}/{t}_0_schema.sql")
+               for t in tables if (ROOT/f"db/tables/{t}/{t}_0_schema.sql").exists()}
+    ref = None
+    for t, cols in present.items():
+        if ref is None:
+            ref = cols
+        assert cols == ref, f"{t} diverges for type {type_}"
