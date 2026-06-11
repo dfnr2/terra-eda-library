@@ -100,15 +100,27 @@ def _diodes_inc(item: dict) -> list[str]:
 
 # Industry-standard (JEDEC / Pro-Electron / common jellybean) part-number patterns.
 # These are second-sourced commodities — any maker's datasheet is electrically
-# equivalent, so they can be routed to a clean-CDN second source (Diodes Inc).
+# equivalent, so they route to a clean-CDN second source. Diodes Inc covers the
+# discretes; TI covers the logic + analog jellybeans (see COMMODITY_SOURCES).
 COMMODITY_RE = re.compile(
-    r"^(1N\d{3,4}|2N\d{3,4}|BA[VTSW]\d|BZ[XVY]\d|BB\d|MMB[TDZ]|MMSD|"
-    r"PMBT|PDTC|PDTA|DDTC|DDTA|BC\d|BSS\d|2N7|74[A-Z]*\d|54[A-Z]*\d|"
-    r"1PS|BAS|BAT5|BAV99|MBR\d|SS\d{2}|US1[A-Z]|S1[A-Z]\b)", re.I)
+    r"^("
+    r"1N\d{3,4}|2N\d{3,4}|BA[VTSW]\d|BZ[XVY]\d|BB\d|MMB[TDZ]|MMSD|"      # discretes
+    r"PMBT|PDTC|PDTA|DDTC|DDTA|BC\d|BSS\d|1PS|BAS|MBR\d|SS\d{2}|US1[A-Z]|"
+    r"74[A-Z]*\d|54[A-Z]*\d|CD4\d|HEF4\d|MC14\d|"                          # logic (74xx/4000)
+    r"LM\d|LF\d|NE5\d|TL0\d|TLC\d|TL4\d|LMV\d|LMC\d|TLV\d|ICL\d|ICM\d"     # analog jellybeans
+    r")", re.I)
 
 
 def is_commodity(filename: str) -> bool:
     return bool(COMMODITY_RE.match(stem(filename)))
+
+
+# Clean-CDN commodity second sources, tried in order for any commodity part whose
+# CERN manufacturer is not already that vendor. (resolver, vendor-key, source-label)
+COMMODITY_SOURCES = [
+    (_diodes_inc, "DIODES INC", "Diodes Inc (commodity equivalent)"),
+    (_ti, "TEXAS INSTRUMENTS", "TI (commodity equivalent)"),
+]
 
 
 # manufacturer substring (upper) -> resolver.
@@ -187,9 +199,11 @@ def main() -> None:
         if fn:
             for u in fn(item):
                 candidates.append((u, "manufacturer (template)"))
-        if is_commodity(item["filename"]) and "DIODES INC" not in mfr.upper():
-            for u in _diodes_inc(item):
-                candidates.append((u, "Diodes Inc (commodity equivalent)"))
+        if is_commodity(item["filename"]):
+            for resolver, vendor_key, label in COMMODITY_SOURCES:
+                if vendor_key not in mfr.upper():           # don't equivalence to itself
+                    for u in resolver(item):
+                        candidates.append((u, label))
         if not candidates:
             continue
         tried += 1
