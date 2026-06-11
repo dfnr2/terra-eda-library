@@ -1,9 +1,3 @@
--- db/tables/cern_tyco/cern_tyco_0_schema.sql
--- Terra EDA Library - cern_tyco table schema (CERN 'TYCO' connectors).
--- Core fields match the go-forward core; tier defaults to 5 per TIER_TAG_SPEC.org.
--- Connectors share the "Connectors" symbol lib; the symbol + pin_count carry the
--- type, so no type-specific tail.
-
 CREATE TABLE cern_tyco (
     unique_id TEXT PRIMARY KEY,
     part_locator TEXT,
@@ -30,7 +24,7 @@ CREATE TABLE cern_tyco (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_by TEXT,
     source TEXT DEFAULT 'static',
-    dump_priority INTEGER DEFAULT 1,
+    dump_priority INTEGER DEFAULT 0,
     tier INTEGER DEFAULT 5,
     tags TEXT DEFAULT '',
     sim_model_type TEXT,
@@ -39,5 +33,44 @@ CREATE TABLE cern_tyco (
     sim_model_file TEXT,
     sim_params TEXT,
     pin_count TEXT,
-    component_height TEXT
+    component_height TEXT,
+    exclude_from_bom BOOLEAN NOT NULL DEFAULT 0,
+    temp_operating_min REAL,
+    temp_operating_max REAL,
+    temp_storage_min REAL,
+    temp_storage_max REAL,
+    temp_soldering REAL,
+    connector_category TEXT,      -- e.g. 'board-to-board', 'wire-to-board', 'io', 'terminal_block',
+    connector_family TEXT,        -- e.g. 'JST-XH', 'Molex MicroFit', 'USB-C', 'RJ45',
+    connector_series TEXT,        -- vendor series name/number (e.g. '5557', '171823', etc.),
+    connector_type TEXT,          -- e.g. 'header', 'receptacle', 'plug', 'jack', 'socket', 'terminal_block',
+    positions INTEGER,            -- total number of contacts (positions),
+    rows INTEGER DEFAULT 1,       -- 1, 2, 3...,
+    pitch_mm REAL,                -- contact pitch along row (mm),
+    row_pitch_mm REAL,            -- distance between rows, if applicable (mm),
+    orientation TEXT,             -- 'vertical', 'right-angle', 'inline', 'top-entry', 'side-entry',
+    termination_type TEXT,        -- 'SMT', 'Through Hole', 'crimp', 'idc', 'solder_cup', 'poke_in', 'press_fit', etc.,
+    gender TEXT,                  -- 'male', 'female', 'plug', 'receptacle', 'jack',
+    polarized TEXT,               -- 'yes'/'no' (keying present?),
+    keying_detail TEXT,           -- e.g. 'polarizing tab', 'asymmetric shroud', 'dual key',
+    locking_mechanism TEXT,       -- 'friction', 'latch', 'screw', 'bayonet', 'push-pull', 'none',
+    shielding TEXT,               -- 'shielded', 'unshielded', or detail like 'metal shell',
+    panel_mount_style TEXT,       -- 'through-hole', 'snap-in', 'flange', 'nut', 'none',
+    color TEXT,                   -- housing color if functionally relevant (e.g. USB, coded headers),
+    current_rating REAL,          -- per contact continuous rating (A),
+    voltage_rating REAL,          -- working voltage rating (V),
+    contact_resistance_mohm REAL, -- typical/max contact resistance,
+    insulation_resistance_mohm REAL, -- insulation resistance,
+    dielectric_withstand_vrms REAL,  -- hi-pot test rating,
+    signal_type TEXT,             -- 'signal', 'power', 'mixed', 'rf', 'high-speed',
+    wire_gauge_min_awg INTEGER,  -- minimum supported wire gauge,
+    wire_gauge_max_awg INTEGER,  -- maximum supported wire gauge,
+    insulation_dia_min_mm REAL,  -- min insulation OD (mm),
+    insulation_dia_max_mm REAL,  -- max insulation OD (mm),
+    cable_type TEXT,              -- 'discrete', 'ribbon', 'coax', 'twisted_pair', etc.,
+    flammability_rating TEXT,     -- e.g. 'UL94-V0',
+    ip_rating TEXT,               -- e.g. 'IP20', 'IP67',
+    creepage_clearance_note TEXT, -- notes if creepage/clearance are special / safety rated,
+    mating_family TEXT,           -- e.g. 'mates with MicroFit receptacles',
+    mating_part_hint TEXT
 );

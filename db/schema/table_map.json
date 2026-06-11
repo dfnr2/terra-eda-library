@@ -19,5 +19,22 @@
   "ferrites":               { "type": "ferrites",  "tier_default": 2, "dump_priority_default": 1 },
   "ic_drivers":             { "type": "ic_drivers", "tier_default": 2, "dump_priority_default": 1 },
   "ic_memory":              { "type": "ic_memory",  "tier_default": 2, "dump_priority_default": 1 },
-  "ic_microcontrollers":    { "type": "ic_microcontrollers", "tier_default": 2, "dump_priority_default": 1 }
+  "ic_microcontrollers":    { "type": "ic_microcontrollers", "tier_default": 2, "dump_priority_default": 1 },
+  "connectors":                    { "type": "connectors", "tier_default": 2, "dump_priority_default": 1 },
+  "cern_3m":                       { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 },
+  "cern_amphenol":                 { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 },
+  "cern_erni":                     { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 },
+  "cern_fci":                      { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 },
+  "cern_harting":                  { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 },
+  "cern_harwin":                   { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 },
+  "cern_lemo":                     { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 },
+  "cern_mentor":                   { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 },
+  "cern_molex":                    { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 },
+  "cern_phoenix":                  { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 },
+  "cern_samtec":                   { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 },
+  "cern_sockets":                  { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 },
+  "cern_souriau":                  { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 },
+  "cern_stelvio_kontek_comatel":   { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 },
+  "cern_tyco":                     { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 },
+  "cern_weidmuller":               { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 }
 }
