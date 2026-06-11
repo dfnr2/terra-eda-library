@@ -1,5 +1,7 @@
 # tests/test_schema_consolidation.py
+import glob
 import json
+import re
 import sqlite3
 import subprocess
 import sys
@@ -43,3 +45,14 @@ def test_committed_schemas_match_generator():
                              cwd=ROOT).stdout
         on_disk = (ROOT/f"db/tables/{table}/{table}_0_schema.sql").read_text()
         assert gen == on_disk, f"{table}_0_schema.sql is stale — run `make schema`"
+
+
+def test_data_inserts_are_column_qualified():
+    bad = []
+    bare = re.compile(r"INSERT\s+INTO\s+[\"']?(\w+)[\"']?\s+VALUES", re.IGNORECASE)
+    for f in glob.glob(str(ROOT/"db/tables/*/*.sql")):
+        if f.endswith("_0_schema.sql"):
+            continue
+        for m in bare.finditer(Path(f).read_text()):
+            bad.append(f"{Path(f).name}: bare INSERT INTO {m.group(1)} VALUES")
+    assert not bad, "positional INSERTs break under core reorder:\n" + "\n".join(bad[:20])
