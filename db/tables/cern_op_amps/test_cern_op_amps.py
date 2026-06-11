@@ -32,7 +32,7 @@ def test_known_part_mapping():
     assert r["unique_id"] == "TEXAS INSTRUMENTS-LM358AD"
     assert r["package"] == "SOIC8"
     assert r["amplifier_type"] == "Operational Amplifier"
-    assert r["channels"] == "2"
+    assert r["channels"] == 2
     assert r["pin_count"] == "8"
     assert r["kicad_symbol"] == "cern-operational-amplifiers:Operational Amplifier x2 Type1"
     assert r["kicad_footprint"] == "cern-ics-and-semiconductors-smd:SOIC127P600X175-8N"
