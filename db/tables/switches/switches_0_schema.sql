@@ -1,4 +1,4 @@
-CREATE TABLE cern_switches (
+CREATE TABLE switches (
     unique_id TEXT PRIMARY KEY,
     part_locator TEXT,
     mpn TEXT NOT NULL,
@@ -24,8 +24,8 @@ CREATE TABLE cern_switches (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_by TEXT,
     source TEXT DEFAULT 'static',
-    dump_priority INTEGER DEFAULT 0,
-    tier INTEGER DEFAULT 5,
+    dump_priority INTEGER DEFAULT 1,
+    tier INTEGER DEFAULT 2,
     tags TEXT DEFAULT '',
     sim_model_type TEXT,
     sim_device TEXT,
