@@ -57,6 +57,7 @@ db/tables/*/*_generated_*.sql
 # Datasheet/param resolver: build outputs and local-only state (not tracked)
 build/
 assets/datasheets/files/
+assets/datasheets/quarantine/
 assets/datasheets/.cache-state.json
 
 # Git worktrees (isolated workspaces)
