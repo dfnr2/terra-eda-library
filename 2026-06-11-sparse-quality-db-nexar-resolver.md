@@ -84,8 +84,8 @@ stays blank under fill-blanks-only.
 - **DROP-ALL = 9 columns** dropped everywhere: `class, component_type,
   component_value, composition, number_of_pins, reference, sim_library, sim_type,
   temp_coeff`. (The 3 temp columns are promoted to core instead, hence 9 not 12.
-  `number_of_pins` text is dropped in favor of harvesting `pin_count` into type
-  fragments from Nexar's clean `numberofpins`.)
+  `number_of_pins` text is dropped in favor of the canonical core `pin_count`,
+  harvested from Nexar's clean `numberofpins`.)
 - **connectors ADOPT = yes** — reuse the native 38-col connectors schema verbatim
   for all 17 connector tables.
 - **dedupe `uart_count`** — `ic_microcontrollers` listed it twice; keep one.
@@ -102,12 +102,25 @@ Mechanism is unchanged from `2026-06-10-phase0-schema-consolidation.md`:
 target + drift test keep committed schemas in sync; cern/native column-set equivalence
 is asserted per type. **What changes is the column content**, below.
 
-### Core — 39 columns
+### Core — 41 columns (reconciled to the deployed schemas)
 
-The 34 columns from the plan's `core.sql` (`unique_id` … `sim_params`, including
-`tier` and `tags`) **plus** the 5 temperature columns above. Suggested placement: a
-"Temperature ratings" block right after the physical/display fields (`package`,
-`value`). `tier`/`dump_priority` defaults remain per-table via `table_map.json`.
+The spec originally assumed a clean 34-col core; the live schemas (survey 2026-06-11)
+show the cores have **diverged in membership**, so the canonical core is pinned here
+from what is actually deployed and populated:
+
+- **33 base columns** `unique_id … sim_params` (incl. `variant`), copied from
+  `cern_diodes_0_schema.sql`.
+- **`exclude_from_bom`** — re-added (CLAUDE.md lists it core; default 0; currently
+  present in only `connectors`).
+- **`pin_count`, `component_height`** — already present and **populated** in 35 tables
+  (the CERN import added them to core); kept as core, not dropped.
+- **the 5 temperature columns** (`temp_operating_min/max`, `temp_storage_min/max`,
+  `temp_soldering`).
+
+Total = **41 columns**. Suggested placement: temp + `component_height` in a
+physical/ratings block after `package`/`value`, `pin_count` near them; `tier`/
+`dump_priority` defaults stay per-table via `table_map.json`. Because `pin_count` is
+core, it is **removed from the `ic_microcontrollers` fragment** (below).
 
 ### Type fragments (final — from `schema-review.org` marks)
 
@@ -157,23 +170,27 @@ ic_memory (ic_memory):
   persistence_cycles, persistence_years
 
 ic_microcontrollers (ic_microcontrollers):
-  family, core, supply_voltage_min, supply_voltage_max, pin_count,
+  family, core, supply_voltage_min, supply_voltage_max,
   flash_size, eeprom_size, ram_size, gpio_count, uart_count,
   i2c_count, timer_count, special_features
+  (pin_count is CORE, not in this fragment)
 
 connectors (connectors + all 16 cern_<vendor> tables):
   ADOPT the existing native connector TAIL verbatim
   (connector_category … mating_part_hint). The CORE portion is regenerated
-  to the canonical 39-col core — see the column-order note below.
+  to the canonical 41-col core — see the column-order note below.
 ```
 
 ### Column-order normalization (all regenerated tables, connectors notably)
 
 Generating every table through the one canonical core **normalizes core column
-order** across the library. The current native `connectors_0_schema.sql` is stale —
-its core block omits `variant` (jumps `manufacturer → package`) and predates the temp
-columns; regeneration inserts `variant` + the 5 temp columns in canonical positions
-and groups the core consistently with all other tables. This is desirable, not a
+membership and order** across the library. The live cores have diverged: e.g.
+`cern_diodes` has `variant` + `pin_count` + `component_height` but **not**
+`exclude_from_bom`, while `connectors` has `exclude_from_bom` but **not** `variant`
+(jumps `manufacturer → package`) and predates the temp columns. Regeneration replaces
+each table's core with the canonical 41-col core — adding whatever it lacks
+(`variant`, `exclude_from_bom`, `pin_count`, `component_height`, the 5 temp columns)
+in canonical positions and grouping the core consistently. This is desirable, not a
 special case.
 
 **Invariant (data-safety guard):** a core reorder breaks **positional**
@@ -281,7 +298,7 @@ maintainer-run phases.
 
 ## 4. Testing
 
-- **Phase 0:** core = 39 columns; each `<type>.sql` included by both cern + native
+- **Phase 0:** core = 41 columns; each `<type>.sql` included by both cern + native
   schemas with identical resulting column sets; committed `_0_schema.sql` matches the
   generator (drift guard); passives absent from `table_map.json`; `_v` views still
   build (need `unique_id` + `tier`, both core).
