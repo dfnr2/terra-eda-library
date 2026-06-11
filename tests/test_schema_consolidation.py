@@ -89,3 +89,16 @@ def test_type_tables_share_columns(type_, tables):
         if ref is None:
             ref = cols
         assert cols == ref, f"{t} diverges for type {type_}"
+
+
+def test_passive_tables_not_in_table_map():
+    table_map = json.loads((ROOT/"db/schema/table_map.json").read_text())
+    for t in ("resistors_smt", "resistors_th", "capacitors_smt", "capacitors_th"):
+        assert t not in table_map, f"{t} curated — out of Phase 0 scope"
+
+def test_deferred_cern_only_types_not_in_table_map():
+    table_map = json.loads((ROOT/"db/schema/table_map.json").read_text())
+    for t in ("cern_batteries", "cern_crystals_oscillators", "cern_dc_dc_converters",
+              "cern_fuses", "cern_optocouplers", "cern_power_supplies", "cern_regulators",
+              "cern_relays", "cern_sensors", "cern_thermistors_varistors", "cern_transformers"):
+        assert t not in table_map, f"{t} deferred this round"
