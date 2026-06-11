@@ -9,20 +9,49 @@
 // Agents only write PDFs (race-safe via content addressing); they RETURN structured
 // records. The caller ingests those into assets/datasheets/acquisition.jsonl.
 //
-// Invoke: Workflow({ scriptPath: "tools/fetch_datasheets.workflow.js",
-//                     args: { chunkFile: "build/chunk.json", count: <N> } })
-// The chunk file (an array of {filename,manufacturer,mpns,part_count}) is produced
-// by tools/datasheets/remaining.py. Agents read their item from it by index.
+// Invoke: Workflow({ scriptPath: "tools/fetch_datasheets.workflow.js" })
+// The chunk file build/chunk.json (an array of {filename,manufacturer,mpns,part_count})
+// is produced by tools/datasheets/remaining.py. A loader agent reads it (workflow
+// scripts have no filesystem access; agents do), then one fetch agent runs per item.
 
 export const meta = {
   name: 'fetch-datasheets',
   description: 'Fetch + verify + content-address a chunk of component datasheets (mktemp-safe, quarantine-not-reject)',
-  phases: [{ title: 'Fetch', detail: 'one haiku per unique datasheet: find, download, verify, store or quarantine' }],
+  phases: [
+    { title: 'Load', detail: 'read build/chunk.json' },
+    { title: 'Fetch', detail: 'one haiku per unique datasheet: find, download, verify, store or quarantine' },
+  ],
 }
 
 const CHUNK = (args && args.chunkFile) || 'build/chunk.json'
-const COUNT = (args && args.count) || 0
-if (!COUNT) { log('no count in args — nothing to do'); return [] }
+
+phase('Load')
+const loaded = await agent(
+  `Read the JSON file ${CHUNK} in /users/dave/vsrc/terra-eda-library. It is an array of objects, each with keys: filename (string), manufacturer (string), mpns (array of strings), part_count (integer). Return it verbatim as {"items": [ ... ]} with every element preserved exactly.`,
+  {
+    label: 'load-chunk', phase: 'Load', model: 'haiku',
+    schema: {
+      type: 'object', additionalProperties: false, required: ['items'],
+      properties: {
+        items: {
+          type: 'array',
+          items: {
+            type: 'object', additionalProperties: true, required: ['filename'],
+            properties: {
+              filename: { type: 'string' },
+              manufacturer: { type: 'string' },
+              mpns: { type: 'array', items: { type: 'string' } },
+              part_count: { type: 'integer' },
+            },
+          },
+        },
+      },
+    },
+  },
+)
+const ITEMS = (loaded && loaded.items) || []
+if (!ITEMS.length) { log('chunk empty or unreadable — nothing to do'); return [] }
+log(`loaded ${ITEMS.length} datasheets to fetch`)
 
 const SCHEMA = {
   type: 'object',
@@ -43,12 +72,14 @@ const SCHEMA = {
   },
 }
 
-function prompt(i) {
+function prompt(item) {
+  const mpns = (item.mpns || []).join(', ')
   return `You fetch ONE electronic-component datasheet PDF. Work in /users/dave/vsrc/terra-eda-library.
 
-STEP 0 — read your work item (index ${i} of the chunk):
-  python3 -c "import json; print(json.dumps(json.load(open('${CHUNK}'))[${i}]))"
-Keys: filename (CERN datasheet filename hint), manufacturer, mpns (example part numbers sharing this sheet). Use these as your target.
+Your work item:
+- filename (CERN datasheet filename hint): ${item.filename}
+- manufacturer: ${item.manufacturer || '(unknown)'}
+- example MPN(s) sharing this sheet: ${mpns || '(none)'}
 
 GOAL: find the official datasheet PDF for this part (a documented family/series sheet is acceptable if the exact-MPN sheet does not exist), download it, verify it, store it content-addressed.
 
@@ -89,11 +120,10 @@ Return the structured result: filename (from your item), status, source (site na
 }
 
 phase('Fetch')
-const idx = Array.from({ length: COUNT }, (_, i) => i)
 const results = await pipeline(
-  idx,
-  (i) => agent(prompt(i), { label: `ds:${i}`, phase: 'Fetch', model: 'haiku', schema: SCHEMA })
-    .then(r => r || { filename: `idx:${i}`, status: 'error', source_tier: 'none', notes: 'agent returned null' }),
+  ITEMS,
+  (item) => agent(prompt(item), { label: `ds:${(item.filename || '').slice(0, 32)}`, phase: 'Fetch', model: 'haiku', schema: SCHEMA })
+    .then(r => r || { filename: item.filename, status: 'error', source_tier: 'none', notes: 'agent returned null' }),
 )
 
 const by = (s) => results.filter(r => r && r.status === s).length

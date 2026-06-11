@@ -56,13 +56,13 @@ If the gitignored PDF stores are ever lost, they rebuild from the log's `source_
 
 ## Runner A — Claude workflow (default)
 
-`Workflow({ scriptPath: "tools/fetch_datasheets.workflow.js",
-            args: { chunkFile: "build/chunk.json", count: <chunk length> } })`
+`Workflow({ scriptPath: "tools/fetch_datasheets.workflow.js" })`
 
-Agents read their item from `build/chunk.json` by index, fetch, and RETURN records (they
-never write the log — no concurrent-append races). Save the workflow's return value to
-`build/results.json`, then ingest (step 4). Resume a killed run with the same
-`scriptPath` + `resumeFromRunId`.
+No args needed: a loader agent reads `build/chunk.json` (workflow scripts have no
+filesystem access, but agents do), then one fetch agent runs per item. Agents RETURN
+records — they never write the log, so there are no concurrent-append races. Save the
+workflow's return value to `build/results.json`, then ingest (step 4). Resume a killed run
+with the same `scriptPath` + `resumeFromRunId`.
 
 ## Runner B — third-party / cheaper agent (provider-agnostic contract)
 
