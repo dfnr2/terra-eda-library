@@ -17,5 +17,6 @@
   "cern_switches":          { "type": "switches", "tier_default": 5, "dump_priority_default": 0 },
   "inductors":              { "type": "inductors", "tier_default": 2, "dump_priority_default": 1 },
   "ferrites":               { "type": "ferrites",  "tier_default": 2, "dump_priority_default": 1 },
-  "ic_drivers":             { "type": "ic_drivers", "tier_default": 2, "dump_priority_default": 1 }
+  "ic_drivers":             { "type": "ic_drivers", "tier_default": 2, "dump_priority_default": 1 },
+  "ic_memory":              { "type": "ic_memory",  "tier_default": 2, "dump_priority_default": 1 }
 }
