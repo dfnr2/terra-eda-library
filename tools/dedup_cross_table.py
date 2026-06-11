@@ -97,7 +97,6 @@ def main() -> None:
     from pathlib import Path
 
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-    from tools.terra_server import load_spec
 
     db = sys.argv[1]
     conn = sqlite3.connect(db)
@@ -106,8 +105,16 @@ def main() -> None:
     # stale relative to this build (e.g. EXCLUDE_TABLES drops a table it still
     # lists), so keep only tables actually present in the DB.
     present = set(tables_with_unique_id(conn))
-    part_tables = [s["base_table"] for s in load_spec("terra.kicad_dbl")
-                   if s["base_table"] in present]
+    _INFRA_TABLES = {"tags", "user_tags"}
+    dbl_path = Path("terra.kicad_dbl")
+    if dbl_path.exists():
+        from tools.terra_server import load_spec
+        part_tables = [s["base_table"] for s in load_spec(dbl_path)
+                       if s["base_table"] in present]
+    else:
+        # terra.kicad_dbl is generated after terra.db; fall back to all part
+        # tables in the DB, excluding known infrastructure tables.
+        part_tables = sorted(present - _INFRA_TABLES)
     dropped = dedup(conn, RESOLUTIONS, part_tables)
     for uid, tables in dropped.items():
         print(f"  deduped {uid}: dropped from {', '.join(tables)}")
