@@ -155,3 +155,170 @@ def test_identity_fields_preserved():
         assert source == "terra_sym", f"source not preserved for {uid}: {source!r}"
         assert dp == 100, f"dump_priority not preserved for {uid}: {dp!r}"
     con.close()
+
+
+# ---------------------------------------------------------------------------
+# Semantic map unit tests (transform functions)
+# ---------------------------------------------------------------------------
+
+def _import_module():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("remigrate_native", TOOL)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def test_diode_type_schottky():
+    """'Schottky Diode' → 'schottky'."""
+    mod = _import_module()
+    result = mod._diode_type_transform("Schottky Diode")
+    assert result == "schottky", f"expected 'schottky', got {result!r}"
+
+
+def test_diode_type_bare_dropped():
+    """Bare 'Diode' is a generic category; should map to None (dropped)."""
+    mod = _import_module()
+    result = mod._diode_type_transform("Diode")
+    assert result is None, f"expected None (drop), got {result!r}"
+
+
+def test_diode_type_schottky_no_suffix():
+    """'Schottky' without 'Diode' suffix is preserved as 'schottky'."""
+    mod = _import_module()
+    result = mod._diode_type_transform("Schottky")
+    assert result == "schottky", f"expected 'schottky', got {result!r}"
+
+
+def test_mosfet_power_rating_split_space():
+    """'28V 5A' → v_ce_ds_max='28V', i_c_d_max='5A'."""
+    mod = _import_module()
+    v, i = mod._parse_voltage_token("28V 5A"), mod._parse_current_token("28V 5A")
+    assert v == "28V", f"expected '28V', got {v!r}"
+    assert i == "5A", f"expected '5A', got {i!r}"
+
+
+def test_mosfet_power_rating_split_comma():
+    """'30V, 3.8A' → v_ce_ds_max='30V', i_c_d_max='3.8A'."""
+    mod = _import_module()
+    v, i = mod._parse_voltage_token("30V, 3.8A"), mod._parse_current_token("30V, 3.8A")
+    assert v == "30V", f"expected '30V', got {v!r}"
+    assert i == "3.8A", f"expected '3.8A', got {i!r}"
+
+
+def test_mosfet_power_rating_split_comma2():
+    """'20V, 4.2A' → v_ce_ds_max='20V', i_c_d_max='4.2A'."""
+    mod = _import_module()
+    v, i = mod._parse_voltage_token("20V, 4.2A"), mod._parse_current_token("20V, 4.2A")
+    assert v == "20V", f"expected '20V', got {v!r}"
+    assert i == "4.2A", f"expected '4.2A', got {i!r}"
+
+
+# ---------------------------------------------------------------------------
+# Semantic map integration tests — verify mapped values land in the DB
+# ---------------------------------------------------------------------------
+
+SCHEMAS = {t: ROOT / "db" / "tables" / t / f"{t}_0_schema.sql"
+           for t in ("diodes", "mosfet", "ic_analog", "ic_memory", "ic_logic", "ic_drivers")}
+DATA = {t: ROOT / "db" / "tables" / t / f"{t}_1_migrated.sql"
+        for t in ("diodes", "mosfet", "ic_analog", "ic_memory", "ic_logic", "ic_drivers")}
+
+
+def _load_db(table):
+    """Load schema + data into in-memory sqlite; return connection."""
+    con = sqlite3.connect(":memory:")
+    con.executescript(SCHEMAS[table].read_text())
+    con.executescript(DATA[table].read_text())
+    return con
+
+
+def test_diodes_schottky_diode_type():
+    """Schottky diodes must have diode_type='schottky'; bare 'Diode' rows have NULL.
+
+    The legacy data has 4 rows with component_type='Schottky Diode' (3 Vishay + 1 OnSemi),
+    so 4 schottky rows are expected.
+    """
+    con = _load_db("diodes")
+    schottky_count = con.execute(
+        "SELECT COUNT(*) FROM diodes WHERE diode_type = 'schottky'"
+    ).fetchone()[0]
+    assert schottky_count == 4, f"expected 4 schottky rows, got {schottky_count}"
+    total = con.execute("SELECT COUNT(*) FROM diodes").fetchone()[0]
+    assert total == 9, f"expected 9 diode rows, got {total}"
+    con.close()
+
+
+def test_mosfet_v_and_i_populated():
+    """All 3 mosfet rows should have v_ce_ds_max and i_c_d_max set."""
+    con = _load_db("mosfet")
+    rows = con.execute(
+        "SELECT mpn, v_ce_ds_max, i_c_d_max FROM mosfet ORDER BY mpn"
+    ).fetchall()
+    assert len(rows) == 3, f"expected 3 mosfet rows, got {len(rows)}"
+    for mpn, v, i in rows:
+        assert v is not None, f"v_ce_ds_max is NULL for {mpn}"
+        assert i is not None, f"i_c_d_max is NULL for {mpn}"
+    # Check the specific values
+    by_mpn = {mpn: (v, i) for mpn, v, i in rows}
+    assert by_mpn.get("BTS5030-1EJA") == ("28V", "5A"), \
+        f"BTS5030-1EJA mismatch: {by_mpn.get('BTS5030-1EJA')!r}"
+    assert by_mpn.get("DMP3099L") == ("30V", "3.8A"), \
+        f"DMP3099L mismatch: {by_mpn.get('DMP3099L')!r}"
+    assert by_mpn.get("IRLM2502TRPBF") == ("20V", "4.2A"), \
+        f"IRLM2502TRPBF mismatch: {by_mpn.get('IRLM2502TRPBF')!r}"
+    con.close()
+
+
+def test_ic_analog_function_type():
+    """INA180A2 must have function_type='current sense amplifier'."""
+    con = _load_db("ic_analog")
+    row = con.execute(
+        "SELECT function_type FROM ic_analog WHERE mpn = 'INA180A2'"
+    ).fetchone()
+    assert row is not None, "INA180A2 not found"
+    assert row[0] == "current sense amplifier", \
+        f"expected 'current sense amplifier', got {row[0]!r}"
+    con.close()
+
+
+def test_ic_memory_memory_type():
+    """24LC32AT-I/OT must have memory_type='EEPROM'."""
+    con = _load_db("ic_memory")
+    row = con.execute(
+        "SELECT memory_type FROM ic_memory WHERE mpn LIKE '%24LC32A%'"
+    ).fetchone()
+    assert row is not None, "24LC32A row not found"
+    assert row[0] == "EEPROM", f"expected 'EEPROM', got {row[0]!r}"
+    con.close()
+
+
+def test_ic_logic_gate_function_level_shifter():
+    """SN74LVC1G139 (Level Shifter) row must have gate_function='level shifter'."""
+    con = _load_db("ic_logic")
+    count = con.execute(
+        "SELECT COUNT(*) FROM ic_logic WHERE gate_function = 'level shifter'"
+    ).fetchone()[0]
+    assert count >= 1, "no level shifter gate_function found"
+    total = con.execute("SELECT COUNT(*) FROM ic_logic").fetchone()[0]
+    assert total == 4, f"expected 4 ic_logic rows, got {total}"
+    con.close()
+
+
+def test_ic_drivers_row_count_and_mappings():
+    """14 rows total; SZNUD3124DMT1G must have i_max_device='150 mA'; level shifters mapped."""
+    con = _load_db("ic_drivers")
+    total = con.execute("SELECT COUNT(*) FROM ic_drivers").fetchone()[0]
+    assert total == 14, f"expected 14 ic_drivers rows, got {total}"
+
+    row = con.execute(
+        "SELECT i_max_device FROM ic_drivers WHERE mpn LIKE '%SZNUD3124%'"
+    ).fetchone()
+    assert row is not None, "SZNUD3124DMT1G row not found"
+    assert row[0] == "150 mA", f"expected i_max_device='150 mA', got {row[0]!r}"
+
+    # Level Shifters should have driver_type populated
+    ls_count = con.execute(
+        "SELECT COUNT(*) FROM ic_drivers WHERE driver_type = 'level shifter'"
+    ).fetchone()[0]
+    assert ls_count >= 1, "no 'level shifter' driver_type rows found"
+    con.close()

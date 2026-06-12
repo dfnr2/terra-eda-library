@@ -13,16 +13,19 @@ Transforms applied per row:
   - temp_operating  → temp_operating_min, temp_operating_max  (parsed from range string)
   - temp_storage    → temp_storage_min, temp_storage_max      (parsed from range string)
   - temp_soldering  → temp_soldering  (only if string parses as a single number)
+  - SEMANTIC_MAP    → per-type mappings that preserve curated legacy values in canonical cols
   - All other legacy columns not in canonical schema are dropped
   - Placeholder junk values (empty, 'if applicable', 'na', 'n/a', 'tbd', 'none') are nulled
 """
 
+import json
 import re
 import sqlite3
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+TABLE_MAP_PATH = ROOT / "db" / "schema" / "table_map.json"
 
 # Values that should be treated as absent (NULL) regardless of column
 PLACEHOLDER_STRS = frozenset({"if applicable", "na", "n/a", "tbd", "none", ""})
@@ -37,6 +40,185 @@ SPLIT_COLS = {
     "temp_operating": ("temp_operating_min", "temp_operating_max"),
     "temp_storage":   ("temp_storage_min",   "temp_storage_max"),
 }
+
+
+# ---------------------------------------------------------------------------
+# Per-type semantic field maps
+#
+# Each entry is keyed by the "type" value in table_map.json.  Each entry is a
+# list of rules processed in order.  Each rule is a dict:
+#
+#   src         legacy column to read
+#   dst         canonical column to write
+#   transform   callable(value) → value_or_None
+#               Return None to drop (not write) the mapping for this row.
+#
+# Rules fire only when:
+#   - src column exists and is non-placeholder in the legacy row
+#   - dst column exists in the canonical schema
+#   - dst column is not already populated by the direct-copy pass
+#     (i.e. no overwrite of a value from the exact-match pass)
+# ---------------------------------------------------------------------------
+
+def _diode_type_transform(v: str):
+    """'Schottky Diode' → 'schottky';  bare 'Diode' → drop (return None)."""
+    normalized = v.strip().lower()
+    drop_generics = {"diode"}
+    if normalized in drop_generics:
+        return None
+    # Strip trailing ' diode' suffix
+    if normalized.endswith(" diode"):
+        normalized = normalized[: -len(" diode")].strip()
+    return normalized or None
+
+
+def _parse_voltage_token(s: str):
+    """Return first '<num>V' token from s, or None."""
+    m = re.search(r"(\d+(?:\.\d+)?)\s*V\b", s, re.IGNORECASE)
+    return f"{m.group(1)}V" if m else None
+
+
+def _parse_current_token(s: str):
+    """Return first '<num>A' token from s, or None."""
+    m = re.search(r"(\d+(?:\.\d+)?)\s*A\b", s, re.IGNORECASE)
+    return f"{m.group(1)}A" if m else None
+
+
+def _transistor_type_transform(v: str):
+    """Drop generic mosfet labels; keep nothing (all values are generic here)."""
+    drop_generics = {"mosfet", "mosfet switch"}
+    if v.strip().lower() in drop_generics:
+        return None
+    return v.strip().lower() or None
+
+
+def _function_type_transform(v: str):
+    """Light normalisation: 'Current sens amplifier' → 'current sense amplifier'."""
+    normalized = v.strip().lower()
+    # Fix common abbreviation
+    normalized = re.sub(r"\bsens\b", "sense", normalized)
+    return normalized or None
+
+
+def _memory_type_transform(v: str):
+    """Preserve memory type as-is (e.g. 'EEPROM')."""
+    s = v.strip()
+    return s or None
+
+
+def _gate_function_transform(v: str):
+    """'Level Shifter' → 'level shifter'; bare 'IC' → drop."""
+    drop_generics = {"ic"}
+    normalized = v.strip().lower()
+    if normalized in drop_generics:
+        return None
+    return normalized or None
+
+
+def _driver_type_transform(v: str):
+    """Drop 'IC' and 'MOSFET'; keep 'IC Driver', 'Interface IC', 'Level Shifter' lowercased."""
+    drop_generics = {"ic", "mosfet"}
+    normalized = v.strip().lower()
+    if normalized in drop_generics:
+        return None
+    return normalized or None
+
+
+# SEMANTIC_MAP[type] = list of rule dicts.
+# Rules that require splitting one legacy column into two canonical columns use
+# 'dst' as a tuple; the transform then returns a tuple (v_ce_ds_max, i_c_d_max).
+SEMANTIC_MAP = {
+    "diodes": [
+        {"src": "component_type", "dst": "diode_type", "transform": _diode_type_transform},
+    ],
+    "transistors": [
+        # power_rating splits into two columns
+        {"src": "power_rating", "dst": ("v_ce_ds_max", "i_c_d_max"),
+         "transform": lambda v: (_parse_voltage_token(v), _parse_current_token(v))},
+        {"src": "component_type", "dst": "transistor_type",
+         "transform": _transistor_type_transform},
+    ],
+    "analog": [
+        {"src": "component_type", "dst": "function_type",
+         "transform": _function_type_transform},
+    ],
+    "ic_memory": [
+        {"src": "component_type", "dst": "memory_type",
+         "transform": _memory_type_transform},
+    ],
+    "logic": [
+        {"src": "component_type", "dst": "gate_function",
+         "transform": _gate_function_transform},
+    ],
+    "ic_drivers": [
+        {"src": "component_type", "dst": "driver_type",
+         "transform": _driver_type_transform},
+        {"src": "current_rating", "dst": "i_max_device",
+         "transform": lambda v: v.strip() or None},
+    ],
+}
+
+
+def table_type(table: str) -> str | None:
+    """Look up the 'type' string for a table from table_map.json.
+
+    Returns None if the table is not registered (semantic maps won't fire).
+    """
+    if not TABLE_MAP_PATH.exists():
+        return None
+    data = json.loads(TABLE_MAP_PATH.read_text())
+    entry = data.get(table)
+    return entry.get("type") if entry else None
+
+
+def apply_semantic_map(legacy: dict, result: dict,
+                       type_key: str, canon_set: set) -> None:
+    """Apply SEMANTIC_MAP rules for *type_key* to *result* in-place.
+
+    Reads values from *legacy*; writes only when:
+      - src value is present and non-placeholder
+      - dst column(s) exist in canon_set
+      - dst column is NOT already populated in result (no overwrite)
+
+    For split rules (dst is a tuple), writes each sub-target independently.
+    """
+    rules = SEMANTIC_MAP.get(type_key)
+    if not rules:
+        return
+    for rule in rules:
+        src = rule["src"]
+        dst = rule["dst"]
+        xform = rule["transform"]
+
+        src_val = legacy.get(src)
+        if is_placeholder(src_val):
+            continue
+
+        mapped = xform(src_val)
+
+        if isinstance(dst, tuple):
+            # mapped should be a tuple of (v1, v2, ...) aligned with dst
+            if not isinstance(mapped, tuple):
+                continue
+            for col, val in zip(dst, mapped):
+                if col not in canon_set:
+                    continue
+                if col in result:
+                    # Target already populated — don't overwrite; warn.
+                    print(f"  INFO: semantic map skipped {src!r}→{col!r}: "
+                          f"target already has {result[col]!r}", file=sys.stderr)
+                    continue
+                if val is not None:
+                    result[col] = val
+        else:
+            if dst not in canon_set:
+                continue
+            if dst in result:
+                print(f"  INFO: semantic map skipped {src!r}→{dst!r}: "
+                      f"target already has {result[dst]!r}", file=sys.stderr)
+                continue
+            if mapped is not None:
+                result[dst] = mapped
 
 
 def parse_temp_range(s: str):
@@ -158,10 +340,12 @@ def _derive_from_unique_id(uid: str, col: str):
 
 
 def build_canonical_row(legacy: dict, canon_set: set,
-                        not_null_cols: set | None = None) -> dict:
+                        not_null_cols: set | None = None,
+                        type_key: str | None = None) -> dict:
     """Map a legacy row dict to a canonical row dict.
 
-    canon_set: set of canonical column names (for quick lookup).
+    canon_set:   set of canonical column names (for quick lookup).
+    type_key:    'type' value from table_map.json — drives SEMANTIC_MAP lookups.
     Returns a dict with only non-null canonical columns.
     """
     result = {}
@@ -205,6 +389,10 @@ def build_canonical_row(legacy: dict, canon_set: set,
         if is_placeholder(v):
             continue  # null out placeholders
         result[col] = v
+
+    # Semantic field maps: preserve curated values stored under legacy-named columns
+    if type_key:
+        apply_semantic_map(legacy, result, type_key, canon_set)
 
     # Last-resort fallback: NOT NULL columns with no default that ended up absent
     if not_null_cols:
@@ -258,6 +446,7 @@ def rewrite_file(table: str) -> None:
     canon_cols = canonical_cols(schema_path)
     canon_set = set(canon_cols)
     not_null_cols = canonical_not_null_no_default(schema_path)
+    type_key = table_type(table)
 
     original = data_path.read_text()
     legacy_rows = parse_inserts(original, table)
@@ -284,7 +473,10 @@ def rewrite_file(table: str) -> None:
     has_transaction = bool(re.search(r"^\s*BEGIN\s+TRANSACTION", original,
                                      re.IGNORECASE | re.MULTILINE))
 
-    canonical_rows = [build_canonical_row(r, canon_set, not_null_cols) for r in legacy_rows]
+    canonical_rows = [
+        build_canonical_row(r, canon_set, not_null_cols, type_key=type_key)
+        for r in legacy_rows
+    ]
 
     # Build output
     lines = []
