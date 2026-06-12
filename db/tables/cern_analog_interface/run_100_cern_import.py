@@ -11,7 +11,7 @@ from pathlib import Path
 _ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(_ROOT))
 
-from tools import cern_source, cern_libmap  # noqa: E402
+from tools import cern_source, cern_libmap, cern_promoted  # noqa: E402
 
 CERN_TABLE = "Analog & Interface"
 OUTPUT_FILE = "cern_analog_interface_generated_100_cern_import.sql"
@@ -132,6 +132,8 @@ def main() -> None:
     rows = sorted(cern_source.rows(CERN_TABLE), key=_sort_key)
     for row in rows:
         if is_denylisted(row):
+            continue
+        if cern_promoted.is_promoted(clean(row.get("Manufacturer Part Number"))):
             continue
         m = map_row(row)
         m["unique_id"] = finalize_unique_id(m, row, seen)

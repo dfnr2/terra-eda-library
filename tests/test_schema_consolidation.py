@@ -67,6 +67,7 @@ PAIRS = {  # type -> list of all tables that must share columns
     "logic": ["ic_logic", "cern_logic", "cern_standard_logic"],
     "analog": ["ic_analog", "cern_analog_interface"],
     "leds": ["leds", "cern_leds_displays"],
+    "led_drivers": ["led_drivers"],
     "switches": ["switches", "cern_switches"],
     "inductors": ["inductors"],
     "ferrites": ["ferrites"],

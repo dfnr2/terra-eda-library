@@ -12,6 +12,7 @@
   "ic_analog":              { "type": "analog",  "tier_default": 2, "dump_priority_default": 1 },
   "cern_analog_interface":  { "type": "analog",  "tier_default": 5, "dump_priority_default": 0 },
   "leds":                   { "type": "leds",    "tier_default": 2, "dump_priority_default": 1 },
+  "led_drivers":            { "type": "led_drivers", "tier_default": 2, "dump_priority_default": 1 },
   "cern_leds_displays":     { "type": "leds",    "tier_default": 5, "dump_priority_default": 0 },
   "switches":               { "type": "switches", "tier_default": 2, "dump_priority_default": 1 },
   "cern_switches":          { "type": "switches", "tier_default": 5, "dump_priority_default": 0 },
