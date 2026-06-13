@@ -111,7 +111,7 @@ def _dbl_spec():
                 "footprints": "kicad_footprint",
                 "fields": [
                     {"column": "mpn", "name": "Manufacturer PN", "visible_in_chooser": True},
-                    {"column": "value", "name": "Value", "visible_in_chooser": True},
+                    {"column": "value", "name": "Value", "visible_in_chooser": True, "visible_on_add": True},
                     {"column": "kicad_symbol", "name": "Symbol", "visible_in_chooser": False},
                     {"column": "kicad_footprint", "name": "Footprint", "visible_in_chooser": True},
                 ],
@@ -412,7 +412,7 @@ def test_serialize_part_footprint_is_in_fields_not_top_level(spec):
 
     assert "footprint" not in part  # not a top-level key
     fp = part["fields"]["footprint"]
-    assert fp == {"value": "Package_TO_SOT_SMD:SOT-23", "visible": "true"}
+    assert fp == {"value": "Package_TO_SOT_SMD:SOT-23", "visible": "false"}
 
 
 def test_serialize_part_no_symbol_field_and_no_duplicate_footprint_field(spec):
@@ -437,16 +437,17 @@ def test_serialize_part_generic_fields_visibility_and_values(spec):
     part = serialize_part(row, spec, pid)
     fields = part["fields"]
 
-    # mpn -> "Manufacturer PN", visible_in_chooser True -> "true"
-    assert fields["Manufacturer PN"] == {"value": "BC847", "visible": "true"}
-    # value -> "Value", visible True
+    # On-schematic visibility is driven by visible_on_add, not visible_in_chooser.
+    # mpn -> "Manufacturer PN": no visible_on_add -> hidden on the placed symbol
+    assert fields["Manufacturer PN"] == {"value": "BC847", "visible": "false"}
+    # value -> "Value": visible_on_add True -> shown on the placed symbol
     assert fields["Value"] == {"value": "NPN 45V", "visible": "true"}
 
 
 def test_serialize_part_visible_false_field_serializes_string_false(spec):
-    # Use a spec variant where the Value field is visible_in_chooser False.
+    # Use a spec variant where the Value field has visible_on_add False.
     custom = _dbl_spec()
-    custom["libraries"][0]["fields"][1]["visible_in_chooser"] = False
+    custom["libraries"][0]["fields"][1]["visible_on_add"] = False
     import tempfile, os
     fd, p = tempfile.mkstemp(suffix=".kicad_dbl")
     os.write(fd, json.dumps(custom).encode())

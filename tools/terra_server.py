@@ -131,7 +131,7 @@ def serialize_part(row, spec, pid: str) -> dict:
     # not clobbered by a re-emitted "Footprint" field.
     footprint = row[spec["footprints"]]
     if footprint:
-        fields["footprint"] = {"value": str(footprint), "visible": "true"}
+        fields["footprint"] = {"value": str(footprint), "visible": "false"}
 
     for field in spec["fields"]:
         column = field["column"]
@@ -142,7 +142,11 @@ def serialize_part(row, spec, pid: str) -> dict:
             continue
         fields[field["name"]] = {
             "value": str(value),
-            "visible": "true" if field.get("visible_in_chooser") else "false",
+            # On-schematic field visibility is driven by visible_on_add (KiCad's
+            # "show this field when the symbol is placed"), NOT visible_in_chooser
+            # (which only governs chooser columns). The dbl sets visible_on_add for
+            # Value alone, so a placed part shows just Reference + Value.
+            "visible": "true" if field.get("visible_on_add") else "false",
         }
 
     return {
