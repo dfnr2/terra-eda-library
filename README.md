@@ -72,7 +72,7 @@ correction, and enhancement, and invites you to roll up your sleeves and dig in.
 
 ## Using the library
 
-To use Terra as a consumer — build it, serve it, and select parts in KiCad.
+To use Terra, you need to 1) build it, 2) serve it, and 3) select parts in KiCad.
 
 ### Prerequisites
 
