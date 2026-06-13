@@ -10,15 +10,15 @@
 #            ${KIPRJMOD}/terra_local.db - clone of master + project config applied
 
 # Configuration
+# Recipes use bash-isms ([[ ]] in verify, etc.); pin the shell so the build is
+# portable to systems where /bin/sh is dash (e.g. Debian/Ubuntu) and not bash.
+SHELL := bash
 PYTHON := uv run python
 CONFIG := tools/field_mappings.yaml
 VENV_MARKER := .venv/.synced
 
 # Default tier cutoff when no terra_config.sql exists
 DEFAULT_TIER := 2
-
-# Tables with deliberately-assigned tiers; everything else is re-tiered to 0.
-PARAMETRIC_TIER_TABLES := resistors_smt capacitors_smt
 
 # Override via command line: make TIER=3 TAGS=analog,passive
 TIER ?=
@@ -230,8 +230,6 @@ db/terra.db: $(GLOBAL_SQL) $(foreach table,$(TABLES),$($(table)_ALL_SQL))
 			fi; \
 		fi; \
 	done
-	@echo "  Re-tiering static/curated tables to tier 0..."
-	@$(PYTHON) tools/retier_static.py $@ $(PARAMETRIC_TIER_TABLES)
 	@echo "  Resolving cross-table duplicate unique_ids..."
 	@$(PYTHON) tools/dedup_cross_table.py $@
 	@echo "  Inserting default config (tier=$(DEFAULT_TIER), no active tags)..."

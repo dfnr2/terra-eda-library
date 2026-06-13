@@ -252,22 +252,22 @@ def dump_table_to_file(conn: sqlite3.Connection, table_name: str, output_dir: Pa
 
     # Get dump priorities and sources (excluding dump_priority = 0)
     dump_info, max_priority = get_table_dump_info(conn, table_name)
-    
-    # Calculate padding width based on max priority
-    padding_width = len(str(max_priority))
-    
-    # Write schema file with proper padding
-    schema_file = table_dir / f"{table_name}_{'0' * padding_width}_schema.sql"
-    with open(schema_file, 'w', encoding='utf-8') as f:
-        f.write(f"-- Terra EDA Library - {table_name} Table Schema\n")
-        f.write(f"-- This file contains only the table definition\n")
-        f.write(f"-- Data is split by dump_priority and source into separate files\n")
-        f.write(f"--\n")
-        f.write(f"-- This file is auto-generated and suitable for git tracking.\n")
-        f.write(f"--\n\n")
-        f.write(f"{create_table_sql};\n")
-    
-    print(f"    ✓ Wrote to {schema_file}")
+
+    # Fixed single-width numbering. Padding is NOT derived from max_priority --
+    # that made filenames shift (e.g. _1_ -> _100_) whenever a higher-priority
+    # source appeared, leaving stale duplicates behind. Numbers wider than one
+    # digit render naturally (priority 100 -> "100").
+    padding_width = 1
+
+    # The schema file (_0_schema.sql) is owned by tools/gen_schema.py; the dumper
+    # writes only the static data files. First remove any stale dumper-managed
+    # data files so a re-split or a renamed source does not leave a duplicate that
+    # double-inserts on the next build. Never touch the gen_schema-owned
+    # *_schema.sql or the gitignored *_generated_* files.
+    for old in sorted(table_dir.glob(f"{table_name}_*.sql")):
+        if old.name.endswith("_schema.sql") or "_generated_" in old.name:
+            continue
+        old.unlink()
 
     # Dump data by priority and source
     if total_rows > 0:
