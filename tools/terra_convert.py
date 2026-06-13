@@ -373,14 +373,17 @@ def _recommendations(part: Part, row: dict[str, str]) -> list[str]:
     return [f"update native terra part: schematic has {', '.join(missing)}"] if missing else []
 
 
-def _best_passive(category: str, part: Part, cands: list[dict]) -> tuple[dict | None, str]:
+def _best_passive(category: str, part: Part, cands: list[dict],
+                  derate: bool = False) -> tuple[dict | None, str]:
     """Pick the safest spec-equivalent passive from same value+package candidates.
 
     Enforces meet-or-exceed on the quality dimensions so a substitute is never
     weaker than the original: capacitors must match dielectric and rate >= the
     required voltage; resistors must rate >= the required power and <= the
-    required tolerance, preferring the same composition. Returns ``(None, why)``
-    when terra has the value/package but nothing meets spec -- a real gap, not an
+    required tolerance, preferring the same composition. With *derate* set,
+    capacitors prefer the next voltage rating above the working voltage (more
+    margin) rather than the smallest sufficient one. Returns ``(None, why)`` when
+    terra has the value/package but nothing meets spec -- a real gap, not an
     unsafe substitution.
     """
     if category == "Capacitor":
@@ -391,10 +394,15 @@ def _best_passive(category: str, part: Part, cands: list[dict]) -> tuple[dict | 
               and (req_v is None or (c.get("voltage") is not None and c["voltage"] >= req_v))]
         if not ok:
             return None, f"terra has this value/package but none meet {req_diel or 'dielectric'} >= {req_v or '?'}V"
-        best = min(ok, key=lambda c: (c["voltage"] if c["voltage"] is not None else 1e9, c["tier"]))
+        pool, derated = ok, False
+        if derate and req_v is not None:
+            higher = [c for c in ok if c["voltage"] is not None and c["voltage"] > req_v]
+            if higher:
+                pool, derated = higher, True
+        best = min(pool, key=lambda c: (c["voltage"] if c["voltage"] is not None else 1e9, c["tier"]))
         v = best["voltage"]
         label = f"{best.get('dielectric', '')} {f'{v:g}V' if v is not None else ''}".strip()
-        return best, f"spec-equivalent: {label} ({len(ok)} meet spec)"
+        return best, f"spec-equivalent{' (derated)' if derated else ''}: {label} ({len(ok)} meet spec)"
 
     # Resistor
     req_pow = parse_power(part.power) or parse_power(part.value)
@@ -415,7 +423,7 @@ def _best_passive(category: str, part: Part, cands: list[dict]) -> tuple[dict | 
     return best, "spec-equivalent: " + " ".join(b for b in bits if b) + f" ({len(ok)} meet spec)"
 
 
-def match_part(part: Part, idx: TerraIndex) -> Match:
+def match_part(part: Part, idx: TerraIndex, derate: bool = False) -> Match:
     """Classify a part into tier A (MPN), B (spec), REVIEW (value/MPN), or C (gap)."""
     cat = category_of(part.ref, part.lib_id)
     nm = norm_mpn(part.mpn)
@@ -460,7 +468,7 @@ def match_part(part: Part, idx: TerraIndex) -> Match:
         pkg = package_of(part.footprint)
         cands = [c for c in idx.passives[cat] if _close(c["mag"], target) and c["package"] == pkg]
         if cands:
-            best, why = _best_passive(cat, part, cands)
+            best, why = _best_passive(cat, part, cands, derate)
             if best is not None:
                 return Match("B", best["mpn"], why)
             return Match("C", "", why)  # value+package exist but no SAFE substitute
@@ -480,11 +488,11 @@ _TIER_LABEL = {
 }
 
 
-def build_records(parts: list[Part], idx: TerraIndex) -> list[dict]:
+def build_records(parts: list[Part], idx: TerraIndex, derate: bool = False) -> list[dict]:
     """Match every part and return one flat record per instance."""
     out: list[dict] = []
     for p in parts:
-        m = match_part(p, idx)
+        m = match_part(p, idx, derate)
         rec = asdict(p)
         rec.update(category=category_of(p.ref, p.lib_id), tier=m.tier,
                    target=m.target, note=m.note, flags=m.flags)
@@ -539,11 +547,13 @@ def main() -> None:
     ap.add_argument("schematic", type=Path, help="path to a .kicad_sch file")
     ap.add_argument("--db", type=Path, default=Path("db/terra.db"), help="terra database")
     ap.add_argument("--json", action="store_true", help="emit a machine record instead of the report")
+    ap.add_argument("--derate", action="store_true",
+                    help="prefer the next capacitor voltage rating above the working voltage")
     args = ap.parse_args()
 
     parts = parse_schematic(args.schematic)
     idx = load_terra(args.db)
-    records = build_records(parts, idx)
+    records = build_records(parts, idx, args.derate)
 
     if args.json:
         json.dump({"project": str(args.schematic), "parts": records}, sys.stdout, indent=2)
