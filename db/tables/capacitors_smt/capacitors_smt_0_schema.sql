@@ -1,66 +1,55 @@
--- Terra EDA Library - capacitors_smt Table Schema
--- This file contains only the table definition
--- Data is split by dump_priority and source into separate files
---
--- This file is auto-generated and suitable for git tracking.
---
-
 CREATE TABLE capacitors_smt (
-        -- Core fields (shared across all component types)
-        unique_id TEXT PRIMARY KEY,
-        part_locator TEXT,
-        mpn TEXT NOT NULL,
-        manufacturer TEXT NOT NULL,
-        package TEXT,
-        value TEXT, -- In SPICE notation: 0.5p, 22n, 10u, etc.
-        description TEXT,
-        datasheet TEXT, -- URL
-        manufacturer_link TEXT, -- URL
-        kicad_symbol TEXT,
-        kicad_footprint TEXT,
-        altium_symbol TEXT,
-        altium_footprint TEXT,
-        lifecycle_status TEXT DEFAULT 'Active',
-        rohs TEXT DEFAULT 'No',
-        rohs_document_link TEXT,
-        allow_substitution TEXT DEFAULT 'No',
-        tracking TEXT DEFAULT 'No',
-        standards_version TEXT DEFAULT 'v1.0',
-        bom_comment TEXT,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        created_by TEXT,
-        source TEXT DEFAULT 'static',
-        dump_priority INTEGER DEFAULT 1,
-        tier INTEGER DEFAULT 0,
-        tags TEXT DEFAULT '',
-        sim_model_type TEXT,
-        sim_device TEXT,
-        sim_pins TEXT,
-        sim_model_file TEXT,
-        sim_params TEXT,
-
-        -- Electrical core (capacitor-specific)
-        voltage_rating_v REAL,
-        tolerance TEXT,
-        cap_type TEXT,
-        dielectric_class TEXT,
-        polarized TEXT DEFAULT 'No',
-
-        -- Performance / loss
-        esr_typ_ohm REAL,
-        esr_test_freq_hz REAL,
-        ripple_current_max_a REAL,
-        leakage_current_max_a REAL,
-
-        -- Temperature / reliability
-        temp_operating TEXT,
-        temp_soldering TEXT,
-        temp_storage TEXT,
-        lifetime_hours_at_max_temp INTEGER,
-        aec_q_rating TEXT,
-
-        -- Mechanical
-        height_max_mm REAL,
-    "variant" TEXT
-    );
+    unique_id TEXT PRIMARY KEY,
+    part_locator TEXT,
+    mpn TEXT NOT NULL,
+    manufacturer TEXT NOT NULL,
+    variant TEXT,
+    package TEXT,
+    value TEXT,
+    description TEXT,
+    datasheet TEXT,
+    manufacturer_link TEXT,
+    kicad_symbol TEXT,
+    kicad_footprint TEXT,
+    altium_symbol TEXT,
+    altium_footprint TEXT,
+    lifecycle_status TEXT DEFAULT 'Active',
+    rohs TEXT DEFAULT 'no',
+    rohs_document_link TEXT,
+    allow_substitution TEXT DEFAULT 'no',
+    tracking TEXT DEFAULT 'no',
+    standards_version TEXT DEFAULT 'v1.0',
+    bom_comment TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by TEXT,
+    source TEXT DEFAULT 'static',
+    dump_priority INTEGER DEFAULT 1,
+    tier INTEGER DEFAULT 2,
+    tags TEXT DEFAULT '',
+    sim_model_type TEXT,
+    sim_device TEXT,
+    sim_pins TEXT,
+    sim_model_file TEXT,
+    sim_params TEXT,
+    pin_count TEXT,
+    component_height TEXT,
+    exclude_from_bom BOOLEAN NOT NULL DEFAULT 0,
+    temp_operating_min REAL,
+    temp_operating_max REAL,
+    temp_storage_min REAL,
+    temp_storage_max REAL,
+    temp_soldering REAL,
+    voltage_rating_v REAL,
+    tolerance TEXT,
+    cap_type TEXT,
+    dielectric_class TEXT,
+    polarized TEXT DEFAULT 'No',
+    esr_typ_ohm REAL,
+    esr_test_freq_hz REAL,
+    ripple_current_max_a REAL,
+    leakage_current_max_a REAL,
+    lifetime_hours_at_max_temp INTEGER,
+    aec_q_rating TEXT,
+    height_max_mm REAL
+);

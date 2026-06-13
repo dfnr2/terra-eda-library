@@ -92,10 +92,20 @@ def test_type_tables_share_columns(type_, tables):
         assert cols == ref, f"{t} diverges for type {type_}"
 
 
-def test_passive_tables_not_in_table_map():
+def test_passive_tables_folded_onto_canonical_core():
+    # The native passives were deferred during Phase 0, then folded onto the
+    # canonical core afterward (numeric temp_*_min/max, type tails). They are now
+    # managed by gen_schema like every other native table.
     table_map = json.loads((ROOT/"db/schema/table_map.json").read_text())
-    for t in ("resistors_smt", "resistors_th", "capacitors_smt", "capacitors_th"):
-        assert t not in table_map, f"{t} curated — out of Phase 0 scope"
+    expected = {
+        "resistors_smt": "resistors",
+        "resistors_th": "resistors_th",
+        "capacitors_smt": "capacitors",
+        "capacitors_th": "capacitors",
+    }
+    for t, type_ in expected.items():
+        assert t in table_map, f"{t} should be folded into table_map"
+        assert table_map[t]["type"] == type_, f"{t} should use type {type_}"
 
 def test_deferred_cern_only_types_not_in_table_map():
     table_map = json.loads((ROOT/"db/schema/table_map.json").read_text())

@@ -34,6 +34,33 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+
+def parse_temp_range(s):
+    """Extract two signed integers from a string like "-55°C to +125°C".
+
+    Returns a (min, max) pair of SQL literals (bare numbers), or
+    ("NULL", "NULL") if two numbers can't be found.
+    """
+    if not s:
+        return ("NULL", "NULL")
+    nums = re.findall(r"[+-]?\d+", s)
+    if len(nums) < 2:
+        return ("NULL", "NULL")
+    return (str(int(nums[0])), str(int(nums[1])))
+
+
+def parse_temp_single(s):
+    """Extract the leading signed integer from a string like "260°C (10s max)".
+
+    Returns one SQL literal (bare number), or "NULL" if no number is found.
+    """
+    if not s:
+        return "NULL"
+    m = re.search(r"[+-]?\d+", s)
+    if not m:
+        return "NULL"
+    return str(int(m.group(0)))
+
 # ============================================================================
 # ======================== USER CONFIGURATION ================================
 # ============================================================================
@@ -165,8 +192,8 @@ SQL_TEMPLATES = {
 BEGIN TRANSACTION;
 """,
     "section_header": "-- {dielectric} {package} {voltage}",
-    "insert": """INSERT INTO capacitors_smt (unique_id, part_locator, mpn, manufacturer, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tier, tags, voltage_rating_v, tolerance, cap_type, dielectric_class, polarized, temp_operating, temp_soldering, temp_storage, lifecycle_status, rohs, allow_substitution, tracking, created_at, updated_at, created_by, height_max_mm)
-VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', '{package}', '{value_spice}', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, {tier}, '{tags}', {voltage_rating}, '{tolerance}', '{cap_type}', '{dielectric_class}', '{polarized}', '{temp_operating}', '{temp_soldering}', '{temp_storage}', '{lifecycle_status}', '{rohs}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}', {height_max_mm});""",
+    "insert": """INSERT INTO capacitors_smt (unique_id, part_locator, mpn, manufacturer, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tier, tags, voltage_rating_v, tolerance, cap_type, dielectric_class, polarized, temp_operating_min, temp_operating_max, temp_storage_min, temp_storage_max, temp_soldering, lifecycle_status, rohs, allow_substitution, tracking, created_at, updated_at, created_by, height_max_mm)
+VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', '{package}', '{value_spice}', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, {tier}, '{tags}', {voltage_rating}, '{tolerance}', '{cap_type}', '{dielectric_class}', '{polarized}', {temp_operating_min}, {temp_operating_max}, {temp_storage_min}, {temp_storage_max}, {temp_soldering}, '{lifecycle_status}', '{rohs}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}', {height_max_mm});""",
 
     "tag_insert": "INSERT INTO tags (unique_id, tag) VALUES ('{unique_id}', '{tag}');",
     "file_footer": """COMMIT;
@@ -752,9 +779,11 @@ def generate_capacitors(csv_rows: List[Dict[str, str]]) -> str:
             cap_type=CAP_TYPE,
             dielectric_class=dielectric,
             polarized=POLARIZED,
-            temp_operating=STRING_TEMPLATES["temp_operating"],
-            temp_soldering=STRING_TEMPLATES["temp_soldering"],
-            temp_storage=STRING_TEMPLATES["temp_storage"],
+            temp_operating_min=parse_temp_range(STRING_TEMPLATES["temp_operating"])[0],
+            temp_operating_max=parse_temp_range(STRING_TEMPLATES["temp_operating"])[1],
+            temp_storage_min=parse_temp_range(STRING_TEMPLATES["temp_storage"])[0],
+            temp_storage_max=parse_temp_range(STRING_TEMPLATES["temp_storage"])[1],
+            temp_soldering=parse_temp_single(STRING_TEMPLATES["temp_soldering"]),
             lifecycle_status=LIFECYCLE_STATUS,
             rohs=ROHS_COMPLIANT,
             allow_substitution=ALLOW_SUBSTITUTION,
