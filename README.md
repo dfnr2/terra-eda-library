@@ -18,7 +18,7 @@ editing.
 ## How it fits together
 
 ```mermaid
-flowchart LR
+flowchart TD
     src["generators + curation tools<br/>(the source — version-controlled)"]
     sql["SQL in db/tables/<br/>(generated)"]
     db["db/terra.db<br/>(build artifact)"]
@@ -108,20 +108,62 @@ The server must be running for the library to load.
 ## Working on the library
 
 Parts are added and changed by **running or writing generators and curation
-tools** — never by editing the SQL or the database by hand. This is deliberate.
-The scripts enforce the invariants that make the library coherent: above all that
-each part's `part_locator` (the canonical key used to find substitutes) is the
-computed value, and that metadata is complete. A hand edit silently bypasses
-those guarantees — exactly the kind of drift the generated workflow exists to
-prevent.
+tools**. The scripts enforce the invariants that make the library coherent: above
+all that each part's `part_locator` (the canonical key used to find substitutes)
+is the computed value, and that metadata is complete.
 
-The shape of that work:
+The following are an overview of the process of adding parts, not a how-to
+guide.
 
-- Generate a series from a datasheet (the resistor and capacitor generators are
-  the model), or seed parts from KiCad's shipped symbols — see [PLAN.md](PLAN.md)
-  for the approach and [PROCESSES.md](PROCESSES.md) for the commands.
-- Rebuild with `make`, check round-trip consistency with `make verify`, and
-  review the diff of the scripts and assets before committing.
+### Bulk parts
+
+To add bulk parts from a datasheet, as in the case of resistors, other passives,
+or connectors:
+
+- If the part is in a class not already represented in a library table, then
+  come up with a schema. A schema must include the **core schema** plus any tail
+  parameters specific to the part class.  Encode the schema as an sql file.
+
+- Review the datasheet and determine if there is a pattern to the part numbers.
+  In many cases, there is some invariant portion common to all parts, and a
+  variable portion encoding a part's specific value.
+
+  Some passives, such as resistors, have numerous values all sharing invariant
+  specs. Writing a script to generate these parts is easy.
+
+  Some part families such as diodes or fuses, have different specs for each part
+  number but the same overall parameters. For these, the parameters must be
+  extracted from the datasheet prior and hard coded in the script if the values
+  cannot be programmatically generated. Other parts must be completely mined
+  from the datasheet. This can be done manually, or via OCR/AI agent and then
+  manually checked.
+
+- Generate a script to output an sql entry for each part in the datasheet.
+
+- Add the table to the Makefile and rebuild
+
+### Bespoke parts
+
+To add a single part — a specific IC, connector, or other one-off — the process
+is the same in spirit, minus the part-number pattern:
+
+- If the part's class isn't already represented, create a schema for it just as
+  for bulk parts (the **core schema** plus a class-specific tail), encoded as an
+  SQL file. If the class already has a table, reuse it.
+
+- Source the symbol and footprint, preferring KiCad's shipped libraries — a
+  specific-part symbol usually carries a usable datasheet and a designated
+  footprint, which keeps the part grounded in KiCad's native style. Where KiCad
+  has no suitable footprint or 3D model, source or create one.
+
+- Gather the part's details — MPN, manufacturer, datasheet link, and parameters —
+  from the datasheet (or a parametric source such as Nexar).
+
+- Write a script that emits the single SQL entry. Even one-off parts are
+  scripted, so a later schema change or symbol-convention switch (US vs. EU) is
+  reapplied by a rebuild, never by a hand edit.
+
+- Add the table to the Makefile if the class is new, then rebuild.
 
 ## Documentation
 
