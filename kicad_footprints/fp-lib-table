@@ -38,6 +38,7 @@
   (lib (name "cern-weidmuller-thd")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/cern-weidmuller-thd.pretty")(options "")(descr ""))
   (lib (name "terra-connectors")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/terra-connectors.pretty")(options "")(descr ""))
   (lib (name "terra-diodes")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/terra-diodes.pretty")(options "")(descr ""))
+  (lib (name "terra-optoelectronics")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/terra-optoelectronics.pretty")(options "")(descr ""))
   (lib (name "terra-test-points")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/terra-test-points.pretty")(options "")(descr ""))
   (lib (name "terra_sym")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/terra_sym.pretty")(options "")(descr ""))
 )
