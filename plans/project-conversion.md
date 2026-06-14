@@ -25,7 +25,13 @@ repo; commit only if it outlives the work.
         session (harvest generators, new types, footprint+symbol migration, CERN deletes,
         verified tier-A). The `terra_harvest` *automation* is moot for these boards; build it
         only if future boards warrant it.
-      - **4b (schematic rewrite, `terra_rewrite.py`): NOT started.** This is the capstone and
+      - **4b (schematic rewrite, `terra_rewrite.py`): core built (`d6aca54`).** Pin-preserving
+        transform (`parse_pins` + `find_transform`) done + tested (6 tests), validated on real
+        symbols. Invariant agreed: connectivity unchanged = per-net (ref, pin-number) membership
+        identical (value/footprint/MPN change by design). NEXT increment: apply stage (instance
+        lib_id/at/mirror rewrite + property updates + lib_symbols embed) with a **dry-run**, then
+        the kicad-cli netlist connectivity gold-check, then the gated write on **spiro_cart**.
+        This is the capstone and
         the only consequential step left — it *mutates the user's board files*. Pin-preserving
         transform per symbol, netlist gold-check via `kicad-cli` (present, v10.0.3). Also
         applies the schematic-side fixes: FB MPN → BLM18BD121SN1D (displayed-value-wins),
