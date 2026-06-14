@@ -333,9 +333,6 @@ db/%.sql: %_sym.kicad_sym $(CONFIG)
 dump: $(foreach table,$(TABLES),$(table)-dump)
 	@echo "All tables dumped. Review changes with 'git diff db/tables/' before committing."
 
-# Verify round-trip consistency
-# Process: Static SQL -> [Generate] -> DB -> Dump -> Compare Static SQL
-# Generated SQL (source=''|NULL) should NOT appear in dump
 # Verify the library is reproducible and consistent. The source of truth is the
 # generator scripts (not static SQL), so this is a clean rebuild from source plus
 # the test suite -- which includes the schema drift guard. It deliberately does

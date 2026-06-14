@@ -26,7 +26,7 @@ TYPES = {
     "leds": (["leds"], ["cern_leds_displays"]),
     "switches": (["switches"], ["cern_switches"]),
     "inductors": (["inductors"], []),
-    "ferrites": (["ferrites"], []),
+    "ferrites": (["ferrites_smt"], []),
     "ic_drivers": (["ic_drivers"], []),
     "ic_memory": (["ic_memory"], []),
     "ic_microcontrollers": (["ic_microcontrollers"], []),
