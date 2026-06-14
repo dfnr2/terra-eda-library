@@ -20,7 +20,7 @@ COLS = [
     "source", "dump_priority", "tier", "tags", "pin_count",
     "connector_category", "connector_family", "connector_series", "connector_type",
     "positions", "rows", "pitch_mm", "orientation", "termination_type", "gender",
-    "signal_type", "mating_part_hint", "exclude_from_bom", "bom_comment",
+    "signal_type", "mates_with", "exclude_from_bom", "bom_comment",
 ]
 
 PARTS = [
@@ -39,7 +39,7 @@ PARTS = [
         "connector_series": "TC2030", "connector_type": "footprint",
         "positions": 6, "rows": 2, "pitch_mm": 1.27, "orientation": "vertical",
         "termination_type": "SMT", "gender": None, "signal_type": "signal",
-        "mating_part_hint": "TC2030-IDC-NL (no-legs cable, for this no-holes footprint); TC2030-IDC (legged cable) needs the holed footprint variant",
+        "mates_with": "TC2030-IDC-NL (no-legs cable, for this no-holes footprint); TC2030-IDC (legged cable) needs the holed footprint variant",
         "exclude_from_bom": 1, "bom_comment": "footprint only -- no placed component",
         "pin_count": "6", "tags": "connector,programming,debug",
     },
@@ -53,7 +53,7 @@ PARTS = [
         "connector_series": "53254", "connector_type": "header",
         "positions": 4, "rows": 1, "pitch_mm": 2.0, "orientation": "right-angle",
         "termination_type": "Through Hole", "gender": "male", "signal_type": "signal",
-        "mating_part_hint": None, "pin_count": "4", "tags": "connector,header",
+        "mates_with": None, "pin_count": "4", "tags": "connector,header",
     },
     {
         "mpn": "5600200320", "manufacturer": "Molex", "value": "Solenoid",
@@ -65,7 +65,7 @@ PARTS = [
         "connector_series": "560020", "connector_type": "header",
         "positions": 3, "rows": 1, "pitch_mm": 2.0, "orientation": "vertical",
         "termination_type": "SMT", "gender": "male", "signal_type": "power",
-        "mating_part_hint": None, "pin_count": "3", "tags": "connector,header",
+        "mates_with": None, "pin_count": "3", "tags": "connector,header",
     },
     {
         "mpn": "829-22-008-20-002101", "manufacturer": "Mill-Max", "value": "8 pins",
@@ -77,7 +77,7 @@ PARTS = [
         "connector_series": "829", "connector_type": "spring-pin",
         "positions": 8, "rows": 1, "pitch_mm": 2.54, "orientation": "right-angle",
         "termination_type": "Through Hole", "gender": "male", "signal_type": "signal",
-        "mating_part_hint": None, "pin_count": "8", "tags": "connector,pogo,spring-pin",
+        "mates_with": None, "pin_count": "8", "tags": "connector,pogo,spring-pin",
     },
 ]
 

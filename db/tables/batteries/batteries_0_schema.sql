@@ -45,5 +45,6 @@ CREATE TABLE batteries (
     capacity_ah REAL,           -- rated capacity (Ah),
     energy_wh REAL,             -- rated energy (Wh),
     rechargeable TEXT,          -- 'yes' | 'no',
-    smart_interface TEXT        -- 'SMBus' | 'I2C' | 'none' | ...
+    smart_interface TEXT,       -- 'SMBus' | 'I2C' | 'none' | ...,
+    mates_with TEXT             -- mating connector MPN(s) the pack plugs into
 );

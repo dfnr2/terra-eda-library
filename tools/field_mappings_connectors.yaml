@@ -120,7 +120,7 @@ column_edits:
     "ip_rating": add
     "creepage_clearance_note": add
     "mating_family": add
-    "mating_part_hint": add
+    "mates_with": add
 
     # Remove KiCad internal fields
     "^ki_.*": remove

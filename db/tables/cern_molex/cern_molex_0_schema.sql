@@ -71,6 +71,6 @@ CREATE TABLE cern_molex (
     flammability_rating TEXT,     -- e.g. 'UL94-V0',
     ip_rating TEXT,               -- e.g. 'IP20', 'IP67',
     creepage_clearance_note TEXT, -- notes if creepage/clearance are special / safety rated,
-    mating_family TEXT,           -- e.g. 'mates with MicroFit receptacles',
-    mating_part_hint TEXT
+    mating_family TEXT,           -- family-level hint, e.g. 'mates with MicroFit receptacles',
+    mates_with TEXT               -- mating connector/cable MPN(s) that plug into this part
 );
