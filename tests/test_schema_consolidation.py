@@ -70,7 +70,7 @@ PAIRS = {  # type -> list of all tables that must share columns
     "led_drivers": ["led_drivers"],
     "switches": ["switches", "cern_switches"],
     "inductors": ["inductors"],
-    "ferrites": ["ferrites"],
+    "ferrites": ["ferrites_smt"],
     "ic_drivers": ["ic_drivers"],
     "ic_memory": ["ic_memory"],
     "ic_microcontrollers": ["ic_microcontrollers"],
@@ -99,13 +99,14 @@ def test_passive_tables_folded_onto_canonical_core():
     table_map = json.loads((ROOT/"db/schema/table_map.json").read_text())
     expected = {
         "resistors_smt": "resistors",
-        "resistors_th": "resistors_th",
         "capacitors_smt": "capacitors",
-        "capacitors_th": "capacitors",
     }
     for t, type_ in expected.items():
         assert t in table_map, f"{t} should be folded into table_map"
         assert table_map[t]["type"] == type_, f"{t} should use type {type_}"
+    # Through-hole passives are dropped for now (SMT focus) -- not in the build.
+    for t in ("resistors_th", "capacitors_th"):
+        assert t not in table_map, f"{t} should be dropped (SMT focus)"
 
 def test_deferred_cern_only_types_not_in_table_map():
     table_map = json.loads((ROOT/"db/schema/table_map.json").read_text())

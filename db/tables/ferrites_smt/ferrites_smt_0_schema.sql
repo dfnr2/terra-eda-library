@@ -1,4 +1,4 @@
-CREATE TABLE resistors_th (
+CREATE TABLE ferrites_smt (
     unique_id TEXT PRIMARY KEY,
     part_locator TEXT,
     mpn TEXT NOT NULL,
@@ -40,11 +40,9 @@ CREATE TABLE resistors_th (
     temp_storage_min REAL,
     temp_storage_max REAL,
     temp_soldering REAL,
-    tolerance TEXT,
+    impedance_at_freq TEXT,
+    dc_resistance TEXT,
+    current_rating TEXT,
     power_rating TEXT,
-    temp_coeff TEXT,
-    voltage_rating TEXT,
-    composition TEXT,
-    lead_spacing_mm REAL,
-    body_style TEXT DEFAULT 'axial'
+    tolerance TEXT
 );
