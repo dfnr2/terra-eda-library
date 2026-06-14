@@ -6,7 +6,9 @@ repo; commit only if it outlives the work.
 
 ## Pipeline status
 - [x] **#1** quality-aware read-only converter (`tools/terra_convert.py`) — committed `f1960cb`
-- [ ] **#2** ferrite resolution — see *Ferrite generator* below (rename prerequisite now DONE)
+- [x] **#2** ferrite resolution — **library side DONE 2026-06-14**: full Murata BLM18…N1
+      family generator built; rotten BLM18 rows replaced. Remaining piece is schematic-side
+      (BD121 vs BD221 per rail) and belongs to #6. See *Ferrite generator* below.
 - [x] **#3** substitution policy — decided; see *Approved substitutions*
 - [x] **#4** harvest gap parts → native terra tables — **DONE 2026-06-14.** All 21 gap
       instances (12 distinct parts) now resolve to tier A; converter reports **0 gaps**
@@ -42,19 +44,22 @@ footprints to migrate into terra's footprint assets; the 3 simple TVS use standa
   capacity_ah, energy_wh, rechargeable, smart/interface); add `db/schema/types/batteries.sql`
   + table_map entry + `db/tables/batteries/` + a generator.
 
-## Ferrite generator (deferred — do after the other items)
-The 12 `FB` symbols are cut/paste rot mixing three real parts: name `BLM18EG121SN1D`
-(120Ω/2A), MPN field `BLM18BD221SN1D` (220Ω/300mA), Description = 120Ω/300mA =
-`BLM18BD121SN1D` (terra LACKS this; the MPN field looks like a `BD221`→`BD121` typo).
-Fix = a **datasheet-driven generator**, not a hand edit.
-- **Where:** `db/tables/ferrites_smt/`; datasheet placed: `murata_blm18xxxxxxN1x_datasheet.pdf`
-- **Model:** `db/tables/resistors_smt/run_2*.py`, `capacitors_smt/run_3*.py`/`run_4*.py`
-  (shared part_locator canonicalizer, tier, numeric temps, column-qualified INSERTs,
-  `SOURCE=None`/`DUMP_PRIORITY=0`).
-- **Reconcile the rename FIRST:** the dir was renamed `ferrites/` → `ferrites_smt/`, but the
-  schema still says `CREATE TABLE ferrites` and `table_map.json` keys it `ferrites` (old
-  `ferrites/` dir gone) → the tree is build-inconsistent for ferrites. Rename the table to
-  `ferrites_smt` (schema fragment + `table_map` + `_1_migrated.sql`), like the other passives.
+## Ferrite generator (#2 — LIBRARY SIDE DONE 2026-06-14)
+Built `db/tables/ferrites_smt/run_500_murata_blm18.py`, a datasheet-driven generator for
+the full Murata BLM18…N1 0603 family (74 parts) from the parked spec
+`murata_blm18xxxxxxN1x_datasheet.pdf` (JENF243A_0003AN-01). Removed the two cut/paste-rotted
+hand-migrated BLM18 rows (the generator supersedes them); kept the non-BLM18 parts
+(Bourns MH2029, Murata BLM41) and fixed BLM41's rotted `value` field. Symbol
+`Device:FerriteBead_Small`, footprint `Inductor_SMD:L_0603_1608Metric`.
+- **"EG" myth busted:** no `BLM18EG…` series exists in the datasheet. The terra migrated
+  row `BLM18EG121SN1D` was a typo for `BLM18PG121SN1D` (120Ω / 2A DC-power-line); now present.
+- **The real schematic rot (open decision, drives #6, NOT a library task):** all 12 small
+  `FB` symbols carry MPN `BLM18BD221SN1D` (220Ω / 250mA) but value text "120 ohm 300 mA"
+  = `BLM18BD121SN1D`. `terra_convert` now surfaces this as a per-instance CONFLICT (it was
+  masked before, when terra held matching rotten rows). terra carries BOTH parts, so the fix
+  is purely schematic-side: decide 120Ω/300mA (BD121) vs 220Ω/250mA (BD221) per rail and
+  rewrite the MPN. FB9 = `BLM41PG600SN1L` (60Ω/6A) is correct; only its value text is rot.
+- **Rename prerequisite:** DONE earlier (`ferrites` → `ferrites_smt`).
 
 ## Approved substitutions (#3 — decided 2026-06-13)
 Resistors accepted as-is (50 ppm RT is fine; nothing here needs a tighter tempco). Caps
