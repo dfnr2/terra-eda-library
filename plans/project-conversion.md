@@ -53,12 +53,13 @@ hand-migrated BLM18 rows (the generator supersedes them); kept the non-BLM18 par
 `Device:FerriteBead_Small`, footprint `Inductor_SMD:L_0603_1608Metric`.
 - **"EG" myth busted:** no `BLM18EG…` series exists in the datasheet. The terra migrated
   row `BLM18EG121SN1D` was a typo for `BLM18PG121SN1D` (120Ω / 2A DC-power-line); now present.
-- **The real schematic rot (open decision, drives #6, NOT a library task):** all 12 small
-  `FB` symbols carry MPN `BLM18BD221SN1D` (220Ω / 250mA) but value text "120 ohm 300 mA"
-  = `BLM18BD121SN1D`. `terra_convert` now surfaces this as a per-instance CONFLICT (it was
-  masked before, when terra held matching rotten rows). terra carries BOTH parts, so the fix
-  is purely schematic-side: decide 120Ω/300mA (BD121) vs 220Ω/250mA (BD221) per rail and
-  rewrite the MPN. FB9 = `BLM41PG600SN1L` (60Ω/6A) is correct; only its value text is rot.
+- **The real schematic rot (RESOLVED 2026-06-14, applied by #6):** all 12 small `FB` symbols
+  carry MPN `BLM18BD221SN1D` (220Ω / 250mA) but value text "120 ohm 300 mA" = `BLM18BD121SN1D`.
+  `terra_convert` surfaces this as a per-instance CONFLICT. **Decision: the displayed Value
+  wins** (it's the human-reviewed field), so the intended part is **`BLM18BD121SN1D`** and the
+  MPN field is the typo — the #6 write engine rewrites the 12 FBs' MPN to BD121. This is now a
+  general conversion policy (see [[terra-convert-tooling]] #5). FB9 = `BLM41PG600SN1L` (60Ω/6A)
+  is correct; only its value text is rot.
 - **Bourns MH series:** also generated now — `run_510_bourns_mh.py` builds the full
   MH-series family (27 parts, 0603/0805/1206) from `bourns_mh_ferrites_datasheet.pdf`,
   superseding the hand-migrated MH2029-800Y row (which is a library part, not used on this
@@ -87,5 +88,6 @@ C0603C105K4RACTU -> CL10B105KA8NNN   (1uF;  C2,C4,C6,C8,C10,C12,C14)
 ```
 
 ## Open decisions
-- **#2 ferrites:** which bead is actually intended — resolved by the deferred generator above;
-  confirm the rail current (≤300mA vs >300mA) and 120Ω vs 220Ω when we build it.
+- ~~**#2 ferrites:** which bead is intended~~ — RESOLVED 2026-06-14: displayed Value wins →
+  `BLM18BD121SN1D` (120Ω/300mA); #6 rewrites the 12 FB MPNs. General policy in
+  [[terra-convert-tooling]] #5.
