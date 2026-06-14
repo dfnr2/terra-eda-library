@@ -30,6 +30,30 @@ repo; commit only if it outlives the work.
   (KEMET X7R → Samsung CL X7R ≥16V)
 - **21 gap** → ~13 native parts to harvest
 
+## cartridge-pcb.kicad_sch — second board (added 2026-06-14, hierarchical)
+Root + `valve_control.kicad_sch` sub-sheet = **111 part instances** (terra_convert now
+follows hierarchy, commit `9dea23f`). Start: A=64 / B=18 / C=28 / REVIEW=1.
+
+- **Bucket 1 (clean harvests) — DONE 2026-06-14** (`run_310_cart_harvest.py` per table):
+  `ESDA18-1K`→diodes, `OPA991IDBVR`→ic_opamp (stand-in symbol `OPA365xxDBV`, see note),
+  `MMBT3906`→bjt, and 3 connectors (`532540470`, `5600200320`, `829-22-008-20-002101`) with
+  custom footprints migrated into terra-connectors. 9 instances flipped C→A (C now 19).
+  - `OPA991` has no dedicated KiCad symbol — used the standard single-op-amp SOT-23-5
+    `Amplifier_Operational:OPA365xxDBV` as a functionally-correct stand-in. Revisit if we add
+    a terra symbol library / migrate curated symbols.
+  - **Tag-Connect TC2030** ported as `TC2030-IDC-NL` but its schematic symbol has an EMPTY
+    MPN, so it stays tier C until the schematic gets an MPN (#6 fix). terra carries it now.
+- **Bucket 2 (not harvest targets):** LED Everlight ×2 already terra (empty MPN → #6 fix);
+  MountingHole ×6 mechanical (skip).
+- **Bucket 3 (new tables / generators):**
+  - `cap_electrolytics_th` table — Dave provides datasheet → generator (`EKYC250ELL392MK30S`
+    3900µF/25V radial THT is the first member; don't just port one part).
+  - extend the cap generators to **0402 and 0201** (covers `GRM155…105` 1µF and `C0402C104`
+    0.1µF X7R gaps; model proven, httplib search is snappy).
+  - `optoelectronics_sensors` table — Dave provides datasheet (`OPB733TR` reflective sensor).
+- **Conflicts:** `FB1–FB7` are the same ferrite rot as the mainboard → `BLM18BD121SN1D`
+  (displayed-value-wins, #6). **REVIEW:** `RT0603FRE07174KL` (Yageo FR→FK), same as mainboard.
+
 ## Harvest manifest (gaps → native terra; the curated project parts ARE the source)
 All 12 distinct parts carry a datasheet + real description, so these are clean ports.
 **Footprint note (#4):** the connectors, SM712, and the test point carry hand-curated `nema:`
