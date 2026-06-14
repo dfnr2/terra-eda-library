@@ -358,6 +358,15 @@ def load_terra(db_path: Path) -> TerraIndex:
                   else parse_capacitance if table.startswith("capacitors") else None)
         cat = ("Resistor" if table.startswith("resistors")
                else "Capacitor" if table.startswith("capacitors") else None)
+        # Value+package substitution only applies to tables that carry the parametric
+        # columns (MLCC caps, chip resistors). Others -- e.g. capacitors_electrolytic_th,
+        # whose tail has voltage_rating/capacitance, not voltage_rating_v/dielectric_class
+        # -- are MPN-matchable only, never auto-substituted. Keeps load_terra robust as
+        # new capacitor/resistor families are added.
+        if cat == "Capacitor" and not {"voltage_rating_v", "dielectric_class"} <= cols:
+            cat = parser = None
+        elif cat == "Resistor" and not {"power_rating", "composition"} <= cols:
+            cat = parser = None
         for row in conn.execute(f'SELECT * FROM "{table}"'):
             mpn = (row["mpn"] or "").strip()
             if mpn:

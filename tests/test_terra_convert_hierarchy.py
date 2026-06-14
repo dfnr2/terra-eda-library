@@ -72,3 +72,36 @@ def test_parse_schematic_visits_each_file_once(tmp_path):
         '(sheet (property "Sheetfile" "valve.kicad_sch"))')
     refs = sorted(p.ref for p in tc.parse_schematic(root))
     assert refs == ["R6", "R7"]  # both instances, file parsed once
+
+
+# --- load_terra robustness: a non-MLCC capacitor family must not break indexing ---
+
+def _make_db(path):
+    import sqlite3
+    con = sqlite3.connect(path)
+    # MLCC-shaped capacitor table (has the parametric substitution columns)
+    con.execute("""CREATE TABLE capacitors_smt (
+        unique_id TEXT PRIMARY KEY, mpn TEXT, value TEXT, package TEXT, tier INTEGER,
+        tolerance TEXT, datasheet TEXT, manufacturer_link TEXT, rohs_document_link TEXT,
+        kicad_footprint TEXT, voltage_rating_v REAL, dielectric_class TEXT)""")
+    con.execute("INSERT INTO capacitors_smt VALUES "
+                "('u1','C0402X','1uF','0402',2,'10%','','','','',16,'X7R')")
+    # Electrolytic table: different tail (voltage_rating/capacitance, no *_v / dielectric)
+    con.execute("""CREATE TABLE capacitors_electrolytic_th (
+        unique_id TEXT PRIMARY KEY, mpn TEXT, value TEXT, package TEXT, tier INTEGER,
+        tolerance TEXT, datasheet TEXT, manufacturer_link TEXT, rohs_document_link TEXT,
+        kicad_footprint TEXT, voltage_rating TEXT, capacitance TEXT)""")
+    con.execute("INSERT INTO capacitors_electrolytic_th VALUES "
+                "('u2','EKYC250ELL392MK30S','3900uF 25V','Radial',2,'20%','','','','','25V','3900uF')")
+    con.commit(); con.close()
+
+
+def test_load_terra_handles_non_mlcc_capacitor_table(tmp_path):
+    db = tmp_path / "terra.db"
+    _make_db(str(db))
+    idx = tc.load_terra(db)
+    # both MPNs are indexed (MPN match works for either family)
+    assert "C0402X" in idx.by_mpn and "EKYC250ELL392MK30S" in idx.by_mpn
+    # only the MLCC enters the value+package substitution index
+    cap_mpns = {c["mpn"] for c in idx.passives["Capacitor"]}
+    assert cap_mpns == {"C0402X"}
