@@ -78,7 +78,7 @@ DIELECTRIC_ENABLE = {
 
 # ======================== CASE SIZE CONFIGURATION ========================
 CASE_SIZE_ENABLE = {
-    "0201": "no",
+    "0201": "yes",
     "0402": "yes",
     "0603": "yes",
     "0805": "yes",

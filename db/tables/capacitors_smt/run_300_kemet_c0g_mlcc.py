@@ -115,9 +115,9 @@ TOLERANCE_PERCENT_ENABLE = {
 
 CASE_VOLTAGE_ENABLE = {
     # 0201 - Limited voltage range
-    "0201/10V": "no",
-    "0201/16V": "no",
-    "0201/25V": "no",
+    "0201/10V": "yes",
+    "0201/16V": "yes",
+    "0201/25V": "yes",
     # 0402 - Full voltage range
     "0402/10V": "no",
     "0402/16V": "yes",
