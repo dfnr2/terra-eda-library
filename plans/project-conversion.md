@@ -46,11 +46,14 @@ follows hierarchy, commit `9dea23f`). Start: A=64 / B=18 / C=28 / REVIEW=1.
 - **Bucket 2 (not harvest targets):** LED Everlight ×2 already terra (empty MPN → #6 fix);
   MountingHole ×6 mechanical (skip).
 - **Bucket 3 (new tables / generators):**
-  - `cap_electrolytics_th` table — Dave provides datasheet → generator (`EKYC250ELL392MK30S`
-    3900µF/25V radial THT is the first member; don't just port one part).
-  - extend the cap generators to **0402 and 0201** (covers `GRM155…105` 1µF and `C0402C104`
-    0.1µF X7R gaps; model proven, httplib search is snappy).
-  - `optoelectronics_sensors` table — Dave provides datasheet (`OPB733TR` reflective sensor).
+  - **DONE** `capacitors_electrolytic_th` — full Chemi-Con KYC family generator (118 parts,
+    16-120V); `EKYC250ELL392MK30S` matches tier A.
+  - **DONE** `optoelectronics_sensors` — `OPB733TR` ported tier A. Established **native
+    symbol migration** (per-category `kicad_symbols/terra-optoelectronics.kicad_sym`): when
+    KiCad ships no pin-correct symbol, migrate the curated one rather than mis-number pads
+    with a stand-in. (OPA991 keeps its pin-compatible `OPA365xxDBV` stand-in.)
+  - **TODO** extend the cap generators to **0402 and 0201** (covers `GRM155…105` 1µF and
+    `C0402C104` 0.1µF X7R gaps; no datasheet needed). Closes the cartridge MLCC gaps.
 - **Conflicts:** `FB1–FB7` are the same ferrite rot as the mainboard → `BLM18BD121SN1D`
   (displayed-value-wins, #6). **REVIEW:** `RT0603FRE07174KL` (Yageo FR→FK), same as mainboard.
 
