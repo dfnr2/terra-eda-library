@@ -27,6 +27,9 @@ DENY_PATTERNS = [
     re.compile(r"^CERN_OHL", re.I),
     re.compile(r"^Empty$", re.I),
     re.compile(r"copyright", re.I),
+    # PCA9306 is now a native curated part (TI PCA9306DCT, ic_analog harvest);
+    # drop the superseded CERN rows (DCT/DCU/DQE).
+    re.compile(r"\bPCA9306", re.I),
 ]
 
 INSERT_COLS = [

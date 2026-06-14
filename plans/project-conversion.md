@@ -15,7 +15,11 @@ repo; commit only if it outlives the work.
       (A=43, B=26, C=0). Footprints migrated into per-category libs (terra-diodes,
       terra-connectors, terra-test-points) with their 3D models; new `test_points` and
       `batteries` tables added. See *Harvest manifest* (done) below.
-- [ ] **#5** `U2` PCA9306DCT: port `cern_analog_interface` → native, delete the CERN entry
+- [x] **#5** `U2` PCA9306DCT: port `cern_analog_interface` → native — **DONE 2026-06-14.**
+      Ported to native `ic_analog` (`run_300_spiro_harvest.py`) with standard `Interface:PCA9306`
+      symbol + `Package_SO:SSOP-8_2.95x2.8mm_P0.65mm` footprint (no asset migration needed);
+      retired all 3 CERN PCA9306 rows (DCT/DCU/DQE) via the importer denylist. U2 now matches
+      `ic_analog` tier A. DCU/DQE (unused, uncurated) were dropped — re-harvest if ever needed.
 - [ ] **#6** stage-4 write engine — **designed:** `specs/200-stage4-write-engine/write-engine-spec.md`
       (4a terra-side writes via `terra_harvest`; 4b pin-preserving schematic rewrite via
       `terra_rewrite`). Next: review the spec, then implement 4a first.
