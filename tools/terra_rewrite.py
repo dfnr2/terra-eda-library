@@ -25,7 +25,13 @@ from __future__ import annotations
 
 import math
 import re
+import sqlite3
+import sys
 from dataclasses import dataclass
+from pathlib import Path
+
+_ROOT = Path(__file__).resolve().parents[1]
+_SYMBOL_DIRS = ["/usr/share/kicad/symbols", str(_ROOT / "kicad_symbols")]
 
 
 @dataclass(frozen=True)
@@ -122,3 +128,131 @@ def find_transform(legacy_pins: list[Pin], legacy_at: Placement,
                 ox, oy = offsets.pop()
                 return Transform(rot=rot, mirror=mirror, x=ox, y=oy)
     return None
+
+
+# --------------------------------------------------------------------------- #
+# Dry-run analysis: does a pin-preserving transform exist for each convertible
+# part on a board? (Read-only; the precursor to the write + netlist gold-check.)
+# --------------------------------------------------------------------------- #
+
+def _balanced_symbol_block(text: str, name: str) -> str | None:
+    """Return the balanced ``(symbol "name" ... )`` block (incl. unit sub-symbols)."""
+    anchor = f'(symbol "{name}"'
+    i = text.find(anchor)
+    if i < 0:
+        return None
+    depth = 0
+    for j in range(i, len(text)):
+        if text[j] == "(":
+            depth += 1
+        elif text[j] == ")":
+            depth -= 1
+            if depth == 0:
+                return text[i:j + 1]
+    return None
+
+
+def resolve_symbol_pins(kicad_symbol: str, _depth: int = 0) -> list[Pin] | None:
+    """Pins for a ``Lib:Name`` symbol from the standard or terra symbol libraries.
+
+    Follows ``(extends "base")`` for derived symbols (e.g. ``OPA365xxDBV`` extends
+    ``MCP6L91T-EOT``, ``MMBT3906`` extends ``Q_PNP_BEC``), which inherit the base's
+    pin geometry.
+    """
+    if ":" not in kicad_symbol or _depth > 8:
+        return None
+    lib, name = kicad_symbol.split(":", 1)
+    for d in _SYMBOL_DIRS:
+        f = Path(d) / f"{lib}.kicad_sym"
+        if f.is_file():
+            block = _balanced_symbol_block(f.read_text(), name)
+            if block is None:
+                continue
+            pins = parse_pins(block)
+            if pins:
+                return pins
+            m = re.search(r'\(extends "((?:[^"\\]|\\.)*)"', block)
+            if m:
+                return resolve_symbol_pins(f"{lib}:{m.group(1)}", _depth + 1)
+            return pins
+    return None
+
+
+def _all_sheet_text(root: Path) -> str:
+    """Concatenated text of the root schematic and every sub-sheet (for lib_symbols)."""
+    seen: set[Path] = set()
+    stack = [root]
+    out = []
+    while stack:
+        f = stack.pop()
+        try:
+            f = f.resolve()
+        except OSError:
+            continue
+        if f in seen or not f.is_file():
+            continue
+        seen.add(f)
+        t = f.read_text(encoding="utf-8")
+        out.append(t)
+        for m in re.finditer(r'\(property "Sheetfile" "((?:[^"\\]|\\.)*)"', t):
+            stack.append(f.parent / m.group(1))
+    return "\n".join(out)
+
+
+def _terra_symbol_for(conn, table: str, uid: str) -> str | None:
+    row = conn.execute(f'SELECT kicad_symbol FROM "{table}" WHERE unique_id=?', (uid,)).fetchone()
+    return row[0] if row else None
+
+
+def dry_run(board: Path, db: Path):
+    """Classify each convertible instance: pin-preserving transform OK, or manual."""
+    import terra_convert as tc
+    parts = tc.parse_schematic(board)
+    idx = tc.load_terra(db)
+    records = tc.build_records(parts, idx)
+    libtext = _all_sheet_text(board)
+    conn = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
+
+    ok, manual, skipped = [], [], {"C": 0, "REVIEW": 0}
+    for rec in records:
+        tier = rec["tier"]
+        if tier in ("C", "REVIEW"):
+            skipped[tier] = skipped.get(tier, 0) + 1
+            continue
+        ref, lib_id, target = rec["ref"], rec["lib_id"], rec.get("target") or ""
+        # resolve the terra part's kicad_symbol
+        terra_sym = None
+        if tier == "A" and ":" in target:
+            table, uid = target.split(":", 1)
+            terra_sym = _terra_symbol_for(conn, table, uid)
+        elif tier == "B":
+            hit = idx.by_mpn.get(tc.norm_mpn(target))
+            if hit:
+                terra_sym = _terra_symbol_for(conn, hit["table"], hit["uid"])
+        legacy = _balanced_symbol_block(libtext, lib_id)
+        legacy_pins = parse_pins(legacy) if legacy else []
+        terra_pins = resolve_symbol_pins(terra_sym) if terra_sym else None
+        if not legacy_pins or not terra_pins:
+            manual.append((ref, tier, f"pins unresolved (legacy={len(legacy_pins)}, terra_sym={terra_sym})"))
+            continue
+        t = find_transform(legacy_pins, Placement(0, 0, 0), terra_pins)
+        if t is None:
+            manual.append((ref, tier, f"no transform: legacy {len(legacy_pins)}-pin vs {terra_sym}"))
+        else:
+            ok.append((ref, tier, terra_sym, t))
+    conn.close()
+    return ok, manual, skipped
+
+
+if __name__ == "__main__":
+    board = Path(sys.argv[1])
+    db = Path(sys.argv[2]) if len(sys.argv) > 2 else _ROOT / "db/terra.db"
+    ok, manual, skipped = dry_run(board, db)
+    print(f"convertible & pin-preserving (OK): {len(ok)}")
+    print(f"manual review:                     {len(manual)}")
+    print(f"left alone (C/REVIEW):             {skipped}")
+    from collections import Counter
+    print("OK by rot/mirror:", dict(Counter((t.rot, t.mirror) for _, _, _, t in ok)))
+    print("\n-- manual --")
+    for ref, tier, why in sorted(manual)[:40]:
+        print(f"  {ref:6} {tier}  {why}")
