@@ -19,7 +19,7 @@ MANUFACTURER = "Murata"
 PACKAGE = "0603"
 SYMBOL = "Device:FerriteBead_Small"
 FOOTPRINT = "Inductor_SMD:L_0603_1608Metric"
-DATASHEET = "${TERRA_EDA_LIB}/db/tables/ferrites_smt/murata_blm18xxxxxxN1x_datasheet.pdf"
+DATASHEET = "${TERRA_EDA_LIB}/datasheets/murata/blm18-n1.pdf"
 
 # Series characteristics code -> Murata application classification.
 APPLICATION = {

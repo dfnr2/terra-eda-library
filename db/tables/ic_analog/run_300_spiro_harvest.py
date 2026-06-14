@@ -30,7 +30,7 @@ PARTS = [
         "mpn": "PCA9306DCT", "manufacturer": "Texas Instruments",
         "package": "SSOP-8", "value": "PCA9306",
         "description": "Texas Instruments PCA9306DCT 2-bit bidirectional I2C/SMBus voltage-level translator, SSOP-8",
-        "datasheet": "${TERRA_EDA_LIB}/db/tables/ic_analog/ti_pca9306.pdf",
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/ti/pca9306.pdf",
         "manufacturer_link": "https://www.ti.com/product/PCA9306",
         "kicad_symbol": "Interface:PCA9306",
         "kicad_footprint": "Package_SO:SSOP-8_2.95x2.8mm_P0.65mm",

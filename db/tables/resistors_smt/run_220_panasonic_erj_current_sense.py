@@ -100,7 +100,7 @@ TRACKING = "No"
 
 # ======================== URL TEMPLATES ========================
 URL_TEMPLATES = {
-    "datasheet": "https://industrial.panasonic.com/cdbs/www-data/pdf/AOA0000/AOA0000COL17.pdf",
+    "datasheet": "${TERRA_EDA_LIB}/datasheets/panasonic/erj-series.pdf",
     "manufacturer_link": "https://industrial.panasonic.com/ww/products/pt/current-sensing-chip-resistors",
 }
 

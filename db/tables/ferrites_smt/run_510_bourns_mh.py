@@ -14,7 +14,7 @@ CREATED_BY = Path(__file__).name
 
 MANUFACTURER = "Bourns"
 SYMBOL = "Device:FerriteBead_Small"
-DATASHEET = "${TERRA_EDA_LIB}/db/tables/ferrites_smt/bourns_mh_ferrites_datasheet.pdf"
+DATASHEET = "${TERRA_EDA_LIB}/datasheets/bourns/mh-series.pdf"
 
 # Bourns size code -> (EIA package, KiCad footprint). Bourns codes are internal;
 # the datasheet dimension drawing maps them to standard EIA sizes:
