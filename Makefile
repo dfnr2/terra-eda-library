@@ -10,8 +10,7 @@
 #            ${KIPRJMOD}/terra_local.db - clone of master + project config applied
 
 # Configuration
-# Recipes use bash-isms ([[ ]] in verify, etc.); pin the shell so the build is
-# portable to systems where /bin/sh is dash (e.g. Debian/Ubuntu) and not bash.
+# Pin the shell so recipes are portable where /bin/sh is dash (e.g. Debian/Ubuntu).
 SHELL := bash
 PYTHON := uv run python
 CONFIG := tools/field_mappings.yaml
@@ -325,7 +324,11 @@ db/%.sql: %_sym.kicad_sym $(CONFIG)
 	@$(PYTHON) tools/kicad_sym_to_db.py $< $@ --config $(CONFIG)
 	@echo "Done: $@"
 
-# Dump all databases back to static SQL files
+# LEGACY: dump db -> static SQL. The source of truth is the generator scripts, not
+# static SQL, so this is only for migrating the remaining legacy static SQL to
+# scripts. tools/db_to_tables.py's filename scheme diverges from the committed tree,
+# so it rewrites/renames tracked files -- do NOT run in a normal workflow, and
+# `make verify` no longer uses it. Retire once the legacy static SQL is scripted.
 .PHONY: dump
 dump: $(foreach table,$(TABLES),$(table)-dump)
 	@echo "All tables dumped. Review changes with 'git diff db/tables/' before committing."
@@ -333,42 +336,19 @@ dump: $(foreach table,$(TABLES),$(table)-dump)
 # Verify round-trip consistency
 # Process: Static SQL -> [Generate] -> DB -> Dump -> Compare Static SQL
 # Generated SQL (source=''|NULL) should NOT appear in dump
+# Verify the library is reproducible and consistent. The source of truth is the
+# generator scripts (not static SQL), so this is a clean rebuild from source plus
+# the test suite -- which includes the schema drift guard. It deliberately does
+# NOT do the old SQL round-trip (build -> dump -> compare): that assumed static
+# SQL was canonical and depended on the legacy dumper.
 .PHONY: verify
 verify: $(VENV_MARKER)
-	@echo "Verifying round-trip consistency..."
-	@echo "  Step 1: Save checksums of current static SQL files (excluding *_generated_*)"
-	@rm -f /tmp/terra_checksums_before.txt
-	@for table_dir in $(TABLE_DIRS); do \
-		for sql in $$table_dir/*.sql; do \
-			if [ -f "$$sql" ] && [[ "$$(basename $$sql)" != *_generated_* ]]; then \
-				md5sum "$$sql" >> /tmp/terra_checksums_before.txt; \
-			fi; \
-		done; \
-	done
-	@echo "  Step 2: Clean and rebuild (run generators, build DBs)"
+	@echo "Verifying: clean rebuild from source + test suite..."
 	@$(MAKE) clean
 	@$(MAKE) all
-	@echo "  Step 3: Dump databases back to static SQL"
-	@$(MAKE) dump
-	@echo "  Step 4: Compare checksums of dumped static SQL files"
-	@rm -f /tmp/terra_checksums_after.txt
-	@for table_dir in $(TABLE_DIRS); do \
-		for sql in $$table_dir/*.sql; do \
-			if [ -f "$$sql" ] && [[ "$$(basename $$sql)" != *_generated_* ]]; then \
-				md5sum "$$sql" >> /tmp/terra_checksums_after.txt; \
-			fi; \
-		done; \
-	done
-	@if diff /tmp/terra_checksums_before.txt /tmp/terra_checksums_after.txt > /dev/null 2>&1; then \
-		echo "Round-trip verification passed."; \
-		rm -f /tmp/terra_checksums_before.txt /tmp/terra_checksums_after.txt; \
-	else \
-		echo "X Round-trip verification failed!"; \
-		echo "Static SQL files changed after dump:"; \
-		diff /tmp/terra_checksums_before.txt /tmp/terra_checksums_after.txt || true; \
-		rm -f /tmp/terra_checksums_before.txt /tmp/terra_checksums_after.txt; \
-		exit 1; \
-	fi
+	@echo "  Running test suite (schema drift guard, generators, server)..."
+	@uv run pytest tests/ -q
+	@echo "verify: clean rebuild and tests passed."
 
 # Clean generated files (per-table generated SQL + databases)
 .PHONY: clean
@@ -444,8 +424,8 @@ help:
 	@echo "  make generate         Run all generator scripts"
 	@echo "  make normalize-footprints  Set footprint types + assign 3D models (edits cern-* .kicad_mod)"
 	@echo "  make sync             Ensure uv environment is set up"
-	@echo "  make dump             Dump databases back to db/tables/ structure"
-	@echo "  make verify           Verify round-trip consistency (SQL->DB->SQL->DB)"
+	@echo "  make dump             (legacy) dump DB -> static SQL; only to migrate legacy SQL"
+	@echo "  make verify           Clean rebuild from source + run the test suite"
 	@echo "  make status           Show status of all tables and database"
 	@echo "  make clean            Remove generated files (keep SQL and venv)"
 	@echo "  make distclean        Remove all generated files including venv"
@@ -454,11 +434,11 @@ help:
 	@echo "Override tier/tags for project-db:"
 	@echo "  make project-db KIPRJMOD=/path TIER=3 TAGS=analog,passive"
 	@echo ""
-	@echo "Workflow:"
-	@echo "  1. Build master:  make"
-	@echo "  2. Build project: make project-db KIPRJMOD=\$$KIPRJMOD"
-	@echo "  3. Edit DB:       sqlite3 db/terra.db"
-	@echo "  4. Dump:          make dump"
-	@echo "  5. Commit:        git diff db/tables/ && git add ..."
+	@echo "Workflow (source of truth = generator scripts, not SQL):"
+	@echo "  1. Edit/add a generator script under db/tables/<type>/"
+	@echo "  2. Build:    make"
+	@echo "  3. Verify:   make verify"
+	@echo "  4. Review:   git diff db/tables/   (scripts + assets)"
+	@echo "  5. Commit"
 
 .PHONY: all sync schema dump verify clean distclean status help project-db normalize-footprints

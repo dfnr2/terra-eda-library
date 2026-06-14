@@ -2,6 +2,12 @@
 """
 Database to Table Structure Dumper
 
+LEGACY -- use with care. The library's source of truth is the generator scripts,
+not static SQL, so this dumper is retained only for migrating the remaining legacy
+static SQL to scripts. Its filename scheme (``{table}_{priority}_{source}.sql``)
+diverges from the committed tree, so running it rewrites/renames tracked files;
+``make verify`` no longer uses it. Do not run as part of a normal build.
+
 This script dumps a multi-table SQLite database to the Terra EDA Library
 table structure: db/tables/{table_name}/{table_name}.sql
 

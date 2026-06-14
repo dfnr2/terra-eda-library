@@ -51,13 +51,15 @@ Finish with `make`, then `make verify`, then review the diff of the scripts and
 assets before committing.
 
 **Legacy migration:** a few legacy parts still live as tracked static SQL
-(`dump_priority > 0`, maintained via `make dump`). These are slated for migration
-to scripts; no new parts should be added as static SQL.
+(`dump_priority > 0`). These are slated for migration to scripts; no new parts
+should be added as static SQL. (`make dump` / `db_to_tables.py` is **legacy** —
+used only to extract that remaining static SQL during migration, never in a normal
+build; it rewrites tracked files, so don't run it casually.)
 
 ## Verifying
 
 ```bash
-make verify          # round-trip consistency (SQL → DB → SQL → DB)
+make verify          # clean rebuild from source + test suite (incl. schema drift guard)
 make status          # state of all tables and databases
 make schema          # regenerate _0_schema.sql files from db/schema/ sources
 ```
