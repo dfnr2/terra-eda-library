@@ -20,9 +20,17 @@ repo; commit only if it outlives the work.
       symbol + `Package_SO:SSOP-8_2.95x2.8mm_P0.65mm` footprint (no asset migration needed);
       retired all 3 CERN PCA9306 rows (DCT/DCU/DQE) via the importer denylist. U2 now matches
       `ic_analog` tier A. DCU/DQE (unused, uncurated) were dropped — re-harvest if ever needed.
-- [ ] **#6** stage-4 write engine — **designed:** `specs/200-stage4-write-engine/write-engine-spec.md`
-      (4a terra-side writes via `terra_harvest`; 4b pin-preserving schematic rewrite via
-      `terra_rewrite`). Next: review the spec, then implement 4a first.
+- [~] **#6** stage-4 write engine — `specs/200-stage4-write-engine/write-engine-spec.md`.
+      - **4a (terra-side writes): effectively DONE** for both boards — performed by hand this
+        session (harvest generators, new types, footprint+symbol migration, CERN deletes,
+        verified tier-A). The `terra_harvest` *automation* is moot for these boards; build it
+        only if future boards warrant it.
+      - **4b (schematic rewrite, `terra_rewrite.py`): NOT started.** This is the capstone and
+        the only consequential step left — it *mutates the user's board files*. Pin-preserving
+        transform per symbol, netlist gold-check via `kicad-cli` (present, v10.0.3). Also
+        applies the schematic-side fixes: FB MPN → BLM18BD121SN1D (displayed-value-wins),
+        RT FR→FK, fill empty MPNs (TC2030 → "TC2030", LEDs). Spec says flat-board only —
+        will need the hierarchy support we added for the cartridge.
 
 ## mainboard.kicad_sch — current result (69 real parts)
 - **22 drop-in** (exact MPN): ferrites (12, see conflict), ICs (5), LEDs (2), 2 already-terra
