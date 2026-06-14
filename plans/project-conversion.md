@@ -59,6 +59,10 @@ hand-migrated BLM18 rows (the generator supersedes them); kept the non-BLM18 par
   masked before, when terra held matching rotten rows). terra carries BOTH parts, so the fix
   is purely schematic-side: decide 120Ω/300mA (BD121) vs 220Ω/250mA (BD221) per rail and
   rewrite the MPN. FB9 = `BLM41PG600SN1L` (60Ω/6A) is correct; only its value text is rot.
+- **Bourns MH series:** also generated now — `run_510_bourns_mh.py` builds the full
+  MH-series family (27 parts, 0603/0805/1206) from `bourns_mh_ferrites_datasheet.pdf`,
+  superseding the hand-migrated MH2029-800Y row (which is a library part, not used on this
+  board). Only the Murata BLM41 (1806) remains hand-migrated. ferrites_smt = 102 rows.
 - **Rename prerequisite:** DONE earlier (`ferrites` → `ferrites_smt`).
 
 ## Approved substitutions (#3 — decided 2026-06-13)
