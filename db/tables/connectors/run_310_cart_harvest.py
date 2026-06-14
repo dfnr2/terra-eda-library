@@ -20,13 +20,18 @@ COLS = [
     "source", "dump_priority", "tier", "tags", "pin_count",
     "connector_category", "connector_family", "connector_series", "connector_type",
     "positions", "rows", "pitch_mm", "orientation", "termination_type", "gender",
-    "signal_type", "mating_part_hint",
+    "signal_type", "mating_part_hint", "exclude_from_bom", "bom_comment",
 ]
 
 PARTS = [
     {
-        "mpn": "TC2030-IDC-NL", "manufacturer": "Tag-Connect", "value": "DEBUG",
-        "description": "Tag-Connect TC2030-IDC-NL legless PCB footprint for the TC2030-IDC 6-pin programming/debug cable (ARM)",
+        # Footprint-only: the PCB side has no placed component -- the footprint IS the
+        # part and the symbol is the footprint. No orderable board MPN; excluded from
+        # the BOM. The Tag-Connect cable variants live in the mating field.
+        # mpn is the footprint/interface identity (NOT a cable PN); core mpn is NOT NULL.
+        "unique_id": "Tag-Connect-TC2030", "mpn": "TC2030",
+        "manufacturer": "Tag-Connect", "value": "TC2030",
+        "description": "Tag-Connect TC2030 6-pin programming/debug footprint -- no board component (the footprint is the entire part); mates with a TC2030-IDC cable",
         "datasheet": "https://www.tag-connect.com/wp-content/uploads/bsk-pdf-manager/TC2030-CTX_1.pdf",
         "kicad_symbol": "Connector_Generic:Conn_02x03_Odd_Even",
         "kicad_footprint": "terra-connectors:Tag-Connect_TC2030-IDC_2x03_P1.27mm_Vertical",
@@ -34,7 +39,9 @@ PARTS = [
         "connector_series": "TC2030", "connector_type": "footprint",
         "positions": 6, "rows": 2, "pitch_mm": 1.27, "orientation": "vertical",
         "termination_type": "SMT", "gender": None, "signal_type": "signal",
-        "mating_part_hint": "TC2030-IDC cable", "pin_count": "6", "tags": "connector,programming,debug",
+        "mating_part_hint": "TC2030-IDC-NL (no-legs cable, for this no-holes footprint); TC2030-IDC (legged cable) needs the holed footprint variant",
+        "exclude_from_bom": 1, "bom_comment": "footprint only -- no placed component",
+        "pin_count": "6", "tags": "connector,programming,debug",
     },
     {
         "mpn": "532540470", "manufacturer": "Molex", "value": "connector",
@@ -96,6 +103,7 @@ def row(p):
         "package": None, "manufacturer_link": MFR_LINK.get(p["manufacturer"]),
         "rohs": "Yes", "allow_substitution": "No", "tracking": "No",
         "source": None, "dump_priority": 0, "tier": 2,
+        "exclude_from_bom": 0, "bom_comment": None,
     }
     rec.update(p)
     vals = ", ".join(sql(rec.get(c)) for c in COLS)
