@@ -64,44 +64,90 @@ def _prop(chunk: str, key: str) -> str:
     return m.group(1) if m else ""
 
 
-def parse_schematic(path: Path) -> list[Part]:
-    """Extract the real (BOM-bearing) parts from a KiCad ``.kicad_sch`` file.
+def _instance_refs(chunk: str) -> list[str]:
+    """Every placement's reference designator for a symbol, from its (instances).
 
-    Splits the s-expression text on each ``(lib_id "..."`` -- the properties of
-    an instance follow its lib_id and precede the next one, so each split chunk
-    is one symbol. Power/flag symbols (``power:*``) and unannotated references
-    (``#PWR``...) carry no BOM and are dropped.
+    KiCad 7+ records the real per-instance reference under
+    ``(instances (project ... (path "<uuid>" (reference "R5") (unit 1))))``. A
+    sub-sheet instantiated N times yields N ``(path ...)`` entries here, so reading
+    them counts multi-instantiated sheets correctly. Falls back to the
+    ``Reference`` property when a chunk has no instances block (older files).
+    """
+    m = re.search(r"\(instances\b", chunk)
+    if m:
+        refs = re.findall(r'\(reference "((?:[^"\\]|\\.)*)"', chunk[m.start():])
+        if refs:
+            return refs
+    ref = _prop(chunk, "Reference")
+    return [ref] if ref else []
+
+
+def _parse_one(text: str) -> list[Part]:
+    """Parse the placed symbols of a single ``.kicad_sch`` file's text."""
+    parts: list[Part] = []
+    for chunk in re.split(r'\(lib_id "', text)[1:]:
+        lib_id = chunk.split('"', 1)[0]
+        if lib_id.startswith("power:"):
+            continue
+        fields = dict(
+            lib_id=lib_id,
+            value=_prop(chunk, "Value"),
+            footprint=_prop(chunk, "Footprint"),
+            mpn=_prop(chunk, "Manufacturer PN"),
+            manufacturer=_prop(chunk, "Manufacturer"),
+            datasheet=_prop(chunk, "Datasheet"),
+            mfr_link=_prop(chunk, "Manufacturer Link"),
+            rohs_link=_prop(chunk, "RoHS Europe Document Link"),
+            tolerance=_prop(chunk, "Tolerance"),
+            power=_prop(chunk, "Power Rating"),
+        )
+        for ref in _instance_refs(chunk):
+            if not ref or ref.startswith("#"):
+                continue
+            parts.append(Part(ref=ref, **fields))
+    return parts
+
+
+def _subsheet_paths(text: str, source: Path) -> list[Path]:
+    """Resolve the ``Sheetfile`` of every child sheet block, relative to source."""
+    return [source.parent / m.group(1) for m in
+            re.finditer(r'\(property "Sheetfile" "((?:[^"\\]|\\.)*)"', text)]
+
+
+def parse_schematic(path: Path) -> list[Part]:
+    """Extract the real (BOM-bearing) parts from a KiCad schematic hierarchy.
+
+    Starts at ``path`` (the root ``.kicad_sch``) and follows every ``Sheetfile``
+    reference transitively, parsing each file once. Within a file, symbols are
+    split on ``(lib_id "..."`` -- the properties of an instance follow its lib_id
+    and precede the next one -- and each placement is read from the symbol's
+    ``(instances)`` block, so a sub-sheet instantiated more than once contributes
+    one part per instance. Power/flag symbols (``power:*``, ``#PWR``...) are
+    dropped.
 
     Example::
 
         >>> from tools.terra_convert import parse_schematic
         >>> from pathlib import Path
-        >>> parts = parse_schematic(Path("mainboard.kicad_sch"))
-        >>> parts[0].ref, parts[0].mpn
-        ('R13', 'RT0603FRE07130RL')
+        >>> parts = parse_schematic(Path("cartridge-pcb.kicad_sch"))  # root + sub-sheets
+        >>> {p.ref for p in parts} >= {"R6", "R13"}                   # incl. valve_control
+        True
     """
-    text = path.read_text(encoding="utf-8")
     parts: list[Part] = []
-    for chunk in re.split(r'\(lib_id "', text)[1:]:
-        lib_id = chunk.split('"', 1)[0]
-        ref = _prop(chunk, "Reference")
-        if lib_id.startswith("power:") or ref.startswith("#") or not ref:
+    seen: set[Path] = set()
+    stack = [path]
+    while stack:
+        f = stack.pop()
+        try:
+            f = f.resolve()
+        except OSError:
             continue
-        parts.append(
-            Part(
-                ref=ref,
-                lib_id=lib_id,
-                value=_prop(chunk, "Value"),
-                footprint=_prop(chunk, "Footprint"),
-                mpn=_prop(chunk, "Manufacturer PN"),
-                manufacturer=_prop(chunk, "Manufacturer"),
-                datasheet=_prop(chunk, "Datasheet"),
-                mfr_link=_prop(chunk, "Manufacturer Link"),
-                rohs_link=_prop(chunk, "RoHS Europe Document Link"),
-                tolerance=_prop(chunk, "Tolerance"),
-                power=_prop(chunk, "Power Rating"),
-            )
-        )
+        if f in seen or not f.is_file():
+            continue
+        seen.add(f)
+        text = f.read_text(encoding="utf-8")
+        parts.extend(_parse_one(text))
+        stack.extend(_subsheet_paths(text, f))
     return parts
 
 
