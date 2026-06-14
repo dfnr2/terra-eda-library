@@ -74,6 +74,8 @@ PAIRS = {  # type -> list of all tables that must share columns
     "ic_drivers": ["ic_drivers"],
     "ic_memory": ["ic_memory"],
     "ic_microcontrollers": ["ic_microcontrollers"],
+    "test_points": ["test_points"],
+    "batteries": ["batteries"],
     "connectors": ["connectors", "cern_3m", "cern_amphenol", "cern_erni", "cern_fci",
                    "cern_harting", "cern_harwin", "cern_lemo", "cern_mentor",
                    "cern_molex", "cern_phoenix", "cern_samtec", "cern_sockets",

@@ -1,0 +1,112 @@
+(footprint "14-37FSV30_3_segments"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at -5.969 -7.493 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "9b90f53d-8ff5-4f18-9b04-84b2ee92ae90")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "14-37FSV30_3_segments"
+		(at -2.921 -10.541 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "d6bcb97a-b080-4a0d-9dbd-b55628f68107")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "24cf7417-d750-42d9-a987-ccf7114cf3d1")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "f8b131db-11c9-41ca-9d6a-a6f34b4620b4")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_text user "${REFERENCE}"
+		(at 2.667 11.811 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "c7933c3e-366b-4060-85e2-b9ce5c3e2ec9")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at -6.35 0.6604)
+		(size 2.54 2.54)
+		(drill 1.5748)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "44f1552d-3037-4488-85a5-4336e7845967")
+	)
+	(pad "1" smd rect
+		(at 0 0)
+		(size 19.05 8.128)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(thermal_bridge_angle 45)
+		(uuid "ee9e56c3-24af-4ed6-a9a4-da33bfd501bf")
+	)
+	(pad "1" thru_hole circle
+		(at 0 0.6604)
+		(size 2.54 2.54)
+		(drill 1.5748)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "9ccb38e2-d9f8-45a4-95f0-f129a00599c8")
+	)
+	(pad "1" thru_hole circle
+		(at 6.35 0.6604)
+		(size 2.54 2.54)
+		(drill 1.5748)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "c0b79536-215f-4b30-bf4d-2f0d63056599")
+	)
+	(embedded_fonts no)
+	(model "${TERRA_EDA_LIB}/assets/3dmodels/terra-connectors.3dshapes/14-37FSV30-PP-0.750.STEP"
+		(offset
+			(xyz 0 -3.6068 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 90 0)
+		)
+	)
+)

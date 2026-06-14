@@ -23,6 +23,8 @@
   "ic_drivers":             { "type": "ic_drivers", "tier_default": 2, "dump_priority_default": 1 },
   "ic_memory":              { "type": "ic_memory",  "tier_default": 2, "dump_priority_default": 1 },
   "ic_microcontrollers":    { "type": "ic_microcontrollers", "tier_default": 2, "dump_priority_default": 1 },
+  "test_points":            { "type": "test_points", "tier_default": 2, "dump_priority_default": 1 },
+  "batteries":              { "type": "batteries",   "tier_default": 2, "dump_priority_default": 1 },
   "connectors":                    { "type": "connectors", "tier_default": 2, "dump_priority_default": 1 },
   "cern_3m":                       { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 },
   "cern_amphenol":                 { "type": "connectors", "tier_default": 5, "dump_priority_default": 0 },

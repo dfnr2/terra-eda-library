@@ -1,0 +1,165 @@
+(footprint "TestPoint_Pad_3.43x1.78mm"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "SMD rectangular pad as test Point, square 3.43 x 1.78 mm")
+	(tags "test point SMD pad rectangle square")
+	(property "Reference" "TP"
+		(at -1.524 -2.032 0)
+		(layer "F.SilkS")
+		(uuid "4ac456a4-dca4-48be-8034-2b201bdd0bbf")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "TestPoint_Pad_3.0x3.0mm"
+		(at -1.016 5.588 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "484bd687-6ede-4acf-9ac8-0d923e977a8e")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "8b018013-88f5-41e3-85fe-c52b765c6d9a")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "9e6bf73a-0be7-481c-8f4b-ece10ac97130")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -1.82 -1)
+		(end 1.82 -1)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "857e73c1-d227-4871-ac8b-87daa4d64ed2")
+	)
+	(fp_line
+		(start -1.82 1)
+		(end -1.82 -1)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "4356ac1d-32b9-44f3-9f0f-c2bca7184b95")
+	)
+	(fp_line
+		(start 1.82 -1)
+		(end 1.82 1)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "51727ef9-fdb1-47eb-afd1-dd58ce3359ec")
+	)
+	(fp_line
+		(start 1.82 1)
+		(end -1.82 1)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "afc30d59-11a1-4161-9ad9-42dd1f051a43")
+	)
+	(fp_line
+		(start -2 -1.2)
+		(end -2 1.2)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "1020e52b-63f2-4813-b1ae-e24b469d4de9")
+	)
+	(fp_line
+		(start -2 -1.2)
+		(end 2 -1.2)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "6ba5b17a-c381-4b02-a460-395b3901aa6c")
+	)
+	(fp_line
+		(start 2 1.2)
+		(end -2 1.2)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "01110da0-06a5-4a6f-9032-c9da4644a9a6")
+	)
+	(fp_line
+		(start 2 1.2)
+		(end 2 -1.2)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "90554774-7377-43e8-9f42-5a8b06b33348")
+	)
+	(fp_text user "${Component Value}"
+		(at -0.762 2.032 0)
+		(layer "F.SilkS")
+		(uuid "f1480b01-b535-4e70-9e32-aad65c44c7f4")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at 0 0)
+		(size 3.43 1.78)
+		(layers "F.Cu" "F.Mask")
+		(uuid "4c71b9bb-be46-454d-a6f7-e76ef8e43736")
+	)
+	(embedded_fonts no)
+	(model "${TERRA_EDA_LIB}/assets/3dmodels/terra-test-points.3dshapes/Keystone-5017.step"
+		(offset
+			(xyz 0.5 0.5 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 0 0)
+		)
+	)
+)

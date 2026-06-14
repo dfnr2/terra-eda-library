@@ -27,6 +27,9 @@ DENY_PATTERNS = [
     re.compile(r"^CERN_OHL", re.I),
     re.compile(r"^Empty$", re.I),
     re.compile(r"copyright", re.I),
+    # SM712 is now a native curated part (Littelfuse SM712-02HTG, diodes harvest);
+    # drop the superseded Semtech CERN stubs.
+    re.compile(r"\bSM712\b", re.I),
 ]
 
 INSERT_COLS = [
