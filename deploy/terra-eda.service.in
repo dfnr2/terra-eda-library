@@ -1,0 +1,13 @@
+[Unit]
+Description=Terra EDA Library HTTP server
+After=network.target
+
+[Service]
+Type=simple
+@USER_LINE@WorkingDirectory=@REPO@
+ExecStart=@UV@ run python tools/terra_server.py --db db/terra.db --dbl terra.kicad_dbl --tier @TIER@ --host 127.0.0.1 --port @PORT@
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=@WANTEDBY@
