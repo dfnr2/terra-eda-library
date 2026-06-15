@@ -131,3 +131,17 @@ files: it sets the SMD/through-hole attribute and assigns KiCad 3D models with
 alignment offsets. It **edits committed source files**, so it is a deliberate
 target — *not* part of `make`/`make build`, which must never dirty the tree. It is
 idempotent.
+
+## Running the server as a service
+
+`make serve` runs the server in the foreground (dev). To keep it running:
+
+- **Login item (per-user, no sudo):** `make install-service MODE=user`
+  (starts at login; `loginctl enable-linger $USER` to run without an active session).
+- **Managed service (system-wide, boot):** `sudo make install-service MODE=system`.
+- Status: `make service-status [MODE=user|system]`. Remove: `make uninstall-service MODE=…`.
+
+`make install` does the lot: build + register terra into KiCad's global lib tables
+(idempotent) + install the service in `MODE` (default `user`). Override port/tier with
+`PORT=` / `TIER=`. Preview the unit without touching the system:
+`uv run python tools/install_service.py install --mode user --dry-run`.

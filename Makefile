@@ -441,9 +441,10 @@ help:
 .PHONY: all sync schema dump verify clean distclean status help project-db normalize-footprints
 
 # --- Deployment: service / login item + KiCad registration ---
+# MODE/PORT are deployment-only; TIER reuses the existing override var (empty default
+# at line ~23), so default it inline to 2 here.
 MODE ?= user
 PORT ?= 8361
-TIER ?= 2
 
 .PHONY: install install-service uninstall-service service-status register-kicad
 install: all register-kicad install-service
@@ -453,7 +454,7 @@ register-kicad: $(VENV_MARKER)
 	@$(PYTHON) tools/register_kicad.py
 
 install-service: $(VENV_MARKER)
-	@$(PYTHON) tools/install_service.py install --mode $(MODE) --port $(PORT) --tier $(TIER)
+	@$(PYTHON) tools/install_service.py install --mode $(MODE) --port $(PORT) --tier $(or $(TIER),2)
 
 uninstall-service: $(VENV_MARKER)
 	@$(PYTHON) tools/install_service.py uninstall --mode $(MODE)
