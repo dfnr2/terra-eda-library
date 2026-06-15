@@ -19,3 +19,18 @@ def test_render_system_unit_has_user_line_and_multiuser_target():
     assert "User=dave" in u
     assert "WantedBy=multi-user.target" in u
     assert "--port 9000" in u and "--tier 3" in u
+
+
+def test_unit_path_user_vs_system():
+    up = svc.unit_path("user")
+    assert up.name == "terra-eda.service" and ".config/systemd/user" in str(up)
+    sp = svc.unit_path("system")
+    assert str(sp) == "/etc/systemd/system/terra-eda.service"
+
+
+def test_dry_run_prints_unit_without_writing(capsys, monkeypatch):
+    # dry-run must not touch the filesystem or call systemctl
+    monkeypatch.setattr(svc, "_systemctl", lambda *a, **k: (_ for _ in ()).throw(AssertionError("called")))
+    svc.install("user", port=8361, tier=2, dry_run=True)
+    out = capsys.readouterr().out
+    assert "WorkingDirectory=" in out and "terra-eda.service" in out
