@@ -18,8 +18,12 @@ make httplib         # write terra.kicad_httplib (the KiCad connection file)
 make serve           # serve db/terra.db to KiCad at http://127.0.0.1:8361/
 ```
 
-`make serve` runs in the foreground and reads a **snapshot** of the database at
-launch — rebuild and restart it to pick up changes.
+`make serve` runs in the foreground and **hot-reloads**: it re-reads the database
+and `terra.kicad_dbl` whenever either file's mtime changes, so a `make` rebuild is
+picked up without restarting (portable mtime polling — no systemd/inotify, so it
+works on Windows too). The build stamps a `terra_meta` table (version from `git
+describe`, commit, build timestamp) into `db/terra.db`; the server surfaces it at
+`http://127.0.0.1:8361/v1/meta.json`.
 
 Per-table targets (replace `<type>` with `resistors_smt`, `capacitors_smt`, …):
 

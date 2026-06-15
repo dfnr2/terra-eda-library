@@ -664,6 +664,62 @@ _DIODES_DBL = {
 }
 
 
+# --------------------------------------------------------------------------- #
+# Hot reload + /v1/meta.json
+# --------------------------------------------------------------------------- #
+
+def test_server_hot_reloads_on_db_change(tmp_path):
+    # A rebuild (here: an appended row + an mtime bump) is picked up without
+    # restarting the server.
+    import os
+
+    db = _make_db(tmp_path / "terra.db", BJT_ROWS)
+    dbl = tmp_path / "terra.kicad_dbl"
+    dbl.write_text(json.dumps(_dbl_spec()))
+    client = TestClient(create_app(str(db), str(dbl)))
+
+    before = {p["id"] for p in client.get("/v1/parts/category/bjt.json").json()}
+    assert part_id("NEW-BJT-9999") not in before
+
+    conn = sqlite3.connect(str(db))
+    conn.execute(
+        "INSERT INTO bjt (unique_id, mpn, value, kicad_symbol, kicad_footprint, tier)"
+        " VALUES ('NEW-BJT-9999', 'NEWPART', 'v', 'Lib:S', 'Lib:F', 0)"
+    )
+    conn.commit()
+    conn.close()
+    st = os.stat(db)
+    os.utime(db, (st.st_atime + 10, st.st_mtime + 10))  # guarantee mtime change
+
+    after = {p["id"] for p in client.get("/v1/parts/category/bjt.json").json()}
+    assert part_id("NEW-BJT-9999") in after
+
+
+def test_meta_endpoint_returns_terra_meta(tmp_path):
+    db = _make_db(tmp_path / "terra.db", BJT_ROWS)
+    conn = sqlite3.connect(str(db))
+    conn.execute("CREATE TABLE terra_meta (key TEXT PRIMARY KEY, value TEXT)")
+    conn.executemany(
+        "INSERT INTO terra_meta VALUES (?, ?)",
+        [("version", "v1.2.3"), ("git_commit", "abc123"), ("built_at", "2026-06-15T00:00:00Z")],
+    )
+    conn.commit()
+    conn.close()
+    dbl = tmp_path / "terra.kicad_dbl"
+    dbl.write_text(json.dumps(_dbl_spec()))
+    client = TestClient(create_app(str(db), str(dbl)))
+
+    meta = client.get("/v1/meta.json").json()
+    assert meta["version"] == "v1.2.3"
+    assert meta["git_commit"] == "abc123"
+    assert meta["built_at"] == "2026-06-15T00:00:00Z"
+
+
+def test_meta_endpoint_empty_when_absent(client):
+    # The bjt fixture DB has no terra_meta table -> empty object, not a 500.
+    assert client.get("/v1/meta.json").json() == {}
+
+
 def test_load_spec_desc_col_is_description(tmp_path):
     dbl = tmp_path / "diodes.kicad_dbl"
     dbl.write_text(json.dumps(_DIODES_DBL))

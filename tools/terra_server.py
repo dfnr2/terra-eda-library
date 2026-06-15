@@ -160,17 +160,70 @@ def serialize_part(row, spec, pid: str) -> dict:
     }
 
 
+def read_meta(conn: sqlite3.Connection) -> dict:
+    """Return the terra_meta key/value table as a dict; {} if it is absent.
+
+    terra_meta is stamped into db/terra.db by the build (tools/stamp_meta.py);
+    fixtures and older databases may not have it, so a missing table is not an
+    error.
+    """
+    try:
+        return {k: v for k, v in conn.execute("SELECT key, value FROM terra_meta")}
+    except sqlite3.OperationalError:
+        return {}
+
+
 def create_app(db_path: str, dbl_path: str, tier: int = 2):
-    """Build and return the FastAPI app serving the KiCad HTTP library API."""
+    """Build and return the FastAPI app serving the KiCad HTTP library API.
+
+    The database and ``terra.kicad_dbl`` are re-read whenever either file's mtime
+    changes, so a rebuild is picked up without restarting the server (dev hot
+    reload). This is portable — plain ``os.path.getmtime`` polling, no systemd or
+    inotify dependency — so it works the same on Windows.
+    """
+    import os
+    import threading
+    from contextlib import contextmanager
+
     from fastapi import FastAPI, HTTPException
 
-    conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True, check_same_thread=False)
-    conn.row_factory = sqlite3.Row
+    lock = threading.Lock()
+    box: dict = {"state": None}
 
-    specs = load_spec(dbl_path)
-    id_map = build_id_map(conn, specs)
-    assert_unique_names(conn, specs)
-    specs_by_category = {spec["category_id"]: spec for spec in specs}
+    def _signature():
+        return (os.path.getmtime(db_path), os.path.getmtime(dbl_path))
+
+    def _build_state():
+        conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True, check_same_thread=False)
+        conn.row_factory = sqlite3.Row
+        specs = load_spec(dbl_path)
+        id_map = build_id_map(conn, specs)
+        assert_unique_names(conn, specs)
+        return {
+            "conn": conn,
+            "specs": specs,
+            "id_map": id_map,
+            "by_category": {spec["category_id"]: spec for spec in specs},
+            "meta": read_meta(conn),
+            "sig": _signature(),
+        }
+
+    @contextmanager
+    def session():
+        # Hold the lock for the whole (tiny, single-user) request: serializing
+        # lets us safely close a superseded connection when a rebuild is detected.
+        with lock:
+            cur = box["state"]
+            if cur is None or cur["sig"] != _signature():
+                new = _build_state()
+                if cur is not None:
+                    cur["conn"].close()
+                box["state"] = new
+                cur = new
+            yield cur
+
+    # Build eagerly so a bad DB/spec fails fast at startup (not on first request).
+    box["state"] = _build_state()
 
     app = FastAPI()
 
@@ -179,48 +232,56 @@ def create_app(db_path: str, dbl_path: str, tier: int = 2):
         # Both values must be non-empty strings; KiCad checks !.empty().
         return {"categories": "v1/categories.json", "parts": "v1/parts"}
 
+    @app.get("/v1/meta.json")
+    def meta():
+        with session() as st:
+            return st["meta"]
+
     @app.get("/v1/categories.json")
     def categories():
-        return [
-            {"id": spec["category_id"], "name": spec["name"], "description": ""}
-            for spec in specs
-        ]
+        with session() as st:
+            return [
+                {"id": spec["category_id"], "name": spec["name"], "description": ""}
+                for spec in st["specs"]
+            ]
 
     @app.get("/v1/parts/category/{category}.json")
     def parts_in_category(category: str):
-        spec = specs_by_category.get(category)
-        if spec is None:
-            raise HTTPException(status_code=404, detail="category not found")
-        # The tier cutoff applies only here, when listing a category's parts.
-        rows = conn.execute(
-            f"SELECT * FROM {spec['base_table']} WHERE tier <= ?", (tier,)
-        )
-        result = []
-        for row in rows:
-            uid = row[spec["key"]]
-            pid = part_id(uid)
-            entry = {"id": pid, "name": part_name(uid)}
-            if spec["desc_col"]:
-                desc = row[spec["desc_col"]]
-                if desc:
-                    entry["description"] = str(desc)
-            result.append(entry)
-        return result
+        with session() as st:
+            spec = st["by_category"].get(category)
+            if spec is None:
+                raise HTTPException(status_code=404, detail="category not found")
+            # The tier cutoff applies only here, when listing a category's parts.
+            rows = st["conn"].execute(
+                f"SELECT * FROM {spec['base_table']} WHERE tier <= ?", (tier,)
+            )
+            result = []
+            for row in rows:
+                uid = row[spec["key"]]
+                pid = part_id(uid)
+                entry = {"id": pid, "name": part_name(uid)}
+                if spec["desc_col"]:
+                    desc = row[spec["desc_col"]]
+                    if desc:
+                        entry["description"] = str(desc)
+                result.append(entry)
+            return result
 
     @app.get("/v1/parts/{pid}.json")
     def part_detail(pid: str):
-        entry = id_map.get(pid)
-        if entry is None:
-            raise HTTPException(status_code=404, detail="part not found")
-        table, uid = entry
-        spec = specs_by_category[table]
-        # Tier-agnostic: any known part id resolves regardless of tier.
-        row = conn.execute(
-            f"SELECT * FROM {table} WHERE {spec['key']} = ?", (uid,)
-        ).fetchone()
-        if row is None:
-            raise HTTPException(status_code=404, detail="part not found")
-        return serialize_part(row, spec, pid)
+        with session() as st:
+            entry = st["id_map"].get(pid)
+            if entry is None:
+                raise HTTPException(status_code=404, detail="part not found")
+            table, uid = entry
+            spec = st["by_category"][table]
+            # Tier-agnostic: any known part id resolves regardless of tier.
+            row = st["conn"].execute(
+                f"SELECT * FROM {table} WHERE {spec['key']} = ?", (uid,)
+            ).fetchone()
+            if row is None:
+                raise HTTPException(status_code=404, detail="part not found")
+            return serialize_part(row, spec, pid)
 
     return app
 

@@ -259,6 +259,8 @@ db/terra.db: $(GLOBAL_SQL) $(foreach table,$(TABLES),$($(table)_ALL_SQL))
 	done
 	@tag_count=$$(sqlite3 $@ "SELECT COUNT(*) FROM tags" 2>/dev/null || echo "0"); \
 	echo "  Tags: $$tag_count entries"
+	@echo "  Stamping build metadata (terra_meta)..."
+	@$(PYTHON) tools/stamp_meta.py --db $@
 	@echo "+ Built $@ with $(words $(TABLES)) tables"
 
 # ============================================================================

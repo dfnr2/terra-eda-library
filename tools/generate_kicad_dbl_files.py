@@ -25,6 +25,7 @@ def get_all_tables(conn: sqlite3.Connection) -> List[str]:
     """Get all part tables (excluding infrastructure and sqlite_ tables)."""
     skip_tables = {
         'tags', 'user_tags', 'terra_tier_config', 'terra_tag_config',
+        'terra_meta',
     }
     cursor = conn.cursor()
     cursor.execute("""
