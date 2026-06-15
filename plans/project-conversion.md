@@ -25,7 +25,18 @@ repo; commit only if it outlives the work.
         session (harvest generators, new types, footprint+symbol migration, CERN deletes,
         verified tier-A). The `terra_harvest` *automation* is moot for these boards; build it
         only if future boards warrant it.
-      - **4b (schematic rewrite, `terra_rewrite.py`): core built (`d6aca54`).** Pin-preserving
+      - **4b WRITE STEP IS BLOCKED HEADLESSLY (2026-06-14).** Proven via the gold-check loop:
+        instance edits (lib_id/at/mirror) load fine, but **kicad-cli rejects any schematic with
+        a hand-added `lib_symbols` symbol** — even a minimal/valid/cloned one (structurally
+        valid s-expr; error hidden). Without an embedded symbol, headless kicad-cli can't
+        resolve the terra symbol, so connectivity breaks. The KiCad IPC API (kipy) is no help:
+        no headless server (needs a running GUI) and its schematic module is broken in this
+        version (no `get_schematic`); `pcbnew` is PCB-only. So an automated headless rewrite is
+        not achievable with current KiCad tooling. The realistic path is KiCad-GUI-native:
+        use **Tools -> Change Symbols / DB-library re-link** driven by the dry-run plan, then
+        `kicad-cli` netlist connectivity as the after-check. The transform/dry-run engine
+        (below) produces exactly that plan.
+      - **4b core built (`d6aca54`).** Pin-preserving
         transform (`parse_pins` + `find_transform`) done + tested (6 tests), validated on real
         symbols. Invariant agreed: connectivity unchanged = per-net (ref, pin-number) membership
         identical (value/footprint/MPN change by design). NEXT increment: apply stage (instance
