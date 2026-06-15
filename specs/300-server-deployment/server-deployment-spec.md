@@ -1,18 +1,21 @@
 # Stage — Server deployment & stable asset storage
 
-**Status:** Design for implementation. Today `make serve` runs `terra_server.py` in the
-foreground from the repo working dir (port 8361). This spec adds: (1) running the server as
-a systemd service or login item, (2) an install/register step, and (3+4) a stable-asset story
-for datasheets and 3D STEP models. Maintainer-on-Linux scope; a no-toolchain Windows
-distributable is explicitly out of scope (see end).
+**Status:** Design for implementation. Today `make serve` runs `terra_server.py`
+in the foreground from the repo working dir (port 8361). This spec adds: (1)
+running the server as a systemd service or login item, (2) an install/register
+step, and (3+4) a stable-asset story for datasheets and 3D STEP models.
+Maintainer-on-Linux scope; a no-toolchain Windows distributable is explicitly
+out of scope (see end).
 
 ## Goal
 
-Make the terra library usable without babysitting `make serve`, and give its big binary
-assets (datasheet PDFs, STEP models) **stable references that don't depend on the local
-server and don't bloat the git clone**. Driving constraint: **a schematic shared on GitHub
-is self-sufficient** — a part's `datasheet` URL must resolve for anyone, with no terra server
-running and no local install.
+Make the terra library usable without babysitting `make serve`, and give its big
+binary assets (datasheet PDFs, STEP models) stable references that don't depend
+on the local server and don't bloat the git clone.
+
+Driving constraint: **a schematic shared on GitHub is self-sufficient**. A
+part's `datasheet` URL must resolve for anyone, with no terra server running and
+no local install.
 
 ---
 
@@ -20,16 +23,18 @@ running and no local install.
 
 A generated systemd unit plus an install target with two modes:
 
-- **Login item** — `systemd --user` unit at `~/.config/systemd/user/terra-eda.service`,
-  enabled with `systemctl --user enable --now terra-eda`. Runs as the user, no sudo. Use
-  `loginctl enable-linger <user>` to keep it up without an active login session.
+- **Login item** — `systemd --user` unit at
+  `~/.config/systemd/user/terra-eda.service`, enabled with `systemctl --user
+  enable --now terra-eda`. Runs as the user, no sudo. Use `loginctl
+  enable-linger <user>` to keep it up without an active login session.
 - **Managed service** — system unit at `/etc/systemd/system/terra-eda.service` (sudo),
   with `User=<you>`. Starts at boot regardless of login.
 
-The unit is **generated** (absolute repo path, port, and tier baked in at install time), not
-committed as-is. For now `ExecStart` is `uv run python tools/terra_server.py --db db/terra.db
---dbl terra.kicad_dbl --tier 2` with `WorkingDirectory=<repo>`; this is the one place a future
-frozen binary swaps in. Restart policy `Restart=on-failure`.
+The unit is **generated** (absolute repo path, port, and tier baked in at
+install time), not committed as-is. For now `ExecStart` is `uv run python
+tools/terra_server.py --db db/terra.db --dbl terra.kicad_dbl --tier 2` with
+`WorkingDirectory=<repo>`; this is the one place a future frozen binary swaps
+in. Restart policy `Restart=on-failure`.
 
 Targets:
 - `make install-service MODE=user|system` — render the unit from a template, install it,
@@ -105,12 +110,33 @@ STEP models leave the default git clone (they bloat it for everyone, including n
 - **Reversibility:** every target is idempotent; service install/uninstall is symmetric;
   asset moves are reviewable git changes + reversible release operations.
 
-## Out of scope (for now)
+## Future — full distributable (roadmap, not this build)
 
-- **No-toolchain Windows distributable** — freezing `terra_server` into a standalone binary
-  and building cross-platform installers. Bigger gaps to fill first; revisit once the library
-  stabilizes. The service `ExecStart` indirection (section 1) is the single seam where the
-  frozen binary will later replace `uv run python`.
-- **CDN** — the `ASSET_BASE` indirection (section 3) is the seam; GitHub Releases first.
-- **macOS launchd** — login-item/service equivalents are launchd LaunchAgent/LaunchDaemon;
+Sections 1–2 serve the maintainer (Linux + toolchain). The destination is a no-toolchain
+distributable for colleagues on Windows. The seams above (service `ExecStart`, `ASSET_BASE`)
+are deliberately the only places this roadmap changes. Target pieces, all CI-driven:
+
+1. **Cross-platform executable** — freeze `terra_server` into a standalone binary
+   (PyInstaller/Nuitka) per OS, built in **CI** (a Windows runner; or Linux + wine for the
+   Windows target). This replaces `uv run python` in the service `ExecStart` (section 1) and
+   removes the python/uv/make dependency for end users.
+2. **Database in CI** — generate `terra.db` in CI from the scripts, zip it, and publish as a
+   **release asset** (so users get the built DB without running `make`). The build is already
+   deterministic from the generator scripts.
+3. **PDFs as independently-managed release assets** — datasheets published separately from the
+   code/DB. **Source-of-truth ladder:** maintainer's machine → GitHub Release (the §3
+   `ASSET_BASE`) → CDN once stable. Same `ASSET_BASE` indirection carries through.
+4. **3D models, same pattern — only if they grow.** Bundle + publish like §4, but **lower
+   priority/urgency than PDFs**: most parts use standard KiCad footprints (which reference
+   KiCad's *shipped* 3D models), so terra only bundles STEP for its *custom* footprints. The
+   custom-footprint count grows far slower than the part/PDF count, so the 3D bundle stays
+   small for a long time.
+
+**Asset SoT ladder (general):** local machine → GitHub Release → CDN — applied independently
+to the DB, PDFs, and 3D bundle as each stabilizes.
+
+## Out of scope (this build)
+
+- Everything in the roadmap above (executable freeze, CI DB/PDF/3D publishing, CDN).
+- **macOS launchd** — the login-item/service equivalents are launchd LaunchAgent/LaunchDaemon;
   the install logic generalizes but isn't built now (this box is Linux/systemd).
