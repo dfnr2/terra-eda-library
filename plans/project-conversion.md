@@ -1,5 +1,14 @@
 # Project conversion to terra — working plan
 
+> **ADOPTION PIVOT 2026-06-14: retrofit of existing boards is SHELVED.** New approach —
+> use terra for NEW designs (place fully-qualified terra parts from the start via the HTTP
+> library + KiCad Change-Symbols); keep legacy libs (nema/hotwire) for old boards. Stage-4b
+> (schematic rewrite) abandoned: headless schematic editing is infeasible (kicad-cli rejects
+> hand-added lib_symbols; KiCad IPC API has no schematic support; in-place swaps move pins).
+> What this plan delivered and KEEPS: the harvest/catalog (parts, migrated symbols/footprints,
+> central `datasheets/`) and `terra_convert.py` as a read-only coverage/gap analyzer. The
+> abc4-spiro-cart conversion experiment can be reverted to legacy. The rest below is history.
+
 Converting existing KiCad projects to terra parts with `tools/terra_convert.py`.
 First target: `abc4-spiro-hw/mainboard`. Working/disposable plan — visible in the
 repo; commit only if it outlives the work.
