@@ -439,3 +439,24 @@ help:
 	@echo "  5. Commit"
 
 .PHONY: all sync schema dump verify clean distclean status help project-db normalize-footprints
+
+# --- Deployment: service / login item + KiCad registration ---
+MODE ?= user
+PORT ?= 8361
+TIER ?= 2
+
+.PHONY: install install-service uninstall-service service-status register-kicad
+install: all register-kicad install-service
+	@echo "Installed: KiCad registered + terra-eda service ($(MODE) mode)."
+
+register-kicad: $(VENV_MARKER)
+	@$(PYTHON) tools/register_kicad.py
+
+install-service: $(VENV_MARKER)
+	@$(PYTHON) tools/install_service.py install --mode $(MODE) --port $(PORT) --tier $(TIER)
+
+uninstall-service: $(VENV_MARKER)
+	@$(PYTHON) tools/install_service.py uninstall --mode $(MODE)
+
+service-status:
+	@$(PYTHON) tools/install_service.py status --mode $(MODE)
