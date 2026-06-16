@@ -104,6 +104,14 @@ def create_field_config(column: str) -> Dict:
     }
 
 
+# KiCad chooser labels for tables whose slug reads poorly as a category name.
+# Unlisted tables fall back to the raw table name (the prevailing convention).
+CATEGORY_DISPLAY_NAMES = {
+    'optoelectronics_led': 'Optoelectronics - LED',
+    'optoelectronics_sensor': 'Optoelectronics - Sensor',
+}
+
+
 def create_library_config(conn: sqlite3.Connection, table_name: str) -> Dict:
     """Create library configuration for a specific table."""
     # Get all columns
@@ -138,7 +146,7 @@ def create_library_config(conn: sqlite3.Connection, table_name: str) -> Dict:
     view_name = f'{table_name}_v'
 
     config = {
-        'name': table_name,
+        'name': CATEGORY_DISPLAY_NAMES.get(table_name, table_name),
         'table': view_name,
         'key': pk_col,
         'symbols': 'kicad_symbol',

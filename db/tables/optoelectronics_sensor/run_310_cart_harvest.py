@@ -11,7 +11,7 @@ Generated output (dump_priority=0, source=NULL) is not dumped to static SQL.
 """
 from pathlib import Path
 
-OUTPUT_FILE = Path(__file__).with_name("optoelectronics_sensors_generated_310_cart_harvest.sql")
+OUTPUT_FILE = Path(__file__).with_name("optoelectronics_sensor_generated_310_cart_harvest.sql")
 CREATED_BY = Path(__file__).name
 
 COLS = [
@@ -64,7 +64,7 @@ def main():
     ]
     for p in PARTS:
         vals = ", ".join(sql(p.get(c)) for c in COLS)
-        lines.append(f"INSERT INTO optoelectronics_sensors ({', '.join(COLS)}) VALUES ({vals});")
+        lines.append(f"INSERT INTO optoelectronics_sensor ({', '.join(COLS)}) VALUES ({vals});")
     lines += ["", "COMMIT;", ""]
     OUTPUT_FILE.write_text("\n".join(lines))
     print(f"Generated {OUTPUT_FILE.name}: {len(PARTS)} parts")

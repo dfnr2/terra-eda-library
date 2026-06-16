@@ -1,4 +1,4 @@
-CREATE TABLE leds (
+CREATE TABLE optoelectronics_sensor (
     unique_id TEXT PRIMARY KEY,
     part_locator TEXT,
     mpn TEXT NOT NULL,
@@ -40,10 +40,11 @@ CREATE TABLE leds (
     temp_storage_min REAL,
     temp_storage_max REAL,
     temp_soldering REAL,
-    color TEXT,
-    wavelength_nm TEXT,
-    forward_voltage_v TEXT,
-    current_max_ma TEXT,
-    luminous_intensity TEXT,
-    viewing_angle TEXT
+    sensor_type TEXT,           -- 'reflective' | 'transmissive' | 'ambient-light' | 'proximity',
+    output_device TEXT,         -- 'phototransistor' | 'photodiode' | 'photo-IC' | 'analog' | 'digital',
+    emitter_type TEXT,          -- 'IR LED' | 'visible LED' | ...,
+    peak_wavelength_nm REAL,    -- emitter peak emission wavelength,
+    sensing_distance TEXT,      -- optimal sensing range,
+    forward_current_ma REAL,    -- emitter forward current (max),
+    collector_current_ma REAL   -- detector collector current (max)
 );

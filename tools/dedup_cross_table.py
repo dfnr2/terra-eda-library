@@ -14,7 +14,7 @@ from collections.abc import Iterable
 RESOLUTIONS: dict[str, str] = {
     "3M-P50E-100P1-SR1-EA": "cern_3m",
     "MURATA POWER SOLUTIONS-OKI-78SR-3.3/1.5-W36H-C": "cern_regulators",
-    "Broadcom-ASMT-SWB5-NW703": "leds",
+    "Broadcom-ASMT-SWB5-NW703": "optoelectronics_led",
     "NXP SEMICONDUCTORS-SC18IM700IPW": "cern_analog_interface",
     "SAMTEC-CES-110-01-T-S": "cern_samtec",
     # CERN lists this relay socket in both its Relays and Sockets libraries;
