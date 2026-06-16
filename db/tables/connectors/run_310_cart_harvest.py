@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Harvest curated connectors from the abc4-spiro-cart cartridge board into terra.
 
-All four carry custom footprints migrated into the terra-connectors footprint lib;
-symbols use standard KiCad Connector_Generic symbols. The Tag-Connect TC2030 is a
-legless PCB footprint for the TC2030-IDC programming cable (the schematic symbol has
-no MPN; assigned TC2030-IDC-NL here).
+Most carry custom footprints migrated into the terra-connectors footprint lib and use
+standard KiCad Connector_Generic symbols. The Tag-Connect TC2030 ARM SWD is split into
+three footprint-only parts that share one custom symbol: legs and no-legs front-side
+placements (stock KiCad Connector footprints) and a hole-free reverse-pair back-side
+placement (terra custom footprint reusing the front placement's holes).
 
 Generated output (dump_priority=0, source=NULL) is not dumped to static SQL.
 """
@@ -24,25 +25,52 @@ COLS = [
 ]
 
 PARTS = [
-    {
-        # Footprint-only: the PCB side has no placed component -- the footprint IS the
-        # part and the symbol is the footprint. No orderable board MPN; excluded from
-        # the BOM. The Tag-Connect cable variants live in the mating field.
-        # mpn is the footprint/interface identity (NOT a cable PN); core mpn is NOT NULL.
-        "unique_id": "Tag-Connect-TC2030", "mpn": "TC2030",
-        "manufacturer": "Tag-Connect", "value": "TC2030",
-        "description": "Tag-Connect ARM Cortex SWD JTAG connector, 6 pin No holes for secondary back-side placement.",
-        "datasheet": "https://www.tag-connect.com/wp-content/uploads/bsk-pdf-manager/TC2030-CTX_1.pdf",
-        "kicad_symbol": "terra-connectors:Tag-Connect_TC2030_ARM_SWD_no_holes",
-        "kicad_footprint": "terra-connectors:Tag-Connect_TC2030-IDC_2x03_P1.27mm_Vertical",
-        "connector_category": "programming", "connector_family": "Tag-Connect TC2030 ARM SWD",
-        "connector_series": "TC2030", "connector_type": "footprint",
-        "positions": 6, "rows": 2, "pitch_mm": 1.27, "orientation": "vertical",
-        "termination_type": "SMT", "gender": None, "signal_type": "signal",
-        "mates_with": "TC2030-IDC-NL (no-legs cable, for this no-holes footprint); TC2030-IDC (legged cable) needs the holed footprint variant",
-        "exclude_from_bom": 1, "bom_comment": "footprint only -- no placed component",
-        "pin_count": "6", "tags": "connector,programming,debug,arm,swd,jtag,cortex",
-    },
+    # Footprint-only: the PCB side has no placed component -- the footprint IS the
+    # part and the symbol is the footprint. No orderable board MPN; excluded from the
+    # BOM. mpn is the footprint/interface identity (NOT a cable PN); core mpn is NOT NULL.
+    # Three TC2030 ARM SWD parts share one symbol, differ only by footprint:
+    #   legs / no-legs front-side (stock KiCad), and the hole-free reverse-pair back-side
+    #   (terra custom -- reuses the front placement's alignment/leg holes).
+    *[
+        {
+            "unique_id": f"Tag-Connect-TC2030-{v['suffix']}", "mpn": "TC2030",
+            "manufacturer": "Tag-Connect", "value": "TC2030",
+            "description": v["description"],
+            "datasheet": "https://www.tag-connect.com/wp-content/uploads/bsk-pdf-manager/TC2030-CTX_1.pdf",
+            "kicad_symbol": "terra-connectors:Tag-Connect_TC2030_ARM_SWD",
+            "kicad_footprint": v["kicad_footprint"],
+            "connector_category": "programming", "connector_family": "Tag-Connect TC2030 ARM SWD",
+            "connector_series": "TC2030", "connector_type": "footprint",
+            "positions": 6, "rows": 2, "pitch_mm": 1.27, "orientation": "vertical",
+            "termination_type": v["termination_type"], "gender": None, "signal_type": "signal",
+            "mates_with": v["mates_with"],
+            "exclude_from_bom": 1, "bom_comment": "footprint only -- no placed component",
+            "pin_count": "6", "tags": "connector,programming,debug,arm,swd,jtag,cortex",
+        }
+        for v in [
+            {
+                "suffix": "legs",
+                "description": "Tag-Connect TC2030 ARM Cortex SWD/JTAG, 6-pin front-side footprint with legs (drilled alignment + leg holes).",
+                "kicad_footprint": "Connector:Tag-Connect_TC2030-IDC-FP_2x03_P1.27mm_Vertical",
+                "termination_type": "Through Hole",
+                "mates_with": "TC2030-IDC (legged programming cable)",
+            },
+            {
+                "suffix": "no-legs",
+                "description": "Tag-Connect TC2030 ARM Cortex SWD/JTAG, 6-pin front-side footprint, no legs (alignment holes only).",
+                "kicad_footprint": "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical",
+                "termination_type": "Through Hole",
+                "mates_with": "TC2030-IDC-NL (no-legs programming cable)",
+            },
+            {
+                "suffix": "backside",
+                "description": "Tag-Connect TC2030 ARM Cortex SWD/JTAG, 6-pin reverse-paired back-side footprint: hole-free, reuses the front-side connector's alignment/leg holes.",
+                "kicad_footprint": "terra-connectors:Tag-Connect_TC2030_BackSide_NoHoles_2x03_P1.27mm_Vertical",
+                "termination_type": "SMT",
+                "mates_with": "Pairs with a front-side TC2030 (legs or no-legs); shares its alignment/leg holes",
+            },
+        ]
+    ],
     {
         "mpn": "532540470", "manufacturer": "Molex", "value": "connector",
         "description": "Molex Micro-Latch 53254-0470 1x4 2.00mm right-angle header, through-hole",

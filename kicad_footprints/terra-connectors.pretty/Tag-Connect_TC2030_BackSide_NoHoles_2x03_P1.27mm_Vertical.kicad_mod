@@ -1,9 +1,9 @@
-(footprint "Tag-Connect_TC2030-IDC-NO-HOLESL_2x03_P1.27mm_Vertical"
+(footprint "Tag-Connect_TC2030_BackSide_NoHoles_2x03_P1.27mm_Vertical"
 	(version 20240108)
 	(generator "pcbnew")
 	(generator_version "8.0")
 	(layer "F.Cu")
-	(descr "Tag-Connect programming header no holes, for superposition; http://www.tag-connect.com/Materials/TC2030-IDC-NL.pdf")
+	(descr "Tag-Connect TC2030 ARM SWD, reverse-paired back-side placement: hole-free, reuses the front-side connector's alignment/leg holes. http://www.tag-connect.com/Materials/TC2030-IDC-NL.pdf")
 	(tags "tag connect programming header pogo pins")
 	(property "Reference" "REF**"
 		(at 0 2.7 0)
@@ -16,7 +16,7 @@
 			)
 		)
 	)
-	(property "Value" "Tag-Connect_TC2030-IDC-No-Holes_2x03_P1.27mm_Vertical"
+	(property "Value" "Tag-Connect_TC2030_BackSide_NoHoles_2x03_P1.27mm_Vertical"
 		(at 0 -2.3 0)
 		(layer "F.Fab")
 		(uuid "9b218149-ded9-4af9-94db-b0a7aba25e7f")
