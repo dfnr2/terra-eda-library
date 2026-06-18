@@ -23,6 +23,7 @@
   (lib (name "cern-transistors")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/cern-transistors.kicad_sym")(options "")(descr ""))
   (lib (name "terra-connectors")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra-connectors.kicad_sym")(options "")(descr ""))
   (lib (name "terra-diodes")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra-diodes.kicad_sym")(options "")(descr ""))
+  (lib (name "terra-led-drivers")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra-led-drivers.kicad_sym")(options "")(descr ""))
   (lib (name "terra-optoelectronics")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra-optoelectronics.kicad_sym")(options "")(descr ""))
   (lib (name "terra_sym")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_sym.kicad_sym")(options "")(descr ""))
 )
