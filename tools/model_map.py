@@ -109,6 +109,7 @@ SMD_PACKAGE_MODEL = {
     "TSSOP48": (_SO, "TSSOP-48_6.1x12.5mm_P0.5mm.step"),
     "SSOP16": (_SO, "SSOP-16_3.9x4.9mm_P0.635mm.step"),
     "SSOP28": (_SO, "SSOP-28_5.3x10.2mm_P0.65mm.step"),
+    "SSOP48": (_SO, "SSOP-48_7.5x15.9mm_P0.635mm.step"),
     # DIP (THT); CERN <pkg>-300 == 300mil == W7.62mm
     "DIP4-300": (_DIP, "DIP-4_W7.62mm.step"),
     "DIP6-300": (_DIP, "DIP-6_W7.62mm.step"),
