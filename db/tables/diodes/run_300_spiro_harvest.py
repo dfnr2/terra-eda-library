@@ -19,7 +19,7 @@ COLS = [
     "unique_id", "part_locator", "mpn", "manufacturer", "package", "value",
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "rohs", "allow_substitution", "tracking",
-    "source", "dump_priority", "tier", "tags", "pin_count",
+    "source", "dump_priority", "tier", "keywords", "pin_count",
     "diode_type", "voltage_rating", "power_rating",
 ]
 
@@ -34,7 +34,7 @@ PARTS = [
         "kicad_footprint": "Diode_SMD:D_SOD-523",
         "pin_count": "2", "diode_type": "tvs",
         "voltage_rating": "5V", "power_rating": None,
-        "tags": "tvs,esd,protection",
+        "keywords": "tvs,esd,protection",
     },
     {
         "mpn": "SMF18A", "manufacturer": "Littelfuse",
@@ -46,7 +46,7 @@ PARTS = [
         "kicad_footprint": "Diode_SMD:D_SOD-123F",
         "pin_count": "2", "diode_type": "tvs",
         "voltage_rating": "18V", "power_rating": "200W",
-        "tags": "tvs,protection",
+        "keywords": "tvs,protection",
     },
     {
         "mpn": "SMF6.0A", "manufacturer": "Littelfuse",
@@ -58,7 +58,7 @@ PARTS = [
         "kicad_footprint": "Diode_SMD:D_SOD-123F",
         "pin_count": "2", "diode_type": "tvs",
         "voltage_rating": "6V", "power_rating": "200W",
-        "tags": "tvs,protection",
+        "keywords": "tvs,protection",
     },
     {
         "mpn": "SM712-02HTG", "manufacturer": "Littelfuse",
@@ -70,7 +70,7 @@ PARTS = [
         "kicad_footprint": "terra-diodes:SM71202HTG",
         "pin_count": "3", "diode_type": "tvs",
         "voltage_rating": "12V", "power_rating": None,
-        "tags": "tvs,array,rs-485,protection",
+        "keywords": "tvs,array,rs-485,protection",
     },
 ]
 
@@ -98,7 +98,7 @@ def row(p):
         "manufacturer_link": p["manufacturer_link"],
         "kicad_symbol": p["kicad_symbol"], "kicad_footprint": p["kicad_footprint"],
         "rohs": "Yes", "allow_substitution": "No", "tracking": "No",
-        "source": None, "dump_priority": 0, "tier": 2, "tags": p["tags"],
+        "source": None, "dump_priority": 0, "tier": 2, "keywords": p["keywords"],
         "pin_count": p["pin_count"], "diode_type": p["diode_type"],
         "voltage_rating": p["voltage_rating"], "power_rating": p["power_rating"],
     }

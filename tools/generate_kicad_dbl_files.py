@@ -61,7 +61,8 @@ def create_field_config(column: str) -> Dict:
         'sim_model_type', 'sim_device', 'sim_pins', 'sim_model_file', 'sim_params',  # SPICE internals
         'source', 'dump_priority',  # Internal dump system metadata
         'exclude_from_bom',  # Handled as library-level property
-        'tier', 'tags',  # Tier/tag system internals
+        'tier',  # tier scoping internal
+        'keywords',  # surfaced as the Keywords library property, not a field
     }
 
     if column in skip_cols:
@@ -139,6 +140,11 @@ def create_library_config(conn: sqlite3.Connection, table_name: str) -> Dict:
     properties = {}
     if 'description' in columns:
         properties['description'] = 'description'
+    # Surface the `keywords` column as KiCad's searchable Keywords so catalog
+    # terms (e.g. "zener") are findable in the symbol chooser. This is distinct
+    # from the categorical `tags` table, which drives tier/tag library scoping.
+    if 'keywords' in columns:
+        properties['keywords'] = 'keywords'
     if 'exclude_from_bom' in columns:
         properties['exclude_from_bom'] = 'exclude_from_bom'
 

@@ -26,7 +26,7 @@ CREATE TABLE resistors_smt (
     source TEXT DEFAULT 'static',
     dump_priority INTEGER DEFAULT 1,
     tier INTEGER DEFAULT 2,
-    tags TEXT DEFAULT '',
+    keywords TEXT DEFAULT '',
     sim_model_type TEXT,
     sim_device TEXT,
     sim_pins TEXT,

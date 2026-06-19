@@ -192,8 +192,8 @@ SQL_TEMPLATES = {
 BEGIN TRANSACTION;
 """,
     "section_header": "-- {dielectric} {package} {voltage}",
-    "insert": """INSERT INTO capacitors_smt (unique_id, part_locator, mpn, manufacturer, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tier, tags, voltage_rating_v, tolerance, cap_type, dielectric_class, polarized, temp_operating_min, temp_operating_max, temp_storage_min, temp_storage_max, temp_soldering, lifecycle_status, rohs, allow_substitution, tracking, created_at, updated_at, created_by, height_max_mm)
-VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', '{package}', '{value_spice}', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, {tier}, '{tags}', {voltage_rating}, '{tolerance}', '{cap_type}', '{dielectric_class}', '{polarized}', {temp_operating_min}, {temp_operating_max}, {temp_storage_min}, {temp_storage_max}, {temp_soldering}, '{lifecycle_status}', '{rohs}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}', {height_max_mm});""",
+    "insert": """INSERT INTO capacitors_smt (unique_id, part_locator, mpn, manufacturer, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tier, keywords, voltage_rating_v, tolerance, cap_type, dielectric_class, polarized, temp_operating_min, temp_operating_max, temp_storage_min, temp_storage_max, temp_soldering, lifecycle_status, rohs, allow_substitution, tracking, created_at, updated_at, created_by, height_max_mm)
+VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', '{package}', '{value_spice}', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, {tier}, '{keywords}', {voltage_rating}, '{tolerance}', '{cap_type}', '{dielectric_class}', '{polarized}', {temp_operating_min}, {temp_operating_max}, {temp_storage_min}, {temp_storage_max}, {temp_soldering}, '{lifecycle_status}', '{rohs}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}', {height_max_mm});""",
 
     "tag_insert": "INSERT INTO tags (unique_id, tag) VALUES ('{unique_id}', '{tag}');",
     "file_footer": """COMMIT;
@@ -773,7 +773,7 @@ def generate_capacitors(csv_rows: List[Dict[str, str]]) -> str:
             source=source_sql,
             dump_priority=DUMP_PRIORITY,
             tier=part_tier,
-            tags='passive',
+            keywords='passive',
             voltage_rating=voltage,
             tolerance=sql_escape(tolerance),
             cap_type=CAP_TYPE,

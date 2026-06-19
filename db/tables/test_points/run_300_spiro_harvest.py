@@ -12,7 +12,7 @@ COLS = [
     "unique_id", "part_locator", "mpn", "manufacturer", "value",
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "rohs", "allow_substitution", "tracking",
-    "source", "dump_priority", "tier", "tags", "pin_count",
+    "source", "dump_priority", "tier", "keywords", "pin_count",
     "tp_style", "pad_diameter_mm", "mount", "color",
 ]
 
@@ -27,7 +27,7 @@ PARTS = [
         "kicad_footprint": "terra-test-points:TestPoint_Pad_3.43x1.78mm",
         "rohs": "Yes", "allow_substitution": "No", "tracking": "No",
         "source": None, "dump_priority": 0, "tier": 2,
-        "tags": "test-point,mechanical", "pin_count": "1",
+        "keywords": "test-point,mechanical", "pin_count": "1",
         "tp_style": "smt-pad", "pad_diameter_mm": None, "mount": "SMT", "color": None,
     },
 ]

@@ -19,7 +19,7 @@ COLS = [
     "unique_id", "part_locator", "mpn", "manufacturer", "package", "value",
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "rohs", "allow_substitution", "tracking",
-    "source", "dump_priority", "tier", "tags", "pin_count",
+    "source", "dump_priority", "tier", "keywords", "pin_count",
     "voltage_rating_v", "tolerance", "cap_type", "dielectric_class", "polarized",
     "temp_operating_min", "temp_operating_max",
 ]
@@ -37,7 +37,7 @@ PARTS = [
         "kicad_footprint": "Capacitor_SMD:C_0402_1005Metric",
         "rohs": "Yes", "allow_substitution": "No", "tracking": "No",
         "source": None, "dump_priority": 0, "tier": 2,
-        "tags": "capacitor,mlcc", "pin_count": "2",
+        "keywords": "capacitor,mlcc", "pin_count": "2",
         "voltage_rating_v": 10.0, "tolerance": "10%", "cap_type": "MLCC",
         "dielectric_class": "X7R", "polarized": "No",
         "temp_operating_min": -55.0, "temp_operating_max": 125.0,

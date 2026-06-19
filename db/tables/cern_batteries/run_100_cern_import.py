@@ -34,7 +34,7 @@ INSERT_COLS = [
     "unique_id", "part_locator", "mpn", "manufacturer", "package", "value",
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "lifecycle_status", "rohs", "source", "dump_priority",
-    "tier", "tags", "created_by", "pin_count", "component_height",
+    "tier", "keywords", "created_by", "pin_count", "component_height",
     "battery_kind", "voltage",
 ]
 
@@ -104,7 +104,7 @@ def map_row(row: dict) -> dict:
         "source": "cern_import",
         "dump_priority": 0,
         "tier": 5,
-        "tags": "battery",
+        "keywords": "battery",
         "created_by": "cern_import",
         "pin_count": clean(row.get("Pin Count")),
         "component_height": clean(row.get("ComponentHeight")),

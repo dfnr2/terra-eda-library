@@ -62,8 +62,8 @@ GENERATE_CSV = False  # Set to True to also generate CSV for inspection
 # ======================== TOLERANCE CONFIGURATION ========================
 # Set to "yes" to include, anything else to exclude (case-insensitive)
 TOLERANCE_ENABLE = {
-    "1.0%": "yes",  # F - standard tolerance for RC series
-    "5.0%": "no",   # J - wider tolerance (if needed)
+    "1%": "yes",  # F - standard tolerance for RC series
+    "5%": "no",   # J - wider tolerance (if needed)
 }
 
 # ======================== PACKAGE / TEMPCO CONFIGURATION ========================
@@ -170,8 +170,8 @@ BEGIN TRANSACTION;
 
     "package_header": "-- {package} Package ({power}, {tempco}, {working_voltage} working/{max_voltage} max)",
 
-    "insert": """INSERT INTO resistors_smt (unique_id, part_locator, mpn, manufacturer, variant, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tier, tags, tolerance, power_rating, temp_coeff, voltage_rating, composition, temp_operating_min, temp_operating_max, temp_storage_min, temp_storage_max, temp_soldering, sim_device, sim_pins, lifecycle_status, rohs, rohs_document_link, allow_substitution, tracking, created_at, updated_at, created_by)
-VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', {variant}, '{package}', '{value_sim}', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, {tier}, '{tags}', '{tolerance}', '{power_rating}', '{temp_coeff}', '{voltage_rating}', '{composition}', {temp_operating_min}, {temp_operating_max}, {temp_storage_min}, {temp_storage_max}, {temp_soldering}, '{sim_device}', '{sim_pins}', '{lifecycle_status}', '{rohs}', '{rohs_link}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}');""",
+    "insert": """INSERT INTO resistors_smt (unique_id, part_locator, mpn, manufacturer, variant, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tier, keywords, tolerance, power_rating, temp_coeff, voltage_rating, composition, temp_operating_min, temp_operating_max, temp_storage_min, temp_storage_max, temp_soldering, sim_device, sim_pins, lifecycle_status, rohs, rohs_document_link, allow_substitution, tracking, created_at, updated_at, created_by)
+VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', {variant}, '{package}', '{value_sim}', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, {tier}, '{keywords}', '{tolerance}', '{power_rating}', '{temp_coeff}', '{voltage_rating}', '{composition}', {temp_operating_min}, {temp_operating_max}, {temp_storage_min}, {temp_storage_max}, {temp_soldering}, '{sim_device}', '{sim_pins}', '{lifecycle_status}', '{rohs}', '{rohs_link}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}');""",
 
     "tag_insert": "INSERT INTO tags (unique_id, tag) VALUES ('{unique_id}', '{tag}');",
 
@@ -243,7 +243,7 @@ PRODUCT_SPECS = [
         "power": "1/20W",
         "tempco": "200ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1.0%",
+        "tolerance": "1%",
         "tol_code": "F",
         "packing": "R-07",
         "min_ohm": 1.0,
@@ -263,7 +263,7 @@ PRODUCT_SPECS = [
         "power": "1/16W",
         "tempco": "100ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1.0%",
+        "tolerance": "1%",
         "tol_code": "F",
         "packing": "R-07",
         "min_ohm": 10,
@@ -282,7 +282,7 @@ PRODUCT_SPECS = [
         "power": "1/16W",
         "tempco": "200ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1.0%",
+        "tolerance": "1%",
         "tol_code": "F",
         "packing": "R-07",
         "min_ohm": 1.0,
@@ -302,7 +302,7 @@ PRODUCT_SPECS = [
         "power": "1/10W",
         "tempco": "100ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1.0%",
+        "tolerance": "1%",
         "tol_code": "F",
         "packing": "R-07",
         "min_ohm": 10,
@@ -321,7 +321,7 @@ PRODUCT_SPECS = [
         "power": "1/10W",
         "tempco": "200ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1.0%",
+        "tolerance": "1%",
         "tol_code": "F",
         "packing": "R-07",
         "min_ohm": 1.0,
@@ -341,7 +341,7 @@ PRODUCT_SPECS = [
         "power": "1/8W",
         "tempco": "100ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1.0%",
+        "tolerance": "1%",
         "tol_code": "F",
         "packing": "R-07",
         "min_ohm": 10,
@@ -360,7 +360,7 @@ PRODUCT_SPECS = [
         "power": "1/8W",
         "tempco": "200ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1.0%",
+        "tolerance": "1%",
         "tol_code": "F",
         "packing": "R-07",
         "min_ohm": 1.0,
@@ -380,7 +380,7 @@ PRODUCT_SPECS = [
         "power": "1/4W",
         "tempco": "100ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1.0%",
+        "tolerance": "1%",
         "tol_code": "F",
         "packing": "R-07",
         "min_ohm": 10,
@@ -399,7 +399,7 @@ PRODUCT_SPECS = [
         "power": "1/4W",
         "tempco": "200ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1.0%",
+        "tolerance": "1%",
         "tol_code": "F",
         "packing": "R-07",
         "min_ohm": 1.0,
@@ -419,7 +419,7 @@ PRODUCT_SPECS = [
         "power": "1W",
         "tempco": "100ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1.0%",
+        "tolerance": "1%",
         "tol_code": "F",
         "packing": "R-07",
         "min_ohm": 10,
@@ -438,7 +438,7 @@ PRODUCT_SPECS = [
         "power": "1W",
         "tempco": "200ppm",
         "tempco_code": "",  # Not used in RC MPN
-        "tolerance": "1.0%",
+        "tolerance": "1%",
         "tol_code": "F",
         "packing": "R-07",
         "min_ohm": 1.0,
@@ -460,7 +460,7 @@ def get_enabled_tolerances() -> List[str]:
     """
     Parse tolerance configuration and return enabled tolerances.
 
-    Returns list of enabled tolerance strings (e.g., ["1.0%"]).
+    Returns list of enabled tolerance strings (e.g., ["1%"]).
     """
     return [t for t, enabled in TOLERANCE_ENABLE.items() if enabled.lower() == "yes"]
 
@@ -957,7 +957,7 @@ def generate_resistors() -> str:
                 source=source_sql,
                 dump_priority=DUMP_PRIORITY,
                 tier=part_tier,
-                tags='passive',
+                keywords='passive',
                 tolerance=spec["tolerance"],
                 power_rating=spec["power"],
                 temp_coeff=spec["tempco"],

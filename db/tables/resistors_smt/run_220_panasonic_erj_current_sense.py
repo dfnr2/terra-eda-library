@@ -127,8 +127,8 @@ BEGIN TRANSACTION;
 
     "section_header": "-- === {section} ===",
 
-    "insert": """INSERT INTO resistors_smt (unique_id, part_locator, mpn, manufacturer, variant, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tier, tags, tolerance, power_rating, temp_coeff, voltage_rating, composition, temp_operating_min, temp_operating_max, temp_storage_min, temp_storage_max, temp_soldering, sim_device, sim_pins, lifecycle_status, rohs, allow_substitution, tracking, created_at, updated_at, created_by)
-VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', {variant}, '{package}', '{value_sim}', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, {tier}, '{tags}', '{tolerance}', '{power_rating}', '{temp_coeff}', '{voltage_rating}', '{composition}', {temp_operating_min}, {temp_operating_max}, {temp_storage_min}, {temp_storage_max}, {temp_soldering}, '{sim_device}', '{sim_pins}', '{lifecycle_status}', '{rohs}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}');""",
+    "insert": """INSERT INTO resistors_smt (unique_id, part_locator, mpn, manufacturer, variant, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tier, keywords, tolerance, power_rating, temp_coeff, voltage_rating, composition, temp_operating_min, temp_operating_max, temp_storage_min, temp_storage_max, temp_soldering, sim_device, sim_pins, lifecycle_status, rohs, allow_substitution, tracking, created_at, updated_at, created_by)
+VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', {variant}, '{package}', '{value_sim}', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, {tier}, '{keywords}', '{tolerance}', '{power_rating}', '{temp_coeff}', '{voltage_rating}', '{composition}', {temp_operating_min}, {temp_operating_max}, {temp_storage_min}, {temp_storage_max}, {temp_soldering}, '{sim_device}', '{sim_pins}', '{lifecycle_status}', '{rohs}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}');""",
 
     "tag_insert": "INSERT INTO tags (unique_id, tag) VALUES ('{unique_id}', '{tag}');",
 
@@ -1015,7 +1015,7 @@ def generate_resistors() -> str:
                     source=source_sql,
                     dump_priority=DUMP_PRIORITY,
                     tier=part_tier,
-                    tags="passive,current-sense",
+                    keywords="passive,current-sense",
                     tolerance=tol_str,
                     power_rating=series["power"],
                     temp_coeff=series["tcr"],

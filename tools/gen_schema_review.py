@@ -157,10 +157,10 @@ def main():
     for t in cern_tabs:
         c = set(cols(con, t))
         core = c if core is None else (core & c)
-    core -= {"tags"}
+    core -= {"keywords"}
 
     def tail(t):
-        return [c for c in cols(con, t) if c not in core and c != "tags"]
+        return [c for c in cols(con, t) if c not in core and c != "keywords"]
 
     out = ["#+TITLE: Phase 0 — Part-Type Schema Review",
            "",

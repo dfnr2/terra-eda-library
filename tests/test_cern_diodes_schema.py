@@ -11,7 +11,7 @@ EXPECTED = {
     "kicad_footprint", "altium_symbol", "altium_footprint", "lifecycle_status",
     "rohs", "rohs_document_link", "allow_substitution", "tracking",
     "standards_version", "bom_comment", "created_at", "updated_at", "created_by",
-    "source", "dump_priority", "tier", "tags", "sim_model_type", "sim_device",
+    "source", "dump_priority", "tier", "keywords", "sim_model_type", "sim_device",
     "sim_pins", "sim_model_file", "sim_params",
     "pin_count", "component_height",
     "exclude_from_bom",

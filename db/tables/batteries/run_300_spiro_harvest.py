@@ -15,7 +15,7 @@ COLS = [
     "unique_id", "part_locator", "mpn", "manufacturer", "value",
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "rohs", "allow_substitution", "tracking",
-    "source", "dump_priority", "tier", "tags",
+    "source", "dump_priority", "tier", "keywords",
     "chemistry", "nominal_voltage_v", "capacity_ah", "energy_wh",
     "rechargeable", "smart_interface", "mates_with",
 ]
@@ -30,7 +30,7 @@ PARTS = [
         "kicad_symbol": "Device:Battery", "kicad_footprint": None,
         "rohs": "Yes", "allow_substitution": "No", "tracking": "No",
         "source": None, "dump_priority": 0, "tier": 2,
-        "tags": "battery,li-ion,smart",
+        "keywords": "battery,li-ion,smart",
         "chemistry": "Li-ion", "nominal_voltage_v": 14.4, "capacity_ah": 3.4,
         "energy_wh": 49.0, "rechargeable": "yes", "smart_interface": "SMBus",
         "mates_with": "RRC-MC20-90-10",

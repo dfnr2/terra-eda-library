@@ -22,7 +22,7 @@ COLS = [
     "unique_id", "part_locator", "mpn", "manufacturer", "package", "value",
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "rohs", "allow_substitution", "tracking",
-    "source", "dump_priority", "tier", "tags", "pin_count",
+    "source", "dump_priority", "tier", "keywords", "pin_count",
     "color", "wavelength_nm", "luminous_intensity",
 ]
 
@@ -39,7 +39,7 @@ PARTS = [
         "kicad_footprint": "terra_sym:LED_0603_1608Metric",
         "rohs": "Yes", "allow_substitution": "No", "tracking": "No",
         "source": None, "dump_priority": 0, "tier": 2,
-        "tags": "led,green,optical,smd", "pin_count": "2",
+        "keywords": "led,green,optical,smd", "pin_count": "2",
         "color": "Green", "wavelength_nm": "525", "luminous_intensity": "360 mcd",
     },
 ]

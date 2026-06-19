@@ -18,7 +18,7 @@ COLS = [
     "unique_id", "part_locator", "mpn", "manufacturer", "package", "value",
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "rohs", "allow_substitution", "tracking",
-    "source", "dump_priority", "tier", "tags", "pin_count",
+    "source", "dump_priority", "tier", "keywords", "pin_count",
     "sensor_type", "output_device", "emitter_type", "peak_wavelength_nm",
     "sensing_distance", "forward_current_ma", "collector_current_ma",
 ]
@@ -36,7 +36,7 @@ PARTS = [
         "kicad_footprint": "terra-optoelectronics:OPB733TR",
         "rohs": "Yes", "allow_substitution": "No", "tracking": "No",
         "source": None, "dump_priority": 0, "tier": 2,
-        "tags": "sensor,optical,reflective", "pin_count": "4",
+        "keywords": "sensor,optical,reflective", "pin_count": "4",
         "sensor_type": "reflective", "output_device": "phototransistor",
         "emitter_type": "IR LED", "peak_wavelength_nm": 890.0,
         "sensing_distance": "0.4-1.0 in (10.2-25.4 mm)",

@@ -113,7 +113,7 @@ COLS = [
     "unique_id", "part_locator", "mpn", "manufacturer", "package", "value",
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "rohs", "allow_substitution", "tracking",
-    "source", "dump_priority", "tier", "tags", "pin_count",
+    "source", "dump_priority", "tier", "keywords", "pin_count",
     "temp_operating_min", "temp_operating_max", "temp_storage_min", "temp_storage_max",
     "impedance_at_freq", "dc_resistance", "current_rating", "tolerance",
 ]
@@ -159,7 +159,7 @@ def row(mpn, imp, typ, r85, r125, dcr):
         "kicad_symbol": SYMBOL, "kicad_footprint": FOOTPRINT,
         "rohs": "Yes", "allow_substitution": "No", "tracking": "No",
         "source": None, "dump_priority": 0, "tier": 2,
-        "tags": "ferrite,bead", "pin_count": "2",
+        "keywords": "ferrite,bead", "pin_count": "2",
         "temp_operating_min": -55.0, "temp_operating_max": 125.0,
         "temp_storage_min": -55.0, "temp_storage_max": 125.0,
         "impedance_at_freq": f"{typ}\u03a9@100MHz",

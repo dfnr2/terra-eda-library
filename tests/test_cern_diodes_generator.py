@@ -63,7 +63,7 @@ def test_map_row_known_part():
     assert m["kicad_symbol"] == "cern-diodes:Diode TVS Bi-Directional"
     assert m["kicad_footprint"] == "cern-ics-and-semiconductors-smd:EATON_0402ESDA-MLP"
     assert m["datasheet"] == "0402ESDA-MLP.pdf"
-    assert m["tags"] == "diode"
+    assert m["keywords"] == "diode"
 
 
 def test_finalize_unique_id_disambiguates_on_collision():

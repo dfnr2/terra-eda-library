@@ -12,7 +12,7 @@ COLS = [
     "unique_id", "part_locator", "mpn", "manufacturer", "package", "value",
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "rohs", "allow_substitution", "tracking",
-    "source", "dump_priority", "tier", "tags", "pin_count",
+    "source", "dump_priority", "tier", "keywords", "pin_count",
     "diode_type", "voltage_rating", "power_rating",
 ]
 
@@ -27,7 +27,7 @@ PARTS = [
         "kicad_footprint": "Diode_SMD:D_SOD-523",
         "pin_count": "2", "diode_type": "tvs",
         "voltage_rating": "18V", "power_rating": None,
-        "tags": "tvs,esd,protection",
+        "keywords": "tvs,esd,protection",
     },
 ]
 

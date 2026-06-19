@@ -18,7 +18,7 @@ COLS = [
     "unique_id", "part_locator", "mpn", "manufacturer", "package", "value",
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "rohs", "allow_substitution", "tracking",
-    "source", "dump_priority", "tier", "tags", "pin_count",
+    "source", "dump_priority", "tier", "keywords", "pin_count",
     "function_type", "channels", "resolution_bits", "interface",
     "supply_voltage_min", "supply_voltage_max",
 ]
@@ -36,7 +36,7 @@ PARTS = [
         "kicad_footprint": "Package_SO:SSOP-8_2.95x2.8mm_P0.65mm",
         "rohs": "Yes", "allow_substitution": "No", "tracking": "No",
         "source": None, "dump_priority": 0, "tier": 2,
-        "tags": "analog,level-translator,i2c", "pin_count": "8",
+        "keywords": "analog,level-translator,i2c", "pin_count": "8",
         "function_type": "I2C/SMBus level translator", "channels": 2,
         "resolution_bits": None, "interface": "I2C/SMBus",
         "supply_voltage_min": 1.0, "supply_voltage_max": 5.5,

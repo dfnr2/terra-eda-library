@@ -16,7 +16,7 @@ COLS = [
     "unique_id", "part_locator", "mpn", "manufacturer", "package", "value",
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "rohs", "allow_substitution", "tracking",
-    "source", "dump_priority", "tier", "tags", "pin_count",
+    "source", "dump_priority", "tier", "keywords", "pin_count",
     "connector_category", "connector_family", "connector_series", "connector_type",
     "positions", "rows", "pitch_mm", "orientation", "termination_type", "gender",
     "signal_type", "mates_with",
@@ -33,7 +33,7 @@ PARTS = [
         "connector_series": "15912240", "connector_type": "header",
         "positions": 24, "rows": 2, "pitch_mm": 2.54, "orientation": "vertical",
         "termination_type": "SMT", "gender": "male", "signal_type": "mixed",
-        "mates_with": None, "pin_count": "24", "tags": "connector,header",
+        "mates_with": None, "pin_count": "24", "keywords": "connector,header",
     },
     {
         "mpn": "15912040", "manufacturer": "Molex", "value": "2x2",
@@ -45,7 +45,7 @@ PARTS = [
         "connector_series": "15912040", "connector_type": "header",
         "positions": 4, "rows": 2, "pitch_mm": 2.54, "orientation": "vertical",
         "termination_type": "SMT", "gender": "male", "signal_type": "mixed",
-        "mates_with": None, "pin_count": "4", "tags": "connector,header",
+        "mates_with": None, "pin_count": "4", "keywords": "connector,header",
     },
     {
         "mpn": "DF3A-8P-2DSA", "manufacturer": "Hirose", "value": "1x8 pin connector",
@@ -57,7 +57,7 @@ PARTS = [
         "connector_series": "DF3", "connector_type": "header",
         "positions": 8, "rows": 1, "pitch_mm": 2.0, "orientation": "vertical",
         "termination_type": "Through Hole", "gender": "male", "signal_type": "signal",
-        "mates_with": None, "pin_count": "8", "tags": "connector,header",
+        "mates_with": None, "pin_count": "8", "keywords": "connector,header",
     },
     {
         "mpn": "STX-3500-3NTR", "manufacturer": "Kycon", "value": "CONN 3.5mm stereo jack SMD",
@@ -69,7 +69,7 @@ PARTS = [
         "connector_series": "STX-3500", "connector_type": "jack",
         "positions": 3, "rows": 1, "pitch_mm": None, "orientation": "right-angle",
         "termination_type": "SMT", "gender": "jack", "signal_type": "signal",
-        "mates_with": None, "pin_count": "3", "tags": "connector,audio,jack",
+        "mates_with": None, "pin_count": "3", "keywords": "connector,audio,jack",
     },
     {
         "mpn": "14-37FSV30-BD-16", "manufacturer": "Leader Tech", "value": "Chassis Ground",
@@ -81,7 +81,7 @@ PARTS = [
         "connector_series": "14-37FSV30", "connector_type": "gasket",
         "positions": 1, "rows": 1, "pitch_mm": None, "orientation": "right-angle",
         "termination_type": "SMT", "gender": None, "signal_type": "shield",
-        "mates_with": None, "pin_count": "1", "tags": "connector,emi,grounding",
+        "mates_with": None, "pin_count": "1", "keywords": "connector,emi,grounding",
     },
     {
         "mpn": "RRC-MC20-90-10", "manufacturer": "RRC Power Solutions", "value": "1x5 battery connector",
@@ -93,7 +93,7 @@ PARTS = [
         "connector_series": "MC20", "connector_type": "receptacle",
         "positions": 5, "rows": 1, "pitch_mm": None, "orientation": "right-angle",
         "termination_type": "Through Hole", "gender": "female", "signal_type": "power",
-        "mates_with": "RRC2054", "pin_count": "5", "tags": "connector,battery,power",
+        "mates_with": "RRC2054", "pin_count": "5", "keywords": "connector,battery,power",
     },
 ]
 
