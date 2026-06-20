@@ -9,4 +9,6 @@
     peak_pulse_current TEXT,      -- Ipp (10/1000 us)
     peak_pulse_power TEXT,        -- Ppp peak pulse power
     leakage_current TEXT,         -- IR max at Vrwm
-    capacitance TEXT              -- Cj typ (pF) where specified
+    capacitance TEXT,             -- Cj typ (pF) where specified
+    channels INTEGER,             -- protected lines (1 = discrete, >1 = array)
+    esd_contact_kv TEXT           -- IEC 61000-4-2 contact-discharge ESD rating

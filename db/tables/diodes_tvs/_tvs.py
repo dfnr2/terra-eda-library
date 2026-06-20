@@ -15,7 +15,7 @@ COLS = [
     "temp_storage_max", "directionality", "standoff_voltage",
     "breakdown_voltage_min", "breakdown_voltage_max", "breakdown_test_current",
     "clamping_voltage", "peak_pulse_current", "peak_pulse_power",
-    "leakage_current", "capacitance",
+    "leakage_current", "capacitance", "channels", "esd_contact_kv",
 ]
 
 
