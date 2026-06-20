@@ -3,8 +3,8 @@
 
 OPA991 has no dedicated KiCad symbol; the standard single-op-amp SOT-23-5 symbol
 Amplifier_Operational:OPA365xxDBV is used as a functionally-correct stand-in (same
-pinout/package) -- the DB Value (OPA991) is what appears on the schematic. Deep
-electrical params are left NULL for the parametric harvest pass.
+pinout/package) -- the DB Value (OPA991) is what appears on the schematic.
+Electrical parameters are populated in full from the datasheet.
 
 Generated output (dump_priority=0, source=NULL) is not dumped to static SQL.
 """
@@ -18,8 +18,10 @@ COLS = [
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "rohs", "allow_substitution", "tracking",
     "source", "dump_priority", "tier", "keywords", "pin_count",
-    "amplifier_type", "channels", "gain_bandwidth", "slew_rate",
-    "input_offset", "input_noise", "supply_voltage_min", "supply_voltage_max",
+    "amplifier_type", "input_type", "channels", "gain_bandwidth", "slew_rate",
+    "input_offset", "input_offset_drift", "input_bias_current", "input_noise",
+    "cmrr", "psrr", "quiescent_current", "output_current", "rail_to_rail",
+    "positive_rail", "negative_rail", "supply_voltage_min", "supply_voltage_max",
     "power_rating",
 ]
 
@@ -30,17 +32,21 @@ PARTS = [
         "mpn": "OPA991IDBVR", "manufacturer": "Texas Instruments",
         "package": "SOT-23-5", "value": "OPA991",
         "description": "Texas Instruments OPA991 40V rail-to-rail I/O single op-amp, SOT-23-5",
-        "datasheet": "https://www.ti.com/lit/gpn/opa991",
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/ti/opa991.pdf",
         "manufacturer_link": "https://www.ti.com/product/OPA991",
         "kicad_symbol": "Amplifier_Operational:OPA365xxDBV",
         "kicad_footprint": "Package_TO_SOT_SMD:SOT-23-5",
         "rohs": "Yes", "allow_substitution": "No", "tracking": "No",
         "source": None, "dump_priority": 0, "tier": 2,
-        "keywords": "opamp,rrio", "pin_count": "5",
-        "amplifier_type": "voltage-feedback, RRIO", "channels": 1,
-        "gain_bandwidth": None, "slew_rate": None, "input_offset": None,
-        "input_noise": None, "supply_voltage_min": 2.7, "supply_voltage_max": 40.0,
-        "power_rating": None,
+        "keywords": "opamp,rrio,precision,40v,single,general-purpose", "pin_count": "5",
+        "amplifier_type": "general-purpose", "input_type": "CMOS", "channels": 1,
+        "gain_bandwidth": "4.5MHz", "slew_rate": "21V/µs",
+        "input_offset": "±125µV", "input_offset_drift": "±0.3µV/°C",
+        "input_bias_current": "±10pA", "input_noise": "10.8nV/√Hz",
+        "cmrr": "130dB", "psrr": "120dB", "quiescent_current": "560µA",
+        "output_current": "±75mA", "rail_to_rail": "RRIO",
+        "positive_rail": "V+ +0.1V", "negative_rail": "V- -0.1V",
+        "supply_voltage_min": 2.7, "supply_voltage_max": 40.0, "power_rating": None,
     },
 ]
 
