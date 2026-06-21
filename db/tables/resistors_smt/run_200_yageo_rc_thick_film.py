@@ -134,7 +134,7 @@ STRING_TEMPLATES = {
 
     # Description templates
     "description_jumper": "{manufacturer} {composition} jumper, 0 ohm resistor, {package} package",
-    "description_resistor": "{manufacturer} {composition} resistor {value_readable} {tolerance} {power} {tempco} {package}",
+    "description_resistor": "{manufacturer} {composition} resistor {value_readable} ohm {tolerance} {power} {tempco} {package}",
 
     # Part locator template
     "part_locator": "res-{composition_slug}-{value_lower}-{tolerance_lower}-{power_slug}-{tempco_lower}-{package_lower}",
@@ -171,7 +171,7 @@ BEGIN TRANSACTION;
     "package_header": "-- {package} Package ({power}, {tempco}, {working_voltage} working/{max_voltage} max)",
 
     "insert": """INSERT INTO resistors_smt (unique_id, part_locator, mpn, manufacturer, variant, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tier, keywords, tolerance, power_rating, temp_coeff, voltage_rating, composition, temp_operating_min, temp_operating_max, temp_storage_min, temp_storage_max, temp_soldering, sim_device, sim_pins, lifecycle_status, rohs, rohs_document_link, allow_substitution, tracking, created_at, updated_at, created_by)
-VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', {variant}, '{package}', '{value_sim}', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, {tier}, '{keywords}', '{tolerance}', '{power_rating}', '{temp_coeff}', '{voltage_rating}', '{composition}', {temp_operating_min}, {temp_operating_max}, {temp_storage_min}, {temp_storage_max}, {temp_soldering}, '{sim_device}', '{sim_pins}', '{lifecycle_status}', '{rohs}', '{rohs_link}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}');""",
+VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', {variant}, '{package}', '{value_sim}Ω', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, {tier}, '{keywords}', '{tolerance}', '{power_rating}', '{temp_coeff}', '{voltage_rating}', '{composition}', {temp_operating_min}, {temp_operating_max}, {temp_storage_min}, {temp_storage_max}, {temp_soldering}, '{sim_device}', '{sim_pins}', '{lifecycle_status}', '{rohs}', '{rohs_link}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}');""",
 
     "tag_insert": "INSERT INTO tags (unique_id, tag) VALUES ('{unique_id}', '{tag}');",
 
@@ -548,7 +548,7 @@ GLOBAL_MAX_OHM = 10e9      # 10GΩ
 IEC_UNITS = [
     ("m", -3),  # milli-ohm
     ("R", 0),   # ohm
-    ("K", 3),   # kilo-ohm
+    ("k", 3),   # kilo-ohm
     ("M", 6),   # mega-ohm
     ("G", 9),   # giga-ohm
 ]
@@ -557,7 +557,7 @@ IEC_UNITS = [
 SPICE_UNITS = [
     ("m", -3),  # milli-ohm
     ("", 0),    # ohm (no suffix)
-    ("K", 3),   # kilo-ohm
+    ("k", 3),   # kilo-ohm
     ("M", 6),   # mega-ohm
     ("G", 9),   # giga-ohm
 ]
