@@ -248,6 +248,46 @@ PARTS = [
         "channels": 1, "supply_voltage_min": 1.71, "supply_voltage_max": 5.5,
     },
     {
+        # ISO1432 = full-duplex 12 Mbps sibling of ISO1412, pin-identical (16-pin DW).
+        # Reuses the ISO1412BDW symbol (electrically correct) until a dedicated
+        # ISO1432 symbol is supplied.
+        "unique_id": "Texas Instruments-ISO1432BDW",
+        "part_locator": "IC_DRIVER TI ISO1432BDW Full Duplex isolated RS422 driver",
+        "mpn": "ISO1432BDW", "manufacturer": "Texas Instruments", "package": "SOIC (DW)",
+        "value": "IC TI ISO1432BDW Full Duplex isolated RS422 driver",
+        "description": "Full Duplex, isolated RS-485/RS-422 transceiver, 12 Mbps, 5kVrms, SMT",
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/ti/iso14x2.pdf",
+        "manufacturer_link": "https://www.ti.com/product/ISO1432",
+        "kicad_symbol": "terra_sym:IC_DRIVER TI ISO1412BDW Full Duplex isolated RS422 driver",
+        "kicad_footprint": "Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm",
+        "rohs": "Yes", "rohs_document_link": TI_ISO_CR,
+        "allow_substitution": "Yes", "tracking": "No", "standards_version": "1.1",
+        "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "16",
+        "temp_operating_min": -40, "temp_operating_max": 125,
+        "temp_storage_min": -65, "temp_storage_max": 150,
+        "channels": 1, "supply_voltage_min": 1.71, "supply_voltage_max": 5.5,
+    },
+    {
+        # ISOW1432 = full-duplex 12 Mbps sibling of ISOW1412 (integrated DC-DC),
+        # pin-identical (20-pin DFM). Reuses the ISOW1412 symbol until a dedicated
+        # ISOW1432 symbol is supplied.
+        "unique_id": "Texas Instruments-ISOW1432",
+        "part_locator": "IC_DRIVER TI ISOW1432 Full Duplex isolated RS422 driver",
+        "mpn": "ISOW1432", "manufacturer": "Texas Instruments", "package": "SOIC (DW)",
+        "value": "IC TI ISOW1432 Full Duplex isolated RS422 driver",
+        "description": "Full Duplex isolated RS-485/RS-422 transceiver with integrated DC-DC, 12 Mbps, 5kVrms, SMT",
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/ti/isow14x2.pdf",
+        "manufacturer_link": "https://www.ti.com/product/ISOW1432",
+        "kicad_symbol": "terra_sym:IC_DRIVER TI ISO1412W Full Duplex isolated RS422 driver",
+        "kicad_footprint": "Package_SO:SOIC-20W_7.5x12.8mm_P1.27mm",
+        "rohs": "Yes", "rohs_document_link": TI_ISO_CR,
+        "allow_substitution": "Yes", "tracking": "No", "standards_version": "1.1",
+        "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "20",
+        "temp_operating_min": -40, "temp_operating_max": 125,
+        "temp_storage_min": -65, "temp_storage_max": 150,
+        "channels": 1, "supply_voltage_min": 1.71, "supply_voltage_max": 5.5,
+    },
+    {
         # FIX: manufacturer "Texas Instrument" -> "Texas Instruments" (the other TI
         # rows spell it correctly); unique_id follows.
         "unique_id": "Texas Instruments-TXU0104PWR",
