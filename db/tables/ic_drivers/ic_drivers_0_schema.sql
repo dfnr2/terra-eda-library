@@ -42,6 +42,7 @@ CREATE TABLE ic_drivers (
     temp_soldering REAL,
     driver_type TEXT,
     channels INTEGER,
+    data_rate TEXT,            -- signaling rate (transceivers/translators), e.g. '12 Mbps',
     supply_voltage_min REAL,
     supply_voltage_max REAL,
     i_max_device TEXT,

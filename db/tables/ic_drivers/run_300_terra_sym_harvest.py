@@ -30,7 +30,7 @@ COLS = [
     "kicad_footprint", "rohs", "rohs_document_link", "allow_substitution",
     "tracking", "standards_version", "source", "dump_priority", "tier",
     "pin_count", "temp_operating_min", "temp_operating_max", "temp_storage_min",
-    "temp_storage_max", "driver_type", "channels", "supply_voltage_min",
+    "temp_storage_max", "driver_type", "channels", "data_rate", "supply_voltage_min",
     "supply_voltage_max", "i_max_device", "i_max_channel", "output_type",
     "power_rating",
 ]
@@ -58,7 +58,7 @@ PARTS = [
         "channels": 2, "i_max_channel": "150 mA", "output_type": "open-drain",
     },
     {
-        "unique_id": "Renesas-ISL83490IBZ",
+        "unique_id": "Renesas-ISL83490IBZ", "data_rate": "2.5 Mbps",
         "part_locator": "IC_DRIVER ISL834390 RS422 Tranceiver full duplex 3.3V soic-8",
         "mpn": "ISL83490IBZ", "manufacturer": "Renesas", "package": "soic-8",
         "value": "RS422",
@@ -75,7 +75,7 @@ PARTS = [
         "channels": 1, "supply_voltage_min": 3.0, "supply_voltage_max": 3.6,
     },
     {
-        "unique_id": "Renesas-ISL83490IBZ-flipped",
+        "unique_id": "Renesas-ISL83490IBZ-flipped", "data_rate": "2.5 Mbps",
         "part_locator": "IC_DRIVER ISL834390 RS422 Tranceiver full duplex 3.3V soic-8_flipped",
         "mpn": "ISL83490IBZ", "manufacturer": "Renesas", "variant": "flipped",
         "package": "soic-8", "value": "RS422",
@@ -111,7 +111,7 @@ PARTS = [
         "channels": 1, "supply_voltage_min": 3.0, "supply_voltage_max": 3.6,
     },
     {
-        "unique_id": "Analog Devices-MAX3488EESA+",
+        "unique_id": "Analog Devices-MAX3488EESA+", "data_rate": "250 kbps",
         "part_locator": "IC_DRIVER MAX3488E RS422 Tranceiver full duplex 3.3V 15kv ESD soic-8",
         "mpn": "MAX3488EESA+", "manufacturer": "Analog Devices", "package": "soic-8",
         "value": "RS422",
@@ -131,7 +131,7 @@ PARTS = [
         "channels": 1, "supply_voltage_min": 3.0, "supply_voltage_max": 3.6,
     },
     {
-        "unique_id": "Analog Devices-MAX3488EESA+-flipped",
+        "unique_id": "Analog Devices-MAX3488EESA+-flipped", "data_rate": "250 kbps",
         "part_locator": "IC_DRIVER MAX3488E RS422 Tranceiver full duplex 3.3V 15kv ESD soic-8 flipped",
         "mpn": "MAX3488EESA+", "manufacturer": "Analog Devices", "variant": "flipped",
         "package": "soic-8", "value": "RS422",
@@ -150,7 +150,7 @@ PARTS = [
         "channels": 1, "supply_voltage_min": 3.0, "supply_voltage_max": 3.6,
     },
     {
-        "unique_id": "MaxLinear-SP490ECN-L",
+        "unique_id": "MaxLinear-SP490ECN-L", "data_rate": "2.5 Mbps",
         "part_locator": "IC_DRIVER MaxLinear SP490E RS422 Tranceiver full duplex 5V soic-8",
         "mpn": "SP490ECN-L", "manufacturer": "MaxLinear", "package": "soic-8",
         "value": "RS422",
@@ -210,7 +210,7 @@ PARTS = [
         "output_type": "open-drain",
     },
     {
-        "unique_id": "Texas Instruments-ISO1412BDW",
+        "unique_id": "Texas Instruments-ISO1412BDW", "data_rate": "500 kbps",
         "part_locator": "IC_DRIVER TI ISO1412BDW Full Duplex isolated RS422 driver",
         "mpn": "ISO1412BDW", "manufacturer": "Texas Instruments", "package": "SOIC (DW)",
         "value": "IC TI ISO1412BDW Full Duplex isolated RS422 driver",
@@ -229,7 +229,7 @@ PARTS = [
         "channels": 1, "supply_voltage_min": 1.71, "supply_voltage_max": 5.5,
     },
     {
-        "unique_id": "Texas Instruments-ISOW1412",
+        "unique_id": "Texas Instruments-ISOW1412", "data_rate": "500 kbps",
         "part_locator": "IC_DRIVER TI ISO1412W Full Duplex isolated RS422 driver",
         "mpn": "ISOW1412", "manufacturer": "Texas Instruments", "package": "SOIC (DW)",
         "value": "IC TI ISO1412W Full Duplex isolated RS422 driver",
@@ -251,7 +251,7 @@ PARTS = [
         # ISO1432 = full-duplex 12 Mbps sibling of ISO1412, pin-identical (16-pin DW).
         # Reuses the ISO1412BDW symbol (electrically correct) until a dedicated
         # ISO1432 symbol is supplied.
-        "unique_id": "Texas Instruments-ISO1432BDW",
+        "unique_id": "Texas Instruments-ISO1432BDW", "data_rate": "12 Mbps",
         "part_locator": "IC_DRIVER TI ISO1432BDW Full Duplex isolated RS422 driver",
         "mpn": "ISO1432BDW", "manufacturer": "Texas Instruments", "package": "SOIC (DW)",
         "value": "IC TI ISO1432BDW Full Duplex isolated RS422 driver",
@@ -271,7 +271,7 @@ PARTS = [
         # ISOW1432 = full-duplex 12 Mbps sibling of ISOW1412 (integrated DC-DC),
         # pin-identical (20-pin DFM). Reuses the ISOW1412 symbol until a dedicated
         # ISOW1432 symbol is supplied.
-        "unique_id": "Texas Instruments-ISOW1432",
+        "unique_id": "Texas Instruments-ISOW1432", "data_rate": "12 Mbps",
         "part_locator": "IC_DRIVER TI ISOW1432 Full Duplex isolated RS422 driver",
         "mpn": "ISOW1432", "manufacturer": "Texas Instruments", "package": "SOIC (DW)",
         "value": "IC TI ISOW1432 Full Duplex isolated RS422 driver",
