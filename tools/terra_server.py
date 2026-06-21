@@ -54,9 +54,18 @@ def load_spec(dbl_path: str | Path) -> list[dict]:
             f["column"] for f in lib["fields"] if f["column"] not in (symbols, footprints)
         ]
 
-        # Optional description column, surfaced in the category listing so KiCad
-        # shows a meaningful description in the chooser.
-        desc_col = "description" if "description" in field_cols else None
+        # Description and keywords are KiCad library *properties* (a reserved
+        # attribute mapped to a column), not ordinary fields. KiCad's HTTP API
+        # wants the description as a top-level `description` in the category
+        # listing, and both as lowercase `description`/`keywords` entries in the
+        # per-part `fields` object -- the capitalised "Description" field name is
+        # NOT recognised. Read the column names from properties, falling back to
+        # a legacy "description" field for older dbl files.
+        props = lib.get("properties", {})
+        desc_col = props.get("description") or (
+            "description" if "description" in field_cols else None
+        )
+        keywords_col = props.get("keywords")
 
         specs.append(
             {
@@ -67,6 +76,7 @@ def load_spec(dbl_path: str | Path) -> list[dict]:
                 "symbols": symbols,
                 "footprints": footprints,
                 "desc_col": desc_col,
+                "keywords_col": keywords_col,
                 "fields": lib["fields"],
             }
         )
@@ -148,6 +158,16 @@ def serialize_part(row, spec, pid: str) -> dict:
             # Value alone, so a placed part shows just Reference + Value.
             "visible": "true" if field.get("visible_on_add") else "false",
         }
+
+    # description/keywords are KiCad-reserved lowercase field keys carried by the
+    # dbl as library properties, so they are not in spec["fields"] above. Emit
+    # them here from their mapped columns (hidden on the schematic).
+    for key, col in (("description", spec.get("desc_col")),
+                     ("keywords", spec.get("keywords_col"))):
+        if col:
+            value = row[col]
+            if value not in (None, ""):
+                fields[key] = {"value": str(value), "visible": "false"}
 
     return {
         "id": pid,

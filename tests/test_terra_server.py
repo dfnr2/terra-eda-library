@@ -751,3 +751,83 @@ def test_category_listing_uses_mpn_name_and_includes_description(tmp_path):
     assert part["name"] == "Diodes-MMBD914-7-F"
     # description surfaced in the listing
     assert part["description"] == "Fast switching diode"
+
+
+# --------------------------------------------------------------------------- #
+# description/keywords as library *properties* (the generator's current output)
+#
+# generate_kicad_dbl_files.py emits description and keywords as `properties`
+# mappings, NOT as entries in `fields` (KiCad's reserved attributes). The server
+# must still surface them: a top-level `description` in the category listing and
+# lowercase `description`/`keywords` entries in the per-part detail.
+# --------------------------------------------------------------------------- #
+
+# A dbl shaped like the real generator output: description/keywords live under
+# `properties`, and neither column appears in `fields`.
+_DIODES_PROPS_DBL = {
+    "libraries": [
+        {
+            "name": "Diodes",
+            "table": "diodes_v",
+            "key": "unique_id",
+            "symbols": "kicad_symbol",
+            "footprints": "kicad_footprint",
+            "fields": [
+                {"column": "mpn", "name": "Manufacturer PN", "visible_in_chooser": True},
+                {"column": "kicad_symbol", "name": "Symbol", "visible_in_chooser": False},
+                {"column": "kicad_footprint", "name": "Footprint", "visible_in_chooser": True},
+            ],
+            "properties": {"description": "description", "keywords": "keywords"},
+        }
+    ]
+}
+
+
+def _make_props_diodes_db(path):
+    conn = sqlite3.connect(str(path))
+    conn.execute(
+        "CREATE TABLE diodes (unique_id TEXT, description TEXT, keywords TEXT,"
+        " mpn TEXT, kicad_symbol TEXT, kicad_footprint TEXT, tier INTEGER)"
+    )
+    conn.execute(
+        "INSERT INTO diodes VALUES ('Diodes-MMBD914-7-F','Fast switching diode',"
+        "'switching,smd,fast','MMBD914-7-F','Diode:D','SOT:SOT-23',0)"
+    )
+    conn.commit()
+    conn.close()
+
+
+def test_load_spec_reads_desc_and_keywords_from_properties(tmp_path):
+    dbl = tmp_path / "diodes.kicad_dbl"
+    dbl.write_text(json.dumps(_DIODES_PROPS_DBL))
+    s = load_spec(str(dbl))[0]
+    assert s["desc_col"] == "description"
+    assert s["keywords_col"] == "keywords"
+
+
+def test_category_listing_description_from_property(tmp_path):
+    db = tmp_path / "diodes.db"
+    _make_props_diodes_db(db)
+    dbl = tmp_path / "diodes.kicad_dbl"
+    dbl.write_text(json.dumps(_DIODES_PROPS_DBL))
+
+    c = TestClient(create_app(str(db), str(dbl)))
+    parts = c.get("/v1/parts/category/diodes.json").json()
+    assert len(parts) == 1
+    assert parts[0]["description"] == "Fast switching diode"
+
+
+def test_part_detail_emits_lowercase_description_and_keywords(tmp_path):
+    db = tmp_path / "diodes.db"
+    _make_props_diodes_db(db)
+    dbl = tmp_path / "diodes.kicad_dbl"
+    dbl.write_text(json.dumps(_DIODES_PROPS_DBL))
+
+    c = TestClient(create_app(str(db), str(dbl)))
+    pid = c.get("/v1/parts/category/diodes.json").json()[0]["id"]
+    fields = c.get(f"/v1/parts/{pid}.json").json()["fields"]
+    # KiCad's reserved keys are lowercase; the capitalised forms are NOT read.
+    assert fields["description"] == {"value": "Fast switching diode", "visible": "false"}
+    assert fields["keywords"] == {"value": "switching,smd,fast", "visible": "false"}
+    assert "Description" not in fields
+    assert "Keywords" not in fields
