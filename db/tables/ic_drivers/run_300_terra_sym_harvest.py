@@ -43,7 +43,7 @@ PARTS = [
         "mpn": "SZNUD3124DMT1G", "manufacturer": "ON Semi",
         "value": "FET DRIVER DUAL SZNUD3124DMT1G",
         "description": "Dual MOSFET Relay driver SMT",
-        "datasheet": "https://www.onsemi.com/download/data-sheet/pdf/nud3124-d.pdf",
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/onsemi/nud3124.pdf",
         "manufacturer_link": "https://www.onsemi.com/products/motor-control/motor-drivers/load-drivers-relay-drivers/nud3124",
         "kicad_symbol": "terra_sym:IC_DRIVER DUAL FET DRIVER SZNUD3124DMT1G",
         "kicad_footprint": "terra_sym:SC-74-6_1.5x2.9mm_P0.95mm",
@@ -52,6 +52,10 @@ PARTS = [
         "allow_substitution": "No", "tracking": "No", "standards_version": "1.1",
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "6",
         "temp_operating_min": -40, "temp_operating_max": 125, "i_max_device": "150 mA",
+        # NUD3124/SZNUD3124 (NUD3124/D): inductive-load driver; SC-74 (CASE 318F)
+        # is the dual version (two N-ch open-drain MOSFETs). ID = 150 mA continuous
+        # per driver; output drains relay coils -> open-drain sink. No supply rail.
+        "channels": 2, "i_max_channel": "150 mA", "output_type": "open-drain",
     },
     {
         "unique_id": "Renesas-ISL83490IBZ",
@@ -92,7 +96,7 @@ PARTS = [
         "part_locator": "IC_DRIVER LTC2851IMS8", "mpn": "LTC2851IMS8",
         "manufacturer": "Analog Devices", "package": "MSOP-8", "value": "LTC2851",
         "description": "RS232 transceiver 1 channel, 3v",
-        "datasheet": "https://www.analog.com/media/en/technical-documentation/data-sheets/285012fe.pdf",
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/analog-devices/ltc2851.pdf",
         "manufacturer_link": "https://www.analog.com/en/products/ltc2851.html",
         "kicad_symbol": "terra_sym:IC_DRIVER LTC2851IMS8",
         "kicad_footprint": "Package_SO:MSOP-8_3x3mm_P0.65mm",
@@ -102,6 +106,9 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "8",
         "temp_operating_min": -40, "temp_operating_max": 85,
         "temp_storage_min": -65, "temp_storage_max": 150, "driver_type": "interface ic",
+        # LTC2850/51/52 (285012fe): 3.3V RS485/RS422 transceiver, single full-duplex
+        # channel; electrical specs at VCC = 3.0V-3.6V (VIL@3V, VIH@3.6V).
+        "channels": 1, "supply_voltage_min": 3.0, "supply_voltage_max": 3.6,
     },
     {
         "unique_id": "Analog Devices-MAX3488EESA+",
@@ -109,7 +116,7 @@ PARTS = [
         "mpn": "MAX3488EESA+", "manufacturer": "Analog Devices", "package": "soic-8",
         "value": "RS422",
         "description": "Full duplex RS-422 transceiver, 250 kbps, SOIC-8, 3.3V",
-        "datasheet": "https://www.analog.com/media/en/technical-documentation/data-sheets/MAX3483E-MAX3491E.pdf",
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/analog-devices/max3483e-max3491e.pdf",
         "manufacturer_link": "https://www.analog.com/en/products/max3488e.html",
         "kicad_symbol": "terra_sym:IC_DRIVER MAX3488E RS422 Tranceiver full duplex 3.3V 15kv ESD soic-8",
         "kicad_footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
@@ -119,6 +126,9 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "8",
         "temp_operating_min": -40, "temp_operating_max": 85,
         "temp_storage_min": -65, "temp_storage_max": 150, "driver_type": "ic driver",
+        # MAX3488E (MAX3483E-MAX3491E): single +3.3V full-duplex RS-485/422
+        # transceiver; "Supply Voltage Range VCC 3.0-3.6V".
+        "channels": 1, "supply_voltage_min": 3.0, "supply_voltage_max": 3.6,
     },
     {
         "unique_id": "Analog Devices-MAX3488EESA+-flipped",
@@ -126,7 +136,7 @@ PARTS = [
         "mpn": "MAX3488EESA+", "manufacturer": "Analog Devices", "variant": "flipped",
         "package": "soic-8", "value": "RS422",
         "description": "Full duplex RS-422 transceiver, 250 kbps, SOIC-8, 3.3V",
-        "datasheet": "https://www.analog.com/media/en/technical-documentation/data-sheets/MAX3483E-MAX3491E.pdf",
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/analog-devices/max3483e-max3491e.pdf",
         "manufacturer_link": "https://www.analog.com/en/products/max3488e.html",
         "kicad_symbol": "terra_sym:IC_DRIVER MAX3488E RS422 Tranceiver full duplex 3.3V 15kv ESD soic-8 flipped",
         "kicad_footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
@@ -136,6 +146,8 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "8",
         "temp_operating_min": -40, "temp_operating_max": 85,
         "temp_storage_min": -65, "temp_storage_max": 150, "driver_type": "ic driver",
+        # flipped = same part as MAX3488EESA+; mirror harvested values.
+        "channels": 1, "supply_voltage_min": 3.0, "supply_voltage_max": 3.6,
     },
     {
         "unique_id": "MaxLinear-SP490ECN-L",
@@ -143,8 +155,8 @@ PARTS = [
         "mpn": "SP490ECN-L", "manufacturer": "MaxLinear", "package": "soic-8",
         "value": "RS422",
         "description": "Full duplex RS-422 transciver, 2.5 Mbps, SOIC-8",
-        "datasheet": "https://www.analog.com/media/en/technical-documentation/data-sheets/MAX1487E-MAX491E.pdf",
-        "manufacturer_link": "https://www.maxlinear.com/product/interface/serial-transceivers/rs485-422/sp490e",
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/maxlinear/sp490e-sp491e.pdf",
+        "manufacturer_link": "https://www.maxlinear.com/product/interface/serial-transceivers/rs-485-rs-422/sp490ers485-422/sp490e",
         "kicad_symbol": "terra_sym:IC_DRIVER MaxLinear SP490E RS422 Tranceiver full duplex 5V soic-8",
         "kicad_footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
         "rohs": "Yes",
@@ -153,6 +165,9 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "8",
         "temp_operating_min": 0, "temp_operating_max": 70,
         "temp_storage_min": -65, "temp_storage_max": 150, "driver_type": "ic driver",
+        # SP490E (REV 1.0.2): 5V-only full-duplex RS-485/422 transceiver, single
+        # driver/receiver; Supply Voltage 4.75-5.25V.
+        "channels": 1, "supply_voltage_min": 4.75, "supply_voltage_max": 5.25,
     },
     {
         "unique_id": "NXP-PCA9306D",
@@ -200,8 +215,8 @@ PARTS = [
         "mpn": "ISO1412BDW", "manufacturer": "Texas Instruments", "package": "SOIC (DW)",
         "value": "IC TI ISO1412BDW Full Duplex isolated RS422 driver",
         "description": "Full Duplex, isolated RS 422 Driver, 500 kbps, SMT",
-        "datasheet": "https://www.ti.com/product/ISO1412/part-details/ISO1412BDW",
-        "manufacturer_link": "https://www.ti.com/product/ISO1412/part-details/ISO1412BDW",
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/ti/iso14x2.pdf",
+        "manufacturer_link": "https://www.ti.com/product/ISO1412",
         "kicad_symbol": "terra_sym:IC_DRIVER TI ISO1412BDW Full Duplex isolated RS422 driver",
         "kicad_footprint": "Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm",
         "rohs": "Yes", "rohs_document_link": TI_ISO_CR,
@@ -219,7 +234,7 @@ PARTS = [
         "mpn": "ISOW1412", "manufacturer": "Texas Instruments", "package": "SOIC (DW)",
         "value": "IC TI ISO1412W Full Duplex isolated RS422 driver",
         "description": "Full Duplex, isolated RS 422 Driver, 500 kbps, SMT",
-        "datasheet": "https://www.ti.com/lit/ds/symlink/isow1432.pdf",
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/ti/isow14x2.pdf",
         "manufacturer_link": "https://www.ti.com/product/ISOW1412",
         "kicad_symbol": "terra_sym:IC_DRIVER TI ISO1412W Full Duplex isolated RS422 driver",
         "kicad_footprint": "Package_SO:SOIC-20W_7.5x12.8mm_P1.27mm",
@@ -228,6 +243,9 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "16",
         "temp_operating_min": -40, "temp_operating_max": 125,
         "temp_storage_min": -65, "temp_storage_max": 150,
+        # ISOW1412 (ISOW14x2, SLLSF86C): single isolated full-duplex RS-485/422
+        # transceiver with integrated DC-DC; VIO 1.71-5.5V, VDD 3-5.5V.
+        "channels": 1, "supply_voltage_min": 1.71, "supply_voltage_max": 5.5,
     },
     {
         # FIX: manufacturer "Texas Instrument" -> "Texas Instruments" (the other TI

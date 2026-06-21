@@ -35,7 +35,7 @@ PARTS = [
         "mpn": "DF62J12S2AHQAA", "manufacturer": "CK Components",
         "value": "SW DPDT CK DF62J12S2AHQAA",
         "description": "DPDT rocker, right angle, through-hole",
-        "datasheet": "https://www.ckswitches.com/media/1443/df.pdf",
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/ck/df-series.pdf",
         "manufacturer_link": "https://www.ckswitches.com/products/switches/product-details/Rocker/DF/DF62J12S2AHQA/",
         "kicad_symbol": "terra_sym:SW DPDT CK DF62J12S2AHQAA ",
         "kicad_footprint": "terra_sym:DF62J12S2AHQAA",
@@ -45,7 +45,7 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "4",
         "temp_operating_min": -20, "temp_operating_max": 85, "current_rating": "16A",
         "switch_type": "rocker", "poles": 2, "throws": 2,
-        "voltage_rating": None, "actuation_force": None,
+        "voltage_rating": "250 VAC", "actuation_force": None,
     },
 ]
 

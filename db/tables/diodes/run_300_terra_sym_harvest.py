@@ -44,7 +44,7 @@ PARTS = [
         "mpn": "MMBD914-7-F", "manufacturer": "Diodes, Inc.", "package": "SOT23",
         "value": "MMBD914",
         "description": "DIODE SMT/TH 1n914/mmbd914 generic switching",
-        "datasheet": "https://www.diodes.com/assets/Datasheets/BAS16_MMBD4148_MMBD914.pdf",
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/diodes-inc/mmbd914.pdf",
         "manufacturer_link": "https://www.diodes.com/part/view/MMBD914",
         "kicad_symbol": "terra_sym:DIODE MMBD914 small signal switching diode SMT SOT23",
         "kicad_footprint": "Package_TO_SOT_SMD:SOT-23",
@@ -53,6 +53,9 @@ PARTS = [
         "allow_substitution": "Yes", "tracking": "No", "standards_version": "1.1",
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "3",
         "temp_operating_min": -65, "temp_operating_max": 150,
+        "diode_type": "small-signal", "voltage_rating": "75V",
+        "forward_voltage": "1.25V @ 150mA", "forward_current": "300mA",
+        "current_rating": "200mA",
         "power_rating": "350 mW / 200 mA",
     },
     {
@@ -80,7 +83,7 @@ PARTS = [
         "mpn": "MBR0530T1G", "manufacturer": "OnSemi", "package": "SOD-123",
         "value": "DIODE OnSemi Schottky 30V 0.5A SOD-123 MBR0530",
         "description": "30V 0.5A Schottky Power Rectifier Diode",
-        "datasheet": "https://www.onsemi.com/pdf/datasheet/mbr0530t1-d.pdf",
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/onsemi/mbr0530t1.pdf",
         "manufacturer_link": "https://www.onsemi.com/products/discrete-power-modules/schottky-diodes-schottky-rectifiers/mbr0530",
         "kicad_symbol": "terra_sym:DIODE OnSemi Schottky 30V 0.5A SOD-123 MBR0530",
         "kicad_footprint": "Diode_SMD:D_SOD-123",
@@ -90,6 +93,8 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2,
         "temp_operating_min": -65, "temp_operating_max": 125,
         "temp_storage_min": -65, "temp_storage_max": 150, "diode_type": "schottky",
+        "voltage_rating": "30V", "forward_voltage": "0.43V @ 0.5A",
+        "forward_current": "0.5A", "current_rating": "0.5A",
     },
     {
         # EDIT: `value` was a leftover template

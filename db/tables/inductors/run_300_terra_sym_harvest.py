@@ -50,8 +50,8 @@ PARTS = [
         "mpn": "SRR6603-100ML", "manufacturer": "Bourns", "package": "SMT",
         "value": "IND Bourns 10uH 1.1A rms SRR6603-100ML",
         "description": "Power inductor, 10 mH, 75 mOhm, 1A rms,  20% SMT 6.8x4.4mm",
-        "datasheet": "https://www.bourns.com/pdfs/SRR6603.pdf",
-        "manufacturer_link": BOURNS_MFR_LINK,
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/bourns/srr6603.pdf",
+        "manufacturer_link": "https://bourns.com",
         "kicad_symbol": "terra_sym:IND Bourns 10uH 1.1A rms SRR6603-100ML",
         "kicad_footprint": "terra_sym:Coilcraft MSS7341 Shileded power inductor",
         "rohs": "Yes", "rohs_document_link": BOURNS_ROHS,
@@ -61,6 +61,9 @@ PARTS = [
         "temp_operating_min": -40, "temp_operating_max": 125,
         "temp_storage_min": -40, "temp_storage_max": 125, "tolerance": "30%",
         "current_rating": "1.1A rms, 40C rise, 1.5ADC, 10% drop",
+        # Datasheet harvest (Bourns SRR6603, SRR6603-100ML row, 100 KHz).
+        "inductance": "10 uH", "saturation_current": "0.320 A (30% drop)",
+        "dc_resistance": "75 mOhm", "self_res_freq": "38 MHz",
     },
     {
         "unique_id": "Bourns-SRR1210-680M",
@@ -68,8 +71,8 @@ PARTS = [
         "mpn": "SRR1210-680M", "manufacturer": "Bourns", "package": "SMT",
         "value": "IND Bourns 68uH 3A rms  SRR1210-680M",
         "description": "Power inductor, 68 mH, 102 mOhm, 3A rms,  20% SMT 12mm x 12mm",
-        "datasheet": "https://www.bourns.com/docs/Product-Datasheets/SRR1210.pdf",
-        "manufacturer_link": BOURNS_MFR_LINK,
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/bourns/srr1210.pdf",
+        "manufacturer_link": "https://bourns.com",
         "kicad_symbol": "terra_sym:IND Bourns 68uH 3A rms  SRR1210-680M ",
         "kicad_footprint": "terra_sym:Bourns SRR1210",
         "rohs": "Yes", "rohs_document_link": BOURNS_ROHS,
@@ -79,6 +82,9 @@ PARTS = [
         "temp_operating_min": -40, "temp_operating_max": 125,
         "temp_storage_min": -40, "temp_storage_max": 125, "tolerance": "20%",
         "current_rating": "3A rms, 40C rise, 10% drop",
+        # Datasheet harvest (Bourns SRR1210, SRR1210-680M row, 2.52 MHz test).
+        "inductance": "68 uH", "saturation_current": "3.0 A (20% drop)",
+        "dc_resistance": "102 mOhm", "self_res_freq": "3.8 MHz",
     },
     {
         "unique_id": "CoilCraft-MSS7341-103ML",
