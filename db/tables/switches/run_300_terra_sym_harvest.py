@@ -24,7 +24,8 @@ COLS = [
     "datasheet", "manufacturer_link", "kicad_symbol", "kicad_footprint", "rohs",
     "rohs_document_link", "allow_substitution", "tracking", "standards_version",
     "source", "dump_priority", "tier", "pin_count", "temp_operating_min",
-    "temp_operating_max", "current_rating",
+    "temp_operating_max", "current_rating", "switch_type", "poles", "throws",
+    "voltage_rating", "actuation_force",
 ]
 
 PARTS = [
@@ -43,6 +44,8 @@ PARTS = [
         "allow_substitution": "No", "tracking": "No", "standards_version": "1.1",
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "4",
         "temp_operating_min": -20, "temp_operating_max": 85, "current_rating": "16A",
+        "switch_type": "rocker", "poles": 2, "throws": 2,
+        "voltage_rating": None, "actuation_force": None,
     },
 ]
 

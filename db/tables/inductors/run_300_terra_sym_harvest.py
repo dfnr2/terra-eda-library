@@ -37,7 +37,8 @@ COLS = [
     "tracking", "standards_version", "source", "dump_priority", "tier",
     "sim_device", "sim_pins", "pin_count", "temp_operating_min",
     "temp_operating_max", "temp_storage_min", "temp_storage_max", "tolerance",
-    "current_rating",
+    "current_rating", "inductance", "saturation_current", "dc_resistance",
+    "self_res_freq",
 ]
 
 PARTS = [
@@ -97,6 +98,9 @@ PARTS = [
         "temp_operating_min": -40, "temp_operating_max": 85,
         "temp_storage_min": -40, "temp_storage_max": 125, "tolerance": "30%",
         "current_rating": "2.8A rms, 20C rise, 1.64ADC, 10% ind. drop",
+        # Datasheet harvest (Coilcraft Doc 383-2, MSS7341-103ML row).
+        "inductance": "10 uH", "saturation_current": "1.64 A (10% drop)",
+        "dc_resistance": "38 mOhm", "self_res_freq": "32 MHz",
     },
 ]
 

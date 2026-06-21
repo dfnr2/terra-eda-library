@@ -30,7 +30,9 @@ COLS = [
     "kicad_footprint", "rohs", "rohs_document_link", "allow_substitution",
     "tracking", "standards_version", "source", "dump_priority", "tier",
     "pin_count", "temp_operating_min", "temp_operating_max", "temp_storage_min",
-    "temp_storage_max", "driver_type", "i_max_device", "power_rating",
+    "temp_storage_max", "driver_type", "channels", "supply_voltage_min",
+    "supply_voltage_max", "i_max_device", "i_max_channel", "output_type",
+    "power_rating",
 ]
 
 PARTS = [
@@ -65,6 +67,8 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "8",
         "temp_operating_min": -40, "temp_operating_max": 85,
         "temp_storage_min": -65, "temp_storage_max": 150, "driver_type": "ic driver",
+        # ISL83490 (FN6052): single +3.3V supply, 3V-3.6V; full-duplex transceiver.
+        "channels": 1, "supply_voltage_min": 3.0, "supply_voltage_max": 3.6,
     },
     {
         "unique_id": "Renesas-ISL83490IBZ-flipped",
@@ -80,6 +84,8 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "8",
         "temp_operating_min": -40, "temp_operating_max": 85,
         "temp_storage_min": -65, "temp_storage_max": 150, "driver_type": "ic driver",
+        # flipped = same part as ISL83490IBZ; copy harvested values.
+        "channels": 1, "supply_voltage_min": 3.0, "supply_voltage_max": 3.6,
     },
     {
         "unique_id": "Analog Devices-LTC2851IMS8",
@@ -163,6 +169,10 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "8",
         "temp_operating_min": -40, "temp_operating_max": 105,
         "temp_storage_min": -65, "temp_storage_max": 150, "driver_type": "level shifter",
+        # PCA9306 (SCPS113O): 2-bit (SDA/SCL) bidirectional I2C/SMBus translator,
+        # 1.2V-5.5V, open-drain pass-FET I/O.
+        "channels": 2, "supply_voltage_min": 1.2, "supply_voltage_max": 5.5,
+        "output_type": "open-drain",
     },
     {
         "unique_id": "Texas Instruments-PCA9306DCT",
@@ -179,6 +189,10 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "8",
         "temp_operating_min": -40, "temp_operating_max": 105,
         "temp_storage_min": -65, "temp_storage_max": 150, "driver_type": "level shifter",
+        # PCA9306 (SCPS113O): 2-bit (SDA/SCL) bidirectional I2C/SMBus translator,
+        # 1.2V-5.5V, open-drain pass-FET I/O.
+        "channels": 2, "supply_voltage_min": 1.2, "supply_voltage_max": 5.5,
+        "output_type": "open-drain",
     },
     {
         "unique_id": "Texas Instruments-ISO1412BDW",
@@ -195,6 +209,9 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "16",
         "temp_operating_min": -40, "temp_operating_max": 125,
         "temp_storage_min": -65, "temp_storage_max": 150,
+        # ISO1412 (SLLSF22H): single isolated full-duplex RS-485/422 transceiver;
+        # VCC1 (logic) 1.71-5.5V, VCC2 (bus) 3-5.5V.
+        "channels": 1, "supply_voltage_min": 1.71, "supply_voltage_max": 5.5,
     },
     {
         "unique_id": "Texas Instruments-ISOW1412",
@@ -230,6 +247,10 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "14",
         "temp_operating_min": -40, "temp_operating_max": 125,
         "temp_storage_min": -65, "temp_storage_max": 150, "driver_type": "level shifter",
+        # TXU0104 (SCES937B): 4-bit dual-rail level translator, each port 1.1-5.5V,
+        # push-pull 3-state outputs, high drive up to 12mA at 5V.
+        "channels": 4, "supply_voltage_min": 1.1, "supply_voltage_max": 5.5,
+        "i_max_channel": "12 mA", "output_type": "push-pull, 3-state",
     },
     {
         # FIX: mpn "UNL2003A" -> "ULN2003A" (the locator, value, symbol and datasheet
@@ -249,6 +270,9 @@ PARTS = [
         "allow_substitution": "Yes", "tracking": "Yes", "standards_version": "1.1",
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "16",
         "temp_operating_min": -40, "temp_operating_max": 85, "power_rating": "2.5A",
+        # ULN2003A (SLRS027T): 7 NPN Darlington pairs, 500mA collector current per
+        # output, open-collector outputs sinking to the common emitter.
+        "channels": 7, "i_max_channel": "500 mA", "output_type": "open-collector sink",
     },
     {
         "unique_id": "NXP-SN74LV1T125DBV",
@@ -266,6 +290,10 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "5",
         "temp_operating_min": -40, "temp_operating_max": 125,
         "temp_storage_min": -65, "temp_storage_max": 150, "driver_type": "level shifter",
+        # SN74LV1T125 (SCLS745D): single buffer gate level shifter, VCC 1.8-5.5V,
+        # CMOS 3-state output.
+        "channels": 1, "supply_voltage_min": 1.8, "supply_voltage_max": 5.5,
+        "output_type": "push-pull, 3-state",
     },
 ]
 

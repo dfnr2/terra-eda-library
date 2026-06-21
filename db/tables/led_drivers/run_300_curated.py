@@ -174,6 +174,7 @@ PARTS = [
         "dump_priority": 0, "tier": 2, "created_by": "cern_import",
         "pin_count": "2", "component_height": "1.35mm", "keywords": "diode",
         "driver_topology": "linear", "channels": 1, "output_current": "15mA",
+        "supply_voltage_min": 1.8, "supply_voltage_max": 45.0,
         "output_voltage_max": "45V", "dimming_method": "none",
         "interface": "none", "current_accuracy": "±20%",
     },
@@ -189,7 +190,7 @@ PARTS = [
         "dump_priority": 0, "tier": 2, "created_by": "cern_import",
         "pin_count": "2", "component_height": "1.35mm", "keywords": "diode",
         "driver_topology": "linear", "channels": 1, "output_current": "10mA",
-        "supply_voltage_max": 50.0, "output_voltage_max": "50V",
+        "supply_voltage_min": 1.8, "supply_voltage_max": 50.0, "output_voltage_max": "50V",
         "dimming_method": "none", "interface": "none", "current_accuracy": "±30%",
     },
 ]

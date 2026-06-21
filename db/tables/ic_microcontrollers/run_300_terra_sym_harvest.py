@@ -26,6 +26,9 @@ COLS = [
     "tracking", "standards_version", "source", "dump_priority", "tier",
     "pin_count", "temp_operating_min", "temp_operating_max", "temp_storage_min",
     "temp_storage_max",
+    "family", "core", "supply_voltage_min", "supply_voltage_max",
+    "flash_size", "eeprom_size", "ram_size", "gpio_count", "uart_count",
+    "i2c_count", "timer_count", "special_features",
 ]
 
 PARTS = [
@@ -44,6 +47,11 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "32",
         "temp_operating_min": -40, "temp_operating_max": 85,
         "temp_storage_min": -60, "temp_storage_max": 150,
+        "family": "SAM C20", "core": "Arm Cortex-M0+",
+        "supply_voltage_min": 2.7, "supply_voltage_max": 5.5,
+        "flash_size": "256 KB", "ram_size": "32 KB",
+        "gpio_count": 26, "uart_count": 4, "i2c_count": 4, "timer_count": 8,
+        "special_features": "12-bit ADC, PTC, DIVAS, CCL, RWW Flash EEPROM emulation",
     },
     {
         "unique_id": "Microchip-ATSAMC20G18A",
@@ -60,6 +68,11 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "48",
         "temp_operating_min": -40, "temp_operating_max": 85,
         "temp_storage_min": -60, "temp_storage_max": 150,
+        "family": "SAM C20", "core": "Arm Cortex-M0+",
+        "supply_voltage_min": 2.7, "supply_voltage_max": 5.5,
+        "flash_size": "256 KB", "ram_size": "32 KB",
+        "gpio_count": 38, "uart_count": 4, "i2c_count": 4, "timer_count": 8,
+        "special_features": "12-bit ADC, PTC, DIVAS, CCL, RWW Flash EEPROM emulation",
     },
 ]
 

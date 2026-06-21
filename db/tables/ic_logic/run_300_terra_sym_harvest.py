@@ -27,7 +27,8 @@ COLS = [
     "kicad_footprint", "rohs", "rohs_document_link", "allow_substitution",
     "tracking", "standards_version", "source", "dump_priority", "tier",
     "pin_count", "temp_operating_min", "temp_operating_max", "temp_storage_min",
-    "temp_storage_max", "gate_function",
+    "temp_storage_max", "gate_function", "logic_family", "channels",
+    "propagation_delay", "supply_voltage_min", "supply_voltage_max",
 ]
 
 PARTS = [
@@ -47,6 +48,9 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "8",
         "temp_operating_min": -40, "temp_operating_max": 125,
         "temp_storage_min": -65, "temp_storage_max": 150,
+        "gate_function": "monostable multivibrator", "logic_family": "LVC",
+        "channels": 1, "propagation_delay": "8 ns max at 3.3 V",
+        "supply_voltage_min": 1.65, "supply_voltage_max": 5.5,
     },
     {
         "unique_id": "Texas Instruments-SN74LVC1G123DCU",
@@ -57,6 +61,9 @@ PARTS = [
         "datasheet": "http://www.ti.com/lit/ds/symlink/sn74lvc1g123.pdf",
         "kicad_symbol": "terra_sym:IC_LOGIC 74LVC1G123d",
         "source": "terra_sym", "dump_priority": 0, "tier": 2,
+        "gate_function": "monostable multivibrator", "logic_family": "LVC",
+        "channels": 1, "propagation_delay": "8 ns max at 3.3 V",
+        "supply_voltage_min": 1.65, "supply_voltage_max": 5.5,
     },
     {
         "unique_id": "Texas Instruments-SN74LVC1G139DCU",
@@ -67,6 +74,9 @@ PARTS = [
         "datasheet": "www.ti.com/lit/ds/symlink/sn74lvc1g139.pdf",
         "kicad_symbol": "terra_sym:IC_LOGIC 74LVC1G139",
         "source": "terra_sym", "dump_priority": 0, "tier": 2,
+        "gate_function": "2-to-4 line decoder/demux", "logic_family": "LVC",
+        "channels": 1, "propagation_delay": "4.9 ns max at 3.3 V, 15 pF",
+        "supply_voltage_min": 1.65, "supply_voltage_max": 5.5,
     },
     {
         # FIX: manufacturer "Texas Instrument" -> "Texas Instruments" (the other
@@ -86,7 +96,10 @@ PARTS = [
         "allow_substitution": "No", "tracking": "No", "standards_version": "1.1",
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "5",
         "temp_operating_min": -40, "temp_operating_max": 125,
-        "temp_storage_min": -65, "temp_storage_max": 150, "gate_function": "level shifter",
+        "temp_storage_min": -65, "temp_storage_max": 150,
+        "gate_function": "2-to-4 line decoder/demux", "logic_family": "LVC",
+        "channels": 1, "propagation_delay": "4.9 ns max at 3.3 V, 15 pF",
+        "supply_voltage_min": 1.65, "supply_voltage_max": 5.5,
     },
 ]
 

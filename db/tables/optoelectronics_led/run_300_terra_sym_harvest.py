@@ -33,6 +33,8 @@ COLS = [
     "sim_device", "sim_pins", "pin_count", "temp_operating_min",
     "temp_operating_max", "temp_storage_min", "temp_storage_max",
     "temp_soldering", "color",
+    "wavelength_nm", "forward_voltage_v", "current_max_ma",
+    "luminous_intensity", "viewing_angle",
 ]
 
 PARTS = [
@@ -52,6 +54,10 @@ PARTS = [
         "sim_device": "D", "sim_pins": "1=K 2=A",
         "temp_operating_min": -40, "temp_operating_max": 100,
         "temp_storage_min": -40, "temp_storage_max": 100, "temp_soldering": 260,
+        # HSMx-A4xx DS: HSML row, U40 intensity bin (450-1125 mcd @ 50 mA).
+        "wavelength_nm": "605", "forward_voltage_v": "2.2 V",
+        "current_max_ma": "70 mA", "luminous_intensity": "450-1125 mcd",
+        "viewing_angle": "120 deg",
     },
     {
         "unique_id": "Broadcom-ASMT-SWB5-NW703",
@@ -69,6 +75,9 @@ PARTS = [
         "sim_device": "D", "sim_pins": "1=K 2=A",
         "temp_operating_min": -40, "temp_operating_max": 100,
         "temp_storage_min": -40, "temp_storage_max": 100, "temp_soldering": 260,
+        # ASMT-SWB5-Nxxxx DS: white, wavelength_nm left NULL. Iv 1400-2850 mcd @ 30 mA.
+        "forward_voltage_v": "3.2 V", "current_max_ma": "30 mA",
+        "luminous_intensity": "1400-2850 mcd", "viewing_angle": "120 deg",
     },
     {
         # FIX: manufacturer "Kingsbright" -> "Kingbright" (datasheet is kingbrightusa.com).
@@ -85,6 +94,10 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2,
         "sim_device": "D", "sim_pins": "1=K 2=A", "pin_count": "4",
         "temp_operating_min": -40, "temp_operating_max": 85,
+        # Dual-color: datasheet gives per-die wavelength/Vf/Iv (Green ldom 570nm,
+        # Vf 2.1V, 50mcd; Yellow ldom 590nm, Vf 2.0V, 120mcd) -> left NULL. Only the
+        # shared If max (30 mA) and viewing angle (120 deg) recorded.
+        "current_max_ma": "30 mA", "viewing_angle": "120 deg",
     },
     {
         "unique_id": "Dialight-550-0205F",
@@ -102,6 +115,10 @@ PARTS = [
         "sim_device": "D", "sim_pins": "1=K 2=A",
         "temp_operating_min": -40, "temp_operating_max": 100,
         "temp_storage_min": -40, "temp_storage_max": 100, "temp_soldering": 260,
+        # Dialight C-17264 family table, 550-0205F GREEN DIFFUSED row.
+        "wavelength_nm": "570", "forward_voltage_v": "2.1 V",
+        "current_max_ma": "30 mA", "luminous_intensity": "60 mcd",
+        "viewing_angle": "60 deg",
     },
     {
         "unique_id": "Dialight-550-3507F",
@@ -139,6 +156,11 @@ PARTS = [
         "sim_device": "D", "sim_pins": "1=K 2=A",
         "temp_operating_min": -40, "temp_operating_max": 85,
         "temp_storage_min": -40, "temp_storage_max": 85, "temp_soldering": 260,
+        # Kingbright APG1608QBC/D DS: ldom 465nm, Vf 3.3V typ, Iv 100mcd typ @ 20mA,
+        # If(DC) max 30mA, viewing angle 130 deg.
+        "wavelength_nm": "465", "forward_voltage_v": "3.3 V",
+        "current_max_ma": "30 mA", "luminous_intensity": "100 mcd",
+        "viewing_angle": "130 deg",
     },
 ]
 

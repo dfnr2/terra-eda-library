@@ -24,6 +24,7 @@ COLS = [
     "kicad_footprint", "rohs", "allow_substitution", "tracking",
     "source", "dump_priority", "tier", "keywords", "pin_count",
     "color", "wavelength_nm", "luminous_intensity",
+    "forward_voltage_v", "current_max_ma", "viewing_angle",
 ]
 
 PARTS = [
@@ -41,6 +42,9 @@ PARTS = [
         "source": None, "dump_priority": 0, "tier": 2,
         "keywords": "led,green,optical,smd", "pin_count": "2",
         "color": "Green", "wavelength_nm": "525", "luminous_intensity": "360 mcd",
+        # Everlight 19-219 DS: Vf 2.9V typ @ 5mA, If max 25mA, 2theta-1/2 130 deg.
+        "forward_voltage_v": "2.9 V", "current_max_ma": "25 mA",
+        "viewing_angle": "130 deg",
     },
 ]
 

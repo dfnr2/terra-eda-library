@@ -29,6 +29,8 @@ COLS = [
     "tracking", "standards_version", "source", "dump_priority", "tier",
     "pin_count", "temp_operating_min", "temp_operating_max", "temp_storage_min",
     "temp_storage_max", "v_ce_ds_max", "i_c_d_max", "sim_device",
+    "transistor_type", "channels", "power_dissipation", "rds_on", "vgs_th",
+    "transition_freq", "temp_junction_max",
 ]
 
 PARTS = [
@@ -48,6 +50,11 @@ PARTS = [
         "temp_operating_min": -40, "temp_operating_max": 150,
         "temp_storage_min": -55, "temp_storage_max": 150,
         "v_ce_ds_max": "28V", "i_c_d_max": "5A", "sim_device": None,
+        "transistor_type": "nmos", "channels": 1,
+        "power_dissipation": "1.7W (Ta=85C, Tj<150C)",
+        "rds_on": "60mOhm max @ Vin=4.5V, Tj=150C (30mOhm typ @ 25C)",
+        "vgs_th": None, "transition_freq": None,
+        "temp_junction_max": "150C",
     },
     {
         "unique_id": "Diodes, Inc.-DMP3099L",
@@ -81,6 +88,11 @@ PARTS = [
         "temp_operating_min": -55, "temp_operating_max": 150,
         "temp_storage_min": -55, "temp_storage_max": 150,
         "v_ce_ds_max": "20V", "i_c_d_max": "4.2A", "sim_device": "NMOS",
+        "transistor_type": "nmos", "channels": 1,
+        "power_dissipation": "1.25W (Ta=25C)",
+        "rds_on": "0.045Ohm max @ Vgs=4.5V, Id=4.2A",
+        "vgs_th": "0.60V min / 1.2V max", "transition_freq": None,
+        "temp_junction_max": "150C",
     },
 ]
 

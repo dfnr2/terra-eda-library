@@ -98,8 +98,8 @@ PARTS = [
         "part_locator": "DIODE ROHM RFN10TB4SNZC9 430V 10A",
         "mpn": "RFN10TB4SNZC9", "manufacturer": "ROHM", "package": "TO-220FN-2",
         "value": "RFN10TB4SNZC9",
-        "description": "General Purpose DIode, fast recovery, Vf 430V, Iav 10A",
-        "datasheet": "RFN10TB4SNZC9",
+        "description": "General-purpose fast-recovery rectifier, Vr 430V, Vf 1.55V @ 10A, Iav 10A, trr 30ns",
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/rohm/rfn10tb4snz.pdf",
         "manufacturer_link": "https://www.rohm.com/products/diodes/fast-recovery-diodes/standard/rfn10tb4snz-product",
         "kicad_symbol": "terra_sym:DIODE ROHM RFN10TB4SNZC9 430V 10A",
         "kicad_footprint": "Package_TO_SOT_THT:TO-220-2_Vertical",
@@ -107,7 +107,9 @@ PARTS = [
         "rohs_document_link": "https://fscdn.rohm.com/en/techdata_basic/diode/rohs-elv/ROHS_ELV_Diode-e.pdf",
         "allow_substitution": "Yes", "tracking": "No", "standards_version": "1.1",
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "2",
-        "temp_storage_min": -55, "temp_storage_max": 150, "current_rating": "10 Avg",
+        "temp_operating_max": 150, "temp_storage_min": -55, "temp_storage_max": 150,
+        "diode_type": "rectifier", "voltage_rating": "430V", "forward_voltage": "1.55V",
+        "forward_current": "10A", "current_rating": "10A",
     },
     {
         "unique_id": "Rectron-FR204-B",
@@ -125,6 +127,8 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "2",
         "temp_operating_min": -55, "temp_operating_max": 150,
         "temp_storage_min": -55, "temp_storage_max": 150, "current_rating": "2A",
+        "diode_type": "fast-recovery", "voltage_rating": "400V",
+        "forward_voltage": "1.3V", "forward_current": "2A",
     },
     {
         "unique_id": "Vishay-VSSAF510-M3/H",
@@ -142,6 +146,8 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2,
         "temp_operating_min": -65, "temp_operating_max": 150,
         "temp_storage_min": -65, "temp_storage_max": 150, "diode_type": "schottky",
+        "voltage_rating": "100V", "forward_voltage": "0.75V",
+        "forward_current": "5A", "current_rating": "5A",
     },
     {
         "unique_id": "Vishay-VSSAF512",
@@ -159,6 +165,8 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2,
         "temp_operating_min": -65, "temp_operating_max": 150,
         "temp_storage_min": -65, "temp_storage_max": 150, "diode_type": "schottky",
+        "voltage_rating": "120V", "forward_voltage": "0.88V",
+        "forward_current": "5A", "current_rating": "5A",
     },
     {
         "unique_id": "Vishay-VSSB410S",
@@ -176,6 +184,8 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2,
         "temp_operating_min": -65, "temp_operating_max": 150,
         "temp_storage_min": -65, "temp_storage_max": 150, "diode_type": "schottky",
+        "voltage_rating": "100V", "forward_voltage": "0.77V", "forward_current": "4A",
+        "current_rating": "4A",
     },
 ]
 

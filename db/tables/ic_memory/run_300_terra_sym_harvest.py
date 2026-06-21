@@ -24,7 +24,8 @@ COLS = [
     "kicad_footprint", "rohs", "rohs_document_link", "allow_substitution",
     "tracking", "standards_version", "source", "dump_priority", "tier",
     "pin_count", "temp_operating_min", "temp_operating_max", "temp_storage_min",
-    "temp_storage_max", "memory_type",
+    "temp_storage_max", "memory_type", "capacity", "word_size", "speed",
+    "interface", "persistence_cycles", "persistence_years",
 ]
 
 PARTS = [
@@ -45,6 +46,9 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "5",
         "temp_operating_min": -40, "temp_operating_max": 85,
         "temp_storage_min": -40, "temp_storage_max": 85, "memory_type": "EEPROM",
+        "capacity": "32 Kbit", "word_size": "8-bit", "speed": "400 kHz",
+        "interface": "I2C", "persistence_cycles": "1M",
+        "persistence_years": "200 years",
     },
 ]
 
