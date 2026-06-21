@@ -31,6 +31,10 @@ def render(table: str, cfg: dict) -> str:
             l = f"    tier INTEGER DEFAULT {cfg['tier_default']}"
         elif s.startswith("dump_priority INTEGER"):
             l = f"    dump_priority INTEGER DEFAULT {cfg['dump_priority_default']}"
+        elif s.startswith("sim_device TEXT") and cfg.get("sim_device"):
+            l = f"    sim_device TEXT DEFAULT '{cfg['sim_device']}'"
+        elif s.startswith("sim_pins TEXT") and cfg.get("sim_pins"):
+            l = f"    sim_pins TEXT DEFAULT '{cfg['sim_pins']}'"
         out.append(l.rstrip(","))
     frag = _lines((TYPES / f"{cfg['type']}.sql").read_text())
     cols = [c.rstrip(",") for c in out + frag]

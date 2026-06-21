@@ -58,8 +58,8 @@ def create_field_config(column: str) -> Dict:
         'unique_id',  # Internal primary key (used as key field, not displayed)
         'part_locator',  # Internal database locator
         'altium_symbol', 'altium_footprint',  # Not relevant for KiCad
-        'sim_model_type', 'sim_device', 'sim_pins', 'sim_model_file', 'sim_params',  # SPICE internals
         'source', 'dump_priority',  # Internal dump system metadata
+        'description',  # KiCad's special Description attr -> library property, not a field
         'exclude_from_bom',  # Handled as library-level property
         'tier',  # tier scoping internal
         'keywords',  # surfaced as the Keywords library property, not a field
@@ -92,6 +92,13 @@ def create_field_config(column: str) -> Dict:
         'created_at': 'Built On',
         'updated_at': 'Updated On',
         'created_by': 'Created By',
+        # SPICE model -> KiCad's reserved Sim.* field names (hidden; carry the
+        # simulation model from the DB to KiCad instead of being dropped).
+        'sim_device': 'Sim.Device',
+        'sim_model_type': 'Sim.Type',
+        'sim_pins': 'Sim.Pins',
+        'sim_params': 'Sim.Params',
+        'sim_model_file': 'Sim.Library',
     }
 
     # Convert column name to display name
