@@ -51,6 +51,22 @@ PARTS = [
         "pin_count": "2", "directionality": "unidirectional", "standoff_voltage": "18V",
         "keywords": "tvs,esd,protection,uni",
     },
+    {
+        # Re-homed from the diodes table, where it was the junk 'Unknown-UNKNOWN'
+        # row. Identified as the Nexperia PESD3V3L4UW low-cap quad ESD array.
+        "unique_id": "Nexperia-PESD3V3L4UW",
+        "part_locator": "esd-array-4ch-3v3-uni-sot665",
+        "mpn": "PESD3V3L4UW", "manufacturer": "Nexperia",
+        "package": "SOT-665", "value": "3.3V ESD array",
+        "description": "Nexperia PESD3V3L4UW low-capacitance quadruple unidirectional ESD protection array, 3.3V, common anode, SOT-665",
+        "datasheet": "https://assets.nexperia.com/documents/data-sheet/PESDXL4UF_G_W.pdf",
+        "manufacturer_link": "https://www.nexperia.com",
+        "kicad_symbol": "terra_sym:DIODE_ARRAY PESD3V3L4UW",
+        "kicad_footprint": "Package_TO_SOT_SMD:SOT-665",
+        "pin_count": "6", "directionality": "unidirectional", "standoff_voltage": "3.3V",
+        "channels": 4,
+        "keywords": "esd,array,protection,low-capacitance,common-anode,4-channel",
+    },
 ]
 
 
