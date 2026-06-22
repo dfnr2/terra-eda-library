@@ -246,7 +246,7 @@
 		(layers "F.Cu" "F.Paste" "F.Mask")
 		(uuid "e19c8c60-3cbf-4cb1-b5d5-f9e9071a18b7")
 	)
-	(model "${TERRA_EDA_LIB}/assets/3dmodels/legacy.3dshapes/24LC32AT-I_OT.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/SOT-23-5.step"
 		(offset
 			(xyz 0 0 0)
 		)

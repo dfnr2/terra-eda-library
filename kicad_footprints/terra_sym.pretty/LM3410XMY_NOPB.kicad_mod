@@ -569,7 +569,7 @@
 		(uuid "0a621cc2-1f5c-4f35-89c9-18a906ad55b3")
 	)
 	(embedded_fonts no)
-	(model "${TERRA_EDA_LIB}/assets/3dmodels/legacy.3dshapes/LM3410XMY_NOPB.stp"
+	(model "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/MSOP-8_3x3mm_P0.65mm.step"
 		(offset
 			(xyz 0 0 0)
 		)
