@@ -1,4 +1,4 @@
-(footprint "ASMT-SWB5-NW703" (version 20211014) (generator pcbnew)
+(footprint "Broadcom_ASMT-SWB5-NW703" (version 20211014) (generator pcbnew)
   (layer "F.Cu")
   (tedit 620B0E2A)
   (attr smd)

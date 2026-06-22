@@ -1,4 +1,4 @@
-(footprint "Texas_DCT0008A_SSOP-8_2.95x2.8mm_P0.65mm"
+(footprint "TI_DCT0008A_SSOP-8_2.95x2.8mm_P0.65mm"
 	(version 20241229)
 	(generator "pcbnew")
 	(generator_version "9.0")

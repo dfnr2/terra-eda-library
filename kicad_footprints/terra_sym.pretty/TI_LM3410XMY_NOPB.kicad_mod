@@ -1,4 +1,4 @@
-(footprint "LM3410XMY_NOPB"
+(footprint "TI_LM3410XMY_NOPB"
 	(version 20241229)
 	(generator "pcbnew")
 	(generator_version "9.0")

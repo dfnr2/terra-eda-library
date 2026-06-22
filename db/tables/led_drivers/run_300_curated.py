@@ -75,7 +75,7 @@ PARTS = [
         "datasheet": "${TERRA_EDA_LIB}/datasheets/ti/lm3410.pdf",
         "manufacturer_link": "https://www.ti.com/store/ti/en/p/product/?p=LM3410XMY/NOPB",
         "kicad_symbol": "terra_sym:LED DRIVER Texas Instruments LM3410XMY/NOPB",
-        "kicad_footprint": "terra_sym:LM3410XMY_NOPB",
+        "kicad_footprint": "terra_sym:TI_LM3410XMY_NOPB",
         "lifecycle_status": "Active", "rohs": "Yes", "source": "terra_sym",
         "dump_priority": 0, "tier": 2, "pin_count": "8",
         "temp_operating_min": -40, "temp_operating_max": 125,

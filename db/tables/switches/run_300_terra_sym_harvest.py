@@ -38,7 +38,7 @@ PARTS = [
         "datasheet": "${TERRA_EDA_LIB}/datasheets/ck/df-series.pdf",
         "manufacturer_link": "https://www.ckswitches.com/products/switches/product-details/Rocker/DF/DF62J12S2AHQA/",
         "kicad_symbol": "terra_sym:SW DPDT CK DF62J12S2AHQAA ",
-        "kicad_footprint": "terra_sym:DF62J12S2AHQAA",
+        "kicad_footprint": "terra_sym:CK_DF62J12S2AHQAA",
         "rohs": "Yes",
         "rohs_document_link": "https://www.mouser.com/catalog/additional/CK_Components_6111_RoHS_Certificate.pdf",
         "allow_substitution": "No", "tracking": "No", "standards_version": "1.1",
