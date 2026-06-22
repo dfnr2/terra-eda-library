@@ -246,7 +246,7 @@
 		(uuid "3b697454-32ce-412c-a273-5f77dbabcf53")
 	)
 	(embedded_fonts no)
-	(model "${TERRA_EDA_LIB}/assets/3dmodels/legacy.3dshapes/SM712-02HTG.stp"
+	(model "${TERRA_EDA_LIB}/assets/3dmodels/terra-diodes.3dshapes/SM712-02HTG.stp"
 		(offset
 			(xyz 0 0 0.61)
 		)

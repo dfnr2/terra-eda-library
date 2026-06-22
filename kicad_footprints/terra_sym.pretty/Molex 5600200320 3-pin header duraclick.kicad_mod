@@ -21,7 +21,7 @@
   (pad "3" smd rect (at 2 -3.548) (size 1.2 2.2) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 3b9ce6b0-047c-4e71-81a7-b0a5c13aa4d2))
   (pad "M" smd rect (at -5.6 2.032) (size 2 4.2) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 01106a52-6b7d-40fd-b165-c927be1f6a1d))
   (pad "M" smd rect (at 5.6 2.032) (size 2 4.2) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 2952439a-4d93-45a3-a998-2b2fce2c5fe9))
-  (model "${TERRA_EDA_LIB}/assets/3dmodels/legacy.3dshapes/5600200320.stp"
+  (model "${TERRA_EDA_LIB}/assets/3dmodels/terra-connectors.3dshapes/560020-0320.stp"
     (offset (xyz 0 0 3))
     (scale (xyz 1 1 1))
     (rotate (xyz -90 0 0))

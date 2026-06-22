@@ -117,7 +117,7 @@
 		(uuid "2952439a-4d93-45a3-a998-2b2fce2c5fe9")
 	)
 	(embedded_fonts no)
-	(model "${TERRA_EDA_LIB}/assets/3dmodels/legacy.3dshapes/5600200320.stp"
+	(model "${TERRA_EDA_LIB}/assets/3dmodels/terra-connectors.3dshapes/560020-0320.stp"
 		(offset
 			(xyz 0 0 3.1)
 		)

@@ -151,7 +151,7 @@
 		(uuid "4c71b9bb-be46-454d-a6f7-e76ef8e43736")
 	)
 	(embedded_fonts no)
-	(model "${TERRA_EDA_LIB}/assets/3dmodels/legacy.3dshapes/Keystone-5017.step"
+	(model "${TERRA_EDA_LIB}/assets/3dmodels/terra-test-points.3dshapes/Keystone-5017.step"
 		(offset
 			(xyz 0.5 0.5 0)
 		)
