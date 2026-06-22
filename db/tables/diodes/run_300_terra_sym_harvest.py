@@ -67,7 +67,7 @@ PARTS = [
         "datasheet": "${TERRA_EDA_LIB}/datasheets/nexperia/pne20020er.pdf",
         "manufacturer_link": "https://www.nexperia.com/products/diodes/recovery-rectifiers/PNE20020ER.html",
         "kicad_symbol": "terra_sym:DIODE Nexperia PNE20020ERX 200V 2.8A Fast Recovery SOD123",
-        "kicad_footprint": "terra_sym:Nexperia SOD-123W",
+        "kicad_footprint": "Diode_SMD:Nexperia_CFP3_SOD-123W",
         "rohs": "Yes",
         "rohs_document_link": "https://4donline.ihs.com/images/VipMasterIC/IC/RECT/RECT-E-A0007327236/RECT-E-A0007327236-1.pdf?hkey=6D0214268300F1406B835FE51CB13195",
         "allow_substitution": "Yes", "tracking": "No", "standards_version": "1.1",
