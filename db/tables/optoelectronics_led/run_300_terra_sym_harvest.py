@@ -94,9 +94,9 @@ PARTS = [
         "source": "terra_sym", "dump_priority": 0, "tier": 2,
         "sim_device": "D", "sim_pins": "1=K 2=A", "pin_count": "4",
         "temp_operating_min": -40, "temp_operating_max": 85,
-        # Dual-color: datasheet gives per-die wavelength/Vf/Iv (Green ldom 570nm,
-        # Vf 2.1V, 50mcd; Yellow ldom 590nm, Vf 2.0V, 120mcd) -> left NULL. Only the
-        # shared If max (30 mA) and viewing angle (120 deg) recorded.
+        # Dual green/yellow die: per-die values listed green/yellow.
+        "wavelength_nm": "570/590", "forward_voltage_v": "2.1/2.0 V",
+        "luminous_intensity": "50/120 mcd",
         "current_max_ma": "30 mA", "viewing_angle": "120 deg",
     },
     {

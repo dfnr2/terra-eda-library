@@ -46,7 +46,7 @@ PARTS = [
         "datasheet": "${TERRA_EDA_LIB}/datasheets/onsemi/nud3124.pdf",
         "manufacturer_link": "https://www.onsemi.com/products/motor-control/motor-drivers/load-drivers-relay-drivers/nud3124",
         "kicad_symbol": "terra_sym:IC_DRIVER DUAL FET DRIVER SZNUD3124DMT1G",
-        "kicad_footprint": "terra_sym:SC-74-6_1.5x2.9mm_P0.95mm",
+        "kicad_footprint": "terra_sym:onsemi_SC-74-6_1.5x3.0mm_P0.95mm",
         "rohs": "Yes",
         "rohs_document_link": "https://4donline.ihs.com/images/VipMasterIC/IC/ONSM/ONSM-E-A0015053231/ONSM-E-A0015053231-1.pdf?hkey=6D0214268300F1406B835FE51CB13195",
         "allow_substitution": "No", "tracking": "No", "standards_version": "1.1",
@@ -240,7 +240,7 @@ PARTS = [
         "kicad_footprint": "Package_SO:SOIC-20W_7.5x12.8mm_P1.27mm",
         "rohs": "Yes", "rohs_document_link": TI_ISO_CR,
         "allow_substitution": "Yes", "tracking": "No", "standards_version": "1.1",
-        "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "16",
+        "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "20",
         "temp_operating_min": -40, "temp_operating_max": 125,
         "temp_storage_min": -65, "temp_storage_max": 150,
         # ISOW1412 (ISOW14x2, SLLSF86C): single isolated full-duplex RS-485/422

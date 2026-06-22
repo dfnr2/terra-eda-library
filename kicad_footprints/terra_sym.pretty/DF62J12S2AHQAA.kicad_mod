@@ -1,0 +1,478 @@
+(footprint "DF62J12S2AHQAA"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "DPDT Rocker")
+	(property "Reference" "SW**"
+		(at -11.342 -0.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "b4ea9a73-9e69-488b-ba90-daeaab101e40")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "Value"
+		(at -11.342 1 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "0b016e14-8329-480e-886c-a384d632ca49")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" "https://www.ckswitches.com/media/1443/df.pdf"
+		(at -11.342 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "7452a165-ab6b-412d-86b8-6d8d52bdd2b4")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" "DPDT Horizontal Rocker PCB TH"
+		(at -11.342 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "21fce281-7f4a-4853-bd4e-058df0259ca0")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Allow Substitution" "No"
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "0eec5fd4-3c02-4bf7-aada-f619593e9439")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "BOM Comment" ""
+		(at -5.5 0 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "46d1db30-aedc-48fb-ae4d-ae8e5bcf41be")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Class" ""
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "6856fc86-f9ac-476d-981e-fb4260267d01")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Component Type" "Switch"
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "ee9ba509-c338-4076-9dd1-822960d0ba44")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Component Value" "DPDT rocker"
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "a9f4fc1f-e575-41dd-998f-4b71ed703e2f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Current Rating" "16A"
+		(at 17.653 27.432 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "f32d3dd9-39bf-4e57-b214-00abf1ce3a9c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Fitted" "Yes"
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "4d013a6c-7f28-4553-b062-8077249eeb54")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Manufacturer" "CK Components"
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "27b2120d-3475-4f93-a5a6-7da07354e8ef")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Manufacturer Link" "https://www.ckswitches.com/products/switches/product-details/Rocker/DF/DF62J12S2AHQA/"
+		(at -1.524 35.433 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "6b6fb205-c525-4336-9fbe-2438186aa1f2")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Manufacturer PN" "DF62J12S2AHQA"
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "79b0c1d4-3faf-4f86-b8a2-9a2564fc254a")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Material" "If applicable"
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "2d281a5b-d62a-413c-80c8-fa3a322a4ba9")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Number of Pins" "4"
+		(at -8.128 26.162 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "90a56239-4fc3-40ca-9c2d-fdddea25cd2d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Package" "n/a"
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "3e9d2632-4fd4-4868-b735-11a0ebb3befb")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Package Variant" "n/a"
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "ebccd37d-1777-4e73-a395-d799b0e875c5")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "RoHS" "Yes"
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "80c5adbf-5cf1-4c2e-a161-20514fee1d34")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "RoHS China Document Link" ""
+		(at -5.5 0 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "0db613da-ed21-4b21-bad6-4d57c08c6bc2")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "RoHS Europe Document Link" "https://www.mouser.com/catalog/additional/CK_Components_6111_RoHS_Certificate.pdf"
+		(at -1.524 35.433 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "a06727fe-62d6-456e-a83d-5e7361bdd0fc")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Standards Version" "1.1"
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "955e6972-1061-428c-9573-54f9a2615e1f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Temp (Operating)" "-20C/85C"
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "c1bcf211-33c2-4152-b1c0-4e27b95956cb")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Temp (Soldering)" "If applicable"
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "e113c587-d7a7-4ef3-b17c-1e0b2b320b75")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Temp (Storage)" "If applicable"
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "983a8b94-5fb9-4a05-a4e3-5fa4bedeef7a")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Temp Coeff." "n/a"
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "8a0323fb-0f0e-49ec-bda3-257555bcac04")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Tolerance" "n/a"
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "f9d742c9-5717-49fd-8401-f71ea775aba1")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Tracking" "No"
+		(at 4.318 30.607 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "a94370a3-8a0c-44dc-bfc9-32730a0aaed5")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_rect
+		(start -25.5 15)
+		(end 3.5 -15)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(fill no)
+		(layer "B.SilkS")
+		(uuid "ec1444a5-491f-45e4-bd91-7626f737ecd5")
+	)
+	(fp_rect
+		(start -26.5 16)
+		(end 4.5 -16)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(fill no)
+		(layer "B.CrtYd")
+		(uuid "df2ce7c3-9b80-4b8c-bdce-8883de01f2ab")
+	)
+	(fp_text user "${REFERENCE}"
+		(at -13.95 17.1 180)
+		(unlocked yes)
+		(layer "B.Fab")
+		(uuid "5c1711ad-ce1a-425b-91b8-e492c1d84ee5")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(fp_text user "${REFERENCE}"
+		(at -21.248 -17.78 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "508959a8-c8f0-44dc-9b5f-b882661b05fa")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at 0 -5.9436)
+		(size 3.302 3.302)
+		(drill 1.905)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "ac4eae6f-3cd9-40a1-af2d-4752e7801c44")
+	)
+	(pad "2" thru_hole circle
+		(at 0 5.9436)
+		(size 3.302 3.302)
+		(drill 1.905)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "57f4e687-7933-4e02-9560-8b2692bfcbbe")
+	)
+	(pad "3" thru_hole circle
+		(at 4.953 -5.9436)
+		(size 3.302 3.302)
+		(drill 1.905)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "66aac60e-76e3-465d-afaa-babd9855b1fb")
+	)
+	(pad "4" thru_hole circle
+		(at 4.953 5.9436)
+		(size 3.302 3.302)
+		(drill 1.905)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "d9e7e655-be61-4d51-b4a8-1ff6f58408ce")
+	)
+	(pad "5" thru_hole circle
+		(at -12.7254 -11.3792)
+		(size 3.302 3.302)
+		(drill 1.905)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "51e96b9c-d16d-4280-8b93-337cb85c278a")
+	)
+	(pad "5" thru_hole circle
+		(at -12.7254 11.3792)
+		(size 3.302 3.302)
+		(drill 1.905)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "a1c687ea-63fa-457f-ade1-c5c151b92da0")
+	)
+	(embedded_fonts no)
+	(model "${TERRA_EDA_LIB}/assets/3dmodels/legacy.3dshapes/DF62J12S2AHQA.stp"
+		(offset
+			(xyz -16.5 0 6)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 180 -90)
+		)
+	)
+)
