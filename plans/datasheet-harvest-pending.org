@@ -1,0 +1,36 @@
+#+TITLE: Harvest worklist
+#+STARTUP: showall
+
+* Datasheets — DONE
+
+All twelve previously-blocked parts have been harvested (params filled from the
+datasheet) and their PDFs filed into =datasheets/<mfr>/= with the =datasheet=
+field repointed to the local store:
+
+  MMBD914-7-F, MBR0530T1G, DMP3099L, SRR6603-100ML, SRR1210-680M, LTC2851IMS8,
+  MAX3488EESA+, SP490ECN-L, SZNUD3124DMT1G, ISOW1412 (+ ISO1432/ISOW1432 added),
+  DF62J12S2AHQAA, 550-3507F.
+
+Notes: DF62 actuation-force is not published (left NULL). SRR1210 uses KiCad's
+shipped =Inductor_SMD:L_Bourns_SRR1210A=.
+
+* 3D models — partial
+
+21 of the missing =legacy.3dshapes= models were harvested from the hotwire /
+target-led-kicad trees. The following ~29 are referenced by terra_sym.pretty
+footprints but were *not* found in those trees — they need another source dir or
+to be created (several are for inactive/legacy footprints, so triage first):
+
+  0015912040, 14-37FSV30-PP-0.750, 1725656, 1725669, 1725672, 2082940040,
+  24LC32AT-I_OT, 5040500891, 53254-0470, 550XX05F, 5600200820, APG1608,
+  cap-el-th-w13xh29-p5, CUI_DEVICES_PJ-202BH, DF3-8P-2DSA-wh, DFN1006-2,
+  dialight-550-35xF, LM3410XMY_NOPB, mill-max-399-10-108-10-007000,
+  mill-max-829-22-008-20-002101, molex-1x8-micro-latch-532530870, PCA9306DCTR,
+  RRC-MC20-90-10, SOD123W, SRR6603-100ML, STX-3500-3NTR_rA7, toradex-mallow,
+  toradex-yavia, Vishay-SLIMSMA-DO-221AC
+
+* Small follow-ups
+- Nexperia PESD3V3L4UW: deep TVS params (clamping/peak-pulse/capacitance/ESD kV)
+  and a manufacturer_link are still NULL — harvest from the Nexperia datasheet.
+- APHBM2012 / 550-3507F bi-colour values are listed as green/yellow & red/green
+  slash pairs in single columns (agreed convention).
