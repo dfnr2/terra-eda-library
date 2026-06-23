@@ -20,7 +20,7 @@ SYMBOL = "Device:CP"
 # Parts with a curated terra symbol (correct body/lead geometry) override the
 # generic Device:CP, keyed by full MPN.
 SYMBOL_OVERRIDES = {
-    "EKYC250ELL392MK30S": "terra_sym:CAP_TH chemicon EKYC250ELL392MK30S 3900 uF 25V",
+    "EKYC250ELL392MK30S": "terra-capacitors-electrolytic-th:CAP_TH chemicon EKYC250ELL392MK30S 3900 uF 25V",
 }
 
 # case diameter (mm) -> (lead spacing mm, KiCad radial CP footprint)
