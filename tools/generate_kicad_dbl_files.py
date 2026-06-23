@@ -51,7 +51,7 @@ def get_display_name(table_name: str) -> str:
     return name_map.get(table_name, table_name.replace('_', ' ').title())
 
 
-def create_field_config(column: str) -> Dict:
+def create_field_config(column: str, table_name: str = "") -> Dict:
     """Create field configuration for a column."""
     # Skip internal/metadata columns and columns handled as library-level properties
     skip_cols = {
@@ -75,7 +75,12 @@ def create_field_config(column: str) -> Dict:
         'current_rating', 'dielectric', 'color', 'wavelength'
     }
 
-    visible_on_add = column in {'value'}
+    # Value is always annotated on the schematic. For voltage-significant
+    # capacitors (electrolytic, tantalum) the voltage rating is also annotated as
+    # its own field -- so those generators drop the voltage from Value. Jellybean
+    # MLCC keeps voltage off the sheet (chooser/BOM only).
+    special_cap = 'electrolytic' in table_name or 'tantalum' in table_name
+    visible_on_add = column in {'value'} or (column == 'voltage_rating' and special_cap)
 
     # Display name mappings
     display_name_map = {
@@ -139,7 +144,7 @@ def create_library_config(conn: sqlite3.Connection, table_name: str) -> Dict:
     # Create field configurations
     fields = []
     for col in columns:
-        field = create_field_config(col)
+        field = create_field_config(col, table_name)
         if field:
             fields.append(field)
 

@@ -195,7 +195,7 @@ def row(pn_t, cap, case, esr, ripple):
         "unique_id": f"Nippon_Chemi-Con-{mpn}",
         "part_locator": f"cap-elec-{cap}uf-{v}v-radial-d{dia:g}",
         "mpn": mpn, "manufacturer": MANUFACTURER, "package": "Radial",
-        "value": f"{cap}\u00b5F {v}V",
+        "value": f"{cap}\u00b5F",  # voltage shown via the separate (visible) Voltage Rating field
         "description": (f"Nippon Chemi-Con KYC {cap}\u00b5F {v}V \u00b120% low-ESR "
                         f"aluminum electrolytic, radial THT, {dia:g}\u00d7{length:g}mm"),
         "datasheet": DATASHEET, "manufacturer_link": "https://www.chemi-con.com",
