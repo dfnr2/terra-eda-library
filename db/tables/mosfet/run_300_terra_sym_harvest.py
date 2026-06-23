@@ -3,7 +3,7 @@
 
 These three parts were recovered from the terra_sym.kicad_sym source. They are
 scripted here so a schema change reapplies by rebuild and one parameter set lives
-per part. This is a faithful port: every field -- URLs and the `terra_sym:`-prefixed
+per part. This is a faithful port: every field -- URLs and the `terra-mosfet:`-prefixed
 kicad_symbol/kicad_footprint references -- is carried verbatim with no corrections.
 
 Deferred curation: DMP3099L `rohs_document_link` is still the placeholder 'RoHs
@@ -42,7 +42,7 @@ PARTS = [
         "description": "Smart High-Side Power Switch, PROFET, Single, 30mOhm, 5A, 28V, DSO-8",
         "datasheet": "https://www.infineon.com/dgdl/Infineon-BTS5030-1EJA-DS-v02_20-EN.pdf?fileId=5546d46259d9a4bf015a84f3e686758a",
         "manufacturer_link": "https://www.infineon.com/cms/en/product/power/smart-power-switches/high-side-switches/profet-plus-12v-automotive-smart-high-side-switch/bts5030-1eja/",
-        "kicad_symbol": "terra_sym:IC_SSR Infineon BTS5030-1EJA MOSFET high-side switch 30 mOhm 5A 28V DSO-8",
+        "kicad_symbol": "terra-mosfet:IC_SSR Infineon BTS5030-1EJA MOSFET high-side switch 30 mOhm 5A 28V DSO-8",
         "kicad_footprint": "Package_SO:Infineon_PG-DSO-8-43",
         "rohs": "Yes", "rohs_document_link": IHS_INFN,
         "allow_substitution": "No", "tracking": "No", "standards_version": "1.1",
@@ -63,7 +63,7 @@ PARTS = [
         "description": "P Channel MOSFET, 30V 3.8A SOT-23",
         "datasheet": "${TERRA_EDA_LIB}/datasheets/diodes-inc/dmp3099l.pdf",
         "manufacturer_link": "https://www.diodes.com/part/view/DMP3099L",
-        "kicad_symbol": "terra_sym:MOSFET DMP3099L P-channel 30V 3.8A",
+        "kicad_symbol": "terra-mosfet:MOSFET DMP3099L P-channel 30V 3.8A",
         "kicad_footprint": "Package_TO_SOT_SMD:SOT-23",
         "rohs": "Yes", "rohs_document_link": "RoHs Link",
         "allow_substitution": "Yes", "tracking": "No", "standards_version": "1.1",
@@ -85,7 +85,7 @@ PARTS = [
         "description": "N Channel MOSFET, 30V 3.8A SOT-23",
         "datasheet": "https://www.infineon.com/dgdl/Infineon-IRLML2502-DataSheet-v01_01-EN.pdf?fileId=5546d462533600a401535668048e2606",
         "manufacturer_link": "https://www.infineon.com/cms/en/product/power/mosfet/n-channel/irlml2502/",
-        "kicad_symbol": "terra_sym:MOSFET Infineon IRLM2502 N-channel 4.2A 20V",
+        "kicad_symbol": "terra-mosfet:MOSFET Infineon IRLM2502 N-channel 4.2A 20V",
         "kicad_footprint": "Package_TO_SOT_SMD:SOT-23",
         "rohs": "Yes", "rohs_document_link": IHS_INFN,
         "allow_substitution": "Yes", "tracking": "No", "standards_version": "1.1",

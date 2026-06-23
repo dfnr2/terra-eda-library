@@ -5,15 +5,15 @@ These eight 2-terminal diodes were recovered from the terra_sym source. They are
 scripted here so a schema change reapplies by rebuild. The recovered rows carried
 dump_priority=100 and no tier; both are overridden here to the native convention
 (dump_priority=0, tier=2). Field values are otherwise ported faithfully -- URLs,
-symbol/footprint strings (including any `terra_sym:` prefix, double spaces, and
+symbol/footprint strings (including any `terra-diodes:` prefix, double spaces, and
 trailing spaces) are preserved verbatim.
 
 Deferred curation:
   - ROHM RFN10TB4SNZC9: its datasheet field is a bare MPN 'RFN10TB4SNZC9' (broken,
     needs a real URL); its description says "Vf 430V" which is actually Vr, not Vf.
     (Its `value` was a leftover template string and has been replaced with the MPN.)
-  - The `terra_sym:`-prefixed footprints (PNE20020ER's "terra_sym:Nexperia SOD-123W",
-    VSSAF510 and VSSAF512's "terra_sym:Vishay_SlimSMA_D_DO-221AC") point at a symbol
+  - The `terra-diodes:`-prefixed footprints (PNE20020ER's "terra-diodes:Nexperia SOD-123W",
+    VSSAF510 and VSSAF512's "terra-diodes:Vishay_SlimSMA_D_DO-221AC") point at a symbol
     library and need real footprints.
   - Deep tail params (diode_type / forward_voltage / forward_current) are sparse and
     need a datasheet harvest.
@@ -46,7 +46,7 @@ PARTS = [
         "description": "DIODE SMT/TH 1n914/mmbd914 generic switching",
         "datasheet": "${TERRA_EDA_LIB}/datasheets/diodes-inc/mmbd914.pdf",
         "manufacturer_link": "https://www.diodes.com/part/view/MMBD914",
-        "kicad_symbol": "terra_sym:DIODE MMBD914 small signal switching diode SMT SOT23",
+        "kicad_symbol": "terra-diodes:DIODE MMBD914 small signal switching diode SMT SOT23",
         "kicad_footprint": "Package_TO_SOT_SMD:SOT-23",
         "rohs": "Yes",
         "rohs_document_link": "https://www.diodes.com/assets/Quality-Reliability-Docs/Master_CofC.pdf",
@@ -66,7 +66,7 @@ PARTS = [
         "description": "200V hyperfast recovery rectifier, Vf 0.98V @ 2A, Iav 2A, trr 25ns",
         "datasheet": "${TERRA_EDA_LIB}/datasheets/nexperia/pne20020er.pdf",
         "manufacturer_link": "https://www.nexperia.com/products/diodes/recovery-rectifiers/PNE20020ER.html",
-        "kicad_symbol": "terra_sym:DIODE Nexperia PNE20020ERX 200V 2.8A Fast Recovery SOD123",
+        "kicad_symbol": "terra-diodes:DIODE Nexperia PNE20020ERX 200V 2.8A Fast Recovery SOD123",
         "kicad_footprint": "Diode_SMD:Nexperia_CFP3_SOD-123W",
         "rohs": "Yes",
         "rohs_document_link": "https://4donline.ihs.com/images/VipMasterIC/IC/RECT/RECT-E-A0007327236/RECT-E-A0007327236-1.pdf?hkey=6D0214268300F1406B835FE51CB13195",
@@ -85,7 +85,7 @@ PARTS = [
         "description": "30V 0.5A Schottky Power Rectifier Diode",
         "datasheet": "${TERRA_EDA_LIB}/datasheets/onsemi/mbr0530t1.pdf",
         "manufacturer_link": "https://www.onsemi.com/products/discrete-power-modules/schottky-diodes-schottky-rectifiers/mbr0530",
-        "kicad_symbol": "terra_sym:DIODE OnSemi Schottky 30V 0.5A SOD-123 MBR0530",
+        "kicad_symbol": "terra-diodes:DIODE OnSemi Schottky 30V 0.5A SOD-123 MBR0530",
         "kicad_footprint": "Diode_SMD:D_SOD-123",
         "rohs": "Yes",
         "rohs_document_link": "https://www.mouser.com/catalog/additional/On_Semiconductor_5121_RoHS_Certificate.pdf",
@@ -106,7 +106,7 @@ PARTS = [
         "description": "General-purpose fast-recovery rectifier, Vr 430V, Vf 1.55V @ 10A, Iav 10A, trr 30ns",
         "datasheet": "${TERRA_EDA_LIB}/datasheets/rohm/rfn10tb4snz.pdf",
         "manufacturer_link": "https://www.rohm.com/products/diodes/fast-recovery-diodes/standard/rfn10tb4snz-product",
-        "kicad_symbol": "terra_sym:DIODE ROHM RFN10TB4SNZC9 430V 10A",
+        "kicad_symbol": "terra-diodes:DIODE ROHM RFN10TB4SNZC9 430V 10A",
         "kicad_footprint": "Package_TO_SOT_THT:TO-220-2_Vertical",
         "rohs": "Yes",
         "rohs_document_link": "https://fscdn.rohm.com/en/techdata_basic/diode/rohs-elv/ROHS_ELV_Diode-e.pdf",
@@ -124,7 +124,7 @@ PARTS = [
         "description": "General Purpose DIode, fast recovery, Vf 400V, Iav 2A",
         "datasheet": "https://www.rectron.com/public/product_datasheets/fr201-fr207.pdf",
         "manufacturer_link": "https://www.rectron.com/category/4/50",
-        "kicad_symbol": "terra_sym:DIODE Rectron  FR204-B 400V 2A Fast Recovery",
+        "kicad_symbol": "terra-diodes:DIODE Rectron  FR204-B 400V 2A Fast Recovery",
         "kicad_footprint": "Diode_THT:D_DO-15_P10.16mm_Horizontal",
         "rohs": "Yes",
         "rohs_document_link": "https://4donline.ihs.com/images/VipMasterIC/IC/RECT/RECT-E-A0007327236/RECT-E-A0007327236-1.pdf?hkey=6D0214268300F1406B835FE51CB13195",
@@ -143,8 +143,8 @@ PARTS = [
         "description": "100V 5A Schottky Power Rectifier Diode",
         "datasheet": "https://www.vishay.com/docs/87610/vssaf510.pdf",
         "manufacturer_link": "https://www.vishay.com/en/product/87610/",
-        "kicad_symbol": "terra_sym:DIODE Vishay VSSAF510  Schottky 5A",
-        "kicad_footprint": "terra_sym:Vishay_SlimSMA_D_DO-221AC",
+        "kicad_symbol": "terra-diodes:DIODE Vishay VSSAF510  Schottky 5A",
+        "kicad_footprint": "terra-diodes:Vishay_SlimSMA_D_DO-221AC",
         "rohs": "Yes",
         "rohs_document_link": "https://www.vishay.com/en/how/leadfree/#summary",
         "allow_substitution": "Yes", "tracking": "No", "standards_version": "1.1",
@@ -162,8 +162,8 @@ PARTS = [
         "description": "120V 5A Schottky Power Rectifier Diode",
         "datasheet": "https://www.vishay.com/docs/87611/vssaf512.pdf",
         "manufacturer_link": "https://www.vishay.com/en/product/87611/",
-        "kicad_symbol": "terra_sym:DIODE Vishay VSSAF512  Schottky 5A",
-        "kicad_footprint": "terra_sym:Vishay_SlimSMA_D_DO-221AC",
+        "kicad_symbol": "terra-diodes:DIODE Vishay VSSAF512  Schottky 5A",
+        "kicad_footprint": "terra-diodes:Vishay_SlimSMA_D_DO-221AC",
         "rohs": "Yes",
         "rohs_document_link": "https://www.vishay.com/en/how/leadfree/#summary",
         "allow_substitution": "Yes", "tracking": "No", "standards_version": "1.1",
@@ -181,7 +181,7 @@ PARTS = [
         "description": "100V 4A Schottky Power Rectifier Diode",
         "datasheet": "https://www.vishay.com/docs/89140/vssb410s-e3.pdf",
         "manufacturer_link": "https://www.vishay.com/en/product/89140/",
-        "kicad_symbol": "terra_sym:DIODE Vishay VSSB410S Schottky 4A",
+        "kicad_symbol": "terra-diodes:DIODE Vishay VSSB410S Schottky 4A",
         "kicad_footprint": "Diode_SMD:D_SMB",
         "rohs": "Yes",
         "rohs_document_link": "https://www.vishay.com/en/how/leadfree/#summary",

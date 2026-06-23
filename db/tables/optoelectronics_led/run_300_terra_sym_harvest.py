@@ -14,7 +14,7 @@ Typos corrected (confirmed by each part's own datasheet/other fields): the APHBM
 manufacturer "Kingsbright" -> "Kingbright" (kingbrightusa.com), and the space-wrapped
 " APG1608QBC/D " mpn -> "APG1608QBC/D".
 
-Deferred curation: every `kicad_footprint` is `terra_sym:`-prefixed (points at a symbol
+Deferred curation: every `kicad_footprint` is `terra-optoelectronics:`-prefixed (points at a symbol
 library, needs a real footprint) and the HSML-A401 even borrows the ASMT-SWB5 footprint;
 the APHBM2012 has no footprint at all; deep tail (forward_voltage_v, current_max_ma,
 wavelength_nm, viewing_angle) is NULL pending a datasheet harvest.
@@ -45,8 +45,8 @@ PARTS = [
         "color": "Orange", "description": "Orange SMT LED , PLCC-4 SMT",
         "datasheet": "https://docs.broadcom.com/docs/HSMx-A4xx-xxxxx-SMT-Surface-Mount-LED-Indicator-DS",
         "manufacturer_link": "https://www.broadcom.com/products/leds-and-displays/surface-mount-plcc/plcc-4-leds/flat-top/hsml-a401-u40m1",
-        "kicad_symbol": "terra_sym:LED Broadcom Orange, PLCC-4  HSML-A401-U40M1 ",
-        "kicad_footprint": "terra_sym:Broadcom_ASMT-SWB5-NW703",
+        "kicad_symbol": "terra-optoelectronics:LED Broadcom Orange, PLCC-4  HSML-A401-U40M1 ",
+        "kicad_footprint": "terra-optoelectronics:Broadcom_ASMT-SWB5-NW703",
         "rohs": "Yes",
         "rohs_document_link": "https://www.mouser.com/catalog/additional/Broadcom_Limited_6305_RoHS_Certificate.pdf",
         "allow_substitution": "No", "tracking": "No", "standards_version": "1.1",
@@ -66,8 +66,8 @@ PARTS = [
         "color": "White", "description": "White SMT LED , PLCC-4 SMT",
         "datasheet": "https://docs.broadcom.com/docs/ASMT-SWB5-Nxxxx-DS",
         "manufacturer_link": "https://www.broadcom.com/products/leds-and-displays/surface-mount-plcc/plcc-4-leds/flat-top/asmt-swb5-nw703",
-        "kicad_symbol": "terra_sym:LED Broadcom White, PLCC-4 ASMT-SWB5-NW703",
-        "kicad_footprint": "terra_sym:Broadcom_ASMT-SWB5-NW703",
+        "kicad_symbol": "terra-optoelectronics:LED Broadcom White, PLCC-4 ASMT-SWB5-NW703",
+        "kicad_footprint": "terra-optoelectronics:Broadcom_ASMT-SWB5-NW703",
         "rohs": "Yes",
         "rohs_document_link": "https://www.mouser.com/catalog/additional/Broadcom_6305_RoHS_Certificate.pdf",
         "allow_substitution": "No", "tracking": "No", "standards_version": "1.1",
@@ -87,7 +87,7 @@ PARTS = [
         "color": "Green/Yellow", "description": "Dual Green/Yellow LED, SMD",
         "datasheet": "https://www.kingbrightusa.com/images/catalog/SPEC/APHBM2012CGKSYKC.pdf",
         "manufacturer_link": "https://www.kingbrightusa.com/product.asp?catalog_name=LED&product_id=APHBM2012CGKSYKC",
-        "kicad_symbol": "terra_sym:LED DUAL APHBM2012CGKSYKC ",
+        "kicad_symbol": "terra-optoelectronics:LED DUAL APHBM2012CGKSYKC ",
         "rohs": "Yes",
         "rohs_document_link": "https://www.mouser.com/catalog/additional/Kingbright_6040_RoHS_Certificate.pdf",
         "allow_substitution": "Yes", "tracking": "No", "standards_version": "1.1",
@@ -106,8 +106,8 @@ PARTS = [
         "color": "Green", "description": "CBI 1x1 5mm green LED",
         "datasheet": "https://s3-us-west-2.amazonaws.com/catsy.557/C17264.pdf",
         "manufacturer_link": "https://www.dialightsignalsandcomponents.com/550-series-cbi-5mm-1x1-g/#resources-btn",
-        "kicad_symbol": "terra_sym:LED Dialight CBI 5mm Green TH",
-        "kicad_footprint": "terra_sym:Dialight_550-series",
+        "kicad_symbol": "terra-optoelectronics:LED Dialight CBI 5mm Green TH",
+        "kicad_footprint": "terra-optoelectronics:Dialight_550-series",
         "rohs": "Yes",
         "rohs_document_link": "https://www.dialightsignalsandcomponents.com/550-series-cbi-5mm-1x1-g/#resources-btn",
         "allow_substitution": "Yes", "tracking": "No", "standards_version": "1.1",
@@ -132,8 +132,8 @@ PARTS = [
         "current_max_ma": "25 mA", "luminous_intensity": "5/8 mcd",
         "viewing_angle": "65 deg",
         "manufacturer_link": "https://www.dialightsignalsandcomponents.com/550-series-5-mm-cbi-r-g-3-leaded-slope-back-housing/",
-        "kicad_symbol": "terra_sym:LED Dialight CBI 5mm Green/Red Common Cath TH",
-        "kicad_footprint": "terra_sym:Dialight_550-3x07",
+        "kicad_symbol": "terra-optoelectronics:LED Dialight CBI 5mm Green/Red Common Cath TH",
+        "kicad_footprint": "terra-optoelectronics:Dialight_550-3x07",
         "rohs": "Yes",
         "rohs_document_link": "https://www.dialightsignalsandcomponents.com/550-series-5-mm-cbi-r-g-3-leaded-slope-back-housing/",
         "allow_substitution": "Yes", "tracking": "No", "standards_version": "1.1",
@@ -151,8 +151,8 @@ PARTS = [
         "color": "Blue", "description": "Blue LED  SMT 1608  20mA",
         "datasheet": "https://www.kingbrightusa.com/images/catalog/SPEC/APG1608QBC-D.pdf",
         "manufacturer_link": "http://www.kingbrightusa.com/product.asp?catalog_name=LED&product_id=APG1608QBC/D",
-        "kicad_symbol": "terra_sym:LED Kingbright Blue  SMT 1608  APG1608QBC/D",
-        "kicad_footprint": "terra_sym:LED_0603_1608Metric",
+        "kicad_symbol": "terra-optoelectronics:LED Kingbright Blue  SMT 1608  APG1608QBC/D",
+        "kicad_footprint": "terra-optoelectronics:LED_0603_1608Metric",
         "rohs": "Yes",
         "rohs_document_link": "https://www.mouser.com/catalog/additional/Kingbright_6040_RoHS_Certificate.pdf",
         "allow_substitution": "Yes", "tracking": "No", "standards_version": "1.1",

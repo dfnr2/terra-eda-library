@@ -11,7 +11,7 @@ trimmed to "SRR6603-100ML"; unique_id follows. Its kicad_symbol never had the
 " q q" suffix and is preserved verbatim.
 
 Deferred curation (judgement calls intentionally left as-is for a later pass):
-  - All three kicad_footprint values are terra_sym:-prefixed, so they point at a
+  - All three kicad_footprint values are terra-inductors:-prefixed, so they point at a
     symbol library rather than a real footprint. Two (SRR6603, MSS7341) even name
     a "Coilcraft MSS7341 Shileded" [sic] footprint that is mismatched to the part
     (the SRR6603 is a Bourns part).
@@ -52,8 +52,8 @@ PARTS = [
         "description": "Power inductor, 10 mH, 75 mOhm, 1A rms,  20% SMT 6.8x4.4mm",
         "datasheet": "${TERRA_EDA_LIB}/datasheets/bourns/srr6603.pdf",
         "manufacturer_link": "https://bourns.com",
-        "kicad_symbol": "terra_sym:IND Bourns 10uH 1.1A rms SRR6603-100ML",
-        "kicad_footprint": "terra_sym:Bourns_SRR6603",
+        "kicad_symbol": "terra-inductors:IND Bourns 10uH 1.1A rms SRR6603-100ML",
+        "kicad_footprint": "terra-inductors:Bourns_SRR6603",
         "rohs": "Yes", "rohs_document_link": BOURNS_ROHS,
         "allow_substitution": "No", "tracking": "No", "standards_version": "1.1",
         "source": "terra_sym", "dump_priority": 0, "tier": 2,
@@ -73,7 +73,7 @@ PARTS = [
         "description": "Power inductor, 68 mH, 102 mOhm, 3A rms,  20% SMT 12mm x 12mm",
         "datasheet": "${TERRA_EDA_LIB}/datasheets/bourns/srr1210.pdf",
         "manufacturer_link": "https://bourns.com",
-        "kicad_symbol": "terra_sym:IND Bourns 68uH 3A rms  SRR1210-680M ",
+        "kicad_symbol": "terra-inductors:IND Bourns 68uH 3A rms  SRR1210-680M ",
         "kicad_footprint": "Inductor_SMD:L_Bourns_SRR1210A",
         "rohs": "Yes", "rohs_document_link": BOURNS_ROHS,
         "allow_substitution": "No", "tracking": "No", "standards_version": "1.1",
@@ -94,8 +94,8 @@ PARTS = [
         "description": "Power inductor, 10 mH, 38 mOhm, 2.8A, 20% SMT 7.1x7.1 mm",
         "datasheet": "https://www.coilcraft.com/getmedia/7b464459-a4d6-47b0-83ca-9d96d4410863/MSS7341.pdf",
         "manufacturer_link": "https://www.coilcraft.com/en-us/products/power/shielded-inductors/ferrite-drum/mss-mos/mss7341/mss7341-103/",
-        "kicad_symbol": "terra_sym:IND CoilCraft 10uH 2.8A MSS7341-103ML",
-        "kicad_footprint": "terra_sym:Coilcraft_MSS7341",
+        "kicad_symbol": "terra-inductors:IND CoilCraft 10uH 2.8A MSS7341-103ML",
+        "kicad_footprint": "terra-inductors:Coilcraft_MSS7341",
         "rohs": "Yes",
         "rohs_document_link": "https://4donline.ihs.com/images/VipMasterIC/IC/COLC/COLC-E-A0007342590/COLC-E-A0007342584-1.pdf?hkey=6D0214268300F1406B835FE51CB13195",
         "allow_substitution": "No", "tracking": "No", "standards_version": "1.1",

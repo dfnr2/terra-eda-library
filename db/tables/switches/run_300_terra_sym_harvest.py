@@ -5,7 +5,7 @@ The recovered terra_sym dump for this table held two rows, but only one is a
 switch. This generator ports just the CK Components DF62J12S2AHQAA DPDT rocker
 and faithfully preserves every field from its source row.
 
-Deferred curation: the kicad_footprint is `terra_sym:`-prefixed, so it points at
+Deferred curation: the kicad_footprint is `terra-switches:`-prefixed, so it points at
 a symbol library rather than a real footprint and needs a proper footprint later.
 The deep tail (switch_type, poles, throws, voltage_rating, actuation_force) is
 NULL pending a datasheet harvest -- the datasheet describes a DPDT rocker,
@@ -37,8 +37,8 @@ PARTS = [
         "description": "DPDT rocker, right angle, through-hole",
         "datasheet": "${TERRA_EDA_LIB}/datasheets/ck/df-series.pdf",
         "manufacturer_link": "https://www.ckswitches.com/products/switches/product-details/Rocker/DF/DF62J12S2AHQA/",
-        "kicad_symbol": "terra_sym:SW DPDT CK DF62J12S2AHQAA ",
-        "kicad_footprint": "terra_sym:CK_DF62J12S2AHQAA",
+        "kicad_symbol": "terra-switches:SW DPDT CK DF62J12S2AHQAA ",
+        "kicad_footprint": "terra-switches:CK_DF62J12S2AHQAA",
         "rohs": "Yes",
         "rohs_document_link": "https://www.mouser.com/catalog/additional/CK_Components_6111_RoHS_Certificate.pdf",
         "allow_substitution": "No", "tracking": "No", "standards_version": "1.1",

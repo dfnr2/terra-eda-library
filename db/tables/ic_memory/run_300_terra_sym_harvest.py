@@ -7,8 +7,8 @@ here so a schema change reapplies by rebuild and the part shares one parameter s
 Only typos contradicted by a part's own other fields are corrected here: the mpn
 carried a leading space (" 24LC32AT-I/OT") -> trimmed; unique_id follows.
 
-Deferred curation: the kicad_footprint is `terra_sym:`-prefixed
-(terra_sym:SOT95P270X145-5N) and needs a real SOT-23-5 footprint; capacity
+Deferred curation: the kicad_footprint is `terra-ic-memory:`-prefixed
+(terra-ic-memory:SOT95P270X145-5N) and needs a real SOT-23-5 footprint; capacity
 ('4k x 8' / 32 Kbit) and interface ('I2C') are evident from the value/description
 but left NULL pending curation; word_size and speed also need a datasheet harvest.
 
@@ -38,8 +38,8 @@ PARTS = [
         "description": "EEPROM 4k x 8 I2C SOT-23-5",
         "datasheet": "https://ww1.microchip.com/downloads/aemDocuments/documents/MPD/ProductDocuments/DataSheets/24AA32A-24LC32A-32-Kbit-I2C-Serial-EEPROM-DS20001713.pdf",
         "manufacturer_link": "https://www.microchip.com/en-us/product/24lc32a",
-        "kicad_symbol": "terra_sym:IC_MEMORY EEPROM Microchip 24LC32A 4kx8 SOT-23-5",
-        "kicad_footprint": "terra_sym:SOT95P270X145-5N",
+        "kicad_symbol": "terra-ic-memory:IC_MEMORY EEPROM Microchip 24LC32A 4kx8 SOT-23-5",
+        "kicad_footprint": "terra-ic-memory:SOT95P270X145-5N",
         "rohs": "Yes",
         "rohs_document_link": "https://4donline.ihs.com/images/VipMasterIC/IC/MCHP/MCHP-E-A0019744312/MCHP-E-A0019744312-1.pdf?hkey=6D0214268300F1406B835FE51CB13195",
         "allow_substitution": "Yes", "tracking": "No", "standards_version": "1.1",

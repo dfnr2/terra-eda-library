@@ -61,7 +61,7 @@ PARTS = [
         "description": "Nexperia PESD3V3L4UW low-capacitance quadruple unidirectional ESD protection array, 3.3V, common anode, SOT-665",
         "datasheet": "${TERRA_EDA_LIB}/datasheets/nexperia/pesd3v3l4uw.pdf",
         "manufacturer_link": "https://www.nexperia.com/product/PESD3V3L4UW",
-        "kicad_symbol": "terra_sym:DIODE_ARRAY PESD3V3L4UW",
+        "kicad_symbol": "terra-diodes-tvs:DIODE_ARRAY PESD3V3L4UW",
         "kicad_footprint": "Package_TO_SOT_SMD:SOT-665",
         "pin_count": "6", "directionality": "unidirectional", "standoff_voltage": "3.3V",
         "channels": 4,
