@@ -12,9 +12,9 @@ Deferred curation:
   - ROHM RFN10TB4SNZC9: its datasheet field is a bare MPN 'RFN10TB4SNZC9' (broken,
     needs a real URL); its description says "Vf 430V" which is actually Vr, not Vf.
     (Its `value` was a leftover template string and has been replaced with the MPN.)
-  - The `terra-diodes:`-prefixed footprints (PNE20020ER's "terra-diodes:Nexperia SOD-123W",
-    VSSAF510 and VSSAF512's "terra-diodes:Vishay_SlimSMA_D_DO-221AC") point at a symbol
-    library and need real footprints.
+  - VSSAF510 and VSSAF512's "terra-diodes:Vishay_SlimSMA_D_DO-221AC" footprint points at a
+    symbol library and needs a real footprint. (PNE20020ER's "terra-diodes:Nexperia SOD-123W"
+    is done -- footprint + spiro SOD123W.step model now live in the terra-diodes libs.)
   - Deep tail params (diode_type / forward_voltage / forward_current) are sparse and
     need a datasheet harvest.
   - A ninth recovered row, 'Unknown-UNKNOWN', is a mis-identified Nexperia
@@ -67,7 +67,7 @@ PARTS = [
         "datasheet": "${TERRA_EDA_LIB}/datasheets/nexperia/pne20020er.pdf",
         "manufacturer_link": "https://www.nexperia.com/products/diodes/recovery-rectifiers/PNE20020ER.html",
         "kicad_symbol": "terra-diodes:DIODE Nexperia PNE20020ERX 200V 2.8A Fast Recovery SOD123",
-        "kicad_footprint": "Diode_SMD:Nexperia_CFP3_SOD-123W",
+        "kicad_footprint": "terra-diodes:Nexperia SOD-123W",
         "rohs": "Yes",
         "rohs_document_link": "https://4donline.ihs.com/images/VipMasterIC/IC/RECT/RECT-E-A0007327236/RECT-E-A0007327236-1.pdf?hkey=6D0214268300F1406B835FE51CB13195",
         "allow_substitution": "Yes", "tracking": "No", "standards_version": "1.1",
