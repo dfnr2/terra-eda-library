@@ -23,6 +23,12 @@ SYMBOL_OVERRIDES = {
     "EKYC250ELL392MK30S": "terra-capacitors-electrolytic-th:CAP_TH chemicon EKYC250ELL392MK30S 3900 uF 25V",
 }
 
+# Parts with a curated terra footprint carrying the true-height 3D model (the
+# generic KiCad CP_Radial model uses a short representative body), keyed by MPN.
+FOOTPRINT_OVERRIDES = {
+    "EKYC250ELL392MK30S": "terra-capacitors-electrolytic-th:CP_Radial_D13.0mm_P5.00mm",
+}
+
 # case diameter (mm) -> (lead spacing mm, KiCad radial CP footprint)
 CASE = {
     10.0: (5.0, "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm"),
@@ -193,7 +199,8 @@ def row(pn_t, cap, case, esr, ripple):
         "description": (f"Nippon Chemi-Con KYC {cap}\u00b5F {v}V \u00b120% low-ESR "
                         f"aluminum electrolytic, radial THT, {dia:g}\u00d7{length:g}mm"),
         "datasheet": DATASHEET, "manufacturer_link": "https://www.chemi-con.com",
-        "kicad_symbol": SYMBOL_OVERRIDES.get(mpn, SYMBOL), "kicad_footprint": footprint,
+        "kicad_symbol": SYMBOL_OVERRIDES.get(mpn, SYMBOL),
+        "kicad_footprint": FOOTPRINT_OVERRIDES.get(mpn, footprint),
         "rohs": "Yes", "allow_substitution": "No", "tracking": "No",
         "source": None, "dump_priority": 0, "tier": 2,
         "keywords": "capacitor,electrolytic,low-esr", "pin_count": "2",

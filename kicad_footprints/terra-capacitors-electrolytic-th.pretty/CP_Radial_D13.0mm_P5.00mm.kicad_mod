@@ -2535,7 +2535,7 @@
 		(uuid "ddaf4a77-1630-43ba-a502-db59f44e1ca6")
 	)
 	(embedded_fonts no)
-	(model "${TERRA_EDA_LIB}/assets/3dmodels/legacy.3dshapes/cap-el-th-w13xh29-p5.step"
+	(model "${TERRA_EDA_LIB}/assets/3dmodels/terra-capacitors-electrolytic-th.3dshapes/cap-el-th-w13xh29-p5.step"
 		(offset
 			(xyz 2.5 0 0)
 		)

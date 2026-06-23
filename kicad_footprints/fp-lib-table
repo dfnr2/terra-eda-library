@@ -1,5 +1,6 @@
 (fp_lib_table
   (version 7)
+  (lib (name "terra-capacitors-electrolytic-th")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/terra-capacitors-electrolytic-th.pretty")(options "")(descr ""))
   (lib (name "terra-connectors")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/terra-connectors.pretty")(options "")(descr ""))
   (lib (name "terra-diodes")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/terra-diodes.pretty")(options "")(descr ""))
   (lib (name "terra-optoelectronics")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/terra-optoelectronics.pretty")(options "")(descr ""))
