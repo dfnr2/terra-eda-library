@@ -12,9 +12,6 @@ Deferred curation:
   - ROHM RFN10TB4SNZC9: its datasheet field is a bare MPN 'RFN10TB4SNZC9' (broken,
     needs a real URL); its description says "Vf 430V" which is actually Vr, not Vf.
     (Its `value` was a leftover template string and has been replaced with the MPN.)
-  - VSSAF510 and VSSAF512's "terra-diodes:Vishay_SlimSMA_D_DO-221AC" footprint points at a
-    symbol library and needs a real footprint. (PNE20020ER's "terra-diodes:Nexperia SOD-123W"
-    is done -- footprint + spiro SOD123W.step model now live in the terra-diodes libs.)
   - Deep tail params (diode_type / forward_voltage / forward_current) are sparse and
     need a datasheet harvest.
   - A ninth recovered row, 'Unknown-UNKNOWN', is a mis-identified Nexperia
