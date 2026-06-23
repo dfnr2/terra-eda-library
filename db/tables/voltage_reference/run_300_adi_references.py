@@ -39,8 +39,9 @@ SOIC8 = "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 MSOP8 = "Package_SO:MSOP-8_3x3mm_P0.65mm"
 RV = "REVIEW: no KiCad symbol; series-reference pinout -- assign in KiCad"
 
-# Curated terra DIP-8 symbol covering every LT1021 N8 grade/voltage.
-LT1021SYM = "terra_sym:LT1021-xN8"
+# Curated DIP-8 symbol covering every LT1021 N8 grade/voltage; lives in the
+# per-table library kicad_symbols/terra-voltage-reference.kicad_sym.
+LT1021SYM = "terra-voltage-reference:LT1021-xN8"
 LT1021_COMMON = dict(
     datasheet="${TERRA_EDA_LIB}/datasheets/analog-devices/lt1021.pdf",
     manufacturer_link="https://www.analog.com/en/products/lt1021.html",
