@@ -92,7 +92,7 @@ BASE = {
 }
 
 # (package, mpn, pin_count, kicad_symbol, kicad_footprint, note[, overrides])
-# LT1021 DIP-8 (N8) rows use the curated terra_sym:LT1021-xN8 symbol; the B and D
+# LT1021 DIP-8 (N8) rows use the curated terra-voltage-reference:LT1021-xN8 symbol; the B and D
 # grades share a package/voltage but differ in temperature coefficient.
 VARIANTS = {
     "LT1021-5": [("PDIP-8", "LT1021BCN8-5", "8", LT1021SYM, DIP8, "through-hole", {"variant": "B grade", "temperature_coefficient": TC_B}),
