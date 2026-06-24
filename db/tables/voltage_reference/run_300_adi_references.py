@@ -41,7 +41,7 @@ RV = "REVIEW: no KiCad symbol; series-reference pinout -- assign in KiCad"
 
 # Curated DIP-8 symbol covering every LT1021 N8 grade/voltage; lives in the
 # per-table library kicad_symbols/terra-voltage-reference.kicad_sym.
-LT1021SYM = "terra-voltage-reference:LT1021-xN8"
+LT1021SYM = "terra_symbols_voltage_reference:LT1021-xN8"
 LT1021_COMMON = dict(
     datasheet="${TERRA_EDA_LIB}/datasheets/analog-devices/lt1021.pdf",
     manufacturer_link="https://www.analog.com/en/products/lt1021.html",
@@ -92,7 +92,7 @@ BASE = {
 }
 
 # (package, mpn, pin_count, kicad_symbol, kicad_footprint, note[, overrides])
-# LT1021 DIP-8 (N8) rows use the curated terra-voltage-reference:LT1021-xN8 symbol; the B and D
+# LT1021 DIP-8 (N8) rows use the curated terra_symbols_voltage_reference:LT1021-xN8 symbol; the B and D
 # grades share a package/voltage but differ in temperature coefficient.
 VARIANTS = {
     "LT1021-5": [("PDIP-8", "LT1021BCN8-5", "8", LT1021SYM, DIP8, "through-hole", {"variant": "B grade", "temperature_coefficient": TC_B}),

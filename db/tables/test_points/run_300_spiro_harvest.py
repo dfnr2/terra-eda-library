@@ -24,7 +24,7 @@ PARTS = [
         "datasheet": "https://www.keyelco.com/product-pdf.cfm?p=1355",
         "manufacturer_link": "https://www.keyelco.com",
         "kicad_symbol": "Connector:TestPoint",
-        "kicad_footprint": "terra-test-points:TestPoint_Pad_3.43x1.78mm",
+        "kicad_footprint": "terra_footprints_test_points:TestPoint_Pad_3.43x1.78mm",
         "rohs": "Yes", "allow_substitution": "No", "tracking": "No",
         "source": None, "dump_priority": 0, "tier": 2,
         "keywords": "test-point,mechanical", "pin_count": "1",

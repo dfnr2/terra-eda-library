@@ -8,7 +8,7 @@ selector table; orderable MPNs, packages, and directionality are verified from
 each series' datasheet section. ESD parts are rated by ESD kV + surge current,
 not Vbr/Ppp, so those columns stay NULL.
 
-Unidirectional parts use terra-diodes:D_TVS_unidir; bidirectional use Device:D_TVS.
+Unidirectional parts use terra_symbols_diodes:D_TVS_unidir; bidirectional use Device:D_TVS.
 
 NOT INCLUDED (no KiCad footprint): SP1003-01DTG (SOD-723) and the entire SP1006
 series (uDFN-2). The multi-channel arrays in this class (SP05, SP1001, SP1002,
@@ -19,7 +19,7 @@ from _tvs import insert, write
 
 DATASHEET = "${TERRA_EDA_LIB}/datasheets/littelfuse/spa-diode-arrays-catalog.pdf"
 LINK = "https://www.littelfuse.com/products/tvs-diode-arrays.aspx"
-SYM = {"unidirectional": "terra-diodes:D_TVS_unidir", "bidirectional": "Device:D_TVS"}
+SYM = {"unidirectional": "terra_symbols_diodes:D_TVS_unidir", "bidirectional": "Device:D_TVS"}
 FP = {
     "SOD-882": "Diode_SMD:D_SOD-882",
     "SOD-323": "Diode_SMD:D_SOD-323",

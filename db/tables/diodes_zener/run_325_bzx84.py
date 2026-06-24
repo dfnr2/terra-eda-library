@@ -3,7 +3,7 @@
 
 A single Zener in a 3-pad SOT-23: pin 1 anode, pin 2 N.C., pin 3 cathode. KiCad
 ships no 3-pin SOT-23 Zener symbol, so this family uses the custom
-`terra-diodes:BZX84_SOT23` symbol (pin 2 marked no-connect) on the standard
+`terra_symbols_diodes:BZX84_SOT23` symbol (pin 2 marked no-connect) on the standard
 `SOT-23W` land (closer to the Nexperia-published footprint than the generic
 wide SOT-23). pin_count=3.
 
@@ -60,7 +60,7 @@ if __name__ == "__main__":
         Path(__file__).name,
         prefix="BZX84", package="SOT-23",
         footprint="Package_TO_SOT_SMD:SOT-23W",
-        symbol="terra-diodes:BZX84_SOT23", pin_count="3",
+        symbol="terra_symbols_diodes:BZX84_SOT23", pin_count="3",
         power_rating="250mW", forward_voltage="0.9V",
         datasheet="${TERRA_EDA_LIB}/datasheets/nexperia/bzx84.pdf",
         extra_tags="sot23", types=TYPES,

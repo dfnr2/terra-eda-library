@@ -4,7 +4,7 @@
 LED1/LED2 on cartridge-pcb are the same Everlight 19-219/GHC-YR2T1B5Y/3T (525nm green,
 1608 SMD). The schematic referenced a one-off native symbol with an empty MPN, so it had
 no terra database part. It is a plain two-pin LED, so it uses the standard KiCad Device:LED
-symbol; the footprint is terra's existing terra-optoelectronics:LED_0603_1608Metric (standard 1608 land
+symbol; the footprint is terra's existing terra_footprints_optoelectronics:LED_0603_1608Metric (standard 1608 land
 with the migrated APG1608.STEP 3D model), the same footprint the sibling Kingbright 1608 LED
 uses -- not the generic LED_SMD footprint, which would drop the curated 3D model.
 
@@ -37,7 +37,7 @@ PARTS = [
         "datasheet": "${TERRA_EDA_LIB}/datasheets/everlight/19-219-ghc-yr2t1b5y.pdf",
         "manufacturer_link": "https://www.everlighteurope.com/product-details?id=2934",
         "kicad_symbol": "Device:LED",
-        "kicad_footprint": "terra-optoelectronics:LED_0603_1608Metric",
+        "kicad_footprint": "terra_footprints_optoelectronics:LED_0603_1608Metric",
         "rohs": "Yes", "allow_substitution": "No", "tracking": "No",
         "source": None, "dump_priority": 0, "tier": 2,
         "keywords": "led,green,optical,smd", "pin_count": "2",

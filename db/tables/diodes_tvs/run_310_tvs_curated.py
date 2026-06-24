@@ -5,7 +5,7 @@ These are individually-sourced ESD/TVS parts (not a parametric series): the Vish
 VESD05A1 low-cap ESD diode, the Littelfuse SM712 asymmetric RS-485 array (3-pin,
 custom symbol), and the ST ESDA18-1K. ESDA18-1K is unidirectional (its datasheet
 says so) and was wrongly on the bidirectional Device:D_TVS — corrected here to
-terra-diodes:D_TVS_unidir.
+terra_symbols_diodes:D_TVS_unidir.
 
 Datasheets are still web URLs (pre-dating the local-store rule); backfill to the
 central store on the next pass. Generated: dump_priority=0, source=NULL.
@@ -34,8 +34,8 @@ PARTS = [
         "description": "Littelfuse SM712-02HTG asymmetric TVS diode array for RS-485 (7V/12V), SOT-23",
         "datasheet": "https://www.littelfuse.com/media?resourcetype=datasheets&itemid=8313a28c-8802-4d47-a2a7-e30b5b1f67d8&filename=littelfuse-tvs-diode-array-sm712-datasheet",
         "manufacturer_link": "https://www.littelfuse.com",
-        "kicad_symbol": "terra-diodes:SM712-02HTG_compact",
-        "kicad_footprint": "terra-diodes:SM71202HTG",
+        "kicad_symbol": "terra_symbols_diodes:SM712-02HTG_compact",
+        "kicad_footprint": "terra_footprints_diodes:SM71202HTG",
         "pin_count": "3", "directionality": "bidirectional", "standoff_voltage": "12V",
         "keywords": "tvs,array,rs-485,protection,bidi",
     },
@@ -47,7 +47,7 @@ PARTS = [
         "description": "STMicroelectronics ESDA18-1K unidirectional TVS / ESD protection diode, 18V working, SOD-523",
         "datasheet": "https://www.st.com/resource/en/datasheet/esda18-1k.pdf",
         "manufacturer_link": "https://www.st.com",
-        "kicad_symbol": "terra-diodes:D_TVS_unidir", "kicad_footprint": "Diode_SMD:D_SOD-523",
+        "kicad_symbol": "terra_symbols_diodes:D_TVS_unidir", "kicad_footprint": "Diode_SMD:D_SOD-523",
         "pin_count": "2", "directionality": "unidirectional", "standoff_voltage": "18V",
         "keywords": "tvs,esd,protection,uni",
     },
@@ -61,7 +61,7 @@ PARTS = [
         "description": "Nexperia PESD3V3L4UW low-capacitance quadruple unidirectional ESD protection array, 3.3V, common anode, SOT-665",
         "datasheet": "${TERRA_EDA_LIB}/datasheets/nexperia/pesd3v3l4uw.pdf",
         "manufacturer_link": "https://www.nexperia.com/product/PESD3V3L4UW",
-        "kicad_symbol": "terra-diodes-tvs:DIODE_ARRAY PESD3V3L4UW",
+        "kicad_symbol": "terra_symbols_diodes_tvs:DIODE_ARRAY PESD3V3L4UW",
         "kicad_footprint": "Package_TO_SOT_SMD:SOT-665",
         "pin_count": "6", "directionality": "unidirectional", "standoff_voltage": "3.3V",
         "channels": 4,

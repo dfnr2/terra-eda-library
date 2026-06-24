@@ -4,7 +4,7 @@
 Each standoff voltage is offered unidirectional (SMFxxA) and, through 85 V,
 bidirectional (SMFxxCA); 90 V and up are uni-only. 45 voltages -> 83 parts.
 Per-type Vbr/Ipp/Vc/IR from the datasheet table; Ppp is the 200 W family rating.
-Unidirectional parts use the custom `terra-diodes:D_TVS_unidir` symbol;
+Unidirectional parts use the custom `terra_symbols_diodes:D_TVS_unidir` symbol;
 bidirectional parts use the stock `Device:D_TVS` (bowtie).
 """
 from pathlib import Path
@@ -13,7 +13,7 @@ from _tvs import insert, write
 FOOTPRINT = "Diode_SMD:D_SOD-123F"          # SOD-123FL flat-lead
 DATASHEET = "${TERRA_EDA_LIB}/datasheets/littelfuse/tvs-smf.pdf"
 LINK = "https://www.littelfuse.com/products/tvs-diodes/surface-mount/smf.aspx"
-UNI_SYM = "terra-diodes:D_TVS_unidir"
+UNI_SYM = "terra_symbols_diodes:D_TVS_unidir"
 BIDI_SYM = "Device:D_TVS"
 
 # code, Vbr_min, Vbr_max, IT(mA), Vrwm(V str), IR(uA), Ipp(A), Vc(V), has_bidi
