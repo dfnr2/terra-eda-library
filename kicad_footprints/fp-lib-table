@@ -4,7 +4,6 @@
   (lib (name "terra_footprints_connectors")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/terra_footprints_connectors.pretty")(options "")(descr ""))
   (lib (name "terra_footprints_diodes")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/terra_footprints_diodes.pretty")(options "")(descr ""))
   (lib (name "terra_footprints_ic_drivers")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/terra_footprints_ic_drivers.pretty")(options "")(descr ""))
-  (lib (name "terra_footprints_ic_memory")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/terra_footprints_ic_memory.pretty")(options "")(descr ""))
   (lib (name "terra_footprints_inductors")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/terra_footprints_inductors.pretty")(options "")(descr ""))
   (lib (name "terra_footprints_led_drivers")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/terra_footprints_led_drivers.pretty")(options "")(descr ""))
   (lib (name "terra_footprints_optoelectronics")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_footprints/terra_footprints_optoelectronics.pretty")(options "")(descr ""))

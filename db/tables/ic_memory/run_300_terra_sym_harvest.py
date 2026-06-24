@@ -1,16 +1,12 @@
 #!/usr/bin/env python3
-"""Emit the ic_memory catalog harvested from terra_sym.kicad_sym as native rows.
+"""Microchip 24LC32A (32 Kbit I2C serial EEPROM) package family.
 
-This single part was recovered from the terra_sym.kicad_sym source. It is scripted
-here so a schema change reapplies by rebuild and the part shares one parameter set.
-
-Only typos contradicted by a part's own other fields are corrected here: the mpn
-carried a leading space (" 24LC32AT-I/OT") -> trimmed; unique_id follows.
-
-Deferred curation: the kicad_footprint is `terra-ic-memory:`-prefixed
-(terra_footprints_ic_memory:SOT95P270X145-5N) and needs a real SOT-23-5 footprint; capacity
-('4k x 8' / 32 Kbit) and interface ('I2C') are evident from the value/description
-but left NULL pending curation; word_size and speed also need a datasheet harvest.
+The SOT-23-5 variant was recovered from terra_sym.kicad_sym; the 8-pin packages
+are added on KiCad's stock Memory_EEPROM:24LC32 symbol and standard footprints.
+Note the SOT-23-5 (OT) part is the reduced 5-pin variant (no A0/A1/A2 address
+pins) so it keeps its own curated 5-pin terra symbol; the 8-pin packages share
+KiCad's 24LC32 symbol (A0/A1/A2/VSS/SDA/SCL/WP/VCC). The DFN-8 (MNY) package is
+omitted pending exposed-pad confirmation (KiCad has several DFN-8 3x2mm EP sizes).
 
 Generated output (dump_priority=0) is not dumped back to static SQL.
 """
@@ -28,28 +24,39 @@ COLS = [
     "interface", "persistence_cycles", "persistence_years",
 ]
 
+COMMON = dict(
+    manufacturer="Microchip", value="4k x 8 EEPROM",
+    datasheet="https://ww1.microchip.com/downloads/aemDocuments/documents/MPD/ProductDocuments/DataSheets/24AA32A-24LC32A-32-Kbit-I2C-Serial-EEPROM-DS20001713.pdf",
+    manufacturer_link="https://www.microchip.com/en-us/product/24lc32a",
+    rohs="Yes",
+    rohs_document_link="https://4donline.ihs.com/images/VipMasterIC/IC/MCHP/MCHP-E-A0019744312/MCHP-E-A0019744312-1.pdf?hkey=6D0214268300F1406B835FE51CB13195",
+    allow_substitution="Yes", tracking="No", standards_version="1.1",
+    source="terra_sym", dump_priority=0, tier=2,
+    temp_operating_min=-40, temp_operating_max=85,
+    temp_storage_min=-40, temp_storage_max=85, memory_type="EEPROM",
+    capacity="32 Kbit", word_size="8-bit", speed="400 kHz", interface="I2C",
+    persistence_cycles="1M", persistence_years="200 years",
+)
+
+EEPROM8 = "Memory_EEPROM:24LC32"   # stock 8-pin I2C EEPROM symbol
+
+# (mpn, package, pin_count, kicad_symbol, kicad_footprint)
+VARIANTS = [
+    ("24LC32AT-I/OT", "SOT-23-5", "5",
+     "terra_symbols_ic_memory:IC_MEMORY EEPROM Microchip 24LC32A 4kx8 SOT-23-5",
+     "Package_TO_SOT_SMD:SOT-23-5"),
+    ("24LC32A-I/P", "PDIP-8", "8", EEPROM8, "Package_DIP:DIP-8_W7.62mm"),
+    ("24LC32A-I/SN", "SOIC-8", "8", EEPROM8, "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"),
+    ("24LC32AT-I/ST", "TSSOP-8", "8", EEPROM8, "Package_SO:TSSOP-8_4.4x3mm_P0.65mm"),
+]
+
 PARTS = [
-    {
-        # FIX: mpn carried a leading space (" 24LC32AT-I/OT") -> trimmed; unique_id follows.
-        "unique_id": "Microchip-24LC32AT-I/OT",
-        "part_locator": "IC_MEMORY EEPROM Microchip 24LC32A 4kx8 SOT-23-5",
-        "mpn": "24LC32AT-I/OT", "manufacturer": "Microchip", "package": "SOT-23-5",
-        "value": "4k x 8 EEPROM",
-        "description": "EEPROM 4k x 8 I2C SOT-23-5",
-        "datasheet": "https://ww1.microchip.com/downloads/aemDocuments/documents/MPD/ProductDocuments/DataSheets/24AA32A-24LC32A-32-Kbit-I2C-Serial-EEPROM-DS20001713.pdf",
-        "manufacturer_link": "https://www.microchip.com/en-us/product/24lc32a",
-        "kicad_symbol": "terra_symbols_ic_memory:IC_MEMORY EEPROM Microchip 24LC32A 4kx8 SOT-23-5",
-        "kicad_footprint": "terra_footprints_ic_memory:SOT95P270X145-5N",
-        "rohs": "Yes",
-        "rohs_document_link": "https://4donline.ihs.com/images/VipMasterIC/IC/MCHP/MCHP-E-A0019744312/MCHP-E-A0019744312-1.pdf?hkey=6D0214268300F1406B835FE51CB13195",
-        "allow_substitution": "Yes", "tracking": "No", "standards_version": "1.1",
-        "source": "terra_sym", "dump_priority": 0, "tier": 2, "pin_count": "5",
-        "temp_operating_min": -40, "temp_operating_max": 85,
-        "temp_storage_min": -40, "temp_storage_max": 85, "memory_type": "EEPROM",
-        "capacity": "32 Kbit", "word_size": "8-bit", "speed": "400 kHz",
-        "interface": "I2C", "persistence_cycles": "1M",
-        "persistence_years": "200 years",
-    },
+    {**COMMON,
+     "unique_id": f"Microchip-{mpn}",
+     "part_locator": f"IC_MEMORY EEPROM Microchip 24LC32A 4kx8 {pkg}",
+     "mpn": mpn, "package": pkg, "description": f"EEPROM 4k x 8 I2C {pkg}",
+     "kicad_symbol": sym, "kicad_footprint": fp, "pin_count": pins}
+    for mpn, pkg, pins, sym, fp in VARIANTS
 ]
 
 
@@ -63,9 +70,8 @@ def sql(v):
 
 def main():
     lines = [
-        "-- Terra EDA Library - ic_memory harvested from terra_sym.kicad_sym",
-        f"-- Native terra rows scripted from the terra_sym source. Generated by {Path(__file__).name}.",
-        "-- dump_priority=0: regenerated, not dumped to static SQL.",
+        "-- Terra EDA Library - Microchip 24LC32A I2C EEPROM package family",
+        f"-- Generated by {Path(__file__).name}. dump_priority=0: not dumped to static SQL.",
         "",
         "BEGIN TRANSACTION;",
         "",
