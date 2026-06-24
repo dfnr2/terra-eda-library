@@ -26,7 +26,7 @@ COLS = [
 
 COMMON = dict(
     manufacturer="Microchip", value="4k x 8 EEPROM",
-    datasheet="https://ww1.microchip.com/downloads/aemDocuments/documents/MPD/ProductDocuments/DataSheets/24AA32A-24LC32A-32-Kbit-I2C-Serial-EEPROM-DS20001713.pdf",
+    datasheet="${TERRA_EDA_LIB}/datasheets/microchip/24lc32a.pdf",
     manufacturer_link="https://www.microchip.com/en-us/product/24lc32a",
     rohs="Yes",
     rohs_document_link="https://4donline.ihs.com/images/VipMasterIC/IC/MCHP/MCHP-E-A0019744312/MCHP-E-A0019744312-1.pdf?hkey=6D0214268300F1406B835FE51CB13195",
