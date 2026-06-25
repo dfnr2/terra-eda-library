@@ -13,10 +13,11 @@ resolved; delete stale items.
 
 ## ic_logic (74xx TTL/CMOS-TTL)
 
-Landed 2026-06-25: 215 devices (210 harvested by `db/tables/ic_logic/run_320_ttl_harvest.py`
-+ 5 curated by `run_310_ttl_canonical.py`), families 74/74LS/74HC/74HCT.
+Landed 2026-06-25: 264 devices — 210 TTL harvested (`run_320_ttl_harvest.py`,
+families 74/74LS/74HC/74HCT) + 5 curated (`run_310_ttl_canonical.py`) + 49
+CD4000-series CMOS (`run_330_cd4000.py`, logic_family='4000B').
 
-- [ ] **Per-part dynamics are NULL** across all 210 harvested parts:
+- [ ] **Per-part dynamics are NULL** across all harvested parts (210 TTL + 49 CD4000):
   `propagation_delay`, `max_frequency`, `supply_current`. Not present in KiCad
   symbols — needs datasheet extraction. Only the curated 5 have them. Backfill
   the high-use parts first (counters, '245/'244 buffers, '74/'374 flip-flops).
@@ -27,8 +28,14 @@ Landed 2026-06-25: 215 devices (210 harvested by `db/tables/ic_logic/run_320_ttl
 - [ ] **74HC thresholds are @Vcc=4.5V representative values** (`vih_min` 3.15 /
   `vil_max` 1.35 in `FAMILY_EE`). Real HC inputs are Vcc-ratiometric (0.7/0.3·Vcc).
   Fine for parametric search; revisit if we want per-Vcc accuracy.
-- [ ] **74LS629** (dual VCO) is categorized `other` — legitimately not a standard
-  logic function. Leave unless we add an `oscillator` category.
+- [ ] **74LS629** (dual VCO) and **CD4046B** (PLL/VCO) are categorized `other` —
+  legitimately not standard logic functions. Leave unless we add a category.
+- [ ] **CD4000B levels are @Vcc=5V representative** (`vih_min` 3.5 / `vil_max` 1.5
+  in `run_330` FAMILY_EE); real 4000B inputs are Vcc-ratiometric over a 3-18V
+  supply, and the ~0.5mA drive scales strongly with Vcc. Fine for search.
+- [ ] **CD4000 mfr/MPN/datasheet normalized to the TI CD4000B line** (CD<base>BE/BM,
+  ti.com datasheet) for a coherent orderable part. A few devices only second-sourced
+  elsewhere (some MC14xxx / HEF parts) may want a correction or 404-check on the URL.
 - [ ] **Datasheets are TI URLs**, pulled from each symbol's Datasheet property
   (per agreement 2026-06-25). Only the curated 5 are local PDFs under
   `datasheets/ti/`. Optional: localize the most-used parts.
@@ -37,9 +44,9 @@ Landed 2026-06-25: 215 devices (210 harvested by `db/tables/ic_logic/run_320_ttl
 - [ ] **Modern specialty 74xx families** (~92 parts in `74xx.kicad_sym`): 74CBT
   bus switches, 74LCX / 74ALVC / 74LVC / 74AHCV translators. Not really "TTL";
   excluded from the retro harvest. Same `run_320` pattern extends to them if wanted.
-- [ ] **CD4000-series CMOS** — separate KiCad libs `4xxx.kicad_sym` /
-  `4xxx_IEEE.kicad_sym`. Would be a new harvester run (or a new table); decide
-  whether 4000-series shares `ic_logic` or gets its own table.
+- [x] **CD4000-series CMOS** (done 2026-06-25, `run_330_cd4000.py`) — 49 parts
+  folded into `ic_logic` as logic_family='4000B'. The alternate IEEE-symbol lib
+  `4xxx_IEEE.kicad_sym` was not harvested (same devices, different symbol style).
 
 ---
 
