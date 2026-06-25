@@ -21,6 +21,7 @@
   "inductors":              { "type": "inductors", "tier_default": 2, "dump_priority_default": 1, "sim_device": "L", "sim_pins": "1=+ 2=-" },
   "ferrites_smt":           { "type": "ferrites",  "tier_default": 2, "dump_priority_default": 1 },
   "resistors_smt":          { "type": "resistors",  "tier_default": 2, "dump_priority_default": 1, "sim_device": "R", "sim_pins": "1=+ 2=-" },
+  "resistors_th":           { "type": "resistors_th", "tier_default": 2, "dump_priority_default": 1, "sim_device": "R", "sim_pins": "1=+ 2=-" },
   "capacitors_smt":         { "type": "capacitors", "tier_default": 2, "dump_priority_default": 1, "sim_device": "C", "sim_pins": "1=+ 2=-" },
   "capacitors_electrolytic_th": { "type": "capacitors_electrolytic", "tier_default": 2, "dump_priority_default": 1, "sim_device": "C", "sim_pins": "1=+ 2=-" },
   "optoelectronics_sensor": { "type": "optoelectronics_sensors", "tier_default": 2, "dump_priority_default": 1 },

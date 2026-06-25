@@ -104,13 +104,14 @@ def test_passive_tables_folded_onto_canonical_core():
     expected = {
         "resistors_smt": "resistors",
         "capacitors_smt": "capacitors",
+        "resistors_th": "resistors_th",   # axial metal-film (Yageo MFR), re-added
     }
     for t, type_ in expected.items():
         assert t in table_map, f"{t} should be folded into table_map"
         assert table_map[t]["type"] == type_, f"{t} should use type {type_}"
-    # Through-hole passives are dropped for now (SMT focus) -- not in the build.
-    for t in ("resistors_th", "capacitors_th"):
-        assert t not in table_map, f"{t} should be dropped (SMT focus)"
+    # capacitors_th is still dropped (no through-hole cap source yet).
+    for t in ("capacitors_th",):
+        assert t not in table_map, f"{t} should be dropped (no source yet)"
 
 def test_deferred_cern_only_types_not_in_table_map():
     table_map = json.loads((ROOT/"db/schema/table_map.json").read_text())
