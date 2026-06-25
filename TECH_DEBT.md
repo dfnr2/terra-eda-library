@@ -76,6 +76,25 @@ Landed 2026-06-22: 29 active megaAVR devices (`db/tables/ic_microcontrollers/run
 
 ---
 
+## resistors_th (Yageo MFR metal-film axial)
+
+Landed 2026-06-25: 8415 parts (`db/tables/resistors_th/run_200_yageo_mfr_metal_film.py`),
+5 axial power bodies (1/6W–2W) × {0.5%, 1%} E96+E24 / {5%} E24.
+
+- [ ] **MPN variable slots are fixed by assumption** — packing `T` (Box Pack),
+  TCR `F` (±100ppm/°C), forming per body (26-/52-/73-), e.g. `MFR-25FTF52-10k`.
+  A given resistance is also orderable under other packing (`R` reel / `B` bulk),
+  TCR (`E` ±50ppm), and forming codes; we emit one canonical combination. Adjust
+  the constants at the top of the generator if a different default is wanted.
+- [ ] **Only the "Normal" axial bodies** (MFR-12/-25/-50/100/200) are generated;
+  the Miniature / wattage-S variants (MFR25S/50S/1WS/2WS/3WS, incl. the 3W body)
+  are not. Add POWER_SPECS entries if needed.
+- [ ] **±2% (G) is wired but disabled**; flip its enable to add it (E24).
+- [ ] **Footprints are horizontal axial only** (DIN0204..DIN0516 Horizontal); no
+  vertical-mount footprint variants.
+
+---
+
 ## Cross-cutting
 
 - [ ] **Lifecycle vocabulary** — `lifecycle_status` is free text (DEFAULT
