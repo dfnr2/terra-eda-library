@@ -1015,7 +1015,7 @@ def generate_resistors() -> str:
                     source=source_sql,
                     dump_priority=DUMP_PRIORITY,
                     tier=part_tier,
-                    keywords="passive,current-sense",
+                    keywords="passive,current-sense,resistor,surface-mount,SMD,SMT",
                     tolerance=tol_str,
                     power_rating=series["power"],
                     temp_coeff=series["tcr"],

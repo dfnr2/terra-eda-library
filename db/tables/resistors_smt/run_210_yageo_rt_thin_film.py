@@ -1246,7 +1246,7 @@ def generate_resistors() -> str:
                 source=source_sql,
                 dump_priority=DUMP_PRIORITY,
                 tier=part_tier,
-                keywords='passive,precision',
+                keywords='passive,precision,resistor,surface-mount,SMD,SMT',
                 tolerance=spec["tolerance"],
                 power_rating=spec["power"],
                 temp_coeff=spec["tempco"],

@@ -52,6 +52,9 @@ TRACKING = "No"
 SOURCE = None          # NULL for generated data (not dumped)
 DUMP_PRIORITY = 0
 TIER = 2
+# Searchable keywords — include through-hole terms so TH parts are findable
+# distinctly from the SMT resistors (which share the 'passive' tag).
+KEYWORDS = "passive,resistor,through-hole,TH,axial,leaded,metal-film"
 
 DATASHEET = "${TERRA_EDA_LIB}/datasheets/yageo/yageo_mfr.pdf"
 MANUFACTURER_LINK = "https://www.yageo.com/en/Product/Index/leadednetworks/metal_film_mfr"
@@ -205,7 +208,7 @@ def build() -> str:
                     unique_id, part_locator, mpn, MANUFACTURER, None,
                     f"Axial {spec['body_style']}", f"{value_spice}Ω", desc, DATASHEET,
                     MANUFACTURER_LINK, SYMBOL, spec["footprint"], SOURCE, DUMP_PRIORITY,
-                    TIER, "passive", tol["label"], spec["power"], TCR_LABEL,
+                    TIER, KEYWORDS, tol["label"], spec["power"], TCR_LABEL,
                     spec["working_voltage"], COMPOSITION, spec["lead_spacing_mm"],
                     spec["body_style"],
                 ]
