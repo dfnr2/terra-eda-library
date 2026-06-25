@@ -29,6 +29,12 @@ LIB_CANDIDATES = [
     "/usr/share/kicad/symbols/74xx.kicad_sym",
     "/usr/local/share/kicad/symbols/74xx.kicad_sym",
 ]
+# Same devices drawn with IEEE rectangular symbols, under bare device numbers
+# (7400, not 74LS00); covers only a subset of the standard lib.
+IEEE_CANDIDATES = [
+    "/usr/share/kicad/symbols/74xx_IEEE.kicad_sym",
+    "/usr/local/share/kicad/symbols/74xx_IEEE.kicad_sym",
+]
 
 # Longest prefix first so 74LS/74HCT win over 74.
 FAMILIES = ("74LS", "74HCT", "74HC", "74")
@@ -63,7 +69,7 @@ COUNT_WORDS = {"single": 1, "dual": 2, "double": 2, "triple": 3, "quad": 4,
                "quadruple": 4, "hex": 6, "octal": 8}
 
 COLS = [
-    "unique_id", "part_locator", "mpn", "manufacturer", "package", "value",
+    "unique_id", "variant", "part_locator", "mpn", "manufacturer", "package", "value",
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "rohs", "allow_substitution", "tracking",
     "standards_version", "source", "dump_priority", "tier", "lifecycle_status",
@@ -265,6 +271,17 @@ def main():
                          "value": value,
                          "description": f"{func}, {fam}, {pkg_label}",
                          "kicad_footprint": fp})
+
+    # IEEE-symbol variants: clone any row whose IEEE glyph exists (matched by
+    # bare device number 74<base>), swapping symbol + tagging variant='IEEE'.
+    ieee_lib = next((p for p in IEEE_CANDIDATES if Path(p).exists()), None)
+    ieee_names = set(re.findall(r'^\t\(symbol "([^"]+)"', Path(ieee_lib).read_text(), re.M)) if ieee_lib else set()
+    for r in list(rows):
+        cand = f"74{r['base_number']}"
+        if cand in ieee_names:
+            rows.append({**r, "variant": "IEEE",
+                         "unique_id": r["unique_id"] + "-IEEE",
+                         "kicad_symbol": f"74xx_IEEE:{cand}"})
 
     lines = [
         "-- Terra EDA Library - 74xx TTL harvest (74/74LS/74HC/74HCT)",

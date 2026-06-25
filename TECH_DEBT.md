@@ -15,7 +15,10 @@ resolved; delete stale items.
 
 Landed 2026-06-25: 264 devices — 210 TTL harvested (`run_320_ttl_harvest.py`,
 families 74/74LS/74HC/74HCT) + 5 curated (`run_310_ttl_canonical.py`) + 49
-CD4000-series CMOS (`run_330_cd4000.py`, logic_family='4000B').
+CD4000-series CMOS (`run_330_cd4000.py`, logic_family='4000B'). Each generator
+also emits IEEE rectangular-symbol rows (`variant='IEEE'`) where KiCad's
+`*_IEEE` libs cover the device — only a subset (67/164 TTL bases, 44/49 CD4000),
+so most MSI parts have no IEEE alternative. 788 rows total.
 
 - [ ] **Per-part dynamics are NULL** across all harvested parts (210 TTL + 49 CD4000):
   `propagation_delay`, `max_frequency`, `supply_current`. Not present in KiCad

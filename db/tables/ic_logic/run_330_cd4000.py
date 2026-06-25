@@ -28,6 +28,12 @@ LIB_CANDIDATES = [
     "/usr/share/kicad/symbols/4xxx.kicad_sym",
     "/usr/local/share/kicad/symbols/4xxx.kicad_sym",
 ]
+# Same devices drawn with IEEE rectangular symbols (bare device numbers);
+# covers only a subset of the standard lib.
+IEEE_CANDIDATES = [
+    "/usr/share/kicad/symbols/4xxx_IEEE.kicad_sym",
+    "/usr/local/share/kicad/symbols/4xxx_IEEE.kicad_sym",
+]
 
 # 4000B @Vcc=5V representative levels; supply spans 3-18V, inputs Vcc-ratiometric.
 FAMILY_EE = dict(vmin=3.0, vmax=18.0, vih=3.5, vil=1.5, voh=4.95, vol=0.05,
@@ -43,7 +49,7 @@ COUNT_WORDS = {"single": 1, "dual": 2, "double": 2, "triple": 3, "quad": 4,
                "quadruple": 4, "hex": 6, "octal": 8}
 
 COLS = [
-    "unique_id", "part_locator", "mpn", "manufacturer", "package", "value",
+    "unique_id", "variant", "part_locator", "mpn", "manufacturer", "package", "value",
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "rohs", "allow_substitution", "tracking",
     "standards_version", "source", "dump_priority", "tier", "lifecycle_status",
@@ -239,6 +245,16 @@ def main():
                          "value": value,
                          "description": f"{func}, 4000B, {pkg_label}",
                          "kicad_footprint": fp})
+
+    # IEEE-symbol variants: clone any row whose IEEE glyph exists (matched by the
+    # bare device number), swapping symbol + tagging variant='IEEE'.
+    ieee_lib = next((p for p in IEEE_CANDIDATES if Path(p).exists()), None)
+    ieee_names = set(re.findall(r'^\t\(symbol "([^"]+)"', Path(ieee_lib).read_text(), re.M)) if ieee_lib else set()
+    for r in list(rows):
+        if r["base_number"] in ieee_names:
+            rows.append({**r, "variant": "IEEE",
+                         "unique_id": r["unique_id"] + "-IEEE",
+                         "kicad_symbol": f"4xxx_IEEE:{r['base_number']}"})
 
     lines = [
         "-- Terra EDA Library - CD4000-series CMOS logic harvest",

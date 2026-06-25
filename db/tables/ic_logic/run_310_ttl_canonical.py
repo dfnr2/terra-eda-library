@@ -10,12 +10,19 @@ Once this set proves the schema/footprint/symbol wiring, run_320+ fans out acros
 the rest of the 74xx KiCad symbol library. Generated output (dump_priority=0) is
 not dumped back to static SQL.
 """
+import re
 from pathlib import Path
 
 OUTPUT_FILE = Path(__file__).with_name("ic_logic_generated_310_ttl_canonical.sql")
 
+# IEEE rectangular-symbol lib (bare device numbers like 7400); covers a subset.
+IEEE_CANDIDATES = [
+    "/usr/share/kicad/symbols/74xx_IEEE.kicad_sym",
+    "/usr/local/share/kicad/symbols/74xx_IEEE.kicad_sym",
+]
+
 COLS = [
-    "unique_id", "part_locator", "mpn", "manufacturer", "package", "value",
+    "unique_id", "variant", "part_locator", "mpn", "manufacturer", "package", "value",
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "rohs", "allow_substitution", "tracking",
     "standards_version", "source", "dump_priority", "tier", "lifecycle_status",
@@ -111,6 +118,17 @@ def main():
                 "kicad_footprint": fp,
             }
             rows.append(row)
+
+    # IEEE-symbol variants: clone any row whose IEEE glyph exists (matched by the
+    # bare device number 74<base>), swapping symbol + tagging variant='IEEE'.
+    ieee_lib = next((p for p in IEEE_CANDIDATES if Path(p).exists()), None)
+    ieee_names = set(re.findall(r'^\t\(symbol "([^"]+)"', Path(ieee_lib).read_text(), re.M)) if ieee_lib else set()
+    for r in list(rows):
+        cand = f"74{r['base_number']}"
+        if cand in ieee_names:
+            rows.append({**r, "variant": "IEEE",
+                         "unique_id": r["unique_id"] + "-IEEE",
+                         "kicad_symbol": f"74xx_IEEE:{cand}"})
 
     lines = [
         "-- Terra EDA Library - canonical 74LS TTL set",
