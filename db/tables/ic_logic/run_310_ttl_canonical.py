@@ -101,6 +101,7 @@ def main():
             row = {
                 **DEFAULTS, **dev,
                 "unique_id": f"TI-{mpn}",
+                "base_number": dev["base"],
                 "part_locator": f"IC_LOGIC {dev['value']} {pkg}",
                 "mpn": mpn, "package": pkg, "pin_count": str(dev["pins"]),
                 "description": f"{dev['gate_function']}, 74LS, {pkg}",
