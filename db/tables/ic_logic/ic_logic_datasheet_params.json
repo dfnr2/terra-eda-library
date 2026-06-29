@@ -1,0 +1,2851 @@
+{
+ "74LS/161": {
+  "propagation_delay": "14 ns typ (clock→Q, Vcc=5V)",
+  "max_frequency": "32 MHz (Vcc=5V)",
+  "supply_current": "31 mA (Icc, outputs high)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls161a",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/00": {
+  "propagation_delay": "9 ns typ (Vcc=4.5V, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "20 µA (Icc max, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hc00",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4001": {
+  "propagation_delay": "125 ns typ (Vcc=5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "0.01 µA (Icc typ, Vcc=5V, 25°C)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/cd4001b",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4002": {
+  "propagation_delay": "125 ns typ (Vcc=5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "0.01 µA (Icc typ, Vcc=5V, 25°C)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/cd4002b",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4010": {
+  "propagation_delay": "100 ns typ (Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "0.02 µA (Icc typ, Vcc=5V, 25°C)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/cd4010b",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/40106": {
+  "propagation_delay": "140 ns typ (Vcc=5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "0.02 µA (Icc typ, Vcc=5V, 25°C)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/cd40106b",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4011": {
+  "propagation_delay": "125 ns typ (Vcc=5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "0.01 µA (Icc typ, Vcc=5V, 25°C)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/cd4011b",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4012": {
+  "propagation_delay": "60 ns typ (Vcc=5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "0.01 µA (Idd typ, Vcc=5V, 25°C)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4012b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4013": {
+  "propagation_delay": "150 ns typ (Vcc=5V, CL=50pF)",
+  "max_frequency": "7 MHz (Vcc=5V)",
+  "supply_current": "0.02 µA (Idd typ, Vcc=5V, 25°C)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4013b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4016": {
+  "propagation_delay": "40 ns typ (Vcc=5V, CL=50pF, RL=1kΩ)",
+  "max_frequency": null,
+  "supply_current": "5 µA (Idd typ, Vcc=5V, Vs=0-5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4016b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4017": {
+  "propagation_delay": "325 ns typ (Vcc=5V, CL=50pF)",
+  "max_frequency": "2.5 MHz (Vcc=5V)",
+  "supply_current": "0.04 µA (Idd typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4017b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4020": {
+  "propagation_delay": "360 ns max (Vcc=5V, CL=50pF)",
+  "max_frequency": "3.5 MHz (Vcc=5V)",
+  "supply_current": "0.04 µA (Idd typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4020b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4021": {
+  "propagation_delay": "160 ns typ (Vcc=5V, CL=50pF)",
+  "max_frequency": "3 MHz (Vcc=5V, min specified)",
+  "supply_current": "0.04 µA (Idd typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4021b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4022": {
+  "propagation_delay": "325 ns typ (Vcc=5V, CL=50pF)",
+  "max_frequency": "2.5 MHz (Vcc=5V)",
+  "supply_current": "0.04 µA (Idd typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4022b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4023": {
+  "propagation_delay": "60 ns typ (Vcc=5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "0.01 µA (Idd typ, Vcc=5V, 25°C)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4023b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4025": {
+  "propagation_delay": "125 ns typ (Vcc=5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "0.01 µA (Idd typ, Vcc=5V, 25°C)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4025b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4027": {
+  "propagation_delay": "150 ns typ (Vcc=5V, CL=50pF)",
+  "max_frequency": "3.5 MHz (toggle mode, Vcc=5V)",
+  "supply_current": "1 µA (Icc max, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4027b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4028": {
+  "propagation_delay": "175 ns typ (Vdd=5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "5 µA (Idd max, Vdd=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4028b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4029": {
+  "propagation_delay": "250 ns typ (Vdd=5V, CL=50pF)",
+  "max_frequency": "2 MHz (Vdd=5V)",
+  "supply_current": "5 µA (Idd max, Vdd=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4029b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4033": {
+  "propagation_delay": "250 ns typ (Vdd=5V, CL=50pF)",
+  "max_frequency": "2.5 MHz (Vdd=5V)",
+  "supply_current": "5 µA (Idd max, Vdd=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4033b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4040": {
+  "propagation_delay": "180 ns typ (Vdd=5V, CL=50pF)",
+  "max_frequency": "3.5 MHz (Vdd=5V)",
+  "supply_current": "5 µA (Idd max, Vdd=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4040b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4046": {
+  "propagation_delay": "225 ns typ (Vdd=5V, input tr=20ns)",
+  "max_frequency": "1.7 MHz (center frequency, Vdd=5V, Rin=1Meg, C1=100pF)",
+  "supply_current": "0.2 mA (Vdd=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4046b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4047": {
+  "propagation_delay": "200 ns typ (Vdd=5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "1 µA (Idd max, Vdd=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4047b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4050": {
+  "propagation_delay": "200 ns typ (Vdd=5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "1 µA (Idd max, Vdd=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4050b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4051": {
+  "propagation_delay": "30 ns typ (Vdd=5V, RL=200kΩ)",
+  "max_frequency": null,
+  "supply_current": "18 µA (Idd max, Vdd=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4051b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4052": {
+  "propagation_delay": "160 ns typ (Vcc=5V, CL=50pF, RL=200kΩ, Address-to-Signal OUT)",
+  "max_frequency": null,
+  "supply_current": "18 µA (Idd max, Vcc=5V, 25°C)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4052b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4053": {
+  "propagation_delay": "160 ns typ (Vcc=5V, CL=50pF, RL=200kΩ, Address-to-Signal OUT)",
+  "max_frequency": null,
+  "supply_current": "18 µA (Idd max, Vcc=5V, 25°C)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4053b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4056": {
+  "propagation_delay": "400 ns max (VEE=-5V, VSS=0V, VD=5V, CL=50pF, RL=200kΩ)",
+  "max_frequency": null,
+  "supply_current": "0.04 µA (Idd max, Vdd=5V, 25°C)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4056b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4060": {
+  "propagation_delay": "370 ns typ (Vcc=5V, CL=50pF, RL=200kΩ, Input-Pulse Operation)",
+  "max_frequency": "5 MHz (Vcc=5V)",
+  "supply_current": "0.04 µA (Idd max, Vcc=5V, 25°C)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4060b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4066": {
+  "propagation_delay": "20 ns typ (Vcc=5V, CL=50pF, RL=1kΩ, Signal Input to Signal Output)",
+  "max_frequency": "6 MHz (Vcc=5V, Maximum control input repetition rate)",
+  "supply_current": "4 µA (Idd max, Vcc=5V, 25°C, All Switches OFF)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4066b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4070": {
+  "propagation_delay": "140 ns typ (Vcc=5V, CL=50pF, RL=200kΩ)",
+  "max_frequency": null,
+  "supply_current": "0.01 µA (Idd max, Vcc=5V, 25°C)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/cd4070b",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4071": {
+  "propagation_delay": "125 ns typ (Vcc=5V, CL=50pF, RL=200kΩ)",
+  "max_frequency": null,
+  "supply_current": "0.01 µA (Idd max, Vcc=5V, 25°C)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4071b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4072": {
+  "propagation_delay": "125 ns typ (Vcc=5V, CL=50pF, RL=200kΩ)",
+  "max_frequency": null,
+  "supply_current": "0.01 µA (Idd max, Vcc=5V, 25°C)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4072b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4073": {
+  "propagation_delay": "125 ns typ (Vcc=5V, CL=50pF, RL=200kΩ)",
+  "max_frequency": null,
+  "supply_current": "0.01 µA (Idd max, Vcc=5V, 25°C)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4073b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4075": {
+  "propagation_delay": "125 ns typ (Vcc=5V, CL=50pF, RL=200kΩ)",
+  "max_frequency": null,
+  "supply_current": "0.01 µA typ, 0.25 µA max (Idd, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4075b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4077": {
+  "propagation_delay": "140 ns typ (Vcc=5V, CL=50pF, RL=200kΩ)",
+  "max_frequency": null,
+  "supply_current": "0.01 µA typ, 0.25 µA max (Idd, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4077b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4081": {
+  "propagation_delay": "125 ns typ (Vcc=5V, CL=50pF, RL=200kΩ)",
+  "max_frequency": null,
+  "supply_current": "0.01 µA typ, 0.25 µA max (Idd, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4081b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4093": {
+  "propagation_delay": "190 ns typ (Vcc=5V, CL=50pF, RL=200kΩ)",
+  "max_frequency": null,
+  "supply_current": "0.02 µA typ, 1 µA max (Idd, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4093b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4094": {
+  "propagation_delay": "300 ns typ (Vcc=5V, CL=50pF, RL=200kΩ)",
+  "max_frequency": "1.25 MHz (Vcc=5V, limited by setup/hold times)",
+  "supply_current": "0.04 µA typ, 5 µA max (Idd, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4094b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4098": {
+  "propagation_delay": "250 ns typ (Vcc=5V, trigger propagation)",
+  "max_frequency": null,
+  "supply_current": "0.02 µA typ, 1 µA max (Idd, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4098b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4504": {
+  "propagation_delay": "140 ns typ (Vcc=5V, CMOS-to-CMOS mode, CL=50pF, RL=200kΩ)",
+  "max_frequency": null,
+  "supply_current": "0.02 µA typ, 1.5 mA max (Vcc=5V, CMOS-CMOS mode)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4504b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4510": {
+  "propagation_delay": "200 ns typ (Vcc=5V, Clock-to-Q output, CL=50pF, RL=200kΩ)",
+  "max_frequency": "2 MHz (Vcc=5V)",
+  "supply_current": "0.04 µA typ, 5 µA max (Idd, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4510b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4518": {
+  "propagation_delay": "280 ns typ (Vcc=5V, Clock or Enable to Output, CL=50pF, RL=200kΩ)",
+  "max_frequency": "1.5 MHz (Vcc=5V)",
+  "supply_current": "0.04 µA typ, 5 µA max (Idd, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4518b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4520": {
+  "propagation_delay": "280 ns typ (Vcc=5V, Clock or Enable to Output, CL=50pF, RL=200kΩ)",
+  "max_frequency": "1.5 MHz (Vcc=5V)",
+  "supply_current": "0.04 µA typ, 5 µA max (Idd, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4520b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4528": {
+  "propagation_delay": "100 ns typ (tPLH, Vcc=5V, CL=8mS)",
+  "max_frequency": null,
+  "supply_current": "0.005 µA typ (Icc, Vcc=5V)",
+  "datasheet_url": "https://www.poyntsource.com/New/PathImages/CD4528.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4529": {
+  "propagation_delay": "20-40 ns (CL=50pF, RL=200kΩ, VDD=5V)",
+  "max_frequency": null,
+  "supply_current": null,
+  "datasheet_url": "https://www.thierry-lequeu.fr/data/HCF4529B.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4538": {
+  "propagation_delay": "300 ns typ (tPLH, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "0.005 µA typ (Idd, Vcc=5V)",
+  "datasheet_url": "https://www.soemtron.org/downloads/disposals/cd4538bcn.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4543": {
+  "propagation_delay": "600 ns typ (tPHL, Vcc=5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "0.04 µA typ (Idd, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4543b.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74/00": {
+  "propagation_delay": "12 ns typ (tPLH, Vcc=5V, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "16 mA (Icc max)",
+  "datasheet_url": "http://www.ti.com/lit/gpn/sn7400",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74/02": {
+  "propagation_delay": "15 ns typ (tPHL, Vcc=5V, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "16 mA (Icc max)",
+  "datasheet_url": "http://www.ti.com/lit/gpn/sn7402",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74/54": {
+  "propagation_delay": "13 ns typ (tPLH, Vcc=5V, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "8 mA (Icc max, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/sn54ls54.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/02": {
+  "propagation_delay": "10 ns typ (tPHL, Vcc=5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "80 µA max (Icc, Vcc=5V)",
+  "datasheet_url": "http://www.ti.com/lit/gpn/sn74hc02",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/04": {
+  "propagation_delay": "8 ns typ (tPHL, Vcc=5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "80 µA max (Icc, Vcc=5V)",
+  "datasheet_url": "https://assets.nexperia.com/documents/data-sheet/74HC_HCT04.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/123": {
+  "propagation_delay": "100 ns typ (tPLH, Vcc=5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "80 µA max (Icc, Vcc=5V)",
+  "datasheet_url": "https://assets.nexperia.com/documents/data-sheet/74HC_HCT123.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/138": {
+  "propagation_delay": "18 ns typ (Vcc=5V, from A/B/C to Y output)",
+  "max_frequency": null,
+  "supply_current": "80 µA (Icc, quiescent, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hc138",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/14": {
+  "propagation_delay": "12 ns typ (Vcc=5V, A to Y)",
+  "max_frequency": null,
+  "supply_current": "20 µA (Icc, Vcc=6V, quiescent)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hc14",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/164": {
+  "propagation_delay": "20 ns typ (Vcc=5V, CLK to Q output)",
+  "max_frequency": "50 MHz (Vcc=5V, typ at 25°C)",
+  "supply_current": "80 µA (Icc, quiescent, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/sn74hc164.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/165": {
+  "propagation_delay": "20 ns typ (Vcc=5V, CLK/SH-LD to outputs)",
+  "max_frequency": "50 MHz (Vcc=5V, typ at 25°C)",
+  "supply_current": "8 µA (Icc, quiescent, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/sn74hc165.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/173": {
+  "propagation_delay": "17 ns typ (Vcc=5V, clock to output)",
+  "max_frequency": "60 MHz (Vcc=5V, typ)",
+  "supply_current": "8 µA (Icc, quiescent, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd74hc173.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/192": {
+  "propagation_delay": "10 ns typ (Vcc=5V, CL=50pF, CPU to TCD)",
+  "max_frequency": "24 MHz (Vcc=5V, 192 variant, typ at 25°C)",
+  "supply_current": "8 µA (Icc, quiescent, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd74hc192.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/193": {
+  "propagation_delay": "20 ns typ (Vcc=5V, from clock input)",
+  "max_frequency": "21 MHz (Vcc=5V, typ at 25°C)",
+  "supply_current": "80 µA (Icc, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd74hc193.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/237": {
+  "propagation_delay": "5 ns typ (Vcc=5V, address to output)",
+  "max_frequency": null,
+  "supply_current": "8 µA (Icc, quiescent, Vcc=6V)",
+  "datasheet_url": "http://www.ti.com/lit/ds/symlink/cd74hc237.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/238": {
+  "propagation_delay": "13 ns typ (Vcc=5V, address to output)",
+  "max_frequency": null,
+  "supply_current": "8 µA (Icc, quiescent, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd74hc238.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/240": {
+  "propagation_delay": "20 ns typ (Vcc=4.5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "80 µA (Icc max, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hc240",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/244": {
+  "propagation_delay": "13 ns typ (Vcc=4.5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "80 µA (Icc max, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hc244",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/245": {
+  "propagation_delay": "15 ns typ (Vcc=4.5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "80 µA (Icc max, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hc245",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/273": {
+  "propagation_delay": "12 ns typ",
+  "max_frequency": "21 MHz (Vcc=4.5V)",
+  "supply_current": "80 µA (Icc max, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hc273",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/373": {
+  "propagation_delay": "13 ns typ",
+  "max_frequency": null,
+  "supply_current": "160 µA (Icc max, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hc373",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/374": {
+  "propagation_delay": "14 ns typ",
+  "max_frequency": "20 MHz (Vcc=4.5V)",
+  "supply_current": "80 µA (Icc max, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hc374",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/4051": {
+  "propagation_delay": null,
+  "max_frequency": null,
+  "supply_current": "160 µA (Icc max, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/cd54hc4051",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/4060": {
+  "propagation_delay": "14 ns typ",
+  "max_frequency": "19 MHz (Vcc=4.5V)",
+  "supply_current": "80 µA (Icc max, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hc4060",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/594": {
+  "propagation_delay": "30 ns typ (SRCLK to Qn, Vcc=4.5V, CL=50pF)",
+  "max_frequency": "25 MHz (fmax, Vcc=4.5V)",
+  "supply_current": "8 µA (Icc max, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hc594",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/595": {
+  "propagation_delay": "30 ns typ (SRCLK to Qn, Vcc=4.5V, CL=50pF)",
+  "max_frequency": "31 MHz (fmax, Vcc=4.5V)",
+  "supply_current": "80 µA (Icc max, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hc595",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/688": {
+  "propagation_delay": "42 ns typ (P/Q to P=Q, Vcc=4.5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "8 µA (Icc max, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hc688",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/74": {
+  "propagation_delay": "20 ns typ (PRE/CLR to Q/Q, Vcc=4.5V, CL=50pF)",
+  "max_frequency": "31 MHz (fclock, Vcc=4.5V)",
+  "supply_current": "4 µA (Icc, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hc74",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/85": {
+  "propagation_delay": "16 ns typ (A_n, B_n to (A > B) OUT at VCC=4.5V, 25°C)",
+  "max_frequency": null,
+  "supply_current": "8 µA typ (VCC=6V, HC type)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd74hc85.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/86": {
+  "propagation_delay": "12 ns typ (A or B to Y, Vcc=4.5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "2 µA (Icc, Vcc=6V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hc86",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/00": {
+  "propagation_delay": "10 ns typ (A or B to Y, Vcc=5.5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "20 µA (Icc, Vcc=5.5V)",
+  "datasheet_url": "http://www.ti.com/lit/gpn/sn74hct00",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/02": {
+  "propagation_delay": "10 ns typ (A or B to Y, Vcc=5.5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "20 µA (Icc, Vcc=5.5V)",
+  "datasheet_url": "http://www.ti.com/lit/gpn/sn74hct02",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/04": {
+  "propagation_delay": "13 ns typ (Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "20 µA (Icc max)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hct04",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/123": {
+  "propagation_delay": "26 ns typ (nA, nB to nQ, nQ; CEXT=0pF, REXT=5kΩ, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": null,
+  "datasheet_url": "https://datasheet.octopart.com/74HC123N,652-NXP-Semiconductors-datasheet-9752343.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/137": {
+  "propagation_delay": "16 ns typ (Address to Output, CL=15pF, VCC=5V, 25°C, HCT type)",
+  "max_frequency": null,
+  "supply_current": "360 µA typ (25°C, dual-supply worst-case per datasheet note)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd74hc137.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/138": {
+  "propagation_delay": "32 ns typ (Vcc=5.5V, A/B/C to Y)",
+  "max_frequency": null,
+  "supply_current": "80 µA (Icc max)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hct138",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/164": {
+  "propagation_delay": "14 ns typ (CP to Qn, CL=15pF, VCC=5V, 25°C, HCT type)",
+  "max_frequency": "61 MHz (CL=15pF, VCC=5V)",
+  "supply_current": null,
+  "datasheet_url": "https://datasheet.octopart.com/74HCT164N,652-NXP-Semiconductors-datasheet-9990193.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/173": {
+  "propagation_delay": "17 ns typ (clock to output, Vcc=5V)",
+  "max_frequency": "60 MHz",
+  "supply_current": "80 µA (Icc max, Vcc=5.5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hct173",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/193": {
+  "propagation_delay": null,
+  "max_frequency": null,
+  "supply_current": "160 µA typ (VCC=6V, 25°C, HCT type)",
+  "datasheet_url": "https://datasheet.octopart.com/74HC193N-NXP-Semiconductors-datasheet-9708938.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/238": {
+  "propagation_delay": "13 ns typ (Vcc=5V, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "80 µA (Icc max)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd74hc238.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/240": {
+  "propagation_delay": "12 ns typ (Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "80 µA (Icc max)",
+  "datasheet_url": "https://assets.nexperia.com/documents/data-sheet/74HC_HCT240.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/244": {
+  "propagation_delay": "18 ns typ (Vcc=5.5V, CL=150pF, A to Y)",
+  "max_frequency": null,
+  "supply_current": "8 µA typ (Icc, Vcc=5.5V, Vi=VCC or 0)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hct244",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/273": {
+  "propagation_delay": "15 ns typ (CLR to Any, Vcc=5.5V, CL=50pF)",
+  "max_frequency": "28 MHz (Vcc=5.5V)",
+  "supply_current": "160 µA (Icc max, Vcc=5.5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hct273",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/373": {
+  "propagation_delay": "32 ns typ (D to Q, Vcc=5.5V, CL=150pF)",
+  "max_frequency": null,
+  "supply_current": "160 µA (Icc max, Vcc=5.5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hct373",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/374": {
+  "propagation_delay": "35 ns typ (CLK to Any Q, Vcc=5.5V, CL=150pF)",
+  "max_frequency": "36 MHz (Vcc=5.5V)",
+  "supply_current": "160 µA (Icc max, Vcc=5.5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hct374",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/4051": {
+  "propagation_delay": null,
+  "max_frequency": null,
+  "supply_current": "8.0 µA max (VCC=5.5V, TA=25°C)",
+  "datasheet_url": "https://assets.nexperia.com/documents/data-sheet/74HC_HCT4051.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/541": {
+  "propagation_delay": "19 ns typ (OE to Y, Vcc=5.5V, CL=150pF)",
+  "max_frequency": null,
+  "supply_current": "160 µA (Icc max, Vcc=5.5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hct541",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/574": {
+  "propagation_delay": "35 ns typ (CLK to Q, Vcc=5.5V, CL=150pF)",
+  "max_frequency": "33 MHz (Vcc=5.5V)",
+  "supply_current": "160 µA (Icc max, Vcc=5.5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hct574",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/595": {
+  "propagation_delay": "42 ns typ (SRCLK to QH, Vcc=5.5V)",
+  "max_frequency": "31 MHz (Vcc=5.5V)",
+  "supply_current": "8 µA (Icc, Vcc=5.5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hct595",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/596": {
+  "propagation_delay": "42 ns typ (SRCLK to QH, Vcc=5.5V)",
+  "max_frequency": "31 MHz (Vcc=5.5V)",
+  "supply_current": "8 µA (Icc, Vcc=5.5V)",
+  "datasheet_url": "https://assets.nexperia.com/documents/data-sheet/74HC_HCT595.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/688": {
+  "propagation_delay": "34 ns typ (A or B to Y, Vcc=4.5V, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "80 µA (Icc, Vcc=5.5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd74hct688.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/74": {
+  "propagation_delay": "20 ns typ (Vcc=4.5V, CLK to Q output)",
+  "max_frequency": "20 MHz (Vcc=4.5V)",
+  "supply_current": "4 µA (Icc typ, Vcc=5.5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74hct74",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/85": {
+  "propagation_delay": "13 ns typ (Vcc=5V, data to output)",
+  "max_frequency": null,
+  "supply_current": "80 µA (Icc typ, Vcc=5.5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd74hc85.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/02": {
+  "propagation_delay": "15 ns typ (Vcc=5V, input to output, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "27 mA (Icc typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls02",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/03": {
+  "propagation_delay": "15 ns typ (Vcc=5V, input to output, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "4.4 mA (Icc typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls03",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/05": {
+  "propagation_delay": "40 ns typ (Vcc=5V, input to output, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "6.6 mA (Icc typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls05",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/06": {
+  "propagation_delay": "10 ns typ (Vcc=5V, input to output, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "60 mA (Icc, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls06",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/07": {
+  "propagation_delay": "19 ns typ (Vcc=5V, input to output, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "45 mA (Icc, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls07",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/08": {
+  "propagation_delay": "10 ns typ (Vcc=5V, input to output, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "8.8 mA (Icc, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls08",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/09": {
+  "propagation_delay": "6.5 ns typ (Vcc=5V, input to output, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "8.8 mA (Icc, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls09",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/10": {
+  "propagation_delay": "9 ns typ (Vcc=5V, RL=2kΩ, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "3.3 mA (Iccl max, Vcc=5V, VI=4.5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls10",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/107": {
+  "propagation_delay": "16 ns typ (Vcc=5V, RL=400Ω, CL=15pF, CLR to Q)",
+  "max_frequency": "20 MHz typ (Vcc=5V)",
+  "supply_current": "10 mA (Icc1 typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/sn74ls107a.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/109": {
+  "propagation_delay": "10 ns typ (Vcc=5V, RL=400Ω, CL=15pF, PRE or CLR to Q)",
+  "max_frequency": "25 MHz typ (Vcc=5V)",
+  "supply_current": "9 mA (Icc typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/sn74ls109a.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/11": {
+  "propagation_delay": "8 ns typ (Vcc=5V, RL=2kΩ, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "1.8 mA (Icch typ, Vcc=5V, VI=0V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls11",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/112": {
+  "propagation_delay": "15 ns typ (Vcc=5V, RL=2kΩ, CL=15pF, CLR or PRE to Q)",
+  "max_frequency": "30 MHz typ (Vcc=5V)",
+  "supply_current": "4 mA (Icc typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/sn74ls112a.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/113": {
+  "propagation_delay": "16 ns max (tpLH/tpHL, Vcc=5V, CL=15pF)",
+  "max_frequency": "30 MHz (fmax)",
+  "supply_current": "8 mA (Icc at Vcc=Max)",
+  "datasheet_url": "https://archive.org/download/74LS113/74LS113.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/114": {
+  "propagation_delay": "16 ns max (tpLH/tpHL, Vcc=5V, CL=15pF, RL=2kΩ)",
+  "max_frequency": "30 MHz (fmax)",
+  "supply_current": "8.0 mA (Icc at Vcc=Max, VCP=0V)",
+  "datasheet_url": "https://archive.org/download/74LS114/74LS114.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/12": {
+  "propagation_delay": "17 ns typ (tPLH, Vcc=5V, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "1.4 mA typ (Icc, Vcc=5V); 3.3 mA (Total, Output LOW)",
+  "datasheet_url": "https://archive.org/download/74LS12/74LS12.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/121": {
+  "propagation_delay": "45 ns typ (Vcc=5V, CL=15pF, low-to-high at output from A input)",
+  "max_frequency": null,
+  "supply_current": "13 mA (Icc quiescent typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74121",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/122": {
+  "propagation_delay": "33 ns typ (tPLH A to Q, Vcc=5V, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "11 mA typ (Icc, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls122",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/123": {
+  "propagation_delay": "33 ns typ (tPLH A to Q, Vcc=5V, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "11 mA typ (Icc, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls123",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/125": {
+  "propagation_delay": "8 ns typ (Vcc=5V, RL=400Ω, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "32 mA (Icc typ, Vcc=5V, 125 config)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls125",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/126": {
+  "propagation_delay": "8 ns typ (Vcc=5V, RL=400Ω, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "32 mA (Icc typ, Vcc=5V, 126 config)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls126",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/132": {
+  "propagation_delay": "15 ns typ (Vcc=5V, RL=2kΩ, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "8.2 mA (Icc typ, Vcc=5V, 132 logic state)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls132",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/133": {
+  "propagation_delay": "2 ns typ, 6 ns max (CL=15pF, LOW-to-HIGH); 2 ns typ, 7 ns max (HIGH-to-LOW)",
+  "max_frequency": null,
+  "supply_current": "3 mA typ (Output HIGH), 5.5 mA typ (Output LOW)",
+  "datasheet_url": "https://www.ivytechengineering.com/info/stores/74ls/files/74ls133.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/136": {
+  "propagation_delay": "18 ns typ (tPLH, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "50 mA (Icc max, Vcc=5V)",
+  "datasheet_url": "http://www.ti.com/lit/ds/symlink/sn54ls136.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/137": {
+  "propagation_delay": "17 ns typ (tPLH, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "18 mA (Icc max, Vcc=5V)",
+  "datasheet_url": "http://www.ti.com/lit/ds/symlink/sn54ls137.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/139": {
+  "propagation_delay": "20 ns typ (tPLH, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "50 mA (Icc max, Vcc=5V)",
+  "datasheet_url": "http://www.ti.com/lit/ds/symlink/sn74ls139a.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/14": {
+  "propagation_delay": "22 ns max (tPLH/tPHL, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "50 mA (Icc max, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls14",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/145": {
+  "propagation_delay": "50 ns max (tPLH/tPHL, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "62 mA (Icc max, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls145",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/147": {
+  "propagation_delay": "12 ns typ, 18 ns max (in-phase output)",
+  "max_frequency": null,
+  "supply_current": "17 mA (Output HIGH), 20 mA (Output LOW)",
+  "datasheet_url": "https://ece-classes.usc.edu/ee459/library/datasheets/SN74LS147-D.PDF",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/148": {
+  "propagation_delay": "15 ns typ (tPLH, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "62 mA (Icc max, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls148",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/15": {
+  "propagation_delay": "10 ns typ",
+  "max_frequency": null,
+  "supply_current": null,
+  "datasheet_url": "https://www.datasheethub.com/74ls15-triple-3-input-and-gate-o-c/",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/151": {
+  "propagation_delay": "27 ns typ (tPLH, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "10 mA (Icc max, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls151",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/153": {
+  "propagation_delay": "14 ns typ (Data to Y, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "36 mA typ (Icc, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls153",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/154": {
+  "propagation_delay": "30 ns (Data to Output, CL=15pF); 25 ns (Strobe to Output, max 35 ns)",
+  "max_frequency": null,
+  "supply_current": "9 mA typ, 14 mA max",
+  "datasheet_url": "https://mvelectronica.com/download-product-file/74154/datasheet%2074LS154%20(2020-05-18%2013-37-09).pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/156": {
+  "propagation_delay": "25 ns typ (A,B,2C or 1G to output Y, CL=15pF, RL=400Ω, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "25 mA typ (Icc max, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls156",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/157": {
+  "propagation_delay": "9 ns typ (Data to output, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "30 mA typ (Icc, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls157",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/158": {
+  "propagation_delay": "7 ns typ (Data to output, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "4.8 mA typ (Icc, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls158",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/160": {
+  "propagation_delay": "13 ns typ (Clock to Q, LS160A/LS161A); 20 ns typ (Clock to TC)",
+  "max_frequency": "25 MHz",
+  "supply_current": "31 mA",
+  "datasheet_url": "https://users.ece.utexas.edu/~valvano/Datasheets/74LS163.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/162": {
+  "propagation_delay": "18 ns typ (Clock to Q, LS162A); 20 ns typ (Clock to TC), 35 ns max",
+  "max_frequency": "32 MHz",
+  "supply_current": "31 mA",
+  "datasheet_url": "https://users.ece.utexas.edu/~valvano/Datasheets/74LS163.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/163": {
+  "propagation_delay": "18 ns typ (Clock to Q, LS163A); 20 ns typ (Clock to TC), 35 ns max",
+  "max_frequency": "32 MHz",
+  "supply_current": "31 mA",
+  "datasheet_url": "https://users.ece.utexas.edu/~valvano/Datasheets/74LS163.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/165": {
+  "propagation_delay": "20 ns typ (LD to any output, CL=15pF, RL=400Ω, Vcc=5V)",
+  "max_frequency": "26 MHz typ (fmax clock frequency, Vcc=5V)",
+  "supply_current": "42 mA typ (Icc, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/sn74ls165a.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/166": {
+  "propagation_delay": "24 ns typ (Clock to Output), max 35 ns (CL=15pF); 19 ns typ (Clear to Output), max 30 ns",
+  "max_frequency": "35 MHz",
+  "supply_current": "38 mA",
+  "datasheet_url": "https://www.futurlec.com/Datasheet/74ls/74LS166.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/168": {
+  "propagation_delay": "10 ns typ",
+  "max_frequency": "40 MHz",
+  "supply_current": null,
+  "datasheet_url": "https://www.datasheethub.com/74ls168-synch-decade-up-down-counter/",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/169": {
+  "propagation_delay": "10 ns typ",
+  "max_frequency": "40 MHz",
+  "supply_current": null,
+  "datasheet_url": "https://www.datasheethub.com/74ls169-synchronous-binary-up-down-counter/",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/170": {
+  "propagation_delay": "21 ns typ",
+  "max_frequency": "35 MHz",
+  "supply_current": null,
+  "datasheet_url": "https://www.circuits-diy.com/74ls170-4x4-register-file-open-collector-ic-datasheet/",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/173": {
+  "propagation_delay": "10 ns typ",
+  "max_frequency": "35 MHz",
+  "supply_current": "24 mA",
+  "datasheet_url": "https://www.ti.com/product/SN74LS173A",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/174": {
+  "propagation_delay": "23 ns typ (tpLH clear, Vcc=5V, TA=25°C)",
+  "max_frequency": "40 MHz (typ)",
+  "supply_current": "16 mA (Icc typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls174",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/175": {
+  "propagation_delay": "20 ns typ (tpLH clock, Vcc=5V, TA=25°C)",
+  "max_frequency": "40 MHz (typ)",
+  "supply_current": "11 mA (Icc typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls175",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/181": {
+  "propagation_delay": "10 ns typ",
+  "max_frequency": "40 MHz",
+  "supply_current": null,
+  "datasheet_url": "https://www.datasheethub.com/74ls181-arithmetic-logic-unit-function-generator/",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/182": {
+  "propagation_delay": "21 ns typ",
+  "max_frequency": "35 MHz",
+  "supply_current": null,
+  "datasheet_url": "https://www.circuits-diy.com/74ls182-carry-lookahead-adder-generator-ic-datasheet/",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/190": {
+  "propagation_delay": "35 ns typ",
+  "max_frequency": "25 MHz",
+  "supply_current": null,
+  "datasheet_url": "https://www.circuits-diy.com/74ls190-presettable-bcd-decade-up-down-counter-ic-datasheet/",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/191": {
+  "propagation_delay": "20 ns typ (Vcc=5V, CL=15pF)",
+  "max_frequency": "25 MHz",
+  "supply_current": "65 mA typ (Icc, Vcc=5V)",
+  "datasheet_url": "http://www.ti.com/lit/gpn/sn74LS191",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/192": {
+  "propagation_delay": "17 ns typ (tpLH, Vcc=5V, CL=15pF)",
+  "max_frequency": "25 MHz",
+  "supply_current": "65 mA typ (Icc, Vcc=5V)",
+  "datasheet_url": "http://www.ti.com/lit/ds/symlink/sn74ls193.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/193": {
+  "propagation_delay": "16 ns typ (tpLH, Vcc=5V, CL=15pF)",
+  "max_frequency": "25 MHz",
+  "supply_current": "65 mA typ (Icc, Vcc=5V)",
+  "datasheet_url": "http://www.ti.com/lit/ds/symlink/sn74ls193.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/194": {
+  "propagation_delay": "10 ns typ",
+  "max_frequency": "25 MHz",
+  "supply_current": "63 mA",
+  "datasheet_url": "https://www.ti.com/product/SN74LS194A",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/195": {
+  "propagation_delay": "17 ns typ (clock to Q0 output, VCC=5.0V, CL=15pF)",
+  "max_frequency": "39 MHz",
+  "supply_current": "21 mA (ICC)",
+  "datasheet_url": "https://www.futurlec.com/Datasheet/74ls/74LS195.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/196": {
+  "propagation_delay": "13 ns typ (CP0 to Q0, VCC=5.0V, CL=15pF)",
+  "max_frequency": "40 MHz",
+  "supply_current": "27 mA (ICC)",
+  "datasheet_url": "https://susta.cz/fel/74/pdf/sn_74196.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/197": {
+  "propagation_delay": "14 ns typ (CP0 to Q0, VCC=5.0V, CL=15pF)",
+  "max_frequency": "40 MHz",
+  "supply_current": "27 mA (ICC)",
+  "datasheet_url": "https://susta.cz/fel/74/pdf/sn_74196.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/20": {
+  "propagation_delay": "8 ns typ (tpLH, RL=400Ω, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "2 mA typ (Icc, Vcc=5V)",
+  "datasheet_url": "http://www.ti.com/lit/gpn/sn74LS20",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/21": {
+  "propagation_delay": "8 ns typ (tpLH, RL=2kΩ, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "1.2 mA typ (Icc, Vcc=5V)",
+  "datasheet_url": "http://www.ti.com/lit/gpn/sn74LS21",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/221": {
+  "propagation_delay": "70 ns typ (Vcc=5V, tPLH A to Q)",
+  "max_frequency": null,
+  "supply_current": "26 mA (Icc quiescent, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls221",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/240": {
+  "propagation_delay": "14 ns typ (Vcc=5V, RL=667Ω, CL=45pF)",
+  "max_frequency": null,
+  "supply_current": "17 mA (Icc outputs high, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls240",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/241": {
+  "propagation_delay": "14 ns typ (Vcc=5V, RL=667Ω, CL=45pF)",
+  "max_frequency": null,
+  "supply_current": "17 mA (Icc outputs high, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls241",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/242": {
+  "propagation_delay": "9 ns typ (Vcc=5V, RL=667Ω, CL=45pF)",
+  "max_frequency": null,
+  "supply_current": "22 mA (Icc outputs high, Vcc=5V)",
+  "datasheet_url": "https://unicornelectronics.com/ftp/Data%20Sheets/74ls242-243.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/243": {
+  "propagation_delay": "12 ns typ (Vcc=5V, RL=667Ω, CL=45pF)",
+  "max_frequency": null,
+  "supply_current": "22 mA (Icc outputs high, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls243",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/245": {
+  "propagation_delay": "8 ns typ (Vcc=5V, RL=667Ω, CL=45pF)",
+  "max_frequency": null,
+  "supply_current": "48 mA (Icc total outputs high, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls245",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/247": {
+  "propagation_delay": "100 ns typ (turn-off time from A input, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "64 mA (Icc max, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls247",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/248": {
+  "propagation_delay": "100 ns typ (A input to output, VCC=5.0V, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "38 mA (ICC)",
+  "datasheet_url": "https://susta.cz/fel/74/pdf/sn_74247.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/249": {
+  "propagation_delay": "100 ns typ (A input to output, VCC=5.0V, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "15 mA (ICC)",
+  "datasheet_url": "https://susta.cz/fel/74/pdf/sn_74247.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/251": {
+  "propagation_delay": "17 ns typ (D to Y, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "7.1 mA typ (Icc, Vcc=5.25V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls251",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/253": {
+  "propagation_delay": "20 ns typ (Data to Y, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "7 mA typ (Icc condition A, all inputs grounded)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls253",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/256": {
+  "propagation_delay": "20 ns typ (Data to Output, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "30 mA max (Icc, Vcc=5.5V)",
+  "datasheet_url": "https://alfter.us/wp-content/uploads/2022/12/74LS256.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/257": {
+  "propagation_delay": "12 ns typ (data to output, VCC=5.0V, CL=45pF)",
+  "max_frequency": null,
+  "supply_current": "16 mA (ICC, output LOW)",
+  "datasheet_url": "https://susta.cz/fel/74/pdf/sn_74257.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/259": {
+  "propagation_delay": "18 ns typ (Enable-to-output, per Features); switching: 32 ns typ (Enable to output HIGH-to-LOW, RL=2kΩ, CL=50pF)",
+  "max_frequency": null,
+  "supply_current": "22 mA typ (Vcc=5V); 36 mA max (Vcc=Max)",
+  "datasheet_url": "https://www.ivytechengineering.com/info/stores/74ls/files/74ls259.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/26": {
+  "propagation_delay": "28 ns typ (A or B to Y, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "2.4 mA typ (Icc, Vcc=5.5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls26",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/27": {
+  "propagation_delay": "15 ns typ (A, B, or C to Y, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "6.8 mA typ (Iccl, Vcc=5.5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls27",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/273": {
+  "propagation_delay": "27 ns typ (clock to output, Vcc=5V)",
+  "max_frequency": "40 MHz typ (fmax, Vcc=5V)",
+  "supply_current": "27 mA typ (Icc operating, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls273",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/279": {
+  "propagation_delay": "22 ns typ (S to Q, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "7 mA typ (Icc, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn54ls279a",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/28": {
+  "propagation_delay": "12 ns typ (CL=45pF, RL=667Ω, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "3.6 mA (Icc total)",
+  "datasheet_url": "http://eeshop.unl.edu/pdf/74ls28.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/280": {
+  "propagation_delay": "50 ns typ (CL=15pF, RL=2kΩ, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "16 mA (Icc max at Vcc=max)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls280",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/283": {
+  "propagation_delay": "21 ns typ (C0 to any Σ, CL=15pF, RL=400Ω)",
+  "max_frequency": null,
+  "supply_current": "34 mA (all inputs at 4.5V, outputs open)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls283",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/290": {
+  "propagation_delay": "16 ns typ (CP0 to Q0 LOW-to-HIGH, CL=15pF); 12-18 ns range depending on path; overall 10-50 ns max (all paths at CL=15pF, RL=2kΩ, Vcc=5V)",
+  "max_frequency": "32 MHz (CP0 input) / 16 MHz (CP1 input); datasheet header states typically 42 MHz",
+  "supply_current": "15 mA typ (Vcc=Max); Low Power Schottky",
+  "datasheet_url": "https://digsys.upc.edu/csd/chips/classic/SN54_74LS290.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/293": {
+  "propagation_delay": "42 ns typ (A input to QA, CL=15pF, RL=400Ω)",
+  "max_frequency": "32 MHz (A input)",
+  "supply_current": "26 mA (Icc max at Vcc=max)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls293",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/298": {
+  "propagation_delay": "27 ns typ (CL=15pF, RL=400Ω, low-to-high output)",
+  "max_frequency": null,
+  "supply_current": "30 mA (Icc max at Vcc=max, outputs open)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls298",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/299": {
+  "propagation_delay": "33 ns typ (CLK to outputs, CL=15pF, RL=1kΩ)",
+  "max_frequency": "20 MHz (from switching characteristics fmax row)",
+  "supply_current": "140 mA (Icc min at Vcc=max)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls299",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/30": {
+  "propagation_delay": "22 ns typ (any input to Y, CL=15pF, RL=400Ω)",
+  "max_frequency": null,
+  "supply_current": "3 mA (Iccl typical)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls30",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/32": {
+  "propagation_delay": "22 ns typ (A or B to Y, CL=15pF, RL=2kΩ)",
+  "max_frequency": null,
+  "supply_current": "3 mA (Iccl typical)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls32",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/323": {
+  "propagation_delay": "22 ns typ (CLK to Q, LOW-to-HIGH at CL=15pF, RL=2kΩ); range 10-39 ns depending on path (tPLH/tPHL combined: min 10 ns, max 39 ns at various loads)",
+  "max_frequency": "25 MHz (typical clock frequency; noted in Features as exceptionally stable 25 MHz shift clock frequency)",
+  "supply_current": null,
+  "datasheet_url": "https://www.ivytechengineering.com/info/stores/74ls/files/74ls323.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/33": {
+  "propagation_delay": "20 ns typ (Vcc=5V, CL=45pF)",
+  "max_frequency": null,
+  "supply_current": null,
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls33",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/348": {
+  "propagation_delay": "11 ns typ (Inputs 1-7 to A0/A1/A2, Vcc=5V, CL=45pF)",
+  "max_frequency": null,
+  "supply_current": "13 mA typ (Icc max 25 mA, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls348",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/365": {
+  "propagation_delay": "10 ns typ (or 20 ns max)",
+  "max_frequency": "40 MHz",
+  "supply_current": null,
+  "datasheet_url": "https://www.circuits-diy.com/74ls365-hex-bus-drivers-buffers-ic-with-3-state-outputs-datasheet/",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/367": {
+  "propagation_delay": "20 ns max",
+  "max_frequency": "35 MHz",
+  "supply_current": null,
+  "datasheet_url": "https://www.circuits-diy.com/74ls367-6-bit-hex-buffer-driver-non-inverting-ic-with-3-state-outputs/",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/37": {
+  "propagation_delay": "13 ns typ (Vcc=5V, RL=133Ω, CL=45pF)",
+  "max_frequency": null,
+  "supply_current": "34 mA (Icc max, Vcc=MAX, VI=4.5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls37",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/373": {
+  "propagation_delay": "12 ns typ (data to Q, RL=667Ω, CL=45pF)",
+  "max_frequency": "40 MHz typ (fmax, Note 3)",
+  "supply_current": "2 mA (Icc typ, SN74LS', Vcc=MAX, output control at 4.5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls373",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/374": {
+  "propagation_delay": "12 ns typ (data to Q, RL=667Ω, CL=45pF)",
+  "max_frequency": "40 MHz typ (fmax, Note 3)",
+  "supply_current": "2 mA (Icc typ, SN74LS', Vcc=MAX, output control at 4.5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls374",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/375": {
+  "propagation_delay": "16 ns typ (data to Q, RL=2kΩ, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "12 mA (Icc max, SN74LS', Vcc=MAX)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls375",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/377": {
+  "propagation_delay": "17 ns typ (clock to Q, RL=2kΩ, CL=15pF)",
+  "max_frequency": "40 MHz typ (fmax)",
+  "supply_current": "28 mA (Icc typ, SN74LS', Vcc=MAX, See Note 2)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls377",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/378": {
+  "propagation_delay": "17 ns typ (clock to Q, RL=2kΩ, CL=15pF)",
+  "max_frequency": "40 MHz typ (fmax)",
+  "supply_current": "28 mA (Icc typ, SN74LS', Vcc=MAX, See Note 2)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls378",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/379": {
+  "propagation_delay": "5-10 ns typ",
+  "max_frequency": "35 MHz",
+  "supply_current": null,
+  "datasheet_url": "https://www.circuits-diy.com/74ls379-quad-4-bit-d-type-parallel-register-ic-with-enable-datasheet/",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/38": {
+  "propagation_delay": "14 ns typ (A or B to Y, RL=133Ω, CL=45pF)",
+  "max_frequency": null,
+  "supply_current": "54 mA (Icc max, SN74LS', Vcc=MAX, VI=4.5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls38",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/390": {
+  "propagation_delay": "12 ns typ (A to QA, Vcc=5V, CL=15pF)",
+  "max_frequency": "35 MHz typ",
+  "supply_current": "38 mA (Icc typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls390",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/393": {
+  "propagation_delay": "13 ns typ (A to QA, Vcc=5V, CL=15pF)",
+  "max_frequency": "35 MHz typ",
+  "supply_current": "38 mA (Icc typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls393",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/399": {
+  "propagation_delay": "18 ns typ (low-to-high output, Vcc=5V, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "13 mA (Icc typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls399",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/40": {
+  "propagation_delay": "8 ns typ (RL=133Ω, CL=15pF, Vcc=5V, 25°C)",
+  "max_frequency": null,
+  "supply_current": "130 mA typ operating (IccL, Vcc=5V)",
+  "datasheet_url": "https://eeshop.unl.edu/pdf/74ls40.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/42": {
+  "propagation_delay": "17 ns typ",
+  "max_frequency": null,
+  "supply_current": "41 mA (Icc typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls42",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/46": {
+  "propagation_delay": "50 ns max (typical family spec for BCD-to-7-seg decoder, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "18 mA max (90 mW @ 5V, from SN74LS46 row in power table)",
+  "datasheet_url": "https://learnabout-electronics.org/Downloads/74LS46-49-BCD-7-segment.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/47": {
+  "propagation_delay": "17 ns typ",
+  "max_frequency": null,
+  "supply_current": "35 mA (Icc typ, Vcc=5V for SN74LS47)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls47",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/48": {
+  "propagation_delay": "100 ns max (An to a-g outputs, CL=15pF, Vcc=5V, 25°C)",
+  "max_frequency": null,
+  "supply_current": "38 mA max operating (ICCH, Vcc=5V)",
+  "datasheet_url": "https://www.futurlec.com/Datasheet/74ls/74LS48.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/49": {
+  "propagation_delay": "50 ns max (BCD-to-7-seg family spec, Vcc=5V)",
+  "max_frequency": null,
+  "supply_current": "8 mA max (40 mW / 5V, SN74LS49 open-collector, from power dissipation table)",
+  "datasheet_url": "http://www.applelogic.org/files/74LS49.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/51": {
+  "propagation_delay": "13 ns typ (Vcc=5V, CL=15pF)",
+  "max_frequency": null,
+  "supply_current": "14 mA (Icc max, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls51",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/54": {
+  "propagation_delay": "12 ns typ, 20 ns max (tPLH=12, tPHL=12.5 typ, Vcc=5V, CL=15pF, 25°C)",
+  "max_frequency": null,
+  "supply_current": "2.0 mA max operating (ICC output LOW, Vcc=5V)",
+  "datasheet_url": "http://www.applelogic.org/files/74LS54.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/540": {
+  "propagation_delay": "9 ns typ (Vcc=5V, RL=667Ω, CL=45pF)",
+  "max_frequency": null,
+  "supply_current": "25 mA (Icc max, Vcc=5V, outputs high)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls540",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/541": {
+  "propagation_delay": "10 ns typ (Vcc=5V, RL=667Ω, CL=45pF)",
+  "max_frequency": null,
+  "supply_current": "32 mA (Icc max, Vcc=5V, outputs high)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls541",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/55": {
+  "propagation_delay": "12 ns typ, 20 ns max (tPLH=12, tPHL=12.5 typ, Vcc=5V, CL=15pF, 25°C)",
+  "max_frequency": null,
+  "supply_current": "1.3 mA max operating (ICC output LOW, Vcc=5V)",
+  "datasheet_url": "http://www.applelogic.org/files/74LS55.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/573": {
+  "propagation_delay": "27 ns max (tPLH Data to Q, RL=2kΩ, CL=50pF, Vcc=5V, 25°C)",
+  "max_frequency": null,
+  "supply_current": "50 mA max operating (ICC Vcc=MAX, Fairchild)",
+  "datasheet_url": "https://www.futurlec.com/Datasheet/74ls/74LS573.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/574": {
+  "propagation_delay": "5-10 ns typ (or 28 ns max tPHL CP to output)",
+  "max_frequency": "100 MHz",
+  "supply_current": "86 mA (86000 µA typ)",
+  "datasheet_url": "https://www.circuits-diy.com/74ls574-octal-edge-triggered-d-type-flip-flop-ic-with-tri-state-outputs/",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/590": {
+  "propagation_delay": "17 ns typ (Vcc=5V, RL=1kΩ, CL=30pF)",
+  "max_frequency": "20 MHz (fCCK max)",
+  "supply_current": "65 mA (Icc max, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls590",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/595": {
+  "propagation_delay": "18 ns typ (Vcc=5V, RL=1kΩ, CL=30pF)",
+  "max_frequency": "20 MHz (Shift clock frequency max)",
+  "supply_current": "65 mA (Icc max, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls595",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/629": {
+  "propagation_delay": null,
+  "max_frequency": null,
+  "supply_current": "55 µA typ (Icc, Vcc=MAX)",
+  "datasheet_url": "http://www.ti.com/lit/gpn/sn74LS629",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/670": {
+  "propagation_delay": "40 ns typ (tPLH from read select to output, CL=15pF, RL=2kΩ)",
+  "max_frequency": null,
+  "supply_current": "30 mA typ (Icc, Vcc=MAX)",
+  "datasheet_url": "http://www.ti.com/lit/gpn/sn74LS670",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/688": {
+  "propagation_delay": "18 ns typ (tPLH, CL=15pF, RL=2kΩ)",
+  "max_frequency": null,
+  "supply_current": "40 mA typ (Icc, Vcc=MAX)",
+  "datasheet_url": "http://www.ti.com/lit/gpn/sn74ls688",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/73": {
+  "propagation_delay": "20 ns",
+  "max_frequency": null,
+  "supply_current": null,
+  "datasheet_url": "https://www.alldatasheet.com/datasheet-pdf/pdf/27428/TI/74LS73.html",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/75": {
+  "propagation_delay": "25 ns typ (tPHL from D input to Q output, CL=15pF, RL=2kΩ)",
+  "max_frequency": null,
+  "supply_current": "32 mA typ (Icc, Vcc=MAX)",
+  "datasheet_url": "http://www.ti.com/lit/gpn/sn74LS75",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/78": {
+  "propagation_delay": "9 ns",
+  "max_frequency": null,
+  "supply_current": null,
+  "datasheet_url": "https://archive.org/details/74LS78",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/83": {
+  "propagation_delay": "16 ns (or 16-24 ns range)",
+  "max_frequency": null,
+  "supply_current": null,
+  "datasheet_url": "https://www.circuits-diy.com/74ls83-4-bit-binary-full-adder-ic-with-fast-carry-datasheet/",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/85": {
+  "propagation_delay": "23 ns typ (Vcc=5V, 4-bit magnitude comparator)",
+  "max_frequency": null,
+  "supply_current": "55 mA (Icc typ, Vcc=5V)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls85",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/86": {
+  "propagation_delay": "14 ns typ (Vcc=5V, XOR gate)",
+  "max_frequency": null,
+  "supply_current": "30 mA (Icc typ, Vcc=5V)",
+  "datasheet_url": "https://datasheet.octopart.com/SN74LS86N-Texas-Instruments-datasheet-8442833.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/90": {
+  "propagation_delay": "16 ns typ (Vcc=5V, CKA→QA, CL=15pF)",
+  "max_frequency": "42 MHz typ (Vcc=5V, 25C)",
+  "supply_current": "29 mA typ (Icc, Vcc=MAX)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls90",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/91": {
+  "propagation_delay": "40 ns max",
+  "max_frequency": "18 MHz",
+  "supply_current": null,
+  "datasheet_url": "https://www.circuits-diy.com/74ls91-8-bit-shift-storage-register-ic-datasheet/",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "med",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/92": {
+  "propagation_delay": "16 ns typ (Vcc=5V, CKA→QA, CL=15pF)",
+  "max_frequency": "42 MHz typ (Vcc=5V, 25C)",
+  "supply_current": "29 mA typ (Icc, Vcc=MAX)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls92",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/93": {
+  "propagation_delay": "16 ns typ (Vcc=5V, CKA→QA, CL=15pF)",
+  "max_frequency": "42 MHz typ (Vcc=5V, 25C)",
+  "supply_current": "29 mA typ (Icc, Vcc=MAX)",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls93",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/95": {
+  "propagation_delay": "18 ns typ (Vcc=5V, CP to Q output, low-to-high)",
+  "max_frequency": "36 MHz (fMAX at Vcc=5V)",
+  "supply_current": "21 mA (Icc typ, Vcc=5V)",
+  "datasheet_url": "https://archive.org/download/74LS95/74LS95.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "high",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4009": {
+  "propagation_delay": "typ 80 ns @ VDD=5 V, CL=50 pF",
+  "max_frequency": null,
+  "supply_current": "static ICC typ <1 µA; max depends on VDD/temp",
+  "datasheet_url": "https://www.ti.com/lit/gpn/CD4010B",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4049": {
+  "propagation_delay": "typ 80 ns @ VDD=5 V, CL=50 pF",
+  "max_frequency": null,
+  "supply_current": "static ICC max 1 µA @18 V over temp (input leakage spec family)",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4049ub.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "4000B/4069": {
+  "propagation_delay": "typ 60 ns @ VDD=5 V, CL=50 pF",
+  "max_frequency": null,
+  "supply_current": "static ICC typ <1 µA; max depends on VDD/temp",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd4069ub.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/137": {
+  "propagation_delay": "typ 13 ns; max 48 ns @ VCC=4.5 V, CL=50 pF",
+  "max_frequency": null,
+  "supply_current": "ICC max 8 µA @6 V; CMOS static, no load",
+  "datasheet_url": "https://assets.nexperia.com/documents/data-sheet/74HC137.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/590": {
+  "propagation_delay": "max 38 ns clock/register to Q @ VCC=4.5 V, CL=50 pF",
+  "max_frequency": "typ 77 MHz; min 30 MHz @ VCC=4.5 V",
+  "supply_current": "ICC max 8 µA @6 V; CMOS static, no load",
+  "datasheet_url": "https://assets.nexperia.com/documents/data-sheet/74HC590.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/596": {
+  "propagation_delay": "use 74HC595 family: max 38 ns latch/shift to Q @ VCC=4.5 V, CL=50 pF",
+  "max_frequency": "use 74HC595 family: typ 100 MHz; min ~25 MHz @ VCC=4.5 V",
+  "supply_current": "ICC max 8 µA @6 V; CMOS static, no load",
+  "datasheet_url": "https://assets.nexperia.com/documents/data-sheet/74HC_HCT595.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/4024": {
+  "propagation_delay": "max 95 ns CP to Qn @ VCC=4.5 V, CL=50 pF",
+  "max_frequency": "typ 64 MHz; min 30 MHz @ VCC=4.5 V",
+  "supply_current": "ICC max 8 µA @6 V; CMOS static, no load",
+  "datasheet_url": "https://assets.nexperia.com/documents/data-sheet/74HC4024.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74HC/7014": {
+  "propagation_delay": "max 715 ns @ VCC=4.5 V, CL=50 pF",
+  "max_frequency": null,
+  "supply_current": "ICC max 8 µA @6 V; abs ICC/GND current 50 mA",
+  "datasheet_url": "https://assets.nexperia.com/documents/data-sheet/74HC7014.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74HCT/237": {
+  "propagation_delay": "typ 13 ns; max 45 ns @ VCC=4.5 V, CL=50 pF",
+  "max_frequency": null,
+  "supply_current": "ICC max 80 µA; plus HCT ΔICC for TTL-level inputs",
+  "datasheet_url": "https://www.ti.com/lit/ds/symlink/cd74hc237.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/01": {
+  "propagation_delay": "max 32 ns (open-collector output, load dependent)",
+  "max_frequency": null,
+  "supply_current": "ICC max 4.4 mA",
+  "datasheet_url": "http://www.nteinc.com/specs/7400to7499/pdf/nte74LS01.pdf",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/13": {
+  "propagation_delay": "max 27 ns input to output",
+  "max_frequency": null,
+  "supply_current": "ICC max 7 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74LS13",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/22": {
+  "propagation_delay": "max ~35 ns (open-collector output, load dependent)",
+  "max_frequency": null,
+  "supply_current": "ICC max ~5.2 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74LS22",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/76": {
+  "propagation_delay": "max 20 ns clock/clear/preset to Q",
+  "max_frequency": "min 30 MHz; typ 45 MHz",
+  "supply_current": "ICC max 6 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74LS76",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/77": {
+  "propagation_delay": "max 19 ns data to Q; max 18 ns enable to Q",
+  "max_frequency": null,
+  "supply_current": "ICC max 13 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74LS77",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/155": {
+  "propagation_delay": "max 22 ns address/enable to output",
+  "max_frequency": null,
+  "supply_current": "ICC max 10 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74LS155",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/246": {
+  "propagation_delay": "max 100 ns A/RBI to segment outputs",
+  "max_frequency": null,
+  "supply_current": "ICC max 15 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74LS246",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/258": {
+  "propagation_delay": "max ~32 ns select/data/enable to output",
+  "max_frequency": null,
+  "supply_current": "ICC max ~11 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74LS258",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/295": {
+  "propagation_delay": "max ~35 ns clock/clear to output",
+  "max_frequency": "min 25 MHz; typ ~35 MHz",
+  "supply_current": "ICC max ~30 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74LS295",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/322": {
+  "propagation_delay": "max ~40 ns clock to Q/sign output",
+  "max_frequency": "min ~25 MHz; typ ~35 MHz",
+  "supply_current": "ICC max ~55 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74LS322",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/352": {
+  "propagation_delay": "typ 21 ns; max ~35 ns select/input to output",
+  "max_frequency": null,
+  "supply_current": "ICC max 10 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74LS352",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/353": {
+  "propagation_delay": "max ~35 ns select/input to output; enable disable/enable differs",
+  "max_frequency": null,
+  "supply_current": "ICC max ~16 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74LS353",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/366": {
+  "propagation_delay": "max ~22 ns input to output; enable max ~35 ns",
+  "max_frequency": null,
+  "supply_current": "ICC max ~32 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74LS366",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/368": {
+  "propagation_delay": "max ~22 ns input to output; enable max ~35 ns",
+  "max_frequency": null,
+  "supply_current": "ICC max ~32 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74LS368",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/385": {
+  "propagation_delay": "max 27 ns clock to sum; max 22 ns other data path",
+  "max_frequency": null,
+  "supply_current": "ICC max 75 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74LS385",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/386": {
+  "propagation_delay": "max 23 ns input to output",
+  "max_frequency": null,
+  "supply_current": "ICC max 10 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74LS386",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/395": {
+  "propagation_delay": "max 35 ns clear to output; max ~30 ns clock to output",
+  "max_frequency": "min 30 MHz; typ 45 MHz",
+  "supply_current": "ICC max ~30 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74LS395",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/398": {
+  "propagation_delay": "max ~35 ns data/select to output",
+  "max_frequency": null,
+  "supply_current": "ICC max ~30 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74LS398",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ },
+ "74LS/596": {
+  "propagation_delay": "max ~45 ns clock/latch to output (open-collector path load-dependent)",
+  "max_frequency": "min ~20 MHz; typ ~30 MHz",
+  "supply_current": "ICC max ~50 mA",
+  "datasheet_url": "https://www.ti.com/lit/gpn/sn74ls596",
+  "_prov": {
+   "src": "datasheet",
+   "conf": "user",
+   "date": "2026-06-28"
+  }
+ }
+}

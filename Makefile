@@ -88,8 +88,9 @@ $(1)_ALL_SQL := $$($(1)_STATIC_SQL) $$($(1)_GEN_SQL)
 $(1)-generate: $$($(1)_GEN_SQL)
 
 # Rule: run_N_name.py -> {table}_generated_N_name.sql
-# If ANY generator script changes, rebuild ALL generated SQL for this table
-$$($(1)_DIR)/$(1)_generated_%.sql: $$($(1)_DIR)/run_%.py $$($(1)_GEN_SCRIPTS)
+# If ANY generator script OR a data file it reads (e.g. *.json param tables)
+# changes, rebuild ALL generated SQL for this table
+$$($(1)_DIR)/$(1)_generated_%.sql: $$($(1)_DIR)/run_%.py $$($(1)_GEN_SCRIPTS) $$(wildcard $$($(1)_DIR)/*.json)
 	@echo "Running generator: $$<"
 	@cd $$($(1)_DIR) && $$(PYTHON) $$(notdir $$<)
 	@echo "+ Generated: $$@"

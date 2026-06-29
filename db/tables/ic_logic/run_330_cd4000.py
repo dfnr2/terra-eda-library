@@ -19,10 +19,27 @@ Differences from the 74xx harvest:
 Per-part dynamics (propagation delay, fmax, Icc) aren't in the symbols -> NULL.
 Generated output (dump_priority=0) is not dumped back to static SQL.
 """
+import json
 import re
 from pathlib import Path
 
 OUTPUT_FILE = Path(__file__).with_name("ic_logic_generated_330_cd4000.sql")
+
+# Datasheet-harvested dynamics (propagation_delay / max_frequency / supply_current),
+# keyed by "<logic_family>/<base_number>". See plans/ic-logic-datasheet-harvest.md.
+HARVEST_FILE = Path(__file__).with_name("ic_logic_datasheet_params.json")
+HARVEST = json.loads(HARVEST_FILE.read_text(encoding="utf-8")) if HARVEST_FILE.exists() else {}
+
+
+def fill_harvest(row, key):
+    """Fill the three datasheet dynamics into a row, fill-blanks-only (a harvested
+    value is applied only where the generator left the column None)."""
+    p = HARVEST.get(key)
+    if not p:
+        return
+    for col in ("propagation_delay", "max_frequency", "supply_current"):
+        if row.get(col) is None and p.get(col) is not None:
+            row[col] = p[col]
 
 LIB_CANDIDATES = [
     "/usr/share/kicad/symbols/4xxx.kicad_sym",
@@ -234,6 +251,7 @@ def main():
             propagation_delay=None, max_frequency=None,
             output_current=ee["drive"], supply_current=None,
         )
+        fill_harvest(common, f"4000B/{base}")
         for pkg, suffix, fp in (("PDIP", "E", FOOTPRINTS[pins][0]),
                                 ("SOIC", "M", FOOTPRINTS[pins][1])):
             pkg_label = f"{pkg}-{pins}"
