@@ -32,14 +32,18 @@ HARVEST = json.loads(HARVEST_FILE.read_text(encoding="utf-8")) if HARVEST_FILE.e
 
 
 def fill_harvest(row, key):
-    """Fill the three datasheet dynamics into a row, fill-blanks-only (a harvested
-    value is applied only where the generator left the column None)."""
+    """Apply harvested datasheet data to a row. The three dynamics
+    (propagation_delay / max_frequency / supply_current) are filled blanks-only;
+    the `datasheet` URL is repointed to the harvested known-good URL when present
+    (overriding the symbol's original link, which is often a dead/odd mirror)."""
     p = HARVEST.get(key)
     if not p:
         return
     for col in ("propagation_delay", "max_frequency", "supply_current"):
         if row.get(col) is None and p.get(col) is not None:
             row[col] = p[col]
+    if p.get("datasheet_url"):
+        row["datasheet"] = p["datasheet_url"]
 
 LIB_CANDIDATES = [
     "/usr/share/kicad/symbols/4xxx.kicad_sym",

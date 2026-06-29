@@ -49,7 +49,11 @@ Per the user's call for this round (a fuller storage/link plan comes later, see
 
 - Downloaded PDFs go to a **gitignored scratch dir**, not the repo
   `datasheets/<mfr>/` store. The repo is not loaded up with PDFs this round.
-- The parts' existing `datasheet` URLs are **left as-is** — not repointed.
+- The parts' `datasheet` field is **repointed to the harvested known-good URL**
+  (the agent-opened URL, or the hand-verified URL for the tail) — still a URL, not
+  a local PDF. Local-PDF storage stays deferred to the later plan. (Originally this
+  round left URLs as-is; changed 2026-06-28 to use the known-good URLs since we are
+  URL-only for now.)
 - The canonical manufacturer URL each agent actually used **is banked** in the
   data file (`datasheet_url`) so the later link-cleanup has a clean source.
 
@@ -211,9 +215,10 @@ enough that NULL is the correct "sparse but high quality" outcome; revisit only 
 specific design needs one.
 
 **Interim datasheet handling (as decided):** PDFs were downloaded to a gitignored
-scratch dir, **not** committed to the repo; parts keep their existing `datasheet`
-URLs; the canonical manufacturer URL each agent used is banked in
-`ic_logic_datasheet_params.json` (`datasheet_url`) for the later storage/link plan.
+scratch dir, **not** committed to the repo. Each harvested part's `datasheet` is
+**repointed to the banked known-good URL** (`datasheet_url` in
+`ic_logic_datasheet_params.json`) — still URL-only; local-PDF storage is deferred to
+the later plan. The 5 curated `run_310` parts keep their existing local-PDF paths.
 
 ### Tail filled manually (2026-06-28)
 
