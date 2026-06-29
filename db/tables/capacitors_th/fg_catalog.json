@@ -1,0 +1,2666 @@
+[
+ {
+  "type": "FG11",
+  "dielectric": "C0G",
+  "capacitance": "47nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG11C0G2A473JNT00"
+ },
+ {
+  "type": "FG11",
+  "dielectric": "C0G",
+  "capacitance": "68nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG11C0G2A683JNT00"
+ },
+ {
+  "type": "FG11",
+  "dielectric": "X7R",
+  "capacitance": "1µF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG11X7R1H105KNT00"
+ },
+ {
+  "type": "FG11",
+  "dielectric": "X7R",
+  "capacitance": "10µF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG11X7R1H106KRT00"
+ },
+ {
+  "type": "FG11",
+  "dielectric": "X7R",
+  "capacitance": "1.5µF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG11X7R2A155KRT00"
+ },
+ {
+  "type": "FG11",
+  "dielectric": "X7R",
+  "capacitance": "2.2µF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG11X7R2A225KRT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "C0G",
+  "capacitance": "15nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG14C0G1H153JNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "C0G",
+  "capacitance": "22nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG14C0G1H223JNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "C0G",
+  "capacitance": "33nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG14C0G1H333JNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "C0G",
+  "capacitance": "10nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG14C0G2A103JNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "C0G",
+  "capacitance": "15nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG14C0G2A153JRT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "C0G",
+  "capacitance": "22nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG14C0G2A223JRT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "C0G",
+  "capacitance": "33nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG14C0G2A333JRT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "C0G",
+  "capacitance": "3.9nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG14C0G2A392JNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "C0G",
+  "capacitance": "4.7nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG14C0G2A472JNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "C0G",
+  "capacitance": "5.6nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG14C0G2A562JNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "C0G",
+  "capacitance": "6.8nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG14C0G2A682JNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "C0G",
+  "capacitance": "8.2nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG14C0G2A822JNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "X7R",
+  "capacitance": "680nF",
+  "tolerance": "±10%",
+  "voltage_v": 16,
+  "mpn": "FG14X7R1C684KNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "X7R",
+  "capacitance": "3.3uF",
+  "tolerance": "±10%",
+  "voltage_v": 25,
+  "mpn": "FG14X7R1E335KRT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "X7R",
+  "capacitance": "470nF",
+  "tolerance": "±10%",
+  "voltage_v": 25,
+  "mpn": "FG14X7R1E474KNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "X7R",
+  "capacitance": "4.7uF",
+  "tolerance": "±10%",
+  "voltage_v": 25,
+  "mpn": "FG14X7R1E475KRT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "X7R",
+  "capacitance": "1uF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG14X7R1H105KRT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "X7R",
+  "capacitance": "150nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG14X7R1H154KNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "X7R",
+  "capacitance": "1.5uF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG14X7R1H155KRT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "X7R",
+  "capacitance": "220nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG14X7R1H224KNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "X7R",
+  "capacitance": "2.2uF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG14X7R1H225KRT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "X7R",
+  "capacitance": "330nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG14X7R1H334KNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "X7R",
+  "capacitance": "680nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG14X7R1H684KNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "X7R",
+  "capacitance": "100nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG14X7R2A104KNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "X7R",
+  "capacitance": "33nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG14X7R2A333KNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "X7R",
+  "capacitance": "47nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG14X7R2A473KNT00"
+ },
+ {
+  "type": "FG14",
+  "dielectric": "X7R",
+  "capacitance": "68nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG14X7R2A683KNT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "C0G",
+  "capacitance": "100nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG16C0G1H104JNT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "C0G",
+  "capacitance": "47nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG16C0G1H473JNT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "C0G",
+  "capacitance": "68nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG16C0G1H683JNT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "C0G",
+  "capacitance": "100nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG16C0G2A104JRT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "C0G",
+  "capacitance": "15nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG16C0G2A153JNT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "C0G",
+  "capacitance": "22nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG16C0G2A223JNT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "C0G",
+  "capacitance": "33nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG16C0G2A333JNT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "C0G",
+  "capacitance": "47nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG16C0G2A473JRT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "C0G",
+  "capacitance": "68nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG16C0G2A683JRT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "X7R",
+  "capacitance": "1µF",
+  "tolerance": "±10%",
+  "voltage_v": 25,
+  "mpn": "FG16X7R1E105KNT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "X7R",
+  "capacitance": "10µF",
+  "tolerance": "±10%",
+  "voltage_v": 25,
+  "mpn": "FG16X7R1E106KRT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "X7R",
+  "capacitance": "1.5µF",
+  "tolerance": "±10%",
+  "voltage_v": 25,
+  "mpn": "FG16X7R1E155KNT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "X7R",
+  "capacitance": "2.2µF",
+  "tolerance": "±10%",
+  "voltage_v": 25,
+  "mpn": "FG16X7R1E225KNT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "X7R",
+  "capacitance": "470nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG16X7R1H474KNT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "X7R",
+  "capacitance": "4.7µF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG16X7R1H475KRT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "X7R",
+  "capacitance": "680nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG16X7R1H684KNT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "X7R",
+  "capacitance": "1µF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG16X7R2A105KNT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "X7R",
+  "capacitance": "150nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG16X7R2A154KNT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "X7R",
+  "capacitance": "220nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG16X7R2A224KNT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "X7R",
+  "capacitance": "330nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG16X7R2A334KNT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "X7R",
+  "capacitance": "470nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG16X7R2A474KNT00"
+ },
+ {
+  "type": "FG16",
+  "dielectric": "X7R",
+  "capacitance": "680nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG16X7R2A684KNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "10pF",
+  "tolerance": "±0.5pF",
+  "voltage_v": 50,
+  "mpn": "FG18C0G1H100DNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "100pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG18C0G1H101JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "1nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG18C0G1H102JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "10nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG18C0G1H103JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "1.5nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG18C0G1H152JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "22pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG18C0G1H220JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "220pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG18C0G1H221JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "2.2nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG18C0G1H222JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "3.3nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG18C0G1H332JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "47pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG18C0G1H470JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "470pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG18C0G1H471JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "4.7nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG18C0G1H472JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "6.8nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG18C0G1H682JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "10pF",
+  "tolerance": "±0.5pF",
+  "voltage_v": 100,
+  "mpn": "FG18C0G2A100DNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "100pF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG18C0G2A101JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "1nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG18C0G2A102JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "10nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG18C0G2A103JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "1.5nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG18C0G2A152JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "22pF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG18C0G2A220JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "220pF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG18C0G2A221JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "2.2nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG18C0G2A222JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "3.3nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG18C0G2A332JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "47pF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG18C0G2A470JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "470pF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG18C0G2A471JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "4.7nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG18C0G2A472JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "C0G",
+  "capacitance": "6.8nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG18C0G2A682JNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "2.2µF",
+  "tolerance": "±10%",
+  "voltage_v": 10,
+  "mpn": "FG18X7R1A225KRT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "1µF",
+  "tolerance": "±10%",
+  "voltage_v": 25,
+  "mpn": "FG18X7R1E105KRT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "1nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG18X7R1H102KNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "10nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG18X7R1H103KNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "100nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG18X7R1H104KNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "2.2nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG18X7R1H222KNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "22nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG18X7R1H223KNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "220nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG18X7R1H224KRT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "3.3nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG18X7R1H332KNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "33nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG18X7R1H333KNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "330nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG18X7R1H334KRT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "4.7nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG18X7R1H472KNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "47nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG18X7R1H473KNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "470nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG18X7R1H474KRT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "1nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG18X7R2A102KNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "10nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG18X7R2A103KNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "2.2nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG18X7R2A222KNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "22nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG18X7R2A223KNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "3.3nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG18X7R2A332KNT00"
+ },
+ {
+  "type": "FG18",
+  "dielectric": "X7R",
+  "capacitance": "4.7nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG18X7R2A472KNT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "C0G",
+  "capacitance": "47nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG20C0G2A473JNT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "C0G",
+  "capacitance": "68nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG20C0G2A683JNT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "C0G",
+  "capacitance": "33nF",
+  "tolerance": "±5%",
+  "voltage_v": 250,
+  "mpn": "FG20C0G2E333JNT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "C0G",
+  "capacitance": "47nF",
+  "tolerance": "±5%",
+  "voltage_v": 250,
+  "mpn": "FG20C0G2E473JNT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "C0G",
+  "capacitance": "22nF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG20C0G2W223JNT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "C0G",
+  "capacitance": "33nF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG20C0G2W333JNT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "C0G",
+  "capacitance": "15nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG20C0G2J153JNT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "C0G",
+  "capacitance": "22nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG20C0G2J223JNT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "C0G",
+  "capacitance": "33nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG20C0G2J333JNT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "X7R",
+  "capacitance": "15µF",
+  "tolerance": "±20%",
+  "voltage_v": 16,
+  "mpn": "FG20X7R1C156MRT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "X7R",
+  "capacitance": "22µF",
+  "tolerance": "±20%",
+  "voltage_v": 16,
+  "mpn": "FG20X7R1C226MRT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "X7R",
+  "capacitance": "1µF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG20X7R1H105KNT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "X7R",
+  "capacitance": "10µF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG20X7R1H106KRT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "X7R",
+  "capacitance": "1.5µF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG20X7R2A155KRT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "X7R",
+  "capacitance": "2.2µF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG20X7R2A225KRT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "X7R",
+  "capacitance": "220nF",
+  "tolerance": "±10%",
+  "voltage_v": 250,
+  "mpn": "FG20X7R2E224KNT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "X7R",
+  "capacitance": "47nF",
+  "tolerance": "±10%",
+  "voltage_v": 630,
+  "mpn": "FG20X7R2J473KNT00"
+ },
+ {
+  "type": "FG20",
+  "dielectric": "X7R",
+  "capacitance": "68nF",
+  "tolerance": "±10%",
+  "voltage_v": 630,
+  "mpn": "FG20X7R2J683KNT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "C0G",
+  "capacitance": "150nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG22C0G1H154JNT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "C0G",
+  "capacitance": "220nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG22C0G1H224JNT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "C0G",
+  "capacitance": "100nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG22C0G2A104JNT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "C0G",
+  "capacitance": "100nF",
+  "tolerance": "±5%",
+  "voltage_v": 250,
+  "mpn": "FG22C0G2E104JRT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "C0G",
+  "capacitance": "68nF",
+  "tolerance": "±5%",
+  "voltage_v": 250,
+  "mpn": "FG22C0G2E683JRT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "C0G",
+  "capacitance": "47nF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG22C0G2W473JNT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "C0G",
+  "capacitance": "68nF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG22C0G2W683JNT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "C0G",
+  "capacitance": "47nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG22C0G2J473JNT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "X7R",
+  "capacitance": "33µF",
+  "tolerance": "±20%",
+  "voltage_v": 16,
+  "mpn": "FG22X7R1C336MRT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "X7R",
+  "capacitance": "10µF",
+  "tolerance": "±10%",
+  "voltage_v": 25,
+  "mpn": "FG22X7R1E106KNT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "X7R",
+  "capacitance": "15µF",
+  "tolerance": "±20%",
+  "voltage_v": 25,
+  "mpn": "FG22X7R1E156MRT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "X7R",
+  "capacitance": "22µF",
+  "tolerance": "±20%",
+  "voltage_v": 25,
+  "mpn": "FG22X7R1E226MRT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "X7R",
+  "capacitance": "3.3µF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG22X7R1H335KNT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "X7R",
+  "capacitance": "6.8µF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG22X7R1H685KRT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "X7R",
+  "capacitance": "1.5µF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG22X7R2A155KNT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "X7R",
+  "capacitance": "2.2µF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG22X7R2A225KNT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "X7R",
+  "capacitance": "330nF",
+  "tolerance": "±10%",
+  "voltage_v": 250,
+  "mpn": "FG22X7R2E334KNT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "X7R",
+  "capacitance": "470nF",
+  "tolerance": "±10%",
+  "voltage_v": 250,
+  "mpn": "FG22X7R2E474KNT00"
+ },
+ {
+  "type": "FG22",
+  "dielectric": "X7R",
+  "capacitance": "100nF",
+  "tolerance": "±10%",
+  "voltage_v": 630,
+  "mpn": "FG22X7R2J104KNT00"
+ },
+ {
+  "type": "FG23",
+  "dielectric": "C0G",
+  "capacitance": "150nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG23C0G2A154JNT00"
+ },
+ {
+  "type": "FG23",
+  "dielectric": "C0G",
+  "capacitance": "150nF",
+  "tolerance": "±5%",
+  "voltage_v": 250,
+  "mpn": "FG23C0G2E154JRT00"
+ },
+ {
+  "type": "FG23",
+  "dielectric": "C0G",
+  "capacitance": "100nF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG23C0G2W104JNT00"
+ },
+ {
+  "type": "FG23",
+  "dielectric": "C0G",
+  "capacitance": "100nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG23C0G2J104JRT00"
+ },
+ {
+  "type": "FG23",
+  "dielectric": "C0G",
+  "capacitance": "68nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG23C0G2J683JRT00"
+ },
+ {
+  "type": "FG23",
+  "dielectric": "X7R",
+  "capacitance": "47µF",
+  "tolerance": "±20%",
+  "voltage_v": 16,
+  "mpn": "FG23X7R1C476MRT00"
+ },
+ {
+  "type": "FG23",
+  "dielectric": "X7R",
+  "capacitance": "22µF",
+  "tolerance": "±20%",
+  "voltage_v": 25,
+  "mpn": "FG23X7R1E226MNT00"
+ },
+ {
+  "type": "FG23",
+  "dielectric": "X7R",
+  "capacitance": "10µF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG23X7R1H106KRT00"
+ },
+ {
+  "type": "FG23",
+  "dielectric": "X7R",
+  "capacitance": "3.3µF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG23X7R2A335KNT00"
+ },
+ {
+  "type": "FG23",
+  "dielectric": "X7R",
+  "capacitance": "4.7µF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG23X7R2A475KNT00"
+ },
+ {
+  "type": "FG23",
+  "dielectric": "X7R",
+  "capacitance": "1µF",
+  "tolerance": "±10%",
+  "voltage_v": 250,
+  "mpn": "FG23X7R2E105KNT00"
+ },
+ {
+  "type": "FG23",
+  "dielectric": "X7R",
+  "capacitance": "150nF",
+  "tolerance": "±10%",
+  "voltage_v": 630,
+  "mpn": "FG23X7R2J154KNT00"
+ },
+ {
+  "type": "FG23",
+  "dielectric": "X7R",
+  "capacitance": "220nF",
+  "tolerance": "±10%",
+  "voltage_v": 630,
+  "mpn": "FG23X7R2J224KNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "C0G",
+  "capacitance": "15nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG24C0G1H153JNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "C0G",
+  "capacitance": "22nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG24C0G1H223JNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "C0G",
+  "capacitance": "33nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG24C0G1H333JNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "C0G",
+  "capacitance": "33nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG24C0G2A333JRT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "C0G",
+  "capacitance": "2.7nF",
+  "tolerance": "±5%",
+  "voltage_v": 250,
+  "mpn": "FG24C0G2E272JNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "C0G",
+  "capacitance": "3.3nF",
+  "tolerance": "±5%",
+  "voltage_v": 250,
+  "mpn": "FG24C0G2E332JNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "C0G",
+  "capacitance": "100pF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG24C0G2W101JNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "C0G",
+  "capacitance": "1nF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG24C0G2W102JNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "C0G",
+  "capacitance": "1.2nF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG24C0G2W122JNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "C0G",
+  "capacitance": "150pF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG24C0G2W151JNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "C0G",
+  "capacitance": "220pF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG24C0G2W221JNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "C0G",
+  "capacitance": "2.2nF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG24C0G2W222JNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "C0G",
+  "capacitance": "2.7nF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG24C0G2W272JNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "C0G",
+  "capacitance": "330pF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG24C0G2W331JNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "C0G",
+  "capacitance": "3.3nF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG24C0G2W332JNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "C0G",
+  "capacitance": "5.6nF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG24C0G2W562JNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "X7R",
+  "capacitance": "680nF",
+  "tolerance": "±10%",
+  "voltage_v": 16,
+  "mpn": "FG24X7R1C684KNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "X7R",
+  "capacitance": "470nF",
+  "tolerance": "±10%",
+  "voltage_v": 25,
+  "mpn": "FG24X7R1E474KNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "X7R",
+  "capacitance": "4.7µF",
+  "tolerance": "±10%",
+  "voltage_v": 25,
+  "mpn": "FG24X7R1E475KRT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "X7R",
+  "capacitance": "1µF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG24X7R1H105KRT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "X7R",
+  "capacitance": "150nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG24X7R1H154KNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "X7R",
+  "capacitance": "220nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG24X7R1H224KNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "X7R",
+  "capacitance": "2.2µF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG24X7R1H225KRT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "X7R",
+  "capacitance": "100nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG24X7R2A104KNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "X7R",
+  "capacitance": "33nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG24X7R2A333KNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "X7R",
+  "capacitance": "47nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG24X7R2A473KNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "X7R",
+  "capacitance": "1nF",
+  "tolerance": "±10%",
+  "voltage_v": 250,
+  "mpn": "FG24X7R2E102KNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "X7R",
+  "capacitance": "10nF",
+  "tolerance": "±10%",
+  "voltage_v": 250,
+  "mpn": "FG24X7R2E103KNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "X7R",
+  "capacitance": "4.7nF",
+  "tolerance": "±10%",
+  "voltage_v": 250,
+  "mpn": "FG24X7R2E472KNT00"
+ },
+ {
+  "type": "FG24",
+  "dielectric": "X7R",
+  "capacitance": "6.8nF",
+  "tolerance": "±10%",
+  "voltage_v": 250,
+  "mpn": "FG24X7R2E682KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "100nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG26C0G1H104JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "47nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG26C0G1H473JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "68nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG26C0G1H683JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "100nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG26C0G2A104JRT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "15nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG26C0G2A153JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "22nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG26C0G2A223JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "33nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG26C0G2A333JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "47nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG26C0G2A473JRT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "68nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG26C0G2A683JRT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "15nF",
+  "tolerance": "±5%",
+  "voltage_v": 250,
+  "mpn": "FG26C0G2E153JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "22nF",
+  "tolerance": "±5%",
+  "voltage_v": 250,
+  "mpn": "FG26C0G2E223JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "10nF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG26C0G2W103JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "15nF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG26C0G2W153JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "6.8nF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG26C0G2W682JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "8.2nF",
+  "tolerance": "±5%",
+  "voltage_v": 450,
+  "mpn": "FG26C0G2W822JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "100pF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J101JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "10nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J103JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "120pF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J121JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "1.2nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J122JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "150pF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J151JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "1.5nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J152JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "1.8nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J182JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "2.2nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J222JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "2.7nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J272JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "3.3nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J332JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "3.9nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J392JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "470pF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J471JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "4.7nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J472JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "560pF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J561JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "5.6nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J562JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "680pF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J681JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "6.8nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J682JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "C0G",
+  "capacitance": "8.2nF",
+  "tolerance": "±5%",
+  "voltage_v": 630,
+  "mpn": "FG26C0G2J822JNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "470nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG26X7R1H474KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "4.7µF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG26X7R1H475KRT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "680nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG26X7R1H684KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "1µF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG26X7R2A105KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "150nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG26X7R2A154KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "220nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG26X7R2A224KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "330nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG26X7R2A334KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "470nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG26X7R2A474KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "680nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG26X7R2A684KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "100nF",
+  "tolerance": "±10%",
+  "voltage_v": 250,
+  "mpn": "FG26X7R2E104KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "47nF",
+  "tolerance": "±10%",
+  "voltage_v": 250,
+  "mpn": "FG26X7R2E473KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "1nF",
+  "tolerance": "±10%",
+  "voltage_v": 630,
+  "mpn": "FG26X7R2J102KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "10nF",
+  "tolerance": "±10%",
+  "voltage_v": 630,
+  "mpn": "FG26X7R2J103KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "1.5nF",
+  "tolerance": "±10%",
+  "voltage_v": 630,
+  "mpn": "FG26X7R2J152KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "2.2nF",
+  "tolerance": "±10%",
+  "voltage_v": 630,
+  "mpn": "FG26X7R2J222KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "22nF",
+  "tolerance": "±10%",
+  "voltage_v": 630,
+  "mpn": "FG26X7R2J223KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "3.3nF",
+  "tolerance": "±10%",
+  "voltage_v": 630,
+  "mpn": "FG26X7R2J332KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "33nF",
+  "tolerance": "±10%",
+  "voltage_v": 630,
+  "mpn": "FG26X7R2J333KNT00"
+ },
+ {
+  "type": "FG26",
+  "dielectric": "X7R",
+  "capacitance": "4.7nF",
+  "tolerance": "±10%",
+  "voltage_v": 630,
+  "mpn": "FG26X7R2J472KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "1.0pF",
+  "tolerance": "±0.25pF",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H010CNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "2.0pF",
+  "tolerance": "±0.25pF",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H020CNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "3.0pF",
+  "tolerance": "±0.25pF",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H030CNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "4.0pF",
+  "tolerance": "±0.25pF",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H040CNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "5.0pF",
+  "tolerance": "±0.25pF",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H050CNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "6.0pF",
+  "tolerance": "±0.5pF",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H060DNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "8.0pF",
+  "tolerance": "±0.5pF",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H080DNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "9.0pF",
+  "tolerance": "±0.5pF",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H090DNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "10pF",
+  "tolerance": "±0.5pF",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H100DNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "100pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H101JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "1nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H102JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "10nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H103JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "12pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H120JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "120pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H121JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "1.2nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H122JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "15pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H150JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "150pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H151JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "1.5nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H152JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "18pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H180JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "180pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H181JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "1.8nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H182JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "22pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H220JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "220pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H221JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "2.2nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H222JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "27pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H270JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "270pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H271JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "2.7nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H272JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "33pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H330JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "330pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H331JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "3.3nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H332JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "39pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H390JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "390pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H391JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "3.9nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H392JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "47pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H470JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "470pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H471JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "4.7nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H472JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "56pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H560JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "560pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H561JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "5.6nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H562JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "68pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H680JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "680pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H681JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "6.8nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H682JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "82pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H820JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "820pF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H821JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "8.2nF",
+  "tolerance": "±5%",
+  "voltage_v": 50,
+  "mpn": "FG28C0G1H822JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "5.0pF",
+  "tolerance": "±0.25pF",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A050CNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "7.0pF",
+  "tolerance": "±0.5pF",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A070DNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "8.0pF",
+  "tolerance": "±0.5pF",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A080DNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "9.0pF",
+  "tolerance": "±0.5pF",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A090DNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "10pF",
+  "tolerance": "±0.5pF",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A100DNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "100pF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A101JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "1nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A102JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "10nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A103JRT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "15pF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A150JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "150pF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A151JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "1.5nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A152JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "22pF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A220JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "220pF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A221JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "2.2nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A222JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "33pF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A330JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "330pF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A331JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "3.3nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A332JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "47pF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A470JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "470pF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A471JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "4.7nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A472JRT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "68pF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A680JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "680pF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A681JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "6.8nF",
+  "tolerance": "±5%",
+  "voltage_v": 100,
+  "mpn": "FG28C0G2A682JRT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "1nF",
+  "tolerance": "±5%",
+  "voltage_v": 250,
+  "mpn": "FG28C0G2E102JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "150pF",
+  "tolerance": "±5%",
+  "voltage_v": 250,
+  "mpn": "FG28C0G2E151JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "1.5nF",
+  "tolerance": "±5%",
+  "voltage_v": 250,
+  "mpn": "FG28C0G2E152JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "220pF",
+  "tolerance": "±5%",
+  "voltage_v": 250,
+  "mpn": "FG28C0G2E221JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "2.2nF",
+  "tolerance": "±5%",
+  "voltage_v": 250,
+  "mpn": "FG28C0G2E222JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "330pF",
+  "tolerance": "±5%",
+  "voltage_v": 250,
+  "mpn": "FG28C0G2E331JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "470pF",
+  "tolerance": "±5%",
+  "voltage_v": 250,
+  "mpn": "FG28C0G2E471JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "C0G",
+  "capacitance": "680pF",
+  "tolerance": "±5%",
+  "voltage_v": 250,
+  "mpn": "FG28C0G2E681JNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "1.5uF",
+  "tolerance": "±10%",
+  "voltage_v": 10,
+  "mpn": "FG28X7R1A155KRT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "2.2uF",
+  "tolerance": "±10%",
+  "voltage_v": 10,
+  "mpn": "FG28X7R1A225KRT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "1nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG28X7R1H102KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "10nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG28X7R1H103KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "100nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG28X7R1H104KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "1.5nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG28X7R1H152KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "15nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG28X7R1H153KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "2.2nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG28X7R1H222KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "22nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG28X7R1H223KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "220nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG28X7R1H224KRT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "3.3nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG28X7R1H332KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "33nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG28X7R1H333KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "4.7nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG28X7R1H472KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "47nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG28X7R1H473KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "6.8nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG28X7R1H682KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "68nF",
+  "tolerance": "±10%",
+  "voltage_v": 50,
+  "mpn": "FG28X7R1H683KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "1nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG28X7R2A102KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "10nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG28X7R2A103KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "1.5nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG28X7R2A152KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "2.2nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG28X7R2A222KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "22nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG28X7R2A223KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "3.3nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG28X7R2A332KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "4.7nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG28X7R2A472KNT00"
+ },
+ {
+  "type": "FG28",
+  "dielectric": "X7R",
+  "capacitance": "6.8nF",
+  "tolerance": "±10%",
+  "voltage_v": 100,
+  "mpn": "FG28X7R2A682KNT00"
+ }
+]
