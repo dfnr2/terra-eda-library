@@ -51,7 +51,59 @@ ALLOW_SUBSTITUTION = "Yes"
 TRACKING = "No"
 SOURCE = None          # NULL for generated data (not dumped)
 DUMP_PRIORITY = 0
-TIER = 2
+
+# Tier assignment, mirroring the package ladder in resistors_smt: the everyday
+# parts sit at tier 0 and the specialist ones fall out of the served set.  The
+# server's --tier cutoff decides what KiCad's chooser enumerates, so a part
+# parked at tier 3 costs nothing at runtime while staying in the database.
+#
+# Precision (+/-0.5% or tighter) and the 2W body are deliberately tier 3: they
+# are a minority of real placements and together they are over half this table.
+#
+# Thick film belongs at TIER 2.  There is no thick/carbon-film axial series in
+# the library yet; when one is added, its generator sets tier 2 rather than
+# reusing the ladder below, which is metal-film specific.
+PRECISION_TOLERANCES = {"\u00b10.5%", "\u00b10.25%", "\u00b10.1%"}
+PRECISION_TIER = 3
+HIGH_POWER = "2W"
+HIGH_POWER_TIER = 3
+
+# Metal film, non-precision, by power rating.
+POWER_TIER = {
+    "1/4W": 0,   # the default axial
+    "1/2W": 1,
+    "1W": 1,
+    "1/6W": 2,
+}
+DEFAULT_TIER = 2
+
+
+def resolve_tier(power: str, tolerance: str) -> int:
+    """Return the serving tier for one metal-film through-hole resistor.
+
+    Precision and high-power parts are demoted ahead of the power ladder, so a
+    2W +/-0.5% part lands at tier 3 by either rule rather than by luck of order.
+
+    :param power: Power rating as it appears in the specs, e.g. ``1/4W``.
+    :param tolerance: Tolerance label including sign, e.g. ``\u00b11%``.
+    :returns: Tier 0-3; the server serves ``tier <= cutoff``.
+
+    Example::
+
+        >>> from run_200_yageo_mfr_metal_film import resolve_tier
+        >>> resolve_tier("1/4W", "\u00b11%")
+        0
+        >>> resolve_tier("1/4W", "\u00b10.5%")
+        3
+    """
+    if tolerance in PRECISION_TOLERANCES:
+        return PRECISION_TIER
+
+    if power == HIGH_POWER:
+        return HIGH_POWER_TIER
+
+    return POWER_TIER.get(power, DEFAULT_TIER)
+
 # Searchable keywords — include through-hole terms so TH parts are findable
 # distinctly from the SMT resistors (which share the 'passive' tag).
 KEYWORDS = "passive,resistor,through-hole,TH,axial,leaded,metal-film"
@@ -208,7 +260,8 @@ def build() -> str:
                     unique_id, part_locator, mpn, MANUFACTURER, None,
                     f"Axial {spec['body_style']}", f"{value_spice}Ω", desc, DATASHEET,
                     MANUFACTURER_LINK, SYMBOL, spec["footprint"], SOURCE, DUMP_PRIORITY,
-                    TIER, KEYWORDS, tol["label"], spec["power"], TCR_LABEL,
+                    resolve_tier(spec["power"], tol["label"]), KEYWORDS, tol["label"],
+                    spec["power"], TCR_LABEL,
                     spec["working_voltage"], COMPOSITION, spec["lead_spacing_mm"],
                     spec["body_style"],
                 ]

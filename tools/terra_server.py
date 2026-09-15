@@ -279,11 +279,26 @@ def create_app(db_path: str, dbl_path: str, tier: int = 2):
             for row in rows:
                 uid = row[spec["key"]]
                 pid = part_id(uid)
-                entry = {"id": pid, "name": part_name(uid)}
-                if spec["desc_col"]:
-                    desc = row[spec["desc_col"]]
-                    if desc:
-                        entry["description"] = str(desc)
+
+                # Emit the complete part object here, not just id/name/description.
+                # KiCad's HTTP_LIB_CONNECTION::SelectAll marks a listing entry
+                # detailsLoaded when it carries a "fields" object, and
+                # SCH_IO_HTTP_LIB::EnumerateSymbolLib then skips its per-part back-fill
+                # -- one HTTP round trip per part, added in KiCad 10.0.5. Serving the
+                # fields up front turns a full library sync from one request per part
+                # into one request per category.
+                entry = serialize_part(row, spec, pid)
+
+                # description and keywords are read from the TOP level of a listing
+                # entry by setPartIdNameAndMetadata, separately from the lowercase
+                # copies serialize_part puts inside "fields". Both are needed.
+                for key, col in (("description", spec.get("desc_col")),
+                                 ("keywords", spec.get("keywords_col"))):
+                    if col:
+                        value = row[col]
+                        if value not in (None, ""):
+                            entry[key] = str(value)
+
                 result.append(entry)
             return result
 
