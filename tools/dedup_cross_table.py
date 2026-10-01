@@ -46,7 +46,9 @@ def dedup(
     `part_tables` that is not keep_table and currently contains it. Returns
     {uid: [tables_dropped_from]}, omitting uids where nothing was dropped. If
     keep_table holds no row for the uid, the deletions still happen (a warning
-    is printed) so the build does not crash.
+    is printed) so the build does not crash. A resolution whose keep_table is
+    not among `part_tables` (e.g. a retired or excluded table) is skipped, so
+    the surviving copy in the built tables is left alone.
 
     Only `part_tables` are scanned. Infra tables that also carry a unique_id
     column — notably the `tags` join table — must be spared, or the kept
@@ -55,6 +57,8 @@ def dedup(
     tables = list(part_tables)
     dropped: dict[str, list[str]] = {}
     for uid, keep_table in resolutions.items():
+        if keep_table not in tables:
+            continue
         kept = conn.execute(
             f'SELECT COUNT(*) FROM "{keep_table}" WHERE unique_id = ?', (uid,)
         ).fetchone()[0]

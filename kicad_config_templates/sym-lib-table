@@ -1,5 +1,5 @@
 (sym_lib_table
   (version 7)
-  ; terra-owned symbol libs — generated table (kicad_symbols/sym-lib-table) included as one entry
-  (lib (name "terra_symbols")(type "Table")(uri "${TERRA_EDA_LIB}/kicad_symbols/sym-lib-table")(options "")(descr "Terra + vendor symbol libraries"))
+  ; terra-owned symbol libs -- generated table (kicad_symbols/sym-lib-table) included as one entry
+  (lib (name "terra_symbols")(type "Table")(uri "${TERRA_EDA_LIB}/kicad_symbols/sym-lib-table")(options "")(descr "Terra-owned symbol libraries"))
 )

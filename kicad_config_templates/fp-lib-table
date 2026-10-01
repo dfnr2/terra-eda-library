@@ -1,7 +1,7 @@
 (fp_lib_table
   (version 7)
-  ; terra-owned footprint libs — generated table (kicad_footprints/fp-lib-table) included as one entry
-  (lib (name "terra_footprints")(type "Table")(uri "${TERRA_EDA_LIB}/kicad_footprints/fp-lib-table")(options "")(descr "Terra + vendor footprint libraries"))
+  ; terra-owned footprint libs -- generated table (kicad_footprints/fp-lib-table) included as one entry
+  (lib (name "terra_footprints")(type "Table")(uri "${TERRA_EDA_LIB}/kicad_footprints/fp-lib-table")(options "")(descr "Terra-owned footprint libraries"))
   ; not-yet-folded terra collections (TODO: move into kicad_footprints/)
   (lib (name "Terra_Custom")(type "KiCad")(uri "${TERRA_EDA_LIB}/assets/footprints/Custom.pretty")(options "")(descr "Terra custom footprints"))
   (lib (name "Terra_Standard")(type "KiCad")(uri "${TERRA_EDA_LIB}/assets/footprints/Standard.pretty")(options "")(descr "Terra standard footprints"))

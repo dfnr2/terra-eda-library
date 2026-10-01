@@ -61,16 +61,16 @@ def test_symbols_are_shared_connectors_lib(table):
 
 
 @pytest.mark.parametrize("table", TABLES)
-def test_nicks_registered(table):
+def test_cern_nicks_are_quarantined_from_generated_lib_tables(table):
     con = _con(table)
     sym = (ROOT / "kicad_symbols/sym-lib-table").read_text()
     fp = (ROOT / "kicad_footprints/fp-lib-table").read_text()
     for (val,) in con.execute(
             f"SELECT DISTINCT kicad_symbol FROM {table} WHERE kicad_symbol != ''"):
-        assert f'(name "{val.split(":", 1)[0]}")' in sym
+        assert f'(name "{val.split(":", 1)[0]}")' not in sym
     for (val,) in con.execute(
             f"SELECT DISTINCT kicad_footprint FROM {table} WHERE kicad_footprint LIKE '%:%'"):
-        assert f'(name "{val.split(":", 1)[0]}")' in fp
+        assert f'(name "{val.split(":", 1)[0]}")' not in fp
 
 
 @pytest.mark.parametrize("table", TABLES)

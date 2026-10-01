@@ -52,9 +52,14 @@ TAGS ?=
 # is moved or deleted, so omitting the flag restores the full build.
 EXCLUDE_TABLES ?=
 
+# Retired tables: kept on disk as source material but never built. The CERN
+# import is wound down; its part numbers live on as plans/cern-harvest-worklist.csv.
+RETIRED_TABLES := $(patsubst db/tables/%/,%,$(wildcard db/tables/cern_*/))
+SKIP_TABLES := $(EXCLUDE_TABLES) $(RETIRED_TABLES)
+
 # Discover all table directories (exclude _global which is infrastructure)
 TABLE_DIRS := $(filter-out db/tables/_global/,$(wildcard db/tables/*/))
-TABLES := $(filter-out $(EXCLUDE_TABLES),$(patsubst db/tables/%/,%,$(TABLE_DIRS)))
+TABLES := $(filter-out $(SKIP_TABLES),$(patsubst db/tables/%/,%,$(TABLE_DIRS)))
 DB_FILES := $(patsubst %,db/%.db,$(TABLES))
 
 # Global infrastructure SQL (loaded before any part tables)
@@ -220,6 +225,7 @@ db/terra.db: $(GLOBAL_SQL) $(foreach table,$(TABLES),$($(table)_ALL_SQL))
 	@for table_dir in $$(ls -d db/tables/*/ 2>/dev/null | sort); do \
 		table_name=$$(basename "$$table_dir"); \
 		if [ "$$table_name" = "_global" ]; then continue; fi; \
+		case " $(RETIRED_TABLES) " in *" $$table_name "*) continue;; esac; \
 		case " $(EXCLUDE_TABLES) " in *" $$table_name "*) echo "  - skipping $$table_name (excluded)"; continue;; esac; \
 		sql_files=$$(find "$$table_dir" -name "*.sql" -type f | sort); \
 		if [ -n "$$sql_files" ]; then \

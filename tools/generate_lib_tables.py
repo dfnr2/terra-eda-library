@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Generate terra's symbol and footprint lib-tables from the owned hierarchy.
+"""Generate terra's registered symbol and footprint lib-tables.
 
 Registration is an OUTPUT of the build, never hand-maintained: this scans
-``kicad_symbols/*.kicad_sym`` and ``kicad_footprints/*.pretty`` and writes a
-standard KiCad lib-table into each directory. Each entry's nickname is the lib
-filename stem; URIs are ``${TERRA_EDA_LIB}``-relative (KiCad expands path vars in
-lib-table URIs).
+``kicad_symbols/terra*.kicad_sym`` and ``kicad_footprints/terra*.pretty`` and
+writes a standard KiCad lib-table into each directory. CERN-imported libraries
+stay in the repository as quarantine/harvest source files, but are intentionally
+not registered into KiCad's global library surface. Each entry's nickname is the
+lib filename stem; URIs are ``${TERRA_EDA_LIB}``-relative (KiCad expands path
+vars in lib-table URIs).
 
 Include them from a global/project table with one ``(type "Table")`` entry, e.g.::
 
@@ -23,7 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def generate(dir_rel: str, pattern: str, table_tag: str, out_name: str) -> None:
     d = ROOT / dir_rel
-    libs = sorted(p for p in d.glob(pattern))
+    libs = sorted(p for p in d.glob(pattern) if p.name.startswith("terra"))
     lines = [f"({table_tag}", "  (version 7)"]
     for p in libs:
         nick = p.name[: -len(p.suffix)] if p.suffix else p.name  # strip .kicad_sym/.pretty

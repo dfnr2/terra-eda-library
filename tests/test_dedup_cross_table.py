@@ -51,6 +51,21 @@ def test_dedup_does_not_touch_non_part_tables():
     assert conn.execute("SELECT COUNT(*) FROM tags WHERE unique_id='3M-P50E-100P1-SR1-EA'").fetchone()[0] == 1
 
 
+def test_dedup_skips_resolution_when_canonical_table_not_built():
+    """A retired canonical table must not cost the surviving copy its row."""
+    conn = sqlite3.connect(":memory:")
+    conn.execute("CREATE TABLE connectors (unique_id TEXT, mpn TEXT)")
+    conn.execute("INSERT INTO connectors VALUES ('3M-P50E-100P1-SR1-EA', 'x')")
+    conn.commit()
+    dropped = dedup(
+        conn,
+        {"3M-P50E-100P1-SR1-EA": "cern_3m"},
+        part_tables=["connectors"],
+    )
+    assert dropped == {}
+    assert conn.execute("SELECT COUNT(*) FROM connectors WHERE unique_id='3M-P50E-100P1-SR1-EA'").fetchone()[0] == 1
+
+
 def test_find_cross_table_duplicates_flags_residual():
     """A uid in two part tables is reported; a uid in one table is not."""
     conn = sqlite3.connect(":memory:")

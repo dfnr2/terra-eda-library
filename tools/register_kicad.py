@@ -17,14 +17,14 @@ def ensure_lib_entry(table_text: str, name: str, line: str) -> tuple[str, bool]:
     return table_text[:close] + "  " + line + "\n" + table_text[close:], True
 
 
-# (name, target table filename, lib line) — uri uses ${TERRA_EDA_LIB}, resolved by KiCad.
+# (name, target table filename, lib line) -- uri uses ${TERRA_EDA_LIB}, resolved by KiCad.
 ENTRIES = [
     ("terra", "sym-lib-table",
      '(lib (name "terra")(type "HTTP")(uri "${TERRA_EDA_LIB}/terra.kicad_httplib")(options "")(descr "terra HTTP library"))'),
     ("terra-symbols", "sym-lib-table",
-     '(lib (name "terra-symbols")(type "Table")(uri "${TERRA_EDA_LIB}/kicad_symbols/sym-lib-table")(options "")(descr "terra + cern symbols"))'),
+     '(lib (name "terra-symbols")(type "Table")(uri "${TERRA_EDA_LIB}/kicad_symbols/sym-lib-table")(options "")(descr "terra-owned symbols"))'),
     ("terra-footprints", "fp-lib-table",
-     '(lib (name "terra-footprints")(type "Table")(uri "${TERRA_EDA_LIB}/kicad_footprints/fp-lib-table")(options "")(descr "terra + cern footprints"))'),
+     '(lib (name "terra-footprints")(type "Table")(uri "${TERRA_EDA_LIB}/kicad_footprints/fp-lib-table")(options "")(descr "terra-owned footprints"))'),
 ]
 
 
