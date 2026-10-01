@@ -28,13 +28,11 @@ def _table_cols(schema_sql_path):
     name = schema_sql_path.parent.name
     return [r[1] for r in con.execute(f'PRAGMA table_info("{name}")')]
 
-def test_diodes_cern_and_native_identical_columns():
-    cern = _table_cols(ROOT/"db/tables/cern_diodes/cern_diodes_0_schema.sql")
-    native = _table_cols(ROOT/"db/tables/diodes/diodes_0_schema.sql")
-    assert cern == native, f"diodes mismatch:\n cern={cern}\n native={native}"
-    assert "diode_type" in cern and "forward_voltage" in cern
-    assert "pin_count" in cern and "temp_operating_min" in cern   # core present
-    assert "tolerance" not in cern and "component_type" not in cern  # legacy dropped
+def test_diodes_schema_has_tail_and_core():
+    cols = _table_cols(ROOT/"db/tables/diodes/diodes_0_schema.sql")
+    assert "diode_type" in cols and "forward_voltage" in cols
+    assert "pin_count" in cols and "temp_operating_min" in cols   # core present
+    assert "tolerance" not in cols and "component_type" not in cols  # legacy dropped
 
 
 def test_committed_schemas_match_generator():
@@ -61,14 +59,14 @@ def test_data_inserts_are_column_qualified():
 import pytest
 
 PAIRS = {  # type -> list of all tables that must share columns
-    "diodes": ["cern_diodes", "diodes"],
-    "transistors": ["bjt", "mosfet", "cern_transistors"],
-    "op_amps": ["ic_opamp", "cern_op_amps"],
-    "logic": ["ic_logic", "cern_logic", "cern_standard_logic"],
-    "analog": ["ic_analog", "cern_analog_interface"],
-    "leds": ["optoelectronics_led", "cern_leds_displays"],
+    "diodes": ["diodes"],
+    "transistors": ["bjt", "mosfet"],
+    "op_amps": ["ic_opamp"],
+    "logic": ["ic_logic"],
+    "analog": ["ic_analog"],
+    "leds": ["optoelectronics_led"],
     "led_drivers": ["led_drivers"],
-    "switches": ["switches", "cern_switches"],
+    "switches": ["switches"],
     "inductors": ["inductors"],
     "ferrites": ["ferrites_smt"],
     "ic_drivers": ["ic_drivers"],
@@ -78,11 +76,7 @@ PAIRS = {  # type -> list of all tables that must share columns
     "batteries": ["batteries"],
     "capacitors_electrolytic": ["capacitors_electrolytic_th"],
     "optoelectronics_sensor": ["optoelectronics_sensor"],
-    "connectors": ["connectors", "cern_3m", "cern_amphenol", "cern_erni", "cern_fci",
-                   "cern_harting", "cern_harwin", "cern_lemo", "cern_mentor",
-                   "cern_molex", "cern_phoenix", "cern_samtec", "cern_sockets",
-                   "cern_souriau", "cern_stelvio_kontek_comatel", "cern_tyco",
-                   "cern_weidmuller"],
+    "connectors": ["connectors"],
 }
 
 @pytest.mark.parametrize("type_,tables", PAIRS.items())
@@ -110,10 +104,3 @@ def test_passive_tables_folded_onto_canonical_core():
     for t, type_ in expected.items():
         assert t in table_map, f"{t} should be folded into table_map"
         assert table_map[t]["type"] == type_, f"{t} should use type {type_}"
-
-def test_deferred_cern_only_types_not_in_table_map():
-    table_map = json.loads((ROOT/"db/schema/table_map.json").read_text())
-    for t in ("cern_batteries", "cern_crystals_oscillators", "cern_dc_dc_converters",
-              "cern_fuses", "cern_optocouplers", "cern_power_supplies", "cern_regulators",
-              "cern_relays", "cern_sensors", "cern_thermistors_varistors", "cern_transformers"):
-        assert t not in table_map, f"{t} deferred this round"
