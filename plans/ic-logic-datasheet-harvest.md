@@ -28,8 +28,8 @@ nothing more.
 
 ### Source: read the datasheets (not Nexar) for this table
 
-The `2026-06-11` resolver design locked Nexar's structured `specs` as the param
-source and rejected datasheet extraction. That decision stands library-wide, but
+Nexar's structured `specs` are the default param source library-wide
+(`plans/nexar-harvest.md`), but
 **ic_logic is harvested from the datasheets instead**, deliberately, because:
 
 - **Quota.** ~259 logic devices would consume a quarter of the Nexar
