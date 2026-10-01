@@ -1,0 +1,52 @@
+{
+  "manufacturer": "Broadcom",
+  "datasheets": [
+    {
+      "file": "datasheets/broadcom/assr-1218-1219-1228.pdf",
+      "url": "https://docs.broadcom.com/doc/AV02-0173EN",
+      "revision": "AV02-0173EN, January 30, 2026",
+      "covers": ["ASSR-1218", "ASSR-1219", "ASSR-1228"]
+    }
+  ],
+  "parts": [
+    {
+      "mpn": "ASSR-1218",
+      "series": "ASSR-12xx",
+      "kicad_symbol": "Relay_SolidState:ASSR-1218",
+      "kicad_footprint": "Package_SO:SO-4_4.4x4.3mm_P2.54mm",
+      "footprint_check": "exact",
+      "package": "SO-4",
+      "mount": "SMD",
+      "pin_count": 4,
+      "contact_form": "1 Form A",
+      "channels": 1,
+      "load_type": "AC/DC",
+      "voltage_rating": "60V",
+      "current_rating": "200mA",
+      "on_resistance": "10Ohm max @ IF=5mA, IO=200mA, pulse<=30ms",
+      "off_capacitance": null,
+      "led_operate_current": "3mA",
+      "led_forward_voltage": "1.6V max @ IF=5mA",
+      "control_voltage": null,
+      "isolation_voltage": "3750Vrms",
+      "turn_on_time": "5ms max @ IF=5mA, IO=200mA",
+      "turn_off_time": "5ms max @ IF=5mA, IO=200mA",
+      "temp_operating_min": -40,
+      "temp_operating_max": 85,
+      "temp_storage_min": -55,
+      "temp_storage_max": 125,
+      "rohs": "Yes",
+      "lifecycle_status": "Active",
+      "lifecycle_source": "https://www.broadcom.com/products/optocouplers/industrial-plastic/other/solid-state-relay/assr-1218-003e",
+      "manufacturer_link": "https://www.broadcom.com/products/optocouplers/industrial-plastic/other/solid-state-relay/assr-1218-003e",
+      "datasheet": "datasheets/broadcom/assr-1218-1219-1228.pdf",
+      "pages": "p2 ordering/pinout, p4 SO-4 outline + land pattern, p9 abs max/insulation, p10 recommended operating, p11 package/DC/AC specs",
+      "notes": "Only package is SO-4. Orderable numbers are ASSR-1218-003E (tube, 100 units) and ASSR-1218-503E (tape and reel, 1500 units); the option code differs only in packing, and the trailing E (RoHS compliant) appears on every orderable number, so mpn is the base number. Datasheet gives no maximum LED turn-on current: led_operate_current is the recommended minimum IF(ON) (3mA, max 20mA); footnote says the switching threshold is IF>=0.5mA but 5mA is recommended over temperature. Output off-capacitance is not specified (only input-output capacitance 0.4pF typ). On-resistance is 0.2Ohm typ. Output leakage 1uA max @ VO=60V. Load current derates with temperature (Fig. 1). Turn-on/off typ 0.13ms/0.06ms. Clearance/creepage 4.9mm/4.9mm. The KiCad footprint pads (0.8x1.2mm at +/-3.0mm, 2.54mm pitch) match the datasheet land pattern exactly; its descr cites this datasheet."
+    }
+  ],
+  "notes": [
+    "Family datasheet AV02-0173EN also covers ASSR-1219 (DIP-6, AC/DC or DC connection) and ASSR-1228 (2 Form A, DIP-8); excluded per task scope.",
+    "Broadcom option codes: the leading digit is the package/packing option (0 = standard through-hole or SO tube, 3 = gull-wing SMD tube, 5 = tape and reel), the middle digits identify the package (03 = SO-4, 01 = DIP-6, 02 = DIP-8), and the trailing E means RoHS compliant. For ASSR-1218: -003E = SO-4 tube, -503E = SO-4 tape and reel.",
+    "Lifecycle read from Broadcom's product JSON (/api/getjson) for ASSR-1218-003E: lifecycle 'Active'. Broadcom has no separate product page for -503E (404)."
+  ]
+}

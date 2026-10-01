@@ -77,6 +77,7 @@ PAIRS = {  # type -> list of all tables that must share columns
     "capacitors_electrolytic": ["capacitors_electrolytic_th"],
     "optoelectronics_sensor": ["optoelectronics_sensor"],
     "connectors": ["connectors"],
+    "relays_ssr": ["relays_ssr"],
 }
 
 @pytest.mark.parametrize("type_,tables", PAIRS.items())
