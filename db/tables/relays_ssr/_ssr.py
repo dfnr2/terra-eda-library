@@ -4,7 +4,7 @@ Each manufacturer generator loads its datasheet-harvested catalog
 (`<mfr>_catalog.json`, one entry per package variant) and calls emit(), which
 turns every entry into a column-qualified INSERT. Symbols and footprints are
 KiCad stock parts; parts without a trusted symbol or footprint, or whose
-footprint is only approximate, are printed on every run for review.
+footprint doesn't fit the package, are printed on every run for review.
 
 Output is dump_priority=0 / source=NULL -- generated, never dumped to static SQL.
 """
@@ -64,6 +64,10 @@ def row(p, manufacturer, family, value):
     desc += f", {rating}" if rating else ""
     desc += f", {ron} on" if ron else ""
     desc += f", {p['package']}"
+    if p.get("replaces"):
+        desc += f", replaces {p['replaces']}"
+    if p.get("replaced_by"):
+        desc += f", replaced by {p['replaced_by']}"
     if life != "Active":
         desc += f" ({life})"
     if not p.get("kicad_symbol") or not p.get("kicad_footprint"):
@@ -111,9 +115,10 @@ def emit(script, catalogs, family, value_of, title):
         if not p.get("kicad_symbol") or not p.get("kicad_footprint"):
             review.append(f"  REVIEW {p['mpn']}: symbol={p.get('kicad_symbol')} "
                           f"footprint={p.get('kicad_footprint')}")
-        elif p.get("footprint_check") not in (None, "exact"):
-            review.append(f"  footprint {p.get('footprint_check')} {p['mpn']}: "
-                          f"{p['kicad_footprint']}")
+        elif p.get("footprint_check") == "mismatch":
+            # "close" is accepted: a stock IPC-style package footprint whose pads
+            # differ slightly from the vendor's recommended land pattern.
+            review.append(f"  footprint mismatch {p['mpn']}: {p['kicad_footprint']}")
     out = script.with_name(
         f"{TABLE}_generated_{script.stem.removeprefix('run_')}.sql")
     out.write_text("\n".join([

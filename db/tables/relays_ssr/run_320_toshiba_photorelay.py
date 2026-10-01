@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """Toshiba MOSFET photorelays from KiCad's Relay_SolidState library (TLP175A,
-TLP222A, TLP222A-2, TLP3123, TLP3542-TLP3546).
+TLP222A, TLP222A-2, TLP3123, TLP3542-TLP3546) and Toshiba's named replacements
+for the discontinued ones (TLP3122A, TLP3543A, TLP3545A, TLP3546A, TLP176AM),
+which reuse the stock symbol of a part with the identical pinout.
 
-Data: toshiba_catalog.json, harvested from the datasheets in datasheets/toshiba/.
+Data: toshiba_catalog.json (KiCad parts) and toshiba_b_catalog.json
+(replacements), harvested from the datasheets in datasheets/toshiba/.
 Generated output (dump_priority=0, source=NULL) is not dumped to static SQL.
 """
 import re
@@ -15,5 +18,5 @@ def value_of(p):
 
 
 if __name__ == "__main__":
-    emit(__file__, "toshiba_catalog.json", "photorelay", value_of,
+    emit(__file__, ["toshiba_catalog.json", "toshiba_b_catalog.json"], "photorelay", value_of,
          "Toshiba MOSFET photorelays")

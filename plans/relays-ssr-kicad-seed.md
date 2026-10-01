@@ -1,7 +1,7 @@
 # relays_ssr — MOSFET-output solid-state relays seeded from KiCad
 
 **Started:** 2026-10-01
-**Status:** Built — 74 parts; open items below
+**Status:** Built — 94 parts
 
 ## Intent
 
@@ -20,8 +20,10 @@ catalog).
 
 - **In:** the 52 MOSFET/DC-output parts in `Relay_SolidState` (Littelfuse/IXYS 30,
   Panasonic 10, Toshiba 9, Finder 2, Broadcom 1) plus Panasonic AQW21xEH.
-- **Out (future AC table):** the 68 triac/thyristor-output parts (AQH, MOC30xx,
-  FOD4xx, FODM30xx, Sharp S-series, TLP14x/16x, Finder 34.81-8240, HHG1D-1).
+- **Out:** the 68 triac/thyristor-output parts (AQH, MOC30xx, FOD4xx, FODM30xx,
+  Sharp S-series, TLP14x/16x, Finder 34.81-8240, HHG1D-1). No AC table planned.
+- **Out:** TLP3542/3543/3546 (LF1). They appear only in Toshiba's discontinuation
+  notice (obsolete), never confirmed as stocked; their (LF1) replacements are in.
 
 ## Decisions
 
@@ -35,9 +37,13 @@ catalog).
 - **Symbols:** the stock KiCad symbol for the part. A variant KiCad doesn't list
   uses its sibling's symbol only when the pinout is identical.
 - **Footprints:** a stock KiCad footprint checked against the datasheet package
-  drawing; mismatches are recorded, not silently accepted.
+  drawing. A standard IPC-style package footprint whose pads differ slightly from
+  the vendor's recommended land pattern is accepted (`footprint_check: close`);
+  only real mismatches or missing footprints are flagged by the generators.
 - **`load_type` follows the datasheet rating table strictly**: a part rated only in
   DC (e.g. CPC1020N, 1.2ADC) is `DC` even if its output is back-to-back MOSFETs.
+- **Operating temperature** is the datasheet's absolute-maximum rating (Topr), not
+  the recommended operating range.
 - **Datasheets** are stored in `datasheets/<mfr>/` and referenced via
   `${TERRA_EDA_LIB}`.
 - **Columns** (`db/schema/types/relays_ssr.sql`): contact form, channels, load type,
@@ -56,9 +62,19 @@ harvested from the datasheets; one generator per manufacturer
 
 ## Results
 
-74 rows from 6 catalogs (Panasonic 18, Littelfuse 36, Toshiba 13, Finder 6,
-Broadcom 1); 16 Active, 44 EOL, 1 NRND, 13 Obsolete. Every symbol and footprint resolves
-to a stock KiCad library item. `make verify` clean.
+94 rows from 9 catalogs: Littelfuse 39 (incl. current-limited LAA110L/LS/PL),
+Toshiba 30 (13 KiCad parts + 17 named replacements), Panasonic 18, Finder 6,
+Broadcom 1. 33 Active, 39 EOL, 1 NRND, 21 Obsolete. Every symbol and footprint
+resolves to a stock KiCad library item. `make verify` clean.
+
+**Toshiba replacements** (`toshiba_b_catalog.json`, per Toshiba's 2024-04-24
+discontinuation notice): TLP3123 -> TLP3122A; TLP3543 -> TLP3543A; TLP3542,
+TLP3544, TLP3545 -> TLP3545A; TLP3546 -> TLP3546A; TLP175A (NRND) -> TLP176AM.
+Rows carry `replaces` / `replaced_by` in their descriptions. The TLP354xA parts
+come in five package variants each (base, (LF1), (LF5), wide AF, AF(LF4)) from
+the datasheet ordering tables; TLP3122A and TLP176AM use the TLP175A symbol
+(same 11-4M1S package and pin assignment). Operating temperature is the
+absolute-maximum Topr (to 110C), per the decision above.
 
 **Findings that differ from KiCad or from expectations**
 
@@ -74,23 +90,20 @@ to a stock KiCad library item. `make verify` clean.
 - **KiCad descriptions out of date:** TLP3542 is 60V / 2.5A / 100mOhm (KiCad says
   20V / 4A / 50mOhm); Finder 34.81-9024 is rated 6A (KiCad says 2A); CPC2025N is
   30Ohm max (KiCad gives the 20Ohm typical).
-- **Toshiba:** TLP222A/-2 obsolete; TLP3123 and TLP3542–3546 EOL announced
-  (replacements TLP3122A, TLP3543A, TLP3545A, TLP3546A); TLP175A NRND.
+- **Toshiba:** TLP222A/-2, TLP3123 and TLP3542–3546 obsolete (last shipment
+  2025-09-30); TLP175A NRND. All have named replacements, included above.
 - **Panasonic AQY28x EH/EHA/S marked Obsolete by inference** (product pages gone,
   not in current series lists); no EOL notice found. Their data comes from 2003
   datasheets.
 
-**Footprints marked close** (stock footprint usable, pads differ from the
-datasheet's recommended land pattern): Littelfuse SOP-4 (CPC10xx/CPC11xx, ~0.1mm
-row spacing), Panasonic SMD DIP (`SMDIP-4/8_W7.62mm`, ~1.2mm wider than the
-recommended pattern), Toshiba (LF1) lead-form variants (`SMDIP-*_W9.53mm`).
+**Footprints marked close** are accepted per the footprint rule: Littelfuse SOP-4
+(CPC10xx/CPC11xx), Panasonic SMD DIP (`SMDIP-4/8_W7.62mm`), Toshiba lead-form
+variants (`SMDIP-6_W9.53mm` for (LF1)/(LF5), `SMDIP-6_W11.48mm` for AF(LF4)).
 
 **Open**
 
-- Toshiba (LF1) rows only where a distributor listing confirmed the number;
-  TLP3542/3543/3546 (LF1) probably exist but are unconfirmed.
-- Not included: current-limited LAA110L/LS/PL (separate datasheet), Broadcom
-  ASSR-1219/1228, and the newer Toshiba replacements.
 - Several datasheets came from Wayback captures of the manufacturer files
-  (Littelfuse blocks scripted downloads); CPC2017N is revision R06 and may not be
-  the newest.
+  (Littelfuse blocks scripted downloads); CPC2017N is revision R06 and LAA110L is
+  R12 (R13 exists but couldn't be fetched).
+- LAA110LS/PL EOL status assumed from the family-wide PDN EIC-1177; only LAA110L
+  was seen marked Last Time Buy.

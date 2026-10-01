@@ -108,7 +108,8 @@
       "manufacturer_link": "https://toshiba.semicon-storage.com/us/semiconductor/product/isolators-solid-state-relays/photorelay-mosfet-output/detail.TLP175A.html",
       "datasheet": "datasheets/toshiba/tlp175a.pdf",
       "pages": "p1 features, p2 pinout (1,3,4,6), p3 abs max/VF/COFF, p4 IFT/RON/tON/tOFF, p7 outline",
-      "notes": "Product page status 'Not Recommended for New Design'. Pins 1=anode, 3=cathode, 4/6=drain (4-pin SO6 on 6-pin grid; footprint pads 1,3,4,6 match, 2.54mm pin spacing, 7.0mm span). Toshiba orderable numbers carry a RoHS/lead-free suffix (',E' e.g. TLP175A(TPL,E)) plus optional packing codes; mpn keeps the base number. VDE (V4) option is a certification variant, not listed separately."
+      "notes": "Product page status 'Not Recommended for New Design'. Pins 1=anode, 3=cathode, 4/6=drain (4-pin SO6 on 6-pin grid; footprint pads 1,3,4,6 match, 2.54mm pin spacing, 7.0mm span). Toshiba orderable numbers carry a RoHS/lead-free suffix (',E' e.g. TLP175A(TPL,E)) plus optional packing codes; mpn keeps the base number. VDE (V4) option is a certification variant, not listed separately.",
+      "replaced_by": "TLP176AM"
     },
     {
       "mpn": "TLP222A",
@@ -273,12 +274,13 @@
       "temp_storage_min": -55,
       "temp_storage_max": 125,
       "rohs": "Yes",
-      "lifecycle_status": "EOL",
-      "lifecycle_source": "https://toshiba.semicon-storage.com/us/semiconductor/product/isolators-solid-state-relays/photorelay-mosfet-output/detail.TLP3123.html (Toshiba: EOL announced, replacement named)",
+      "lifecycle_status": "Obsolete",
+      "lifecycle_source": "Toshiba discontinuation notice 2024-04-24: last-time buy 2025-06-30, last shipment 2025-09-30 https://www.farnell.com/datasheets/4477091.pdf",
       "manufacturer_link": "https://toshiba.semicon-storage.com/us/semiconductor/product/isolators-solid-state-relays/photorelay-mosfet-output/detail.TLP3123.html",
       "datasheet": "datasheets/toshiba/tlp3123.pdf",
       "pages": "p1 features/outline/pinout, p2 abs max/VF/COFF, p3 IFT/RON/switching",
-      "notes": "Toshiba product page shows 'EOL announced' ('TLP3123 is shortly to be discontinued'); recommended replacement TLP3122A. Mapped to NRND because the part is still orderable pending discontinuation. Body 3.9x4.4mm, 2.54mm pitch, 7.0mm span; KiCad footprint was drawn from this datasheet. Toshiba orderable numbers carry a RoHS/lead-free suffix ('(F)') plus optional packing codes; mpn keeps the base number."
+      "notes": "Toshiba product page shows 'EOL announced' ('TLP3123 is shortly to be discontinued'); recommended replacement TLP3122A. Mapped to NRND because the part is still orderable pending discontinuation. Body 3.9x4.4mm, 2.54mm pitch, 7.0mm span; KiCad footprint was drawn from this datasheet. Toshiba orderable numbers carry a RoHS/lead-free suffix ('(F)') plus optional packing codes; mpn keeps the base number.",
+      "replaced_by": "TLP3122A"
     },
     {
       "mpn": "TLP3542",
@@ -307,12 +309,13 @@
       "temp_storage_min": -40,
       "temp_storage_max": 125,
       "rohs": "Yes",
-      "lifecycle_status": "EOL",
-      "lifecycle_source": "https://toshiba.semicon-storage.com/us/semiconductor/product/isolators-solid-state-relays/photorelay-mosfet-output/detail.TLP3542.html (Toshiba: EOL announced, replacement named)",
+      "lifecycle_status": "Obsolete",
+      "lifecycle_source": "Toshiba discontinuation notice 2024-04-24: last-time buy 2025-06-30, last shipment 2025-09-30 https://www.farnell.com/datasheets/4477091.pdf",
       "manufacturer_link": "https://toshiba.semicon-storage.com/us/semiconductor/product/isolators-solid-state-relays/photorelay-mosfet-output/detail.TLP3542.html",
       "datasheet": "datasheets/toshiba/tlp3542.pdf",
       "pages": "p1 features/outline/pinout, p2 abs max, p3 electrical/switching",
-      "notes": "Toshiba product page shows 'EOL announced' ('TLP3542 is shortly to be discontinued'); recommended replacement TLP3545A. Mapped to NRND because the part is still orderable pending discontinuation. Pins 1=anode, 2=cathode, 3=NC, 4/6=drain, pin 5 removed. Faster switching at IF=10mA: tON 1.5ms max, tOFF 0.4ms max. KiCad symbol description (4A, 50mOhm, 20V) is wrong for this part; datasheet is 60V/2.5A/100mOhm. Toshiba orderable numbers carry a RoHS/lead-free suffix ('(F)') plus optional packing codes; mpn keeps the base number."
+      "notes": "Toshiba product page shows 'EOL announced' ('TLP3542 is shortly to be discontinued'); recommended replacement TLP3545A. Mapped to NRND because the part is still orderable pending discontinuation. Pins 1=anode, 2=cathode, 3=NC, 4/6=drain, pin 5 removed. Faster switching at IF=10mA: tON 1.5ms max, tOFF 0.4ms max. KiCad symbol description (4A, 50mOhm, 20V) is wrong for this part; datasheet is 60V/2.5A/100mOhm. Toshiba orderable numbers carry a RoHS/lead-free suffix ('(F)') plus optional packing codes; mpn keeps the base number.",
+      "replaced_by": "TLP3545A"
     },
     {
       "mpn": "TLP3543",
@@ -341,12 +344,13 @@
       "temp_storage_min": -55,
       "temp_storage_max": 125,
       "rohs": "Yes",
-      "lifecycle_status": "EOL",
-      "lifecycle_source": "https://toshiba.semicon-storage.com/us/semiconductor/product/isolators-solid-state-relays/photorelay-mosfet-output/detail.TLP3543.html (Toshiba: EOL announced, replacement named)",
+      "lifecycle_status": "Obsolete",
+      "lifecycle_source": "Toshiba discontinuation notice 2024-04-24: last-time buy 2025-06-30, last shipment 2025-09-30 https://www.farnell.com/datasheets/4477091.pdf",
       "manufacturer_link": "https://toshiba.semicon-storage.com/us/semiconductor/product/isolators-solid-state-relays/photorelay-mosfet-output/detail.TLP3543.html",
       "datasheet": "datasheets/toshiba/tlp3543.pdf",
       "pages": "p1 features/pinout, p2 abs max, p3 electrical/coupled, p4 switching, p7 connections, p8 outline",
-      "notes": "Toshiba product page shows 'EOL announced' ('TLP3543 is shortly to be discontinued'); recommended replacement TLP3543A. Mapped to NRND because the part is still orderable pending discontinuation. Pins 1=anode, 2=cathode, 3=NC, 4/6=drain, 5=source. Connection ratings: A (AC/DC, pins 4-6) 4A/50mOhm max; B (DC, source pin 5 used) 4A/10mOhm typ; C (DC, drains paralleled) 8A/5mOhm typ @ ION=4A. tON 3ms max at IF=10mA. Toshiba orderable numbers carry a RoHS/lead-free suffix ('(F)') plus optional packing codes; mpn keeps the base number."
+      "notes": "Toshiba product page shows 'EOL announced' ('TLP3543 is shortly to be discontinued'); recommended replacement TLP3543A. Mapped to NRND because the part is still orderable pending discontinuation. Pins 1=anode, 2=cathode, 3=NC, 4/6=drain, 5=source. Connection ratings: A (AC/DC, pins 4-6) 4A/50mOhm max; B (DC, source pin 5 used) 4A/10mOhm typ; C (DC, drains paralleled) 8A/5mOhm typ @ ION=4A. tON 3ms max at IF=10mA. Toshiba orderable numbers carry a RoHS/lead-free suffix ('(F)') plus optional packing codes; mpn keeps the base number.",
+      "replaced_by": "TLP3543A"
     },
     {
       "mpn": "TLP3544",
@@ -375,12 +379,13 @@
       "temp_storage_min": -55,
       "temp_storage_max": 125,
       "rohs": "Yes",
-      "lifecycle_status": "EOL",
-      "lifecycle_source": "https://toshiba.semicon-storage.com/us/semiconductor/product/isolators-solid-state-relays/photorelay-mosfet-output/detail.TLP3544.html (Toshiba: EOL announced, replacement named)",
+      "lifecycle_status": "Obsolete",
+      "lifecycle_source": "Toshiba discontinuation notice 2024-04-24: last-time buy 2025-06-30, last shipment 2025-09-30 https://www.farnell.com/datasheets/4477091.pdf",
       "manufacturer_link": "https://toshiba.semicon-storage.com/us/semiconductor/product/isolators-solid-state-relays/photorelay-mosfet-output/detail.TLP3544.html",
       "datasheet": "datasheets/toshiba/tlp3544.pdf",
       "pages": "p1 features/pinout, p2 abs max, p3 electrical/coupled, p4 switching, p7 connections, p8 outline",
-      "notes": "Toshiba product page shows 'EOL announced' ('TLP3544 is shortly to be discontinued'); recommended replacement TLP3545A. Mapped to NRND because the part is still orderable pending discontinuation. Pins 1=anode, 2=cathode, 3=NC, 4/6=drain, 5=source. Connection ratings: A (AC/DC, pins 4-6) 3.5A/60mOhm max; B (DC, source pin 5 used) 3.5A/15mOhm typ; C (DC, drains paralleled) 7A/8mOhm typ @ ION=4A. tON 3ms max at IF=10mA. Toshiba orderable numbers carry a RoHS/lead-free suffix ('(F)') plus optional packing codes; mpn keeps the base number."
+      "notes": "Toshiba product page shows 'EOL announced' ('TLP3544 is shortly to be discontinued'); recommended replacement TLP3545A. Mapped to NRND because the part is still orderable pending discontinuation. Pins 1=anode, 2=cathode, 3=NC, 4/6=drain, 5=source. Connection ratings: A (AC/DC, pins 4-6) 3.5A/60mOhm max; B (DC, source pin 5 used) 3.5A/15mOhm typ; C (DC, drains paralleled) 7A/8mOhm typ @ ION=4A. tON 3ms max at IF=10mA. Toshiba orderable numbers carry a RoHS/lead-free suffix ('(F)') plus optional packing codes; mpn keeps the base number.",
+      "replaced_by": "TLP3545A"
     },
     {
       "mpn": "TLP3544(LF1)",
@@ -409,12 +414,13 @@
       "temp_storage_min": -55,
       "temp_storage_max": 125,
       "rohs": "Yes",
-      "lifecycle_status": "EOL",
-      "lifecycle_source": "https://toshiba.semicon-storage.com/us/semiconductor/product/isolators-solid-state-relays/photorelay-mosfet-output/detail.TLP3544.html (Toshiba: EOL announced, replacement named)",
+      "lifecycle_status": "Obsolete",
+      "lifecycle_source": "Toshiba discontinuation notice 2024-04-24: last-time buy 2025-06-30, last shipment 2025-09-30 https://www.farnell.com/datasheets/4477091.pdf",
       "manufacturer_link": "https://toshiba.semicon-storage.com/us/semiconductor/product/isolators-solid-state-relays/photorelay-mosfet-output/detail.TLP3544.html",
       "datasheet": "datasheets/toshiba/tlp3544.pdf",
       "pages": "datasheet pp1-4 (electrical); Selection Guide 2026 p32 (LF1 outline/land)",
-      "notes": "Same pinout as TLP3544 (symbol reused). Toshiba product page shows 'EOL announced' ('TLP3544 is shortly to be discontinued'); recommended replacement TLP3545A. Mapped to NRND because the part is still orderable pending discontinuation. (LF1) gull-wing lead form per Toshiba Selection Guide 2026 'Lead Form Options' (lead tip span 10.0mm max, land pattern example 1.5x1.6mm pads at 8.7mm row pitch); SMDIP W9.53mm has 9.53mm pad pitch and 2.0x1.78mm pads, so pads land slightly outboard of Toshiba's example but cover the 10.0mm-max feet. (LF1) variant is not in the datasheet ordering info (the datasheet has none); existence confirmed by distributor listing TLP3544(LF1,F) (distributor listings, e.g. micro-semiconductor.com) and Toshiba product page 'Mounting: Through Hole/Surface Mount'. Electrical characteristics identical to the through-hole part (Toshiba catalog: lead-forming does not affect characteristics). Connection ratings: A (AC/DC, pins 4-6) 3.5A/60mOhm max; B (DC, source pin 5 used) 3.5A/15mOhm typ; C (DC, drains paralleled) 7A/8mOhm typ @ ION=4A. tON 3ms max at IF=10mA. Toshiba orderable numbers carry a RoHS/lead-free suffix ('(F)') plus optional packing codes; mpn keeps the base number."
+      "notes": "Same pinout as TLP3544 (symbol reused). Toshiba product page shows 'EOL announced' ('TLP3544 is shortly to be discontinued'); recommended replacement TLP3545A. Mapped to NRND because the part is still orderable pending discontinuation. (LF1) gull-wing lead form per Toshiba Selection Guide 2026 'Lead Form Options' (lead tip span 10.0mm max, land pattern example 1.5x1.6mm pads at 8.7mm row pitch); SMDIP W9.53mm has 9.53mm pad pitch and 2.0x1.78mm pads, so pads land slightly outboard of Toshiba's example but cover the 10.0mm-max feet. (LF1) variant is not in the datasheet ordering info (the datasheet has none); existence confirmed by distributor listing TLP3544(LF1,F) (distributor listings, e.g. micro-semiconductor.com) and Toshiba product page 'Mounting: Through Hole/Surface Mount'. Electrical characteristics identical to the through-hole part (Toshiba catalog: lead-forming does not affect characteristics). Connection ratings: A (AC/DC, pins 4-6) 3.5A/60mOhm max; B (DC, source pin 5 used) 3.5A/15mOhm typ; C (DC, drains paralleled) 7A/8mOhm typ @ ION=4A. tON 3ms max at IF=10mA. Toshiba orderable numbers carry a RoHS/lead-free suffix ('(F)') plus optional packing codes; mpn keeps the base number.",
+      "replaced_by": "TLP3545A"
     },
     {
       "mpn": "TLP3545",
@@ -443,12 +449,13 @@
       "temp_storage_min": -55,
       "temp_storage_max": 125,
       "rohs": "Yes",
-      "lifecycle_status": "EOL",
-      "lifecycle_source": "https://toshiba.semicon-storage.com/us/semiconductor/product/isolators-solid-state-relays/photorelay-mosfet-output/detail.TLP3545.html (Toshiba: EOL announced, replacement named)",
+      "lifecycle_status": "Obsolete",
+      "lifecycle_source": "Toshiba discontinuation notice 2024-04-24: last-time buy 2025-06-30, last shipment 2025-09-30 https://www.farnell.com/datasheets/4477091.pdf",
       "manufacturer_link": "https://toshiba.semicon-storage.com/us/semiconductor/product/isolators-solid-state-relays/photorelay-mosfet-output/detail.TLP3545.html",
       "datasheet": "datasheets/toshiba/tlp3545.pdf",
       "pages": "p1 features/pinout, p2 abs max, p3 electrical/coupled, p4 switching, p7 connections, p8 outline",
-      "notes": "Toshiba product page shows 'EOL announced' ('TLP3545 is shortly to be discontinued'); recommended replacement TLP3545A. Mapped to NRND because the part is still orderable pending discontinuation. Pins 1=anode, 2=cathode, 3=NC, 4/6=drain, 5=source. Connection ratings: A (AC/DC, pins 4-6) 3A/70mOhm max; B (DC, source pin 5 used) 3A/20mOhm typ; C (DC, drains paralleled) 6A/10mOhm typ @ ION=4A. tON 3ms max at IF=10mA. Toshiba orderable numbers carry a RoHS/lead-free suffix ('(F)') plus optional packing codes; mpn keeps the base number."
+      "notes": "Toshiba product page shows 'EOL announced' ('TLP3545 is shortly to be discontinued'); recommended replacement TLP3545A. Mapped to NRND because the part is still orderable pending discontinuation. Pins 1=anode, 2=cathode, 3=NC, 4/6=drain, 5=source. Connection ratings: A (AC/DC, pins 4-6) 3A/70mOhm max; B (DC, source pin 5 used) 3A/20mOhm typ; C (DC, drains paralleled) 6A/10mOhm typ @ ION=4A. tON 3ms max at IF=10mA. Toshiba orderable numbers carry a RoHS/lead-free suffix ('(F)') plus optional packing codes; mpn keeps the base number.",
+      "replaced_by": "TLP3545A"
     },
     {
       "mpn": "TLP3545(LF1)",
@@ -477,12 +484,13 @@
       "temp_storage_min": -55,
       "temp_storage_max": 125,
       "rohs": "Yes",
-      "lifecycle_status": "EOL",
-      "lifecycle_source": "https://toshiba.semicon-storage.com/us/semiconductor/product/isolators-solid-state-relays/photorelay-mosfet-output/detail.TLP3545.html (Toshiba: EOL announced, replacement named)",
+      "lifecycle_status": "Obsolete",
+      "lifecycle_source": "Toshiba discontinuation notice 2024-04-24: last-time buy 2025-06-30, last shipment 2025-09-30 https://www.farnell.com/datasheets/4477091.pdf",
       "manufacturer_link": "https://toshiba.semicon-storage.com/us/semiconductor/product/isolators-solid-state-relays/photorelay-mosfet-output/detail.TLP3545.html",
       "datasheet": "datasheets/toshiba/tlp3545.pdf",
       "pages": "datasheet pp1-4 (electrical); Selection Guide 2026 p32 (LF1 outline/land)",
-      "notes": "Same pinout as TLP3545 (symbol reused). Toshiba product page shows 'EOL announced' ('TLP3545 is shortly to be discontinued'); recommended replacement TLP3545A. Mapped to NRND because the part is still orderable pending discontinuation. (LF1) gull-wing lead form per Toshiba Selection Guide 2026 'Lead Form Options' (lead tip span 10.0mm max, land pattern example 1.5x1.6mm pads at 8.7mm row pitch); SMDIP W9.53mm has 9.53mm pad pitch and 2.0x1.78mm pads, so pads land slightly outboard of Toshiba's example but cover the 10.0mm-max feet. (LF1) variant is not in the datasheet ordering info (the datasheet has none); existence confirmed by distributor listing TLP3545(LF1,F) at Digi-Key (part 7594994) and Toshiba product page 'Mounting: Through Hole/Surface Mount'. Electrical characteristics identical to the through-hole part (Toshiba catalog: lead-forming does not affect characteristics). Connection ratings: A (AC/DC, pins 4-6) 3A/70mOhm max; B (DC, source pin 5 used) 3A/20mOhm typ; C (DC, drains paralleled) 6A/10mOhm typ @ ION=4A. tON 3ms max at IF=10mA. Toshiba orderable numbers carry a RoHS/lead-free suffix ('(F)') plus optional packing codes; mpn keeps the base number."
+      "notes": "Same pinout as TLP3545 (symbol reused). Toshiba product page shows 'EOL announced' ('TLP3545 is shortly to be discontinued'); recommended replacement TLP3545A. Mapped to NRND because the part is still orderable pending discontinuation. (LF1) gull-wing lead form per Toshiba Selection Guide 2026 'Lead Form Options' (lead tip span 10.0mm max, land pattern example 1.5x1.6mm pads at 8.7mm row pitch); SMDIP W9.53mm has 9.53mm pad pitch and 2.0x1.78mm pads, so pads land slightly outboard of Toshiba's example but cover the 10.0mm-max feet. (LF1) variant is not in the datasheet ordering info (the datasheet has none); existence confirmed by distributor listing TLP3545(LF1,F) at Digi-Key (part 7594994) and Toshiba product page 'Mounting: Through Hole/Surface Mount'. Electrical characteristics identical to the through-hole part (Toshiba catalog: lead-forming does not affect characteristics). Connection ratings: A (AC/DC, pins 4-6) 3A/70mOhm max; B (DC, source pin 5 used) 3A/20mOhm typ; C (DC, drains paralleled) 6A/10mOhm typ @ ION=4A. tON 3ms max at IF=10mA. Toshiba orderable numbers carry a RoHS/lead-free suffix ('(F)') plus optional packing codes; mpn keeps the base number.",
+      "replaced_by": "TLP3545A"
     },
     {
       "mpn": "TLP3546",
@@ -511,12 +519,13 @@
       "temp_storage_min": -55,
       "temp_storage_max": 125,
       "rohs": "Yes",
-      "lifecycle_status": "EOL",
-      "lifecycle_source": "https://toshiba.semicon-storage.com/us/semiconductor/product/isolators-solid-state-relays/photorelay-mosfet-output/detail.TLP3546.html (Toshiba: EOL announced, replacement named)",
+      "lifecycle_status": "Obsolete",
+      "lifecycle_source": "Toshiba discontinuation notice 2024-04-24: last-time buy 2025-06-30, last shipment 2025-09-30 https://www.farnell.com/datasheets/4477091.pdf",
       "manufacturer_link": "https://toshiba.semicon-storage.com/us/semiconductor/product/isolators-solid-state-relays/photorelay-mosfet-output/detail.TLP3546.html",
       "datasheet": "datasheets/toshiba/tlp3546.pdf",
       "pages": "p1 features/pinout, p2 abs max, p3 electrical/coupled, p4 switching, p7 connections, p8 outline",
-      "notes": "Toshiba product page shows 'EOL announced' ('TLP3546 is shortly to be discontinued'); recommended replacement TLP3546A. Mapped to NRND because the part is still orderable pending discontinuation. Pins 1=anode, 2=cathode, 3=NC, 4/6=drain, 5=source. Connection ratings: A (AC/DC, pins 4-6) 2A/200mOhm max; B (DC, source pin 5 used) 2A/50mOhm typ; C (DC, drains paralleled) 4A/25mOhm typ @ ION=4A. tON 3ms max at IF=10mA. Toshiba orderable numbers carry a RoHS/lead-free suffix ('(F)') plus optional packing codes; mpn keeps the base number."
+      "notes": "Toshiba product page shows 'EOL announced' ('TLP3546 is shortly to be discontinued'); recommended replacement TLP3546A. Mapped to NRND because the part is still orderable pending discontinuation. Pins 1=anode, 2=cathode, 3=NC, 4/6=drain, 5=source. Connection ratings: A (AC/DC, pins 4-6) 2A/200mOhm max; B (DC, source pin 5 used) 2A/50mOhm typ; C (DC, drains paralleled) 4A/25mOhm typ @ ION=4A. tON 3ms max at IF=10mA. Toshiba orderable numbers carry a RoHS/lead-free suffix ('(F)') plus optional packing codes; mpn keeps the base number.",
+      "replaced_by": "TLP3546A"
     }
   ],
   "notes": [
