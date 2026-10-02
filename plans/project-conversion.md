@@ -116,8 +116,12 @@ the full Murata BLM18…N1 0603 family (74 parts) from the parked spec
 hand-migrated BLM18 rows (the generator supersedes them); kept the non-BLM18 parts
 (Bourns MH2029, Murata BLM41) and fixed BLM41's rotted `value` field. Symbol
 `Device:FerriteBead_Small`, footprint `Inductor_SMD:L_0603_1608Metric`.
-- **"EG" myth busted:** no `BLM18EG…` series exists in the datasheet. The terra migrated
-  row `BLM18EG121SN1D` was a typo for `BLM18PG121SN1D` (120Ω / 2A DC-power-line); now present.
+- **Correction (2026-10-02):** the earlier note here said no `BLM18EG…` series exists and
+  that the migrated row `BLM18EG121SN1D` was a typo for `BLM18PG121SN1D`. That was wrong:
+  BLM18EG is a real Murata GHz-noise series (EG121 = 120Ω ±25% @100MHz, 2A, 0.04Ω DCR max),
+  covered by a different reference spec than the N1 one. EG121 and PG121 are different parts
+  (PG121 has 0.10Ω DCR). The EG series now comes from `run_501_murata_blm18_ghz.py`. Any
+  design that swapped EG121 -> PG121 on the strength of the old note should be rechecked.
 - **The real schematic rot (RESOLVED 2026-06-14, applied by #6):** all 12 small `FB` symbols
   carry MPN `BLM18BD221SN1D` (220Ω / 250mA) but value text "120 ohm 300 mA" = `BLM18BD121SN1D`.
   `terra_convert` surfaces this as a per-instance CONFLICT. **Decision: the displayed Value

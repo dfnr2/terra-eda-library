@@ -4,9 +4,9 @@
 Generates the full BLM18[xx][nnn]SN1D / TN1D family (0603 / 1608Metric) from
 Murata reference spec JENF243A_0003AN-01 (parked alongside this script as
 murata_blm18xxxxxxN1x_datasheet.pdf). This supersedes the hand-migrated,
-cut/paste-rotted BLM18 rows: the schematic's "BLM18EG121SN1D" was a typo for
-BLM18PG121SN1D (120 ohm / 2 A; no "EG" series exists), and the previously
-missing BLM18BD121SN1D (120 ohm / 300 mA) is now present.
+cut/paste-rotted BLM18 rows; the previously missing BLM18BD121SN1D
+(120 ohm / 300 mA) is now present. The GHz-noise series (BLM18EG and BLM18H*)
+are in a different Murata spec and come from run_501_murata_blm18_ghz.py.
 
 Generated output (dump_priority=0, source=NULL) is not dumped to static SQL.
 """
