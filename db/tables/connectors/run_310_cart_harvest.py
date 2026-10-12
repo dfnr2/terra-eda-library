@@ -71,18 +71,7 @@ PARTS = [
             },
         ]
     ],
-    {
-        "mpn": "532540470", "manufacturer": "Molex", "value": "connector",
-        "description": "Molex Micro-Latch 53254-0470 1x4 2.00mm right-angle header, through-hole",
-        "datasheet": "https://www.molex.com/en-us/products/part-detail/532540470?display=pdf",
-        "kicad_symbol": "Connector_Generic:Conn_01x04",
-        "kicad_footprint": "terra_footprints_connectors:Molex_Micro-Latch_53254-0470_1x04_P2.00mm_Horizontal",
-        "connector_category": "wire-to-board", "connector_family": "Molex Micro-Latch",
-        "connector_series": "53254", "connector_type": "header",
-        "positions": 4, "rows": 1, "pitch_mm": 2.0, "orientation": "right-angle",
-        "termination_type": "Through Hole", "gender": "male", "signal_type": "signal",
-        "mates_with": None, "pin_count": "4", "keywords": "connector,header",
-    },
+    # Molex Micro-Latch 532540470 now comes from run_320_molex_micro_latch.py.
     {
         "mpn": "5600200320", "manufacturer": "Molex", "value": "Solenoid",
         "description": "Molex DuraClick 560020-0320 1x3 2.00mm vertical header, SMT",
