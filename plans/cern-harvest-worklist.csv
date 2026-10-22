@@ -628,8 +628,8 @@ analog_interface,ANALOG DEVICES,ADM3066ETRM,MSOP10,10,"3.0 V to 5.5 V, ±12 kV I
 analog_interface,ANALOG DEVICES,ADM3101EARQ,SSOP16,16,"±15 kV ESD Protected, 3.3 V Single-Channel RS-232 Line Driver/Receiver",ADM3101EARQ.pdf,cern-ics-and-semiconductors-smd:SOP63P600X175-16N,
 analog_interface,ANALOG DEVICES,ADM3232EARN,SOIC16,16,"±15kV ESD Protected, 3.3V, RS-232 Line Driver/Receiver",ADM3232EARN.pdf,cern-ics-and-semiconductors-smd:SOIC127P600X175-16N,
 analog_interface,ANALOG DEVICES,ADM3251EARW,SOIC20,20,"Isolated, Single-Channel RS-232 Line Driver/Receiver",ADM3251EARWZ.pdf,cern-ics-and-semiconductors-smd:SOIC127P1032X265-20N,
-analog_interface,ANALOG DEVICES,ADM3488AR,SOIC8,8,"3.3V, 250kbps, Full-Duplex RS-485/RS-422 Transceiver",ADM3488ARZ.pdf,cern-ics-and-semiconductors-smd:SOIC127P600X175-8N,
-analog_interface,ANALOG DEVICES,ADM3490AR,SOIC8,8,"3.3V, 10Mbps Full-Duplex RS-485/RS-422 Transceiver",ADM3490ARZ.pdf,cern-ics-and-semiconductors-smd:SOIC127P600X175-8N,
+analog_interface,ANALOG DEVICES,ADM3488AR,SOIC8,8,"3.3V, 250kbps, Full-Duplex RS-485/RS-422 Transceiver",ADM3488ARZ.pdf,cern-ics-and-semiconductors-smd:SOIC127P600X175-8N,ic_drivers
+analog_interface,ANALOG DEVICES,ADM3490AR,SOIC8,8,"3.3V, 10Mbps Full-Duplex RS-485/RS-422 Transceiver",ADM3490ARZ.pdf,cern-ics-and-semiconductors-smd:SOIC127P600X175-8N,ic_drivers
 analog_interface,ANALOG DEVICES,ADM6316BX46ARJ,SOT23-5,5,4.63V Supervisory Circuits with Watchdog and Manual Reset,ADM6316BX46ARJZ-R7.pdf,cern-ics-and-semiconductors-smd:SOT95P280X145-5N,
 analog_interface,ANALOG DEVICES,ADM6321CY46ARJ,SOT23-5,5,"Supervisory Circuit with Watchdog, Reset Voltage Threshold 4.63V",ADM6321CY46ARJZ.pdf,cern-ics-and-semiconductors-smd:SOT95P280X145-5N,
 analog_interface,ANALOG DEVICES,ADM660AR,SOIC8,8,CMOS Switched-Capacitor Voltage Converters,ADM660.pdf,cern-ics-and-semiconductors-smd:SOIC127P600X175-8N,

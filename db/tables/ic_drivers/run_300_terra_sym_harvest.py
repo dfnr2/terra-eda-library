@@ -21,7 +21,7 @@ OUTPUT_FILE = Path(__file__).with_name("ic_drivers_generated_300_terra_sym_harve
 
 RNCC = "https://4donline.ihs.com/images/VipMasterIC/IC/RNCC/RNCC-E-A0024639703/RNCC-E-A0024639703-1.pdf?hkey=6D0214268300F1406B835FE51CB13195"
 ISL_LINK = "https://www.renesas.com/en/products/isl83490?srsltid=AfmBOorrhojJuPyDWNYh6-rDmOQmnBg03ja1MLg9s8OvA6xcdYZLD9Zv"
-ISL_DS = "https://www.renesas.com/en/document/dst/isl83483-isl83485-isl83488-isl83490-isl83491-datasheet"
+ISL_DS = "${TERRA_EDA_LIB}/datasheets/renesas/isl83483-isl83491.pdf"
 TI_ISO_CR = "https://www.ti.com/lit/cr/sszqqi4/sszqqi4.pdf?ts=1698698947760&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FISO1412"
 
 COLS = [
@@ -58,11 +58,12 @@ PARTS = [
         "channels": 2, "i_max_channel": "150 mA", "output_type": "open-drain",
     },
     {
-        "unique_id": "Renesas-ISL83490IBZ", "data_rate": "2.5 Mbps",
+        # FIX: data_rate was 2.5 Mbps; FN6052 Table 1 gives 10 Mbps for ISL83490.
+        "unique_id": "Renesas-ISL83490IBZ", "data_rate": "10 Mbps",
         "part_locator": "IC_DRIVER ISL834390 RS422 Tranceiver full duplex 3.3V soic-8",
         "mpn": "ISL83490IBZ", "manufacturer": "Renesas", "package": "soic-8",
         "value": "RS422",
-        "description": "Full duplex RS-422 transciver, 2.5 Mbps, SOIC-8, 3.3V",
+        "description": "Full duplex RS-422 transciver, 10 Mbps, SOIC-8, 3.3V",
         "datasheet": ISL_DS, "manufacturer_link": ISL_LINK,
         "kicad_symbol": "terra_symbols_ic_drivers:IC_DRIVER ISL834390 RS422 Tranceiver full duplex 3.3V soic-8",
         "kicad_footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
@@ -75,11 +76,11 @@ PARTS = [
         "channels": 1, "supply_voltage_min": 3.0, "supply_voltage_max": 3.6,
     },
     {
-        "unique_id": "Renesas-ISL83490IBZ-flipped", "data_rate": "2.5 Mbps",
+        "unique_id": "Renesas-ISL83490IBZ-flipped", "data_rate": "10 Mbps",
         "part_locator": "IC_DRIVER ISL834390 RS422 Tranceiver full duplex 3.3V soic-8_flipped",
         "mpn": "ISL83490IBZ", "manufacturer": "Renesas", "variant": "flipped",
         "package": "soic-8", "value": "RS422",
-        "description": "Full duplex RS-422 transciver, 2.5 Mbps, SOIC-8, 3.3V",
+        "description": "Full duplex RS-422 transciver, 10 Mbps, SOIC-8, 3.3V",
         "datasheet": ISL_DS, "manufacturer_link": ISL_LINK,
         "kicad_symbol": "terra_symbols_ic_drivers:IC_DRIVER ISL834390 RS422 Tranceiver full duplex 3.3V soic-8_flipped",
         "kicad_footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
