@@ -32,6 +32,7 @@ import os
 import csv
 from datetime import datetime
 from pathlib import Path
+from _keywords import cap_keywords
 from typing import Dict, List, Tuple, Optional, Set
 
 
@@ -934,7 +935,7 @@ def generate_capacitors() -> str:
                         source=source_sql,
                         dump_priority=DUMP_PRIORITY,
                         tier=3,
-                        keywords='passive',
+                        keywords=cap_keywords(cap_pf, DIELECTRIC, voltage, case_size),
                         voltage_rating=voltage,
                         tolerance=tolerance,
                         cap_type=CAP_TYPE,
@@ -1019,7 +1020,7 @@ def generate_capacitors() -> str:
                         source=source_sql,
                         dump_priority=DUMP_PRIORITY,
                         tier=3,
-                        keywords='passive',
+                        keywords=cap_keywords(cap_pf, DIELECTRIC, voltage, case_size),
                         voltage_rating=voltage,
                         tolerance=tolerance,
                         cap_type=CAP_TYPE,

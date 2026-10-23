@@ -71,8 +71,8 @@ def create_field_config(column: str, table_name: str = "") -> Dict:
     # Special handling for specific columns
     visible_in_chooser = column in {
         'value', 'description', 'mpn', 'manufacturer', 'package',
-        'kicad_footprint', 'tolerance', 'power_rating', 'voltage_rating',
-        'current_rating', 'dielectric', 'color', 'wavelength'
+        'kicad_footprint', 'tolerance', 'power_rating', 'voltage_rating', 'voltage_rating_v',
+        'current_rating', 'dielectric', 'dielectric_class', 'color', 'wavelength'
     }
 
     # Value is always annotated on the schematic. For voltage-significant
