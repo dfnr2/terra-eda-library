@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Harvest curated BJTs from the abc4-spiro-cart cartridge board into native terra.
 
-Deep electrical params (hFE, fT, Pd) are left NULL for the parametric harvest pass;
-only the values carried by the curated symbol (Vceo, Ic) are populated.
+MMBT3904/MMBT3906 are the complementary Diodes Inc pair; ratings are from each
+part's datasheet (DS30036 / DS30059): Pd is the minimum-pad figure (Note 5), hFE the
+IC = 10 mA range, fT the guaranteed minimum.
 
 Generated output (dump_priority=0, source=NULL) is not dumped to static SQL.
 """
@@ -23,13 +24,33 @@ COLS = [
 
 PARTS = [
     {
+        "unique_id": "Diodes_Incorporated-MMBT3904",
+        "part_locator": "bjt-npn-40v-200ma-sot23",
+        "mpn": "MMBT3904", "manufacturer": "Diodes Incorporated",
+        "package": "SOT-23", "value": "MMBT3904",
+        "description": "Diodes Inc MMBT3904 NPN general-purpose BJT, 40V 200mA, SOT-23",
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/diodes-inc/mmbt3904.pdf",
+        "manufacturer_link": "https://www.diodes.com/part/view/MMBT3904",
+        "kicad_symbol": "Transistor_BJT:MMBT3904",
+        "kicad_footprint": "Package_TO_SOT_SMD:SOT-23",
+        "rohs": "Yes", "allow_substitution": "No", "tracking": "No",
+        "source": None, "dump_priority": 0, "tier": 2,
+        "keywords": "bjt,npn", "pin_count": "3", "sim_device": "NPN",
+        "transistor_type": "npn", "channels": 1,
+        "v_ce_ds_max": "40V", "i_c_d_max": "200mA",
+        "power_dissipation": "310mW (Ta=25C)",
+        "hfe_typ": "100-300 @ Ic=10mA, Vce=1V",
+        "rds_on": None, "vgs_th": None, "transition_freq": "300MHz min",
+        "temp_junction_max": "150C",
+    },
+    {
         "unique_id": "Diodes_Incorporated-MMBT3906",
         "part_locator": "bjt-pnp-40v-200ma-sot23",
         "mpn": "MMBT3906", "manufacturer": "Diodes Incorporated",
         "package": "SOT-23", "value": "MMBT3906",
         "description": "Diodes Inc MMBT3906 PNP general-purpose BJT, 40V 200mA, SOT-23",
-        "datasheet": "https://www.diodes.com/assets/Datasheets/MMBT3906.pdf",
-        "manufacturer_link": "https://www.diodes.com",
+        "datasheet": "${TERRA_EDA_LIB}/datasheets/diodes-inc/mmbt3906.pdf",
+        "manufacturer_link": "https://www.diodes.com/part/view/MMBT3906",
         "kicad_symbol": "Transistor_BJT:MMBT3906",
         "kicad_footprint": "Package_TO_SOT_SMD:SOT-23",
         "rohs": "Yes", "allow_substitution": "No", "tracking": "No",
@@ -37,8 +58,10 @@ PARTS = [
         "keywords": "bjt,pnp", "pin_count": "3", "sim_device": "PNP",
         "transistor_type": "pnp", "channels": 1,
         "v_ce_ds_max": "40V", "i_c_d_max": "200mA",
-        "power_dissipation": None, "hfe_typ": None, "rds_on": None,
-        "vgs_th": None, "transition_freq": None, "temp_junction_max": None,
+        "power_dissipation": "310mW (Ta=25C)",
+        "hfe_typ": "100-300 @ Ic=-10mA, Vce=-1V",
+        "rds_on": None, "vgs_th": None, "transition_freq": "250MHz min",
+        "temp_junction_max": "150C",
     },
 ]
 
