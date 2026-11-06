@@ -128,6 +128,19 @@ BASE = {
         cmrr="100dB", psrr="100dB", quiescent_current="1.4mA", output_current=None,
         rail_to_rail="no", positive_rail="(V+)-1.5V", negative_rail="(V-)+1.5V",
         supply_voltage_min=4.5, supply_voltage_max=36.0),
+    # TL07xC column of SLOS080W (+/-15 V, 25 C). GBW is 5.25 MHz for the N/D/PW
+    # packages (3 MHz applies only to NS/PS packages and the M grade).
+    "TL074": dict(
+        description="Texas Instruments TL074 quad low-noise JFET-input op-amp, 5.25MHz GBW, ±2.25-18V supply",
+        datasheet="${TERRA_EDA_LIB}/datasheets/ti/tl072.pdf",
+        manufacturer_link="https://www.ti.com/product/TL074",
+        keywords="opamp,quad,jfet,fet-input,low-noise,audio,tl074",
+        amplifier_type="jfet", input_type="JFET", channels=4,
+        gain_bandwidth="5.25MHz", slew_rate="20V/µs", input_offset="3mV",
+        input_offset_drift="±18µV/°C", input_bias_current="65pA", input_noise="37nV/√Hz",
+        cmrr="100dB", psrr="100dB", quiescent_current="1.4mA", output_current=None,
+        rail_to_rail="no", positive_rail="(V+)-1.5V", negative_rail="(V-)+1.5V",
+        supply_voltage_min=4.5, supply_voltage_max=36.0),
     "TL081": dict(
         description="Texas Instruments TL081 single JFET-input op-amp, 5.25MHz GBW, ±2.25-20V supply",
         manufacturer_link="https://www.ti.com/product/TL081",
@@ -324,6 +337,9 @@ VARIANTS = {
         ("SOIC-8", "TL072CDR", "8", SI+"TL072", SOIC8, ""),
         ("PDIP-8", "TL072CP", "8", SI+"TL072", DIP8, "through-hole"),
         ("TSSOP-8", "TL072CPWR", "8", SI+"TL072", TSSOP8, ""),
+    ],
+    "TL074": [
+        ("PDIP-14", "TL074CN", "14", SI+"TL074", DIP14, "through-hole"),
     ],
     "TL081": [
         ("SOIC-8", "TL081CDR", "8", SI+"TL081", SOIC8, ""),
