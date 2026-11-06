@@ -5,6 +5,7 @@
   (lib (name "terra_symbols_capacitors_electrolytic_th")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_capacitors_electrolytic_th.kicad_sym")(options "")(descr ""))
   (lib (name "terra_symbols_capacitors_smt")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_capacitors_smt.kicad_sym")(options "")(descr ""))
   (lib (name "terra_symbols_connectors")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_connectors.kicad_sym")(options "")(descr ""))
+  (lib (name "terra_symbols_dc_dc_converters")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_dc_dc_converters.kicad_sym")(options "")(descr ""))
   (lib (name "terra_symbols_diodes")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_diodes.kicad_sym")(options "")(descr ""))
   (lib (name "terra_symbols_diodes_tvs")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_diodes_tvs.kicad_sym")(options "")(descr ""))
   (lib (name "terra_symbols_diodes_zener")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_diodes_zener.kicad_sym")(options "")(descr ""))

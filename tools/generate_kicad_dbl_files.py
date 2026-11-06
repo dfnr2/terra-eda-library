@@ -122,6 +122,7 @@ def create_field_config(column: str, table_name: str = "") -> Dict:
 CATEGORY_DISPLAY_NAMES = {
     'optoelectronics_led': 'Optoelectronics - LED',
     'optoelectronics_sensor': 'Optoelectronics - Sensor',
+    'dc_dc_converters': 'DC-DC Converters',
 }
 
 
