@@ -142,7 +142,7 @@ TEMP_OPERATING = "-55°C to +155°C"
 TEMP_STORAGE = "-55°C to +155°C"
 TEMP_SOLDERING = "260°C (10s max)"
 
-IEC_UNITS = [("R", 0), ("k", 3), ("M", 6)]
+IEC_UNITS = [("R", 0), ("K", 3), ("M", 6)]
 SPICE_UNITS = [("", 0), ("k", 3), ("M", 6)]
 
 INSERT = ("INSERT INTO resistors_th (unique_id, part_locator, mpn, manufacturer, "
