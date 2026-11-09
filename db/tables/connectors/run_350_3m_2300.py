@@ -7,7 +7,7 @@ number decoded from the TS-0766-B ordering table (23XX-6XXX-XX): 23 03 = one row
 
 Digi-Key lists this part obsolete (checked via search snippet 2026-11-09; the 3M, Digi-Key
 and Mouser pages block automated fetches, so it is not confirmed from 3M). The row is
-therefore `Obsolete` and bom_comment points at the nearest Active terra header. Only this
+therefore `Obsolete` and bom_comment names the TE 87224-3 as its replacement. Only this
 one orderable part is listed; the sheet covers the whole 2300 family.
 
 Stock KiCad symbol and footprint (Connector_PinHeader_2.54mm, 1.0 mm holes against the
@@ -70,8 +70,8 @@ def parts():
         "lifecycle_status": "Obsolete", "rohs": "No",
         "allow_substitution": "No", "tracking": "No",
         "bom_comment": (
-            "Listed obsolete by Digi-Key; not confirmed from 3M. Candidate replacement "
-            "(unconfirmed, tin plated, 6.09mm pin): Molex 22-28-4030."
+            "Listed obsolete by Digi-Key; not confirmed from 3M. Replacement: TE 87224-3 "
+            "(same 0.025in post and gold contact area, longer 8.08mm post, 3.18mm tail)."
         ),
         "created_by": CREATED_BY, "source": None, "dump_priority": 0, "tier": 2,
         "keywords": ("connector,header,pin-header,3m,2300,2.54mm,0.1in,vertical,gold,"

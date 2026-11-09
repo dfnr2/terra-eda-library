@@ -48,7 +48,7 @@ EFFICIENCY = {
     (24, "S5"): 80, (24, "S12"): 83, (24, "S15"): 81, (24, "D5"): 79, (24, "D12"): 81, (24, "D15"): 82,
 }
 
-REPLACEMENT = "PCN1-S5-D15-S"   # like-for-like: 5 V in, +/-15 V out, +/-33 mA, same pinout
+REPLACEMENT = "PCN1-S5-D15-S"   # confirmed: the adapter uses both +15 V and -15 V, 5 V in, same pinout
 
 COLS = [
     "unique_id", "part_locator", "mpn", "manufacturer", "value", "description",

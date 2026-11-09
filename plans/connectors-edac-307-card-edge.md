@@ -23,7 +23,7 @@ Needed by the Asteroids adapter (J1, the cabinet-harness connector). Generator
 - **3D model is EDAC's 305-044-0521-202**, a different series and code, carried over
   from the adapter project. Placement is unverified against this part.
 - **Footprint not checked against the drawing** (pad pitch, row spacing, hole sizes).
-- **Not added:** EDAC 305-044-558-202 (no datasheet found), Sullins EBC22DKRA (no
-  datasheet found, and its pitch is unconfirmed).
+- **Not added, dropped (2026-11-09):** EDAC 305-044-558-202 and Sullins EBC22DKRA. No
+  datasheets were found and the decision is to leave them out.
 - **Asteroids J2 is not a purchased part.** In the adapter project it is gold fingers
   on the board's own copper (`edge 44-pin 0.156 inch`), so it needs no terra row.

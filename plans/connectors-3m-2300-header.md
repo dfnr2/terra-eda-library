@@ -21,8 +21,10 @@ Needed by the Asteroids adapter (J3, J4). Generator
 - **Lifecycle is from a search snippet:** Digi-Key Canada lists the part obsolete. The 3M,
   Digi-Key and Mouser pages block automated fetches, so it is unconfirmed from 3M. The row
   is `Obsolete`; check a distributor page and fix the row if it is still active.
-- **No replacement chosen.** `bom_comment` names Molex 22-28-4030 (terra, Active, 1x3, tin,
-  6.09 mm pin) as a candidate only. Which header J3/J4 should use is the user's call.
+- **Replacement: TE 87224-3** (chosen 2026-11-09; see `connectors-te-87224-header.md`),
+  recorded in `bom_comment`. Same 0.025in post and gold contact area, but a longer post
+  (8.08 mm vs 5.84 mm) and a stackable housing, so check the adapter's J3/J4 clearance.
+  Molex 22-28-4030 (breakaway, tin) is the other 1x3 option in terra.
 - Hole size: stock footprint has 1.0 mm holes; the sheet recommends 1.02 mm (1.0 mm for the
   kinked end tails on other variants).
 - The sheet covers the whole 2300 family (1 and 2 row, straight and right angle, other

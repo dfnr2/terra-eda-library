@@ -21,11 +21,10 @@ type fragment `db/schema/types/dc_dc.sql`.
 
 ## Open items
 
-- **Replacement is a judgement call.** Dave named `PCN1-S5-S12-S` (12 V single). The
-  electrical like-for-like for a 5 V in, +/-15 V out part is `PCN1-S5-D15-S`
-  (+/-33 mA vs +/-34 mA), which is what is recorded. The adapter's BOM text for VR1
-  ("15 Vdc, 0.067 A") describes the 15 V single `S15` instead. Which output the board
-  really needs is unconfirmed; change `REPLACEMENT` in the generator once it is.
+- **Replacement confirmed (2026-11-09):** `PCN1-S5-D15-S`. The adapter uses both the +15 V
+  and -15 V outputs to power the op-amp, so the +/-15 V dual is the like-for-like part
+  (not the 12 V single, which was named earlier). The adapter BOM text for VR1 ("15 Vdc,
+  0.067 A") is left as the description; terra carries the PCN1-S MPN.
 - **Footprint geometry is approximate.** Pads are the adapter's (1.508 mm pad, 1.0 mm
   drill; the PCN datasheet recommends 0.8 mm hole, 1.5 mm pad). Body outlines for the
   two PCN footprints are re-drawn from the datasheet's 6.1/7.2 mm widths but not
