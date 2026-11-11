@@ -23,9 +23,17 @@ exact datasheet lead spacing; body outline from L and T). There is no 3D model.
 Plan: plans/capacitors-th-kemet-goldmax.md. Generated output (dump_priority=0,
 source=NULL) is not dumped to static SQL.
 """
+import sys
+from pathlib import Path as _P
+sys.path.insert(0, str(_P(__file__).resolve().parents[3] / "tools"))
+from passive_units import unit_value, sim_params  # noqa: E402
 import json
 import re
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _keywords import th_keywords
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -102,7 +110,7 @@ THICK_32X_BIG = 4.07
 BIG_PF = 4.7e6
 
 COLS = [
-    "unique_id", "part_locator", "mpn", "manufacturer", "package", "value",
+    "unique_id", "part_locator", "mpn", "manufacturer", "package", "value", "sim_params",
     "description", "datasheet", "manufacturer_link", "kicad_symbol", "kicad_footprint",
     "rohs", "allow_substitution", "tracking", "source", "dump_priority", "tier",
     "keywords", "pin_count",
@@ -246,13 +254,14 @@ def row(p, footprints):
         "unique_id": f"{MANUFACTURER}-{p['mpn']}",
         "part_locator": f"cap-mlcc-{diel.lower()}-{sp}-{tol_slug(tol_t)}-{v}v-th-p{spacing:g}",
         "mpn": p["mpn"], "manufacturer": MANUFACTURER, "package": f"C{style}",
-        "value": sp, "description": desc,
+        "value": unit_value(sp, "F"), "sim_params": sim_params("C", sp),
+        "description": desc,
         "datasheet": DATASHEETS[diel], "manufacturer_link": MANUFACTURER_LINK,
         "kicad_symbol": SYMBOL, "kicad_footprint": FP_LIB + fp_name,
         "rohs": "Yes", "allow_substitution": "Yes", "tracking": "No",
         "source": None, "dump_priority": 0, "tier": 2,
-        "keywords": (f"capacitor,mlcc,ceramic,through-hole,radial,{diel.lower()},kemet,goldmax,"
-                     f"c{style}" + (",automotive,aec-q200" if auto else "")),
+        "keywords": th_keywords(p["pf"], diel, v, tol_t, "KEMET", "Goldmax", f"C{style}",
+                                *(("automotive", "AEC-Q200") if auto else ())),
         "pin_count": "2",
         "temp_operating_min": float(p["tmin"]), "temp_operating_max": float(p["tmax"]),
         "temp_storage_min": float(p["tmin"]), "temp_storage_max": float(p["tmax"]),

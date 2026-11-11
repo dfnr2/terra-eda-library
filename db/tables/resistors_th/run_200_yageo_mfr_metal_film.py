@@ -16,6 +16,10 @@ Differences from the SMT RC generator:
 Datasheet: datasheets/yageo/yageo_mfr.pdf (Metal Film Resistors, MFR Series, V.4).
 Generated output (dump_priority=0) is not dumped back to static SQL.
 """
+import sys
+from pathlib import Path as _P
+sys.path.insert(0, str(_P(__file__).resolve().parents[3] / "tools"))
+from passive_units import unit_value, sim_params  # noqa: E402
 
 import math
 import re
@@ -150,7 +154,7 @@ INSERT = ("INSERT INTO resistors_th (unique_id, part_locator, mpn, manufacturer,
           "kicad_symbol, kicad_footprint, source, dump_priority, tier, keywords, "
           "tolerance, power_rating, temp_coeff, voltage_rating, composition, "
           "lead_spacing_mm, body_style, temp_operating_min, temp_operating_max, "
-          "temp_storage_min, temp_storage_max, temp_soldering, sim_device, sim_pins, "
+          "temp_storage_min, temp_storage_max, temp_soldering, sim_device, sim_pins, sim_params, "
           "lifecycle_status, rohs, rohs_document_link, allow_substitution, tracking, "
           "created_at, updated_at, created_by)\nVALUES ({vals});")
 
@@ -267,7 +271,7 @@ def build() -> str:
                 ]
                 vals = ", ".join(sqls(x) for x in row)
                 vals += (f", {to_min}, {to_max}, {ts_min}, {ts_max}, {t_sold}, "
-                         f"'R', '1=+ 2=-', '{LIFECYCLE_STATUS}', '{ROHS_COMPLIANT}', NULL, "
+                         f"'R', '1=+ 2=-', '{sim_params('R', value_spice + 'Ω')}', '{LIFECYCLE_STATUS}', '{ROHS_COMPLIANT}', NULL, "
                          f"'{ALLOW_SUBSTITUTION}', '{TRACKING}', '{created}', '{created}', '{script}'")
                 lines.append(INSERT.format(vals=vals))
                 lines.append(f"INSERT INTO tags (unique_id, tag) VALUES ('{unique_id}', 'passive');")

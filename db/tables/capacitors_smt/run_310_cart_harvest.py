@@ -10,13 +10,17 @@ convention but no lineup of which combinations exist).
 
 Generated output (dump_priority=0, source=NULL) is not dumped to static SQL.
 """
+import sys
+from pathlib import Path as _P
+sys.path.insert(0, str(_P(__file__).resolve().parents[3] / "tools"))
+from passive_units import unit_value, sim_params  # noqa: E402
 from pathlib import Path
 
 OUTPUT_FILE = Path(__file__).with_name("capacitors_smt_generated_310_cart_harvest.sql")
 CREATED_BY = Path(__file__).name
 
 COLS = [
-    "unique_id", "part_locator", "mpn", "manufacturer", "package", "value",
+    "unique_id", "part_locator", "mpn", "manufacturer", "package", "value", "sim_params",
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "rohs", "allow_substitution", "tracking",
     "source", "dump_priority", "tier", "keywords", "pin_count",
@@ -29,7 +33,7 @@ PARTS = [
         "unique_id": "Murata-GRM155Z71A105KE01D",
         "part_locator": "cap-mlcc-1u-10v-x7r-0402",
         "mpn": "GRM155Z71A105KE01D", "manufacturer": "Murata",
-        "package": "0402", "value": "1u",
+        "package": "0402", "value": unit_value("1u", "F"), "sim_params": sim_params("C", "1u"),
         "description": "Murata GRM155Z71A105KE01D 1uF X7R 10V +/-10% MLCC, 0402",
         "datasheet": "${TERRA_EDA_LIB}/datasheets/murata/grm155z71a105ke01.pdf",
         "manufacturer_link": "https://www.murata.com/en-us/products/productdetail?partno=GRM155Z71A105KE01%23",

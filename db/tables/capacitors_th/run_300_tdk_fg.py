@@ -16,9 +16,17 @@ these two especially want a custom terra footprint later (see TECH_DEBT/plan).
 
 Generated output (dump_priority=0, source=NULL) is not dumped to static SQL.
 """
+import sys
+from pathlib import Path as _P
+sys.path.insert(0, str(_P(__file__).resolve().parents[3] / "tools"))
+from passive_units import unit_value, sim_params  # noqa: E402
 import json
 import re
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _keywords import th_keywords
 
 OUTPUT_FILE = Path(__file__).with_name("capacitors_th_generated_300_tdk_fg.sql")
 CATALOG_FILE = Path(__file__).with_name("fg_catalog.json")
@@ -57,7 +65,7 @@ TEMP = {"C0G": (-55, 125), "X7R": (-55, 125), "X7S": (-55, 125),
 TEMP_SOLDERING = 260.0  # FG flow-soldering peak
 
 COLS = [
-    "unique_id", "part_locator", "mpn", "manufacturer", "package", "value",
+    "unique_id", "part_locator", "mpn", "manufacturer", "package", "value", "sim_params",
     "description", "datasheet", "manufacturer_link", "kicad_symbol", "kicad_footprint",
     "rohs", "allow_substitution", "tracking", "source", "dump_priority", "tier",
     "keywords", "pin_count",
@@ -123,13 +131,13 @@ def row(p, mpn, pkg_note):
         "unique_id": f"{MANUFACTURER}-{mpn}",
         "part_locator": f"cap-mlcc-{diel.lower()}-{sp}-{tol_slug(tol)}-{v}v-th-p{pitch:g}",
         "mpn": mpn, "manufacturer": MANUFACTURER, "package": p["type"],
-        "value": sp,
+        "value": unit_value(sp, "F"), "sim_params": sim_params("C", sp),
         "description": (f"MLCC TDK FG {diel} {rd} {tol} {v}V radial {pitch:g}mm{pkg_note}"),
         "datasheet": DATASHEET, "manufacturer_link": MANUFACTURER_LINK,
         "kicad_symbol": SYMBOL, "kicad_footprint": footprint,
         "rohs": "Yes", "allow_substitution": "Yes", "tracking": "No",
         "source": None, "dump_priority": 0, "tier": 2,
-        "keywords": f"capacitor,mlcc,ceramic,through-hole,radial,{diel.lower()}",
+        "keywords": th_keywords(cap_to_pf(p["capacitance"]), diel, v, tol, "TDK", p["type"]),
         "pin_count": "2",
         "temp_operating_min": float(tmin), "temp_operating_max": float(tmax),
         "temp_storage_min": float(tmin), "temp_storage_max": float(tmax),

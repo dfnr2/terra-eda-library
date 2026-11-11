@@ -23,7 +23,11 @@ Deferred curation (judgement calls intentionally left as-is for a later pass):
 
 Generated output (dump_priority=0) is not dumped back to static SQL.
 """
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "tools"))
+from passive_units import unit_value, sim_params  # noqa: E402
 
 OUTPUT_FILE = Path(__file__).with_name("inductors_generated_300_terra_sym_harvest.sql")
 
@@ -35,7 +39,7 @@ COLS = [
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "rohs", "rohs_document_link", "allow_substitution",
     "tracking", "standards_version", "source", "dump_priority", "tier",
-    "sim_device", "sim_pins", "pin_count", "temp_operating_min",
+    "sim_device", "sim_pins", "sim_params", "pin_count", "temp_operating_min",
     "temp_operating_max", "temp_storage_min", "temp_storage_max", "tolerance",
     "current_rating", "inductance", "saturation_current", "dc_resistance",
     "self_res_freq",
@@ -109,6 +113,13 @@ PARTS = [
         "dc_resistance": "38 mOhm", "self_res_freq": "32 MHz",
     },
 ]
+
+# Schematic value is the inductance with its unit sign (the old symbol-name text is
+# still in kicad_symbol / part_locator); Sim.Params carries the same number.
+for _p in PARTS:
+    _l = _p["inductance"].replace(" ", "")
+    _p["value"] = unit_value(_l, "H")
+    _p["sim_params"] = sim_params("L", _l)
 
 
 def sql(v):

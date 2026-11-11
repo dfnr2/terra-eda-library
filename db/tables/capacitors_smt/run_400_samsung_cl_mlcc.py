@@ -25,6 +25,10 @@ Example: CL10A104KA8NNNC
 - NNN = Packaging/suffix
 - C = General
 """
+import sys
+from pathlib import Path as _P
+sys.path.insert(0, str(_P(__file__).resolve().parents[3] / "tools"))
+from passive_units import unit_value, sim_params  # noqa: E402
 
 import csv
 import re
@@ -193,8 +197,8 @@ SQL_TEMPLATES = {
 BEGIN TRANSACTION;
 """,
     "section_header": "-- {dielectric} {package} {voltage}",
-    "insert": """INSERT INTO capacitors_smt (unique_id, part_locator, mpn, manufacturer, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tier, keywords, voltage_rating_v, tolerance, cap_type, dielectric_class, polarized, temp_operating_min, temp_operating_max, temp_storage_min, temp_storage_max, temp_soldering, lifecycle_status, rohs, allow_substitution, tracking, created_at, updated_at, created_by, height_max_mm)
-VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', '{package}', '{value_spice}', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, {tier}, '{keywords}', {voltage_rating}, '{tolerance}', '{cap_type}', '{dielectric_class}', '{polarized}', {temp_operating_min}, {temp_operating_max}, {temp_storage_min}, {temp_storage_max}, {temp_soldering}, '{lifecycle_status}', '{rohs}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}', {height_max_mm});""",
+    "insert": """INSERT INTO capacitors_smt (unique_id, part_locator, mpn, manufacturer, package, value, sim_params, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tier, keywords, voltage_rating_v, tolerance, cap_type, dielectric_class, polarized, temp_operating_min, temp_operating_max, temp_storage_min, temp_storage_max, temp_soldering, lifecycle_status, rohs, allow_substitution, tracking, created_at, updated_at, created_by, height_max_mm)
+VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', '{package}', '{value_display}', '{sim_params}', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, {tier}, '{keywords}', {voltage_rating}, '{tolerance}', '{cap_type}', '{dielectric_class}', '{polarized}', {temp_operating_min}, {temp_operating_max}, {temp_storage_min}, {temp_storage_max}, {temp_soldering}, '{lifecycle_status}', '{rohs}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}', {height_max_mm});""",
 
     "tag_insert": "INSERT INTO tags (unique_id, tag) VALUES ('{unique_id}', '{tag}');",
     "file_footer": """COMMIT;
@@ -766,6 +770,8 @@ def generate_capacitors(csv_rows: List[Dict[str, str]]) -> str:
             manufacturer=sql_escape(MANUFACTURER),
             package=case_size,
             value_spice=sql_escape(value_spice),
+            value_display=unit_value(value_spice, "F"),
+            sim_params=sim_params("C", value_spice),
             description=sql_escape(description),
             datasheet=sql_escape(datasheet),
             manufacturer_link=sql_escape(manufacturer_link),

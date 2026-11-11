@@ -17,6 +17,10 @@ MPN Formats:
   SQ-type: ERJ{code}{range}{tol}{value_3char}{pkg}  e.g. ERJ3BSFR10V
   L-type:  ERJL{size}{valtype}{tol}{value_3char}{pkg}  e.g. ERJL14KF47MV
 """
+import sys
+from pathlib import Path as _P
+sys.path.insert(0, str(_P(__file__).resolve().parents[3] / "tools"))
+from passive_units import unit_value, sim_params  # noqa: E402
 
 import math
 import re
@@ -127,8 +131,8 @@ BEGIN TRANSACTION;
 
     "section_header": "-- === {section} ===",
 
-    "insert": """INSERT INTO resistors_smt (unique_id, part_locator, mpn, manufacturer, variant, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tier, keywords, tolerance, power_rating, temp_coeff, voltage_rating, composition, temp_operating_min, temp_operating_max, temp_storage_min, temp_storage_max, temp_soldering, sim_device, sim_pins, lifecycle_status, rohs, allow_substitution, tracking, created_at, updated_at, created_by)
-VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', {variant}, '{package}', '{value_sim}Ω', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, {tier}, '{keywords}', '{tolerance}', '{power_rating}', '{temp_coeff}', '{voltage_rating}', '{composition}', {temp_operating_min}, {temp_operating_max}, {temp_storage_min}, {temp_storage_max}, {temp_soldering}, '{sim_device}', '{sim_pins}', '{lifecycle_status}', '{rohs}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}');""",
+    "insert": """INSERT INTO resistors_smt (unique_id, part_locator, mpn, manufacturer, variant, package, value, description, datasheet, manufacturer_link, kicad_symbol, kicad_footprint, source, dump_priority, tier, keywords, tolerance, power_rating, temp_coeff, voltage_rating, composition, temp_operating_min, temp_operating_max, temp_storage_min, temp_storage_max, temp_soldering, sim_device, sim_pins, sim_params, lifecycle_status, rohs, allow_substitution, tracking, created_at, updated_at, created_by)
+VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', {variant}, '{package}', '{value_sim}Ω', '{description}', '{datasheet}', '{manufacturer_link}', '{kicad_symbol}', '{kicad_footprint}', {source}, {dump_priority}, {tier}, '{keywords}', '{tolerance}', '{power_rating}', '{temp_coeff}', '{voltage_rating}', '{composition}', {temp_operating_min}, {temp_operating_max}, {temp_storage_min}, {temp_storage_max}, {temp_soldering}, '{sim_device}', '{sim_pins}', '{sim_params}', '{lifecycle_status}', '{rohs}', '{allow_substitution}', '{tracking}', '{created_at}', '{updated_at}', '{created_by}');""",
 
     "tag_insert": "INSERT INTO tags (unique_id, tag) VALUES ('{unique_id}', '{tag}');",
 
@@ -1028,6 +1032,7 @@ def generate_resistors() -> str:
                     temp_soldering=parse_temp_single(STRING_TEMPLATES["temp_soldering"]),
                     sim_device=SIMULATION["device"],
                     sim_pins=SIMULATION["pins"],
+                sim_params=sim_params("R", value_spice + "Ω"),
                     lifecycle_status=LIFECYCLE_STATUS,
                     rohs=ROHS_COMPLIANT,
                     allow_substitution=ALLOW_SUBSTITUTION,

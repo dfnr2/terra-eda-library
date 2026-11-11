@@ -8,6 +8,10 @@ number; case size / ESR / ripple come straight from the ratings row.
 
 Generated output (dump_priority=0, source=NULL) is not dumped to static SQL.
 """
+import sys
+from pathlib import Path as _P
+sys.path.insert(0, str(_P(__file__).resolve().parents[3] / "tools"))
+from passive_units import unit_value, sim_params  # noqa: E402
 from pathlib import Path
 
 OUTPUT_FILE = Path(__file__).with_name("capacitors_electrolytic_th_generated_500_chemi_con_kyc.sql")
@@ -162,7 +166,7 @@ FAMILY = [
 ]
 
 COLS = [
-    "unique_id", "part_locator", "mpn", "manufacturer", "package", "value",
+    "unique_id", "part_locator", "mpn", "manufacturer", "package", "value", "sim_params",
     "description", "datasheet", "manufacturer_link", "kicad_symbol",
     "kicad_footprint", "rohs", "allow_substitution", "tracking",
     "source", "dump_priority", "tier", "keywords", "pin_count",
@@ -195,7 +199,7 @@ def row(pn_t, cap, case, esr, ripple):
         "unique_id": f"Nippon_Chemi-Con-{mpn}",
         "part_locator": f"cap-elec-{cap}uf-{v}v-radial-d{dia:g}",
         "mpn": mpn, "manufacturer": MANUFACTURER, "package": "Radial",
-        "value": f"{cap}\u00b5F",  # voltage shown via the separate (visible) Voltage Rating field
+        "value": unit_value(f"{cap}u", "F"), "sim_params": sim_params("C", f"{cap}u"),  # voltage shown via the separate (visible) Voltage Rating field
         "description": (f"Nippon Chemi-Con KYC {cap}\u00b5F {v}V \u00b120% low-ESR "
                         f"aluminum electrolytic, radial THT, {dia:g}\u00d7{length:g}mm"),
         "datasheet": DATASHEET, "manufacturer_link": "https://www.chemi-con.com",
