@@ -208,7 +208,7 @@ VALUES ('{unique_id}', '{part_locator}', '{mpn}', '{manufacturer}', '{package}',
 
 # ======================== KICAD CONFIGURATION ========================
 KICAD_CONFIG = {
-    "symbol": "Device:C_US",  # 'Device:C' (European) or 'Device:C_US' (American)
+    "symbol": "Device:C",  # two straight plates; C_US has a curved plate that reads as polarized
     "footprint_prefix": "Capacitor_SMD:C_",
     "footprint_suffix": "Metric",
 }
