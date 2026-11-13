@@ -229,7 +229,12 @@ db/terra.db: $(GLOBAL_SQL) $(foreach table,$(TABLES),$($(table)_ALL_SQL))
 		case " $(EXCLUDE_TABLES) " in *" $$table_name "*) echo "  - skipping $$table_name (excluded)"; continue;; esac; \
 		sql_files=$$(find "$$table_dir" -name "*.sql" -type f | sort); \
 		if [ -n "$$sql_files" ]; then \
-			cat $$sql_files | sqlite3 $@; \
+			for f in $$sql_files; do \
+				prev=$$(sqlite3 $@ "SELECT COALESCE(MAX(rowid),0) FROM $$table_name" 2>/dev/null || echo 0); \
+				cat $$f | sqlite3 $@; \
+				d=$$($(PYTHON) tools/source_date.py $$f); \
+				sqlite3 $@ "UPDATE $$table_name SET created_at='$$d', updated_at='$$d' WHERE rowid > $${prev:-0}" 2>/dev/null || true; \
+			done; \
 			if [ $$? -eq 0 ]; then \
 				count=$$(sqlite3 $@ "SELECT COUNT(*) FROM $$table_name" 2>/dev/null || echo "0"); \
 				echo "  + Added $$count rows to $$table_name"; \

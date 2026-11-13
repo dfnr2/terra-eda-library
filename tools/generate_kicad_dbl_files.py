@@ -63,6 +63,7 @@ def create_field_config(column: str, table_name: str = "") -> Dict:
         'exclude_from_bom',  # Handled as library-level property
         'tier',  # tier scoping internal
         'keywords',  # surfaced as the Keywords library property, not a field
+        'created_at',  # build time, not part data (Updated On carries the change date)
     }
 
     if column in skip_cols:
@@ -94,8 +95,7 @@ def create_field_config(column: str, table_name: str = "") -> Dict:
         'tracking': 'Tracking',
         'standards_version': 'Standards Version',
         'bom_comment': 'BOM Comment',
-        'created_at': 'Built On',
-        'updated_at': 'Updated On',
+        'updated_at': 'Changed On',
         'created_by': 'Created By',
         # SPICE model -> KiCad's reserved Sim.* field names (hidden; carry the
         # simulation model from the DB to KiCad instead of being dropped).
