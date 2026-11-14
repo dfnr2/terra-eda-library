@@ -118,6 +118,9 @@ STRING_TEMPLATES = {
 }
 
 # ======================== SQL TEMPLATES ========================
+# MPN prefixes promoted to tier 2 (ERJ-1T 2512 current-sense, +/-1%)
+TIER2_MPN_PREFIXES = ("ERJ1TRQF",)
+
 SQL_TEMPLATES = {
     "file_header": """-- Panasonic ERJ Series Current-Sensing (Low Resistance) Thick Film Resistors
 -- Families: LW, BW, CW (double-sided), BS/Q (high-power), RS/Q (standard), L (low TCR)
@@ -1000,8 +1003,9 @@ def generate_resistors() -> str:
                     package_lower=series["package"].lower(),
                 )
 
-                # All current-sense parts are tier 3 (specialty)
-                part_tier = 3
+                # Current-sense parts are tier 3 (specialty), except the families listed
+                # in TIER2_MPN_PREFIXES, which are in use on boards.
+                part_tier = 2 if mpn.startswith(TIER2_MPN_PREFIXES) else 3
 
                 sql_line = SQL_TEMPLATES["insert"].format(
                     unique_id=unique_id,
