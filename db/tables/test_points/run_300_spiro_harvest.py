@@ -27,7 +27,7 @@ PARTS = [
         "kicad_footprint": "terra_footprints_test_points:TestPoint_Pad_3.43x1.78mm",
         "rohs": "Yes", "allow_substitution": "No", "tracking": "No",
         "source": None, "dump_priority": 0, "tier": 2,
-        "keywords": "test-point,mechanical", "pin_count": "1",
+        "keywords": "test,point,testpoint,test-point,mechanical", "pin_count": "1",
         "tp_style": "smt-pad", "pad_diameter_mm": None, "mount": "SMT", "color": None,
     },
 ]
