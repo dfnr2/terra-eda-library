@@ -208,6 +208,88 @@ def clean_function(desc):
     return re.sub(r",?\s*(DIP|SO|SOIC|TSSOP)-?\d+\s*$", "", desc, flags=re.I).strip()
 
 
+# TI product pages (ti.com/product/<base>) confirmed to exist, checked in Chrome 2026-11-15, for
+# parts whose symbol datasheet carries no /lit/gpn/ id. Parts absent here have no TI page under
+# their own SN part number and are left without a link.
+TI_PRODUCT_PAGES = frozenset({
+    "SN74HC04",
+    "SN74HC138",
+    "SN74HC164",
+    "SN74HC165",
+    "SN74HC193",
+    "SN74HC240",
+    "SN74HC244",
+    "SN74HC273",
+    "SN74HC373",
+    "SN74HC374",
+    "SN74HC4060",
+    "SN74HC594",
+    "SN74HC595",
+    "SN74HC688",
+    "SN74HC74",
+    "SN74HCT04",
+    "SN74HCT138",
+    "SN74HCT240",
+    "SN74HCT244",
+    "SN74HCT273",
+    "SN74HCT373",
+    "SN74HCT374",
+    "SN74HCT595",
+    "SN74HCT74",
+    "SN74LS07",
+    "SN74LS136",
+    "SN74LS193",
+    "SN74LS240",
+    "SN74LS241",
+    "SN74LS393",
+    "SN74LS51",
+    "SN74LVC1G123",
+    "SN74LVC1G139",
+})
+
+
+# Parts with no TI page under their own number, mapped to TI's essentially identical
+# replacement page: the CD74HC/HCT equivalent of an SN74HC/HCT part, or the "A" revision of
+# an SN74LS part (same function and pinout, same temperature range). SN54/SN55 military-range
+# pages are deliberately not used. Checked in Chrome 2026-11-15.
+TI_PRODUCT_REPLACEMENTS = {
+    "SN74HC123": "CD74HC123",
+    "SN74HC137": "CD74HC137",
+    "SN74HC173": "CD74HC173",
+    "SN74HC192": "CD74HC192",
+    "SN74HC237": "CD74HC237",
+    "SN74HC238": "CD74HC238",
+    "SN74HC4024": "CD74HC4024",
+    "SN74HC4051": "CD74HC4051",
+    "SN74HC590": "SN74HC590A",
+    "SN74HC85": "CD74HC85",
+    "SN74HCT123": "CD74HCT123",
+    "SN74HCT137": "CD74HCT137",
+    "SN74HCT164": "CD74HCT164",
+    "SN74HCT173": "CD74HCT173",
+    "SN74HCT193": "CD74HCT193",
+    "SN74HCT237": "CD74HCT237",
+    "SN74HCT238": "CD74HCT238",
+    "SN74HCT4051": "CD74HCT4051",
+    "SN74HCT688": "CD74HCT688",
+    "SN74HCT85": "CD74HCT85",
+    "SN74LS139": "SN74LS139A",
+    "SN74LS165": "SN74LS165A",
+    "SN74LS86": "SN74LS86A",
+    # Combined datasheet pages whose text names the SN74 part itself.
+    "SN7454": "SN5454",
+    "SN74LS54": "SN54LS54",
+    "SN74LS01": "SN54LS01",
+    "SN74LS28": "SN5428",
+}
+
+
+def ti_product_link(mpn):
+    base = re.sub(r"(DR|PWR|PW|N|D)$", "", mpn)
+    page = base if base in TI_PRODUCT_PAGES else TI_PRODUCT_REPLACEMENTS.get(base)
+    return f"https://www.ti.com/product/{page}" if page else None
+
+
 def gpn_from_ds(ds):
     m = re.search(r"/gpn/(\w+)", ds or "")
     return m.group(1).upper() if m else None
@@ -286,7 +368,8 @@ def main():
                                 ("SOIC", "D", FOOTPRINTS[pins][1])):
             pkg_label = f"{pkg}-{pins}"
             mpn = f"SN{fam}{base}{suffix}"
-            rows.append({**common,
+            link = common["manufacturer_link"] or ti_product_link(mpn)
+            rows.append({**common, "manufacturer_link": link,
                          "unique_id": f"TI-{mpn}",
                          "part_locator": f"IC_LOGIC {value} {pkg_label}",
                          "mpn": mpn, "package": pkg_label, "pin_count": str(pins),
