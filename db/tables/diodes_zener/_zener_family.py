@@ -1,4 +1,4 @@
-"""Shared emit logic for Nexperia Zener (voltage-regulator) diode families.
+"""Shared emit logic for Zener (voltage-regulator) diode families.
 
 Each `run_3NN_<family>.py` defines its family metadata plus a per-type table
 (transcribed from the datasheet's "Characteristics per type" tables) and calls
@@ -60,10 +60,12 @@ def emit(output_file, created_by, *, prefix, package, footprint, power_rating,
          forward_voltage, datasheet, types, manufacturer="Nexperia",
          temp_operating=(-65.0, 150.0), temp_storage=(-65.0, 150.0),
          extra_tags="", symbol=SYMBOL, pin_count="2", dash=True,
-         manufacturer_link=None):
+         manufacturer_link=None, mpn_format=None):
     # mpn: Nexperia type numbers carry a dash (BZV55-C5V1); Vishay's BZX584C
-    # does not (BZX584C5V1) -> dash=False. manufacturer_link defaults to the
-    # Nexperia per-part page; pass a fixed URL for other vendors.
+    # does not (BZX584C5V1) -> dash=False. Families whose MPN doesn't follow
+    # prefix+grade+code (onsemi MM5Z18VT1G) pass mpn_format(letter, code) -> str.
+    # manufacturer_link defaults to the Nexperia per-part page; pass a fixed URL
+    # for other vendors.
     pkg_slug = _slug(package)
     tag_tail = ("," + extra_tags) if extra_tags else ""
     rows = []
@@ -71,7 +73,10 @@ def emit(output_file, created_by, *, prefix, package, footprint, power_rating,
         vz = _nominal(code)
         for letter, (vmin, vmax) in d["grades"].items():
             tol = GRADE_TOL[letter]
-            mpn = f"{prefix}-{letter}{code}" if dash else f"{prefix}{letter}{code}"
+            if mpn_format:
+                mpn = mpn_format(letter, code)
+            else:
+                mpn = f"{prefix}-{letter}{code}" if dash else f"{prefix}{letter}{code}"
             cap = d.get("capacitance")
             izsm = d.get("izsm")
             imp = d.get("impedance_max")
