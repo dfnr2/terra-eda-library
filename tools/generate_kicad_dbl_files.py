@@ -46,6 +46,7 @@ def get_display_name(table_name: str) -> str:
         'ic_logic': 'Logic ICs',
         'ic_memory': 'Memory ICs',
         'ic_microcontrollers': 'Microcontrollers',
+        'ic_nvram': 'NVRAM ICs',
         'ic_opamp': 'Op-Amps',
     }
     return name_map.get(table_name, table_name.replace('_', ' ').title())

@@ -1,8 +1,8 @@
 # Vintage computer parts
 
 **Date:** 2026-11-17
-**Status:** Phase 1 done; phase 2 schema, SRAM and DRAM done (see Results). EPROM,
-EEPROM and PROM are next. Decisions in "Open questions" are needed before phases 3, 4
+**Status:** Phase 1 done; phase 2 schema, SRAM, DRAM and NVRAM done (see Results).
+EPROM, EEPROM and PROM are next. Decisions in "Open questions" are needed before phases 3, 4
 and 6.
 **Scope:** bring terra up to the point where a 1975-85 microcomputer (KIM-1, Apple I/II,
 SWTPC, S-100, COSMAC ELF, TRS-80, Z80 SBC, or a modern retro build) can be drawn with
@@ -146,7 +146,7 @@ book before generation.
 | HM62256 | Hitachi | 32Kx8 | 28 | |
 | HM628128 | Hitachi | 128Kx8 | 32 | retro builds |
 | AS6C6264, AS6C62256, AS6C1008, AS6C4008 | Alliance | 8K-512Kx8 | 28/32 | modern drop-ins, Active |
-| DS1225, DS1230 | Dallas | 8Kx8, 32Kx8 | 28 | battery-backed NVRAM, 6264/62256 sockets (optional) |
+| DS1225, DS1230 | Dallas | 8Kx8, 32Kx8 | 28 | battery-backed NVRAM, 6264/62256 sockets (optional; moved to its own `ic_nvram` table, see Results) |
 
 #### Dynamic RAM (`run_320_dram.py`)
 
@@ -629,3 +629,44 @@ Follow-ups:
 - Left out: the MK4027-1 (named in the features list but given no timing column) and
   the 1984-preview-only TMS4464-10.
 
+### Battery-backed NVRAM (done 2026-11-20)
+
+NVRAMs got their own table, `ic_nvram` (decided 2026-11-19), with the core columns plus
+a `nvram` fragment: `capacity`, `word_size`, `speed`, `supply_voltage_min/max` (REAL),
+`persistence_years`, `write_protect_voltage`, `battery`, `sram_socket`, `rtc`.
+20 rows from `db/tables/ic_nvram/run_300_nvram.py`.
+
+- **Coverage (every code the current datasheet lists, commercial temperature, DIP):**
+  - Analog Devices (Dallas) DS1220AB/AD-100+ (2Kx8), DS1225AB/AD-70+ (8Kx8),
+    DS1230AB/Y-70+ (32Kx8), DS1245AB/Y-70+ (128Kx8), DS1250AB/Y-70+ (512Kx8).
+  - ST ZEROPOWER M48Z02/M48Z12-70PC1 and -150PC1 (2Kx8), M48Z08/M48Z18-100PC1 and
+    M48Z58/M48Z58Y-70PC1 (8Kx8), M48Z35/M48Z35Y-70PC1 (32Kx8).
+  - Each chip has two VCC grades, so there are two `value`s per chip. Dallas AB = 5 V ±5%,
+    AD/Y = ±10%. ST M48Zx2/x8/35/58 = 4.75-5.5 V, the 12/18/35Y/58Y = 4.5-5.5 V. The grade
+    also sets the write-protect window (`write_protect_voltage`).
+- **Sources:** the current ADI and ST datasheets, fetched through Chrome, in
+  `datasheets/analog-devices/` and `datasheets/st/`. The DS1245 PDF has the 32-pin module
+  drawing from its 2006 revision appended as p. 11, because the 2010 revisions dropped
+  package drawings.
+- **Lifecycle:** all Active on Digi-Key (2026-11-20), and the ST codes on the ST eStore.
+  Only the lead-free "+" Dallas codes are Active; the leaded ones are Obsolete.
+  analog.com refuses every product page even in a real browser, so ADI rows have no
+  `manufacturer_link`. All 8 ST product pages were checked.
+- **Footprints:** the modules are wider than a DIP (Dallas 720/740-mil body, ST CAPHAT
+  18 mm) but sit on 600-mil rows (Dallas 0.590-0.630", ST 0.600-0.630"). The 24-pin parts
+  use KiCad's 18 mm-body `DIP-24_18.0mmx34.29mm_W15.24mm`. The 28/32-pin parts use the
+  plain `W15.24mm` patterns, whose silkscreen is narrower than the module.
+- **Symbols:**
+  - Stock `Memory_RAM:M48Zx2` (2Kx8), `HM62256BLP` (32Kx8) and `AS6C4008-55PCN`
+    (512Kx8) match pin for pin.
+  - 2 new symbols in `terra_symbols_ic_nvram`: `DS1225` (8Kx8; also the M48Z08/18/58)
+    and `DS1245` (128Kx8). Both are the JEDEC SRAM pinout with the active-high CE2 pin
+    NC (6264 pin 26, 628128 pin 30), so they also fit 2764/27C010 EPROM sockets.
+
+Follow-ups:
+- The 2010 Dallas revisions list only -70 (DS1220: -100). Digi-Key still shows -85 to
+  -200 grades of some as Active; add them if an older revision's timing table is filed.
+- Not included: IND grades, the Dallas 34-pin PowerCap modules (DS9034PC battery cap),
+  and the ST SOH28 SNAPHAT parts (M48Z35Y/M48Z58Y-70MH1F). They need SMT footprints.
+- Timekeepers (`rtc` = Yes): the ST M48T02/08/35/58 and Dallas DS1643/DS1644 are the
+  obvious next rows. Stock `Memory_RAM:M48Tx2` covers the 24-pin ones.
