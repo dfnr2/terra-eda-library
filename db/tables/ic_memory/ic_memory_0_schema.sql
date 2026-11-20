@@ -46,5 +46,7 @@ CREATE TABLE ic_memory (
     speed TEXT,
     interface TEXT,
     persistence_cycles TEXT,
-    persistence_years TEXT
+    persistence_years TEXT,
+    supply_rails TEXT,
+    programming_voltage TEXT
 );
