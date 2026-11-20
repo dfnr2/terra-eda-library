@@ -39,6 +39,75 @@ _A24 = [(8, "A0"), (7, "A1"), (6, "A2"), (5, "A3"), (4, "A4"), (3, "A5"), (2, "A
         (1, "A7"), (23, "A8"), (22, "A9"), (19, "A10")]
 _A28 = [(n + 2, name) for n, name in _A24]
 
+
+def _prom(addr, outs, enables, vcc, gnd, ptype, pins, desc, kw, extra_nc=()):
+    """A bipolar PROM pinout: addr/outs/enables are [(number, name), ...]."""
+    width = "7.62" if pins < 24 else "15.24"
+    left = [name for _, name in sorted(addr, key=lambda p: int(p[1][1:]))]
+    return dict(
+        pins=_pins(**{"in": addr + enables, ptype: outs,
+                      "nc": [(n, "NC") for n in extra_nc],
+                      "pwr": [(vcc, "VCC"), (gnd, "GND")]}),
+        left=left + [None] + [name for _, name in enables],
+        right=[name for _, name in outs],
+        top=["VCC"], bottom=["GND"],
+        footprint=f"Package_DIP:DIP-{pins}_W{width}mm",
+        description=desc, keywords=kw)
+
+
+# Bipolar PROM pin groups, shared by every maker's equivalent part (Signetics 1977,
+# AMD 1984, MMI 1981, TI 1981, National 1983 books agree pin for pin). Outputs are
+# named O0..On (Signetics prints O1../B0.., National Q1..).
+_P16_ADDR4 = [(5, "A0"), (6, "A1"), (7, "A2"), (4, "A3"), (3, "A4"), (2, "A5"),
+              (1, "A6"), (15, "A7")]
+_P16_OUT4 = [(12, "O0"), (11, "O1"), (10, "O2"), (9, "O3")]
+_P18_ADDR4 = _P16_ADDR4[:7] + [(17, "A7"), (16, "A8"), (15, "A9")]
+_P18_OUT4 = [(14, "O0"), (13, "O1"), (12, "O2"), (11, "O3")]
+_P24_ADDR8 = [(8, "A0"), (7, "A1"), (6, "A2"), (5, "A3"), (4, "A4"), (3, "A5"),
+              (2, "A6"), (1, "A7"), (23, "A8")]
+_P24_OUT8 = [(9, "O0"), (10, "O1"), (11, "O2"), (13, "O3"), (14, "O4"), (15, "O5"),
+             (16, "O6"), (17, "O7")]
+_PROMS = {
+    # name OC, name TS: (addr, outs, enables, vcc, gnd, pins, org, extra NC, keywords)
+    ("82S23", "82S123"): (
+        [(10, "A0"), (11, "A1"), (12, "A2"), (13, "A3"), (14, "A4")],
+        [(1, "O0"), (2, "O1"), (3, "O2"), (4, "O3"), (5, "O4"), (6, "O5"), (7, "O6"),
+         (9, "O7")],
+        [(15, "~{CE}")], 16, 8, 16, "32x8", (),
+        "82S23 82S123 74S188 74S288 27S18 27S19 6330 6331 TBP18S030"),
+    ("82S126", "82S129"): (
+        _P16_ADDR4, _P16_OUT4, [(13, "~{CE1}"), (14, "~{CE2}")], 16, 8, 16, "256x4", (),
+        "82S126 82S129 74S387 74S287 27S20 27S21 6300 6301 TBP24S10"),
+    ("82S130", "82S131"): (
+        _P16_ADDR4 + [(14, "A8")], _P16_OUT4, [(13, "~{CE}")], 16, 8, 16, "512x4", (),
+        "82S130 82S131 74S570 74S571 27S12 27S13 6305 6306"),
+    ("82S136", "82S137"): (
+        _P18_ADDR4, _P18_OUT4, [(8, "~{CE1}"), (10, "~{CE2}")], 18, 9, 18, "1Kx4", (),
+        "82S136 82S137 74S572 74S573 27S32 27S33 6352 6353 TBP24S41"),
+    ("82S184", "82S185"): (
+        _P18_ADDR4 + [(8, "A10")], _P18_OUT4, [(10, "~{CE}")], 18, 9, 18, "2Kx4", (),
+        "82S184 82S185 87S184 87S185 27S184 27S185 6388 6389 TBP24S81"),
+    ("27S28", "27S29"): (
+        [(1, "A0"), (2, "A1"), (3, "A2"), (4, "A3"), (5, "A4"), (16, "A5"), (17, "A6"),
+         (18, "A7"), (19, "A8")],
+        [(6, "O0"), (7, "O1"), (8, "O2"), (9, "O3"), (11, "O4"), (12, "O5"), (13, "O6"),
+         (14, "O7")],
+        [(15, "~{CE}")], 20, 10, 20, "512x8", (),
+        "27S28 27S29 74S473 74S472 6348 6349 82S146 82S147 TBP18S42"),
+    ("6340", "6341"): (
+        _P24_ADDR8, _P24_OUT8,
+        [(21, "~{CE1}"), (20, "~{CE2}"), (19, "CE3"), (18, "CE4")], 24, 12, 24, "512x8",
+        (22,), "6340 6341 74S475 74S474 27S30 27S31 82S141 TBP18S46"),
+    ("82S180", "82S181"): (
+        _P24_ADDR8 + [(22, "A9")], _P24_OUT8,
+        [(21, "~{CE1}"), (20, "~{CE2}"), (19, "CE3"), (18, "CE4")], 24, 12, 24, "1Kx8",
+        (), "82S180 82S181 87S180 87S181 27S180 27S181 6380 6381 TBP28S86"),
+    ("82S190", "82S191"): (
+        _P24_ADDR8 + [(22, "A9"), (21, "A10")], _P24_OUT8,
+        [(20, "~{CE1}"), (19, "CE2"), (18, "CE3")], 24, 12, 24, "2Kx8", (),
+        "82S190 82S191 87S190 87S191 27S190 27S191 TBP28S166"),
+}
+
 PINOUTS = {
     # Intel 2101A 256x4, separate I/O (1979 Component Data Catalog, p. 3-4). Shared,
     # pin for pin, by the Intel 5101 (p. 3-111, pin 20 printed R/W, low = write) and
@@ -551,3 +620,12 @@ PINOUTS = {
         description="128Kx8 5V EEPROM, pins 1 and 30 NC (AT28C010 / X28C010 pinout)",
         keywords="EEPROM E2PROM 128Kx8 28C010 X28C010"),
 }
+
+# Add the bipolar PROM pinouts: an open-collector and a 3-state symbol per pinout.
+for (_oc, _ts), (_a, _o, _e, _vcc, _gnd, _n, _org, _nc, _kw) in _PROMS.items():
+    for _name, _type, _what in ((_oc, "oc", "open-collector"), (_ts, "tri", "3-state")):
+        PINOUTS[_name] = _prom(
+            _a, _o, _e, _vcc, _gnd, _type, _n,
+            f"{_org} bipolar fuse PROM, {_what} outputs ({_name} pinout)",
+            f"PROM bipolar fuse {_org} {_kw}", _nc)
+

@@ -1,8 +1,8 @@
 # Vintage computer parts
 
 **Date:** 2026-11-17
-**Status:** Phase 1 done; phase 2 schema, SRAM, DRAM, NVRAM, EPROM and EEPROM done
-(see Results). PROM is next. Decisions in "Open questions" are needed before phases 3, 4
+**Status:** Phase 1 done; phase 2 (schema, SRAM, DRAM, NVRAM, EPROM, EEPROM and
+bipolar PROM) done (see Results). Decisions in "Open questions" are needed before phases 3, 4
 and 6.
 **Scope:** bring terra up to the point where a 1975-85 microcomputer (KIM-1, Apple I/II,
 SWTPC, S-100, COSMAC ELF, TRS-80, Z80 SBC, or a modern retro build) can be drawn with
@@ -749,6 +749,49 @@ Follow-ups:
 - More makers if wanted: National NMC2816, Catalyst CAT28C16/64/256, ST M28C16/M28C64,
   Hitachi HN58C65/HN58C256. The 1996 Atmel book adds the AT28C010-12/-15/-20PC plastic
   DIP codes.
+
+### Phase 2 bipolar PROM (done 2026-11-20)
+
+149 rows in `ic_memory` from `run_350_bipolar_prom.py`, `memory_type = 'PROM'`, from
+five makers per the programmable-memory exception. All Obsolete.
+
+- **Coverage:** 32x8, 256x4, 512x4, 1Kx4, 2Kx4, 512x8 (20-pin and 24-pin), 1Kx8 and
+  2Kx8, open-collector and 3-state, one row per printed speed grade:
+  - Signetics N82S23/123 ... N82S190/191 (14). 82S184/185 and 82S190/191 come only in
+    the I ceramic package; 82S146/147 have no sheet in the 1977 book.
+  - AMD Am27S18/19 ... Am27S190/191 plus the 300-mil Am27S280/281/290/291, the A, SA,
+    LS and PS grades (53), PC codes.
+  - MMI 6330/6331 ... 6380/6381 (NiCr, ceramic J and 0.3" JS only) and the Ti-W
+    63S/63LS140/141/240/241 in plastic (37). No 2Kx8 in the 1981 book.
+  - TI TBP18S030, TBP14S10, TBP24S10/41/81, TBP18S42, TBP28S42, TBP18S46, TBP28S46,
+    TBP28S86, TBP28L86, TBP28S166 and their SA open-collector twins (23), N codes.
+    No 512x4 part in the 1981 book.
+  - National DM74S188/288 ... DM87S190/191 plus the 0.3" DM87S280/281/290/291 (22).
+- **Sources:** Signetics 1977 Bipolar and MOS Memory (the 1984 Bipolar LSI manual has
+  no PROMs), AMD 1984 Bipolar/MOS Memories, MMI 1981 Bipolar LSI 4th ed., TI 1981
+  Bipolar Microcomputer Components (the 1983 Field-Programmable Logic book has no
+  PROMs), National 1983 Bipolar Memory. Page ranges are in the generator docstring.
+  TI's two family sheets are filed once each (`tbp14-tbp18-series`, `tbp24-tbp28-series`).
+- **Ordering codes that had to be built:** Signetics ("specify N82S23/123, N or F"),
+  MMI (key only) and TI (key only) print no full codes; National's 2Kx4/2Kx8 sheets
+  list packages but no order numbers. Left out: National A/B grades (never given an
+  order number), TI -55/-60 grades and "design goals" parts, AMD LS-A and burn-in codes.
+- **Descriptions** carry the fuse type (NiCr, PtSi, Ti-W, W) and whether unprogrammed
+  outputs read high or low, which differs by maker (MMI NiCr and TI Series 24/28 ship
+  high, the rest low). `programming_voltage` is NULL: each maker's procedure uses
+  several voltages. Signetics and MMI commercial range is 0 to 75 C.
+- **Symbols:** every maker uses the same pinout for a given organization, so 18 new
+  symbols in `terra_symbols_ic_memory` cover all rows: an open-collector and a 3-state
+  symbol per pinout, `82S23`/`82S123`, `82S126`/`82S129`, `82S130`/`82S131`,
+  `82S136`/`82S137`, `82S184`/`82S185`, `27S28`/`27S29` (20-pin 512x8), `6340`/`6341`
+  (24-pin 512x8), `82S180`/`82S181`, `82S190`/`82S191`. Outputs are named O0..On and
+  enables CE1..CE4 whatever the maker prints (B, Q; E, G, CS).
+- **Footprints:** 16/18/20-pin parts are 0.3". 24-pin parts are 0.6" except AMD
+  Am27S28x/29x, MMI JS and National DM87S28x/29x, which are 0.3" (`DIP-24_W7.62mm`).
+
+Follow-ups:
+- More makers: Harris HM76xx, Fairchild 93xxx, Intel 36xx, Raytheon 29xxx.
+- Later Signetics (82S147, 82S191 in plastic) need a 1980s Signetics bipolar memory book.
 
 ### Battery-backed NVRAM (done 2026-11-20)
 
