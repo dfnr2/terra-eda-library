@@ -23,9 +23,9 @@ A pinout is a dict::
      "footprint": "Package_DIP:DIP-18_W7.62mm",
      "description": "1Kx4 static RAM, common I/O", "keywords": "SRAM 1Kx4"}
 
-Pin types: in, out, tri, bidi, oc, oe (open emitter/source), pwr, nc. Every pin
-number from 1 to the pin count must be placed exactly once, which the tool checks
-before writing. Power pins that share a name (the 1702A's three VCC pins) become
+Pin types: in, out, tri, bidi, oc, oe (open emitter/source), pwr, nc, pas (passive,
+e.g. an exposed pad). Every pin number from 1 to the pin count must be placed exactly
+once, which the tool checks before writing. Power pins that share a name (the 1702A's three VCC pins) become
 one KiCad 10 stacked pin, numbered ``[12,22,23]``, placed once.
 
 Writing replaces a symbol of the same name in place or appends a new one, so it is
@@ -45,7 +45,7 @@ from pathlib import Path
 TYPES = {
     "in": "input", "out": "output", "tri": "tri_state", "bidi": "bidirectional",
     "oc": "open_collector", "oe": "open_emitter", "pwr": "power_in",
-    "nc": "no_connect",
+    "nc": "no_connect", "pas": "passive",
 }
 GRID = 2.54
 PIN_LEN = 2.54
