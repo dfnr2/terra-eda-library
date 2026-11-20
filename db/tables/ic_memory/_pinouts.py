@@ -7,7 +7,7 @@ pin-configuration drawing named in its comment. Write the symbols with
     python3 tools/make_dip_symbol.py db/tables/ic_memory/_pinouts.py \\
         kicad_symbols/terra_symbols_ic_memory.kicad_sym
 
-Pin types: in, out, tri, bidi, oc, pwr, nc (see tools/make_dip_symbol.py).
+Pin types: in, out, tri, bidi, oc, oe, pwr, nc (see tools/make_dip_symbol.py).
 """
 
 
@@ -201,4 +201,74 @@ PINOUTS = {
         footprint="Package_DIP:DIP-18_W7.62mm",
         description="32x8 CMOS static RAM for CDP1802 systems, common I/O",
         keywords="RAM SRAM 32x8 CMOS 1802 COSMAC"),
+    # Intel 1103 1Kx1 PMOS DRAM (1975 Intel Data Catalog, p. 2-7). Names from the
+    # sheet's pin-name legend. VDD is the 0V reference, VSS the +16/+19V supply and
+    # VBB the substrate, 3-4V above VSS. ~DOUT is an inverted open-drain current
+    # output (sourced from VSS) that needs a sense amplifier such as the 3208A.
+    "1103": dict(
+        pins=_pins(
+            **{"in": [(3, "A0"), (4, "A1"), (2, "A2"), (1, "A3"), (15, "A4"),
+                      (8, "A5"), (7, "A6"), (9, "A7"), (13, "A8"), (6, "A9"),
+                      (12, "DIN"), (5, "PRC"), (16, "CE"), (18, "R/W")],
+               "oe": [(14, "~{DOUT}")],
+               "pwr": [(17, "VSS"), (10, "VBB"), (11, "VDD")]}),
+        left=["A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", None,
+              "PRC", "CE", "R/W"],
+        right=["DIN", None, "~{DOUT}"],
+        top=["VSS", "VBB"], bottom=["VDD"],
+        footprint="Package_DIP:DIP-18_W7.62mm",
+        description="1Kx1 PMOS dynamic RAM, precharge clock, current-sourcing output (1103)",
+        keywords="RAM DRAM 1Kx1 1103 PMOS"),
+    # Intel 1103A (same catalog, p. 2-15): the 1103 without the precharge clock, so
+    # pin 5 is N.C.; otherwise pin for pin the same. Shared by the 1103A-1/-2.
+    "1103A": dict(
+        pins=_pins(
+            **{"in": [(3, "A0"), (4, "A1"), (2, "A2"), (1, "A3"), (15, "A4"),
+                      (8, "A5"), (7, "A6"), (9, "A7"), (13, "A8"), (6, "A9"),
+                      (12, "DIN"), (16, "CE"), (18, "R/W")],
+               "oe": [(14, "~{DOUT}")],
+               "nc": [(5, "NC")],
+               "pwr": [(17, "VSS"), (10, "VBB"), (11, "VDD")]}),
+        left=["A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", None,
+              "CE", "R/W"],
+        right=["DIN", None, "~{DOUT}"],
+        top=["VSS", "VBB"], bottom=["VDD"],
+        footprint="Package_DIP:DIP-18_W7.62mm",
+        description="1Kx1 PMOS dynamic RAM, current-sourcing output (1103A pinout, pin 5 N.C.)",
+        keywords="RAM DRAM 1Kx1 1103A PMOS"),
+    # Mostek MK4096 4Kx1 DRAM (1980 Memory Data Book, p. V-17). Shared, pin for pin,
+    # by the MK4027 (p. V-1). The MK4116 layout except pin 13, which is ~CS (latched
+    # at ~CAS) rather than A6. Three supplies: VDD +12V, VCC +5V, VBB -5V.
+    "MK4096": dict(
+        pins=_pins(
+            **{"in": [(5, "A0"), (7, "A1"), (6, "A2"), (12, "A3"), (11, "A4"),
+                      (10, "A5"), (2, "DIN"), (4, "~{RAS}"), (15, "~{CAS}"),
+                      (13, "~{CS}"), (3, "~{WRITE}")],
+               "tri": [(14, "DOUT")],
+               "pwr": [(9, "VCC"), (8, "VDD"), (16, "VSS"), (1, "VBB")]}),
+        left=["A0", "A1", "A2", "A3", "A4", "A5", None,
+              "~{RAS}", "~{CAS}", "~{CS}", "~{WRITE}"],
+        right=["DIN", None, "DOUT"],
+        top=["VCC", "VDD"], bottom=["VSS", "VBB"],
+        footprint="Package_DIP:DIP-16_W7.62mm",
+        description="4Kx1 dynamic RAM, latched output, chip select, +12V/+5V/-5V (MK4096/MK4027 pinout)",
+        keywords="RAM DRAM 4Kx1 4096 4027"),
+    # TI TMS4416 16Kx4 DRAM (1986 MOS Memory Data Book, p. 4-99, N package). Shared,
+    # pin for pin, by the TMS4464 64Kx4 (p. 4-117, "Pinout Identical to TMS4416"):
+    # the 4416 uses A7 for rows only, the 4464 for rows and columns. ~G is the
+    # output enable; DQ1-DQ4 are common I/O.
+    "TMS4416": dict(
+        pins=_pins(
+            **{"in": [(14, "A0"), (13, "A1"), (12, "A2"), (11, "A3"), (8, "A4"),
+                      (7, "A5"), (6, "A6"), (10, "A7"),
+                      (5, "~{RAS}"), (16, "~{CAS}"), (4, "~{W}"), (1, "~{G}")],
+               "bidi": [(2, "DQ1"), (3, "DQ2"), (15, "DQ3"), (17, "DQ4")],
+               "pwr": [(9, "VDD"), (18, "VSS")]}),
+        left=["A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", None,
+              "~{RAS}", "~{CAS}", "~{W}", "~{G}"],
+        right=["DQ1", "DQ2", "DQ3", "DQ4"],
+        top=["VDD"], bottom=["VSS"],
+        footprint="Package_DIP:DIP-18_W7.62mm",
+        description="16Kx4 / 64Kx4 dynamic RAM, common I/O, output enable (TMS4416/TMS4464 pinout)",
+        keywords="RAM DRAM 16Kx4 64Kx4 4416 4464 41464"),
 }

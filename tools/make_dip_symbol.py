@@ -23,8 +23,9 @@ A pinout is a dict::
      "footprint": "Package_DIP:DIP-18_W7.62mm",
      "description": "1Kx4 static RAM, common I/O", "keywords": "SRAM 1Kx4"}
 
-Pin types: in, out, tri, bidi, oc, pwr, nc. Every pin number from 1 to the pin
-count must be placed exactly once, which the tool checks before writing.
+Pin types: in, out, tri, bidi, oc, oe (open emitter/source), pwr, nc. Every pin
+number from 1 to the pin count must be placed exactly once, which the tool checks
+before writing.
 
 Writing replaces a symbol of the same name in place or appends a new one, so it is
 safe to rerun after a pinout fix. Usage::
@@ -42,7 +43,8 @@ from pathlib import Path
 
 TYPES = {
     "in": "input", "out": "output", "tri": "tri_state", "bidi": "bidirectional",
-    "oc": "open_collector", "pwr": "power_in", "nc": "no_connect",
+    "oc": "open_collector", "oe": "open_emitter", "pwr": "power_in",
+    "nc": "no_connect",
 }
 GRID = 2.54
 PIN_LEN = 2.54
