@@ -9,11 +9,12 @@ that schematic capture places parts that are complete from the start.
 
 Terra aims to be the fully-specified counterpart to KiCad's shipped symbol and
 footprint libraries. Those provide the drawing; Terra adds the manufacturer
-identity, datasheet (in the case of generic parts), and parameters that make a
-part orderable and BOM-ready. Because each part is produced by tools — from
-KiCad's libraries and from datasheet and parametric sources — Terra is a
-*generator* whose output is version-controlled, not a database you populate by
-editing.
+identity, datasheet (when available), and parameters that make a part orderable
+and BOM-ready. Because each part is produced by tools — from KiCad's libraries
+and from datasheet and parametric sources — Terra is not a database to be
+populated and maintained by direct hand edits. It is a *generator* based on
+version controlled scripts, whose output is reproducible and managed as
+releases.
 
 The name "Terra EDA Library" was chosen to contrast with the (excellent)
 [Celestial Altium Library](https://altiumlibrary.com/). That library is
@@ -25,9 +26,11 @@ clash with the KiCad symbol style, and do not particularly enhance the Altium
 schematic appearance either.
 
 By contrast, Terra runs entirely on your local system, is grounded in the
-existing KiCad symbols and footprints wherever possibles, is open to inspection,
-modification, correction, and enhancement. If you are inclined, you can easily
-roll up your sleeves and get your hands dirty.
+existing KiCad symbols and footprints wherever possible, is open to inspection,
+modification, correction, and enhancement. The build system includes scripts
+that can serve as templates for new parts, as well as guidelines that are
+useful for adding parts manually or with AI assistance. If you are inclined, you
+can easily roll up your sleeves and get your hands dirty.
 
 ## How it fits together
 
