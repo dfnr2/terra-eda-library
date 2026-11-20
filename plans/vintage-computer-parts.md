@@ -1,8 +1,8 @@
 # Vintage computer parts
 
 **Date:** 2026-11-17
-**Status:** Phase 1 done; phase 2 schema, SRAM, DRAM, NVRAM and EPROM done (see
-Results). EEPROM and PROM are next. Decisions in "Open questions" are needed before phases 3, 4
+**Status:** Phase 1 done; phase 2 schema, SRAM, DRAM, NVRAM, EPROM and EEPROM done
+(see Results). PROM is next. Decisions in "Open questions" are needed before phases 3, 4
 and 6.
 **Scope:** bring terra up to the point where a 1975-85 microcomputer (KIM-1, Apple I/II,
 SWTPC, S-100, COSMAC ELF, TRS-80, Z80 SBC, or a modern retro build) can be drawn with
@@ -398,7 +398,7 @@ Families:
 
 ### Phase 5: modern parallel EEPROM
 
-Folded into phase 2 (`run_330_parallel_eeprom.py`). Listed here only because the request
+Folded into phase 2 (`run_340_parallel_eeprom.py`). Listed here only because the request
 named it separately.
 
 ### Phase 6: crystals (new table `crystals`)
@@ -700,6 +700,55 @@ Follow-ups:
 - Left out: Motorola MCM68766 (same sheet family, ~G/VPP on pin 20, Advance
   Information), the side-braze MCM68764L codes (built from a rule only), Intel P2732A/
   P2764 plastic "production EPROMs", TI TMS2564/TMS2764.
+
+### Phase 2 parallel EEPROM (done 2026-11-20)
+
+74 rows in `ic_memory` from `run_340_parallel_eeprom.py`, `memory_type = 'EEPROM'`,
+from five makers per the programmable-memory exception.
+
+- **Coverage (one row per grade, commercial temperature, plastic DIP where offered):**
+  - Intel D2816 (2), D2816A (4), D2817A (5), CERDIP.
+  - Xicor X2816AP (4), X2816BP (2), X2816CP-20, X2864AP (4), X28C64P (4), X28256P (3),
+    X28C256P (4), and X28C010D-20 (cerdip only).
+  - SEEQ DQ2816A/AH (5), DQ2864/H (4), DQ52B13/H (6), DQ52B33/H (5), all CERDIP (the
+    only package SEEQ offered).
+  - Atmel 1990 AT28C16, AT28C17, AT28C64, AT28C64X, AT28C256 (-15/-20/-25PC each) and
+    AT28C010-15/-20/-25BC (side-braze ceramic, the only DIP in 1990).
+  - Microchip AT28C64B-15PU and AT28C256-15PU, Active (Mouser stock and factory lead
+    time, 2026-11-20; Digi-Key showed a bot check). The current AT28C010 comes only in
+    PLCC/TSOP, so it has no modern row.
+- **Sources:** Intel 1981 Component Data Catalog (2816) and 1984 Memory Components
+  Handbook (2816A, 2817A; all three sheets PRELIMINARY); Xicor 1985 (X2816A) and 1990
+  data books; SEEQ 1985 Data Book; Atmel 1990 Data Book; current Microchip sheets. Page
+  ranges are in the generator docstring. Datasheets in `datasheets/intel`, `xicor`,
+  `seeq`, `atmel` and `microchip`.
+- **Ordering codes that had to be built:**
+  - Intel prints none: D (Type D hermetic DIP) + device + grade, as for the EPROMs.
+  - Xicor 1985 and SEEQ print a key, not a list; codes take the key's package and
+    temperature letters and one suffix per AC-table column.
+  - Left out: grades only in a key (X28256-20, X28C010-15) or only in an AC table
+    (SEEQ 2864-35), the SEEQ 2817A (no ordering box or outline on the commercial
+    sheet), and Atmel's E/F endurance and fast-write options.
+- **Write behaviour** is in each description, since it decides whether a part works in
+  a given board: the 2816 needs a shaped 21V VPP pulse (`programming_voltage = 21V`);
+  the 2816A and SEEQ 52B13/52B33 need ~WE held for the whole write and a byte erase
+  first; the rest are self-timed, later ones with page writes, DATA polling and software
+  data protection. `programming_voltage` is NULL for the 5V-only parts.
+- **Symbols:**
+  - Stock Memory_EEPROM `KM28C64A` (8Kx8, pins 1 and 26 NC: X2864A, X28C64, AT28C64X,
+    AT28C64B), `KM28C65A` (RDY/~BUSY on pin 1: SEEQ 2864, AT28C64) and `28C256`
+    (X28256, X28C256, AT28C256). The stock symbols type the data pins tri-state.
+  - 5 new symbols in `terra_symbols_ic_memory` with bidirectional data pins: `2816`
+    (2716 pinout, VPP on pin 21), `2816A` (6116 pinout, ~WE on pin 21; also the Xicor
+    X2816A/B/C, SEEQ 2816A/52B13 and AT28C16), `2817A` (also the AT28C17), `52B33`
+    (chip clear ~CC on pin 1) and `28C010` (AT28C010 and X28C010).
+- **Footprints:** every DIP outline in these books is 0.6" (`DIP-nn_W15.24mm`). The Intel
+  sheets name no package, so they use the Type D outline appended to each PDF.
+
+Follow-ups:
+- More makers if wanted: National NMC2816, Catalyst CAT28C16/64/256, ST M28C16/M28C64,
+  Hitachi HN58C65/HN58C256. The 1996 Atmel book adds the AT28C010-12/-15/-20PC plastic
+  DIP codes.
 
 ### Battery-backed NVRAM (done 2026-11-20)
 

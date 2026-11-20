@@ -29,6 +29,16 @@ _SST_ADDR = [(12, "A0"), (11, "A1"), (10, "A2"), (9, "A3"), (8, "A4"), (7, "A5")
 _SST_DQ = [(13, "DQ0"), (14, "DQ1"), (15, "DQ2"), (17, "DQ3"), (18, "DQ4"),
            (19, "DQ5"), (20, "DQ6"), (21, "DQ7")]
 
+# Parallel EEPROM data pins, written in-system, so bidirectional.
+_IO24 = [(9, "I/O0"), (10, "I/O1"), (11, "I/O2"), (13, "I/O3"), (14, "I/O4"),
+         (15, "I/O5"), (16, "I/O6"), (17, "I/O7")]
+_IO28 = [(n + 2, name) for n, name in _IO24]
+_IO32 = [(n + 4, name) for n, name in _IO24]
+# 2Kx8 address pins on the 24-pin JEDEC site, and the same pins moved up two on 28.
+_A24 = [(8, "A0"), (7, "A1"), (6, "A2"), (5, "A3"), (4, "A4"), (3, "A5"), (2, "A6"),
+        (1, "A7"), (23, "A8"), (22, "A9"), (19, "A10")]
+_A28 = [(n + 2, name) for n, name in _A24]
+
 PINOUTS = {
     # Intel 2101A 256x4, separate I/O (1979 Component Data Catalog, p. 3-4). Shared,
     # pin for pin, by the Intel 5101 (p. 3-111, pin 20 printed R/W, low = write) and
@@ -469,4 +479,75 @@ PINOUTS = {
         footprint="Package_DIP:DIP-32_W15.24mm",
         description="512Kx8 5V flash (SST39SF040 pinout)",
         keywords="flash 512Kx8 SST39SF040 39SF"),
+    # Intel 2816 2Kx8 EEPROM (1981 Component Data Catalog, Figure 2, p. 2-23): the 2716
+    # pinout with a 21V write/erase pulse on VPP (pin 21) and no on-chip latches.
+    "2816": dict(
+        pins=_pins(
+            **{"in": _A24 + [(18, "~{CE}"), (20, "~{OE}"), (21, "VPP")],
+               "bidi": _IO24, "pwr": [(24, "VCC"), (12, "GND")]}),
+        left=[f"A{i}" for i in range(11)] + [None, "~{CE}", "~{OE}", "VPP"],
+        right=[f"I/O{i}" for i in range(8)],
+        top=["VCC"], bottom=["GND"],
+        footprint="Package_DIP:DIP-24_W15.24mm",
+        description="2Kx8 EEPROM, 21V write pulse on VPP pin 21 (Intel 2816 pinout)",
+        keywords="EEPROM E2PROM 2Kx8 2816"),
+    # Intel 2816A 2Kx8 5V EEPROM (1984 Memory Components Handbook, p. 5-83): the 6116
+    # static-RAM pinout, ~WE on pin 21. Shared by the Xicor X2816A/B/C (1985 p. 3-13,
+    # 1990 pp. 3-9, 3-19), SEEQ 2816A and 52B13 (1985 pp. 2-4, 2-20) and Atmel
+    # AT28C16 (1990 p. 2-51). The 2816A also takes the 2816's 21V pulse on pin 21.
+    "2816A": dict(
+        pins=_pins(
+            **{"in": _A24 + [(18, "~{CE}"), (20, "~{OE}"), (21, "~{WE}")],
+               "bidi": _IO24, "pwr": [(24, "VCC"), (12, "GND")]}),
+        left=[f"A{i}" for i in range(11)] + [None, "~{CE}", "~{OE}", "~{WE}"],
+        right=[f"I/O{i}" for i in range(8)],
+        top=["VCC"], bottom=["GND"],
+        footprint="Package_DIP:DIP-24_W15.24mm",
+        description="2Kx8 5V EEPROM, ~WE on pin 21 (2816A / X2816 / AT28C16, 6116 pinout)",
+        keywords="EEPROM E2PROM 2Kx8 2816A 28C16 X2816 6116"),
+    # Intel 2817A 2Kx8 EEPROM in 28 pins (1984 handbook, Figure 2, p. 5-95): the 2864
+    # site with A11/A12 NC and open-drain RDY/~BUSY on pin 1. Shared by the Atmel
+    # AT28C17 (1990 p. 2-61).
+    "2817A": dict(
+        pins=_pins(
+            **{"in": _A28 + [(20, "~{CE}"), (22, "~{OE}"), (27, "~{WE}")],
+               "bidi": _IO28, "oc": [(1, "RDY/~{BUSY}")],
+               "nc": [(2, "NC"), (23, "NC"), (26, "NC")],
+               "pwr": [(28, "VCC"), (14, "GND")]}),
+        left=[f"A{i}" for i in range(11)] + [None, "~{CE}", "~{OE}", "~{WE}"],
+        right=[f"I/O{i}" for i in range(8)] + [None, "RDY/~{BUSY}"],
+        top=["VCC"], bottom=["GND"],
+        footprint="Package_DIP:DIP-28_W15.24mm",
+        description="2Kx8 5V EEPROM in 28 pins, RDY/~BUSY on pin 1 (2817A / AT28C17)",
+        keywords="EEPROM E2PROM 2Kx8 2817A 28C17"),
+    # SEEQ 52B33 8Kx8 latched EEPROM (1985 Data Book, p. 2-27): the 2864 site with an
+    # active-low chip-clear input ~CC on pin 1 instead of RDY/~BUSY.
+    "52B33": dict(
+        pins=_pins(
+            **{"in": [(n, f"A{i}") for i, n in enumerate(
+                       [10, 9, 8, 7, 6, 5, 4, 3, 25, 24, 21, 23, 2])]
+                     + [(20, "~{CE}"), (22, "~{OE}"), (27, "~{WE}"), (1, "~{CC}")],
+               "bidi": _IO28, "nc": [(26, "NC")],
+               "pwr": [(28, "VCC"), (14, "GND")]}),
+        left=[f"A{i}" for i in range(13)] + [None, "~{CE}", "~{OE}", "~{WE}", "~{CC}"],
+        right=[f"I/O{i}" for i in range(8)],
+        top=["VCC"], bottom=["GND"],
+        footprint="Package_DIP:DIP-28_W15.24mm",
+        description="8Kx8 EEPROM, chip clear ~CC on pin 1 (SEEQ 52B33 pinout)",
+        keywords="EEPROM E2PROM 8Kx8 52B33 2864"),
+    # 128Kx8 EEPROM, Atmel AT28C010 (1990 Data Book, p. 2-125) and Xicor X28C010 (1990
+    # p. 3-111): the JEDEC 32-pin byte-wide site with pins 1 and 30 NC.
+    "28C010": dict(
+        pins=_pins(
+            **{"in": [(n, f"A{i}") for i, n in enumerate(
+                       [12, 11, 10, 9, 8, 7, 6, 5, 27, 26, 23, 25, 4, 28, 29, 3, 2])]
+                     + [(22, "~{CE}"), (24, "~{OE}"), (31, "~{WE}")],
+               "bidi": _IO32, "nc": [(1, "NC"), (30, "NC")],
+               "pwr": [(32, "VCC"), (16, "GND")]}),
+        left=[f"A{i}" for i in range(17)] + [None, "~{CE}", "~{OE}", "~{WE}"],
+        right=[f"I/O{i}" for i in range(8)],
+        top=["VCC"], bottom=["GND"],
+        footprint="Package_DIP:DIP-32_W15.24mm",
+        description="128Kx8 5V EEPROM, pins 1 and 30 NC (AT28C010 / X28C010 pinout)",
+        keywords="EEPROM E2PROM 128Kx8 28C010 X28C010"),
 }
