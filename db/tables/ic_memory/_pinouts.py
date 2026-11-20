@@ -22,6 +22,13 @@ def _pins(**groups):
     return out
 
 
+# SST39SF0x0 address pins A0-A16 and data pins, shared by the three flash symbols.
+_SST_ADDR = [(12, "A0"), (11, "A1"), (10, "A2"), (9, "A3"), (8, "A4"), (7, "A5"),
+             (6, "A6"), (5, "A7"), (27, "A8"), (26, "A9"), (23, "A10"), (25, "A11"),
+             (4, "A12"), (28, "A13"), (29, "A14"), (3, "A15"), (2, "A16")]
+_SST_DQ = [(13, "DQ0"), (14, "DQ1"), (15, "DQ2"), (17, "DQ3"), (18, "DQ4"),
+           (19, "DQ5"), (20, "DQ6"), (21, "DQ7")]
+
 PINOUTS = {
     # Intel 2101A 256x4, separate I/O (1979 Component Data Catalog, p. 3-4). Shared,
     # pin for pin, by the Intel 5101 (p. 3-111, pin 20 printed R/W, low = write) and
@@ -307,4 +314,159 @@ PINOUTS = {
         footprint="Package_DIP:DIP-18_W7.62mm",
         description="16Kx4 / 64Kx4 dynamic RAM, common I/O, output enable (TMS4416/TMS4464 pinout)",
         keywords="RAM DRAM 16Kx4 64Kx4 4416 4464 41464"),
+
+    # ---- UV EPROM / OTP EPROM / flash ----------------------------------------------
+    # Intel 1702A 256x8 (1979 Component Data Catalog, p. 4-5). Silicon-gate PMOS-era
+    # part on +5V/-9V; VCC appears on pins 12, 22 and 23 (stacked) and VBB (pin 15) is
+    # tied to VCC in read. The book's data pins are "DATA OUT 1-8" (1 = LSB).
+    "1702A": dict(
+        pins=_pins(
+            **{"in": [(3, "A0"), (2, "A1"), (1, "A2"), (21, "A3"), (20, "A4"),
+                      (19, "A5"), (18, "A6"), (17, "A7"), (14, "~{CS}"),
+                      (13, "PROGRAM")],
+               "tri": [(4, "DO1"), (5, "DO2"), (6, "DO3"), (7, "DO4"), (8, "DO5"),
+                       (9, "DO6"), (10, "DO7"), (11, "DO8")],
+               "pwr": [(12, "VCC"), (22, "VCC"), (23, "VCC"), (15, "VBB"),
+                       (24, "VDD"), (16, "VGG")]}),
+        left=["A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", None,
+              "~{CS}", "PROGRAM"],
+        right=["DO1", "DO2", "DO3", "DO4", "DO5", "DO6", "DO7", "DO8"],
+        top=["VCC", "VBB"], bottom=["VDD", "VGG"],
+        footprint="Package_DIP:DIP-24_W15.24mm",
+        description="256x8 UV EPROM, +5V/-9V, -48V programming (1702A pinout)",
+        keywords="EPROM UV 256x8 1702 1702A"),
+    # Intel 2708 1Kx8 (1979 catalog, p. 4-20), +12V/+5V/-5V. Shared by the 2704
+    # (512x8; pin 22 tied to VSS). PROGRAM (pin 18) must be grounded in read.
+    "2708": dict(
+        pins=_pins(
+            **{"in": [(8, "A0"), (7, "A1"), (6, "A2"), (5, "A3"), (4, "A4"),
+                      (3, "A5"), (2, "A6"), (1, "A7"), (23, "A8"), (22, "A9"),
+                      (20, "~{CS}/WE"), (18, "PROGRAM")],
+               "tri": [(9, "O0"), (10, "O1"), (11, "O2"), (13, "O3"), (14, "O4"),
+                       (15, "O5"), (16, "O6"), (17, "O7")],
+               "pwr": [(24, "VCC"), (19, "VDD"), (12, "VSS"), (21, "VBB")]}),
+        left=[f"A{i}" for i in range(10)] + [None, "~{CS}/WE", "PROGRAM"],
+        right=[f"O{i}" for i in range(8)],
+        top=["VCC", "VDD"], bottom=["VSS", "VBB"],
+        footprint="Package_DIP:DIP-24_W15.24mm",
+        description="1Kx8 UV EPROM, +12V/+5V/-5V (2708/2704 pinout)",
+        keywords="EPROM UV 1Kx8 2708 2704"),
+    # Intel 2716 2Kx8 +5V (1979 catalog, p. 4-23). Shared by the TI TMS2516 (1982
+    # MOS Memory Data Book, p. 137), which names pin 18 PD/PGM and pin 20 ~CS.
+    "2716": dict(
+        pins=_pins(
+            **{"in": [(8, "A0"), (7, "A1"), (6, "A2"), (5, "A3"), (4, "A4"),
+                      (3, "A5"), (2, "A6"), (1, "A7"), (23, "A8"), (22, "A9"),
+                      (19, "A10"), (18, "~{CE}/PGM"), (20, "~{OE}"), (21, "VPP")],
+               "tri": [(9, "O0"), (10, "O1"), (11, "O2"), (13, "O3"), (14, "O4"),
+                       (15, "O5"), (16, "O6"), (17, "O7")],
+               "pwr": [(24, "VCC"), (12, "GND")]}),
+        left=[f"A{i}" for i in range(11)] + [None, "~{CE}/PGM", "~{OE}", "VPP"],
+        right=[f"O{i}" for i in range(8)],
+        top=["VCC"], bottom=["GND"],
+        footprint="Package_DIP:DIP-24_W15.24mm",
+        description="2Kx8 UV EPROM, +5V, VPP on pin 21 (Intel 2716 / TMS2516 pinout)",
+        keywords="EPROM UV 2Kx8 2716 2516"),
+    # Intel 2732 4Kx8 (1979 catalog, p. 4-28). Shared by the 2732A (1983 Memory
+    # Components Handbook, p. 4-12), which programs at 21V instead of 25V.
+    "2732": dict(
+        pins=_pins(
+            **{"in": [(8, "A0"), (7, "A1"), (6, "A2"), (5, "A3"), (4, "A4"),
+                      (3, "A5"), (2, "A6"), (1, "A7"), (23, "A8"), (22, "A9"),
+                      (19, "A10"), (21, "A11"), (18, "~{CE}"), (20, "~{OE}/VPP")],
+               "tri": [(9, "O0"), (10, "O1"), (11, "O2"), (13, "O3"), (14, "O4"),
+                       (15, "O5"), (16, "O6"), (17, "O7")],
+               "pwr": [(24, "VCC"), (12, "GND")]}),
+        left=[f"A{i}" for i in range(12)] + [None, "~{CE}", "~{OE}/VPP", None],
+        right=[f"O{i}" for i in range(8)],
+        top=["VCC"], bottom=["GND"],
+        footprint="Package_DIP:DIP-24_W15.24mm",
+        description="4Kx8 UV EPROM, +5V, ~OE/VPP on pin 20 (Intel 2732/2732A pinout)",
+        keywords="EPROM UV 4Kx8 2732 2732A"),
+    # TI TMS2716 2Kx8, +12V/+5V/-5V (1982 MOS Memory Data Book, p. 167). Not the Intel
+    # 2716: VDD on 19, VBB on 21; pin 24 is VCC in read and program enable (+12V).
+    "TMS2716": dict(
+        pins=_pins(
+            **{"in": [(8, "A0"), (7, "A1"), (6, "A2"), (5, "A3"), (4, "A4"),
+                      (3, "A5"), (2, "A6"), (1, "A7"), (23, "A8"), (22, "A9"),
+                      (20, "A10"), (18, "~{CS}/PGM")],
+               "tri": [(9, "Q1"), (10, "Q2"), (11, "Q3"), (13, "Q4"), (14, "Q5"),
+                       (15, "Q6"), (16, "Q7"), (17, "Q8")],
+               "pwr": [(24, "VCC"), (19, "VDD"), (12, "VSS"), (21, "VBB")]}),
+        left=[f"A{i}" for i in range(11)] + [None, "~{CS}/PGM"],
+        right=[f"Q{i}" for i in range(1, 9)],
+        top=["VCC", "VDD"], bottom=["VSS", "VBB"],
+        footprint="Package_DIP:DIP-24_W15.24mm",
+        description="2Kx8 UV EPROM, +12V/+5V/-5V (TI TMS2716 pinout, not Intel 2716)",
+        keywords="EPROM UV 2Kx8 TMS2716"),
+    # TI TMS2532 4Kx8 +5V (1982 MOS Memory Data Book, p. 145). Differs from the Intel
+    # 2732 on pins 18 (A11), 20 (PD/~PGM, the only control pin) and 21 (VPP).
+    "TMS2532": dict(
+        pins=_pins(
+            **{"in": [(8, "A0"), (7, "A1"), (6, "A2"), (5, "A3"), (4, "A4"),
+                      (3, "A5"), (2, "A6"), (1, "A7"), (23, "A8"), (22, "A9"),
+                      (19, "A10"), (18, "A11"), (20, "PD/~{PGM}"), (21, "VPP")],
+               "tri": [(9, "Q1"), (10, "Q2"), (11, "Q3"), (13, "Q4"), (14, "Q5"),
+                       (15, "Q6"), (16, "Q7"), (17, "Q8")],
+               "pwr": [(24, "VCC"), (12, "VSS")]}),
+        left=[f"A{i}" for i in range(12)] + [None, "PD/~{PGM}", "VPP"],
+        right=[f"Q{i}" for i in range(1, 9)],
+        top=["VCC"], bottom=["VSS"],
+        footprint="Package_DIP:DIP-24_W15.24mm",
+        description="4Kx8 UV EPROM, +5V (TI TMS2532 pinout, not Intel 2732)",
+        keywords="EPROM UV 4Kx8 TMS2532 2532"),
+    # Motorola MCM68764 8Kx8 in 24 pins (1980 Memory Data Book, p. 2-148): the
+    # MCM68A364 mask-ROM pinout with ~E/VPP on pin 20 and A12 on pin 21.
+    "MCM68764": dict(
+        pins=_pins(
+            **{"in": [(8, "A0"), (7, "A1"), (6, "A2"), (5, "A3"), (4, "A4"),
+                      (3, "A5"), (2, "A6"), (1, "A7"), (23, "A8"), (22, "A9"),
+                      (19, "A10"), (18, "A11"), (21, "A12"), (20, "~{E}/VPP")],
+               "tri": [(9, "DQ0"), (10, "DQ1"), (11, "DQ2"), (13, "DQ3"), (14, "DQ4"),
+                       (15, "DQ5"), (16, "DQ6"), (17, "DQ7")],
+               "pwr": [(24, "VCC"), (12, "VSS")]}),
+        left=[f"A{i}" for i in range(13)] + [None, "~{E}/VPP"],
+        right=[f"DQ{i}" for i in range(8)],
+        top=["VCC"], bottom=["VSS"],
+        footprint="Package_DIP:DIP-24_W15.24mm",
+        description="8Kx8 UV EPROM in 24 pins, ~E/VPP on pin 20 (MCM68764 / 2364 mask-ROM pinout)",
+        keywords="EPROM UV 8Kx8 MCM68764 68764 2364"),
+    # Microchip (SST) SST39SF010A/020A/040 5V multi-purpose flash (DS20005022,
+    # fig. 2-1). JEDEC 27C010-040 read pinout with ~WE on pin 31. The stock
+    # Memory_Flash:SST39SF0x0 symbols name ~WE "PGM", drop the active-low bars and
+    # type the NC pins as inputs, so these replace them.
+    "SST39SF010A": dict(
+        pins=_pins(
+            **{"in": _SST_ADDR + [(22, "~{CE}"), (24, "~{OE}"), (31, "~{WE}")],
+               "bidi": _SST_DQ, "nc": [(1, "NC"), (30, "NC")],
+               "pwr": [(32, "VDD"), (16, "VSS")]}),
+        left=[f"A{i}" for i in range(17)] + [None, "~{CE}", "~{OE}", "~{WE}"],
+        right=[f"DQ{i}" for i in range(8)],
+        top=["VDD"], bottom=["VSS"],
+        footprint="Package_DIP:DIP-32_W15.24mm",
+        description="128Kx8 5V flash, pins 1 and 30 NC (SST39SF010A pinout)",
+        keywords="flash 128Kx8 SST39SF010A 39SF"),
+    "SST39SF020A": dict(
+        pins=_pins(
+            **{"in": _SST_ADDR + [(30, "A17"), (22, "~{CE}"), (24, "~{OE}"), (31, "~{WE}")],
+               "bidi": _SST_DQ, "nc": [(1, "NC")],
+               "pwr": [(32, "VDD"), (16, "VSS")]}),
+        left=[f"A{i}" for i in range(18)] + [None, "~{CE}", "~{OE}", "~{WE}"],
+        right=[f"DQ{i}" for i in range(8)],
+        top=["VDD"], bottom=["VSS"],
+        footprint="Package_DIP:DIP-32_W15.24mm",
+        description="256Kx8 5V flash, pin 1 NC (SST39SF020A pinout)",
+        keywords="flash 256Kx8 SST39SF020A 39SF"),
+    "SST39SF040": dict(
+        pins=_pins(
+            **{"in": _SST_ADDR + [(30, "A17"), (1, "A18"), (22, "~{CE}"), (24, "~{OE}"),
+                                  (31, "~{WE}")],
+               "bidi": _SST_DQ,
+               "pwr": [(32, "VDD"), (16, "VSS")]}),
+        left=[f"A{i}" for i in range(19)] + [None, "~{CE}", "~{OE}", "~{WE}"],
+        right=[f"DQ{i}" for i in range(8)],
+        top=["VDD"], bottom=["VSS"],
+        footprint="Package_DIP:DIP-32_W15.24mm",
+        description="512Kx8 5V flash (SST39SF040 pinout)",
+        keywords="flash 512Kx8 SST39SF040 39SF"),
 }

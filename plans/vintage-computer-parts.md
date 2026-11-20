@@ -1,8 +1,8 @@
 # Vintage computer parts
 
 **Date:** 2026-11-17
-**Status:** Phase 1 done; phase 2 schema, SRAM, DRAM and NVRAM done (see Results).
-EPROM, EEPROM and PROM are next. Decisions in "Open questions" are needed before phases 3, 4
+**Status:** Phase 1 done; phase 2 schema, SRAM, DRAM, NVRAM and EPROM done (see
+Results). EEPROM and PROM are next. Decisions in "Open questions" are needed before phases 3, 4
 and 6.
 **Scope:** bring terra up to the point where a 1975-85 microcomputer (KIM-1, Apple I/II,
 SWTPC, S-100, COSMAC ELF, TRS-80, Z80 SBC, or a modern retro build) can be drawn with
@@ -58,6 +58,12 @@ best-known maker (Intel 2114, MOS 6502, Zilog Z80). Nobody buys these from the
 manufacturer any more, so extra second-source rows add nothing. A **modern drop-in that
 is still in production** (W65C02S, AS6C62256, AT28C256) is a different, orderable part
 and still gets its own Active row.
+
+**Exception for programmable memories (decided 2026-11-20):** for UV/OTP EPROMs,
+parallel EEPROMs and bipolar PROMs, multiple manufacturers are worth having. Builders
+buy whatever surplus parts turn up, and makers differ in programming voltage and
+algorithm (Intel 2764 at 21V vs AMD/Intel 2764A at 12.5V), so each maker's sheet is its
+own row set (EPROMs so far: Intel, AMD, ST, TI, Motorola).
 
 **Speed and package grades.** Every speed grade the datasheet lists is its own MPN
 (2114-2/-3/-L, 6116-15/-20, MC68A09/MC68B09, 2716-1). Generate them all, since a
@@ -628,6 +634,72 @@ Follow-ups:
   so it is not included.
 - Left out: the MK4027-1 (named in the features list but given no timing column) and
   the 1984-preview-only TMS4464-10.
+
+### Phase 2 UV EPROM (done 2026-11-20)
+
+165 rows in `ic_memory` from `run_330_eprom.py`: 153 UV EPROMs, 9 OTP EPROMs and 3 5 V
+flash parts.
+
+- **Coverage (one row per grade, commercial temperature, windowed ceramic DIP):**
+  - Intel B1702A (-2/base/-6), D2704, D2708 (-1/base/L), D2716 (-1/-2/base/-5/-6),
+    D2732 (-4/base/-6), D2732A (7 grades), D2764 (7), D2764A (9), D27128 (6), D27256 (6).
+  - TI TMS2716-30/-45JL, TMS2516-25/-35/-45JL, TMS2532-30/-35/-45JL, TMS25L32-45JL.
+  - Motorola MCM68764C/C35 and MCM68L764C/C35.
+  - AMD Am2764A, Am27128A, Am27256, Am27512 (36 rows, every DC valid combination).
+    It fills the 27128A/27512 gaps the Intel books leave; its Am2764A/Am27256 rows sit
+    alongside Intel's, per the programmable-memory exception under "Manufacturer coverage".
+  - SGS-Thomson NMOS M27128A (7 grades) and M27512 (5), also supplied by Dave.
+  - ST M27C64A, M27C256B, M27C512, M27C1001, M27C2001, M27C4001, M27C801 (42 rows).
+  - Microchip AT27C256R/512R/010/020/040 OTP (PDIP) and SST39SF010A/020A/040 flash.
+- **Sources:**
+  - Intel 1979/1981 Component Data Catalogs, 1983 and 1984 Memory Components
+    Handbooks, using the latest final sheet for each chip. The 1981 2732A/2764
+    sheets are PRELIMINARY; the 27256 has only the 1984 PRELIMINARY sheet, and its
+    descriptions say so. The 1984 handbook was added to the sources.
+  - TI 1982 MOS Memory Data Book (prints full codes; 1984 drops grades), Motorola
+    1980 Memory Data Book.
+  - AMD 8-Bit EPROM Family, publication 08005 Rev. A (May 1986), a scan in
+    `datasheets/amd/`.
+  - ST's M27C pages and datasheets are gone from st.com (the EPROM line went to
+    Numonyx/Micron); the datasheets are Digi-Key's copies.
+  - Page ranges are in the generator docstring.
+- **Ordering codes that had to be built:**
+  - Intel: D + grade (Type D windowed CERDIP, the catalog's prefix rule); B1702A
+    from the 1979 order form, Type B being the 1702A's ceramic transparent-lid package.
+  - ST prints an ordering scheme, not a list: F (windowed FDIP) + 1 (0 to 70 C),
+    VCC +/-10%, one code per standard speed column of the read AC tables. The
+    footnoted "High Speed" columns (-35/-45/-55) are left out.
+  - TI, Motorola, AMD and Microchip codes are printed. The ST NMOS M27128A/M27512
+    schemes list every speed/VCC code; only F (FDIP) and 1 (0 to 70 C) are added.
+- **Lifecycle:** vintage parts and ST all Obsolete (Digi-Key lists the M27C as
+  Obsolete). Microchip: AT27C256R/512R PDIP Active on Digi-Key; the AT27C010/020/040
+  and SST39SF PDIP codes are Obsolete on both Digi-Key and Mouser, although
+  microchip.com shows the families "In Production" (the PLCC/TSOP codes live on).
+- **Programming voltage** (`programming_voltage`): 1702A -48V; 2704/2708/TMS2716 26V
+  pulse; 2716/2732/TMS2516/TMS2532/MCM68764 25V; 2732A/2764/27128 21V; 2764A/27256,
+  the AMD family, M27128A, M27512 and M27C64A 12.5V; other M27C 12.75V; AT27C 13V. Descriptions carry the
+  wrong-VPP cautions (2732 vs 2732A, 2764 vs 2764A).
+- **Symbols:**
+  - Stock Memory_EPROM `2764`, `27128`, `27256`, `27C64`, `27C256`, `27C512`,
+    `27C010`, `27C020`, `27C040`, `27C080`. The stock `27C010` has no pin 30, which is
+    NC on the AT27C010 and M27C1001.
+  - 10 new symbols: `1702A` (three VCC pins stacked as `[12,22,23]`), `2708` (also the
+    2704), `2716` (also the TMS2516), `2732` (also the 2732A), `TMS2716`, `TMS2532`,
+    `MCM68764`, and `SST39SF010A`/`020A`/`040`, which replace the stock Memory_Flash
+    symbols (they name ~WE "PGM", drop the active-low bars and type NC pins as inputs).
+  - `tools/make_dip_symbol.py` now stacks same-name power pins into one pin.
+- **Footprints:** all 0.6" rows. Intel Type D, ST FDIP28W and TI's 600-mil cerpak give
+  it explicitly; for the commercial TMS2516/TMS2532 the 600-mil statement is in the 1984
+  book's J-package text. The AMD sheet has no outline; its 28-pin ceramic DIP is taken
+  as 0.6".
+
+Follow-ups:
+- Not generated: Intel 27128A (1984 advance information, no VPP or grades) and Intel
+  27512 (in no book through 1984); the AMD and ST NMOS rows cover both chips. ST
+  M27C128A (CMOS) has no datasheet on st.com or Digi-Key.
+- Left out: Motorola MCM68766 (same sheet family, ~G/VPP on pin 20, Advance
+  Information), the side-braze MCM68764L codes (built from a rule only), Intel P2732A/
+  P2764 plastic "production EPROMs", TI TMS2564/TMS2764.
 
 ### Battery-backed NVRAM (done 2026-11-20)
 

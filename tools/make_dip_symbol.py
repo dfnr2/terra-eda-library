@@ -25,7 +25,8 @@ A pinout is a dict::
 
 Pin types: in, out, tri, bidi, oc, oe (open emitter/source), pwr, nc. Every pin
 number from 1 to the pin count must be placed exactly once, which the tool checks
-before writing.
+before writing. Power pins that share a name (the 1702A's three VCC pins) become
+one KiCad 10 stacked pin, numbered ``[12,22,23]``, placed once.
 
 Writing replaces a symbol of the same name in place or appends a new one, so it is
 safe to rerun after a pinout fix. Usage::
@@ -102,13 +103,16 @@ def check(name, p):
     if sorted(pins) != list(range(1, n + 1)):
         raise SystemExit(f"{name}: pin numbers are not 1..{n}: {sorted(pins)}")
     by_name = {}
-    for num, (pname, ptype) in pins.items():
+    for num, (pname, ptype) in sorted(pins.items()):
         if ptype not in TYPES:
             raise SystemExit(f"{name}: pin {num} has unknown type {ptype!r}")
         if ptype == "nc":
             continue
         if pname in by_name:
-            raise SystemExit(f"{name}: pin name {pname!r} used by pins {by_name[pname]} and {num}")
+            first = by_name[pname]
+            if ptype != "pwr" or pins[first][1] != "pwr":
+                raise SystemExit(f"{name}: pin name {pname!r} used by pins {first} and {num}")
+            continue  # stacked with the first pin of that name (see number())
         by_name[pname] = num
     placed = [x for side in ("left", "right", "top", "bottom") for x in p.get(side, []) if x]
     dupes = sorted({x for x in placed if placed.count(x) > 1})
@@ -183,7 +187,9 @@ def symbol(name, p):
         placed.append((by_name[pname], offsets[i], y_bot - PIN_LEN, 90))
     for num, x, y, rot in sorted(placed):
         pname, ptype = pins[num]
-        unit += pin(TYPES[ptype], x, y, rot, pname, num)
+        stack = [n for n, (nm, t) in sorted(pins.items()) if nm == pname and t != "nc"]
+        number = f"[{','.join(map(str, stack))}]" if len(stack) > 1 else num
+        unit += pin(TYPES[ptype], x, y, rot, pname, number)
     for num, (pname, ptype) in sorted(pins.items()):
         if ptype == "nc":
             unit += pin("no_connect", 0, 0, 0, pname, num, hide=True)
