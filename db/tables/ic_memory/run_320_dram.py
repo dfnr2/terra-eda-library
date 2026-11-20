@@ -3,14 +3,19 @@
 
 One classic example per chip (see plans/vintage-computer-parts.md, "Manufacturer
 coverage"), one row per speed grade the classic datasheet lists, commercial
-temperature, plastic DIP. All are Obsolete.
+temperature, plastic DIP (CERDIP for the 2118, the only package Intel's books
+code for it). All are Obsolete.
 
 Sources, each cut down to the chip's pages in datasheets/<mfr>/:
   - Intel 1975 Data Catalog: 1103, 1103-1, 1103A, 1103A-1, 1103A-2 pp. 2-7..2-28,
     with the ordering instructions (1-12) and 18-lead outlines (1-9) appended.
+  - Intel 1981 Component Data Catalog: 2118 pp. 1-16..1-26, with the ordering
+    information (12-12) and the 16-lead P and D package outlines appended.
   - Mostek 1980 Memory Data Book and Designers Guide: MK4027 pp. V-1..V-16,
     MK4096 V-17..V-24, MK4116 V-33..V-46 plus V-67..V-68 (typical characteristics),
-    MK4164 V-69..V-77 (PRELIMINARY).
+    MK4164 V-69..V-77 (PRELIMINARY). Mostek 1984/1985 Microelectronic Data Book:
+    MK4564-12 pp. IV-61..IV-69 and MK4564-15/20 IV-71..IV-79, with the ordering key
+    (II-14) and package outlines (II-5) appended; the 1982 sheet is preliminary.
   - TI 1986 MOS Memory Data Book (SMYD006): TMS4416 pp. 4-99..4-115, TMS4464
     4-117..4-134, each with the selection guide (1-10), the numbering key (11-3)
     and package outlines appended. The 1984 book has both only as product previews.
@@ -20,6 +25,11 @@ Sources, each cut down to the chip's pages in datasheets/<mfr>/:
 Ordering codes:
   - Intel's 1975 ordering instructions give the package prefix rule with this very
     example, "P 1103" (P = plastic), and list P/C/D for every 1103 grade.
+  - No Intel book prints a plastic P2118. The only package-coded 2118s are the
+    1983 Memory Component Handbook's Express codes "QD 2118-3/-4/-7", i.e. CERDIP
+    (D), so the rows are D2118 with the 1981 catalog's grade numbers. That catalog
+    prints the grades as -10/-12/-15; the 1979 catalog and 1983 handbook give the
+    same three speeds as -3/-4/-7.
   - Mostek prints no ordering table. Each sheet's title gives the packages and
     grades, e.g. "MK4116(J/N/E)-2/3", and p. II-1 gives the rule: MK + device +
     package letter + dash number, N = plastic. The codes below are built that way.
@@ -73,6 +83,15 @@ CHIPS = [
               ("P1103A-2", 145, 400, "VSS +19V, VBB +22V, VDD 0V, 1 ms refresh",
                "+22V, +19V", (0, 55))],
       kw=["1103", "1103A", "3208A"]),
+    C(mfr="Intel", value="2118", words=16384, bits=1, pins=16, width=0.3,
+      symbol=f"{LIB}:2118", ds="intel/2118-16kx1-dynamic-ram.pdf", tech="NMOS",
+      io="single supply (page mode and hidden refresh are S-number options)",
+      rails="+5V", package="CERDIP-16",
+      note="pins 1 and 9 N/C, not 4116-socket compatible",
+      grades=[("D2118-10", 100, 235, "also graded 2118-3"),
+              ("D2118-12", 120, 270, "also graded 2118-4"),
+              ("D2118-15", 150, 320, "also graded 2118-7")],
+      kw=["2118", "2118-3", "2118-4", "2118-7"]),
     # ---- Mostek -----------------------------------------------------------------
     C(mfr="Mostek", value="MK4096", words=4096, bits=1, pins=16, width=0.3,
       symbol=f"{LIB}:MK4096", ds="mostek/mk4096-4kx1-dynamic-ram.pdf", tech="NMOS",
@@ -99,6 +118,13 @@ CHIPS = [
       note="preliminary data sheet (1980)",
       grades=[("MK4164N-12", 120, 265, None), ("MK4164N-15", 150, 325, None)],
       kw=["4164", "MK4116 successor"]),
+    C(mfr="Mostek", value="MK4564", words=65536, bits=1, pins=16, width=0.3,
+      symbol=f"{LIB}:MK4564", ds="mostek/mk4564-64kx1-dynamic-ram.pdf",
+      tech="NMOS", io="page mode, pin 1 N/C", rails="+5V",
+      note="production successor to the MK4164",
+      grades=[("MK4564N-12", 120, 220, None), ("MK4564N-15", 150, 260, None),
+              ("MK4564N-20", 200, 330, None)],
+      kw=["4564", "4164", "JEDEC 4164 pinout"]),
     # ---- Texas Instruments ------------------------------------------------------
     C(mfr="Texas Instruments", value="TMS4416", words=16384, bits=4, pins=18,
       width=0.3, symbol=f"{LIB}:TMS4416", ds="ti/tms4416-16kx4-dynamic-ram.pdf",
@@ -132,7 +158,7 @@ def records():
             mpn, trac, trc, note = grade[:4]
             rails = grade[4] if len(grade) > 4 else chip["rails"]
             temp = grade[5] if len(grade) > 5 else (0, 70)
-            package = f"PDIP-{chip['pins']}"
+            package = chip.get("package", f"PDIP-{chip['pins']}")
             bits = [f"{chip['mfr']} {chip['value']} {o} {chip['tech']} dynamic RAM",
                     chip["io"], f"{trac}ns access, {trc}ns cycle"]
             if note:

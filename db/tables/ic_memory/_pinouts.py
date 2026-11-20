@@ -253,6 +253,42 @@ PINOUTS = {
         footprint="Package_DIP:DIP-16_W7.62mm",
         description="4Kx1 dynamic RAM, latched output, chip select, +12V/+5V/-5V (MK4096/MK4027 pinout)",
         keywords="RAM DRAM 4Kx1 4096 4027"),
+    # Intel 2118 16Kx1 +5V DRAM (1981 Component Data Catalog, p. 1-16). The MK4116
+    # address pins, but 4164-style power (+5V on 8, ground on 16) and N/C on pins 1
+    # and 9, so it does not fit a 4116 socket.
+    "2118": dict(
+        pins=_pins(
+            **{"in": [(5, "A0"), (7, "A1"), (6, "A2"), (12, "A3"), (11, "A4"),
+                      (10, "A5"), (13, "A6"), (2, "DIN"), (4, "~{RAS}"),
+                      (15, "~{CAS}"), (3, "~{WE}")],
+               "tri": [(14, "DOUT")],
+               "nc": [(1, "N/C"), (9, "N/C")],
+               "pwr": [(8, "VDD"), (16, "VSS")]}),
+        left=["A0", "A1", "A2", "A3", "A4", "A5", "A6", None,
+              "~{RAS}", "~{CAS}", "~{WE}"],
+        right=["DIN", None, "DOUT"],
+        top=["VDD"], bottom=["VSS"],
+        footprint="Package_DIP:DIP-16_W7.62mm",
+        description="16Kx1 dynamic RAM, single +5V supply, pins 1 and 9 N/C (2118)",
+        keywords="RAM DRAM 16Kx1 2118"),
+    # Mostek MK4564 64Kx1 +5V DRAM (1984/1985 Microelectronic Data Book, p. IV-61;
+    # same drawing in the 1982 book, p. IV-63). The stock MK4164N pinout with pin 1
+    # N/C instead of ~RFSH -- the common JEDEC 4164 arrangement.
+    "MK4564": dict(
+        pins=_pins(
+            **{"in": [(5, "A0"), (7, "A1"), (6, "A2"), (12, "A3"), (11, "A4"),
+                      (10, "A5"), (13, "A6"), (9, "A7"), (2, "DIN"), (4, "~{RAS}"),
+                      (15, "~{CAS}"), (3, "~{WRITE}")],
+               "tri": [(14, "DOUT")],
+               "nc": [(1, "N/C")],
+               "pwr": [(8, "VCC"), (16, "VSS")]}),
+        left=["A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", None,
+              "~{RAS}", "~{CAS}", "~{WRITE}"],
+        right=["DIN", None, "DOUT"],
+        top=["VCC"], bottom=["VSS"],
+        footprint="Package_DIP:DIP-16_W7.62mm",
+        description="64Kx1 dynamic RAM, single +5V supply, pin 1 N/C (MK4564 / JEDEC 4164 pinout)",
+        keywords="RAM DRAM 64Kx1 4564 4164"),
     # TI TMS4416 16Kx4 DRAM (1986 MOS Memory Data Book, p. 4-99, N package). Shared,
     # pin for pin, by the TMS4464 64Kx4 (p. 4-117, "Pinout Identical to TMS4416"):
     # the 4416 uses A7 for rows only, the 4464 for rows and columns. ~G is the

@@ -479,7 +479,9 @@ explicitly.
    sign-off before their fragments are written.
 7. ~~**Phase 2 grades**~~ Decided: one row per speed/power grade, sharing symbol and
    footprint.
-8. **Phase 2 optional parts:** DS1225/DS1230, 2118, MCM68764, AT28C010. In or out?
+8. ~~**Phase 2 optional parts**~~ Decided (2026-11-19): all in (DS1225/DS1230, 2118,
+   MCM68764, AT28C010), plus battery-backed NVRAMs generally and the Mostek MK4564
+   (the production 64K DRAM that replaced the preliminary MK4164).
 
 ## Results
 
@@ -570,17 +572,21 @@ Follow-ups:
 
 ### Phase 2 dynamic RAM (done 2026-11-19)
 
-27 DRAM rows in `ic_memory` from `run_320_dram.py`.
+33 DRAM rows in `ic_memory` from `run_320_dram.py`.
 
 - **Coverage (one row per grade, plastic DIP, commercial temperature):**
   - Intel P1103, P1103-1, P1103A, P1103A-1, P1103A-2. The -1 and A-1/-2 grades are rated
     0 to 55 C only, with 19 V/22 V rails instead of 16 V/19 V.
-  - Mostek MK4096N, MK4027N, MK4116N (-2/-3/-4), MK4164N-12/-15.
+  - Intel D2118-10/-12/-15 (optional part, added 2026-11-19).
+  - Mostek MK4096N, MK4027N, MK4116N (-2/-3/-4), MK4164N-12/-15, and the MK4564N-12/-15/-20
+    that replaced the preliminary MK4164 in production.
   - TI TMS4416 and TMS4464 (-12/-15/-20 NL).
   - Toshiba TMM41256P-12/-15 and the TMM41256AP-10/-12/-15 die revision.
 - **Sources:**
-  - Intel 1975 Data Catalog (the 1979 catalog only mentions the 1103).
-  - Mostek 1980 Memory Data Book and Designers Guide.
+  - Intel 1975 Data Catalog (the 1979 catalog only mentions the 1103), and the 1981
+    Component Data Catalog for the 2118.
+  - Mostek 1980 Memory Data Book and Designers Guide. The MK4564 is from the 1984/1985
+    Microelectronic Data Book, because its 1982 sheet is preliminary.
   - TI 1986 MOS Memory Data Book (SMYD006). The 1984 book has both chips only as
     product previews.
   - Toshiba 1987 MOS Memory (on bitsavers after all). Both TMM41256 sheets are in one PDF.
@@ -593,11 +599,18 @@ Follow-ups:
     book's numbering key (p. 11-3): `-12` + N (plastic) + L (0 to 70 C).
   - Intel's 1975 ordering instructions print "P 1103" as their example, and Toshiba's
     selection guide prints its codes, so neither had to be built.
+  - No Intel book prints a plastic P2118. The only package-coded 2118s are the 1983
+    Express codes `QD 2118-3/-4/-7` (CERDIP), so the rows are D2118, CERDIP being the
+    only package on record. They keep the 1981 catalog's -10/-12/-15 grade names; the
+    1979 and 1983 books give the same speeds as -3/-4/-7, and the descriptions and
+    keywords carry both.
 - **Lifecycle:** all `Obsolete`. TI's product pages for both chips return 404.
 - **Symbols:**
   - Stock Memory_RAM `MK4116N`, `MK4164N` (pin 1 ~RFSH) and `TMM41256AP` match their
     chips pin for pin.
-  - 4 new symbols:
+  - 6 new symbols:
+    - `2118`: the MK4116 address pins with +5V on pin 8 and N/C on pins 1 and 9.
+    - `MK4564`: the stock MK4164N with pin 1 N/C instead of ~RFSH (the usual JEDEC 4164).
     - `1103`, and `1103A` (pin 5 N.C. instead of the precharge clock).
     - `MK4096`: the MK4116 layout with ~CS on pin 13 instead of A6. Shared by the MK4027.
     - `TMS4416`: shared by the TMS4464, whose sheet says "Pinout Identical to TMS4416".
@@ -610,13 +623,9 @@ Follow-ups:
     amplifier on the output.
 
 Follow-ups:
-- The MK4164 sheet is marked PRELIMINARY. Mostek's production 64K was the MK4564
-  (1982 book p. IV-63, `MK4564(P/N/J)-15/20/25`), which has pin 1 N.C. instead of
-  ~RFSH, so it would need its own symbol. Not added.
-- Intel 2118 (optional, open question 8): extracted from the 1981 catalog and set aside.
-  - Its pinout matches no stock symbol: a 4164 with N.C. on pins 1 and 9. It is not
-    4116-socket compatible.
-  - No book prints a plastic P2118 code.
-  - The 1981 catalog's -10/-12/-15 grades are the 1979/1983 books' -3/-4/-7.
+- The MK4164 rows stay, although their sheet is marked PRELIMINARY; the MK4564 rows are
+  the production part. The MK4564-25 grade appears only in the preliminary 1982 sheet,
+  so it is not included.
 - Left out: the MK4027-1 (named in the features list but given no timing column) and
   the 1984-preview-only TMS4464-10.
+
