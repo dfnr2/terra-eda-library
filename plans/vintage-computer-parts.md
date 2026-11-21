@@ -3,7 +3,7 @@
 **Date:** 2026-11-17
 **Status:** Phases 1, 2 (schema, SRAM, DRAM, NVRAM, EPROM, EEPROM, bipolar PROM),
 3 (CPUs), 4 (support chips), 6 (crystals) and 7 (trimpots) done (see Results).
-Phases 8 (connectors) and 9 (electrolytics) remain.
+Phase 8 (connectors) is under way (KK 396 done); phase 9 (electrolytics) remains.
 **Scope:** bring terra up to the point where a 1975-85 microcomputer (KIM-1, Apple I/II,
 SWTPC, S-100, COSMAC ELF, TRS-80, Z80 SBC, or a modern retro build) can be drawn with
 fully qualified parts. That means the bus buffers, memory, CPUs and their support chips,
@@ -457,9 +457,11 @@ standard resistance table, 10 Ω-2 MΩ (the 1-2-5 values plus 25 kΩ and 250 kΩ
 
 ### Phase 8: vintage connectors (`connectors`)
 
-- `run_370_molex_kk396.py`: Molex KK 396 (0.156") friction-lock headers, straight and
-  right-angle, 2-18 positions, plus the mating crimp housings (`mates_with` filled both
-  ways). This is the SWTPC/arcade/power-harness connector.
+- `run_370_molex_kk396.py` (**done 2026-11-21**, see `plans/connectors-molex-kk396.md`):
+  Molex KK 396 (0.156") friction-lock headers, 41791 vertical and 41792 right-angle,
+  2-18 positions, 34 rows. The crimp housings are named in `mating_family`/`mates_with`
+  rather than generated (no board footprint). This is the SWTPC/arcade/power-harness
+  connector.
 - **Bus and card-edge connectors (decided 2026-11-18): all of the following.** Pitches and
   position counts here are from memory; confirm each against the computer's own
   documentation and the connector drawing.
