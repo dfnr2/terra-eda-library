@@ -24,6 +24,8 @@
   "ic_microcontrollers":    { "type": "ic_microcontrollers", "tier_default": 2, "dump_priority_default": 1 },
   "ic_microprocessors":     { "type": "ic_microprocessors", "tier_default": 2, "dump_priority_default": 1 },
   "ic_peripherals":         { "type": "ic_peripherals", "tier_default": 2, "dump_priority_default": 1 },
+  "crystals_th":            { "type": "crystals", "tier_default": 2, "dump_priority_default": 1 },
+  "crystals_smt":           { "type": "crystals", "tier_default": 2, "dump_priority_default": 1 },
   "test_points":            { "type": "test_points", "tier_default": 2, "dump_priority_default": 1 },
   "batteries":              { "type": "batteries",   "tier_default": 2, "dump_priority_default": 1 },
   "connectors":                    { "type": "connectors", "tier_default": 2, "dump_priority_default": 1 },

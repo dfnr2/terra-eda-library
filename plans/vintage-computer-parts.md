@@ -2,8 +2,8 @@
 
 **Date:** 2026-11-17
 **Status:** Phases 1, 2 (schema, SRAM, DRAM, NVRAM, EPROM, EEPROM, bipolar PROM),
-3 (CPUs) and 4 (support chips) done (see Results). Decisions in "Open questions" are
-needed before phases 6 and 7.
+3 (CPUs), 4 (support chips) and 6 (crystals) done (see Results). Phase 7 needs its
+columns signed off (see "Open questions").
 **Scope:** bring terra up to the point where a 1975-85 microcomputer (KIM-1, Apple I/II,
 SWTPC, S-100, COSMAC ELF, TRS-80, Z80 SBC, or a modern retro build) can be drawn with
 fully qualified parts. That means the bus buffers, memory, CPUs and their support chips,
@@ -20,7 +20,7 @@ What terra already has (row counts from `db/terra.db`, 2026-11-17):
 | CPUs, peripherals | `ic_microcontrollers` (71) | Modern MCUs (ATmega etc.). No CPU table, no peripheral table. |
 | Electrolytics | `capacitors_electrolytic_th` (118) | Chemi-Con KYC low-ESR radial only. No axial. |
 | Connectors | `connectors` (151) | EDAC 307 44-pin 0.156" card edge, KK 254. No KK 396. |
-| Crystals | none | No table. |
+| Crystals | none (now `crystals_th`, `crystals_smt`) | No table before phase 6. |
 | Trimpots | none | No table. |
 
 KiCad 10's stock libraries already have symbols for a good share of these, and we should
@@ -417,23 +417,25 @@ so they get no Active rows (Zilog CMOS codes from the 1989 book are Obsolete row
 Folded into phase 2 (`run_340_parallel_eeprom.py`). Listed here only because the request
 named it separately.
 
-### Phase 6: crystals (new table `crystals`)
+### Phase 6: crystals (new tables `crystals_th` and `crystals_smt`)
+
+Approved 2026-11-20: one type fragment, `db/schema/types/crystals.sql`, shared by a
+through-hole and an SMT table (the repo's `_th`/`_smt` split). Scope: through-hole for
+the vintage frequencies, plus the standard jellybean SMT families.
 
 | Column | Type | Why |
 |---|---|---|
-| `frequency` | TEXT | `3.579545MHz`; also `value` on the schematic |
-| `load_capacitance` | TEXT | `18pF` or `series`. Vintage oscillator circuits often want series-resonant. |
-| `frequency_tolerance` | TEXT | ±ppm at 25 °C |
-| `frequency_stability` | TEXT | ±ppm over temperature |
-| `esr_ohm` | TEXT | reuse name from electrolytics |
-| `oscillation_mode` | TEXT | fundamental / 3rd overtone (matters above ~20 MHz) |
-| `drive_level` | TEXT | µW max |
+| `frequency` | TEXT | `3.579545MHz`, `32.768kHz`; also `value` on the schematic |
+| `load_capacitance` | TEXT | `18pF` or `series`. The 8224 and 8284 want series-resonant crystals. |
+| `frequency_tolerance` | TEXT | `±20ppm` at 25 °C |
+| `frequency_stability` | TEXT | `±50ppm` over temperature; tuning forks give the parabolic coefficient |
+| `esr_ohm` | TEXT | maximum; name and `Ω` sign reused from `capacitors_electrolytic_th` |
+| `oscillation_mode` | TEXT | fundamental / 3rd overtone / tuning fork |
+| `drive_level` | TEXT | `1000µW max` |
 
-Package (HC-49/U, HC-49/US) goes in core `package`. Seed: one current HC-49 family
-(Abracon AB/ABL or ECS) at the classic frequencies: 1.0, 1.8432, 2.0, 2.4576, 3.579545,
-3.6864, 4.0, 4.194304, 4.9152, 6.0, 7.3728, 8.0, 10.0, 12.0, 14.31818, 16.0, 17.734475,
-18.432, 20.0 MHz. Crystals only for now. DIP-14/DIP-8 can oscillators are out of scope
-(decided 2026-11-18).
+Holder (HC-49/U, HC-49/US, SMD 3.2x2.5mm 4-pad, ...) goes in core `package`; operating
+temperature in the core temperature columns. Crystals only: DIP-14/DIP-8 can
+oscillators are out of scope (decided 2026-11-18).
 
 ### Phase 7: through-hole trimpots (new table `potentiometers_th`)
 
@@ -499,8 +501,8 @@ explicitly.
 5. ~~**DRAM**~~ Decided: included in phase 2 (2026-11-18).
 6. **Schema reviews:** phase 2's, 3's and 4's columns are approved (phase 3 on
    2026-11-20, adding `data_bus_bits` and `clock_source`; phase 4 on 2026-11-20, with
-   `gpio_count` and `active_current`). Phases 6 and 7 still need sign-off before their
-   fragments are written.
+   `gpio_count` and `active_current`; phase 6 on 2026-11-20). Phase 7 still needs
+   sign-off before its fragment is written.
 7. ~~**Phase 2 grades**~~ Decided: one row per speed/power grade, sharing symbol and
    footprint.
 8. ~~**Phase 2 optional parts**~~ Decided (2026-11-19): all in (DS1225/DS1230, 2118,
@@ -957,3 +959,84 @@ Follow-ups:
 - MC68230 and MC68681 sheets say nothing about plastic availability beyond the codes
   above; check a later Motorola book if exact plastic codes matter.
 - PLCC versions and the military/industrial grades are out of scope (DIP only).
+
+### Phase 6: crystals (done 2026-11-20)
+
+New tables `crystals_th` and `crystals_smt` on one fragment
+(`db/schema/types/crystals.sql`), registered in `table_map.json`, `PAIRS` and the
+chooser as "Crystals (Through-Hole)" and "Crystals (SMT)". Shared row builder, value
+formats and Abracon option decoder in `tools/crystal_rows.py`. 226 rows, all Active,
+each code checked as stocked at Mouser on 2026-11-20 and decoded from the
+manufacturer's part-numbering key:
+
+| Table | Generator | Rows | Parts |
+|---|---|---|---|
+| `crystals_th` | `run_300_abracon_ab.py` | 32 | Abracon AB HC-49/U, 1.8432-50 MHz, -B2 grade (-20 to 70 C, ±20 ppm, 18 pF), plus AB-4.433619MHZ |
+| | `run_310_ecs_hc49ux.py` | 43 | ECS HC-49UX: 30 series-resonant codes, 12 parallel codes at vintage frequencies AB lacks, ECS-10-13-1XH (1 MHz) |
+| | `run_320_abracon_abl.py` | 30 | Abracon ABL HC-49/US, 3.579545-48 MHz, -B2 grade |
+| | `run_330_abracon_ab26t.py` | 4 | Abracon AB26T 32.768 kHz cylinder |
+| `crystals_smt` | `run_300_abracon_abls.py` | 26 | Abracon ABLS HC-49/US SMD, -B2-T grade |
+| | `run_310_abracon_abm3.py` | 34 | Abracon ABM3 (5032 2-pad) and ABM3B (5032 4-pad), -B2-T grade |
+| | `run_320_abracon_abm8g.py` | 18 | Abracon ABM8G 3225, -18-D2Y-T grade (18 pF, -40 to 85 C) |
+| | `run_330_abracon_abm10.py` | 27 | Abracon ABM10 2520, -E20-T and -D30-T3 grades |
+| | `run_340_abracon_32khz.py` | 12 | Abracon ABS25 (8038) and ABS07 (3215) 32.768 kHz |
+
+Vintage frequencies, from the OSI SAMS Computerfacts parts lists (C1P, C2/C3, C4P in
+`~/vsrc/osiweb`) and the machines' own manuals and schematics (S = secondary
+source):
+
+| MHz | Machine | Row |
+|---|---|---|
+| 1.000 | KIM-1, SYM-1 | ECS-10-13-1XH |
+| 1.7971 | SWTPC MP-A (MC14411 and CPU) | none: not stocked |
+| 1.8432 | MC14411 datasheet | AB, ECS series |
+| 2.000 | Altair 8800 | AB, ECS series |
+| 2.4576 | Altair 88-2SIO | ECS-24-32-1X |
+| 3.52180 | COSMAC VIP | none: not stocked |
+| 3.579545 | Netronics Elf II, OSI C4P 540, Atari (S) | AB, ABL, ABLS, ECS series |
+| 3.93216 | OSI C1P 600 board | ECS-39-17-1X |
+| 4.000 | AIM-65, OSI 470/505/550/555, North Star MDS | AB, ABLS, ECS series |
+| 4.433618 | VIC-20 PAL (S) | ECS-44-20-1X, AB-4.433619MHZ |
+| 8.000 | OSI 510, North Star ZPB-A, Cromemco ZPU | AB, ABL, ABLS, ABM3B, ECS series |
+| 10.6445 | TRS-80 Model I | none: not stocked |
+| 10.738635 | TI-99/4A TMS9918 (S) | ECS-107-S-1X |
+| 12.000 | OSI C4P 540, TI-99/4A tank (S) | AB, ABL, ABLS, ABM3/3B/8G, ECS series |
+| 14.31818 | Apple 1, Apple II, IBM PC, VIC-20/C64 NTSC (S) | every MHz family |
+| 17.734475 | C64 PAL (S) | AB-17.734475-B4 |
+| 18.000 | IMSAI MPU-A (8224), an OSI C2/C3 board | ECS-180-20-1X, ECS-180-S-1X |
+| 18.432 | Heathkit H8 (8224) | AB, ABL, ABLS, ABM3/3B/8G/10, ECS series |
+| 48.000 | TI-99/4A TIM9904 (S) | AB, ABL, ABLS, ABM3/3B/8G/10, ECS-480-S-1X |
+
+Unconfirmed in any source found: Quest Super Elf, SWTPC MP-S, PET 2001, ZX80, H89.
+The SWTPC MP-A crystal is 1.7971 MHz, not 1.8432 (that is the MSI CP-1).
+
+- **Grades:** one standard grade per family, the one Mouser stocks most widely.
+  AB/ABL/ABLS/ABM3/ABM3B use -B2 (and -B2F, fundamental above 24 MHz); ECS uses its
+  standard grade. All 32.768 kHz load-capacitance and tolerance codes in stock are
+  included, since the load matters to the RTC.
+- **ECS selection:** series-resonant codes at the datasheet's developed frequencies,
+  and parallel codes only where AB is not stocked. Mouser lists ECS-100-S-1X with a
+  20 pF load; the key says series, and the row follows the key.
+- **ECS-107-S-1X:** its abbreviation (107 = 10.738635 MHz) is not in the HC-49UX
+  developed-frequency table; it is added as a listed exception.
+- **Not generated:** 1.7971, 3.52180 and 10.6445 MHz (no stocked HC-49/U part);
+  ABS07-32.768KHZ-1-T
+  (its "1" may be the 0.65 mm height option or ±10 ppm); the odd-frequency ECS codes
+  and the 32.000/100.000 kHz ABS25 parts.
+- **MPN spellings:** Mouser prints AB-17.734475-B4 without "MHZ" (kept) and
+  ABL4.194304MHZB2 without dashes (written as the key gives it, Mouser spelling in
+  keywords).
+- **Symbols:** stock `Device:Crystal` (2-pad and through-hole),
+  `Device:Crystal_GND24` (ABM3B/ABM8G/ABM10: crystal on 1-3, lid on 2/4) and
+  `Device:Crystal_GND23` (ABS25: crystal on 1-4; pads 2/3 float, so grounding them is
+  harmless).
+- **Footprints:** stock `Crystal:` footprints, Abracon-specific where KiCad has one.
+  ABL uses `Crystal_HC49-4H_Vertical` (same land pattern, outline 0.5 mm taller);
+  ABS07 uses the generic `Crystal_SMD_3215-2Pin_3.2x1.5mm`.
+
+Follow-ups:
+- A source for 10.6445 MHz (TRS-80), 1.7971 MHz (SWTPC) and 3.52180 MHz (VIP) would
+  need a custom-crystal maker; leave as a note unless asked.
+- HC-49/U-3pin, HC-18/U and HC-33/U holders are not seeded (no stocked parts at the
+  vintage frequencies checked).
+
