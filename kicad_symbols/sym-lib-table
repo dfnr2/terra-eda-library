@@ -18,6 +18,7 @@
   (lib (name "terra_symbols_ic_microprocessors")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_ic_microprocessors.kicad_sym")(options "")(descr ""))
   (lib (name "terra_symbols_ic_nvram")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_ic_nvram.kicad_sym")(options "")(descr ""))
   (lib (name "terra_symbols_ic_opamp")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_ic_opamp.kicad_sym")(options "")(descr ""))
+  (lib (name "terra_symbols_ic_peripherals")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_ic_peripherals.kicad_sym")(options "")(descr ""))
   (lib (name "terra_symbols_inductors")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_inductors.kicad_sym")(options "")(descr ""))
   (lib (name "terra_symbols_led_drivers")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_led_drivers.kicad_sym")(options "")(descr ""))
   (lib (name "terra_symbols_misc")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_misc.kicad_sym")(options "")(descr ""))

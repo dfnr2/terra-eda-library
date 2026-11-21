@@ -1,9 +1,9 @@
 # Vintage computer parts
 
 **Date:** 2026-11-17
-**Status:** Phases 1, 2 (schema, SRAM, DRAM, NVRAM, EPROM, EEPROM, bipolar PROM) and
-3 (CPUs) done (see Results). Decisions in "Open questions" are needed before phases 4
-and 6.
+**Status:** Phases 1, 2 (schema, SRAM, DRAM, NVRAM, EPROM, EEPROM, bipolar PROM),
+3 (CPUs) and 4 (support chips) done (see Results). Decisions in "Open questions" are
+needed before phases 6 and 7.
 **Scope:** bring terra up to the point where a 1975-85 microcomputer (KIM-1, Apple I/II,
 SWTPC, S-100, COSMAC ELF, TRS-80, Z80 SBC, or a modern retro build) can be drawn with
 fully qualified parts. That means the bus buffers, memory, CPUs and their support chips,
@@ -381,27 +381,36 @@ in `_cpu.py`, custom pin tables in `_pinouts.py`.
 ### Phase 4: support chips (new table `ic_peripherals`)
 
 Same reasoning as phase 3. A separate table rather than one "vintage" table, because
-modern bus peripherals (16550 UART, 82C55) belong here later too.
+modern bus peripherals (16550 UART, 82C55) belong here later too. Columns approved
+2026-11-20 (fragment `db/schema/types/ic_peripherals.sql`):
 
 | Column | Type | Why |
 |---|---|---|
-| `family` | TEXT | bus family it was designed for: `6800`, `6502`, `8080`, `Z80`, `1802` |
-| `peripheral_function` | TEXT | PIA / VIA / ACIA / UART / CRTC / VDG / PPI / timer / interrupt controller / DMA / clock generator / system controller / bus driver |
+| `family` | TEXT | bus family it was designed for, same values as `ic_microprocessors.family`: `6502`, `6800`, `Z80`, `8080`, `8086`, `68000`, `1802`, `9900` |
+| `peripheral_function` | TEXT | PIA / VIA / ACIA / UART / CRTC / VDG / PPI / timer / interrupt controller / DMA / floppy controller / clock generator / bus controller / system controller / bus driver / I/O port |
 | `technology` | TEXT | shared with phase 3 |
 | `max_clock` | TEXT | bus speed grade (6821 vs 68A21 vs 68B21) |
-| `io_lines` | INTEGER | e.g. 20 for 6522 (PA, PB, CA1/2, CB1/2) |
-| `channels` | INTEGER | reuse from `ic_logic`: timers, serial channels |
+| `gpio_count` | INTEGER | programmable parallel I/O lines (16 on a 6522, 24 on an 8255); name reused from `ic_microcontrollers` |
+| `channels` | INTEGER | reused from `ic_logic`: timers, serial channels, DMA channels |
 | `supply_voltage_min` / `_max`, `supply_rails` | REAL / TEXT | shared |
+| `active_current` | TEXT | ICC max as printed, as in phase 3 |
 | `special_features` | TEXT | e.g. 6532 has 128 B RAM; 6530 has mask ROM |
 
-Families:
+Families (every speed grade, plastic DIP, commercial temperature):
 
-- **6502:** 6520, 6522, 6530, 6532, 6551 ACIA (+ W65C22, W65C51N). The request's "6550"
-  meant the 6551.
+- **6502:** 6520, 6522, 6530, 6532, 6551 ACIA (+ Active WDC W65C21N/S, W65C22N/S,
+  W65C51N). The request's "6550" meant the 6551.
 - **6800/6809:** 6820/6821, 6840, 6843, 6844, 6845, 6847, 6850, 6852, 6854.
 - **Z80:** PIO (Z8420), CTC (Z8430), SIO/0-2 (Z8440-2), DART (Z8470), DMA (Z8410), CMOS Z84Cxx.
 - **8080:** 8212, 8216/8226, 8224, 8228/8238, 8251, 8253, 8255, 8257, 8259, 8279.
+- **8086/8088 (added 2026-11-20):** 8284A clock generator, 8288 bus controller.
+- **68000 (added 2026-11-20):** MC68230 PI/T, MC68901 MFP, MC68681 DUART.
+- **TMS9900 (added 2026-11-20):** TIM9904 four-phase clock generator, TMS9901, TMS9902.
 - **1802:** CDP1852, CDP1853, CDP1854, CDP1861 (Pixie).
+
+Modern drop-ins checked on Mouser 2026-11-20: the WDC DIPs are Active and stocked; the
+Renesas/Intersil CP82C55A and CP82C59A and the Zilog CMOS Z84C20 family are End of Life,
+so they get no Active rows (Zilog CMOS codes from the 1989 book are Obsolete rows).
 
 ### Phase 5: modern parallel EEPROM
 
@@ -488,9 +497,10 @@ explicitly.
 3. ~~**"6550"**~~ Decided: it meant the 6551 ACIA, already in phase 4.
 4. ~~**Crystal oscillators**~~ Decided: crystals only for now.
 5. ~~**DRAM**~~ Decided: included in phase 2 (2026-11-18).
-6. **Schema reviews:** phase 2's and phase 3's columns are approved (phase 3 on
-   2026-11-20, adding `data_bus_bits` and `clock_source`). Phases 4, 6 and 7 still
-   need sign-off before their fragments are written.
+6. **Schema reviews:** phase 2's, 3's and 4's columns are approved (phase 3 on
+   2026-11-20, adding `data_bus_bits` and `clock_source`; phase 4 on 2026-11-20, with
+   `gpio_count` and `active_current`). Phases 6 and 7 still need sign-off before their
+   fragments are written.
 7. ~~**Phase 2 grades**~~ Decided: one row per speed/power grade, sharing symbol and
    footprint.
 8. ~~**Phase 2 optional parts**~~ Decided (2026-11-19): all in (DS1225/DS1230, 2118,
@@ -889,3 +899,61 @@ Follow-ups:
 - PLCC versions (MC68000FN, W65C02S PLCC/QFP, Z84C00 VEC) are out of scope (DIP only).
 - Rockwell R65C02 and the NMOS 6510/6512-6515 are not generated.
 
+### Phase 4: support chips (done 2026-11-20)
+
+New table `ic_peripherals` (fragment `db/schema/types/ic_peripherals.sql`, registered
+in `table_map.json`, `PAIRS` and the chooser as "Microprocessor Peripherals"). 109
+rows, one classic maker per chip, every speed grade, plastic DIP, commercial
+temperature unless the book gives only a wider range:
+
+| Generator | Rows | Parts | Source |
+|---|---|---|---|
+| `run_300_6502.py` | 14 | MOS MPS6520/A, MPS6522/A, MPS6530, MPS6532/A, MPS6551/A; WDC W65C21N/S6TPG-14, W65C22N/S6TPG-14, W65C51N6TPG-14 | 1982-83 MOS/Commodore Data Catalog; current WDC sheets |
+| `run_310_6800.py` | 24 | Motorola MC6821, MC6840, MC6844, MC6845, MC6850, MC6852, MC6854 (each P, AP, BP); MC6843P; MC6847P, MC6847YP | 1983 Motorola 8-Bit Microprocessor and Peripheral Data; 1981 Motorola Microprocessors Data Manual (MC6843) |
+| `run_320_68000.py` | 4 | MC68230P8/P10, MC68901P, MC68681P | 1981 Microprocessors Data Manual; MC68901 manual (Jan 1984); MC68681 manual (Sep 1985) |
+| `run_330_z80.py` | 37 | Zilog Z8420/Z8430/Z8440/Z8441/Z8442/Z8470 PS/APS/BPS, Z8410PS/APS; Z84C20/30/40/42 04/06/08PSC, Z84C4104/06PSC, Z84C1004/06/08PEC | 1982 Zilog Data Book; 1989 Zilog Z80 Family Data Book |
+| `run_340_intel.py` | 20 | P8212, P8216, P8226, P8224, P8228, P8238, P8251A, P8253/-5, P8255A/-5, P8257/-5, P8259A/-2/-8, P8279/-5, P8284A, P8288 | 1981 Intel Component Data Catalog |
+| `run_350_1802.py` | 7 | RCA CDP1852E/CE, CDP1853E/CE, CDP1854AE/ACE, CDP1861CE | 1982 RCA CMOS LSI Products |
+| `run_360_tms9900.py` | 3 | TI TMS9901NL, TMS9902NL, SN74LS362N (TIM9904) | 1978 9900 Family Systems Design and Data Book |
+
+- **Lifecycle:** the five WDC parts are Active (Mouser stock, 2026-11-20). Everything
+  else is Obsolete. The Zilog CMOS peripherals (Z84C2008PEG etc.) are End of Life at
+  Mouser, and the Renesas/Intersil CP82C55A and CP82C59A are too, so the Intel family
+  has no Active CMOS row.
+- **Codes built from a book's key or a package note, not printed per chip:** Intel
+  P-prefix codes (catalog ordering rule), RCA CDP1852E/CE and CDP1853E/CE (suffix
+  key), MC6847P/MC6847YP and MC6843P ("P SUFFIX PLASTIC PACKAGE"), MC68230P8/P10
+  (the sheet prints only L8/L10 and "P suffix plastic package available 2Q82"),
+  SN74LS362N (the TIM9904 sheet prints no code; neighbouring TIM990x sheets order
+  SN74LSxxx in "J OR N PACKAGE"). MOS codes come from the catalog's cross reference.
+- **Not generated:** MC6820 (no sheet in either Motorola book; the MC6821 replaced it),
+  6532B and 6551B (in the key or feature list but with no B timing), MC6847T1 (not in
+  either book), the MC2681/MC2682 (general-bus DUART variants), TMS9901-40/9902-40
+  (DESIGN GOAL), 8224-4 and 8284A-1 (not in the 1981 catalog), the 1989 NMOS Zilog
+  codes (Z0842004PSC etc., same parts as the 1982 A/B grades), CMOS DART (none
+  exists), Z84C43/44 and Z84C90 (no DIP).
+- **Technology:** the 8212/8216/8226/8224/8228/8238 sheets don't name the process;
+  they are recorded as bipolar from their TTL characteristics. NMOS is assumed for the
+  8255A, 8257 and 8279. The MC68901 and MC68681 manuals don't name it, so
+  `technology` is NULL. RCA parts are -40 to 85 C (no 0-70 C grade), and the CMOS
+  Z80 DMA is E temperature only (-40 to 100 C), as the CPU's Z84C0010PEC.
+- **Footprints:** stock DIP, 0.6" except the 16/18/20-pin parts (8216/8226, 8224,
+  8284A, 8288, CDP1853, TMS9902, TIM9904) at 0.3". The MOS book has no 28-pin outline;
+  the 6551 is taken as 0.6" from the pin-compatible W65C51N.
+- **Symbols:** stock where the pinout matches pin for pin, active-low bars included:
+  `Interface:6821`, `Interface:MC6843`, `Interface:MC6844`, `GPU:MC6845`,
+  `Interface:Z8420`, `Timer:8253`, `Interface:8255A`, `Interface:8259A`,
+  `Timer:8284` (8284A) and `Interface:8288`. 37 custom symbols in
+  `kicad_symbols/terra_symbols_ic_peripherals.kicad_sym` from
+  `db/tables/ic_peripherals/_pinouts.py`, including MC6840 (stock types D0-D7 as
+  inputs), MC6850 (stock drops the bar on ~{CS2}) and MC68230/MC68681 (stock drops
+  every bar). The WDC parts get their own symbols with WDC's B-suffix names; the
+  W65C22N and W65C22S differ in IRQB type (open drain vs totem pole). One symbol per
+  SIO bonding option (Z8440/Z8441/Z8442).
+
+Follow-ups:
+- 6530 mask-ROM variants (e.g. the KIM-1's 6530-002/-003) are not generated; the row
+  is the generic MPS6530.
+- MC68230 and MC68681 sheets say nothing about plastic availability beyond the codes
+  above; check a later Motorola book if exact plastic codes matter.
+- PLCC versions and the military/industrial grades are out of scope (DIP only).
