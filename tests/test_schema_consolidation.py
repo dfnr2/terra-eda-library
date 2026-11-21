@@ -76,6 +76,7 @@ PAIRS = {  # type -> list of all tables that must share columns
     "ic_microprocessors": ["ic_microprocessors"],
     "ic_peripherals": ["ic_peripherals"],
     "crystals": ["crystals_th", "crystals_smt"],
+    "potentiometers": ["potentiometers_th"],
     "test_points": ["test_points"],
     "batteries": ["batteries"],
     "capacitors_electrolytic": ["capacitors_electrolytic_th"],

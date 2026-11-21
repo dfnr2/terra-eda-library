@@ -2,8 +2,8 @@
 
 **Date:** 2026-11-17
 **Status:** Phases 1, 2 (schema, SRAM, DRAM, NVRAM, EPROM, EEPROM, bipolar PROM),
-3 (CPUs), 4 (support chips) and 6 (crystals) done (see Results). Phase 7 needs its
-columns signed off (see "Open questions").
+3 (CPUs), 4 (support chips), 6 (crystals) and 7 (trimpots) done (see Results).
+Phases 8 (connectors) and 9 (electrolytics) remain.
 **Scope:** bring terra up to the point where a 1975-85 microcomputer (KIM-1, Apple I/II,
 SWTPC, S-100, COSMAC ELF, TRS-80, Z80 SBC, or a modern retro build) can be drawn with
 fully qualified parts. That means the bus buffers, memory, CPUs and their support chips,
@@ -21,7 +21,7 @@ What terra already has (row counts from `db/terra.db`, 2026-11-17):
 | Electrolytics | `capacitors_electrolytic_th` (118) | Chemi-Con KYC low-ESR radial only. No axial. |
 | Connectors | `connectors` (151) | EDAC 307 44-pin 0.156" card edge, KK 254. No KK 396. |
 | Crystals | none (now `crystals_th`, `crystals_smt`) | No table before phase 6. |
-| Trimpots | none | No table. |
+| Trimpots | none (now `potentiometers_th`) | No table before phase 7. |
 
 KiCad 10's stock libraries already have symbols for a good share of these, and we should
 use them where the pinout matches (checked in `/usr/share/kicad/symbols`):
@@ -33,7 +33,8 @@ use them where the pinout matches (checked in `/usr/share/kicad/symbols`):
 - **Memory:** MK4116, MK4164, HY6264, 62256 (CY/HM/KM), 2764/27128/27256/27512, 27C64-27C080,
   28C256, KM28C64A.
 - **Passives:** `Device:Crystal`, `Device:R_Potentiometer_Trim`, with stock
-  `Crystal:` and `Potentiometer_THT:` footprints (Bourns 3296/3362 among them).
+  `Crystal:` and `Potentiometer_THT:` footprints (Bourns 3296, but no 3362; see the
+  phase 7 results).
 
 Missing, so these need custom symbols: 6502/65C02, 6520 (but it shares the 6821 pinout,
 so check whether `Interface:6821` can be reused), 6522, 6530/6532, 6551, 6847, 8085, 8212,
@@ -448,8 +449,11 @@ The tail reuses `resistors_th` names. `value` is the resistance.
 | `turns` | INTEGER | new: 1 vs 25 changes the part's use |
 | `adjustment` | TEXT | new: top / side |
 
-Seed: Bourns 3296 (W top, Y side; 25-turn 3/8") and 3362 (P/H/U; single-turn 1/4") in the
-standard 1-2-5 decade values, 10 Ω-2 MΩ, on stock `Potentiometer_THT:` footprints.
+Approved 2026-11-21. Type `potentiometers` (fragment
+`db/schema/types/potentiometers.sql`), so a later `potentiometers_smt` can share it.
+Seed: Bourns 3296 (25-turn 3/8"; all five pin styles: W and Y top adjust, P, X and Z side
+adjust) and 3362 (single-turn 1/4"; P, H and U, all top adjust) in the datasheets'
+standard resistance table, 10 Ω-2 MΩ (the 1-2-5 values plus 25 kΩ and 250 kΩ).
 
 ### Phase 8: vintage connectors (`connectors`)
 
@@ -501,8 +505,8 @@ explicitly.
 5. ~~**DRAM**~~ Decided: included in phase 2 (2026-11-18).
 6. **Schema reviews:** phase 2's, 3's and 4's columns are approved (phase 3 on
    2026-11-20, adding `data_bus_bits` and `clock_source`; phase 4 on 2026-11-20, with
-   `gpio_count` and `active_current`; phase 6 on 2026-11-20). Phase 7 still needs
-   sign-off before its fragment is written.
+   `gpio_count` and `active_current`; phase 6 on 2026-11-20; phase 7 on 2026-11-21).
+   Phases 8 and 9 add to existing tables and need no new columns.
 7. ~~**Phase 2 grades**~~ Decided: one row per speed/power grade, sharing symbol and
    footprint.
 8. ~~**Phase 2 optional parts**~~ Decided (2026-11-19): all in (DS1225/DS1230, 2118,
@@ -1039,4 +1043,42 @@ Follow-ups:
   need a custom-crystal maker; leave as a note unless asked.
 - HC-49/U-3pin, HC-18/U and HC-33/U holders are not seeded (no stocked parts at the
   vintage frequencies checked).
+
+### Phase 7: through-hole trimpots (done 2026-11-21)
+
+New table `potentiometers_th` on type `potentiometers` (fragment
+`db/schema/types/potentiometers.sql`), registered in `table_map.json`, `PAIRS` and the
+chooser as "Trimpots (Through-Hole)". Shared row builder and the Bourns standard
+resistance table in `db/tables/potentiometers_th/_pot.py`. 152 rows, all Active:
+
+| Generator | Rows | Parts |
+|---|---|---|
+| `run_300_bourns_3296.py` | 95 | Bourns 3296W/Y/P/X/Z-1-<code>LF, 25-turn, 3/8" square |
+| `run_310_bourns_3362.py` | 57 | Bourns 3362P/H/U-1-<code>LF, single-turn, 1/4" square |
+
+- **Specs** (both datasheets): ±10 %, 0.5 W at 70 °C (300 V max), ±100 ppm/°C, cermet,
+  -55 to 125 °C. `value` is the end-to-end resistance (`10kΩ`), formatted by
+  `passive_units`.
+- **Codes:** every standard-table value (19) in each style, tube packaging, LF (tin)
+  terminations, from the key "<model><style>-1-<code>LF". Mouser lists all 152 as
+  Active (checked 2026-11-21); 78 were on order rather than in stock that day (e.g.
+  3362P-1-102LF, 13,468 on order).
+- **Symbol:** stock `Device:R_Potentiometer_Trim`: pins 1 and 3 the ends, 2 the wiper,
+  matching Bourns' 1 CCW / 2 wiper / 3 CW.
+- **Footprints:** stock `Potentiometer_THT:Potentiometer_Bourns_3296*` for the 3296.
+  KiCad ships no 3362 footprint, so `run_310_bourns_3362.py` writes
+  `Potentiometer_Bourns_3362{P,H,U}_Vertical` to
+  `kicad_footprints/terra_footprints_potentiometers_th.pretty` from the datasheet
+  pin-style drawings (pin 1 at the origin, 6.60 x 6.99 mm body, 1.44 mm pads on 0.8 mm
+  drills as KiCad's 3296). The drawings are read as top views; the three styles are
+  mirror-symmetric, so a mirrored reading would only swap pins 1 and 3.
+- **Corrections to the original seed note:** 3296Y is top adjust (staggered pins), not
+  side adjust; the 3296 has five pin styles and all are seeded. The standard table
+  adds 25 kΩ and 250 kΩ to the 1-2-5 values.
+
+Follow-ups:
+- The 3362 side-adjust styles (M, S, W, X, Z) and top-adjust F and R are not seeded;
+  each would need its own terra footprint.
+- Carbon single-turn trimmers (Piher PT10/PT15 and the like), the round 3/8" Bourns
+  3386 and SMT trimmers are not seeded.
 

@@ -50,6 +50,7 @@ def get_display_name(table_name: str) -> str:
         'ic_peripherals': 'Microprocessor Peripherals',
         'crystals_th': 'Crystals (Through-Hole)',
         'crystals_smt': 'Crystals (SMT)',
+        'potentiometers_th': 'Trimpots (Through-Hole)',
         'ic_nvram': 'NVRAM ICs',
         'ic_opamp': 'Op-Amps',
     }
