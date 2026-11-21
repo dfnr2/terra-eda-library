@@ -1,8 +1,8 @@
 # Vintage computer parts
 
 **Date:** 2026-11-17
-**Status:** Phase 1 done; phase 2 (schema, SRAM, DRAM, NVRAM, EPROM, EEPROM and
-bipolar PROM) done (see Results). Decisions in "Open questions" are needed before phases 3, 4
+**Status:** Phases 1, 2 (schema, SRAM, DRAM, NVRAM, EPROM, EEPROM, bipolar PROM) and
+3 (CPUs) done (see Results). Decisions in "Open questions" are needed before phases 4
 and 6.
 **Scope:** bring terra up to the point where a 1975-85 microcomputer (KIM-1, Apple I/II,
 SWTPC, S-100, COSMAC ELF, TRS-80, Z80 SBC, or a modern retro build) can be drawn with
@@ -352,24 +352,31 @@ counts, sources and follow-ups to Results.
 ### Phase 3: CPUs (new table `ic_microprocessors`)
 
 `ic_microcontrollers` is the wrong home: its tail is flash/RAM/GPIO/peripheral counts,
-and all of those would be NULL for a 6502. Proposed fragment `ic_microprocessors`
-(reusing names from `ic_microcontrollers` where the meaning matches):
+and all of those would be NULL for a 6502. Fragment `db/schema/types/ic_microprocessors.sql`
+(columns approved 2026-11-20; names reused from `ic_microcontrollers`/`ic_memory` where
+the meaning matches):
 
 | Column | Type | Why |
 |---|---|---|
-| `family` | TEXT | reuse: `6502`, `6800`, `6809`, `Z80`, `8080`, `8085`, `1802` |
-| `core` | TEXT | reuse: `NMOS 6502`, `CMOS 65C02`, `Z80A` … |
-| `technology` | TEXT | new: NMOS / CMOS / HMOS; drives power, static clocking, 5 V tolerance |
+| `family` | TEXT | reuse: `6502`, `6800`, `6809`, `68000`, `Z80`, `8080`, `8085`, `8086`, `1802`, `9900` |
+| `core` | TEXT | reuse: `NMOS 6502`, `CMOS 65C02`, `NMOS Z80` … |
+| `technology` | TEXT | new: NMOS / CMOS / HMOS; drives power, static clocking. Shared with phase 4. |
 | `architecture_bits` | INTEGER | reuse |
-| `address_bus_bits` | INTEGER | new: 16 for most, 20 for 8088 |
-| `max_clock` | TEXT | reuse: speed grade, e.g. `2 MHz` (MC68B09) |
+| `data_bus_bits` | INTEGER | new: 8088 is 16-bit inside with an 8-bit bus; 68008 vs 68000 |
+| `address_bus_bits` | INTEGER | new: 16 for most, 20 for 8086/8088/68008, 24 for 68000/65816 |
+| `max_clock` | TEXT | reuse: speed grade, e.g. `2MHz` (MC68B09) |
+| `clock_source` | TEXT | new: `on-chip oscillator`, `external single-phase`, `external two-phase`, `external four-phase`; decides which clock chip the board needs |
 | `supply_voltage_min` / `_max` | REAL | reuse |
-| `supply_rails` | TEXT | shared with `ic_memory`: 8080 needs +5/-5/+12 |
-| `special_features` | TEXT | reuse: on-chip clock (6802, 8085), on-chip RAM (6802), DRAM refresh (Z80) |
+| `supply_rails` | TEXT | shared with `ic_memory`: 8080A/TMS9900 need +12/+5/-5 |
+| `active_current` | TEXT | reuse: ICC max, or the power dissipation the book gives |
+| `special_features` | TEXT | reuse: on-chip RAM (6802), DRAM refresh (Z80), SID/SOD (8085) … |
 
-Generators by family: `run_300_6502.py` (MOS/Rockwell/Synertek 6502/6503-6507, WDC W65C02S),
-`run_310_6800.py` (6800/6802/6808/6809/6809E), `run_320_z80.py` (Zilog Z80/Z80A/Z80B NMOS,
-Z84C00 CMOS), `run_330_8080.py` (8080A/8085A), `run_340_1802.py` (CDP1802A/AC/BC).
+Scope (decided 2026-11-20): the families above plus 8086/8088, 68000/68010/68008,
+65802/65816 and TMS9900. Generators by family: `run_300_6502.py` (MOS 6502-6507, GTE
+G65SC802, WDC W65C02S/W65C816S), `run_310_6800.py` (6800/6802/6808/6809/6809E),
+`run_320_68000.py`, `run_330_z80.py` (Z80/A/B/H, Z84C00), `run_340_intel.py`
+(8080A/8085A/8086/8088), `run_350_1802.py`, `run_360_tms9900.py`. Shared row builder
+in `_cpu.py`, custom pin tables in `_pinouts.py`.
 
 ### Phase 4: support chips (new table `ic_peripherals`)
 
@@ -481,8 +488,9 @@ explicitly.
 3. ~~**"6550"**~~ Decided: it meant the 6551 ACIA, already in phase 4.
 4. ~~**Crystal oscillators**~~ Decided: crystals only for now.
 5. ~~**DRAM**~~ Decided: included in phase 2 (2026-11-18).
-6. **Schema reviews:** phase 2's columns are approved. Phases 3, 4, 6 and 7 still need
-   sign-off before their fragments are written.
+6. **Schema reviews:** phase 2's and phase 3's columns are approved (phase 3 on
+   2026-11-20, adding `data_bus_bits` and `clock_source`). Phases 4, 6 and 7 still
+   need sign-off before their fragments are written.
 7. ~~**Phase 2 grades**~~ Decided: one row per speed/power grade, sharing symbol and
    footprint.
 8. ~~**Phase 2 optional parts**~~ Decided (2026-11-19): all in (DS1225/DS1230, 2118,
@@ -834,3 +842,50 @@ Follow-ups:
   and the ST SOH28 SNAPHAT parts (M48Z35Y/M48Z58Y-70MH1F). They need SMT footprints.
 - Timekeepers (`rtc` = Yes): the ST M48T02/08/35/58 and Dallas DS1643/DS1644 are the
   obvious next rows. Stock `Memory_RAM:M48Tx2` covers the 24-pin ones.
+
+### Phase 3: CPUs (done 2026-11-20)
+
+New table `ic_microprocessors` (fragment `db/schema/types/ic_microprocessors.sql`,
+registered in `table_map.json`, `PAIRS` and the chooser as "Microprocessors"). 70 rows,
+one classic maker per chip, every speed grade, plastic DIP, commercial temperature
+unless the book gives only a wider range:
+
+| Generator | Rows | Parts | Source |
+|---|---|---|---|
+| `run_300_6502.py` | 24 | MOS MPS6502-6507 (1/2/3 MHz: none/A/B), GTE G65SC802P-2..-8, WDC W65C02S6TPG-14, W65C816S6PG-14 | 1982 MOS Technology Data Catalog 2-14..2-24; 1987 GTE Microcircuits Data Book 1-83..1-103; current WDC sheets |
+| `run_310_6800.py` | 16 | Motorola MC6800/68A00/68B00, MC6802/A/B + MC6802NS, MC6808/A/B, MC6809/A/B, MC6809E/A/B, P suffix | 1983 Motorola 8-Bit Microprocessor and Peripheral Data |
+| `run_320_68000.py` | 9 | MC68000G4-G12, MC68008P8/P10, MC68010P8/P10 | Motorola data sheets, Apr 1983 / Apr 1985 / May 1985 |
+| `run_330_z80.py` | 8 | Zilog Z8400PS/APS/BPS, Z0840008PSC (Z80H), Z84C0004/06/08PSC, Z84C0010PEC | 1982 Zilog Data Book; 1989 Zilog Z80 Family Data Book |
+| `run_340_intel.py` | 9 | P8080A/-1/-2, P8085A/-2, P8086/-2/-1, P8088 | 1981 Intel Component Data Catalog |
+| `run_350_1802.py` | 3 | RCA CDP1802AE, CDP1802ACE, CDP1802BCE | 1982 RCA CMOS LSI Products |
+| `run_360_tms9900.py` | 1 | TI TMS9900NL | TMS 9900 Data Manual (May 1976); 1978 9900 Family Systems Design and Data Book |
+
+- **Lifecycle:** WDC W65C02S6TPG-14 and W65C816S6PG-14 Active (Mouser stock,
+  2026-11-20). Everything else Obsolete, including the Z84C00 (Zilog EOL notice
+  2024-04-15, Digi-Key Obsolete). Renesas still lists the CDP1802A, but only as the
+  military ceramic CDP1802ACD3, which no distributor carries, so there is no Active
+  1802 row; its Renesas page is the `manufacturer_link`.
+- **Codes built from a book's key, not printed per chip:** MOS MPS codes ("MXS 65XX"
+  key), GTE G65SC802P-n, Intel P-prefix codes (catalog ordering rule; only P8085A-2 is
+  printed), RCA E-suffix codes, TMS9900NL (TI numbering key). WDC PDIP codes are taken
+  from Mouser because the sheets print only a PLCC example.
+- **Footprints:** stock DIP. The 64-pin MC68000/MC68010 and TMS9900 are 0.9" wide
+  (`DIP-64_W22.86mm`); the MOS book has no 28-pin outline, so the 6503-6507 are taken
+  as 0.6".
+- **Symbols:** stock where the pinout matches pin for pin (checked against each book):
+  `CPU_NXP_6800` per grade (6808 and 6802NS on the MC6802 symbols), `CPU_NXP_68000`
+  MC68000P/MC68008P/MC68010P, `CPU:Z84C00xxP` for all Z80s, `MCU_Intel:8080A`,
+  `CPU:CDP1802ACE/BCE`. 12 custom symbols in
+  `kicad_symbols/terra_symbols_ic_microprocessors.kicad_sym`: MPS6502 (also the
+  G65SC802), MPS6503-MPS6507, W65C02S, W65C816S, 8085A, 8086, 8088 (both with min-
+  and max-mode pin names; the stock 8088 symbols drop the bar on ~{DEN}), TMS9900.
+
+Follow-ups:
+- 8088-2: not in the 1981 Intel catalog; add from a later Intel book if wanted. The
+  1989 Zilog NMOS codes Z0840004/06PSC repeat the Z80A/Z80B grades and are not
+  generated.
+- TMS9900-40 (4 MHz): left out because the TI key doesn't show where the speed suffix
+  goes.
+- PLCC versions (MC68000FN, W65C02S PLCC/QFP, Z84C00 VEC) are out of scope (DIP only).
+- Rockwell R65C02 and the NMOS 6510/6512-6515 are not generated.
+

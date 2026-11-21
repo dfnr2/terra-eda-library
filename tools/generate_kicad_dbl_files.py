@@ -46,6 +46,7 @@ def get_display_name(table_name: str) -> str:
         'ic_logic': 'Logic ICs',
         'ic_memory': 'Memory ICs',
         'ic_microcontrollers': 'Microcontrollers',
+        'ic_microprocessors': 'Microprocessors',
         'ic_nvram': 'NVRAM ICs',
         'ic_opamp': 'Op-Amps',
     }
