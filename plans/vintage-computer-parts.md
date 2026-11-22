@@ -3,7 +3,8 @@
 **Date:** 2026-11-17
 **Status:** Phases 1, 2 (schema, SRAM, DRAM, NVRAM, EPROM, EEPROM, bipolar PROM),
 3 (CPUs), 4 (support chips), 6 (crystals) and 7 (trimpots) done (see Results).
-Phase 8 (connectors) is under way (KK 396 done); phase 9 (electrolytics) remains.
+Phase 8 (connectors) is under way (KK 396 and the 0.156" pin buses done; card edge and
+DIN 41612 remain); phase 9 (electrolytics) remains.
 **Scope:** bring terra up to the point where a 1975-85 microcomputer (KIM-1, Apple I/II,
 SWTPC, S-100, COSMAC ELF, TRS-80, Z80 SBC, or a modern retro build) can be drawn with
 fully qualified parts. That means the bus buffers, memory, CPUs and their support chips,
@@ -473,11 +474,15 @@ standard resistance table, 10 Ω-2 MΩ (the 1-2-5 values plus 25 kΩ and 250 kΩ
       EDAC 307 already in terra.
     - AIM-65 application and expansion: 44 positions (2x22), 0.156".
     - Generic 0.156" card edge in the common sizes (2x6 to 2x43).
-  - `run_390_bus_molex.py`, Molex 0.156" bus connectors:
-    - OSI 48-pin backplane bus.
-    - SWTPC SS-50 (50-pin) and SS-30 (30-pin) buses: motherboard pin headers and the
-      mating card-side sockets.
-    These may share parts with KK 396, so check `run_370` first.
+  - **0.156" pin buses (done 2026-11-21, see `plans/connectors-0156-bus.md`):** OSI's
+    48-line bus (4 x 12-pin) and SWTPC SS-50/SS-30 (5 / 3 x 10-pin, one pin pulled as
+    the key). Male side in round posts, as Dave asked: `run_390_te_mta156_round_post.py`,
+    TE MTA-156 640384, 2-15 positions (14 rows; 16-21 obsolete at TE). Card side:
+    `run_395_molex_kk156_41815.py`, Molex KK 156 41815 PCB receptacles (successors to
+    OSI's obsolete 09-52-3121/3123; 09-48-2101 for SWTPC), every Mouser-listed tin build
+    in right-angle, top-entry and bottom-entry styles (141 rows). Custom footprints for
+    both. Follow-ups: TE ratings (spec 108-1051 not yet parked) and the Molex 3190/3192
+    round-pin KK 396 headers as an alternative.
   - `run_400_din41612.py`: Eurocard DIN 41612. Type C 96-pin (3x32), type B 64-pin
     (2x32), and the 2-row a+c 64-pin, each as a right-angle male (board) and vertical
     female (backplane). Pick one classic maker per variant (ERNI, Harting or TE) that
