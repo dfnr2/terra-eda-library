@@ -182,6 +182,15 @@ normalize-footprints: $(VENV_MARKER) db/terra.db
 		$(PYTHON) tools/apply_3d_models.py --table $$t; \
 	done
 
+# STEP models for terra-generated connector footprints, built under headless FreeCAD
+# from each connector generator's model_specs(). Rebuilds only new/changed specs
+# (manifest: assets/3dmodels/terra-connectors.3dshapes/generated.json); a test fails
+# when a spec and its model drift. Edits committed files, so not part of all/build.
+FREECAD ?= freecad
+.PHONY: connector-models
+connector-models:
+	@QT_QPA_PLATFORM=offscreen $(FREECAD) tools/make_connector_models.py 2>&1 | grep -E "connector models|removed|Error|Traceback" || true
+
 # Generate rules for all discovered tables
 $(foreach table,$(TABLES),$(eval $(call TABLE_RULES,$(table))))
 

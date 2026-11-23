@@ -3,8 +3,9 @@
 **Date:** 2026-11-17
 **Status:** Phases 1, 2 (schema, SRAM, DRAM, NVRAM, EPROM, EEPROM, bipolar PROM),
 3 (CPUs), 4 (support chips), 6 (crystals) and 7 (trimpots) done (see Results).
-Phase 8 (connectors) is under way (KK 396 and the 0.156" pin buses done; card edge and
-DIN 41612 remain); phase 9 (electrolytics) remains.
+Phase 8 (connectors) is done apart from a lifecycle check on the card-edge sockets
+(KK 396, the 0.156" pin buses, card edge and DIN 41612 generated); phase 9
+(electrolytics) remains.
 **Scope:** bring terra up to the point where a 1975-85 microcomputer (KIM-1, Apple I/II,
 SWTPC, S-100, COSMAC ELF, TRS-80, Z80 SBC, or a modern retro build) can be drawn with
 fully qualified parts. That means the bus buffers, memory, CPUs and their support chips,
@@ -466,7 +467,9 @@ standard resistance table, 10 Ω-2 MΩ (the 1-2-5 values plus 25 kΩ and 250 kΩ
 - **Bus and card-edge connectors (decided 2026-11-18): all of the following.** Pitches and
   position counts here are from memory; confirm each against the computer's own
   documentation and the connector drawing.
-  - `run_380_card_edge.py`, card-edge sockets:
+  - `run_380_card_edge.py`, card-edge sockets (**generated 2026-11-22**, 56 EDAC parts
+    + `-pins` twins, see `plans/connectors-card-edge.md`; lifecycle still to check at
+    Mouser/Digi-Key). Original scope:
     - S-100: 100 positions (2x50), 0.125".
     - Apple II slot: 50 positions (2x25), 0.100".
     - Apple I expansion: 44 positions (2x22), 0.156".
@@ -483,8 +486,13 @@ standard resistance table, 10 Ω-2 MΩ (the 1-2-5 values plus 25 kΩ and 250 kΩ
     in right-angle, top-entry and bottom-entry styles (141 rows). Added 2026-11-22:
     `run_372_molex_kk396_round_pin.py`, Molex round-pin KK 396 headers 3190 (polarizing
     wall) and 3192 (flat wafer), 38 rows, and the TE voltage/temperature ratings from
-    spec 108-1051. Custom footprints for all three. Follow-up: TE current rating.
-  - `run_400_din41612.py`: Eurocard DIN 41612. Type C 96-pin (3x32), type B 64-pin
+    spec 108-1051 and the 7 A rating from catalog 82056. Custom footprints for all three.
+  - **Connector conventions (Dave, 2026-11-22), `plans/connectors-conventions.md`:**
+    every connector needs symbol, footprint and 3D model, plus a `-pins` per-pin symbol
+    row; retro-documented parts may go in without a drawing. Backfilled to run_340,
+    run_370, run_372, run_390 and run_395 (228 parts, 94 generated models).
+  - `run_400_din41612.py` (**done 2026-11-23**, Harting DIN-Signal, 6 parts + `-pins`
+    twins, see `plans/connectors-din41612.md`): Eurocard DIN 41612. Type C 96-pin (3x32), type B 64-pin
     (2x32), and the 2-row a+c 64-pin, each as a right-angle male (board) and vertical
     female (backplane). Pick one classic maker per variant (ERNI, Harting or TE) that
     publishes drawings.

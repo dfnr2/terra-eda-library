@@ -37,4 +37,7 @@
   (pad "10" thru_hole circle (at 35.640 0.000) (size 2.4 2.4) (drill 1.6) (layers *.Cu *.Mask))
   (pad "11" thru_hole circle (at 39.600 0.000) (size 2.4 2.4) (drill 1.6) (layers *.Cu *.Mask))
   (pad "12" thru_hole circle (at 43.560 0.000) (size 2.4 2.4) (drill 1.6) (layers *.Cu *.Mask))
+  (model "${TERRA_EDA_LIB}/assets/3dmodels/terra-connectors.3dshapes/TE_MTA-156_1-640384-2_1x12_P3.96mm_Vertical.step"
+    (offset (xyz 0 0 0)) (scale (xyz 1 1 1)) (rotate (xyz 0 0 0))
+  )
 )

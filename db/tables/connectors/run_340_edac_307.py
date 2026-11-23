@@ -9,11 +9,14 @@ Only the one orderable part is listed. The 307/357 drawing covers the whole seri
 (contact codes, mounting codes); other counts/codes are added by extending PARTS from
 that drawing. Plan: plans/connectors-edac-307-card-edge.md.
 Generated output (dump_priority=0, source=NULL) is not dumped to static SQL.
+Each part also has a per-pin symbol row (`-pins`, Conn_PerPin_EdgeLetter_2x22, _connkit.py).
 """
 import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+from _connkit import edge_letter_pins_id, edge_letter_pins_symbol, with_pins, write_symbols  # noqa: E402
 ROOT = HERE.parents[2]
 OUTPUT_FILE = HERE / "connectors_generated_340_edac_307.sql"
 CREATED_BY = Path(__file__).name
@@ -38,7 +41,7 @@ FAMILY = {
 }
 
 COLS = [
-    "unique_id", "part_locator", "mpn", "manufacturer", "value", "description",
+    "unique_id", "variant", "part_locator", "mpn", "manufacturer", "value", "description",
     "datasheet", "manufacturer_link", "kicad_symbol", "kicad_footprint",
     "lifecycle_status", "rohs", "allow_substitution", "tracking",
     "created_by", "source", "dump_priority", "tier", "keywords", "pin_count",
@@ -91,7 +94,8 @@ def insert(p):
 
 
 def main():
-    rows = list(parts())
+    write_symbols([edge_letter_pins_symbol(22)])
+    rows = with_pins(list(parts()), lambda r: edge_letter_pins_id(22))
     ids = [p["unique_id"] for p in rows]
     dupes = sorted({i for i in ids if ids.count(i) > 1})
     if dupes:

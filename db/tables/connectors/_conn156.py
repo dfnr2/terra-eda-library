@@ -5,9 +5,12 @@
 ``run_395_molex_kk156_41815.py`` (Molex KK 156 PCB receptacles) all write their own
 footprints into ``terra_footprints_connectors``, from the manufacturers' drawings, with
 pin 1 at the footprint origin and the row running along +x. KiCad ships neither
-family's footprints.
+family's footprints. Each footprint references a generated 3D model named after it,
+and each part also gets a per-pin symbol row (see ``_connkit.py``).
 """
 from pathlib import Path
+
+from _connkit import model_sexpr
 
 ROOT = Path(__file__).resolve().parents[3]
 FP_LIB = "terra_footprints_connectors"
@@ -15,7 +18,7 @@ FP_DIR = ROOT / "kicad_footprints" / f"{FP_LIB}.pretty"
 PITCH = 3.96
 
 COLS = [
-    "unique_id", "part_locator", "mpn", "manufacturer", "value", "description",
+    "unique_id", "variant", "part_locator", "mpn", "manufacturer", "value", "description",
     "datasheet", "manufacturer_link", "kicad_symbol", "kicad_footprint",
     "lifecycle_status", "rohs", "allow_substitution", "tracking",
     "created_by", "source", "dump_priority", "tier", "keywords", "pin_count",
@@ -38,8 +41,12 @@ def sql(v):
     return "'" + str(v).replace("'", "''") + "'"
 
 
-def write(output_file, title, created_by, rows):
-    """Write the INSERTs, failing on a duplicate unique_id rather than dropping rows."""
+def write(output_file, title, created_by, rows, extra_cols=()):
+    """Write the INSERTs, failing on a duplicate unique_id rather than dropping rows.
+
+    extra_cols: columns beyond COLS that this generator fills.
+    """
+    cols = COLS + [c for c in extra_cols if c not in COLS]
     ids = [r["unique_id"] for r in rows]
     dupes = sorted({i for i in ids if ids.count(i) > 1})
     if dupes:
@@ -52,8 +59,8 @@ def write(output_file, title, created_by, rows):
         "",
     ]
     for r in rows:
-        vals = ", ".join(sql(r.get(c)) for c in COLS)
-        lines.append(f"INSERT INTO connectors ({', '.join(COLS)}) VALUES ({vals});")
+        vals = ", ".join(sql(r.get(c)) for c in cols)
+        lines.append(f"INSERT INTO connectors ({', '.join(cols)}) VALUES ({vals});")
     lines += ["", "COMMIT;", ""]
     Path(output_file).write_text("\n".join(lines))
     print(f"Generated {Path(output_file).name}: {len(rows)} parts")
@@ -91,12 +98,13 @@ def npth(x, y, drill):
 
 
 def footprint(name, descr, tags, n, *, pad_size, drill, body, courtyard,
-              extra="", npth_offset_y=None, npth_drill=None):
+              extra="", npth_offset_y=None, npth_drill=None, model=True):
     """One-row THT footprint, pin 1 (square pad) at the origin, pins along +x.
 
     body / courtyard: (x0, y0, x1, y1) in mm. extra: additional fab/silk primitives.
     npth_offset_y / npth_drill: a second row of non-plated holes (bottom-entry pin
     pass-through) at this y offset under every pin.
+    model: reference the generated 3D model named after the footprint.
     """
     bx0, by0, bx1, by1 = body
     cx0, cy0, cx1, cy1 = courtyard
@@ -124,7 +132,7 @@ def footprint(name, descr, tags, n, *, pad_size, drill, body, courtyard,
         + rect(bx0 - s, by0 - s, bx1 + s, by1 + s, "F.SilkS", 0.12)
         + marker
         + rect(cx0, cy0, cx1, cy1, "F.CrtYd", 0.05)
-        + extra + pads + ")\n")
+        + extra + pads + (model_sexpr(name) if model else "") + ")\n")
 
 
 def write_footprint(name, text):

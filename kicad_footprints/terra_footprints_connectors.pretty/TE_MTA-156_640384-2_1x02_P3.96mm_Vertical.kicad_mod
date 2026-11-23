@@ -27,4 +27,7 @@
   (fp_line (start -2.481 3.675) (end -2.481 -3.675) (layer "F.CrtYd") (width 0.05))
   (pad "1" thru_hole rect (at 0.000 0.000) (size 2.4 2.4) (drill 1.6) (layers *.Cu *.Mask))
   (pad "2" thru_hole circle (at 3.960 0.000) (size 2.4 2.4) (drill 1.6) (layers *.Cu *.Mask))
+  (model "${TERRA_EDA_LIB}/assets/3dmodels/terra-connectors.3dshapes/TE_MTA-156_640384-2_1x02_P3.96mm_Vertical.step"
+    (offset (xyz 0 0 0)) (scale (xyz 1 1 1)) (rotate (xyz 0 0 0))
+  )
 )

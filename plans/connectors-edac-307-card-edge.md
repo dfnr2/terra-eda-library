@@ -27,3 +27,8 @@ Needed by the Asteroids adapter (J1, the cabinet-harness connector). Generator
   datasheets were found and the decision is to leave them out.
 - **Asteroids J2 is not a purchased part.** In the adapter project it is gold fingers
   on the board's own copper (`edge 44-pin 0.156 inch`), so it needs no terra row.
+
+## Per-pin row (2026-11-22)
+
+`EDAC-307-044-558-202-pins` uses `terra_symbols_connectors:Conn_PerPin_EdgeLetter_2x22`
+(see `plans/connectors-conventions.md`). The footprint keeps its EDAC 305 STEP.

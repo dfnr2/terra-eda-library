@@ -25,11 +25,14 @@ Connector_Molex:Molex_KK-396_A-4179x-00NN_1xNN_P3.96mm_{Vertical,Horizontal}
 (with KiCad's 3D models).
 
 Generated output (dump_priority=0, source=NULL) is not dumped to static SQL.
+Each part also has a per-pin symbol row (`-pins`, _connkit.py).
 """
 import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+from _connkit import numeric_pins_id, numeric_pins_symbol, with_pins, write_symbols  # noqa: E402
 ROOT = HERE.parents[2]
 OUTPUT_FILE = HERE / "connectors_generated_370_molex_kk396.sql"
 CREATED_BY = Path(__file__).name
@@ -61,7 +64,7 @@ FAMILY = {
 }
 
 COLS = [
-    "unique_id", "part_locator", "mpn", "manufacturer", "value", "description",
+    "unique_id", "variant", "part_locator", "mpn", "manufacturer", "value", "description",
     "datasheet", "manufacturer_link", "kicad_symbol", "kicad_footprint",
     "lifecycle_status", "rohs", "allow_substitution", "tracking",
     "created_by", "source", "dump_priority", "tier", "keywords", "pin_count",
@@ -115,12 +118,13 @@ def sql(v):
 
 
 def insert(p):
-    vals = ", ".join(sql(p[c]) for c in COLS)
+    vals = ", ".join(sql(p.get(c)) for c in COLS)
     return f"INSERT INTO connectors ({', '.join(COLS)}) VALUES ({vals});"
 
 
 def main():
-    rows = list(parts())
+    write_symbols([numeric_pins_symbol(n) for n in CIRCUITS])
+    rows = with_pins(list(parts()), lambda r: numeric_pins_id(r["positions"]))
     ids = [p["unique_id"] for p in rows]
     dupes = sorted({i for i in ids if ids.count(i) > 1})
     if dupes:

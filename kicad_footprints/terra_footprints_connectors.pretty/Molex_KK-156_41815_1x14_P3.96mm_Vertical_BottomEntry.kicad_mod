@@ -53,4 +53,7 @@
   (pad "" np_thru_hole circle (at 43.560 3.350) (size 2.55 2.55) (drill 2.55) (layers *.Cu *.Mask))
   (pad "" np_thru_hole circle (at 47.520 3.350) (size 2.55 2.55) (drill 2.55) (layers *.Cu *.Mask))
   (pad "" np_thru_hole circle (at 51.480 3.350) (size 2.55 2.55) (drill 2.55) (layers *.Cu *.Mask))
+  (model "${TERRA_EDA_LIB}/assets/3dmodels/terra-connectors.3dshapes/Molex_KK-156_41815_1x14_P3.96mm_Vertical_BottomEntry.step"
+    (offset (xyz 0 0 0)) (scale (xyz 1 1 1)) (rotate (xyz 0 0 0))
+  )
 )

@@ -47,10 +47,10 @@ headers (series 3190 and 3192) were added on 2026-11-22 as a same-brand alternat
 TE 640384, from drawing ENG_CD_640384 rev AB: 0.045" round copper-alloy post, tin;
 glass-filled polyester housing, UL94V-0, natural; 0.400" post above the 0.125" housing,
 0.125" tail; no lock. Ratings from system product specification 108-1051 rev J sec. 3.3:
-**600 V AC, -55 to +105 °C**. `current_rating` stays blank: the spec gives only a
-single-circuit base curve for the whole MTA-156 IDC system (14.24 A for a 30 °C rise at
-18 AWG, derated to zero at 105 °C) and wire-size/loading factors, no figure for the
-header alone.
+**600 V AC, -55 to +105 °C**. **7 A** from catalog 82056 (MTA-156 performance data, PDF
+page 26: "7 amp max. for MTA-156 Connector"), the mated-system figure; the header page
+gives none of its own. The spec's base curve (14.24 A for a 30 °C rise at 18 AWG) is a
+single-circuit maximum before derating.
 
 Molex 3190/3192, from drawings SDAE-3190-NXX rev AD2 and SDAE-3192-NX rev L2 and product
 specification PS-99020-0087 (cited by both): nylon housing **UL94V-2**, natural; brass
@@ -70,9 +70,10 @@ Molex 41815, from product specification PS-08-50-001 rev. U (cited by the drawin
 
 ## Footprints
 
-KiCad ships footprints for neither family; both generators write theirs into
+KiCad ships footprints for none of these families; the generators write theirs into
 `terra_footprints_connectors` (shared code in `db/tables/connectors/_conn156.py`), pin 1
-at the origin, row along +x, no 3D models.
+at the origin, row along +x. Each references a generated 3D model and each part has a
+`-pins` per-pin symbol row (2026-11-22, `plans/connectors-conventions.md`).
 
 - TE 640384: 1.60 mm drill (drawing: 0.060" +0.010/-0), 2.40 mm pads; body 0.250" deep,
   n x 0.156" long, posts on the centreline.
@@ -80,7 +81,9 @@ at the origin, row along +x, no 3D models.
   (drawing 1.52 +0.05/-0.08), 2.40 mm pads; housing 6.9 mm deep with the pins on its
   centreline, 1.98 mm from each end. On 3190 a F.Fab line marks the back wall (1.6 mm,
   scaled from the side view) on the -y side, as KiCad draws KK 396 41791. One footprint
-  per series and size; pin length doesn't change it.
+  per series and size, plus `_Pin16.18mm` / `_Pin32.51mm` copies for the long-pin 3192
+  builds so their 3D models show the real pin (same land pattern). Model: housing 4.45
+  mm high (DIM C - DIM D - tail), 3190 wall 9.12 mm.
 - 41815 right angle (`_Horizontal`): 1.52 mm holes (drill 1.55); board edge 7.87 mm from
   the hole row, marked on F.Fab; housing 11.4 mm deep, overhanging the edge 1.91 mm.
 - 41815 top entry (`_Vertical`): 1.52 mm holes; outline scaled from the drawing's dashed
@@ -95,6 +98,7 @@ Rendered with `kicad-cli fp export svg` and checked against the drawings' PCB la
 
 - `datasheets/te/ENG_CD_640384_AB.pdf` (te.com, through Chrome)
 - `datasheets/te/te-108-1051-mta156-product-spec.pdf` (MTA-156 system spec, rev J)
+- `datasheets/te/te-82056-mta-cst100-sl156-catalog.pdf` (catalog 82056, 08/18)
 - `datasheets/molex/kk-396-3190-round-pin-header-sd.pdf` (026192121_sd, all 3190 codes)
 - `datasheets/molex/kk-396-3192-round-pin-header-sd.pdf` (026202121_sd, all 3192 codes)
 - `datasheets/molex/kk-396-round-pin-product-spec-ps-99020-0087.pdf`
@@ -104,8 +108,10 @@ Rendered with `kicad-cli fp export svg` and checked against the drawings' PCB la
 
 ## Follow-ups
 
-- **TE current rating:** TE catalog 82056 (MTA) may carry a per-contact header figure;
-  Chrome still blocked its download on 2026-11-22.
+- ~~**TE current rating**~~ Done 2026-11-22: 7 A from catalog 82056.
+- ~~**3D models and per-pin symbols**~~ Done 2026-11-22, see
+  `plans/connectors-conventions.md`. The 41815 models are block approximations scaled
+  from the drawing's side views.
 - **Mouser is dropping 3190:** Mouser marks every 3190 code except 26-19-2041
   "discontinued with no replacement" (2026-11-22), while Molex and Digi-Key show Active
   (Digi-Key 16-week lead time). Recheck lifecycle before relying on 3190.
@@ -116,3 +122,6 @@ Rendered with `kicad-cli fp export svg` and checked against the drawings' PCB la
   symbol and footprint resolves.
 - 2026-11-22: +38 Molex 3190/3192 rows and 30 footprints; TE rows gain voltage and
   temperature. 193 rows in all; `make verify` clean, 216 tests pass.
+- 2026-11-22: TE current 7 A (catalog 82056). Every part gained a `-pins` twin (386
+  rows from these three generators), every footprint a generated 3D model; 9 long-pin
+  3192 footprints added, `Molex_KK-396_3192_1x17_P3.96mm_Vertical` dropped.

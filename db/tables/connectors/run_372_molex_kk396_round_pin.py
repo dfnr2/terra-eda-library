@@ -28,9 +28,12 @@ Mouser (26-20-2072 under Mouser's typo "2620-2072"). Digi-Key shows 26-19-2121 A
 with a 16-week lead time; Mouser marks the 3190 codes (except 26-19-2041) "discontinued
 with no replacement", i.e. Mouser is dropping stock, not an end of production.
 
-Symbol Connector_Generic:Conn_01xNN. KiCad ships no KK 396 round-pin footprints, so this
-script writes them to terra_footprints_connectors (one per series and size; the pin
-length does not change the land pattern). Plan: plans/connectors-0156-bus.md. Generated
+Symbol Connector_Generic:Conn_01xNN, plus a per-pin symbol row (`-pins`, _connkit.py).
+KiCad ships no KK 396 round-pin footprints, so this script writes them to
+terra_footprints_connectors: one per series and size, and a separate one (suffix
+`_Pin16.18mm` / `_Pin32.51mm`) for the long-pin 3192 builds, whose land pattern is the
+same but whose 3D model is not. Generated 3D models: housing 4.45 mm high (drawing DIM C
+- DIM D - 3.17 mm tail), 3190 wall 9.12 mm above the board. Plan: plans/connectors-0156-bus.md. Generated
 output (dump_priority=0, source=NULL) is not dumped to static SQL.
 """
 import sys
@@ -39,6 +42,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 from _conn156 import FP_LIB, PITCH, check_datasheets, footprint, line, write, write_footprint  # noqa: E402
+from _connkit import numeric_pins_id, numeric_pins_symbol, pin_row, with_pins, write_symbols  # noqa: E402
 
 OUTPUT_FILE = HERE / "connectors_generated_372_molex_kk396_round_pin.sql"
 CREATED_BY = Path(__file__).name
@@ -81,6 +85,10 @@ FAMILY = {
 BODY_HALF_DEPTH = 6.9 / 2       # housing 6.9 mm deep, pins on its centreline
 END = 1.98                      # housing end to the first/last pin centre
 WALL = 1.6                      # 3190 back wall thickness, scaled from the side view
+WALL_H = 9.12                   # 3190 wall height above the board
+HOUSING_H = 19.05 - 11.43 - 3.17  # drawing DIM C - DIM D - tail = 4.45 mm
+TAIL = 3.17
+PIN_D = 1.14
 
 
 def mpn_for(series, n, suffix):
@@ -91,11 +99,12 @@ def catalog(mpn):
     return "00" + mpn.replace("-", "")                            # 0026192121
 
 
-def fp_name(series, n):
-    return f"Molex_KK-396_{series}_1x{n:02d}_P3.96mm_Vertical"
+def fp_name(series, n, suffix="1"):
+    base = f"Molex_KK-396_{series}_1x{n:02d}_P3.96mm_Vertical"
+    return base if suffix == "1" else f"{base}_Pin{PIN_LENGTH[suffix]:g}mm"
 
 
-def footprint_text(series, n):
+def footprint_text(series, n, suffix):
     x1 = (n - 1) * PITCH + END
     body = (-END, -BODY_HALF_DEPTH, x1, BODY_HALF_DEPTH)
     court = (-END - 0.5, -BODY_HALF_DEPTH - 0.5, x1 + 0.5, BODY_HALF_DEPTH + 0.5)
@@ -104,11 +113,26 @@ def footprint_text(series, n):
         extra = line(-END, -BODY_HALF_DEPTH + WALL, x1, -BODY_HALF_DEPTH + WALL, "F.Fab", 0.1)
     kind = "with polarizing wall" if series == "3190" else "flat wafer"
     return footprint(
-        fp_name(series, n),
+        fp_name(series, n, suffix),
         f"Molex KK 396 header series {series}, vertical, 0.045in round pin, {kind}, "
+        f"{PIN_LENGTH[suffix]:g}mm mating pin, "
         f"1x{n:02d}, 3.96mm pitch (Molex drawing SDAE-{series})",
         f"connector Molex KK-396 {series} round pin header 3.96mm 0.156in",
         n, pad_size=2.4, drill=1.52, body=body, courtyard=court, extra=extra)
+
+
+def model_specs():
+    specs = {}
+    for series, n, suffix in PARTS:
+        x1 = (n - 1) * PITCH + END
+        spec = [("box", "natural", -END, -BODY_HALF_DEPTH, 0, x1, BODY_HALF_DEPTH, HOUSING_H)]
+        if series == "3190":
+            spec.append(("box", "natural", -END, -BODY_HALF_DEPTH, 0,
+                         x1, -BODY_HALF_DEPTH + WALL, WALL_H))
+        spec += pin_row("tin", n, PITCH, 0, -TAIL, HOUSING_H + PIN_LENGTH[suffix], PIN_D,
+                        round_=True)
+        specs[fp_name(series, n, suffix)] = spec
+    return specs
 
 
 def parts():
@@ -129,7 +153,7 @@ def parts():
             "datasheet": s["datasheet"],
             "manufacturer_link": f"https://www.molex.com/en-us/products/part-detail/{catalog(mpn)}",
             "kicad_symbol": f"Connector_Generic:Conn_01x{n:02d}",
-            "kicad_footprint": f"{FP_LIB}:{fp_name(series, n)}",
+            "kicad_footprint": f"{FP_LIB}:{fp_name(series, n, suffix)}",
             "lifecycle_status": "Active", "rohs": "Yes",
             "allow_substitution": "No", "tracking": "No",
             "created_by": CREATED_BY, "source": None, "dump_priority": 0, "tier": 2,
@@ -145,9 +169,11 @@ def parts():
 
 def main():
     check_datasheets([SPEC] + [s["datasheet"] for s in SERIES.values()])
-    for series, n in sorted({(p[0], p[1]) for p in PARTS}):
-        write_footprint(fp_name(series, n), footprint_text(series, n))
-    write(OUTPUT_FILE, "Molex KK 396 round-pin headers 3190/3192", CREATED_BY, list(parts()))
+    for series, n, suffix in PARTS:
+        write_footprint(fp_name(series, n, suffix), footprint_text(series, n, suffix))
+    write_symbols([numeric_pins_symbol(n) for n in sorted({p[1] for p in PARTS})])
+    rows = with_pins(list(parts()), lambda r: numeric_pins_id(r["positions"]))
+    write(OUTPUT_FILE, "Molex KK 396 round-pin headers 3190/3192", CREATED_BY, rows)
 
 
 if __name__ == "__main__":

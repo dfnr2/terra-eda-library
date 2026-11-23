@@ -20,10 +20,15 @@ Customer drawing ENG_CD_640384 rev AB (datasheets/te/ENG_CD_640384_AB.pdf):
     1.60 mm (inside that band), 2.40 mm pads.
 Ratings from MTA-156 system product specification 108-1051 rev J sec. 3.3
 (datasheets/te/te-108-1051-mta156-product-spec.pdf): 600 V AC, -55 to +105 C (posts
-brass, tin; headers UL94V-0). Current is left blank: the spec gives only a
-single-circuit base curve for the whole MTA-156 IDC system (14.24 A for a 30 C rise at
-18 AWG, falling to zero at 105 C) with wire-size and loading derating factors, no
-per-contact figure for the header alone.
+brass, tin; headers UL94V-0). Current 7 A from catalog 82056 "MTA, CST-100 II and SL-156
+Connectors" (08/18; datasheets/te/te-82056-mta-cst100-sl156-catalog.pdf), MTA-156
+performance data on PDF page 26: "7 amp max. for MTA-156 Connector", the mated-system
+figure (the header page, PDF page 39, gives none of its own). The spec's base curve
+(14.24 A for a 30 C rise at 18 AWG) is a single-circuit maximum before derating.
+
+3D models (generated, tools/make_connector_models.py) from the same drawing: housing
+0.250" x 0.125" high, n x 0.156" long; 0.045" round posts 0.400" above the housing and
+0.125" below the board. Each part also has a per-pin symbol row (`-pins`, _connkit.py).
 
 Lifecycle: 2-15 are ACTIVE on TE's product pages and listed at Mouser (7, 10, 11, 13
 and 15 non-stocked) on 2026-11-21. Symbol Connector_Generic:Conn_01xNN. KiCad ships no
@@ -37,6 +42,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 from _conn156 import FP_LIB, PITCH, check_datasheets, footprint, write, write_footprint  # noqa: E402
+from _connkit import numeric_pins_id, numeric_pins_symbol, pin_row, with_pins, write_symbols  # noqa: E402
 
 OUTPUT_FILE = HERE / "connectors_generated_390_te_mta156_round_post.sql"
 CREATED_BY = Path(__file__).name
@@ -44,8 +50,13 @@ CREATED_BY = Path(__file__).name
 POSITIONS = range(2, 16)
 DATASHEET = "${TERRA_EDA_LIB}/datasheets/te/ENG_CD_640384_AB.pdf"
 SPEC = "${TERRA_EDA_LIB}/datasheets/te/te-108-1051-mta156-product-spec.pdf"
+CATALOG = "${TERRA_EDA_LIB}/datasheets/te/te-82056-mta-cst100-sl156-catalog.pdf"
 BODY_HALF_DEPTH = 0.250 * 25.4 / 2     # housing 0.250" deep, posts on its centreline
 END = 0.078 * 25.4                     # housing end to first post centre
+HOUSING_H = 0.125 * 25.4               # housing height above the board
+POST_UP = 0.400 * 25.4                 # post above the housing
+TAIL = 0.125 * 25.4                    # solder tail below the board
+POST_D = 0.045 * 25.4
 
 FAMILY = {
     "connector_category": "wire-to-board", "connector_family": "TE MTA-156",
@@ -55,7 +66,7 @@ FAMILY = {
     "polarized": "no", "keying_detail": "none (plain header; pull a post to key)",
     "locking_mechanism": "none", "shielding": "unshielded", "color": "natural",
     "signal_type": "mixed", "flammability_rating": "UL94-V0",
-    "voltage_rating": 600.0, "temp_operating_min": -55.0, "temp_operating_max": 105.0,
+    "current_rating": 7.0, "voltage_rating": 600.0, "temp_operating_min": -55.0, "temp_operating_max": 105.0,
     "mating_family": ("0.156in (3.96mm) receptacles for 0.045in round or square pins: "
                       "Molex KK 156 PCB receptacles 41815, TE MTA-156 IDC and SL-156 "
                       "connector assemblies"),
@@ -82,6 +93,16 @@ def footprint_text(n):
         f"1x{n:02d}, 3.96mm pitch (TE customer drawing 640384)",
         "connector TE MTA-156 640384 round post header 3.96mm 0.156in",
         n, pad_size=2.4, drill=1.6, body=body, courtyard=court)
+
+
+def model_specs():
+    specs = {}
+    for n in POSITIONS:
+        x1 = (n - 1) * PITCH + END
+        specs[fp_name(n)] = (
+            [("box", "natural", -END, -BODY_HALF_DEPTH, 0, x1, BODY_HALF_DEPTH, HOUSING_H)]
+            + pin_row("tin", n, PITCH, 0, -TAIL, HOUSING_H + POST_UP, POST_D, round_=True))
+    return specs
 
 
 def parts():
@@ -111,10 +132,12 @@ def parts():
 
 
 def main():
-    check_datasheets([DATASHEET, SPEC])
+    check_datasheets([DATASHEET, SPEC, CATALOG])
     for n in POSITIONS:
         write_footprint(fp_name(n), footprint_text(n))
-    write(OUTPUT_FILE, "TE MTA-156 640384 round-post headers", CREATED_BY, list(parts()))
+    write_symbols([numeric_pins_symbol(n) for n in POSITIONS])
+    rows = with_pins(list(parts()), lambda r: numeric_pins_id(r["positions"]))
+    write(OUTPUT_FILE, "TE MTA-156 640384 round-post headers", CREATED_BY, rows)
 
 
 if __name__ == "__main__":

@@ -32,7 +32,14 @@ the origin and the row along +x:
   - bottom entry: 1.02 mm tail holes plus a 2.54 mm non-plated hole 3.35 mm away under
     each circuit for the mating pin to pass through the board; housing extent scaled
     from the side view (approximate).
-Body width is the drawing's DIM A (n x 3.96 - 0.10 mm). No 3D models.
+Body width is the drawing's DIM A (n x 3.96 - 0.10 mm).
+
+3D models (generated, tools/make_connector_models.py) are block approximations scaled
+from the sheet-1 side views: right angle, housing 6.5 mm high with a skirt 3.3 mm down
+past the board edge and the edge hook under the board; top entry, 10.7 mm tall body on
+a 1.7 mm base with the hook; bottom entry, 11.5 mm tall on a 2.5 mm base. Tails 0.64
+mm square, 3.68 / 3.05 / 3.18 mm below the board. Each part also has a per-pin symbol
+row (`-pins`, _connkit.py).
 
 Plan: plans/connectors-0156-bus.md. Generated output (dump_priority=0, source=NULL) is
 not dumped to static SQL.
@@ -43,6 +50,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 from _conn156 import FP_LIB, PITCH, check_datasheets, footprint, line, write, write_footprint  # noqa: E402
+from _connkit import numeric_pins_id, numeric_pins_symbol, pin_row, with_pins, write_symbols  # noqa: E402
 
 OUTPUT_FILE = HERE / "connectors_generated_395_molex_kk156_41815.sql"
 CREATED_BY = Path(__file__).name
@@ -136,6 +144,36 @@ def footprint_text(style, n):
                      body=body, courtyard=_grow(body), npth_offset_y=3.35, npth_drill=2.55)
 
 
+TAIL_W = 0.64
+TAIL = {"right-angle": 3.68, "top-entry": 3.05, "bottom-entry": 3.18}
+
+
+def model_specs():
+    """Block models scaled from SDA-41815 sheet 1 (approximate, see docstring)."""
+    specs = {}
+    styles_n = {(v["style"], n) for v in VARIANTS for n in v["mpns"]}
+    for style, n in sorted(styles_n):
+        a = n * PITCH - 0.10
+        mid = (n - 1) * PITCH / 2
+        x0, x1 = mid - a / 2, mid + a / 2
+        if style == "right-angle":
+            edge = 7.87
+            spec = [("box", "natural", x0, -1.62, 0, x1, edge + 1.91, 6.5),
+                    ("box", "natural", x0, edge, -3.3, x1, edge + 1.91, 0),
+                    ("box", "natural", x0, 5.5, -2.6, x1, edge, -1.6)]
+        elif style == "top-entry":
+            spec = [("box", "natural", x0, -6.1, 0, x1, 4.6, 1.7),
+                    ("box", "natural", x0, -5.1, 0, x1, 0.9, 10.7),
+                    ("box", "natural", x0, 0.9, 8.9, x1, 4.6, 10.7)]
+        else:
+            spec = [("box", "natural", x0, -5.2, 0, x1, 6.6, 2.5),
+                    ("box", "natural", x0, -1.2, 0, x1, 5.2, 11.5),
+                    ("box", "natural", x0, -5.2, 2.2, x1, -1.2, 4.9)]
+        spec += pin_row("tin", n, PITCH, 0, -TAIL[style], 0.5, TAIL_W)
+        specs[fp_name(style, n)] = spec
+    return specs
+
+
 def _grow(r, g=0.5):
     return (r[0] - g, r[1] - g, r[2] + g, r[3] + g)
 
@@ -191,6 +229,8 @@ def main():
     rows = list(parts())
     for style, n in sorted({(r["orientation"], r["positions"]) for r in rows}):
         write_footprint(fp_name(style, n), footprint_text(style, n))
+    write_symbols([numeric_pins_symbol(n) for n in sorted({r["positions"] for r in rows})])
+    rows = with_pins(rows, lambda r: numeric_pins_id(r["positions"]))
     write(OUTPUT_FILE, "Molex KK 156 41815 PCB receptacles", CREATED_BY, rows)
 
 

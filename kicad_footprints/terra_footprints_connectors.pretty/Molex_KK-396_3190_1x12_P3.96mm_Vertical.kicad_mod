@@ -1,6 +1,6 @@
 (footprint "Molex_KK-396_3190_1x12_P3.96mm_Vertical" (version 20211014) (generator terra)
   (layer "F.Cu")
-  (descr "Molex KK 396 header series 3190, vertical, 0.045in round pin, with polarizing wall, 1x12, 3.96mm pitch (Molex drawing SDAE-3190)")
+  (descr "Molex KK 396 header series 3190, vertical, 0.045in round pin, with polarizing wall, 11.43mm mating pin, 1x12, 3.96mm pitch (Molex drawing SDAE-3190)")
   (tags "connector Molex KK-396 3190 round pin header 3.96mm 0.156in")
   (attr through_hole)
   (fp_text reference "REF**" (at 21.780 -4.950) (layer "F.SilkS")
@@ -38,4 +38,7 @@
   (pad "10" thru_hole circle (at 35.640 0.000) (size 2.4 2.4) (drill 1.52) (layers *.Cu *.Mask))
   (pad "11" thru_hole circle (at 39.600 0.000) (size 2.4 2.4) (drill 1.52) (layers *.Cu *.Mask))
   (pad "12" thru_hole circle (at 43.560 0.000) (size 2.4 2.4) (drill 1.52) (layers *.Cu *.Mask))
+  (model "${TERRA_EDA_LIB}/assets/3dmodels/terra-connectors.3dshapes/Molex_KK-396_3190_1x12_P3.96mm_Vertical.step"
+    (offset (xyz 0 0 0)) (scale (xyz 1 1 1)) (rotate (xyz 0 0 0))
+  )
 )
