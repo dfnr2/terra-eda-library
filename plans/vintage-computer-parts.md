@@ -4,8 +4,8 @@
 **Status:** Phases 1, 2 (schema, SRAM, DRAM, NVRAM, EPROM, EEPROM, bipolar PROM),
 3 (CPUs), 4 (support chips), 6 (crystals) and 7 (trimpots) done (see Results).
 Phase 8 (connectors) is done apart from a lifecycle check on the card-edge sockets
-(KK 396, the 0.156" pin buses, card edge and DIN 41612 generated); phase 9
-(electrolytics) remains.
+(KK 396, the 0.156" pin buses, card edge and DIN 41612 generated). Phase 9
+(electrolytics) is done: Panasonic M-A radials and Vishay 021 ASM axials.
 **Scope:** bring terra up to the point where a 1975-85 microcomputer (KIM-1, Apple I/II,
 SWTPC, S-100, COSMAC ELF, TRS-80, Z80 SBC, or a modern retro build) can be drawn with
 fully qualified parts. That means the bus buffers, memory, CPUs and their support chips,
@@ -508,6 +508,12 @@ as `run_510_*`, and one axial family (Vishay BCcomponents 021 ASM or Nichicon TV
 `run_520_*`. Axial vs radial goes in core `package`, so the schema doesn't change.
 Watch the fragment's `low_esr DEFAULT 'yes'`: these generators must set `'no'`
 explicitly.
+
+**Done (2026-11-23):** `run_510_panasonic_eca.py` writes Panasonic M-A (ECA-xxM), 130
+radial rows. `run_520_vishay_021asm.py` writes Vishay 021 ASM (ex-Philips 2222 021),
+102 axial rows. Both use stock `Device:CP` symbols and stock KiCad footprints, and both
+set `low_esr = 'no'`. Nichicon UVR was passed over because many of its values went
+obsolete in 2023. Details are in `plans/capacitors-electrolytic-th-general-purpose.md`.
 
 ## Open questions for Dave
 
