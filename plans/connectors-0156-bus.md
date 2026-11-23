@@ -1,4 +1,4 @@
-# connectors: 0.156" pin buses (TE MTA-156 round-post headers, Molex KK 156 41815 receptacles)
+# connectors: 0.156" pin buses (TE MTA-156 and Molex KK 396 round-pin headers, Molex KK 156 41815 receptacles)
 
 The backplane and card connectors of the OSI 48-line bus and the SWTPC SS-50/SS-30
 buses. Part of `plans/vintage-computer-parts.md` phase 8.
@@ -16,10 +16,19 @@ one source only.
 
 **Round pins on the male side** (Dave, 2026-11-21): TE MTA-156 640384, plain, straight,
 0.045" round post, in place of the square-post KK 396 headers. The 41815 receptacle is
-drawn for "0.045 square or round pin", so the two mate.
+drawn for "0.045 square or round pin", so the two mate. Molex's own round-pin KK 396
+headers (series 3190 and 3192) were added on 2026-11-22 as a same-brand alternative.
 
 ## Scope
 
+- `run_372_molex_kk396_round_pin.py`: Molex KK 396 round-pin headers, **38 rows**.
+  Series 3190 (26-19-2NN1, polarizing back wall, 11.43 mm pin): 14 sizes, 3-18. Series
+  3192 (26-20-2NNS, flat end-stackable wafer): 15 with 11.43 mm pins, 8 with 16.18 mm, 1
+  (26-20-2096) with 32.51 mm. Every code on the drawings that is Active on its Molex part
+  page and listed at Mouser (26-20-2072 under Mouser's typo "2620-2072"). Not generated:
+  the 26-21 (17.47 mm) column, which Mouser doesn't list, and the 3190 voided-circuit
+  38-00-xxxx builds. Molex's series charts omit several Active codes, so each code was
+  checked on its own part page.
 - `run_390_te_mta156_round_post.py`: TE 640384, **2-15 positions, 14 rows**. The drawing
   lists 2-24; it marks 22-24 obsolete and TE's product pages mark 16-21 OBSOLETE (Mouser
   still had stock of 20 and 21). All 14 Active at TE and listed at Mouser (7, 10, 11, 13,
@@ -37,8 +46,18 @@ drawn for "0.045 square or round pin", so the two mate.
 
 TE 640384, from drawing ENG_CD_640384 rev AB: 0.045" round copper-alloy post, tin;
 glass-filled polyester housing, UL94V-0, natural; 0.400" post above the 0.125" housing,
-0.125" tail; no lock. **No electrical or temperature ratings on the drawing**, so
-`current_rating`, `voltage_rating` and the temperatures are blank (see follow-ups).
+0.125" tail; no lock. Ratings from system product specification 108-1051 rev J sec. 3.3:
+**600 V AC, -55 to +105 °C**. `current_rating` stays blank: the spec gives only a
+single-circuit base curve for the whole MTA-156 IDC system (14.24 A for a 30 °C rise at
+18 AWG, derated to zero at 105 °C) and wire-size/loading factors, no figure for the
+header alone.
+
+Molex 3190/3192, from drawings SDAE-3190-NXX rev AD2 and SDAE-3192-NX rev L2 and product
+specification PS-99020-0087 (cited by both): nylon housing **UL94V-2**, natural; brass
+pins, matte tin over nickel; **600 V** (spec sec. 4.1); **-40 to +80 °C** with brass
+(sec. 4.3); **7.0 A** from Molex's part pages (the spec rates only the crimp and PCB
+receptacles; the pages give 250 V, the CSA figure). Mates with 3069 crimp housings per
+the part pages, and with the 41815 receptacles.
 
 Molex 41815, from product specification PS-08-50-001 rev. U (cited by the drawing):
 
@@ -57,6 +76,11 @@ at the origin, row along +x, no 3D models.
 
 - TE 640384: 1.60 mm drill (drawing: 0.060" +0.010/-0), 2.40 mm pads; body 0.250" deep,
   n x 0.156" long, posts on the centreline.
+- Molex 3190/3192 (`Molex_KK-396_{3190,3192}_1xNN_P3.96mm_Vertical`): 1.52 mm drill
+  (drawing 1.52 +0.05/-0.08), 2.40 mm pads; housing 6.9 mm deep with the pins on its
+  centreline, 1.98 mm from each end. On 3190 a F.Fab line marks the back wall (1.6 mm,
+  scaled from the side view) on the -y side, as KiCad draws KK 396 41791. One footprint
+  per series and size; pin length doesn't change it.
 - 41815 right angle (`_Horizontal`): 1.52 mm holes (drill 1.55); board edge 7.87 mm from
   the hole row, marked on F.Fab; housing 11.4 mm deep, overhanging the edge 1.91 mm.
 - 41815 top entry (`_Vertical`): 1.52 mm holes; outline scaled from the drawing's dashed
@@ -70,20 +94,25 @@ Rendered with `kicad-cli fp export svg` and checked against the drawings' PCB la
 ## Datasheets
 
 - `datasheets/te/ENG_CD_640384_AB.pdf` (te.com, through Chrome)
+- `datasheets/te/te-108-1051-mta156-product-spec.pdf` (MTA-156 system spec, rev J)
+- `datasheets/molex/kk-396-3190-round-pin-header-sd.pdf` (026192121_sd, all 3190 codes)
+- `datasheets/molex/kk-396-3192-round-pin-header-sd.pdf` (026202121_sd, all 3192 codes)
+- `datasheets/molex/kk-396-round-pin-product-spec-ps-99020-0087.pdf`
 - `datasheets/molex/kk-156-41815-pcb-receptacle-sd.pdf` (molex.com 009482121_sd, all
   41815 builds)
 - `datasheets/molex/kk-396-product-spec-ps-08-50-001.pdf` (already parked for KK 396)
 
 ## Follow-ups
 
-- **TE ratings:** park the MTA-156 product specification 108-1051 (and catalog 82056)
-  and fill current/voltage/temperature. Chrome blocked the second and later te.com
-  downloads in one session (its multiple-downloads prompt).
-- **Molex round-pin KK 396 headers:** series 3190 (with polarizing wall, 26-19-21x1,
-  stocked at Mouser in many sizes) and 3192 (without) are a same-family round-post
-  alternative to TE 640384. Not generated; needs their drawings.
+- **TE current rating:** TE catalog 82056 (MTA) may carry a per-contact header figure;
+  Chrome still blocked its download on 2026-11-22.
+- **Mouser is dropping 3190:** Mouser marks every 3190 code except 26-19-2041
+  "discontinued with no replacement" (2026-11-22), while Molex and Digi-Key show Active
+  (Digi-Key 16-week lead time). Recheck lifecycle before relying on 3190.
 
 ## Results
 
 - 155 rows (14 TE, 141 Molex); 56 footprints; `make verify` clean, 216 tests pass; every
   symbol and footprint resolves.
+- 2026-11-22: +38 Molex 3190/3192 rows and 30 footprints; TE rows gain voltage and
+  temperature. 193 rows in all; `make verify` clean, 216 tests pass.

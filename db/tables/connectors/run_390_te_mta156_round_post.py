@@ -18,8 +18,12 @@ Customer drawing ENG_CD_640384 rev AB (datasheets/te/ENG_CD_640384_AB.pdf):
     post 0.400" above the housing, 0.125" solder tail; no lock or polarizing wall.
   - recommended hole 0.060" +0.010/-0.000 for a 0.062" board. Footprint drill
     1.60 mm (inside that band), 2.40 mm pads.
-The drawing has no electrical or temperature ratings; those columns stay blank until the
-MTA-156 product specification (108-1051) is parked.
+Ratings from MTA-156 system product specification 108-1051 rev J sec. 3.3
+(datasheets/te/te-108-1051-mta156-product-spec.pdf): 600 V AC, -55 to +105 C (posts
+brass, tin; headers UL94V-0). Current is left blank: the spec gives only a
+single-circuit base curve for the whole MTA-156 IDC system (14.24 A for a 30 C rise at
+18 AWG, falling to zero at 105 C) with wire-size and loading derating factors, no
+per-contact figure for the header alone.
 
 Lifecycle: 2-15 are ACTIVE on TE's product pages and listed at Mouser (7, 10, 11, 13
 and 15 non-stocked) on 2026-11-21. Symbol Connector_Generic:Conn_01xNN. KiCad ships no
@@ -39,6 +43,7 @@ CREATED_BY = Path(__file__).name
 
 POSITIONS = range(2, 16)
 DATASHEET = "${TERRA_EDA_LIB}/datasheets/te/ENG_CD_640384_AB.pdf"
+SPEC = "${TERRA_EDA_LIB}/datasheets/te/te-108-1051-mta156-product-spec.pdf"
 BODY_HALF_DEPTH = 0.250 * 25.4 / 2     # housing 0.250" deep, posts on its centreline
 END = 0.078 * 25.4                     # housing end to first post centre
 
@@ -50,6 +55,7 @@ FAMILY = {
     "polarized": "no", "keying_detail": "none (plain header; pull a post to key)",
     "locking_mechanism": "none", "shielding": "unshielded", "color": "natural",
     "signal_type": "mixed", "flammability_rating": "UL94-V0",
+    "voltage_rating": 600.0, "temp_operating_min": -55.0, "temp_operating_max": 105.0,
     "mating_family": ("0.156in (3.96mm) receptacles for 0.045in round or square pins: "
                       "Molex KK 156 PCB receptacles 41815, TE MTA-156 IDC and SL-156 "
                       "connector assemblies"),
@@ -105,7 +111,7 @@ def parts():
 
 
 def main():
-    check_datasheets([DATASHEET])
+    check_datasheets([DATASHEET, SPEC])
     for n in POSITIONS:
         write_footprint(fp_name(n), footprint_text(n))
     write(OUTPUT_FILE, "TE MTA-156 640384 round-post headers", CREATED_BY, list(parts()))

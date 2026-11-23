@@ -1,7 +1,8 @@
 """Shared SQL writer and footprint primitives for the 0.156" (3.96 mm) bus generators.
 
+``run_372_molex_kk396_round_pin.py`` (Molex KK 396 round-pin headers),
 ``run_390_te_mta156_round_post.py`` (TE MTA-156 round-post headers) and
-``run_395_molex_kk156_41815.py`` (Molex KK 156 PCB receptacles) both write their own
+``run_395_molex_kk156_41815.py`` (Molex KK 156 PCB receptacles) all write their own
 footprints into ``terra_footprints_connectors``, from the manufacturers' drawings, with
 pin 1 at the footprint origin and the row running along +x. KiCad ships neither
 family's footprints.

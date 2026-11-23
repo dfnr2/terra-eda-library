@@ -480,9 +480,10 @@ standard resistance table, 10 Ω-2 MΩ (the 1-2-5 values plus 25 kΩ and 250 kΩ
     TE MTA-156 640384, 2-15 positions (14 rows; 16-21 obsolete at TE). Card side:
     `run_395_molex_kk156_41815.py`, Molex KK 156 41815 PCB receptacles (successors to
     OSI's obsolete 09-52-3121/3123; 09-48-2101 for SWTPC), every Mouser-listed tin build
-    in right-angle, top-entry and bottom-entry styles (141 rows). Custom footprints for
-    both. Follow-ups: TE ratings (spec 108-1051 not yet parked) and the Molex 3190/3192
-    round-pin KK 396 headers as an alternative.
+    in right-angle, top-entry and bottom-entry styles (141 rows). Added 2026-11-22:
+    `run_372_molex_kk396_round_pin.py`, Molex round-pin KK 396 headers 3190 (polarizing
+    wall) and 3192 (flat wafer), 38 rows, and the TE voltage/temperature ratings from
+    spec 108-1051. Custom footprints for all three. Follow-up: TE current rating.
   - `run_400_din41612.py`: Eurocard DIN 41612. Type C 96-pin (3x32), type B 64-pin
     (2x32), and the 2-row a+c 64-pin, each as a right-angle male (board) and vertical
     female (backplane). Pick one classic maker per variant (ERNI, Harting or TE) that
