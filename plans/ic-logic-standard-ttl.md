@@ -61,8 +61,49 @@ Most are 1983-88 scans. Their figures were read from page images and cross-check
 - 11 devices, 15 ordering codes, 29 rows counting the IEEE variants. The 2 harvest rows that don't exist
   (SN7402D, SN7454D) and their IEEE twins are gone.
 
+## OSI parts lists (added 2026-11-24)
+
+The SAMS Computerfacts manuals for the C1P, C2/C3 and C4P in `~/vsrc/osiweb` have OCR'd
+parts lists. Their IC numbers were extracted and checked against terra.
+
+**Added** (each with its TI data sheet, read from the scans):
+- **Standard TTL:** 7401, 7403, 7408, 7414, 7420, 7438, 7473, 7474, 7475, 7476, 7492A,
+  74125, 74148, 74151A, 74155, 74157, 74163, 74164, 74165, 74174, 74175, 74193 and 74393.
+- **Schottky TTL:** 74S10, 74S20 and 74S138A, as `logic_family = '74S'`. Their output
+  levels differ: IOL 20 mA, VOH 2.7 V, VOL 0.5 V.
+
+**Lifecycle:**
+- **Active:** SN7414N/DR, SN7438N/DR, SN74S10N, SN74S20N and SN74S138AN/D. Each is in
+  TI's addendum and has a TI product page.
+- **Obsolete:** all the others. Their product pages return 404, and the 74125 and
+  74165 sheets say "obsolete and no longer supplied".
+
+**Things a schematic can trip on:**
+- **7473 and 7476:** master-slave (pulse-triggered), while the 74LS73A and 74LS76A are
+  negative-edge-triggered. The row descriptions say so.
+- **7401:** its outputs are on pins 1, 4, 10 and 13. `74xx:74LS01` matches.
+- **74164:** IOL is 8 mA. It uses `74xx:74HC164`, which has the same pinout.
+
+**Added from data sheets Dave supplied** (TI documents, from datasheet-archive
+mirrors; all three Obsolete):
+- **SN74154:** 24-pin, 0.6 in DIP (`sn74154.pdf`, SDLS056).
+- **SN74111:** dual J-K master-slave with data lockout (`sn74111.pdf`, SDLS038).
+  KiCad has no symbol for it, so `terra_symbols_ic_logic:74111` is KiCad's 74LS76
+  body with its pins renumbered to the 74111 pinout. KiCad plots both units.
+- **SN74S113A** (`sn74s113a.pdf`, D2661): the C2/C3 list prints "SN74113N", but
+  TI's 113 exists only as the 74S113 and 74LS113.
+
+**Left out:**
+- **74138, 74139:** the lists' plain "74138" and "74139" are LS or S parts; TI made no
+  standard 74138 or 74139.
+- **OCR noise:** the 7411, 7415, 7423, 7464 and 7477 hits were cross-reference or
+  memory-size text.
+
+## Results (2026-11-24, OSI additions)
+
+- 40 devices, 80 rows, counting the IEEE variants.
+
 ## Follow-ups
 
-- Other standard-TTL parts as boards need them (7408, 7414, 7432, 7474, 7486, 74121,
-  74154, 74161, 74175 ...). Add each to `DEVICES` with its TI data sheet and addendum
-  status.
+- Other standard-TTL parts as boards need them (7432, 7486, 74121, 74161 ...). Add
+  each to `DEVICES` with its TI data sheet and addendum status.
