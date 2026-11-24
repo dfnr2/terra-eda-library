@@ -69,3 +69,43 @@ PINOUTS = {
                     "(pin 30 NC)",
         keywords="NVRAM NV SRAM 128Kx8 DS1245 628128"),
 }
+
+
+def _st_8k(pin1):
+    """ST 8Kx8 TIMEKEEPER: the 6264 pinout with E1/E2 chip enables and an open-drain
+    output on pin 1 (pin1 = (name, description) )."""
+    return _pins(
+        **{"in": [(10, "A0"), (9, "A1"), (8, "A2"), (7, "A3"), (6, "A4"), (5, "A5"),
+                  (4, "A6"), (3, "A7"), (25, "A8"), (24, "A9"), (21, "A10"),
+                  (23, "A11"), (2, "A12"), (20, "~{E1}"), (26, "E2"), (22, "~{G}"),
+                  (27, "~{W}")],
+           "bidi": [(11, "DQ0"), (12, "DQ1"), (13, "DQ2"), (15, "DQ3"), (16, "DQ4"),
+                    (17, "DQ5"), (18, "DQ6"), (19, "DQ7")],
+           "oc": [(1, pin1)],
+           "pwr": [(28, "VCC"), (14, "VSS")]})
+
+
+# ST 8Kx8 TIMEKEEPER SRAMs. Pinouts from each sheet's fig. 3 (DIP connections) and
+# signal-names table: M48T08/M48T18 Doc ID 2411 Rev 11, pin 1 INT = power-fail
+# interrupt (open drain, needs a pull-up even if unused); M48T58/M48T58Y Doc ID 2412
+# Rev 8, pin 1 FT = frequency test output (open drain). Both have E2 (active-high chip
+# enable 2) on pin 26, so neither the DS1225 symbol (pin 26 NC) nor a 6264 with
+# pin 1 NC fits.
+PINOUTS["M48T08"] = dict(
+    pins=_st_8k("~{INT}"),
+    left=[f"A{i}" for i in range(13)] + [None, "~{E1}", "E2", "~{G}", "~{W}"],
+    right=_DQ + [None, "~{INT}"],
+    top=["VCC"], bottom=["VSS"],
+    footprint="Package_DIP:DIP-28_W15.24mm",
+    description="8Kx8 TIMEKEEPER SRAM with real-time clock, battery-backed, "
+                "power-fail interrupt output (ST M48T08/M48T18)",
+    keywords="TIMEKEEPER RTC NVRAM 8Kx8 M48T08 M48T18 6264")
+PINOUTS["M48T58"] = dict(
+    pins=_st_8k("FT"),
+    left=[f"A{i}" for i in range(13)] + [None, "~{E1}", "E2", "~{G}", "~{W}"],
+    right=_DQ + [None, "FT"],
+    top=["VCC"], bottom=["VSS"],
+    footprint="Package_DIP:DIP-28_W15.24mm",
+    description="8Kx8 TIMEKEEPER SRAM with real-time clock, battery-backed, "
+                "frequency-test output (ST M48T58/M48T58Y)",
+    keywords="TIMEKEEPER RTC NVRAM 8Kx8 M48T58 M48T58Y 6264")

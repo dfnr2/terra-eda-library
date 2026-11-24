@@ -1,0 +1,117 @@
+#!/usr/bin/env python3
+"""Central Semiconductor 1N746A-1N759A 500 mW Zener diodes, DO-35, 5% tolerance.
+
+The classic through-hole Zeners of 1970s-80s boards; the OSI C2/C3 and C4P use
+the 1N751A (5.1 V) and 1N752A (5.6 V). The whole JEDEC series is generated from one
+data sheet: datasheets/central/1n746a-1n759a.pdf (R2, 6-December 2019).
+
+  - PD 500 mW (TL = 75 C); TJ and Tstg -65 to +200 C.
+  - VF 1.5 V max at IF = 200 mA for every type.
+  - Per type: VZ min/nom/max at IZT = 20 mA, ZZT max at IZT, IR max at VR = 1 V
+    (25 C), IZM.
+
+Ordering codes: Central sells each type as "<type> BK PBFREE" (bulk) or
+"<type> TR PBFREE" (tape and reel, sold cut to any quantity). On 2026-11-24 Mouser
+stocked the TR code of every type except the 1N747A and 1N757A, but the BK code only of
+the 1N750A, 1N751A and 1N759A, so the TR codes are used. The 1N747A and 1N757A are
+non-stocked in both packings but still orderable, so they stay Active. onsemi's
+1N746A series is Obsolete; Microchip still makes them, but as tin-lead
+high-reliability parts at several times the price.
+
+Why diodes_zener and not diodes_th: diodes_zener has the Zener columns (VZ window,
+IZT, ZZT). value is the JEDEC type, as in diodes_th, because restorations name
+these parts by type number; the voltage is in zener_voltage and the description.
+
+Symbol Device:D_Zener (1 = K, 2 = A) on the DO-35 footprint, cathode on pad 1.
+
+Generated output (dump_priority=0, source=NULL) is not dumped back to static SQL.
+"""
+import sys
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+from _zener_family import COLS, _sql  # noqa: E402
+
+OUTPUT_FILE = HERE / "diodes_zener_generated_330_central_1n746a.sql"
+CREATED_BY = Path(__file__).name
+DATASHEET = "${TERRA_EDA_LIB}/datasheets/central/1n746a-1n759a.pdf"
+FOOTPRINT = "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+SUFFIX = " TR PBFREE"   # " BK PBFREE" for bulk
+
+# type: (VZ min, nom, max at 20 mA, ZZT max ohms, IR max uA at 1 V, IZM mA)
+DATA = {
+    "1N746A": (3.135, 3.3, 3.465, 28, 10, 110),
+    "1N747A": (3.420, 3.6, 3.780, 24, 10, 100),
+    "1N748A": (3.705, 3.9, 4.095, 23, 10, 95),
+    "1N749A": (4.085, 4.3, 4.515, 22, 2.0, 85),
+    "1N750A": (4.465, 4.7, 4.935, 19, 2.0, 75),
+    "1N751A": (4.845, 5.1, 5.355, 17, 1.0, 70),
+    "1N752A": (5.320, 5.6, 5.880, 11, 1.0, 65),
+    "1N753A": (5.890, 6.2, 6.510, 7.0, 0.1, 60),
+    "1N754A": (6.460, 6.8, 7.140, 5.0, 0.1, 55),
+    "1N755A": (7.125, 7.5, 7.875, 6.0, 0.1, 50),
+    "1N756A": (7.790, 8.2, 8.610, 8.0, 0.1, 45),
+    "1N757A": (8.645, 9.1, 9.555, 10, 0.1, 40),
+    "1N758A": (9.50, 10, 10.50, 17, 0.1, 35),
+    "1N759A": (11.40, 12, 12.60, 30, 0.1, 30),
+}
+
+
+def records():
+    for jedec, (vmin, vnom, vmax, zzt, ir, izm) in DATA.items():
+        # The nominal sits mid-window: a transcription slip would break this.
+        if not (vmin < vnom < vmax and abs((vmin + vmax) / 2 - vnom) < 0.01):
+            raise SystemExit(f"{jedec}: VZ window {vmin}-{vmax} does not centre on {vnom}")
+        vz = f"{vnom:g}V"
+        mpn = jedec + SUFFIX
+        yield {
+            "unique_id": f"Central-{mpn.replace(' ', '-')}",
+            "part_locator": f"diode-zener-{vz.lower().replace('.', 'v').rstrip('v')}"
+                            "-do35",
+            "mpn": mpn, "manufacturer": "Central Semiconductor", "package": "DO-35",
+            "value": jedec,
+            "description": (f"Central {jedec} Zener diode {vz} +/-5% @ 20mA, 500mW, "
+                            f"ZZT {zzt:g} ohm max, IR {ir:g}uA max @ 1V, IZM {izm}mA, "
+                            f"DO-35 axial, tape and reel, Pb-free"),
+            "datasheet": DATASHEET,
+            "manufacturer_link": None,
+            "kicad_symbol": "Device:D_Zener", "kicad_footprint": FOOTPRINT,
+            "rohs": "Yes", "allow_substitution": "Yes", "tracking": "No",
+            "source": None, "dump_priority": 0, "tier": 2,
+            "keywords": f"zener,voltage-regulator,through-hole,axial,DO-35,5%,{jedec},{vz}",
+            "pin_count": "2",
+            "temp_operating_min": -65.0, "temp_operating_max": 200.0,
+            "temp_storage_min": -65.0, "temp_storage_max": 200.0,
+            "zener_voltage": vz, "zener_voltage_min": vmin, "zener_voltage_max": vmax,
+            "tolerance": "5%", "test_current": "20mA", "power_rating": "500mW",
+            "forward_voltage": "1.5V @ 200mA", "impedance_max": float(zzt),
+            "capacitance": None, "peak_reverse_current": None,
+        }
+
+
+def main():
+    root = HERE.parents[2]
+    if not (root / DATASHEET.replace("${TERRA_EDA_LIB}/", "")).is_file():
+        raise SystemExit(f"missing datasheet {DATASHEET}")
+    recs = list(records())
+    ids = [r["unique_id"] for r in recs]
+    if len(set(ids)) != len(ids):
+        raise SystemExit("duplicate unique_id")
+    lines = [
+        "-- Terra EDA Library - Central Semiconductor 1N746A-1N759A Zener diodes, DO-35, 500mW",
+        f"-- Generated by {CREATED_BY}. dump_priority=0, source=NULL: not dumped to static SQL.",
+        "",
+        "BEGIN TRANSACTION;",
+        "",
+    ]
+    for r in recs:
+        vals = ", ".join(_sql(r[c]) for c in COLS)
+        lines.append(f"INSERT INTO diodes_zener ({', '.join(COLS)}) VALUES ({vals});")
+    lines += ["", "COMMIT;", ""]
+    OUTPUT_FILE.write_text("\n".join(lines))
+    print(f"Generated {OUTPUT_FILE.name}: {len(recs)} parts")
+
+
+if __name__ == "__main__":
+    main()

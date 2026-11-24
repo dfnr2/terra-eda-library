@@ -15,6 +15,15 @@ Source: 1982-83 MOS/Commodore Data Catalog (datasheets/mos/, each sheet cut with
   - 6530 RRIOT 2-96: 1 MHz only. Its 1Kx8 ROM, decode addresses and the PB5/PB6 chip-
     select option are mask-programmed and specified when ordering (no "-xxx" scheme
     is printed), so the row is the generic MPS6530.
+  - KIM-1 6530-002 and 6530-003: the two mask-programmed 6530s that hold the KIM-1
+    monitor. Source: MOS Technology KIM-1 User Manual (datasheets/mos/
+    kim-1-user-manual.pdf, archive.6502.org scan), pp. 22-23 and the memory map on
+    p. 38-39. The -002 has ROM at 1C00-1FFF, I/O and timer at 1740-177F, RAM at
+    17C0-17FF, and its I/O runs the keypad, display, TTY and tape. The -003 has ROM at
+    1800-1BFF, I/O and timer at 1700-173F, RAM at 1780-17BF, and its ports go to the
+    application connector. mpn is the number the manual and the parts use, and the
+    pinout and electrical data are the generic 6530's, so they share its symbol and
+    data sheet.
   - 6532 RIOT 2-107: 1 and 2 MHz. The feature list claims 3 MHz but no B code is
     printed, so MPS6532B is not generated.
   - 6551 ACIA 2-129 (PRELIMINARY): MPS6551 and MPS6551A. The key allows a B (3 MHz)
@@ -78,6 +87,16 @@ MOS_PARTS = [
     ("6551", "", 1), ("6551", "A", 2),
 ]
 
+# KIM-1 mask ROMs: (suffix, ROM, I/O+timer, RAM, role)
+KIM1_6530 = [
+    ("002", "1C00-1FFF", "1740-177F", "17C0-17FF",
+     "KIM-1 monitor ROM with the reset/interrupt vectors; I/O drives keypad, display, "
+     "TTY and cassette"),
+    ("003", "1800-1BFF", "1700-173F", "1780-17BF",
+     "second half of the KIM-1 monitor ROM; I/O and timer free for the "
+     "application connector"),
+]
+
 # (mpn, value, chip, symbol, vmin, vmax, temp, gpio, channels, extra feature)
 WDC_PARTS = [
     ("W65C21N6TPG-14", "W65C21N", "6520", "W65C21", 4.5, 5.5, (-40, 85),
@@ -108,6 +127,20 @@ def records():
             active_current=pd,
             description=f"MOS {value} NMOS {desc}, {clock}MHz, PDIP-{pins}",
             keywords=[chip, func, "MOS", "NMOS", "6502", "vintage"], features=feat)
+    for suffix, rom, io, ram, role in KIM1_6530:
+        pins, func, gpio, ch, pd, ds, desc, feat = CHIPS["6530"]
+        value = f"6530-{suffix}"
+        yield row(
+            created_by=CREATED_BY, manufacturer="MOS Technology", mpn=value,
+            value=value, family="6502", function=func, technology="NMOS", clock=1,
+            vmin=4.75, vmax=5.25, rails="+5V", package=f"PDIP-{pins}", pins=pins,
+            symbol=f"{LIB}:MPS6530", datasheet=f"mos/{ds}", gpio=gpio, channels=ch,
+            active_current=pd,
+            description=(f"MOS 6530-{suffix} KIM-1 ROM-RAM-I/O-timer (RRIOT), mask ROM "
+                         f"at {rom}, I/O+timer at {io}, RAM at {ram}, 1MHz, "
+                         f"PDIP-{pins}"),
+            keywords=["6530", value, "RRIOT", "KIM-1", "MOS", "NMOS", "6502", "vintage"],
+            features=f"{role}; {feat}")
     for mpn, value, chip, sym, vmin, vmax, temp, extra in WDC_PARTS:
         pins, func, gpio, ch, _, _, desc, feat = CHIPS[chip]
         yield row(

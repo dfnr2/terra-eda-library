@@ -880,8 +880,7 @@ Follow-ups:
   -200 grades of some as Active; add them if an older revision's timing table is filed.
 - Not included: IND grades, the Dallas 34-pin PowerCap modules (DS9034PC battery cap),
   and the ST SOH28 SNAPHAT parts (M48Z35Y/M48Z58Y-70MH1F). They need SMT footprints.
-- Timekeepers (`rtc` = Yes): the ST M48T02/08/35/58 and Dallas DS1643/DS1644 are the
-  obvious next rows. Stock `Memory_RAM:M48Tx2` covers the 24-pin ones.
+- ~~Timekeepers~~: done 2026-11-24, see "TIMEKEEPER SRAMs" below.
 
 ### Phase 3: CPUs (done 2026-11-20)
 
@@ -927,7 +926,8 @@ Follow-ups:
 - TMS9900-40 (4 MHz): left out because the TI key doesn't show where the speed suffix
   goes.
 - PLCC versions (MC68000FN, W65C02S PLCC/QFP, Z84C00 VEC) are out of scope (DIP only).
-- Rockwell R65C02 and the NMOS 6510/6512-6515 are not generated.
+- ~~Rockwell R65C02 and the NMOS 6510/6512-6515~~: done 2026-11-24, see "6502
+  additions" below.
 
 ### Phase 4: support chips (done 2026-11-20)
 
@@ -982,8 +982,8 @@ temperature unless the book gives only a wider range:
   SIO bonding option (Z8440/Z8441/Z8442).
 
 Follow-ups:
-- 6530 mask-ROM variants (e.g. the KIM-1's 6530-002/-003) are not generated; the row
-  is the generic MPS6530.
+- ~~6530 mask-ROM variants~~: the KIM-1's 6530-002/-003 were added 2026-11-24 (see
+  "6502 additions" below). Other boards' mask ROMs are added as needed.
 - MC68230 and MC68681 sheets say nothing about plastic availability beyond the codes
   above; check a later Motorola book if exact plastic codes matter.
 - PLCC versions and the military/industrial grades are out of scope (DIP only).
@@ -1106,3 +1106,97 @@ Follow-ups:
 - Carbon single-turn trimmers (Piher PT10/PT15 and the like), the round 3/8" Bourns
   3386 and SMT trimmers are not seeded.
 
+
+### OSI parts-list interface, op-amp and Zener parts (done 2026-11-24)
+
+The SAMS parts lists for the OSI C1P, C2/C3 and C4P (in `~/vsrc/osiweb`) name a few
+non-TTL parts terra lacked. Their TTL went into `ic_logic` (`plans/ic-logic-standard-ttl.md`).
+
+| Table | Generator | Rows | Parts |
+|---|---|---|---|
+| `ic_drivers` | `run_330_rs232_1488_1489.py` | 9 | TI MC1488N, SN75188N/DR; MC1489N, MC1489AN, SN75189N/D, SN75189AN/AD |
+| `ic_opamp` | `run_340_renesas_ca3130.py` | 3 | Renesas CA3130EZ, CA3130MZ, CA3130AMZ |
+| `diodes_zener` | `run_330_central_1n746a.py` | 14 | Central 1N746A-1N759A `TR PBFREE`, DO-35, 500 mW, 5% |
+
+- **RS-232 pair:** TI's SLLS094C (MC1488/SN75188) and SLLS095D (MC1489/A, SN75189/A),
+  in `datasheets/ti/mc1488-sn75188.pdf` and `mc1489-sn75189.pdf`. Lifecycle is from
+  their package-option addenda: the MC codes are Obsolete, the SN7518x PDIP and SOIC
+  codes Active (SN75188D tube Obsolete, so the DR reel is used). KiCad has no symbol
+  for either, so `terra_symbols_ic_drivers:MC1488` and `:MC1489` are drawn from
+  `db/tables/ic_drivers/_pinouts.py` with `tools/make_dip_symbol.py`.
+- **CA3130:** Renesas FN817 Rev 6.00 (`datasheets/renesas/ca3130.pdf`). The Renesas
+  pages list only the Pb-free CA3130EZ, CA3130MZ and CA3130AMZ (plus reels) as
+  orderable, so there is no CA3130A in PDIP. Stock `Amplifier_Operational:CA3130`
+  matches the pinout.
+- **Zeners:** the OSI boards use the 1N751A and 1N752A. The whole 1N746A-1N759A series
+  comes from Central's R2 (2019) sheet (`datasheets/central/1n746a-1n759a.pdf`);
+  onsemi's are Obsolete and Microchip's are tin-lead hi-rel parts at several times
+  the price. They go in `diodes_zener` for its Zener columns, with `value` the JEDEC
+  type as in `diodes_th`. Mouser stocked the `TR PBFREE` code of every type but the
+  1N747A and 1N757A on 2026-11-24, and the `BK PBFREE` bulk code of only three, so the
+  TR codes are used; the two unstocked types are orderable and stay Active. Central's PDF host refuses plain fetches of its product
+  search; the PDF itself came from `central.aeminc.com`, which Central's search links.
+
+Follow-ups:
+- 2N5225/2N5226 (OSI) are obsolete and not stocked anywhere; not added.
+- The 1 W 1N4728A-1N4764A Zener series is the other common through-hole family.
+
+### TIMEKEEPER SRAMs (done 2026-11-24)
+
+`db/tables/ic_nvram/run_310_timekeepers.py`, 15 rows with `rtc` = Yes: battery-backed
+SRAM modules with a 32.768 kHz crystal and BCD clock registers in the top eight bytes.
+
+| Part | Codes | Socket | Symbol | Status |
+|---|---|---|---|---|
+| ST M48T02 / M48T12 | -70PC1, -150PC1 | 6116 | stock `Memory_RAM:M48Tx2` | Active |
+| ST M48T08 / M48T18 | -100PC1, -150PC1 | 6264 | `terra_symbols_ic_nvram:M48T08` | Active |
+| ST M48T35 / M48T35Y | -70PC1 | 62256 | stock `Memory_RAM:HM62256BLP` | Active |
+| ST M48T58 / M48T58Y | -70PC1 | 6264 | `terra_symbols_ic_nvram:M48T58` | Active |
+| ADI DS1643 | -85+, -100+ | 6264 | stock `Memory_RAM:HY6264AxP` | Obsolete |
+| ADI DS1644 | -120+ | 62256 | stock `Memory_RAM:HM62256BLP` | Obsolete |
+
+- **Sources:** ST Doc IDs 2410 Rev 9, 2411 Rev 11, 2611 Rev 10, 2412 Rev 8 (June 2011) in
+  `datasheets/st/`; ADI 19-5058 Rev 5/10 and 19-5203 Rev 4/10 in
+  `datasheets/analog-devices/`. Both sites refuse curl. Chrome then allowed only one
+  scripted download per site, but navigating a tab to each PDF URL saved it directly.
+- **Codes and lifecycle:** each ST product page lists its PCDIP codes as orderable and
+  shows Active. Mouser stocks the M48T02/12 and M48T18 codes and lists the others with
+  a 30-week factory lead time. The sheets' -200 M48T02/12 grade is "not recommended for
+  new design" and is left out. The M48T35 sheet says the M48T35Y is SOH28-only, but
+  ST's page and Mouser both list M48T35Y-70PC1, so it is generated. The Dallas codes
+  are printed in each sheet; Mouser lists all three as Obsolete.
+- **Pinouts:** the M48T08/18 have INT (power-fail interrupt, open drain) on pin 1 and
+  E2 on pin 26. The M48T58/58Y have FT (frequency test, open drain) on pin 1 and E2
+  on pin 26. So neither fits the DS1225 symbol, and both get their own
+  (`db/tables/ic_nvram/_pinouts.py`). The DS1643 is the plain 6264 pinout with CS2.
+- **Left out:** the SOH28 SNAPHAT parts (M48T08Y, M48T35Y/58Y-MH1F), the Dallas
+  PowerCap (P) parts and industrial grades, all surface mount.
+
+### 6502 additions (done 2026-11-24)
+
+| Table | Generator | Rows | Parts |
+|---|---|---|---|
+| `ic_microprocessors` | `run_300_6502.py` | 12 | MOS MPS6512/A/B, MPS6513/A/B, MPS6514/A/B, MPS6515/A/B |
+| | | 1 | MOS/Commodore 6510 |
+| | | 4 | Rockwell R65C02P1-P4 |
+| `ic_peripherals` | `run_300_6502.py` | 2 | MOS 6530-002, 6530-003 (KIM-1) |
+
+- **6512-6515:** from the 1982 MOS catalog sheet already filed (book 2-23/2-24). They
+  are the external two-phase-clock versions, with codes from the same "MXS 65XX" key
+  as the 6502-6507. Each has its own symbol: the 6512 adds DBE and a third VSS, and
+  the 28-pin parts put VSS on pin 1 and take PHI1/PHI2 in.
+- **6510:** Commodore Semiconductor Group "6510 Microprocessor with I/O"
+  (`datasheets/mos/6510-microprocessor-with-io.pdf`, from zimmers.net scans). It
+  prints no ordering code or speed suffix, so there is one row, mpn `6510`, at 1 MHz.
+  Its symbol `terra_symbols_ic_microprocessors:6510` follows the base 6510 pinout. The
+  6510-1/-2 variants have different pinouts and are not generated.
+- **R65C02:** Rockwell Order No. 2149 Rev. 6, June 1987 (1987 Controller Products
+  Databook, bitsavers), `datasheets/rockwell/`. Codes R65C02P1-P4 come from its key.
+  The pinout is the NMOS 6502's, so it uses the MPS6502 symbol. The R65C102 and
+  R65C112 on the same sheet differ in pins 3, 5, 35-37 and 39 and are not generated.
+- **6530-002/-003:** the KIM-1 monitor ROMs, from the KIM-1 User Manual
+  (`datasheets/mos/kim-1-user-manual.pdf`, archive.6502.org). The rows give each chip's
+  ROM, I/O-timer and RAM addresses; pinout and electrical data are the generic 6530's.
+
+Follow-ups:
+- R65C102/R65C112, 6510-1/-2, and the 6510T/8500 (no sheet found).

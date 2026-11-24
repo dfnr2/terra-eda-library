@@ -80,6 +80,50 @@ M6506 = _m28([RES, VSS, ("PHI1(OUT)", "out"), IRQ, VCC], 11)
 M6507 = _m28([RES, VSS, RDY, VCC], 12)
 
 
+# 6512-6515 (book 2-23/2-24): the external two-phase-clock versions. No clock
+# generator: PHI1(IN) and PHI2(IN) replace PHI0(IN) and the clock outputs (the 40-pin
+# 6512 still buffers PHI2(OUT)). The 6512 adds DBE (data bus enable) on pin 36 and a
+# third VSS on pin 5.
+M6512 = {
+    1: ("VSS", "pwr"), 2: ("RDY", "in"), 3: ("PHI1(IN)", "in"), 4: ("~{IRQ}", "in"),
+    5: ("VSS", "pwr"), 6: ("~{NMI}", "in"), 7: ("SYNC", "out"), 8: ("VCC", "pwr"),
+    **_a(9, _bus("A", 0, 11)), 21: ("VSS", "pwr"), **_a(22, _bus("A", 12, 15)),
+    **_DATA_6502, 34: ("R/~{W}", "out"), 35: ("NC", "nc"), 36: ("DBE", "in"),
+    37: ("PHI2(IN)", "in"), 38: ("S.O.", "in"), 39: ("PHI2(OUT)", "out"),
+    40: ("~{RES}", "in"),
+}
+
+
+def _m28x(head, addr_hi):
+    """28-pin 6513-6515: `head` from pin 1, then A0..A<addr_hi>, D7..D0 on 18-25,
+    R/W on 26, PHI2(IN) on 27 and RES on 28."""
+    pins = {i + 1: p for i, p in enumerate(head)}
+    pins.update(_a(len(head) + 1, _bus("A", 0, addr_hi)))
+    pins.update(_a(18, [f"D{i}" for i in range(7, -1, -1)], "bidi"))
+    pins.update({26: ("R/~{W}", "out"), 27: ("PHI2(IN)", "in"), 28: RES})
+    assert sorted(pins) == list(range(1, 29)), head
+    return pins
+
+
+PHI1_IN = ("PHI1(IN)", "in")
+M6513 = _m28x([VSS, PHI1_IN, IRQ, NMI, VCC], 11)
+M6514 = _m28x([VSS, PHI1_IN, IRQ, VCC], 12)
+M6515 = _m28x([VSS, RDY, PHI1_IN, IRQ, VCC], 11)
+
+# Commodore Semiconductor Group "6510 Microprocessor with I/O" (HMOS), p. 1, the base
+# 6510 column (the C64 CPU; the 6510-1 and 6510-2 pinouts differ and are not drawn).
+# AEC (address enable control) floats the address bus and R/W for DMA, so those pins
+# are tri-state. P0-P5 are the on-chip I/O port (DDR at 0000, data at 0001).
+M6510 = {
+    1: ("PHI1(IN)", "in"), 2: ("RDY", "in"), 3: ("~{IRQ}", "in"), 4: ("~{NMI}", "in"),
+    5: ("AEC", "in"), 6: ("VCC", "pwr"), **_a(7, _bus("A", 0, 13), "tri"),
+    21: ("VSS", "pwr"), 22: ("A14", "tri"), 23: ("A15", "tri"),
+    **_a(24, [f"P{i}" for i in range(5, -1, -1)], "bidi"),
+    **_a(30, [f"DB{i}" for i in range(7, -1, -1)], "bidi"),
+    38: ("R/~{W}", "tri"), 39: ("PHI2(OUT)", "out"), 40: ("~{RES}", "in"),
+}
+
+
 def _mos(pins, pkg_pins, desc, extra_in, extra_out):
     return _cpu(pins, ["PHI0(IN)", "~{RES}"] + extra_in, ["R/~{W}"] + extra_out,
                 ["VCC"], ["VSS"], DIP40 if pkg_pins == 40 else DIP28, desc,
@@ -182,6 +226,29 @@ PINOUTS = {
                     "clock out", ["~{IRQ}"], ["PHI1(OUT)", "PHI2(OUT)"]),
     "MPS6507": _mos(M6507, 28, "MOS 6507 NMOS 8-bit CPU, 8K address, RDY, no interrupts",
                     ["RDY"], ["PHI2(OUT)"]),
+    "MPS6512": _cpu(M6512, ["PHI1(IN)", "PHI2(IN)", "~{RES}", "~{IRQ}", "~{NMI}", "RDY",
+                            "S.O.", "DBE"], ["R/~{W}", "SYNC", "PHI2(OUT)"], ["VCC"],
+                    ["VSS"], DIP40, "MOS 6512 NMOS 8-bit CPU, 64K address, external "
+                    "two-phase clock, data bus enable",
+                    "6512 6502 65xx MOS NMOS CPU microprocessor 8-bit"),
+    "MPS6513": _cpu(M6513, ["PHI1(IN)", "PHI2(IN)", "~{RES}", "~{IRQ}", "~{NMI}"],
+                    ["R/~{W}"], ["VCC"], ["VSS"], DIP28, "MOS 6513 NMOS 8-bit CPU, 4K "
+                    "address, IRQ and NMI, external two-phase clock",
+                    "6513 6502 65xx MOS NMOS CPU microprocessor 8-bit"),
+    "MPS6514": _cpu(M6514, ["PHI1(IN)", "PHI2(IN)", "~{RES}", "~{IRQ}"],
+                    ["R/~{W}"], ["VCC"], ["VSS"], DIP28, "MOS 6514 NMOS 8-bit CPU, 8K "
+                    "address, IRQ, external two-phase clock",
+                    "6514 6502 65xx MOS NMOS CPU microprocessor 8-bit"),
+    "MPS6515": _cpu(M6515, ["PHI1(IN)", "PHI2(IN)", "~{RES}", "~{IRQ}", "RDY"],
+                    ["R/~{W}"], ["VCC"], ["VSS"], DIP28, "MOS 6515 NMOS 8-bit CPU, 4K "
+                    "address, IRQ and RDY, external two-phase clock",
+                    "6515 6502 65xx MOS NMOS CPU microprocessor 8-bit"),
+    "6510": _cpu(M6510, ["PHI1(IN)", "~{RES}", "~{IRQ}", "~{NMI}", "RDY", "AEC"],
+                 ["R/~{W}", "PHI2(OUT)", None] + [f"P{i}" for i in range(6)],
+                 ["VCC"], ["VSS"], DIP40, "MOS/Commodore 6510 HMOS 8-bit CPU with "
+                 "6-bit I/O port (P0-P5), 64K address, AEC bus float",
+                 "6510 6502 65xx MOS Commodore C64 HMOS CPU microprocessor 8-bit",
+                 data="DB"),
     "W65C02S": _cpu(W65C02S, ["PHI2", "RESB", "IRQB", "NMIB", "SOB", "BE", "RDY"],
                     ["RWB", "SYNC", "VPB", "MLB", "PHI1O", "PHI2O"], ["VDD"], ["VSS"],
                     DIP40, "WDC W65C02S static CMOS 8-bit CPU, 64K address, 1.8-5V",

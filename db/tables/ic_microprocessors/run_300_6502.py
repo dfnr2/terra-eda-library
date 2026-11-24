@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""6502-family CPUs: MOS 6502-6507 (NMOS), GTE G65SC802 and WDC W65C02S/W65C816S (CMOS).
+"""6502-family CPUs: MOS 6502-6507, 6510 and 6512-6515 (NMOS), Rockwell R65C02, GTE G65SC802
+and WDC W65C02S/W65C816S (CMOS).
 
 One classic maker per chip (plans/vintage-computer-parts.md, "Manufacturer coverage"),
 every speed grade, plastic DIP, commercial temperature, plus the WDC parts that are
@@ -8,12 +9,30 @@ still made.
 Sources (cut to the CPU pages plus the DIP outlines, in datasheets/<mfr>/):
   - MOS: 1982 MOS Technology Data Catalog (Commodore Semiconductor Group), "6500
     Microprocessors", book pp. 2-14..2-24 (PDF 25-35), outlines 5-2, clock app brief
-    16. One sheet for 6502-6507 (and 6512-6515, not generated). Ordering key on
+    16. One sheet for 6502-6507 and 6512-6515 (pinouts book 2-23/2-24). Ordering key on
     p. 2-14: "MXS 65XX_" with the middle letter the package (C ceramic, P plastic)
     and the suffix the speed (none 1 MHz, A 2 MHz, B 3 MHz); the book prints no
     individual codes, and says every chip comes in all three speeds, so the plastic
     MPS codes are built from the key. The book has no 28-pin outline; the 28-pin
     parts are taken as 0.6" like the other 28-pin NMOS DIPs.
+    The 6512-6515 are the external two-phase-clock versions (no clock generator), so
+    their clock_source is two-phase and each has its own symbol.
+  - MOS/Commodore 6510 (the C64 CPU): Commodore Semiconductor Group "6510
+    Microprocessor with I/O" (HMOS, undated; it expects 4 MHz parts "in 1986"),
+    datasheets/mos/6510-microprocessor-with-io.pdf, from zimmers.net scans. It prints
+    pinouts for the 6510, 6510-1 and 6510-2 but no ordering code or speed suffix,
+    so there is one row, mpn "6510" (the chip's marking), at 1 MHz; the sheet says
+    1, 2 and 3 MHz operation. The -1/-2 variants (different pinouts, no NMI or RDY,
+    and a "PHI2 IN" on the -2's pin 2 that contradicts its own block diagram) are not
+    generated.
+  - Rockwell: "R65C02, R65C102 and R65C112 R65C00 Microprocessors (CPU)", Document
+    29651N52 / Order No. 2149 Rev. 6, June 1987, from the 1987 Rockwell Controller
+    Products Databook pp. 1-3..1-18 (bitsavers), datasheets/rockwell/. Ordering key on
+    p. 1-3: R65C02 + package (P = 40-pin plastic DIP) + frequency 1-4 + temperature
+    (blank = 0 to 70 C); R65C02P1-P4 are built from it. The R65C02 is pin compatible
+    with the NMOS 6502 (pin figure p. 1-5) and uses the MPS6502 symbol; it takes an
+    external clock on PHI0(IN) and drives PHI1/PHI2 out. The R65C102 (on-chip
+    oscillator) and R65C112 (slave) have different pins and are not generated.
   - GTE: 1987 GTE Microcircuits Data Book, "CMOS 8/16-Bit Microprocessor Family"
     (G65SC802/G65SC816), book pp. 1-83..1-103 (ADVANCE INFORMATION), outlines
     6-3/6-4. Ordering key on p. 1-103: G + 65SC802 + package (P plastic) + temperature
@@ -27,14 +46,15 @@ Sources (cut to the CPU pages plus the DIP outlines, in datasheets/<mfr>/):
     W65C02S key gives 0 to 70 C for DIP; the W65C816S sheet gives -40 to 85 C only.
 
 Symbols are custom (terra_symbols_ic_microprocessors, pin tables in _pinouts.py):
-one per 6503-6507 pinout, MPS6502 for the 6502 and G65SC802, and one each for the
+one per 6503-6507 and 6512-6515 pinout, MPS6502 for the 6502, R65C02 and G65SC802,
+6510 for the 6510, and one each for the
 W65C02S and W65C816S, whose pins 1, 3, 5, 7, 35-39 differ from the NMOS 6502.
 
 Generated output (dump_priority=0, source=NULL) is not dumped back to static SQL.
 """
 from pathlib import Path
 
-from _cpu import EXT_1PH, LIB, ON_CHIP, row, write
+from _cpu import EXT_1PH, EXT_2PH, LIB, ON_CHIP, row, write
 
 OUTPUT_FILE = Path(__file__).with_name("ic_microprocessors_generated_300_6502.sql")
 CREATED_BY = Path(__file__).name
@@ -69,6 +89,70 @@ def mos_rows():
                 keywords=["6502", "65xx", "MOS", "MCS6500", "NMOS", "8-bit", "vintage"],
                 features=f"{signals}; on-chip clock generator; 56 instructions, "
                          "13 addressing modes; M6800 bus compatible")
+
+
+# 6512-6515: external two-phase clock versions (book 2-14 family list, 2-23/2-24).
+MOS_EXT = {
+    "6512": (40, 16, "IRQ, NMI, RDY, SYNC, S.O., DBE data-bus enable, PHI2 out",
+             "64K address"),
+    "6513": (28, 12, "IRQ, NMI", "4K address (A0-A11)"),
+    "6514": (28, 13, "IRQ", "8K address (A0-A12)"),
+    "6515": (28, 12, "IRQ, RDY", "4K address (A0-A11)"),
+}
+
+
+def mos_ext_rows():
+    for chip, (pins, addr, signals, note) in MOS_EXT.items():
+        for suffix, clock in MOS_SPEEDS.items():
+            value = f"{chip}{suffix}"
+            yield row(
+                created_by=CREATED_BY, manufacturer="MOS Technology", mpn=f"MPS{value}",
+                value=value, family="6502", core="NMOS 6502", technology="NMOS",
+                arch_bits=8, data_bits=8, addr_bits=addr, clock=clock,
+                clock_source=EXT_2PH, vmin=4.75, vmax=5.25, rails="+5V",
+                active_current="160mA max", package=f"PDIP-{pins}", pins=pins,
+                symbol=f"{LIB}:MPS{chip}", datasheet=MOS_DS,
+                description=(f"MOS {value} NMOS 8-bit CPU, {note}, {clock}MHz, "
+                             f"external two-phase clock (PHI1/PHI2 in), PDIP-{pins}"),
+                keywords=["6502", "65xx", "MOS", "MCS6500", "NMOS", "8-bit", "vintage"],
+                features=f"{signals}; no clock generator (two-phase clock input); "
+                         "56 instructions, 13 addressing modes; M6800 bus compatible")
+
+
+def csg_6510_row():
+    yield row(
+        created_by=CREATED_BY, manufacturer="MOS Technology", mpn="6510", value="6510",
+        family="6502", core="NMOS 6502", technology="HMOS", arch_bits=8, data_bits=8,
+        addr_bits=16, clock=1, clock_source=EXT_1PH, vmin=4.75, vmax=5.25,
+        rails="+5V", package="PDIP-40", pins=40, symbol=f"{LIB}:6510",
+        datasheet="mos/6510-microprocessor-with-io.pdf",
+        description=("MOS/Commodore 6510 HMOS 8-bit CPU with 6-bit I/O port (P0-P5), "
+                     "64K address, AEC bus float for DMA, PHI1 in / PHI2 out, "
+                     "Commodore 64 CPU, PDIP-40"),
+        keywords=["6510", "6502", "65xx", "MOS", "Commodore", "CSG", "C64", "HMOS",
+                  "8-bit", "vintage"],
+        features="on-chip 6-bit bidirectional I/O port, data direction at 0000 and "
+                 "output register at 0001; AEC floats address bus and R/W; IRQ, NMI, "
+                 "RDY; no SYNC or S.O.; sheet lists 1, 2 and 3 MHz operation but no "
+                 "speed suffixes")
+
+
+def rockwell_rows():
+    for clock in (1, 2, 3, 4):
+        yield row(
+            created_by=CREATED_BY, manufacturer="Rockwell", mpn=f"R65C02P{clock}",
+            value="R65C02", family="6502", core="CMOS 65C02", technology="CMOS",
+            arch_bits=8, data_bits=8, addr_bits=16, clock=clock, clock_source=EXT_1PH,
+            vmin=4.75, vmax=5.25, rails="+5V", active_current=f"{4 * clock}mA typ",
+            package="PDIP-40", pins=40, symbol=f"{LIB}:MPS6502",
+            datasheet="rockwell/r65c02-r65c102-r65c112-cmos-microprocessor.pdf",
+            description=(f"Rockwell R65C02 CMOS 8-bit CPU (65C02), NMOS 6502 pin "
+                         f"compatible, 64K address, {clock}MHz, PDIP-40"),
+            keywords=["65C02", "R65C02", "6502", "65xx", "Rockwell", "CMOS", "8-bit",
+                      "vintage"],
+            features="NMOS 6502 pinout (pins 5, 35, 36 NC); 65C02 instruction set "
+                     "with Rockwell bit instructions (RMB/SMB/BBR/BBS); external "
+                     "clock on PHI0(IN), PHI1/PHI2 outputs; 4mA/MHz")
 
 
 def gte_rows():
@@ -121,8 +205,9 @@ def wdc_rows():
 
 
 def main():
-    write(OUTPUT_FILE, "6502 family (MOS, GTE, WDC)", CREATED_BY,
-          [*mos_rows(), *gte_rows(), *wdc_rows()])
+    write(OUTPUT_FILE, "6502 family (MOS, Rockwell, GTE, WDC)", CREATED_BY,
+          [*mos_rows(), *mos_ext_rows(), *csg_6510_row(), *rockwell_rows(), *gte_rows(),
+           *wdc_rows()])
 
 
 if __name__ == "__main__":
