@@ -15,7 +15,8 @@ Key derivations:
     always drawn, so it equals the physical DIP size even when NC pins are omitted).
   - each part is emitted in PDIP + SOIC.
 
-Excludes the five curated parts owned by run_310_ttl_canonical.py (which carry
+Excludes the five curated parts owned by run_310_ttl_canonical.py and the whole
+standard-TTL family owned by run_315_ttl_standard.py (both carry
 hand-checked dynamics and local datasheets) and any part flagged obsolete.
 
 Generated output (dump_priority=0) is not dumped back to static SQL.
@@ -63,6 +64,10 @@ FAMILIES = ("74LS", "74HCT", "74HC", "74")
 # Curated by run_310 — skip here to avoid unique_id collisions.
 EXCLUDE = {("74LS", "00"), ("74LS", "04"), ("74LS", "74"),
            ("74LS", "138"), ("74LS", "244")}
+
+# Standard (no-letter) TTL is curated by run_315_ttl_standard.py: KiCad has only three
+# of its symbols, and the harvest's invented SOIC codes (SN7402D, SN7454D) don't exist.
+EXCLUDE_FAMILIES = {"74"}
 
 # Per-family recommended supply, guaranteed I/O levels, and output drive.
 # HC levels are the @Vcc=4.5V values (inputs are Vcc-ratiometric); HCT inputs are
@@ -328,7 +333,7 @@ def main():
         if name not in chosen:
             skipped["variant"] += 1
             continue
-        if (fam, base) in EXCLUDE:
+        if (fam, base) in EXCLUDE or fam in EXCLUDE_FAMILIES:
             skipped["curated"] += 1
             continue
         b = blocks[name]

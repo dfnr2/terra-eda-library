@@ -59,7 +59,7 @@ def test_data_inserts_are_column_qualified():
 import pytest
 
 PAIRS = {  # type -> list of all tables that must share columns
-    "diodes": ["diodes"],
+    "diodes": ["diodes", "diodes_th"],
     "transistors": ["bjt", "mosfet"],
     "op_amps": ["ic_opamp"],
     "logic": ["ic_logic"],

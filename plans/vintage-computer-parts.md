@@ -6,6 +6,8 @@
 Phase 8 (connectors) is done: KK 396, the 0.156" pin buses, card edge and
 DIN 41612, with the card-edge sockets' lifecycle checked at Mouser on 2026-11-23. Phase 9
 (electrolytics) is done: Panasonic M-A radials and Vishay 021 ASM axials.
+Added 2026-11-24 for the OSI 470 port: standard (no-letter) TTL in
+`plans/ic-logic-standard-ttl.md`, and through-hole diodes in `plans/diodes-th.md`.
 **Scope:** bring terra up to the point where a 1975-85 microcomputer (KIM-1, Apple I/II,
 SWTPC, S-100, COSMAC ELF, TRS-80, Z80 SBC, or a modern retro build) can be drawn with
 fully qualified parts. That means the bus buffers, memory, CPUs and their support chips,
