@@ -1139,7 +1139,7 @@ non-TTL parts terra lacked. Their TTL went into `ic_logic` (`plans/ic-logic-stan
 
 Follow-ups:
 - 2N5225/2N5226 (OSI) are obsolete and not stocked anywhere; not added.
-- The 1 W 1N4728A-1N4764A Zener series is the other common through-hole family.
+- ~~The 1 W 1N4728A-1N4764A Zener series~~: done 2026-11-24, see below.
 
 ### TIMEKEEPER SRAMs (done 2026-11-24)
 
@@ -1200,3 +1200,25 @@ SRAM modules with a 32.768 kHz crystal and BCD clock registers in the top eight 
 
 Follow-ups:
 - R65C102/R65C112, 6510-1/-2, and the 6510T/8500 (no sheet found).
+
+### 1 W Zeners, 1N4728A-1N4764A (done 2026-11-24)
+
+| Generator | Rows | Parts |
+|---|---|---|
+| `diodes_zener/run_331_central_1n4728a.py` | 37 | Central 1N4728A-1N4764A, 3.3-100 V |
+| `diodes_zener/run_332_onsemi_1n4728a.py` | 28 | onsemi 1N4728A, 1N4732A-1N4758A, bulk codes |
+
+- **Two makers:** Central's sheet (`datasheets/central/1n4728a-1n4764a.pdf`, R2 2013)
+  is the only current one with all 37 types. onsemi (`datasheets/onsemi/1n4736at-d.pdf`,
+  Rev. 10 2021, fetched through Chrome because onsemi refuses curl) makes 28 of them,
+  and Mouser stocks those in far larger quantity. Both are generated; the rows share
+  `part_locator` per voltage.
+- **One table:** onsemi's figures match Central's on every value, so the table lives
+  once in `_zener_1n4728a.py`.
+- **Surge current:** Central heads its last current column "maximum DC current IZM".
+  onsemi gives the same numbers as IZSM, the 8.3 ms surge rating. 1380 mA is far
+  beyond PD/VZ for a 1 W, 3.3 V part, so it is recorded as `peak_reverse_current`.
+- **Stock (Mouser, 2026-11-24):** 27 of onsemi's 28 bulk codes in stock (1N4744A
+  none, not obsolete); onsemi's other nine types show Obsolete. Central's TR code was
+  in stock for 14 types and listed for 14 more; 9 types aren't carried by Mouser, but Central's own
+  part search lists every type without a discontinued flag, so all are Active.
