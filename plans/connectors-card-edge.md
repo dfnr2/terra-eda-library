@@ -89,13 +89,13 @@ Connector_Generic style.
 
 ## Follow-ups
 
-- **Lifecycle is not yet checked.** Every row says `Active`. Mouser blocked this
-  browser (Akamai "Access Denied") after a burst of lookups on 2026-11-22, and
-  Digi-Key showed its bot check.
-  - Check each MPN at Mouser or Digi-Key, then drop the sizes that aren't listed.
-  - The research saw Digi-Key listings for 346-100-520-202, 305-044-520-202,
-    307-044-520-202 and 357-044-520-202.
-  - 345-050-520-202 was seen only at Farnell, Future and Octopart.
+- **Lifecycle checked at Mouser on 2026-11-23:** all 56 MPNs have a Mouser product
+  page with a factory lead time (9-17 weeks), and none is marked obsolete, end of life
+  or NRND, so every row stays `Active` and no size was dropped.
+  - In stock: the S-100 and Apple II sockets (346-100, 396-100, 345-050, 395-050),
+    most 305 sizes, 307-044 (503), 357-044 (325), and a few other 307/357 sizes.
+  - Non-stocked but orderable: most 355 and 357 sizes and several 307 sizes.
+  - Digi-Key still showed a bot check, so only Mouser was used.
 - **Which side is the component side** is unconfirmed for S-100 (1-50) and Apple II
   (1-25), so it's left to the board designer. Which row sits at y = 0 doesn't change the
   part.

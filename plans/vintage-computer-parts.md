@@ -3,8 +3,8 @@
 **Date:** 2026-11-17
 **Status:** Phases 1, 2 (schema, SRAM, DRAM, NVRAM, EPROM, EEPROM, bipolar PROM),
 3 (CPUs), 4 (support chips), 6 (crystals) and 7 (trimpots) done (see Results).
-Phase 8 (connectors) is done apart from a lifecycle check on the card-edge sockets
-(KK 396, the 0.156" pin buses, card edge and DIN 41612 generated). Phase 9
+Phase 8 (connectors) is done: KK 396, the 0.156" pin buses, card edge and
+DIN 41612, with the card-edge sockets' lifecycle checked at Mouser on 2026-11-23. Phase 9
 (electrolytics) is done: Panasonic M-A radials and Vishay 021 ASM axials.
 **Scope:** bring terra up to the point where a 1975-85 microcomputer (KIM-1, Apple I/II,
 SWTPC, S-100, COSMAC ELF, TRS-80, Z80 SBC, or a modern retro build) can be drawn with
@@ -468,8 +468,8 @@ standard resistance table, 10 Ω-2 MΩ (the 1-2-5 values plus 25 kΩ and 250 kΩ
   position counts here are from memory; confirm each against the computer's own
   documentation and the connector drawing.
   - `run_380_card_edge.py`, card-edge sockets (**generated 2026-11-22**, 56 EDAC parts
-    + `-pins` twins, see `plans/connectors-card-edge.md`; lifecycle still to check at
-    Mouser/Digi-Key). Original scope:
+    + `-pins` twins, see `plans/connectors-card-edge.md`; all 56 listed at Mouser on
+    2026-11-23). Original scope:
     - S-100: 100 positions (2x50), 0.125".
     - Apple II slot: 50 positions (2x25), 0.100".
     - Apple I expansion: 44 positions (2x22), 0.156".
