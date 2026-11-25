@@ -38,7 +38,8 @@ Body width is the drawing's DIM A (n x 3.96 - 0.10 mm).
 from the sheet-1 side views: right angle, housing 6.5 mm high with a skirt 3.3 mm down
 past the board edge and the edge hook under the board; top entry, 10.7 mm tall body on
 a 1.7 mm base with the hook; bottom entry, 11.5 mm tall on a 2.5 mm base. Tails 0.64
-mm square, 3.68 / 3.05 / 3.18 mm below the board. Each part also has a per-pin symbol
+mm square, 3.68 / 3.05 / 3.18 mm below the board. Each circuit has a 1.40 mm square
+contact opening (with a lead-in) in the mating face, at the drawing's post axis. Each part also has a per-pin symbol
 row (`-pins`, _connkit.py).
 
 Plan: plans/connectors-0156-bus.md. Generated output (dump_priority=0, source=NULL) is
@@ -169,9 +170,34 @@ def model_specs():
             spec = [("box", "natural", x0, -5.2, 0, x1, 6.6, 2.5),
                     ("box", "natural", x0, -1.2, 0, x1, 5.2, 11.5),
                     ("box", "natural", x0, -5.2, 2.2, x1, -1.2, 4.9)]
+        spec += [c for i in range(n) for c in _openings(style, i * PITCH)]
         spec += pin_row("tin", n, PITCH, 0, -TAIL[style], 0.5, TAIL_W)
         specs[fp_name(style, n)] = spec
     return specs
+
+
+# Contact openings (SDA-41815 sheet 1): 1.40 mm (.055) square entry, 10.41 mm (.410)
+# minimum pin insertion depth; the 2.2 mm lead-in square is scaled from the front view.
+# Post axis: right angle 4.62 mm above the board; top entry 3.18 mm from the tail row;
+# bottom entry over the 2.54 mm board hole, 3.35 mm from the tail row.
+OPEN_W, LEAD_W, LEAD_D, INSERT_D = 1.40, 2.2, 0.6, 10.41
+
+
+def _openings(style, x):
+    """Two cut boxes per circuit: the square contact entry and its lead-in."""
+    cuts = []
+    for w, d in ((OPEN_W, INSERT_D), (LEAD_W, LEAD_D)):
+        h = w / 2
+        if style == "right-angle":                     # mating face at y = edge + 1.91
+            face, z = 7.87 + 1.91, 4.62
+            cuts.append(("cut", "natural", x - h, face - d, z - h, x + h, face + 0.1, z + h))
+        elif style == "top-entry":                     # top face at z = 10.7
+            y = -3.18
+            cuts.append(("cut", "natural", x - h, y - h, 10.7 - d, x + h, y + h, 10.8))
+        else:                                          # bottom face, on the board
+            y = 3.35
+            cuts.append(("cut", "natural", x - h, y - h, -0.1, x + h, y + h, d))
+    return cuts
 
 
 def _grow(r, g=0.5):

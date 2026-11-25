@@ -58,7 +58,7 @@ def shape_of(p):
     import Part
     V = FreeCAD.Vector
     kind = p[0]
-    if kind == "box":
+    if kind in ("box", "cut"):
         _, _, x0, y0, z0, x1, y1, z1 = p
         xa, xb = sorted((x0, x1))
         ya, yb = sorted((-y0, -y1))           # footprint y is down, model y is up
@@ -87,10 +87,16 @@ def build(name, spec, out_path):
     import Part
     doc = FreeCAD.newDocument("m")
     objs = []
-    for colour in sorted({p[1] for p in spec}):
-        shapes = [shape_of(p) for p in spec if p[1] == colour]
+    for colour in sorted({p[1] for p in spec if p[0] != "cut"}):
+        shapes = [shape_of(p) for p in spec if p[1] == colour and p[0] != "cut"]
+        cuts = [shape_of(p) for p in spec if p[1] == colour and p[0] == "cut"]
+        if cuts:            # fuse the solids so a cut opens one clean cavity
+            shape = shapes[0].fuse(shapes[1:]).removeSplitter() if len(shapes) > 1 else shapes[0]
+            shape = shape.cut(Part.makeCompound(cuts))
+        else:
+            shape = Part.makeCompound(shapes)
         obj = doc.addObject("Part::Feature", f"{name}_{colour}".replace("-", "_")[:60])
-        obj.Shape = Part.makeCompound(shapes)
+        obj.Shape = shape
         obj.ViewObject.ShapeAppearance = (
             FreeCAD.Material(DiffuseColor=_connkit.COLOURS[colour]),)
         objs.append(obj)

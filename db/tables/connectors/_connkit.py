@@ -25,6 +25,8 @@ generators themselves never need FreeCAD). Primitives are in footprint coordinat
   ("pin", colour, x, y, z0, z1, w)               square pin w x w, vertical
   ("hpin", colour, x, y0, y1, z, w)              square pin w x w along y (right angle)
   ("hcyl", colour, x, y0, y1, z, d)              round pin along y (right angle)
+  ("cut", colour, x0, y0, z0, x1, y1, z1)        block removed from that colour's solids
+                                                 (contact openings, cavities)
 
 Colours are names from ``COLOURS`` below.
 """
