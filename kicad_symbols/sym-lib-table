@@ -23,6 +23,7 @@
   (lib (name "terra_symbols_led_drivers")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_led_drivers.kicad_sym")(options "")(descr ""))
   (lib (name "terra_symbols_misc")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_misc.kicad_sym")(options "")(descr ""))
   (lib (name "terra_symbols_mosfet")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_mosfet.kicad_sym")(options "")(descr ""))
+  (lib (name "terra_symbols_optocouplers")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_optocouplers.kicad_sym")(options "")(descr ""))
   (lib (name "terra_symbols_optoelectronics")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_optoelectronics.kicad_sym")(options "")(descr ""))
   (lib (name "terra_symbols_resistors_smt")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_resistors_smt.kicad_sym")(options "")(descr ""))
   (lib (name "terra_symbols_switches")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_switches.kicad_sym")(options "")(descr ""))

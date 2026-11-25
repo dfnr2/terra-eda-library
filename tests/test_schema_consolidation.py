@@ -83,6 +83,7 @@ PAIRS = {  # type -> list of all tables that must share columns
     "optoelectronics_sensor": ["optoelectronics_sensor"],
     "connectors": ["connectors"],
     "relays_ssr": ["relays_ssr"],
+    "optocouplers": ["optocouplers"],
     "dc_dc": ["dc_dc_converters"],
 }
 

@@ -32,5 +32,6 @@
   "batteries":              { "type": "batteries",   "tier_default": 2, "dump_priority_default": 1 },
   "connectors":                    { "type": "connectors", "tier_default": 2, "dump_priority_default": 1 },
   "relays_ssr":             { "type": "relays_ssr", "tier_default": 2, "dump_priority_default": 1 },
+  "optocouplers":           { "type": "optocouplers", "tier_default": 2, "dump_priority_default": 1 },
   "dc_dc_converters":       { "type": "dc_dc", "tier_default": 2, "dump_priority_default": 1 }
 }
