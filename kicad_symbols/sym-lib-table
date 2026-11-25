@@ -28,4 +28,5 @@
   (lib (name "terra_symbols_switches")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_switches.kicad_sym")(options "")(descr ""))
   (lib (name "terra_symbols_test_points")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_test_points.kicad_sym")(options "")(descr ""))
   (lib (name "terra_symbols_voltage_reference")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_voltage_reference.kicad_sym")(options "")(descr ""))
+  (lib (name "terra_symbols_voltage_regulator")(type "KiCad")(uri "${TERRA_EDA_LIB}/kicad_symbols/terra_symbols_voltage_regulator.kicad_sym")(options "")(descr ""))
 )
